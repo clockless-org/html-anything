@@ -63,6 +63,9 @@ client-side rendering of the drill-down sections.
      messages + a sample of the longest thread + open-loop callouts.
    - Meeting transcript: speaker stats with talk-time + first 12 cues +
      last 4 cues + each speaker's opening turn + the longest cues.
+   - Event stream (JSONL / NDJSON / server log): inferred schema +
+     time-bucket histogram + severity / category counts + top sources
+     and messages + outlier cards + first 12 + last 4 events.
    - URL article: first 2-3K chars of the rendered text + meta.
    - Repo: README + tree + 3 key files.
 
@@ -104,6 +107,8 @@ client-side rendering of the drill-down sections.
 | [`prompts/docx.md`](./prompts/docx.md) | `.docx` — Word memos, RFCs, briefs |
 | [`prompts/email.md`](./prompts/email.md) | `.eml` / `.mbox` mailboxes (including Gmail Takeout exports) |
 | [`prompts/transcript.md`](./prompts/transcript.md) | `.vtt` / `.srt` / timecoded Zoom & Teams `.txt` meeting transcripts |
+| [`prompts/jsonl.md`](./prompts/jsonl.md) | `.jsonl` / `.ndjson` line-delimited JSON event streams (and `.json` / `.log` / `.txt` files whose contents are line-delimited JSON) |
+| [`prompts/log.md`](./prompts/log.md) | `.log` / `.txt` server logs — Apache / Nginx access logs, syslog, application error logs, generic timestamped app logs |
 | [`prompts/json.md`](./prompts/json.md) | JSON data files |
 | [`prompts/git-diff.md`](./prompts/git-diff.md) | `.diff`, raw `git diff` output — review checklist, risk map, collapsible diff |
 | [`prompts/pr-review.md`](./prompts/pr-review.md) | `.patch` (`git format-patch` mailbox or GitHub PR `.patch`) — commit timeline, evidence-based reviewer's checklist, test-touched flags |
@@ -135,6 +140,13 @@ evidence-based items), risk hotspots, collapsible raw diff / log /
 trace, copyable Markdown summary, and **hypothesis discipline**
 (every inferred cause / risk / call-site is labeled with a visible
 "Hypothesis" chip; no certainty claims).
+
+Event-stream sources (`jsonl`, `log`) also load
+[`prompts/_event_stream.md`](./prompts/_event_stream.md) — the shared
+contract for the event-stream pack: volume-over-time histogram,
+severity / category breakdown, outlier / anomaly callouts, top sources
+or endpoints leaderboard, and a searchable virtualized event-table
+drill-down.
 
 **Adding a new source** = drop a new `<source>.md` in `prompts/`,
 following the same shape as existing ones. No code changes, no

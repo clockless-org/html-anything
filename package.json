@@ -30,6 +30,10 @@
     "patch",
     "ci",
     "stack-trace",
+    "jsonl",
+    "ndjson",
+    "log",
+    "events",
     "agent",
     "ai",
     "llm"

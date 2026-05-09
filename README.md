@@ -108,6 +108,8 @@ data shape Claude should design for.
 | [`docx.md`](./prompts/docx.md) | `.docx` (decision memos, RFCs, briefs) | decisions/actions surfaced first, full doc as drill-down |
 | [`email.md`](./prompts/email.md) | `.eml`, `.mbox` (incl. Gmail Takeout) | thread browser, sender leaderboard, attachment inventory, open-loop callouts |
 | [`transcript.md`](./prompts/transcript.md) | `.vtt`, `.srt`, timecoded Zoom/Teams `.txt` | meeting scorecard — talk-time bars, decisions, action items, open questions, jumpable transcript |
+| [`jsonl.md`](./prompts/jsonl.md) | `.jsonl`, `.ndjson` (also detects line-delimited JSON in `.json`/`.log`/`.txt`) | event-stream pack: schema panel, volume histogram, severity / category filters, outlier cards, searchable table |
+| [`log.md`](./prompts/log.md) | `.log`, `.txt` — Apache/Nginx access logs, syslog, error logs, app logs | event-stream pack with status-code donut + top endpoints / IPs / errors + latency p50/p95/p99 (when present) |
 | [`github-repo.md`](./prompts/github-repo.md) | `github.com/owner/repo` URLs | repo explainer, file tree, README, key files |
 | [`url-article.md`](./prompts/url-article.md) | blog posts, articles, news pages | stripped reading view, pulled quotes |
 | [`json.md`](./prompts/json.md) | `.json` | structured viewer chosen by shape (array → table, object → key-value, tree → collapsible) |
@@ -141,13 +143,13 @@ data shape Claude should design for.
 > Treat the output as a review draft, verify against the runtime, and
 > file the corrections back into the prompt.
 
-### Want more? (Notion, NDJSON, EPUB, …)
+### Want more? (Notion, EPUB, …)
 
 Highest-ask sources we want next:
 
-- 📊 **JSON Lines / NDJSON** — log streams
 - 📝 **Notion exports**
 - 📕 **EPUB** — books → chapter nav + reading time + character map
+- 📨 **iCal / `.ics`** — calendar exports → meeting cadence + busy-hours heatmap
 
 [Pick one and contribute →](#contributing)
 
