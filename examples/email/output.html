@@ -980,6 +980,239 @@ mark.search-hl {
 
 .msg-collapsed-preview:hover { color: var(--fg-2); }
 
+/* ── Panels (open loops / timeline / sender filter) ── */
+.panel {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.panel-callout {
+  background: linear-gradient(135deg, var(--primary-fixed) 0%, var(--surface-container-lowest) 70%);
+  border-left: 3px solid var(--primary);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.panel-title-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.panel-title {
+  font-family: var(--font-headline);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+}
+
+.panel-sub {
+  font-size: 12px;
+  color: var(--fg-muted);
+}
+
+.filter-clear {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--fg-2);
+  cursor: pointer;
+  font-family: inherit;
+}
+.filter-clear:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Open loops list */
+.open-loops-list {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.open-loop-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-md);
+  align-items: center;
+  padding: var(--space-md);
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.open-loop-row:hover {
+  border-color: var(--primary);
+  transform: translateX(2px);
+}
+
+.open-loop-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  flex-shrink: 0;
+}
+
+.open-loop-info {
+  min-width: 0;
+}
+
+.open-loop-subject {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--fg-1);
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.open-loop-question {
+  font-size: 12px;
+  color: var(--fg-2);
+  font-style: italic;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.open-loop-meta {
+  font-size: 11px;
+  color: var(--fg-muted);
+  font-family: var(--font-mono);
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.open-loops-empty {
+  color: var(--fg-muted);
+  font-size: 13px;
+  padding: var(--space-md) 0;
+}
+
+/* Timeline */
+.timeline-wrap {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.timeline-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 60px;
+  align-items: center;
+  gap: var(--space-md);
+  font-size: 12px;
+  cursor: pointer;
+}
+.timeline-row:hover .timeline-bar { filter: brightness(1.08); }
+
+.timeline-label {
+  color: var(--fg-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timeline-track {
+  position: relative;
+  height: 14px;
+  background: var(--surface-container);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.timeline-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: var(--radius-sm);
+  background: var(--primary);
+  min-width: 4px;
+  transition: filter 0.15s;
+}
+
+.timeline-count {
+  font-family: var(--font-mono);
+  color: var(--fg-muted);
+  text-align: right;
+}
+
+.timeline-axis {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--fg-muted);
+  font-family: var(--font-mono);
+  margin-top: var(--space-xs);
+  padding-left: 152px;
+  padding-right: 72px;
+}
+
+@media (max-width: 640px) {
+  .timeline-row { grid-template-columns: 1fr; gap: 4px; }
+  .timeline-label { font-weight: 600; color: var(--fg-1); }
+  .timeline-axis { display: none; }
+}
+
+/* Sender filter chips */
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container-lowest);
+  color: var(--fg-2);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.filter-chip:hover { border-color: var(--primary); color: var(--primary); }
+.filter-chip.active {
+  background: var(--primary);
+  color: var(--on-primary);
+  border-color: var(--primary);
+}
+.filter-chip.active .filter-chip-dot { background: var(--on-primary); }
+
+.filter-chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+.filter-chip-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.thread-summary-card.filter-hidden { display: none; }
+
 </style>
 </head>
 <body>
@@ -1055,6 +1288,41 @@ mark.search-hl {
         <div class="hero-title">Acme × Clockless<br>Mailbox Snapshot</div>
         <div class="hero-stats" id="hero-stats"></div>
       </div>
+
+      <!-- Open loops callout (threads waiting on a reply) -->
+      <section class="panel panel-callout" id="open-loops-section" aria-labelledby="open-loops-title">
+        <div class="panel-header">
+          <div class="panel-title-row">
+            <h2 class="panel-title" id="open-loops-title">Open loops</h2>
+            <span class="panel-sub">Threads where the last message ends in a question or ask</span>
+          </div>
+        </div>
+        <div class="open-loops-list" id="open-loops-list"></div>
+      </section>
+
+      <!-- Timeline -->
+      <section class="panel" id="timeline-section" aria-labelledby="timeline-title">
+        <div class="panel-header">
+          <div class="panel-title-row">
+            <h2 class="panel-title" id="timeline-title">Timeline</h2>
+            <span class="panel-sub">Chronological activity per thread</span>
+          </div>
+        </div>
+        <div class="timeline-wrap" id="timeline-wrap"></div>
+      </section>
+
+      <!-- Sender filter -->
+      <section class="panel" id="sender-filter-section" aria-labelledby="sender-filter-title">
+        <div class="panel-header">
+          <div class="panel-title-row">
+            <h2 class="panel-title" id="sender-filter-title">Sender filter</h2>
+            <span class="panel-sub">Click a chip to constrain visible threads</span>
+          </div>
+          <button class="filter-clear" id="filter-clear-btn" type="button" onclick="clearSenderFilter()" hidden>Clear</button>
+        </div>
+        <div class="filter-chips" id="sender-filter-chips" role="group" aria-label="Sender filter chips"></div>
+      </section>
+
       <div class="threads-grid" id="threads-grid"></div>
     </div>
 
@@ -1122,6 +1390,7 @@ function buildData() {
     allMessages.push(m);
   }
 
+  if (Array.isArray(DATA.messages)) DATA.messages.forEach(addMsg);
   if (DATA.first) DATA.first.forEach(addMsg);
   if (DATA.last) DATA.last.forEach(addMsg);
   if (DATA.longestThread && DATA.longestThread.sample) DATA.longestThread.sample.forEach(addMsg);
@@ -1495,4 +1764,199 @@ function openMobileSidebar() {
 }
 
 function closeMobileSidebar() {
-  document.getElementById
+  document.getElementById('sidebar').classList.remove('mobile-open');
+  document.getElementById('overlay').classList.remove('active');
+}
+
+// ── Open loops ────────────────────────────────────────────────────────────────
+function renderOpenLoops() {
+  const list = document.getElementById('open-loops-list');
+  if (!list) return;
+  list.innerHTML = '';
+
+  const threads = Object.values(threadMap);
+  const open = [];
+  threads.forEach(t => {
+    const meta = (DATA.threads || []).find(x => x.id === t.id);
+    const lastMsg = t.messages[t.messages.length - 1];
+    if (!lastMsg) return;
+    const lastEndsInQuestion = meta ? !!meta.lastEndsInQuestion : !!lastMsg.hasQuestion;
+    if (!lastEndsInQuestion) return;
+    open.push({ thread: t, lastMsg });
+  });
+
+  if (open.length === 0) {
+    list.innerHTML = '<div class="open-loops-empty">No open loops — everyone has replied.</div>';
+    return;
+  }
+
+  const now = Date.now();
+  open.sort((a, b) => (b.lastMsg.tsEpoch || 0) - (a.lastMsg.tsEpoch || 0));
+  open.forEach(({ thread, lastMsg }) => {
+    const sentence = extractAskSentence(lastMsg.body || lastMsg.bodyPreview || '');
+    const senderName = lastMsg.from.name || lastMsg.from.email;
+    const waitedDays = lastMsg.tsEpoch ? Math.max(0, Math.round((now - lastMsg.tsEpoch) / 86400000)) : null;
+    const meta = waitedDays === null ? formatDate(lastMsg.ts) :
+      (waitedDays === 0 ? 'today' : `${waitedDays}d waiting`);
+    const row = document.createElement('div');
+    row.className = 'open-loop-row';
+    row.onclick = () => showThread(thread.id);
+    row.innerHTML = `
+      <div class="open-loop-dot"></div>
+      <div class="open-loop-info">
+        <div class="open-loop-subject">${escHtml(thread.subject)} · ${escHtml(senderName)}</div>
+        <div class="open-loop-question">${escHtml(sentence)}</div>
+      </div>
+      <div class="open-loop-meta">${escHtml(meta)}<br><span style="opacity:0.6">${escHtml(formatDate(lastMsg.ts))}</span></div>
+    `;
+    list.appendChild(row);
+  });
+}
+
+function extractAskSentence(body) {
+  if (!body) return 'Awaiting reply.';
+  const trimmed = body.trim();
+  // Find the last sentence that ends with ? — that's typically the ask.
+  const questionMatch = trimmed.match(/([^?.\n!]{6,200}\?)\s*[^?]*$/m);
+  if (questionMatch) return questionMatch[1].trim().replace(/\s+/g, ' ');
+  // Otherwise, take the last non-empty line.
+  const lines = trimmed.split(/\n+/).map(s => s.trim()).filter(Boolean);
+  const last = lines[lines.length - 1] || trimmed;
+  return last.length > 200 ? last.slice(0, 200) + '…' : last;
+}
+
+// ── Timeline ──────────────────────────────────────────────────────────────────
+function renderTimeline() {
+  const wrap = document.getElementById('timeline-wrap');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+
+  const threads = Object.values(threadMap);
+  if (threads.length === 0) {
+    wrap.innerHTML = '<div class="open-loops-empty">No threads to chart.</div>';
+    return;
+  }
+
+  let minTs = Infinity, maxTs = -Infinity;
+  threads.forEach(t => {
+    t.messages.forEach(m => {
+      if (m.tsEpoch) {
+        if (m.tsEpoch < minTs) minTs = m.tsEpoch;
+        if (m.tsEpoch > maxTs) maxTs = m.tsEpoch;
+      }
+    });
+  });
+  if (minTs === Infinity) {
+    wrap.innerHTML = '<div class="open-loops-empty">No timestamps to chart.</div>';
+    return;
+  }
+  const span = Math.max(1, maxTs - minTs);
+
+  const sorted = threads.slice().sort((a, b) => {
+    const aFirst = a.messages[0]?.tsEpoch || 0;
+    const bFirst = b.messages[0]?.tsEpoch || 0;
+    return aFirst - bFirst;
+  });
+
+  sorted.forEach((t, i) => {
+    const color = PALETTE[i % PALETTE.length];
+    const firstE = t.messages[0]?.tsEpoch || minTs;
+    const lastE = t.messages[t.messages.length - 1]?.tsEpoch || firstE;
+    const left = ((firstE - minTs) / span) * 100;
+    const width = Math.max(1, ((lastE - firstE) / span) * 100);
+    const row = document.createElement('div');
+    row.className = 'timeline-row';
+    row.onclick = () => showThread(t.id);
+    row.innerHTML = `
+      <div class="timeline-label" title="${escHtml(t.subject)}">${escHtml(t.subject)}</div>
+      <div class="timeline-track" aria-label="Activity from ${escHtml(formatDate(t.firstTs))} to ${escHtml(formatDate(t.lastTs))}">
+        <div class="timeline-bar" style="left:${left}%;width:${width}%;background:${color}"></div>
+      </div>
+      <div class="timeline-count">${t.messageCount}</div>
+    `;
+    wrap.appendChild(row);
+  });
+
+  const axis = document.createElement('div');
+  axis.className = 'timeline-axis';
+  axis.innerHTML = `<span>${escHtml(formatDate(new Date(minTs).toISOString().slice(0, 19).replace('T', ' ')))}</span><span>${escHtml(formatDate(new Date(maxTs).toISOString().slice(0, 19).replace('T', ' ')))}</span>`;
+  wrap.appendChild(axis);
+}
+
+// ── Sender filter ─────────────────────────────────────────────────────────────
+let activeSenderFilter = new Set();
+
+function renderSenderFilter() {
+  const chipsEl = document.getElementById('sender-filter-chips');
+  if (!chipsEl) return;
+  chipsEl.innerHTML = '';
+  const senders = (DATA.topSenders || DATA.senders || []).slice(0, 10);
+  if (senders.length === 0) {
+    chipsEl.innerHTML = '<div class="open-loops-empty">No senders detected.</div>';
+    return;
+  }
+  senders.forEach(s => {
+    const color = DOMAIN_COLORS[s.domain] || getColor(s.email);
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'filter-chip';
+    chip.dataset.email = s.email;
+    chip.innerHTML = `
+      <span class="filter-chip-dot" style="background:${color}"></span>
+      <span>${escHtml(s.name || s.email)}</span>
+      <span class="filter-chip-count">${s.count}</span>
+    `;
+    chip.onclick = () => toggleSenderFilter(s.email);
+    chipsEl.appendChild(chip);
+  });
+}
+
+function toggleSenderFilter(email) {
+  if (activeSenderFilter.has(email)) activeSenderFilter.delete(email);
+  else activeSenderFilter.add(email);
+  applySenderFilter();
+}
+
+function clearSenderFilter() {
+  activeSenderFilter.clear();
+  applySenderFilter();
+}
+
+function applySenderFilter() {
+  document.querySelectorAll('#sender-filter-chips .filter-chip').forEach(c => {
+    c.classList.toggle('active', activeSenderFilter.has(c.dataset.email));
+  });
+  const clearBtn = document.getElementById('filter-clear-btn');
+  if (clearBtn) clearBtn.hidden = activeSenderFilter.size === 0;
+
+  const cards = document.querySelectorAll('#threads-grid .thread-summary-card');
+  const threads = Object.values(threadMap);
+  cards.forEach((card, i) => {
+    const t = threads[i];
+    if (!t) return;
+    if (activeSenderFilter.size === 0) {
+      card.classList.remove('filter-hidden');
+      return;
+    }
+    const senderEmails = new Set(t.messages.map(m => m.from.email));
+    let match = false;
+    activeSenderFilter.forEach(e => { if (senderEmails.has(e)) match = true; });
+    card.classList.toggle('filter-hidden', !match);
+  });
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+function init() {
+  buildData();
+  renderSidebar();
+  renderOpenLoops();
+  renderTimeline();
+  renderSenderFilter();
+  renderOverview();
+  renderThreadViews();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
