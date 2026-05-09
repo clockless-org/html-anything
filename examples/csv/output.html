@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Coffee Equipment Sales — January 2026</title>
+<style>/* Base styles for every html-anything output. Opinionated: one good design,
+   no themes. Light by default; respects prefers-color-scheme. */
+
+:root {
+  --ha-bg: #faf8f5;
+  --ha-fg: #1f1c19;
+  --ha-fg-muted: #6b665e;
+  --ha-surface: #ffffff;
+  --ha-border: #e9e4dc;
+  --ha-accent: #c0552a;
+  --ha-accent-soft: #fdeee5;
+  --ha-radius: 14px;
+  --ha-shadow: 0 1px 2px rgba(30, 27, 25, 0.04), 0 8px 24px rgba(30, 27, 25, 0.06);
+  --ha-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --ha-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --ha-serif: "Iowan Old Style", "Apple Garamond", Baskerville, "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ha-bg: #14110e;
+    --ha-fg: #f1ece5;
+    --ha-fg-muted: #9d958a;
+    --ha-surface: #1f1c19;
+    --ha-border: #2e2925;
+    --ha-accent: #ee8a5b;
+    --ha-accent-soft: #2c1d14;
+    --ha-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--ha-sans);
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--ha-fg);
+  background: var(--ha-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: var(--ha-accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.ha-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--ha-bg) 78%, transparent);
+  backdrop-filter: saturate(140%) blur(12px);
+  border-bottom: 1px solid var(--ha-border);
+}
+.ha-bar__inner {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.ha-bar__brand { flex: 1; min-width: 0; }
+.ha-bar__eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ha-fg-muted);
+}
+.ha-bar__title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+  font-family: var(--ha-serif);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ha-bar__search {
+  width: 220px;
+  max-width: 40vw;
+  padding: 9px 14px;
+  border: 1px solid var(--ha-border);
+  border-radius: 999px;
+  background: var(--ha-surface);
+  color: var(--ha-fg);
+  font: inherit;
+  outline: none;
+}
+.ha-bar__search:focus {
+  border-color: var(--ha-accent);
+  box-shadow: 0 0 0 3px var(--ha-accent-soft);
+}
+
+.ha-main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+.ha-main h1, .ha-main h2, .ha-main h3 {
+  font-family: var(--ha-serif);
+  line-height: 1.25;
+  margin: 1.6em 0 0.5em;
+}
+.ha-main h1 { font-size: 32px; }
+.ha-main h2 { font-size: 22px; }
+.ha-main h3 { font-size: 18px; }
+.ha-main p { margin: 1em 0; }
+.ha-main code {
+  font-family: var(--ha-mono);
+  font-size: 0.92em;
+  background: var(--ha-surface);
+  border: 1px solid var(--ha-border);
+  border-radius: 6px;
+  padding: 1px 6px;
+}
+.ha-main pre {
+  font-family: var(--ha-mono);
+  font-size: 13.5px;
+  background: var(--ha-surface);
+  border: 1px solid var(--ha-border);
+  border-radius: var(--ha-radius);
+  padding: 16px 18px;
+  overflow-x: auto;
+}
+.ha-main pre code { background: none; border: none; padding: 0; }
+.ha-main blockquote {
+  border-left: 3px solid var(--ha-accent);
+  margin: 1em 0;
+  padding: 4px 16px;
+  color: var(--ha-fg-muted);
+}
+.ha-main hr {
+  border: 0;
+  border-top: 1px solid var(--ha-border);
+  margin: 2em 0;
+}
+.ha-main img { max-width: 100%; height: auto; border-radius: 8px; }
+.ha-main table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 14px;
+}
+.ha-main th, .ha-main td {
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--ha-border);
+}
+.ha-main th { font-weight: 700; color: var(--ha-fg-muted); }
+
+.ha-hidden { display: none !important; }
+
+.ha-footer {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+  font-size: 12px;
+  color: var(--ha-fg-muted);
+  text-align: center;
+}
+
+.ha-scrolltop {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--ha-border);
+  border-radius: 999px;
+  background: var(--ha-surface);
+  color: var(--ha-fg);
+  font-size: 18px;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  box-shadow: var(--ha-shadow);
+}
+.ha-scrolltop--shown {
+  opacity: 1;
+  pointer-events: auto;
+}
+</style>
+<style>
+.csv-meta {
+  font-size: 13px;
+  color: var(--ha-fg-muted);
+  margin-bottom: 12px;
+}
+.csv-wrap {
+  border: 1px solid var(--ha-border);
+  border-radius: var(--ha-radius);
+  overflow: auto;
+  max-height: 78vh;
+  background: var(--ha-surface);
+  box-shadow: var(--ha-shadow);
+}
+.csv-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  font-variant-numeric: tabular-nums;
+}
+.csv-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--ha-surface);
+  border-bottom: 1px solid var(--ha-border);
+  padding: 0;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ha-fg-muted);
+  text-align: left;
+}
+.csv-sort {
+  width: 100%;
+  background: none;
+  border: 0;
+  text-align: inherit;
+  padding: 12px 14px;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.csv-sort:hover { background: var(--ha-accent-soft); color: var(--ha-fg); }
+.csv-sort__arrow::before { content: ""; opacity: 0.5; }
+.csv-table th[data-sort="asc"] .csv-sort__arrow::before { content: " ↑"; opacity: 1; }
+.csv-table th[data-sort="desc"] .csv-sort__arrow::before { content: " ↓"; opacity: 1; }
+.csv-table td {
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--ha-border);
+  white-space: nowrap;
+  max-width: 360px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.csv-table tbody tr:hover { background: var(--ha-accent-soft); }
+.csv-num { text-align: right; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<header class="ha-bar">
+  <div class="ha-bar__inner">
+    <div class="ha-bar__brand">
+      <div class="ha-bar__eyebrow">CSV · 46 rows · 8 columns</div>
+      <h1 class="ha-bar__title">Coffee Equipment Sales — January 2026</h1>
+    </div>
+    <input class="ha-bar__search" type="search" placeholder="Search…" aria-label="Search">
+  </div>
+</header>
+<main class="ha-main">
+
+<div class="csv-meta">46 rows · 8 columns · 3 numeric</div>
+<div class="csv-wrap">
+  <table class="csv-table">
+    <thead><tr><th data-col="0" data-numeric="false"><button class="csv-sort">order_id<span class="csv-sort__arrow"></span></button></th><th data-col="1" data-numeric="false"><button class="csv-sort">date<span class="csv-sort__arrow"></span></button></th><th data-col="2" data-numeric="false"><button class="csv-sort">region<span class="csv-sort__arrow"></span></button></th><th data-col="3" data-numeric="false"><button class="csv-sort">product<span class="csv-sort__arrow"></span></button></th><th data-col="4" data-numeric="true"><button class="csv-sort">units<span class="csv-sort__arrow"></span></button></th><th data-col="5" data-numeric="true"><button class="csv-sort">unit_price<span class="csv-sort__arrow"></span></button></th><th data-col="6" data-numeric="true"><button class="csv-sort">revenue<span class="csv-sort__arrow"></span></button></th><th data-col="7" data-numeric="false"><button class="csv-sort">sales_rep<span class="csv-sort__arrow"></span></button></th></tr></thead>
+    <tbody><tr data-searchable data-searchable-text="ORD-1042 2026-01-04 West Espresso Machine 12 499.00 5988.00 Mira Park"><td>ORD-1042</td><td>2026-01-04</td><td>West</td><td>Espresso Machine</td><td class="csv-num">12</td><td class="csv-num">499.00</td><td class="csv-num">5988.00</td><td>Mira Park</td></tr>
+<tr data-searchable data-searchable-text="ORD-1043 2026-01-04 West Coffee Grinder 18 189.00 3402.00 Alex Chen"><td>ORD-1043</td><td>2026-01-04</td><td>West</td><td>Coffee Grinder</td><td class="csv-num">18</td><td class="csv-num">189.00</td><td class="csv-num">3402.00</td><td>Alex Chen</td></tr>
+<tr data-searchable data-searchable-text="ORD-1044 2026-01-04 East Espresso Machine 7 499.00 3493.00 Sam Reyes"><td>ORD-1044</td><td>2026-01-04</td><td>East</td><td>Espresso Machine</td><td class="csv-num">7</td><td class="csv-num">499.00</td><td class="csv-num">3493.00</td><td>Sam Reyes</td></tr>
+<tr data-searchable data-searchable-text="ORD-1045 2026-01-05 West Burr Grinder Pro 4 329.00 1316.00 Mira Park"><td>ORD-1045</td><td>2026-01-05</td><td>West</td><td>Burr Grinder Pro</td><td class="csv-num">4</td><td class="csv-num">329.00</td><td class="csv-num">1316.00</td><td>Mira Park</td></tr>
+<tr data-searchable data-searchable-text="ORD-1046 2026-01-05 Central Coffee Grinder 22 189.00 4158.00 Jordan Vu"><td>ORD-1046</td><td>2026-01-05</td><td>Central</td><td>Coffee Grinder</td><td class="csv-num">22</td><td class="csv-num">189.00</td><td class="csv-num">4158.00</td><td>Jordan Vu</td></tr>
+<tr data-searchable data-searchable-text="ORD-1047 2026-01-06 East Espresso Machine 3 499.00 1497.00 Sam Reyes"><td>ORD-1047</td><td>2026-01-06</td><td>East</td><td>Espresso Machine</td><td class="csv-num">3</td><td class="csv-num">499.00</td><td class="csv-num">1497.00</td><td>Sam Reyes</td></tr>
+<tr data-searchable data-searchable-text="ORD-1048 2026-01-06 West Pour-Over Kit 28 79.00 2212.00 Alex Chen"><td>ORD-1048</td><td>2026-01-06</td><td>West</td><td>Pour-Over Kit</td><td class="csv-num">28</td><td class="csv-num">79.00</td><td class="csv-num">2212.00</td><td>Alex Chen</td></tr>
+<tr data-searchable data-searchable-text="ORD-1049 2026-01-07 South Espresso Machine 5 499.00 2495.00 Devi Patel"><td>ORD-1049</td><td>2026-01-07</td><td>South</td><td>Espresso Machine</td><td class="csv-num">5</td><td class="csv-num">499.00</td><td class="csv-num">2495.00</td><td>Devi Patel</td></tr>
+<tr data-searchable data-searchable-text="ORD-1050 2026-01-07 West Burr Grinder Pro 9 329.00 2961.00 Mira Park"><td>ORD-1050</td><td>2026-01-07</td><td>West</td><td>Burr Grinder Pro</td><td class="csv-num">9</td><td class="csv-num">329.00</td><td class="csv-num">2961.00</td><td>Mira Park</td></tr>
+<tr data-searchable data-searchable-text="ORD-1051 2026-01-08 Central Pour-Over Kit 33 79.00 2607.00 Jordan Vu"><td>ORD-1051</td><td>2026-01-08</td><td>Central</td><td>Pour-Over Kit</td><td class="csv-num">33</td><td class="csv-num">79.00</td><td class="csv-num">2607.00</td><td>Jordan Vu</td></tr>
+<tr data-searchable data-searchable-text="ORD-1052 2026-01-09 East Coffee Grinder 11 189.00 2079.00 Sam Reyes"><td>ORD-1052</td><td>2026-01-09</td><td>East</td><td>Coffee Grinder</td><td class="csv-num">11</td><td class="csv-num">189.00</td><td class="csv-num">2079.00</td><td>Sam Reyes</td></tr>
+<tr data-searchable data-searchable-text="ORD-1053 2026-01-09 West Espresso Machine 15 499.00 7485.00 Alex Chen"><td>ORD-1053</td><td>2026-01-09</td><td>West</td><td>Espresso Machine</td><td class="csv-num">15</td><td class="csv-num">499.00</td><td class="csv-num">7485.00</td><td>Alex Chen</td></tr>
+<tr data-searchable data-searchable-text="ORD-1054 2026-01-10 West Burr Grinder Pro 6 329.00 1974.00 Mira Park"><td>ORD-1054</td><td>2026-01-10</td><td>West</td><td>Burr Grinder Pro</td><td class="csv-num">6</td><td class="csv-num">329.00</td><td class="csv-num">1974.00</td><td>Mira Park</td></tr>
+<tr data-searchable data-searchable-text="ORD-1055 2026-01-10 South Coffee Grinder 14 189.00 2646.00 Devi Patel"><td>ORD-1055</td><td>2026-01-10</td><td>South</td><td>Coffee Grinder</td><td class="csv-num">14</td><td class="csv-num">189.00</td><td class="csv-num">2646.00</td><td>Devi Patel</td></tr>
+<tr data-searchable data-searchable-text="ORD-1056 2026-01-11 East Pour-Over Kit 40 79.00 3160.00 Sam Reyes"><td>ORD-1056</td><td>2026-01-11</td><td>East</td><td>Pour-Over Kit</td><td class="csv-num">40</td><td class="csv-num">79.00</td><td class="csv-num">3160.00</td><td>Sam Reyes</td></tr>
+<tr data-searchable data-searchable-text="ORD-1057 2026-01-12 West Espresso Machine 8 499.00 3992.00 Mira Park"><td>ORD-1057</td><td>2026-01-12</td><td>West</td><td>Espresso Machine</td><td class="csv-num">8</td><td class="csv-num">499.00</td><td class="csv-num">3992.00</td><td>Mira Park</td></tr>
+<tr data-searchable data-searchable-text="ORD-1058 2026-01-13 Central Espresso Machine 4 499.00 1996.00 Jordan Vu"><td>ORD-1058</td><td>2026-01-13</td><td>Central</td><td>Espresso Machine</td><td class="csv-num">4</td><td class="csv-num">499.00</td><td class="csv-num">1996.00</td><td>Jordan Vu</td></tr>
+<tr data-searchable data-searchable-text="ORD-1059 2026-01-13 West Coffee Grinder 25 189.00 4725.00 Alex Chen"><td>ORD-1059</td><td>2026-01-13</td><td>West</td><td>Coffee Grinder</td><td class="csv-num">25</td><td class="csv-num">189.00</td><td class="csv-num">4725.00</td><td>Alex Chen</td></tr>
+<tr data-searchable data-searchable-text="ORD-1060 2026-01-14 East Burr Grinder Pro 7 329.00 2303.00 Sam Reyes"><td>ORD-1060</td><td>2026-01-14</td><td>East</td><td>Burr Grinder Pro</td><td class="csv-num">7</td><td class="csv-num">329.00</td><td class="csv-num">2303.00</td><td>Sam Reyes</td></tr>
+<tr data-searchable data-searchable-text="ORD-1061 2026-01-14 South Pour-Over Kit 20 79.00 1580.00 Devi Patel"><td>ORD-1061</td><td>2026-01-14</td><td>South</td><td>Pour-Over Kit</td><td class="csv-num">20</td><td class="csv-num">79.00</td><td class="csv-num">1580.00</td><td>Devi Patel</td></tr>
+<tr data-searchable data-searchable-text="ORD-1062 2026-01-15 West Espresso Machine 11 499.00 5489.00 Mira Park"><td>ORD-1062</td><td>2026-01-15</td><td>West</td><td>Espresso Machine</td><td class="csv-num">11</td><td class="csv-num">499.00</td><td class="csv-num">5489.00</td><td>Mira Park</td></tr>
+<tr data-searchable data-searchable-text="ORD-1063 2026-01-16 Central Burr Grinder Pro 5 329.00 1645.00 Jordan Vu"><td>ORD-1063</td><td>2026-01-16</td><td>Central</td><td>Burr Grinder Pro</td><td class="csv-num">5</td><td class="csv-num">329.00</td><td class="csv-num">1645.00</td><td>Jordan Vu</td></tr>
+<tr data-searchable data-searchable-text="ORD-1064 2026-01-16 West Coffee Grinder 19 189.00 3591.00 Alex Chen"><td>ORD-1064</td><td>2026-01-16</td><td>West</td><td>Coffee Grinder</td><td class="csv-num">19</td><td class="csv-num">189.00</td><td class="csv-num">3591.00</td><td>Alex Chen</td></tr>
+<tr data-searchable data-searchable-text="ORD-1065 2026-01-17 East Espresso Machine 6 499.00 2994.00 Sam Reyes"><td>ORD-1065</td><td>2026-01-17</td><td>East</td><td>Espresso Machine</td><td class="csv-num">6</td><td class="csv-num">499.00</td><td class="csv-num">2994.00</td><td>Sam Reyes</td></tr>
+<tr data-searchable data-searchable-text="ORD-1066 2026-01-17 South Pour-Over Kit 27 79.00 2133.00 Devi Patel"><td>ORD-1066</td><td>2026-01-17</td><td>South</td><td>Pour-Over Kit</td><td class="csv-num">27</td><td class="csv-num">79.00</td><td class="csv-num">2133.00</td><td>Devi Patel</td></tr>
+<tr data-searchable data-searchable-text="ORD-1067 2026-01-18 West Burr Grinder Pro 8 329.00 2632.00 Mira Park"><td>ORD-1067</td><td>2026-01-18</td><td>West</td><td>Burr Grinder Pro</td><td class="csv-num">8</td><td class="csv-num">329.00</td><td class="csv-num">2632.00</td><td>Mira Park</td></tr>
+<tr data-searchable data-searchable-text="ORD-1068 2026-01-19 Central Coffee Grinder 15 189.00 2835.00 Jordan Vu"><td>ORD-1068</td><td>2026-01-19</td><td>Central</td><td>Coffee Grinder</td><td class="csv-num">15</td><td class="csv-num">189.00</td><td class="csv-num">2835.00</td><td>Jordan Vu</td></tr>
+<tr data-searchable data-searchable-text="ORD-1069 2026-01-19 West Espresso Machine 9 499.00 4491.00 Alex Chen"><td>ORD-1069</td><td>2026-01-19</td><td>West</td><td>Espresso Machine</td><td class="csv-num">9</td><td class="csv-num">499.00</td><td class="csv-num">4491.00</td><td>Alex Chen</td></tr>
+<tr data-searchable data-searchable-text="ORD-1070 2026-01-20 East Pour-Over Kit 32 79.00 2528.00 Sam Reyes"><td>ORD-1070</td><td>2026-01-20</td><td>East</td><td>Pour-Over Kit</td><td class="csv-num">32</td><td class="csv-num">79.00</td><td class="csv-num">2528.00</td><td>Sam Reyes</td></tr>
+<tr data-searchable data-searchable-text="ORD-1071 2026-01-21 West Espresso Machine 13 499.00 6487.00 Mira Park"><td>ORD-1071</td><td>2026-01-21</td><td>West</td><td>Espresso Machine</td><td class="csv-num">13</td><td class="csv-num">499.00</td><td class="csv-num">6487.00</td><td>Mira Park</td></tr>
+<tr data-searchable data-searchable-text="ORD-1072 2026-01-21 South Burr Grinder Pro 4 329.00 1316.00 Devi Patel"><td>ORD-1072</td><td>2026-01-21</td><td>South</td><td>Burr Grinder Pro</td><td class="csv-num">4</td><td class="csv-num">329.00</td><td class="csv-num">1316.00</td><td>Devi Patel</td></tr>
+<tr data-searchable data-searchable-text="ORD-1073 2026-01-22 Central Pour-Over Kit 38 79.00 3002.00 Jordan Vu"><td>ORD-1073</td><td>2026-01-22</td><td>Central</td><td>Pour-Over Kit</td><td class="csv-num">38</td><td class="csv-num">79.00</td><td class="csv-num">3002.00</td><td>Jordan Vu</td></tr>
+<tr data-searchable data-searchable-text="ORD-1074 2026-01-22 West Coffee Grinder 22 189.00 4158.00 Alex Chen"><td>ORD-1074</td><td>2026-01-22</td><td>West</td><td>Coffee Grinder</td><td class="csv-num">22</td><td class="csv-num">189.00</td><td class="csv-num">4158.00</td><td>Alex Chen</td></tr>
+<tr data-searchable data-searchable-text="ORD-1075 2026-01-23 East Espresso Machine 7 499.00 3493.00 Sam Reyes"><td>ORD-1075</td><td>2026-01-23</td><td>East</td><td>Espresso Machine</td><td class="csv-num">7</td><td class="csv-num">499.00</td><td class="csv-num">3493.00</td><td>Sam Reyes</td></tr>
+<tr data-searchable data-searchable-text="ORD-1076 2026-01-24 West Burr Grinder Pro 10 329.00 3290.00 Mira Park"><td>ORD-1076</td><td>2026-01-24</td><td>West</td><td>Burr Grinder Pro</td><td class="csv-num">10</td><td class="csv-num">329.00</td><td class="csv-num">3290.00</td><td>Mira Park</td></tr>
+<tr data-searchable data-searchable-text="ORD-1077 2026-01-24 South Coffee Grinder 16 189.00 3024.00 Devi Patel"><td>ORD-1077</td><td>2026-01-24</td><td>South</td><td>Coffee Grinder</td><td class="csv-num">16</td><td class="csv-num">189.00</td><td class="csv-num">3024.00</td><td>Devi Patel</td></tr>
+<tr data-searchable data-searchable-text="ORD-1078 2026-01-25 East Pour-Over Kit 29 79.00 2291.00 Sam Reyes"><td>ORD-1078</td><td>2026-01-25</td><td>East</td><td>Pour-Over Kit</td><td class="csv-num">29</td><td class="csv-num">79.00</td><td class="csv-num">2291.00</td><td>Sam Reyes</td></tr>
+<tr data-searchable data-searchable-text="ORD-1079 2026-01-26 West Espresso Machine 14 499.00 6986.00 Alex Chen"><td>ORD-1079</td><td>2026-01-26</td><td>West</td><td>Espresso Machine</td><td class="csv-num">14</td><td class="csv-num">499.00</td><td class="csv-num">6986.00</td><td>Alex Chen</td></tr>
+<tr data-searchable data-searchable-text="ORD-1080 2026-01-26 Central Burr Grinder Pro 6 329.00 1974.00 Jordan Vu"><td>ORD-1080</td><td>2026-01-26</td><td>Central</td><td>Burr Grinder Pro</td><td class="csv-num">6</td><td class="csv-num">329.00</td><td class="csv-num">1974.00</td><td>Jordan Vu</td></tr>
+<tr data-searchable data-searchable-text="ORD-1081 2026-01-27 West Coffee Grinder 21 189.00 3969.00 Mira Park"><td>ORD-1081</td><td>2026-01-27</td><td>West</td><td>Coffee Grinder</td><td class="csv-num">21</td><td class="csv-num">189.00</td><td class="csv-num">3969.00</td><td>Mira Park</td></tr>
+<tr data-searchable data-searchable-text="ORD-1082 2026-01-28 East Espresso Machine 5 499.00 2495.00 Sam Reyes"><td>ORD-1082</td><td>2026-01-28</td><td>East</td><td>Espresso Machine</td><td class="csv-num">5</td><td class="csv-num">499.00</td><td class="csv-num">2495.00</td><td>Sam Reyes</td></tr>
+<tr data-searchable data-searchable-text="ORD-1083 2026-01-28 South Pour-Over Kit 24 79.00 1896.00 Devi Patel"><td>ORD-1083</td><td>2026-01-28</td><td>South</td><td>Pour-Over Kit</td><td class="csv-num">24</td><td class="csv-num">79.00</td><td class="csv-num">1896.00</td><td>Devi Patel</td></tr>
+<tr data-searchable data-searchable-text="ORD-1084 2026-01-29 West Burr Grinder Pro 11 329.00 3619.00 Mira Park"><td>ORD-1084</td><td>2026-01-29</td><td>West</td><td>Burr Grinder Pro</td><td class="csv-num">11</td><td class="csv-num">329.00</td><td class="csv-num">3619.00</td><td>Mira Park</td></tr>
+<tr data-searchable data-searchable-text="ORD-1085 2026-01-30 Central Coffee Grinder 17 189.00 3213.00 Jordan Vu"><td>ORD-1085</td><td>2026-01-30</td><td>Central</td><td>Coffee Grinder</td><td class="csv-num">17</td><td class="csv-num">189.00</td><td class="csv-num">3213.00</td><td>Jordan Vu</td></tr>
+<tr data-searchable data-searchable-text="ORD-1086 2026-01-30 West Espresso Machine 12 499.00 5988.00 Alex Chen"><td>ORD-1086</td><td>2026-01-30</td><td>West</td><td>Espresso Machine</td><td class="csv-num">12</td><td class="csv-num">499.00</td><td class="csv-num">5988.00</td><td>Alex Chen</td></tr>
+<tr data-searchable data-searchable-text="ORD-1087 2026-01-31 East Pour-Over Kit 35 79.00 2765.00 Sam Reyes"><td>ORD-1087</td><td>2026-01-31</td><td>East</td><td>Pour-Over Kit</td><td class="csv-num">35</td><td class="csv-num">79.00</td><td class="csv-num">2765.00</td><td>Sam Reyes</td></tr></tbody>
+  </table>
+</div>
+</main>
+<footer class="ha-footer">Generated by <a href="https://github.com/clockless-org/html-anything">html-anything</a> · open in any browser, share anywhere</footer>
+<button class="ha-scrolltop" type="button" aria-label="Scroll to top">↑</button>
+<script>
+(function () {
+  // Search: hide elements with [data-searchable] that don't match.
+  var input = document.querySelector('.ha-bar__search');
+  if (input) {
+    input.addEventListener('input', function () {
+      var q = input.value.trim().toLowerCase();
+      document.querySelectorAll('[data-searchable]').forEach(function (el) {
+        var hay = el.getAttribute('data-searchable-text') || el.textContent || '';
+        var hit = !q || hay.toLowerCase().indexOf(q) !== -1;
+        el.classList.toggle('ha-hidden', !hit);
+      });
+    });
+  }
+  // Scroll-to-top
+  var btn = document.querySelector('.ha-scrolltop');
+  if (btn) {
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    window.addEventListener('scroll', function () {
+      btn.classList.toggle('ha-scrolltop--shown', window.scrollY > 500);
+    });
+  }
+})();
+</script>
+<script>
+(function () {
+  var ths = document.querySelectorAll('.csv-table th');
+  ths.forEach(function (th) {
+    th.querySelector('.csv-sort').addEventListener('click', function () {
+      var col = parseInt(th.getAttribute('data-col'), 10);
+      var numeric = th.getAttribute('data-numeric') === 'true';
+      var dir = th.getAttribute('data-sort') === 'asc' ? 'desc' : 'asc';
+      ths.forEach(function (other) { other.removeAttribute('data-sort'); });
+      th.setAttribute('data-sort', dir);
+      var tbody = th.closest('table').querySelector('tbody');
+      var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+      rows.sort(function (a, b) {
+        var av = a.children[col].textContent.trim();
+        var bv = b.children[col].textContent.trim();
+        if (numeric) {
+          var an = parseFloat(av.replace(/[\$,\s%]/g, '')) || 0;
+          var bn = parseFloat(bv.replace(/[\$,\s%]/g, '')) || 0;
+          return dir === 'asc' ? an - bn : bn - an;
+        }
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(function (r) { tbody.appendChild(r); });
+    });
+  });
+})();
+</script>
+</body>
+</html>

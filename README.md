@@ -19,6 +19,16 @@ if HTML is what humans read best, agents should produce HTML.
 [thariq-post]: https://x.com/trq212
 [cli-anything]: https://github.com/HKUDS/CLI-Anything
 
+## See it
+
+Live examples:
+
+- [**Markdown**](https://clockless-org.github.io/html-anything/markdown/output.html) — long-form essay with search + dark mode + TL;DR
+- [**WhatsApp export**](https://clockless-org.github.io/html-anything/whatsapp/output.html) — `_chat.txt` parsed into a scrollable summary
+- [**CSV**](https://clockless-org.github.io/html-anything/csv/output.html) — sortable, searchable, sticky-header table
+
+(Or open the `examples/*/output.html` files locally — every output is a single self-contained file.)
+
 ## Why
 
 | Source format | What you get today | What you actually want |

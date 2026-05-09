@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Alex &amp; Mira</title>
+<style>/* Base styles for every html-anything output. Opinionated: one good design,
+   no themes. Light by default; respects prefers-color-scheme. */
+
+:root {
+  --ha-bg: #faf8f5;
+  --ha-fg: #1f1c19;
+  --ha-fg-muted: #6b665e;
+  --ha-surface: #ffffff;
+  --ha-border: #e9e4dc;
+  --ha-accent: #c0552a;
+  --ha-accent-soft: #fdeee5;
+  --ha-radius: 14px;
+  --ha-shadow: 0 1px 2px rgba(30, 27, 25, 0.04), 0 8px 24px rgba(30, 27, 25, 0.06);
+  --ha-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --ha-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --ha-serif: "Iowan Old Style", "Apple Garamond", Baskerville, "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ha-bg: #14110e;
+    --ha-fg: #f1ece5;
+    --ha-fg-muted: #9d958a;
+    --ha-surface: #1f1c19;
+    --ha-border: #2e2925;
+    --ha-accent: #ee8a5b;
+    --ha-accent-soft: #2c1d14;
+    --ha-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--ha-sans);
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--ha-fg);
+  background: var(--ha-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: var(--ha-accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.ha-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--ha-bg) 78%, transparent);
+  backdrop-filter: saturate(140%) blur(12px);
+  border-bottom: 1px solid var(--ha-border);
+}
+.ha-bar__inner {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.ha-bar__brand { flex: 1; min-width: 0; }
+.ha-bar__eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ha-fg-muted);
+}
+.ha-bar__title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+  font-family: var(--ha-serif);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ha-bar__search {
+  width: 220px;
+  max-width: 40vw;
+  padding: 9px 14px;
+  border: 1px solid var(--ha-border);
+  border-radius: 999px;
+  background: var(--ha-surface);
+  color: var(--ha-fg);
+  font: inherit;
+  outline: none;
+}
+.ha-bar__search:focus {
+  border-color: var(--ha-accent);
+  box-shadow: 0 0 0 3px var(--ha-accent-soft);
+}
+
+.ha-main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+.ha-main h1, .ha-main h2, .ha-main h3 {
+  font-family: var(--ha-serif);
+  line-height: 1.25;
+  margin: 1.6em 0 0.5em;
+}
+.ha-main h1 { font-size: 32px; }
+.ha-main h2 { font-size: 22px; }
+.ha-main h3 { font-size: 18px; }
+.ha-main p { margin: 1em 0; }
+.ha-main code {
+  font-family: var(--ha-mono);
+  font-size: 0.92em;
+  background: var(--ha-surface);
+  border: 1px solid var(--ha-border);
+  border-radius: 6px;
+  padding: 1px 6px;
+}
+.ha-main pre {
+  font-family: var(--ha-mono);
+  font-size: 13.5px;
+  background: var(--ha-surface);
+  border: 1px solid var(--ha-border);
+  border-radius: var(--ha-radius);
+  padding: 16px 18px;
+  overflow-x: auto;
+}
+.ha-main pre code { background: none; border: none; padding: 0; }
+.ha-main blockquote {
+  border-left: 3px solid var(--ha-accent);
+  margin: 1em 0;
+  padding: 4px 16px;
+  color: var(--ha-fg-muted);
+}
+.ha-main hr {
+  border: 0;
+  border-top: 1px solid var(--ha-border);
+  margin: 2em 0;
+}
+.ha-main img { max-width: 100%; height: auto; border-radius: 8px; }
+.ha-main table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 14px;
+}
+.ha-main th, .ha-main td {
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--ha-border);
+}
+.ha-main th { font-weight: 700; color: var(--ha-fg-muted); }
+
+.ha-hidden { display: none !important; }
+
+.ha-footer {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+  font-size: 12px;
+  color: var(--ha-fg-muted);
+  text-align: center;
+}
+
+.ha-scrolltop {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--ha-border);
+  border-radius: 999px;
+  background: var(--ha-surface);
+  color: var(--ha-fg);
+  font-size: 18px;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  box-shadow: var(--ha-shadow);
+}
+.ha-scrolltop--shown {
+  opacity: 1;
+  pointer-events: auto;
+}
+</style>
+<style>
+.wa-stub h2 { margin-top: 0; }
+.wa-stub__note { color: var(--ha-fg-muted); font-size: 14px; }
+.wa-stub__sample { margin-top: 24px; }
+.wa-stub__sample summary { cursor: pointer; color: var(--ha-accent); font-weight: 600; }
+.wa-stub__sample ul { padding-left: 0; list-style: none; margin-top: 12px; }
+.wa-stub__sample li { padding: 6px 0; border-bottom: 1px solid var(--ha-border); font-size: 14px; }
+.wa-stub__ts { font-family: var(--ha-mono); color: var(--ha-fg-muted); font-size: 12px; margin-right: 8px; }
+</style>
+</head>
+<body>
+<header class="ha-bar">
+  <div class="ha-bar__inner">
+    <div class="ha-bar__brand">
+      <div class="ha-bar__eyebrow">WhatsApp · 83 messages · 2 senders</div>
+      <h1 class="ha-bar__title">Alex &amp; Mira</h1>
+    </div>
+    
+  </div>
+</header>
+<main class="ha-main">
+
+<div class="wa-stub">
+  <h2>Parsed.</h2>
+  <p>Found <strong>83</strong> messages from <strong>2</strong> senders, between <strong>2026-01-04</strong> and <strong>2026-02-02</strong>.</p>
+  <p class="wa-stub__note">The full bubble-timeline UI is being built. For now this page confirms the export was recognized. Track progress at <a href="https://github.com/clockless-org/html-anything/issues">github.com/clockless-org/html-anything</a>.</p>
+  <details class="wa-stub__sample">
+    <summary>Show first 20 messages (raw parse)</summary>
+    <ul>
+      <li><span class="wa-stub__ts">2026-01-04 09:12:07</span> <strong>Alex Chen</strong>: hey are we still on for sat</li>
+      <li><span class="wa-stub__ts">2026-01-04 09:14:22</span> <strong>Mira Park</strong>: yes! 11ish at the usual?</li>
+      <li><span class="wa-stub__ts">2026-01-04 09:14:51</span> <strong>Alex Chen</strong>: perfect</li>
+      <li><span class="wa-stub__ts">2026-01-04 09:15:04</span> <strong>Alex Chen</strong>: bringing the books from last time</li>
+      <li><span class="wa-stub__ts">2026-01-04 09:15:38</span> <strong>Mira Park</strong>: omg yes please</li>
+      <li><span class="wa-stub__ts">2026-01-04 09:16:02</span> <strong>Mira Park</strong>: did you finish the murakami</li>
+      <li><span class="wa-stub__ts">2026-01-04 09:18:11</span> <strong>Alex Chen</strong>: half. it&#39;s good but it&#39;s slow</li>
+      <li><span class="wa-stub__ts">2026-01-04 09:18:34</span> <strong>Alex Chen</strong>: like, intentionally slow</li>
+      <li><span class="wa-stub__ts">2026-01-04 09:19:00</span> <strong>Mira Park</strong>: thats the point i think</li>
+      <li><span class="wa-stub__ts">2026-01-04 09:19:42</span> <strong>Mira Park</strong>: let me know when you finish, want to talk about it</li>
+      <li><span class="wa-stub__ts">2026-01-06 14:22:18</span> <strong>Alex Chen</strong>: random q — do you know any good ramen places near pioneer square</li>
+      <li><span class="wa-stub__ts">2026-01-06 14:25:03</span> <strong>Mira Park</strong>: kizuki on 1st? open late too</li>
+      <li><span class="wa-stub__ts">2026-01-06 14:25:30</span> <strong>Alex Chen</strong>: oh nice. how busy is it usually</li>
+      <li><span class="wa-stub__ts">2026-01-06 14:26:11</span> <strong>Mira Park</strong>: 7pm = full. 9pm = walk in</li>
+      <li><span class="wa-stub__ts">2026-01-06 14:26:33</span> <strong>Alex Chen</strong>: noted, thx</li>
+      <li><span class="wa-stub__ts">2026-01-08 19:44:52</span> <strong>Mira Park</strong>: ok finished murakami</li>
+      <li><span class="wa-stub__ts">2026-01-08 19:45:09</span> <strong>Mira Park</strong>: need to debrief</li>
+      <li><span class="wa-stub__ts">2026-01-08 19:46:21</span> <strong>Alex Chen</strong>: hahah ok</li>
+      <li><span class="wa-stub__ts">2026-01-08 19:46:48</span> <strong>Alex Chen</strong>: i&#39;m at the part where the cat shows up</li>
+      <li><span class="wa-stub__ts">2026-01-08 19:47:12</span> <strong>Mira Park</strong>: oh you&#39;re early then</li>
+    </ul>
+  </details>
+</div>
+</main>
+<footer class="ha-footer">Generated by <a href="https://github.com/clockless-org/html-anything">html-anything</a> · open in any browser, share anywhere</footer>
+<button class="ha-scrolltop" type="button" aria-label="Scroll to top">↑</button>
+<script>
+(function () {
+  // Search: hide elements with [data-searchable] that don't match.
+  var input = document.querySelector('.ha-bar__search');
+  if (input) {
+    input.addEventListener('input', function () {
+      var q = input.value.trim().toLowerCase();
+      document.querySelectorAll('[data-searchable]').forEach(function (el) {
+        var hay = el.getAttribute('data-searchable-text') || el.textContent || '';
+        var hit = !q || hay.toLowerCase().indexOf(q) !== -1;
+        el.classList.toggle('ha-hidden', !hit);
+      });
+    });
+  }
+  // Scroll-to-top
+  var btn = document.querySelector('.ha-scrolltop');
+  if (btn) {
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    window.addEventListener('scroll', function () {
+      btn.classList.toggle('ha-scrolltop--shown', window.scrollY > 500);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

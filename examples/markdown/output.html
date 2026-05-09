@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>The Long, Slow, Inevitable Death of the PDF</title>
+<style>/* Base styles for every html-anything output. Opinionated: one good design,
+   no themes. Light by default; respects prefers-color-scheme. */
+
+:root {
+  --ha-bg: #faf8f5;
+  --ha-fg: #1f1c19;
+  --ha-fg-muted: #6b665e;
+  --ha-surface: #ffffff;
+  --ha-border: #e9e4dc;
+  --ha-accent: #c0552a;
+  --ha-accent-soft: #fdeee5;
+  --ha-radius: 14px;
+  --ha-shadow: 0 1px 2px rgba(30, 27, 25, 0.04), 0 8px 24px rgba(30, 27, 25, 0.06);
+  --ha-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --ha-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --ha-serif: "Iowan Old Style", "Apple Garamond", Baskerville, "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ha-bg: #14110e;
+    --ha-fg: #f1ece5;
+    --ha-fg-muted: #9d958a;
+    --ha-surface: #1f1c19;
+    --ha-border: #2e2925;
+    --ha-accent: #ee8a5b;
+    --ha-accent-soft: #2c1d14;
+    --ha-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--ha-sans);
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--ha-fg);
+  background: var(--ha-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: var(--ha-accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.ha-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--ha-bg) 78%, transparent);
+  backdrop-filter: saturate(140%) blur(12px);
+  border-bottom: 1px solid var(--ha-border);
+}
+.ha-bar__inner {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.ha-bar__brand { flex: 1; min-width: 0; }
+.ha-bar__eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ha-fg-muted);
+}
+.ha-bar__title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+  font-family: var(--ha-serif);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ha-bar__search {
+  width: 220px;
+  max-width: 40vw;
+  padding: 9px 14px;
+  border: 1px solid var(--ha-border);
+  border-radius: 999px;
+  background: var(--ha-surface);
+  color: var(--ha-fg);
+  font: inherit;
+  outline: none;
+}
+.ha-bar__search:focus {
+  border-color: var(--ha-accent);
+  box-shadow: 0 0 0 3px var(--ha-accent-soft);
+}
+
+.ha-main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+.ha-main h1, .ha-main h2, .ha-main h3 {
+  font-family: var(--ha-serif);
+  line-height: 1.25;
+  margin: 1.6em 0 0.5em;
+}
+.ha-main h1 { font-size: 32px; }
+.ha-main h2 { font-size: 22px; }
+.ha-main h3 { font-size: 18px; }
+.ha-main p { margin: 1em 0; }
+.ha-main code {
+  font-family: var(--ha-mono);
+  font-size: 0.92em;
+  background: var(--ha-surface);
+  border: 1px solid var(--ha-border);
+  border-radius: 6px;
+  padding: 1px 6px;
+}
+.ha-main pre {
+  font-family: var(--ha-mono);
+  font-size: 13.5px;
+  background: var(--ha-surface);
+  border: 1px solid var(--ha-border);
+  border-radius: var(--ha-radius);
+  padding: 16px 18px;
+  overflow-x: auto;
+}
+.ha-main pre code { background: none; border: none; padding: 0; }
+.ha-main blockquote {
+  border-left: 3px solid var(--ha-accent);
+  margin: 1em 0;
+  padding: 4px 16px;
+  color: var(--ha-fg-muted);
+}
+.ha-main hr {
+  border: 0;
+  border-top: 1px solid var(--ha-border);
+  margin: 2em 0;
+}
+.ha-main img { max-width: 100%; height: auto; border-radius: 8px; }
+.ha-main table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 14px;
+}
+.ha-main th, .ha-main td {
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--ha-border);
+}
+.ha-main th { font-weight: 700; color: var(--ha-fg-muted); }
+
+.ha-hidden { display: none !important; }
+
+.ha-footer {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+  font-size: 12px;
+  color: var(--ha-fg-muted);
+  text-align: center;
+}
+
+.ha-scrolltop {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--ha-border);
+  border-radius: 999px;
+  background: var(--ha-surface);
+  color: var(--ha-fg);
+  font-size: 18px;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  box-shadow: var(--ha-shadow);
+}
+.ha-scrolltop--shown {
+  opacity: 1;
+  pointer-events: auto;
+}
+</style>
+<style>
+.md-tldr {
+  background: var(--ha-accent-soft);
+  border-left: 3px solid var(--ha-accent);
+  border-radius: 4px;
+  padding: 12px 18px;
+  margin-bottom: 28px;
+  font-size: 14.5px;
+}
+.md-tldr strong {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ha-accent);
+  display: block;
+  margin-bottom: 6px;
+}
+.md-tldr p { margin: 0; }
+</style>
+</head>
+<body>
+<header class="ha-bar">
+  <div class="ha-bar__inner">
+    <div class="ha-bar__brand">
+      <div class="ha-bar__eyebrow">Markdown · 581 words</div>
+      <h1 class="ha-bar__title">The Long, Slow, Inevitable Death of the PDF</h1>
+    </div>
+    <input class="ha-bar__search" type="search" placeholder="Search…" aria-label="Search">
+  </div>
+</header>
+<main class="ha-main">
+<article class="md-body" data-searchable><h1>The Long, Slow, Inevitable Death of the PDF</h1>
+<p>The PDF is the universal output format. Every report, every spec, every contract, every menu, every receipt eventually becomes one. It is the text-based equivalent of a fax: hated, ubiquitous, immortal.</p>
+<p>This is mostly because nothing better has shown up. Word documents are proprietary. Markdown is too plain. HTML is too varied. So the PDF endures, like a cockroach with a &quot;Save As&quot; button.</p>
+<h2>Why PDFs persist</h2>
+<p>There are three real reasons:</p>
+<ol><li><strong>Faithful rendering.</strong> A PDF looks the same on every device, every</li></ol>
+<p>   printer, every reader. This was a miracle in 1993 and is still useful.</p>
+<ol><li><strong>Portability.</strong> One file, one click, one envelope.</li><li><strong>Print-to-screen consistency.</strong> Even if you never print it, it</li></ol>
+<p>   <em>implies</em> a page, which implies a finished thing, which implies trust.</p>
+<p>The first two have alternatives that finally work. The third is harder to reason about, but it might be where the PDF actually lives.</p>
+<h2>What&#39;s broken about it</h2>
+<p>A PDF is a closed format pretending to be an open one. The text inside is often hostile to copy-paste. Tables shatter on selection. Forms are hieroglyphics. Search works, but only barely. On a phone, a PDF asks you to <em>zoom into a thing designed for paper</em>, which is the digital equivalent of being handed a folded map and a compass.</p>
+<blockquote>The PDF is the only format I know of that simultaneously feels like a precious artifact and a hostile environment.</blockquote>
+<h2>What might replace it</h2>
+<p>The candidates have always existed. They just haven&#39;t won.</p>
+<h3>HTML</h3>
+<p>A single self-contained <code>.html</code> file can hold structure, color, illustrations, code, animation, search, and interactivity. It opens in any browser. It does not need an app. It is searchable, copyable, mobile-responsive when written correctly, and it is the format that agents already produce for the web.</p>
+<p>The downside has always been that authoring was hard. That is what just changed.</p>
+<h3>Markdown</h3>
+<p>Lighter than HTML, with the same portability. But markdown has no visual identity. A 100-page PDF and a 100-page markdown file feel nothing alike. Markdown is a working draft; PDF is a finished thing. This is sociology more than technology.</p>
+<h3>Notion / Slabs / Walling / Capacities</h3>
+<p>Beautiful, but locked. You don&#39;t have the file. You have a link, and the link only works while you&#39;re paying.</p>
+<h2>So what changes now</h2>
+<p>The shape of the answer is: <strong>make HTML feel finished</strong>. Authoring used to be the bottleneck — a designer to lay out the typography, an engineer to wire the interactions. Both of those are now things an agent can do in a single prompt.</p>
+<p>A PDF says &quot;this document is final.&quot; An HTML file produced by an agent that read your specs, your data, your repo, your meeting notes, <em>and turned them into a single file with search, navigation, dark mode and mobile responsiveness</em> says &quot;this document is alive.&quot;</p>
+<p>That second one is more useful.</p>
+<hr>
+<h2>Footnotes</h2>
+<ul><li>The single-self-contained-file thing matters. Multi-file SPAs are</li></ul>
+<p>  not portable; you can&#39;t email them.</p>
+<ul><li>Search inside the HTML file is non-negotiable. The number of times</li></ul>
+<p>  per week I <code>Cmd-F</code> inside a long document is the reason any reading   experience without it feels broken.</p>
+<ul><li>Mobile responsive is non-negotiable. People will read what you sent</li></ul>
+<p>  on a phone, in a hurry, between meetings. If they can&#39;t, they don&#39;t.</p>
+<p>The PDF is going to outlive every single one of us. But it shouldn&#39;t have to.</p></article>
+</main>
+<footer class="ha-footer">Generated by <a href="https://github.com/clockless-org/html-anything">html-anything</a> · open in any browser, share anywhere</footer>
+<button class="ha-scrolltop" type="button" aria-label="Scroll to top">↑</button>
+<script>
+(function () {
+  // Search: hide elements with [data-searchable] that don't match.
+  var input = document.querySelector('.ha-bar__search');
+  if (input) {
+    input.addEventListener('input', function () {
+      var q = input.value.trim().toLowerCase();
+      document.querySelectorAll('[data-searchable]').forEach(function (el) {
+        var hay = el.getAttribute('data-searchable-text') || el.textContent || '';
+        var hit = !q || hay.toLowerCase().indexOf(q) !== -1;
+        el.classList.toggle('ha-hidden', !hit);
+      });
+    });
+  }
+  // Scroll-to-top
+  var btn = document.querySelector('.ha-scrolltop');
+  if (btn) {
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    window.addEventListener('scroll', function () {
+      btn.classList.toggle('ha-scrolltop--shown', window.scrollY > 500);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

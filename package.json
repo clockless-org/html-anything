@@ -10,7 +10,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsx src/cli.ts",
-    "test": "node --test"
+    "test": "node --test",
+    "examples": "tsx src/cli.ts examples/markdown/input.md --no-ai --out examples/markdown/output.html --title 'The Long, Slow, Inevitable Death of the PDF' && tsx src/cli.ts examples/whatsapp/input.txt --no-ai --out examples/whatsapp/output.html --title 'Alex & Mira' && tsx src/cli.ts examples/csv/input.csv --no-ai --out examples/csv/output.html --title 'Coffee Equipment Sales — January 2026'"
   },
   "files": [
     "dist",
