@@ -1,0 +1,31 @@
+Invoice Number,Issued,Customer,Amount,Due Date,Paid Date,Status,Memo
+INV-1029,2026-01-03,Northwind Co,12500.00,2026-02-02,2026-01-30,paid,January retainer
+INV-1031,2026-01-08,Acme Labs,8500.00,2026-02-07,2026-02-04,paid,Discovery sprint
+INV-1033,2026-01-12,Lavender Projects,4250.00,2026-02-11,2026-02-08,paid,Website redesign milestone 1
+INV-1042,2026-02-01,Northwind Co,12500.00,2026-03-03,2026-02-26,paid,February retainer
+INV-1043,2026-02-04,SummitWorks LLC,6800.00,2026-03-06,2026-03-04,paid,API integration phase 1
+INV-1054,2026-02-15,Acme Labs,8500.00,2026-03-17,2026-03-15,paid,Implementation sprint 1
+INV-1055,2026-02-18,Lavender Projects,4250.00,2026-03-20,2026-03-17,paid,Website redesign milestone 2
+INV-1067,2026-03-01,Northwind Co,12500.00,2026-03-31,2026-04-02,paid,March retainer
+INV-1068,2026-03-04,Hilltop Manufacturing,18400.00,2026-04-03,2026-04-01,paid,Q1 implementation
+INV-1078,2026-03-10,SummitWorks LLC,6800.00,2026-04-09,2026-04-08,paid,API integration phase 2
+INV-1082,2026-03-15,Acme Labs,8500.00,2026-04-14,,outstanding,Implementation sprint 2
+INV-1085,2026-03-22,Riverbend Capital,15400.00,2026-04-21,,overdue,Strategy retainer Q2
+INV-1090,2026-03-28,Lavender Projects,4250.00,2026-04-27,,outstanding,Website redesign milestone 3
+INV-1096,2026-04-01,Northwind Co,12500.00,2026-05-01,,outstanding,April retainer
+INV-1098,2026-04-03,Hilltop Manufacturing,9200.00,2026-05-03,,outstanding,Q2 discovery
+INV-1102,2026-04-08,Riverbend Capital,15400.00,2026-05-08,,outstanding,Strategy retainer Q2 - month 2
+INV-1108,2026-04-12,Tessera Foundry,3400.00,2026-05-12,,outstanding,Brand sprint
+INV-1112,2026-04-15,SummitWorks LLC,6800.00,2026-05-15,,outstanding,API integration phase 3
+INV-1118,2026-04-20,Northwind Co,4200.00,2026-05-20,,outstanding,Additional scope item
+INV-1120,2026-04-22,Pinnacle Health Group,7800.00,2026-05-22,,outstanding,Discovery workshop
+INV-1009,2026-01-29,Riverbend Capital,15400.00,2026-02-28,,overdue,Strategy retainer Q1
+INV-1015,2026-02-08,Hilltop Manufacturing,9200.00,2026-03-10,,overdue,Pre-implementation discovery
+INV-1018,2026-02-22,Tessera Foundry,3400.00,2026-03-24,,overdue,Brand sprint deposit
+INV-1024,2026-03-08,Riverbend Capital,8200.00,2026-04-07,,overdue,Workshop facilitation
+INV-1027,2026-03-12,Pinnacle Health Group,12400.00,2026-04-11,,overdue,Compliance review
+INV-1030,2026-03-25,Hilltop Manufacturing,5400.00,2026-04-24,,overdue,Add-on training
+INV-1036,2026-03-30,Tessera Foundry,2200.00,2026-04-29,,overdue,Brand assets follow-up
+INV-1124,2026-04-25,Lavender Projects,2100.00,2026-05-25,,partially paid,Website redesign milestone 3 - partial payment received
+INV-1126,2026-04-28,Acme Labs,4200.00,2026-05-28,,partially paid,Implementation sprint 2 - partial
+INV-1140,2026-05-04,Northwind Co,12500.00,2026-06-03,,outstanding,May retainer

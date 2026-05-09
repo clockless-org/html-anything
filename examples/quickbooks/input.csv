@@ -1,0 +1,51 @@
+Date,Account,Class,Type,Description,Amount
+2026-01-03,Income:Consulting:Retainers,Direct Cost,Invoice,Northwind Co - January retainer (INV-1029),12500.00
+2026-01-08,Income:Consulting:Project,Direct Cost,Invoice,Acme Labs - Discovery sprint (INV-1031),8500.00
+2026-01-12,Income:Consulting:Project,Direct Cost,Invoice,Lavender Projects - Website milestone 1 (INV-1033),4250.00
+2026-01-15,Expenses:Payroll:Salaries,Direct Cost,Bill,Gusto payroll Jan 1-15,-12480.45
+2026-01-15,Expenses:Software:SaaS,Overhead,Bill,Stripe processing fees,-128.97
+2026-01-15,Expenses:Software:SaaS,Overhead,Bill,GitHub Enterprise,-21.00
+2026-01-15,Expenses:Software:SaaS,Overhead,Bill,Notion Workspace,-16.00
+2026-01-15,Expenses:Software:SaaS,Overhead,Bill,Slack Pro,-30.00
+2026-01-13,Expenses:Office:Rent,Overhead,Bill,WeWork monthly membership,-4200.00
+2026-01-04,Expenses:Software:Cloud,Direct Cost,Bill,AWS marketplace - January,-842.18
+2026-01-12,Expenses:Software:SaaS,Overhead,Bill,Zoom Video Communications,-149.90
+2026-01-30,Expenses:Software:Cloud,Direct Cost,Bill,Anthropic API usage,-184.50
+2026-01-31,Expenses:Payroll:Salaries,Direct Cost,Bill,Gusto payroll Jan 16-31,-12480.45
+2026-01-31,Income:Consulting:Project,Direct Cost,Invoice,SummitWorks LLC - API integration phase 1 (INV-1043),6800.00
+2026-01-22,Expenses:Office:Internet,Overhead,Bill,Comcast Business,-189.95
+2026-01-19,Expenses:Office:Phone,Overhead,Bill,AT&T Wireless Business,-186.40
+2026-01-23,Expenses:Travel:Airfare,Direct Cost,Check,Delta NYC-SFO sales trip,-624.30
+2026-01-26,Expenses:Travel:Lodging,Direct Cost,Check,Hotel Hotel SF sales trip,-1240.00
+2026-02-03,Income:Consulting:Retainers,Direct Cost,Invoice,Northwind Co - February retainer (INV-1042),12500.00
+2026-02-15,Income:Consulting:Project,Direct Cost,Invoice,Acme Labs - Implementation sprint 1 (INV-1054),8500.00
+2026-02-18,Income:Consulting:Project,Direct Cost,Invoice,Lavender Projects - Website milestone 2 (INV-1055),4250.00
+2026-02-13,Expenses:Payroll:Salaries,Direct Cost,Bill,Gusto payroll Feb 1-15,-12690.20
+2026-02-27,Expenses:Payroll:Salaries,Direct Cost,Bill,Gusto payroll Feb 16-28,-12690.20
+2026-02-02,Expenses:Office:Rent,Overhead,Bill,WeWork monthly membership,-4200.00
+2026-02-04,Expenses:Software:Cloud,Direct Cost,Bill,AWS marketplace - February,-918.40
+2026-02-15,Expenses:Software:SaaS,Overhead,Bill,Stripe processing fees,-174.60
+2026-02-22,Expenses:Equipment:Hardware,Direct Cost,Check,Alpine Tools LLC - workstation refresh,-9240.00
+2026-02-28,Income:Consulting:Project,Direct Cost,Invoice,Lavender Projects - February work (INV-1058),4250.00
+2026-02-16,Expenses:Office:Internet,Overhead,Bill,Comcast Business,-189.95
+2026-02-19,Expenses:Office:Phone,Overhead,Bill,AT&T Wireless Business,-186.40
+2026-03-01,Income:Consulting:Retainers,Direct Cost,Invoice,Northwind Co - March retainer (INV-1067),12500.00
+2026-03-04,Income:Consulting:Project,Direct Cost,Invoice,Hilltop Manufacturing - Q1 implementation (INV-1068),18400.00
+2026-03-10,Income:Consulting:Project,Direct Cost,Invoice,SummitWorks LLC - API integration phase 2 (INV-1078),6800.00
+2026-03-13,Expenses:Payroll:Salaries,Direct Cost,Bill,Gusto payroll Mar 1-15,-12890.20
+2026-03-27,Expenses:Payroll:Salaries,Direct Cost,Bill,Gusto payroll Mar 16-31,-12890.20
+2026-03-02,Expenses:Office:Rent,Overhead,Bill,WeWork monthly membership,-4200.00
+2026-03-04,Expenses:Software:Cloud,Direct Cost,Bill,AWS marketplace - March,-1024.50
+2026-03-15,Expenses:Software:SaaS,Overhead,Bill,Stripe processing fees,-217.20
+2026-03-15,Expenses:Software:SaaS,Overhead,Bill,GitHub Enterprise,-21.00
+2026-03-15,Expenses:Software:SaaS,Overhead,Bill,Notion Workspace,-16.00
+2026-03-15,Expenses:Software:SaaS,Overhead,Bill,Slack Pro,-30.00
+2026-03-30,Expenses:Software:Cloud,Direct Cost,Bill,Anthropic API usage,-298.20
+2026-03-16,Expenses:Office:Internet,Overhead,Bill,Comcast Business,-189.95
+2026-03-19,Expenses:Office:Phone,Overhead,Bill,AT&T Wireless Business,-186.40
+2026-03-26,Expenses:Travel:Airfare,Direct Cost,Check,Delta SFO-NYC client visit,-712.40
+2026-03-12,Expenses:Software:SaaS,Overhead,Bill,Zoom Video Communications,-149.90
+2026-03-22,Income:Consulting:Retainers,Direct Cost,Invoice,Riverbend Capital - Strategy retainer Q2 (INV-1085),15400.00
+2026-03-28,Income:Consulting:Project,Direct Cost,Invoice,Lavender Projects - Website milestone 3 (INV-1090),4250.00
+2026-03-31,Expenses:Professional:Legal,Overhead,Check,Outside counsel - Q1 retainer,-3200.00
+2026-03-31,Expenses:Professional:Accounting,Overhead,Check,Bookkeeping Q1,-1800.00

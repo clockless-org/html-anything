@@ -124,7 +124,7 @@ async function loadSourcePrompt(contentType: string): Promise<string> {
   // identical insight-first guidance without duplicating it.
   const candidates = [
     `${contentType}.md`,                                                     // exact
-    `${contentType.replace(/-(chat|tabular|document|data|events)$/, "")}.md`, // strip suffix
+    `${contentType.replace(/-(chat|tabular|document|data|events|report)$/, "")}.md`, // strip suffix
     "default.md",
   ]
   const seen = new Set<string>()
@@ -183,6 +183,29 @@ function familyFor(contentType: string): string | null {
     contentType === "log-events"
   ) {
     return "_event_stream.md"
+  }
+  // Finance / admin sources (bank/credit-card transactions, invoices &
+  // receipts, QuickBooks/Xero GL & P&L reports) share the cashflow-
+  // summary / category-breakdown / recurring-vendors / anomaly-and-
+  // duplicate-callouts / searchable-drill-down contract — and the
+  // hard rule that outputs are analytical, never accounting / tax
+  // advice.
+  if (
+    contentType === "bank-transactions" ||
+    contentType === "invoices" ||
+    contentType === "quickbooks-report"
+  ) {
+    return "_finance.md"
+  }
+  // Planning sources (calendar exports, issue trackers, kanban boards)
+  // share the time-allocation / owner-status filters / stale-bottleneck /
+  // searchable-drill-down contract.
+  if (
+    contentType === "ics-calendar" ||
+    contentType === "issue-tracker" ||
+    contentType === "trello-board"
+  ) {
+    return "_planning.md"
   }
   return null
 }

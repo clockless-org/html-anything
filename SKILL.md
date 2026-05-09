@@ -66,6 +66,10 @@ client-side rendering of the drill-down sections.
    - Event stream (JSONL / NDJSON / server log): inferred schema +
      time-bucket histogram + severity / category counts + top sources
      and messages + outlier cards + first 12 + last 4 events.
+   - Finance file (bank / invoice / QuickBooks CSV): summary card
+     (in / out / net or invoiced / paid / outstanding) + category or
+     account breakdown + recurring vendors + flag cards (duplicate /
+     outlier / first-time / overdue) + first 8 + last 3 rows.
    - URL article: first 2-3K chars of the rendered text + meta.
    - Repo: README + tree + 3 key files.
 
@@ -114,6 +118,12 @@ client-side rendering of the drill-down sections.
 | [`prompts/pr-review.md`](./prompts/pr-review.md) | `.patch` (`git format-patch` mailbox or GitHub PR `.patch`) — commit timeline, evidence-based reviewer's checklist, test-touched flags |
 | [`prompts/ci-log.md`](./prompts/ci-log.md) | CI / build / test logs (GitHub Actions, GitLab CI, CircleCI, Buildkite, Jenkins, generic `npm test` / `pytest` / `go test`) — failure summary, suspected-cause hypotheses |
 | [`prompts/stack-trace.md`](./prompts/stack-trace.md) | Runtime stack traces (Python, Node / JS, Java, Go, Ruby, Rust, .NET) — likely-app-frame headline, folded vendor frames, cause chain |
+| [`prompts/bank-transactions.md`](./prompts/bank-transactions.md) | Bank / credit-card statement CSVs — cashflow timeline, category breakdown, recurring-vendor + duplicate + outlier panels, searchable transactions |
+| [`prompts/invoices.md`](./prompts/invoices.md) | Invoice / receipt CSVs — invoiced-vs-paid-vs-outstanding card, aging buckets, top customers, overdue callouts, invoice scorecard |
+| [`prompts/quickbooks.md`](./prompts/quickbooks.md) | QuickBooks / Xero / Wave general-ledger and P&L exports — collapsible account tree, top-level category rollup, class breakdown, period framing |
+| [`prompts/ics-calendar.md`](./prompts/ics-calendar.md) | `.ics` / `.ical` calendar exports (Google Calendar, Outlook, Apple Calendar, Fastmail) — calendar audit: time-allocation map, busy-hours heatmap, recurring series, back-to-back blocks, meeting-free streaks |
+| [`prompts/issue-tracker.md`](./prompts/issue-tracker.md) | Issue / task CSVs from Linear, Jira, GitHub Issues, Asana, ClickUp, generic project trackers — project audit: status flow, owner load, priority distribution, stale items, bottleneck callouts, swimlane drill-down |
+| [`prompts/trello-board.md`](./prompts/trello-board.md) | Trello board JSON export (`{ id, name, lists, cards, members, labels }`) — board audit: lane breakdown, member load, stale + overdue cards, read-only kanban swimlanes |
 | [`prompts/github-repo.md`](./prompts/github-repo.md) | github.com/owner/repo URLs |
 | [`prompts/url-article.md`](./prompts/url-article.md) | Blog posts, news articles, long-form web pages |
 | [`prompts/default.md`](./prompts/default.md) | Anything else |
@@ -147,6 +157,16 @@ contract for the event-stream pack: volume-over-time histogram,
 severity / category breakdown, outlier / anomaly callouts, top sources
 or endpoints leaderboard, and a searchable virtualized event-table
 drill-down.
+
+Finance / admin sources (`bank-transactions`, `invoices`,
+`quickbooks-report`) also load
+[`prompts/_finance.md`](./prompts/_finance.md) — the shared contract
+for the finance pack: headline cashflow / invoicing summary card,
+category or account breakdown, recurring-items panel,
+anomaly-and-duplicate callouts, and a searchable transactions /
+invoices drill-down. Outputs are **analytical only** — never
+accounting, tax, or legal advice — and the family prompt enforces
+a footer to that effect.
 
 **Adding a new source** = drop a new `<source>.md` in `prompts/`,
 following the same shape as existing ones. No code changes, no

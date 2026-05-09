@@ -23,6 +23,8 @@ import { parser as pdfParser } from "./pdf.js"
 import { parser as docxParser } from "./docx.js"
 import { parser as developerArtifactParser } from "./developer-artifact.js"
 import { parser as logParser } from "./log.js"
+import { parser as planningParser } from "./planning.js"
+import { parser as financeParser } from "./finance.js"
 import { parser as textParser } from "./text.js"
 
 export const parsers: Parser[] = [
@@ -33,6 +35,8 @@ export const parsers: Parser[] = [
   discordParser,            // .json / .csv — DiscordChatExporter
   telegramParser,           // .json — Telegram Desktop result.json
   imessageParser,           // .csv — iMessage-style / generic multi-sender chat
+  planningParser,           // .ics / .json (Trello) / .csv (Linear/Jira/GitHub issue trackers)
+  financeParser,            // .csv / .tsv — bank txns, invoices, QuickBooks/Xero GL & P&L
   jsonlParser,              // .jsonl / .ndjson; also detects line-delimited JSON in .json/.log/.txt
   csvParser,                // .csv / .tsv (generic tabular fallback)
   markdownParser,           // .md / .markdown
