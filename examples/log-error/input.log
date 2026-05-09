@@ -1,0 +1,53 @@
+[2026-04-12 14:00:01.412] [INFO ] [orders.svc] Server started — listening on :8080 (worker pid=4218, version=1.42.0)
+[2026-04-12 14:00:08.118] [INFO ] [orders.svc] DB pool initialized — pool=postgres host=db-primary-01 size=20
+[2026-04-12 14:00:09.221] [INFO ] [orders.svc] Cache warm-up complete — keys=4218 size=12.4MB
+[2026-04-12 14:00:14.557] [INFO ] [orders.api] POST /orders user_id=u_a1c4 order_id=o_19842 amount=47.50 → 201
+[2026-04-12 14:01:42.224] [INFO ] [orders.api] POST /orders user_id=u_b2d5 order_id=o_19843 amount=129.00 → 201
+[2026-04-12 14:02:11.998] [INFO ] [orders.api] POST /orders user_id=u_c3e6 order_id=o_19844 amount=18.75 → 201
+[2026-04-12 14:04:17.404] [INFO ] [orders.api] POST /orders user_id=u_d4f7 order_id=o_19845 amount=62.40 → 201
+[2026-04-12 14:06:22.557] [WARN ] [orders.svc] Slow DB query — query=order_history user_id=u_e5g8 duration_ms=1842 threshold_ms=500
+[2026-04-12 14:06:22.881] [INFO ] [orders.api] GET /orders/u_e5g8 → 200 (1842ms)
+[2026-04-12 14:11:55.412] [INFO ] [orders.api] POST /orders user_id=u_f6h9 order_id=o_19847 amount=34.50 → 201
+[2026-04-12 14:13:14.118] [WARN ] [cache] Cache miss spike — keys_missed=412 window=60s threshold=100
+[2026-04-12 14:14:07.402] [INFO ] [orders.api] POST /orders user_id=u_g7j0 order_id=o_19848 amount=89.20 → 201
+[2026-04-12 14:17:42.402] [INFO ] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19849 amount=12.99 → 201
+[2026-04-12 14:19:11.118] [INFO ] [auth] User login user_id=u_i9l2 method=oauth provider=google
+[2026-04-12 14:20:08.402] [WARN ] [payments] Stripe API slow — endpoint=/v1/charges duration_ms=5402 threshold_ms=3000
+[2026-04-12 14:20:13.998] [ERROR] [payments] Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderTimeoutError reason="Stripe API request exceeded 10s timeout" stack=stripe_client.charge:142>http_client.post:88>http_client._send:124
+[2026-04-12 14:20:34.412] [ERROR] [payments] Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderTimeoutError reason="Stripe API request exceeded 10s timeout" retry=1
+[2026-04-12 14:20:52.798] [ERROR] [payments] Payment failed — order_id=o_19851 user_id=u_j0m3 provider=stripe error=ProviderTimeoutError reason="Stripe API request exceeded 10s timeout"
+[2026-04-12 14:21:18.802] [ERROR] [payments] Payment failed — order_id=o_19852 user_id=u_b2d5 provider=stripe error=ProviderTimeoutError reason="Stripe API request exceeded 10s timeout"
+[2026-04-12 14:21:42.018] [WARN ] [payments] Circuit breaker opened — provider=stripe threshold=5/30s open_until=2026-04-12T14:23:42Z
+[2026-04-12 14:22:11.612] [ERROR] [payments] Payment failed — order_id=o_19853 user_id=u_c3e6 provider=stripe error=CircuitOpenError reason="Circuit breaker open for stripe — fast-failing"
+[2026-04-12 14:22:42.302] [ERROR] [payments] Payment failed — order_id=o_19854 user_id=u_d4f7 provider=stripe error=CircuitOpenError reason="Circuit breaker open for stripe — fast-failing"
+[2026-04-12 14:23:14.612] [ERROR] [payments] Payment failed — order_id=o_19855 user_id=u_e5g8 provider=stripe error=CircuitOpenError reason="Circuit breaker open for stripe — fast-failing"
+[2026-04-12 14:23:42.118] [INFO ] [payments] Circuit breaker half-open — provider=stripe probing
+[2026-04-12 14:24:03.118] [INFO ] [payments] Payment succeeded — order_id=o_19856 user_id=u_f6h9 provider=stripe duration_ms=716
+[2026-04-12 14:24:03.502] [INFO ] [payments] Circuit breaker closed — provider=stripe (probe succeeded)
+[2026-04-12 14:25:42.812] [INFO ] [payments] Payment succeeded — order_id=o_19850 user_id=u_i9l2 provider=stripe duration_ms=694 retry=2
+[2026-04-12 14:27:11.402] [INFO ] [orders.api] POST /orders user_id=u_g7j0 order_id=o_19857 amount=156.00 → 201
+[2026-04-12 14:29:42.118] [INFO ] [orders.api] POST /refunds user_id=u_b2d5 order_id=o_19852 amount=78.50 reason=payment_failed_at_checkout → 201
+[2026-04-12 14:29:42.802] [INFO ] [payments] Refund processed — order_id=o_19852 user_id=u_b2d5 amount=78.50 duration_ms=684
+[2026-04-12 14:31:11.402] [INFO ] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19858 amount=29.50 → 201
+[2026-04-12 14:33:42.118] [INFO ] [auth] User logout user_id=u_b2d5
+[2026-04-12 14:35:11.402] [INFO ] [orders.api] POST /orders user_id=u_j0m3 order_id=o_19859 amount=54.20 → 201
+[2026-04-12 14:37:42.118] [INFO ] [auth] User login user_id=u_k1n4 method=oauth provider=google
+[2026-04-12 14:38:42.402] [INFO ] [orders.api] POST /orders user_id=u_k1n4 order_id=o_19860 amount=104.50 → 201
+[2026-04-12 14:42:11.402] [INFO ] [orders.api] POST /orders user_id=u_a1c4 order_id=o_19861 amount=17.50 → 201
+[2026-04-12 14:42:42.118] [WARN ] [orders.svc] Slow DB query — query=user_history user_id=u_a1c4 duration_ms=1218 threshold_ms=500
+[2026-04-12 14:48:11.402] [INFO ] [orders.api] POST /orders user_id=u_e5g8 order_id=o_19862 amount=67.80 → 201
+[2026-04-12 14:52:11.402] [INFO ] [orders.api] POST /orders user_id=u_f6h9 order_id=o_19863 amount=42.10 → 201
+[2026-04-12 14:55:42.118] [INFO ] [auth] User logout user_id=u_g7j0
+[2026-04-12 14:58:11.402] [INFO ] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19864 amount=89.20 → 201
+[2026-04-12 15:02:42.118] [INFO ] [health] Server health check — status=healthy uptime_s=3759 db_pool=18/20 cache_hit_rate=0.94
+[2026-04-12 15:08:11.402] [WARN ] [cache] Cache eviction triggered — keys_evicted=842 free_mb=128
+[2026-04-12 15:14:42.118] [INFO ] [orders.api] POST /orders user_id=u_a1c4 order_id=o_19865 amount=24.99 → 201
+[2026-04-12 15:18:11.402] [INFO ] [orders.api] POST /orders user_id=u_d4f7 order_id=o_19866 amount=132.00 → 201
+[2026-04-12 15:22:42.118] [INFO ] [auth] User login user_id=u_l2o5 method=password
+[2026-04-12 15:24:11.402] [INFO ] [orders.api] POST /orders user_id=u_l2o5 order_id=o_19867 amount=58.40 → 201
+[2026-04-12 15:31:42.118] [INFO ] [orders.api] POST /orders user_id=u_c3e6 order_id=o_19868 amount=41.20 → 201
+[2026-04-12 15:34:11.402] [INFO ] [orders.api] POST /orders user_id=u_g7j0 order_id=o_19869 amount=88.50 → 201
+[2026-04-12 15:42:42.118] [INFO ] [auth] User logout user_id=u_a1c4
+[2026-04-12 15:48:11.402] [INFO ] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19870 amount=29.50 → 201
+[2026-04-12 15:52:42.118] [INFO ] [orders.api] POST /orders user_id=u_e5g8 order_id=o_19871 amount=67.80 → 201
+[2026-04-12 15:58:11.402] [INFO ] [health] Server health check — status=healthy uptime_s=7090 db_pool=14/20 cache_hit_rate=0.96

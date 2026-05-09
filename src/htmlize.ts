@@ -123,8 +123,8 @@ async function loadSourcePrompt(contentType: string): Promise<string> {
   // family prompt so multi-format families (markdown / pdf / docx) get
   // identical insight-first guidance without duplicating it.
   const candidates = [
-    `${contentType}.md`,                                              // exact
-    `${contentType.replace(/-(chat|tabular|document|data)$/, "")}.md`, // strip suffix
+    `${contentType}.md`,                                                     // exact
+    `${contentType.replace(/-(chat|tabular|document|data|events)$/, "")}.md`, // strip suffix
     "default.md",
   ]
   const seen = new Set<string>()
@@ -174,6 +174,15 @@ function familyFor(contentType: string): string | null {
     contentType === "stack-trace"
   ) {
     return "_developer.md"
+  }
+  // Event-stream sources (JSONL/NDJSON, server/access/error/syslog/app
+  // logs) share the volume-histogram / severity / outliers / top
+  // sources / drill-down contract.
+  if (
+    contentType === "jsonl-events" ||
+    contentType === "log-events"
+  ) {
+    return "_event_stream.md"
   }
   return null
 }
