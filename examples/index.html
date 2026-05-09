@@ -64,6 +64,7 @@ h2 {
   color: var(--muted);
   margin: 48px 0 16px;
 }
+h2 .emoji { margin-right: 8px; letter-spacing: 0; }
 .demo {
   display: block;
   text-decoration: none;
@@ -86,6 +87,12 @@ h2 {
   font-family: var(--serif);
   font-size: 22px;
   font-weight: 600;
+}
+.demo h3 .emoji {
+  display: inline-block;
+  width: 1.45em;
+  margin-right: 2px;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
 }
 .demo h3 .arrow { color: var(--accent); margin-left: 8px; }
 .demo .meta {
@@ -128,72 +135,72 @@ h2 {
   <pre class="cmd">Use html-anything on ~/Downloads/_chat.txt
 → _chat.html  (1 file, opens in any browser)</pre>
 
-  <h2>Personal / experiential exports</h2>
+  <h2><span class="emoji">✨</span>Personal / experiential exports</h2>
 
   <a class="demo" href="google-maps-stars/output.html">
-    <h3>Google Maps — saved places <span class="arrow">→</span></h3>
+    <h3><span class="emoji">🌍</span>Google Maps — saved places <span class="arrow">→</span></h3>
     <p class="meta">Starred places.csv (34 places across 4 continents, synthetic) → personal world atlas</p>
     <p>The skill walked the user through a Google Takeout export, then designed a scrollable map of every place they cared enough to save. Pins drop in on first load, click for the note they wrote at the time. The output is a story of intent — not a CSV.</p>
   </a>
 
   <a class="demo" href="spotify-history/output.html">
-    <h3>Spotify — listening history <span class="arrow">→</span></h3>
+    <h3><span class="emoji">🎧</span>Spotify — listening history <span class="arrow">→</span></h3>
     <p class="meta">Streaming_History_Music_*.json (1,100 plays, 18 artists, 4 years, synthetic) → year-by-year scroll</p>
     <p>The skill explained how to request the privacy export, then designed a "your life in Spotify" reveal-on-scroll page — top tracks per year, listening rhythm heatmap, count-up totals. Spotify Wrapped goes a year at a time; this is the lifetime view.</p>
   </a>
 
   <a class="demo" href="twitch-history/output.html">
-    <h3>Twitch — viewing history <span class="arrow">→</span></h3>
+    <h3><span class="emoji">🟣</span>Twitch — viewing history <span class="arrow">→</span></h3>
     <p class="meta">viewing_history.csv (480 sessions, 14 streamers, 3 years, synthetic) → top-streamers wall</p>
     <p>Top streamers by hours, when-you-watched heatmap, category drift over time. Caedrel's name in display type. Fan shrine vibe — not a parental-control dashboard.</p>
   </a>
 
   <a class="demo" href="iphone-health/output.html">
-    <h3>Apple Health — your body, year by year <span class="arrow">→</span></h3>
+    <h3><span class="emoji">❤️</span>Apple Health — your body, year by year <span class="arrow">→</span></h3>
     <p class="meta">export.xml (10K records + 245 workouts, 18 months, synthetic) → personal health story</p>
     <p>Activity rings, sleep arc, workout calendar, resting-HR sparkline, hike-day outliers preserved. The skill is showing you your data, not diagnosing — Strava-style joy, no clinical voice.</p>
   </a>
 
-  <h2>Documents, code, communication</h2>
+  <h2><span class="emoji">🧩</span>Documents, code, communication</h2>
 
   <a class="demo" href="markdown/output.html">
-    <h3>Markdown <span class="arrow">→</span></h3>
+    <h3><span class="emoji">📄</span>Markdown <span class="arrow">→</span></h3>
     <p class="meta">input.md (3 KB, long-form essay) → LLM-designed reading view</p>
     <p>The LLM saw the headings + opening + length, picked typography that fits the tone, and decided what navigation this length deserves. Different essay → different design.</p>
   </a>
 
   <a class="demo" href="whatsapp/output.html">
-    <h3>WhatsApp export <span class="arrow">→</span></h3>
+    <h3><span class="emoji">💬</span>WhatsApp export <span class="arrow">→</span></h3>
     <p class="meta">_chat.txt (~80 messages between 2 senders) → bubble timeline</p>
     <p>The LLM saw "2 senders, 80 messages, 1-month range" and designed a 2-column bubble timeline. Same parser on a 200-person channel would get a different UI — the LLM picks per-content.</p>
   </a>
 
   <a class="demo" href="wechat-couple/output.html">
-    <h3>WeChat couple chat — realistic report <span class="arrow">→</span></h3>
+    <h3><span class="emoji">💞</span>WeChat couple chat — realistic report <span class="arrow">→</span></h3>
     <p class="meta">WeChat-style CSV (52K messages, 2 years, synthetic) → messy relationship rhythm analysis</p>
     <p>An event-driven boyfriend/girlfriend chat demo with quiet days, work delays, short replies, small arguments, repairs, images, voice notes, and transfers. The report focuses on reality checks, daily rhythm, topic mix, language fingerprints, and tiny anonymized evidence snippets instead of a raw message appendix.</p>
   </a>
 
   <a class="demo" href="csv/output.html">
-    <h3>CSV <span class="arrow">→</span></h3>
+    <h3><span class="emoji">📊</span>CSV <span class="arrow">→</span></h3>
     <p class="meta">input.csv (46 rows, 8 columns, 3 numeric) → sortable table + summary</p>
     <p>The LLM saw the schema and decided this size deserves a full sortable table. A 50K-row CSV would skew toward charts + virtualization instead.</p>
   </a>
 
   <a class="demo" href="email/output.html">
-    <h3>Email archive <span class="arrow">→</span></h3>
+    <h3><span class="emoji">📬</span>Email archive <span class="arrow">→</span></h3>
     <p class="meta">input.mbox (13 messages, 3 threads, 5 senders) → conversation analysis</p>
     <p>The LLM saw a small mailbox with one resolved support thread, one quick internal exchange, and one open client thread — and designed a thread browser, sender leaderboard, and an "open loops" callout for the question waiting on a reply. Gmail Takeout exports use the same .mbox format.</p>
   </a>
 
   <a class="demo" href="transcript-sales-call/output.html">
-    <h3>Meeting transcript — sales call <span class="arrow">→</span></h3>
+    <h3><span class="emoji">🎙️</span>Meeting transcript — sales call <span class="arrow">→</span></h3>
     <p class="meta">input.vtt (43 cues, 4 speakers, pilot-scoping call) → meeting scorecard</p>
     <p>The LLM saw a 4-speaker WebVTT transcript with a clear decision (pilot agreed) and a follow-up commitment, and designed talk-time bars, a decisions panel, an action-items table grouped by owner, and a searchable transcript with timestamp chips. A standup with 6 quick speakers would render as a different shape.</p>
   </a>
 
   <a class="demo" href="transcript-product-meeting/output.html">
-    <h3>Meeting transcript — product review <span class="arrow">→</span></h3>
+    <h3><span class="emoji">🗒️</span>Meeting transcript — product review <span class="arrow">→</span></h3>
     <p class="meta">input.srt (39 cues, 4 speakers, sprint review) → meeting scorecard</p>
     <p>An SRT-format internal review with three decisions, six action items, two open questions, and one risk. The LLM picked the speaker timeline + decisions cards + action-items-by-owner table for this shape — the same parser on a 1:1 sync would produce something tighter.</p>
   </a>
