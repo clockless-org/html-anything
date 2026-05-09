@@ -12,6 +12,7 @@
 import * as fs from "node:fs/promises"
 import * as path from "node:path"
 import { pickParser } from "./parse/index.js"
+import { parser as knowledgeBaseParser } from "./parse/knowledge-base.js"
 import { htmlize } from "./htmlize.js"
 import { makeLlm } from "./llm.js"
 import type { ConverterOptions } from "./types.js"
@@ -83,14 +84,23 @@ async function main() {
   if (args.help || !args.input) { console.log(HELP); return }
 
   const filepath = path.resolve(args.input)
-  try { await fs.access(filepath) } catch {
+  let stat: Awaited<ReturnType<typeof fs.stat>>
+  try {
+    stat = await fs.stat(filepath)
+  } catch {
     console.error(`html-anything: input not found: ${filepath}`)
     process.exit(1)
+    return
   }
 
-  const parser = await pickParser(filepath)
+  const parser = stat.isDirectory()
+    ? knowledgeBaseParser
+    : await pickParser(filepath)
   if (!parser) {
-    console.error(`html-anything: no parser for ${path.extname(filepath) || "(no extension)"}`)
+    const reason = stat.isDirectory()
+      ? "(no markdown files found)"
+      : (path.extname(filepath) || "(no extension)")
+    console.error(`html-anything: no parser for ${reason}`)
     process.exit(1)
   }
   process.stderr.write(`→ parsing as ${parser.name}…\n`)
@@ -109,7 +119,9 @@ async function main() {
 
   const outPath = args.out
     ? path.resolve(args.out)
-    : path.join(path.dirname(filepath), `${path.basename(filepath, path.extname(filepath))}.html`)
+    : stat.isDirectory()
+      ? path.join(path.dirname(filepath), `${path.basename(filepath)}.html`)
+      : path.join(path.dirname(filepath), `${path.basename(filepath, path.extname(filepath))}.html`)
   await fs.writeFile(outPath, html, "utf8")
   console.log(`✓ ${path.basename(outPath)} (${(html.length / 1024).toFixed(1)} KB) — open in your browser`)
 }

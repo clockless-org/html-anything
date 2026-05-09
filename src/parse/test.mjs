@@ -311,3 +311,59 @@ test("registry exposes planning parser before csv (so issue trackers route corre
   assert.ok(csvIdx >= 0, "parsers missing 'csv'")
   assert.ok(planningIdx < csvIdx, `planning must come before csv in registry — got planning@${planningIdx}, csv@${csvIdx}`)
 })
+
+test("knowledge-base parser walks the synthetic notes-vault and builds a backlink graph", async () => {
+  const { parser } = await import("../../dist/parse/knowledge-base.js")
+  const fp = path.join(REPO, "examples/notes-vault")
+  assert.equal(await parser.detect(fp), true)
+  const out = await parser.parse(fp)
+  assert.equal(out.contentType, "obsidian-vault")
+  assert.ok(out.meta.noteCount >= 14, `expected >= 14 notes, got ${out.meta.noteCount}`)
+  // Per-note metadata is populated.
+  const pricing = out.data.notes.find(n => /pricing v2/i.test(n.title))
+  assert.ok(pricing, "expected a 'Pricing V2' note")
+  assert.ok(pricing.outboundCount >= 4, `expected Pricing V2 to link out — got ${pricing.outboundCount}`)
+  assert.ok(pricing.inboundCount >= 4, `expected Pricing V2 to be linked from many notes — got ${pricing.inboundCount}`)
+  // Backlink graph: top hub by inbound is one of the densely-linked notes.
+  assert.ok(out.data.topHubs.length > 0, "expected at least one hub")
+  const topHubInbound = out.data.topHubs[0].inboundCount
+  assert.ok(topHubInbound >= 4, `expected a hub with >= 4 inbound links — got ${topHubInbound}`)
+  // Theme clusters fall back to top-folder grouping when tags are sparse, but
+  // in this vault we expect at least one tag-derived theme.
+  assert.ok(out.data.themeClusters.length >= 1, "expected theme clusters")
+  // Stale + orphan callouts are populated by the synthetic vault.
+  assert.ok(out.data.stale.length >= 1, "expected at least one stale note (Old Idea — Voice UI from 2025-11)")
+  assert.ok(out.data.orphans.length >= 1, "expected at least one orphan note")
+  // The Voice UI note is both stale and an orphan.
+  const voiceStale = out.data.stale.find(s => /voice ui/i.test(s.title))
+  const voiceOrphan = out.data.orphans.find(o => /voice ui/i.test(o.title))
+  assert.ok(voiceStale, "expected the Voice UI note in stale list")
+  assert.ok(voiceOrphan, "expected the Voice UI note in orphan list")
+  // TODO aggregations.
+  assert.ok(out.data.todoStats.openCount >= 8, `expected >= 8 open TODOs across the vault — got ${out.data.todoStats.openCount}`)
+  assert.ok(out.data.topTodos.length > 0, "expected the topTodos sample to be populated")
+  // Every note has its full body inlined so the drill-down can render.
+  for (const n of out.data.notes) {
+    assert.ok(typeof n.raw === "string" && n.raw.length > 0, `note ${n.path} missing raw body`)
+  }
+  // Graph node + edge counts are present and match the inbound/outbound totals.
+  assert.equal(out.data.graph.nodes.length, out.data.notes.length)
+  assert.ok(out.data.graph.edges.length >= 20, `expected >= 20 graph edges in this densely-linked vault — got ${out.data.graph.edges.length}`)
+})
+
+test("knowledge-base parser refuses an empty directory and a non-directory", async () => {
+  const { parser } = await import("../../dist/parse/knowledge-base.js")
+  // A markdown file is not a directory; detect should return false.
+  const filePath = path.join(REPO, "examples/markdown/input.md")
+  assert.equal(await parser.detect(filePath), false)
+})
+
+test("knowledge-base family prompts are present on disk", async () => {
+  const fs = await import("node:fs/promises")
+  const expectedPrompts = ["_knowledge_base.md", "obsidian-vault.md", "notion-export.md", "markdown-folder.md"]
+  for (const name of expectedPrompts) {
+    const p = path.join(REPO, "prompts", name)
+    const stat = await fs.stat(p)
+    assert.ok(stat.isFile(), `missing prompt file: ${name}`)
+  }
+})

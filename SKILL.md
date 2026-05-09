@@ -124,6 +124,9 @@ client-side rendering of the drill-down sections.
 | [`prompts/ics-calendar.md`](./prompts/ics-calendar.md) | `.ics` / `.ical` calendar exports (Google Calendar, Outlook, Apple Calendar, Fastmail) — calendar audit: time-allocation map, busy-hours heatmap, recurring series, back-to-back blocks, meeting-free streaks |
 | [`prompts/issue-tracker.md`](./prompts/issue-tracker.md) | Issue / task CSVs from Linear, Jira, GitHub Issues, Asana, ClickUp, generic project trackers — project audit: status flow, owner load, priority distribution, stale items, bottleneck callouts, swimlane drill-down |
 | [`prompts/trello-board.md`](./prompts/trello-board.md) | Trello board JSON export (`{ id, name, lists, cards, members, labels }`) — board audit: lane breakdown, member load, stale + overdue cards, read-only kanban swimlanes |
+| [`prompts/obsidian-vault.md`](./prompts/obsidian-vault.md) | Directory of `.md` files cross-linked with `[[wikilinks]]` (Obsidian vaults, wiki-style notes) — concept map / backlink graph, theme clusters, hub leaderboard, TODO + stale + orphan callouts, searchable knowledge atlas |
+| [`prompts/notion-export.md`](./prompts/notion-export.md) | Notion "Markdown & CSV" workspace export — page tree mirroring Notion hierarchy, top-level page index, cross-page link counts, TODO + stale + orphan callouts, searchable atlas |
+| [`prompts/markdown-folder.md`](./prompts/markdown-folder.md) | Generic directory of `.md` files (Hugo / Jekyll content, dumped Bear exports, "Notes" folders, MkDocs `docs/`) — folder breakdown, publication timeline, longest-notes leaderboard, TODO + stale + orphan callouts, searchable atlas |
 | [`prompts/github-repo.md`](./prompts/github-repo.md) | github.com/owner/repo URLs |
 | [`prompts/url-article.md`](./prompts/url-article.md) | Blog posts, news articles, long-form web pages |
 | [`prompts/default.md`](./prompts/default.md) | Anything else |
@@ -167,6 +170,24 @@ anomaly-and-duplicate callouts, and a searchable transactions /
 invoices drill-down. Outputs are **analytical only** — never
 accounting, tax, or legal advice — and the family prompt enforces
 a footer to that effect.
+
+Planning sources (`ics-calendar`, `issue-tracker`, `trello-board`)
+also load
+[`prompts/_planning.md`](./prompts/_planning.md) — the shared
+contract for the planning pack: time-allocation map, owner / status
+filters, stale-and-bottleneck callouts, roadmap / calendar / story-
+map view, and a searchable item drill-down. Outputs are read-only
+audits, not editing tools.
+
+Knowledge-base sources (`notion-export`, `obsidian-vault`,
+`markdown-folder`) also load
+[`prompts/_knowledge_base.md`](./prompts/_knowledge_base.md) — the
+shared contract for the knowledge-base pack: concept map / backlink
+graph, theme clusters, TODO + stale + orphan callouts, searchable
+knowledge atlas drill-down, and a hub leaderboard. The CLI accepts
+a directory as input (`html-anything ~/Vault`) and walks it
+recursively; in skill mode, point Claude Code at the folder and it
+reads the markdown files via the standard file tools.
 
 **Adding a new source** = drop a new `<source>.md` in `prompts/`,
 following the same shape as existing ones. No code changes, no

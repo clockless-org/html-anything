@@ -207,6 +207,17 @@ function familyFor(contentType: string): string | null {
   ) {
     return "_planning.md"
   }
+  // Knowledge-base sources (Notion exports, Obsidian vaults, generic
+  // markdown folders) share the concept-map / theme-clusters /
+  // todo-stale-orphan-callouts / searchable-knowledge-atlas / hub-
+  // leaderboard contract.
+  if (
+    contentType === "notion-export" ||
+    contentType === "obsidian-vault" ||
+    contentType === "markdown-folder"
+  ) {
+    return "_knowledge_base.md"
+  }
   return null
 }
 
