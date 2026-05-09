@@ -3,958 +3,1029 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alex &amp; Mira</title>
+<title>Alex & Mira</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+:root {
+  --bg: #f7f7f9;
+  --surface: #ffffff;
+  --surface2: #f0f0f4;
+  --border: #e2e2e8;
+  --text: #1a1a2e;
+  --text2: #5a5a7a;
+  --text3: #8a8aaa;
+  --accent-a: #6c63ff;
+  --accent-b: #ff6b9d;
+  --accent-a-soft: #ece9ff;
+  --accent-b-soft: #fff0f5;
+  --bubble-a: #6c63ff;
+  --bubble-b: #f0f0f4;
+  --bubble-a-text: #ffffff;
+  --bubble-b-text: #1a1a2e;
+  --shadow: 0 2px 16px rgba(0,0,0,0.07);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+@media (prefers-color-scheme: dark) {
   :root {
-    --bg: #f0f2f5;
-    --surface: #ffffff;
-    --header-bg: #075e54;
-    --header-text: #ffffff;
-    --divider-bg: #e1e8ed;
-    --divider-text: #667781;
-    --msg-alex-bg: #ffffff;
-    --msg-alex-text: #111b21;
-    --msg-mira-bg: #d9fdd3;
-    --msg-mira-text: #111b21;
-    --time-color: #667781;
-    --sender-alex: #075e54;
-    --sender-mira: #128c7e;
-    --chip-active-alex: #075e54;
-    --chip-active-mira: #128c7e;
-    --chip-inactive: #e0e0e0;
-    --chip-inactive-text: #555;
-    --search-bg: #f0f2f5;
-    --search-border: #d0d7de;
-    --search-focus: #075e54;
-    --stats-bg: #f8faf8;
-    --stats-border: #d0e8d0;
-    --shadow: 0 1px 2px rgba(0,0,0,0.12);
-    --shadow-md: 0 2px 8px rgba(0,0,0,0.10);
-    --radius: 8px;
-    --radius-msg: 12px;
-    --font: 'Inter', system-ui, sans-serif;
-    --media-bg: #c8e6c9;
+    --bg: #0f0f1a;
+    --surface: #1a1a2e;
+    --surface2: #22223a;
+    --border: #2e2e4e;
+    --text: #eeeeff;
+    --text2: #aaaacc;
+    --text3: #6666aa;
+    --accent-a: #7c73ff;
+    --accent-b: #ff7aaa;
+    --accent-a-soft: #1e1b3a;
+    --accent-b-soft: #2a1a24;
+    --bubble-a: #5a52dd;
+    --bubble-b: #22223a;
+    --bubble-a-text: #ffffff;
+    --bubble-b-text: #eeeeff;
+    --shadow: 0 2px 16px rgba(0,0,0,0.3);
   }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0b141a;
-      --surface: #1f2c34;
-      --header-bg: #1f2c34;
-      --header-text: #e9edef;
-      --divider-bg: #182229;
-      --divider-text: #8696a0;
-      --msg-alex-bg: #1f2c34;
-      --msg-alex-text: #e9edef;
-      --msg-mira-bg: #005c4b;
-      --msg-mira-text: #e9edef;
-      --time-color: #8696a0;
-      --sender-alex: #00a884;
-      --sender-mira: #00a884;
-      --chip-active-alex: #00a884;
-      --chip-active-mira: #00a884;
-      --chip-inactive: #2a3942;
-      --chip-inactive-text: #8696a0;
-      --search-bg: #2a3942;
-      --search-border: #3b4a54;
-      --search-focus: #00a884;
-      --stats-bg: #182229;
-      --stats-border: #2a3942;
-      --shadow: 0 1px 2px rgba(0,0,0,0.4);
-      --shadow-md: 0 2px 8px rgba(0,0,0,0.35);
-      --media-bg: #1a3a2a;
-    }
-  }
-
-  html, body {
-    height: 100%;
-    font-family: var(--font);
-    background: var(--bg);
-    color: var(--msg-alex-text);
-    font-size: 15px;
-    line-height: 1.5;
-  }
-
-  .app {
-    display: flex;
-    flex-direction: column;
-    height: 100dvh;
-    max-width: 700px;
-    margin: 0 auto;
-    background: var(--bg);
-    position: relative;
-  }
-
-  /* HEADER */
-  .header {
-    background: var(--header-bg);
-    color: var(--header-text);
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: var(--shadow-md);
-    flex-shrink: 0;
-  }
-
-  .header-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    font-weight: 600;
-    flex-shrink: 0;
-  }
-
-  .header-info { flex: 1; min-width: 0; }
-  .header-title { font-weight: 600; font-size: 16px; }
-  .header-sub { font-size: 12px; opacity: 0.75; margin-top: 1px; }
-
-  .header-btn {
-    background: none;
-    border: none;
-    color: var(--header-text);
-    cursor: pointer;
-    padding: 6px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.85;
-    transition: opacity 0.15s, background 0.15s;
-    flex-shrink: 0;
-  }
-  .header-btn:hover { opacity: 1; background: rgba(255,255,255,0.1); }
-  .header-btn svg { width: 20px; height: 20px; }
-
-  /* SEARCH BAR */
-  .search-bar {
-    background: var(--header-bg);
-    padding: 0 12px 10px;
-    display: none;
-    flex-shrink: 0;
-  }
-  .search-bar.open { display: block; }
-
-  .search-inner {
-    display: flex;
-    align-items: center;
-    background: var(--search-bg);
-    border: 1px solid var(--search-border);
-    border-radius: 24px;
-    padding: 6px 14px;
-    gap: 8px;
-  }
-
-  .search-inner input {
-    flex: 1;
-    border: none;
-    background: transparent;
-    outline: none;
-    font-family: var(--font);
-    font-size: 14px;
-    color: var(--msg-alex-text);
-  }
-  .search-inner input::placeholder { color: var(--time-color); }
-
-  .search-count {
-    font-size: 12px;
-    color: var(--time-color);
-    white-space: nowrap;
-  }
-
-  .search-clear {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--time-color);
-    padding: 0;
-    display: flex;
-    align-items: center;
-  }
-
-  /* FILTER CHIPS */
-  .filter-row {
-    display: flex;
-    gap: 8px;
-    padding: 8px 12px;
-    background: var(--surface);
-    border-bottom: 1px solid var(--divider-bg);
-    flex-shrink: 0;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 4px 12px;
-    border-radius: 16px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    border: none;
-    transition: all 0.15s;
-    white-space: nowrap;
-  }
-
-  .chip-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .chip.active-alex {
-    background: var(--chip-active-alex);
-    color: #fff;
-  }
-  .chip.active-mira {
-    background: var(--chip-active-mira);
-    color: #fff;
-  }
-  .chip.inactive {
-    background: var(--chip-inactive);
-    color: var(--chip-inactive-text);
-  }
-
-  .chip-spacer { flex: 1; }
-
-  .stats-toggle {
-    font-size: 12px;
-    color: var(--time-color);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 8px;
-    transition: background 0.15s;
-    white-space: nowrap;
-  }
-  .stats-toggle:hover { background: var(--divider-bg); }
-
-  /* STATS PANEL */
-  .stats-panel {
-    background: var(--stats-bg);
-    border-bottom: 1px solid var(--stats-border);
-    padding: 14px 16px;
-    display: none;
-    flex-shrink: 0;
-  }
-  .stats-panel.open { display: block; }
-
-  .stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 12px;
-  }
-
-  .stat-card {
-    background: var(--surface);
-    border-radius: var(--radius);
-    padding: 10px 12px;
-    box-shadow: var(--shadow);
-  }
-
-  .stat-label {
-    font-size: 11px;
-    color: var(--time-color);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 4px;
-    font-weight: 500;
-  }
-
-  .stat-value {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--msg-alex-text);
-  }
-
-  .stat-sub {
-    font-size: 12px;
-    color: var(--time-color);
-    margin-top: 2px;
-  }
-
-  .stats-sender-row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    margin-bottom: 6px;
-    font-size: 13px;
-  }
-
-  .stats-sender-name { font-weight: 500; min-width: 90px; }
-  .stats-bar-wrap { flex: 1; background: var(--divider-bg); border-radius: 4px; height: 8px; overflow: hidden; }
-  .stats-bar { height: 100%; border-radius: 4px; transition: width 0.4s; }
-  .stats-bar-alex { background: var(--chip-active-alex); }
-  .stats-bar-mira { background: var(--chip-active-mira); }
-  .stats-count { font-size: 12px; color: var(--time-color); min-width: 30px; text-align: right; }
-
-  /* MESSAGES AREA */
-  .messages-area {
-    flex: 1;
-    overflow-y: auto;
-    padding: 8px 8px 16px;
-    scroll-behavior: smooth;
-  }
-
-  /* DATE DIVIDER */
-  .date-divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 0 6px;
-  }
-
-  .date-divider-label {
-    background: rgba(225,232,237,0.9);
-    color: var(--divider-text);
-    font-size: 12px;
-    font-weight: 500;
-    padding: 4px 12px;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .date-divider-label {
-      background: rgba(40,55,65,0.9);
-    }
-  }
-
-  /* MESSAGE ROW */
-  .msg-row {
-    display: flex;
-    margin-bottom: 2px;
-    padding: 1px 4px;
-  }
-
-  .msg-row.alex { justify-content: flex-start; }
-  .msg-row.mira { justify-content: flex-end; }
-
-  .msg-row.msg-hidden { display: none; }
-
-  .msg-bubble-wrap {
-    max-width: 75%;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
-
-  @media (max-width: 480px) {
-    .msg-bubble-wrap { max-width: 88%; }
-  }
-
-  .msg-bubble {
-    padding: 7px 10px 6px;
-    border-radius: var(--radius-msg);
-    box-shadow: var(--shadow);
-    position: relative;
-    word-break: break-word;
-    transition: background 0.2s;
-  }
-
-  .msg-row.alex .msg-bubble {
-    background: var(--msg-alex-bg);
-    color: var(--msg-alex-text);
-    border-top-left-radius: 2px;
-  }
-
-  .msg-row.mira .msg-bubble {
-    background: var(--msg-mira-bg);
-    color: var(--msg-mira-text);
-    border-top-right-radius: 2px;
-  }
-
-  .msg-bubble.highlighted {
-    outline: 2px solid #f59e0b;
-    outline-offset: 1px;
-  }
-
-  .msg-text {
-    font-size: 14.5px;
-    line-height: 1.55;
-    white-space: pre-wrap;
-  }
-
-  .msg-text mark {
-    background: #fde68a;
-    color: #7c2d12;
-    border-radius: 2px;
-    padding: 0 1px;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .msg-text mark {
-      background: #78350f;
-      color: #fde68a;
-    }
-  }
-
-  .msg-meta {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 4px;
-    margin-top: 2px;
-  }
-
-  .msg-time {
-    font-size: 11px;
-    color: var(--time-color);
-    white-space: nowrap;
-  }
-
-  .msg-media {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--media-bg);
-    border-radius: 8px;
-    padding: 8px 10px;
-    font-size: 13px;
-    color: var(--time-color);
-    font-style: italic;
-  }
-
-  /* COPY BUTTON (appears on hover) */
-  .copy-btn {
-    position: absolute;
-    top: 4px;
-    opacity: 0;
-    background: var(--surface);
-    border: 1px solid var(--divider-bg);
-    border-radius: 6px;
-    padding: 3px 6px;
-    cursor: pointer;
-    font-size: 11px;
-    color: var(--time-color);
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    transition: opacity 0.15s, background 0.15s;
-    pointer-events: none;
-    z-index: 10;
-    box-shadow: var(--shadow);
-    white-space: nowrap;
-  }
-
-  .msg-row.alex .copy-btn { right: -6px; transform: translateX(100%); }
-  .msg-row.mira .copy-btn { left: -6px; transform: translateX(-100%); }
-
-  .msg-bubble-wrap:hover .copy-btn {
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  .copy-btn:hover { background: var(--divider-bg); }
-  .copy-btn.copied { color: #22c55e; }
-
-  /* CONSECUTIVE MESSAGES */
-  .msg-row.consecutive .msg-bubble {
-    margin-top: 1px;
-  }
-  .msg-row.consecutive.alex .msg-bubble { border-top-left-radius: var(--radius-msg); }
-  .msg-row.consecutive.mira .msg-bubble { border-top-right-radius: var(--radius-msg); }
-
-  /* SCROLL TO BOTTOM */
-  .scroll-btn {
-    position: absolute;
-    bottom: 20px;
-    right: 16px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--surface);
-    border: 1px solid var(--divider-bg);
-    box-shadow: var(--shadow-md);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--time-color);
-    z-index: 50;
-    transition: opacity 0.2s;
-    opacity: 0;
-    pointer-events: none;
-  }
-  .scroll-btn.visible {
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  /* EMPTY STATE */
-  .no-results {
-    text-align: center;
-    padding: 48px 24px;
-    color: var(--time-color);
-    font-size: 14px;
-    display: none;
-  }
-  .no-results.visible { display: block; }
-  .no-results-icon { font-size: 40px; margin-bottom: 10px; }
-
-  /* SCROLLBAR */
-  .messages-area::-webkit-scrollbar { width: 4px; }
-  .messages-area::-webkit-scrollbar-track { background: transparent; }
-  .messages-area::-webkit-scrollbar-thumb { background: var(--divider-bg); border-radius: 4px; }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 15px;
+}
+.page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.header-emoji { font-size: 48px; margin-bottom: 8px; }
+.header h1 {
+  font-size: clamp(24px, 5vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--accent-a), var(--accent-b));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.header-sub {
+  color: var(--text2);
+  font-size: 13px;
+  margin-top: 4px;
+}
+/* Cards grid */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+@media (min-width: 560px) {
+  .cards { grid-template-columns: 1fr 1fr; }
+}
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+.card-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text3);
+  margin-bottom: 8px;
+}
+.card-value {
+  font-size: 15px;
+  color: var(--text);
+  font-weight: 400;
+  line-height: 1.5;
+}
+.card-value strong { color: var(--accent-a); font-weight: 600; }
+.card-value .b { color: var(--accent-b); }
+.card-full { grid-column: 1 / -1; }
+/* Sender split */
+.split-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.split-name {
+  font-size: 13px;
+  font-weight: 500;
+  width: 80px;
+  flex-shrink: 0;
+}
+.split-bar-wrap {
+  flex: 1;
+  height: 10px;
+  background: var(--surface2);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.split-bar {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.6s ease;
+}
+.split-pct {
+  font-size: 12px;
+  color: var(--text2);
+  width: 36px;
+  text-align: right;
+}
+/* Donut */
+.donut-wrap {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.donut-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 20px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent-a), var(--accent-b));
+  border-radius: 99px;
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 16px;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -16px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-a);
+  border: 2px solid var(--surface);
+}
+.timeline-item:last-child { margin-bottom: 0; }
+.tl-date {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent-a);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.tl-text {
+  font-size: 14px;
+  color: var(--text2);
+  margin-top: 2px;
+}
+/* Heatmap */
+.heatmap-wrap { overflow-x: auto; }
+.heatmap-table {
+  border-collapse: separate;
+  border-spacing: 3px;
+  font-size: 11px;
+}
+.hm-cell {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: var(--surface2);
+}
+.hm-label {
+  font-size: 10px;
+  color: var(--text3);
+  text-align: center;
+  padding: 0 2px;
+}
+/* Area chart */
+.chart-wrap { width: 100%; overflow-x: auto; }
+svg text { font-family: 'Inter', sans-serif; }
+/* Emoji */
+.emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 10px;
+}
+.emoji-item {
+  background: var(--surface2);
+  border-radius: var(--radius-sm);
+  padding: 12px 8px;
+  text-align: center;
+}
+.emoji-char { font-size: 26px; display: block; }
+.emoji-count { font-size: 12px; color: var(--text2); margin-top: 4px; display: block; }
+.emoji-who {
+  display: inline-block;
+  font-size: 10px;
+  margin-top: 3px;
+  padding: 1px 6px;
+  border-radius: 99px;
+  font-weight: 500;
+}
+.emoji-who.a { background: var(--accent-a-soft); color: var(--accent-a); }
+.emoji-who.b { background: var(--accent-b-soft); color: var(--accent-b); }
+/* Browse section */
+.browse-toggle {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+  margin-bottom: 4px;
+  transition: background 0.2s;
+}
+.browse-toggle:hover { background: var(--surface2); }
+.toggle-arrow {
+  width: 20px;
+  height: 20px;
+  color: var(--text3);
+  transition: transform 0.3s;
+}
+.browse-panel {
+  display: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-top: 8px;
+}
+.browse-panel.open { display: block; }
+.browse-controls {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  background: var(--surface2);
+}
+.search-input {
+  flex: 1;
+  min-width: 150px;
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+}
+.search-input:focus { border-color: var(--accent-a); }
+.chip {
+  padding: 5px 12px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.chip.active-a { background: var(--accent-a); color: #fff; border-color: var(--accent-a); }
+.chip.active-b { background: var(--accent-b); color: #fff; border-color: var(--accent-b); }
+.chip.active-all { background: var(--text); color: var(--bg); border-color: var(--text); }
+.messages-wrap {
+  max-height: 520px;
+  overflow-y: auto;
+  padding: 16px;
+}
+.day-group { margin-bottom: 20px; }
+.day-label {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  position: relative;
+}
+.day-label::before, .day-label::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background: var(--border);
+}
+.day-label::before { left: 0; }
+.day-label::after { right: 0; }
+.bubble-row {
+  display: flex;
+  margin-bottom: 4px;
+}
+.bubble-row.from-a { justify-content: flex-end; }
+.bubble-row.from-b { justify-content: flex-start; }
+.bubble {
+  max-width: 72%;
+  padding: 8px 13px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  position: relative;
+  word-break: break-word;
+}
+.from-a .bubble {
+  background: var(--bubble-a);
+  color: var(--bubble-a-text);
+  border-bottom-right-radius: 4px;
+}
+.from-b .bubble {
+  background: var(--bubble-b);
+  color: var(--bubble-b-text);
+  border-bottom-left-radius: 4px;
+}
+.bubble-time {
+  font-size: 10px;
+  opacity: 0.65;
+  margin-top: 3px;
+  display: block;
+  text-align: right;
+}
+.bubble-row.from-b .bubble-time { text-align: left; }
+.bubble.highlight {
+  outline: 2px solid var(--accent-b);
+  outline-offset: 1px;
+}
+.hidden { display: none !important; }
+/* Copy button */
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text2);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+  margin-bottom: 24px;
+}
+.copy-btn:hover { background: var(--accent-a-soft); color: var(--accent-a); border-color: var(--accent-a); }
+/* Footer */
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-style: italic;
+}
+/* Section title */
+.section-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text3);
+  margin-bottom: 16px;
+  margin-top: 8px;
+}
+/* No results */
+.no-results {
+  text-align: center;
+  color: var(--text3);
+  padding: 32px;
+  font-size: 14px;
+}
 </style>
 </head>
 <body>
 <script>const DATA = {"messages":[{"ts":"2026-01-04 09:12:07","date":"2026-01-04","time":"09:12:07","sender":"Alex Chen","text":"hey are we still on for sat","isMedia":false},{"ts":"2026-01-04 09:14:22","date":"2026-01-04","time":"09:14:22","sender":"Mira Park","text":"yes! 11ish at the usual?","isMedia":false},{"ts":"2026-01-04 09:14:51","date":"2026-01-04","time":"09:14:51","sender":"Alex Chen","text":"perfect","isMedia":false},{"ts":"2026-01-04 09:15:04","date":"2026-01-04","time":"09:15:04","sender":"Alex Chen","text":"bringing the books from last time","isMedia":false},{"ts":"2026-01-04 09:15:38","date":"2026-01-04","time":"09:15:38","sender":"Mira Park","text":"omg yes please","isMedia":false},{"ts":"2026-01-04 09:16:02","date":"2026-01-04","time":"09:16:02","sender":"Mira Park","text":"did you finish the murakami","isMedia":false},{"ts":"2026-01-04 09:18:11","date":"2026-01-04","time":"09:18:11","sender":"Alex Chen","text":"half. it's good but it's slow","isMedia":false},{"ts":"2026-01-04 09:18:34","date":"2026-01-04","time":"09:18:34","sender":"Alex Chen","text":"like, intentionally slow","isMedia":false},{"ts":"2026-01-04 09:19:00","date":"2026-01-04","time":"09:19:00","sender":"Mira Park","text":"thats the point i think","isMedia":false},{"ts":"2026-01-04 09:19:42","date":"2026-01-04","time":"09:19:42","sender":"Mira Park","text":"let me know when you finish, want to talk about it","isMedia":false},{"ts":"2026-01-06 14:22:18","date":"2026-01-06","time":"14:22:18","sender":"Alex Chen","text":"random q — do you know any good ramen places near pioneer square","isMedia":false},{"ts":"2026-01-06 14:25:03","date":"2026-01-06","time":"14:25:03","sender":"Mira Park","text":"kizuki on 1st? open late too","isMedia":false},{"ts":"2026-01-06 14:25:30","date":"2026-01-06","time":"14:25:30","sender":"Alex Chen","text":"oh nice. how busy is it usually","isMedia":false},{"ts":"2026-01-06 14:26:11","date":"2026-01-06","time":"14:26:11","sender":"Mira Park","text":"7pm = full. 9pm = walk in","isMedia":false},{"ts":"2026-01-06 14:26:33","date":"2026-01-06","time":"14:26:33","sender":"Alex Chen","text":"noted, thx","isMedia":false},{"ts":"2026-01-08 19:44:52","date":"2026-01-08","time":"19:44:52","sender":"Mira Park","text":"ok finished murakami","isMedia":false},{"ts":"2026-01-08 19:45:09","date":"2026-01-08","time":"19:45:09","sender":"Mira Park","text":"need to debrief","isMedia":false},{"ts":"2026-01-08 19:46:21","date":"2026-01-08","time":"19:46:21","sender":"Alex Chen","text":"hahah ok","isMedia":false},{"ts":"2026-01-08 19:46:48","date":"2026-01-08","time":"19:46:48","sender":"Alex Chen","text":"i'm at the part where the cat shows up","isMedia":false},{"ts":"2026-01-08 19:47:12","date":"2026-01-08","time":"19:47:12","sender":"Mira Park","text":"oh you're early then","isMedia":false},{"ts":"2026-01-08 19:47:28","date":"2026-01-08","time":"19:47:28","sender":"Mira Park","text":"just keep going. trust the cat.","isMedia":false},{"ts":"2026-01-09 10:01:33","date":"2026-01-09","time":"10:01:33","sender":"Alex Chen","text":"lunch wed?","isMedia":false},{"ts":"2026-01-09 10:03:04","date":"2026-01-09","time":"10:03:04","sender":"Mira Park","text":"can't wed, dentist","isMedia":false},{"ts":"2026-01-09 10:03:21","date":"2026-01-09","time":"10:03:21","sender":"Mira Park","text":"thursday tho","isMedia":false},{"ts":"2026-01-09 10:03:55","date":"2026-01-09","time":"10:03:55","sender":"Alex Chen","text":"thursday works. that new place on cherry?","isMedia":false},{"ts":"2026-01-09 10:04:18","date":"2026-01-09","time":"10:04:18","sender":"Mira Park","text":"yes please","isMedia":false},{"ts":"2026-01-09 10:04:41","date":"2026-01-09","time":"10:04:41","sender":"Alex Chen","text":"12:30","isMedia":false},{"ts":"2026-01-09 10:04:55","date":"2026-01-09","time":"10:04:55","sender":"Mira Park","text":"👍","isMedia":false},{"ts":"2026-01-12 12:35:18","date":"2026-01-12","time":"12:35:18","sender":"Mira Park","text":"i'm here","isMedia":false},{"ts":"2026-01-12 12:35:42","date":"2026-01-12","time":"12:35:42","sender":"Mira Park","text":"outside, the patio looks open","isMedia":false},{"ts":"2026-01-12 12:36:08","date":"2026-01-12","time":"12:36:08","sender":"Alex Chen","text":"5 min!","isMedia":false},{"ts":"2026-01-12 12:42:11","date":"2026-01-12","time":"12:42:11","sender":"Alex Chen","text":"walking up","isMedia":false},{"ts":"2026-01-13 08:14:02","date":"2026-01-13","time":"08:14:02","sender":"Alex Chen","text":"that lunch was excellent","isMedia":false},{"ts":"2026-01-13 08:14:33","date":"2026-01-13","time":"08:14:33","sender":"Mira Park","text":"agreed. the squash thing???","isMedia":false},{"ts":"2026-01-13 08:14:51","date":"2026-01-13","time":"08:14:51","sender":"Alex Chen","text":"i'm thinking about it still","isMedia":false},{"ts":"2026-01-15 21:03:44","date":"2026-01-15","time":"21:03:44","sender":"Mira Park","text":"ok finished the rewrite of the proposal","isMedia":false},{"ts":"2026-01-15 21:04:18","date":"2026-01-15","time":"21:04:18","sender":"Mira Park","text":"would you read it before i send tomorrow","isMedia":false},{"ts":"2026-01-15 21:04:42","date":"2026-01-15","time":"21:04:42","sender":"Alex Chen","text":"yes! send it","isMedia":false},{"ts":"2026-01-15 21:05:55","date":"2026-01-15","time":"21:05:55","sender":"Mira Park","text":"<Media omitted>","isMedia":true},{"ts":"2026-01-15 21:06:32","date":"2026-01-15","time":"21:06:32","sender":"Alex Chen","text":"opening","isMedia":false},{"ts":"2026-01-15 21:18:11","date":"2026-01-15","time":"21:18:11","sender":"Alex Chen","text":"ok read it. one structural thing — section 3 should come before section 2. otherwise great.","isMedia":false},{"ts":"2026-01-15 21:19:04","date":"2026-01-15","time":"21:19:04","sender":"Mira Park","text":"hmm i can see that","isMedia":false},{"ts":"2026-01-15 21:19:32","date":"2026-01-15","time":"21:19:32","sender":"Mira Park","text":"also the pricing table is too long","isMedia":false},{"ts":"2026-01-15 21:20:00","date":"2026-01-15","time":"21:20:00","sender":"Alex Chen","text":"yeah cut to 3 tiers","isMedia":false},{"ts":"2026-01-15 21:20:18","date":"2026-01-15","time":"21:20:18","sender":"Mira Park","text":"ok","isMedia":false},{"ts":"2026-01-15 21:20:41","date":"2026-01-15","time":"21:20:41","sender":"Mira Park","text":"thank you, will fix and send tomorrow","isMedia":false},{"ts":"2026-01-18 11:22:08","date":"2026-01-18","time":"11:22:08","sender":"Alex Chen","text":"brunch saturday?","isMedia":false},{"ts":"2026-01-18 11:24:33","date":"2026-01-18","time":"11:24:33","sender":"Mira Park","text":"with the group?","isMedia":false},{"ts":"2026-01-18 11:24:51","date":"2026-01-18","time":"11:24:51","sender":"Alex Chen","text":"yeah. j and r are in town","isMedia":false},{"ts":"2026-01-18 11:25:14","date":"2026-01-18","time":"11:25:14","sender":"Mira Park","text":"oh nice. yes — where","isMedia":false},{"ts":"2026-01-18 11:25:42","date":"2026-01-18","time":"11:25:42","sender":"Alex Chen","text":"thinking the place by greenlake","isMedia":false},{"ts":"2026-01-18 11:26:11","date":"2026-01-18","time":"11:26:11","sender":"Mira Park","text":"that's perfect, walkable for me","isMedia":false},{"ts":"2026-01-18 11:26:38","date":"2026-01-18","time":"11:26:38","sender":"Alex Chen","text":"10:30 reservation","isMedia":false},{"ts":"2026-01-18 11:26:55","date":"2026-01-18","time":"11:26:55","sender":"Mira Park","text":"👍👍👍","isMedia":false},{"ts":"2026-01-23 09:48:21","date":"2026-01-23","time":"09:48:21","sender":"Mira Park","text":"brunch was so good","isMedia":false},{"ts":"2026-01-23 09:48:42","date":"2026-01-23","time":"09:48:42","sender":"Mira Park","text":"the eggs at that place","isMedia":false},{"ts":"2026-01-23 09:49:11","date":"2026-01-23","time":"09:49:11","sender":"Alex Chen","text":"i KNOW","isMedia":false},{"ts":"2026-01-23 09:49:38","date":"2026-01-23","time":"09:49:38","sender":"Alex Chen","text":"also j said hi to you twice","isMedia":false},{"ts":"2026-01-23 09:50:02","date":"2026-01-23","time":"09:50:02","sender":"Mira Park","text":"he's such a sweetheart","isMedia":false},{"ts":"2026-01-25 18:31:04","date":"2026-01-25","time":"18:31:04","sender":"Mira Park","text":"would you watch a movie with me thursday","isMedia":false},{"ts":"2026-01-25 18:31:27","date":"2026-01-25","time":"18:31:27","sender":"Mira Park","text":"at home, not theater","isMedia":false},{"ts":"2026-01-25 18:32:00","date":"2026-01-25","time":"18:32:00","sender":"Alex Chen","text":"yes. what","isMedia":false},{"ts":"2026-01-25 18:32:23","date":"2026-01-25","time":"18:32:23","sender":"Mira Park","text":"drive my car","isMedia":false},{"ts":"2026-01-25 18:32:48","date":"2026-01-25","time":"18:32:48","sender":"Alex Chen","text":"i've never seen it actually","isMedia":false},{"ts":"2026-01-25 18:33:11","date":"2026-01-25","time":"18:33:11","sender":"Mira Park","text":"WHAT","isMedia":false},{"ts":"2026-01-25 18:33:31","date":"2026-01-25","time":"18:33:31","sender":"Mira Park","text":"how","isMedia":false},{"ts":"2026-01-25 18:33:49","date":"2026-01-25","time":"18:33:49","sender":"Alex Chen","text":"just never got around to it","isMedia":false},{"ts":"2026-01-25 18:34:08","date":"2026-01-25","time":"18:34:08","sender":"Mira Park","text":"ok thursday. 7. i'm bringing snacks.","isMedia":false},{"ts":"2026-01-25 18:34:30","date":"2026-01-25","time":"18:34:30","sender":"Alex Chen","text":"deal","isMedia":false},{"ts":"2026-01-29 07:11:18","date":"2026-01-29","time":"07:11:18","sender":"Alex Chen","text":"the rest of that book btw — i finished it","isMedia":false},{"ts":"2026-01-29 07:11:42","date":"2026-01-29","time":"07:11:42","sender":"Alex Chen","text":"i don't know how to feel","isMedia":false},{"ts":"2026-01-29 07:12:08","date":"2026-01-29","time":"07:12:08","sender":"Mira Park","text":"😄","isMedia":false},{"ts":"2026-01-29 07:12:33","date":"2026-01-29","time":"07:12:33","sender":"Mira Park","text":"thats the right reaction","isMedia":false},{"ts":"2026-01-29 07:13:01","date":"2026-01-29","time":"07:13:01","sender":"Mira Park","text":"meet for coffee soon and we'll talk about it","isMedia":false},{"ts":"2026-01-29 07:13:24","date":"2026-01-29","time":"07:13:24","sender":"Alex Chen","text":"yes. monday?","isMedia":false},{"ts":"2026-01-29 07:13:48","date":"2026-01-29","time":"07:13:48","sender":"Mira Park","text":"monday works. early — 8?","isMedia":false},{"ts":"2026-01-29 07:14:09","date":"2026-01-29","time":"07:14:09","sender":"Alex Chen","text":"8 it is","isMedia":false},{"ts":"2026-02-02 08:02:11","date":"2026-02-02","time":"08:02:11","sender":"Mira Park","text":"where are u","isMedia":false},{"ts":"2026-02-02 08:02:38","date":"2026-02-02","time":"08:02:38","sender":"Alex Chen","text":"walking up, sorry","isMedia":false},{"ts":"2026-02-02 08:03:00","date":"2026-02-02","time":"08:03:00","sender":"Alex Chen","text":"traffic was nuts","isMedia":false},{"ts":"2026-02-02 08:03:21","date":"2026-02-02","time":"08:03:21","sender":"Mira Park","text":"ok sat at the back","isMedia":false},{"ts":"2026-02-02 08:03:42","date":"2026-02-02","time":"08:03:42","sender":"Mira Park","text":"ordered for u","isMedia":false},{"ts":"2026-02-02 08:04:08","date":"2026-02-02","time":"08:04:08","sender":"Alex Chen","text":"🙏\n","isMedia":false}],"sourceFile":"input.txt","sizeBytes":4711,"messageCount":83,"senderCount":2,"senders":["Alex Chen","Mira Park"],"messagesPerSender":{"Alex Chen":38,"Mira Park":45},"dateRange":"2026-01-04 → 2026-02-02","mediaCount":1};</script>
-<div class="app" id="app">
-  <!-- HEADER -->
+<div class="page" id="main">
   <div class="header">
-    <div class="header-avatar">💬</div>
-    <div class="header-info">
-      <div class="header-title" id="header-title">Alex &amp; Mira</div>
-      <div class="header-sub" id="header-sub">Loading…</div>
-    </div>
-    <button class="header-btn" id="search-toggle-btn" title="Search (Ctrl+F)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-      </svg>
-    </button>
+    <div class="header-emoji">💬</div>
+    <h1>Alex & Mira</h1>
+    <div class="header-sub" id="header-sub">Loading…</div>
   </div>
 
-  <!-- SEARCH BAR -->
-  <div class="search-bar" id="search-bar">
-    <div class="search-inner">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.5">
-        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-      </svg>
-      <input type="text" id="search-input" placeholder="Search messages…" autocomplete="off" spellcheck="false">
-      <span class="search-count" id="search-count"></span>
-      <button class="search-clear" id="search-clear" title="Clear">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
-    </div>
-  </div>
-
-  <!-- FILTER ROW -->
-  <div class="filter-row" id="filter-row">
-    <!-- chips injected by JS -->
-    <span class="chip-spacer"></span>
-    <button class="stats-toggle" id="stats-toggle">📊 Stats</button>
-  </div>
-
-  <!-- STATS PANEL -->
-  <div class="stats-panel" id="stats-panel">
-    <div class="stats-grid" id="stats-grid"></div>
-    <div id="stats-senders"></div>
-  </div>
-
-  <!-- MESSAGES -->
-  <div class="messages-area" id="messages-area">
-    <div class="no-results" id="no-results">
-      <div class="no-results-icon">🔍</div>
-      No messages match your search.
-    </div>
-  </div>
-
-  <!-- SCROLL TO BOTTOM -->
-  <button class="scroll-btn" id="scroll-btn" title="Scroll to bottom">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="6 9 12 15 18 9"/>
-    </svg>
+  <button class="copy-btn" onclick="copyMarkdown()" title="Copy analysis as Markdown">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+    Copy analysis as Markdown
   </button>
+
+  <div class="section-title">Relationship at a glance</div>
+  <div class="cards" id="glance-cards"></div>
+
+  <div class="section-title" style="margin-top:24px;">Conversation arc</div>
+  <div class="card card-full" id="timeline-card">
+    <div class="timeline" id="timeline-content"></div>
+  </div>
+
+  <div class="section-title" style="margin-top:24px;">Message volume over time</div>
+  <div class="card card-full">
+    <div class="chart-wrap" id="area-chart"></div>
+  </div>
+
+  <div class="cards" style="margin-top:16px;">
+    <div class="card" id="sender-split-card">
+      <div class="card-label">Who talks more</div>
+      <div id="sender-split-content"></div>
+    </div>
+    <div class="card" id="heatmap-card">
+      <div class="card-label">When you text · day × hour</div>
+      <div class="heatmap-wrap" id="heatmap-content"></div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:24px;">Emoji signatures</div>
+  <div class="card card-full">
+    <div class="emoji-grid" id="emoji-grid"></div>
+  </div>
+
+  <div style="margin-top:32px; margin-bottom:8px;">
+    <button class="browse-toggle" id="browse-toggle" onclick="toggleBrowse()">
+      <span id="browse-label">Browse all 83 messages</span>
+      <svg class="toggle-arrow" id="toggle-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="browse-panel" id="browse-panel">
+      <div class="browse-controls">
+        <input class="search-input" id="search-input" placeholder="Search messages…" oninput="filterMessages()" />
+        <button class="chip active-all" id="chip-all" onclick="setFilter('all')">All</button>
+        <button class="chip" id="chip-a" onclick="setFilter('a')">Alex Chen</button>
+        <button class="chip" id="chip-b" onclick="setFilter('b')">Mira Park</button>
+      </div>
+      <div class="messages-wrap" id="messages-wrap"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Generated locally — your conversation data never left your machine. The full chat is embedded in this HTML and rendered in your browser.
+  </div>
 </div>
 
 <script>
-(function() {
-  // ── helpers ───────────────────────────────────────────────────
-  function escHtml(s) {
-    return String(s)
-      .replace(/&/g,'&amp;')
-      .replace(/</g,'&lt;')
-      .replace(/>/g,'&gt;')
-      .replace(/"/g,'&quot;');
-  }
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+function fmtDate(d) {
+  const dt = new Date(d + 'T00:00:00');
+  return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+function fmtDateShort(d) {
+  const dt = new Date(d + 'T00:00:00');
+  return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+function dayOfWeek(d) {
+  return new Date(d + 'T00:00:00').getDay(); // 0=Sun
+}
+function hourOf(t) {
+  return parseInt(t.split(':')[0], 10);
+}
+function parseTs(ts) {
+  return new Date(ts.replace(' ', 'T'));
+}
 
-  function formatDate(dateStr) {
-    try {
-      const d = new Date(dateStr + 'T00:00:00');
-      return d.toLocaleDateString(undefined, { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-    } catch(e) { return dateStr; }
-  }
+// ─── Compute stats from full DATA ────────────────────────────────────────────
+function computeStats(data) {
+  const msgs = data.messages;
+  const senders = data.senders;
+  const s0 = senders[0]; // Alex Chen
+  const s1 = senders[1]; // Mira Park
 
-  function formatTime(timeStr) {
-    try {
-      const [h, m] = timeStr.split(':');
-      const hour = parseInt(h, 10);
-      const ampm = hour >= 12 ? 'PM' : 'AM';
-      const h12 = hour % 12 || 12;
-      return `${h12}:${m} ${ampm}`;
-    } catch(e) { return timeStr; }
-  }
-
-  function friendlyDate(dateStr) {
-    try {
-      const d = new Date(dateStr + 'T00:00:00');
-      const today = new Date(); today.setHours(0,0,0,0);
-      const diff = (today - d) / 86400000;
-      if (diff < 1) return 'Today';
-      if (diff < 2) return 'Yesterday';
-      return d.toLocaleDateString(undefined, { month:'short', day:'numeric', year: d.getFullYear() !== today.getFullYear() ? 'numeric' : undefined });
-    } catch(e) { return dateStr; }
-  }
-
-  // ── init ──────────────────────────────────────────────────────
-  const messages = DATA.messages || [];
-  const senders = DATA.senders || [];
-  const messagesPerSender = DATA.messagesPerSender || {};
-  const totalMessages = DATA.messageCount || messages.length;
-  const dateRange = DATA.dateRange || '';
-
-  // Assign roles
-  const SENDER_A = senders[0] || '';
-  const SENDER_B = senders[1] || '';
-
-  function senderClass(s) { return s === SENDER_A ? 'alex' : 'mira'; }
-  function senderInitial(s) { return s ? s.charAt(0).toUpperCase() : '?'; }
-
-  // State
-  let activeFilters = new Set(senders);
-  let searchQuery = '';
-  let searchResults = []; // indices into messages
-  let searchIdx = 0;
-
-  // ── header ───────────────────────────────────────────────────
-  document.getElementById('header-title').textContent = `${SENDER_A} & ${SENDER_B}`;
-  document.getElementById('header-sub').textContent = `${totalMessages} messages · ${dateRange}`;
-
-  // ── stats panel ───────────────────────────────────────────────
-  function buildStats() {
-    const grid = document.getElementById('stats-grid');
-    const maxCount = Math.max(...Object.values(messagesPerSender));
-    const totalCount = Object.values(messagesPerSender).reduce((a,b)=>a+b,0);
-
-    // compute busiest day
-    const dayCount = {};
-    messages.forEach(m => { dayCount[m.date] = (dayCount[m.date]||0)+1; });
-    let busiestDay = '', busiestCount = 0;
-    for (const [d,c] of Object.entries(dayCount)) {
-      if (c > busiestCount) { busiestCount = c; busiestDay = d; }
-    }
-
-    // compute top emojis
-    const emojiRx = /\p{Emoji_Presentation}|\p{Emoji}\uFE0F/gu;
-    const emojiCount = {};
-    messages.forEach(m => {
-      const found = (m.text||'').match(emojiRx) || [];
-      found.forEach(e => { emojiCount[e] = (emojiCount[e]||0)+1; });
-    });
-    const topEmojis = Object.entries(emojiCount).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([e])=>e).join(' ');
-
-    grid.innerHTML = `
-      <div class="stat-card">
-        <div class="stat-label">Total Messages</div>
-        <div class="stat-value">${totalCount}</div>
-        <div class="stat-sub">${dateRange}</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Busiest Day</div>
-        <div class="stat-value">${friendlyDate(busiestDay)}</div>
-        <div class="stat-sub">${busiestCount} messages</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Media Shared</div>
-        <div class="stat-value">${DATA.mediaCount || 0}</div>
-        <div class="stat-sub">files & images</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Top Emojis</div>
-        <div class="stat-value" style="font-size:20px">${topEmojis || '—'}</div>
-      </div>
-    `;
-
-    const sendersEl = document.getElementById('stats-senders');
-    let senderHtml = '';
-    senders.forEach((s, i) => {
-      const cnt = messagesPerSender[s] || 0;
-      const pct = totalCount > 0 ? (cnt / totalCount * 100).toFixed(0) : 0;
-      const cls = i === 0 ? 'stats-bar-alex' : 'stats-bar-mira';
-      senderHtml += `
-        <div class="stats-sender-row">
-          <span class="stats-sender-name">${escHtml(s)}</span>
-          <div class="stats-bar-wrap">
-            <div class="stats-bar ${cls}" style="width:${pct}%"></div>
-          </div>
-          <span class="stats-count">${cnt}</span>
-        </div>`;
-    });
-    sendersEl.innerHTML = senderHtml;
-  }
-
-  document.getElementById('stats-toggle').addEventListener('click', function() {
-    const panel = document.getElementById('stats-panel');
-    panel.classList.toggle('open');
-    this.textContent = panel.classList.contains('open') ? '📊 Hide Stats' : '📊 Stats';
+  // Per-day counts
+  const perDay = {};
+  msgs.forEach(m => {
+    perDay[m.date] = (perDay[m.date] || 0) + 1;
   });
 
-  // ── filter chips ──────────────────────────────────────────────
-  function buildChips() {
-    const row = document.getElementById('filter-row');
-    // remove existing chips
-    row.querySelectorAll('.chip').forEach(c => c.remove());
+  // Date range
+  const dates = Object.keys(perDay).sort();
+  const firstDate = dates[0];
+  const lastDate = dates[dates.length - 1];
+  const startDt = new Date(firstDate + 'T00:00:00');
+  const endDt = new Date(lastDate + 'T00:00:00');
+  const totalDays = Math.round((endDt - startDt) / 86400000) + 1;
+  const activeDays = dates.length;
+  const engagementPct = Math.round(activeDays / totalDays * 100);
 
-    const spacer = row.querySelector('.chip-spacer');
-    senders.forEach((s, i) => {
-      const btn = document.createElement('button');
-      btn.className = 'chip';
-      btn.dataset.sender = s;
-      const dotColor = i === 0 ? 'var(--chip-active-alex)' : 'var(--chip-active-mira)';
-      btn.innerHTML = `<span class="chip-dot" style="background:${dotColor}"></span>${escHtml(s)}`;
-      updateChipState(btn, s);
-      btn.addEventListener('click', () => {
-        if (activeFilters.has(s)) {
-          if (activeFilters.size > 1) activeFilters.delete(s);
-        } else {
-          activeFilters.add(s);
-        }
-        updateChipState(btn, s);
-        applyFilters();
-      });
-      row.insertBefore(btn, spacer);
-    });
+  // Busiest day
+  let busiestDay = dates[0], busiestCount = 0;
+  dates.forEach(d => { if (perDay[d] > busiestCount) { busiestCount = perDay[d]; busiestDay = d; } });
+
+  // Average msgs/day (active days)
+  const avgPerDay = (msgs.length / activeDays).toFixed(1);
+
+  // Longest gap
+  let longestGap = 0;
+  for (let i = 1; i < dates.length; i++) {
+    const gap = (new Date(dates[i]+'T00:00:00') - new Date(dates[i-1]+'T00:00:00')) / 86400000 - 1;
+    if (gap > longestGap) longestGap = gap;
   }
 
-  function updateChipState(btn, s) {
-    const i = senders.indexOf(s);
-    if (activeFilters.has(s)) {
-      btn.className = 'chip ' + (i === 0 ? 'active-alex' : 'active-mira');
-    } else {
-      btn.className = 'chip inactive';
+  // Longest streak
+  let streak = 1, maxStreak = 1, cur = 1;
+  for (let i = 1; i < dates.length; i++) {
+    const gap = (new Date(dates[i]+'T00:00:00') - new Date(dates[i-1]+'T00:00:00')) / 86400000;
+    if (gap === 1) { cur++; if (cur > maxStreak) maxStreak = cur; }
+    else cur = 1;
+  }
+
+  // Who initiates (4+ hour gap)
+  const initiations = { [s0]: 0, [s1]: 0 };
+  for (let i = 1; i < msgs.length; i++) {
+    const gap = (parseTs(msgs[i].ts) - parseTs(msgs[i-1].ts)) / 3600000;
+    if (gap >= 4) {
+      initiations[msgs[i].sender]++;
     }
   }
+  const totalInit = initiations[s0] + initiations[s1];
+  const initPct0 = totalInit ? Math.round(initiations[s0] / totalInit * 100) : 50;
+  const initPct1 = 100 - initPct0;
 
-  // ── render messages ───────────────────────────────────────────
-  function buildMessages() {
-    const area = document.getElementById('messages-area');
-    // keep the no-results div
-    const noResults = document.getElementById('no-results');
-    area.innerHTML = '';
-    area.appendChild(noResults);
+  // Reply latency (minutes between consecutive msgs from different senders)
+  const latencies = [];
+  for (let i = 1; i < msgs.length; i++) {
+    if (msgs[i].sender !== msgs[i-1].sender) {
+      const mins = (parseTs(msgs[i].ts) - parseTs(msgs[i-1].ts)) / 60000;
+      if (mins < 1440) latencies.push(mins); // ignore >24h
+    }
+  }
+  const fastReplies = latencies.filter(l => l <= 5).length;
+  const fastPct = latencies.length ? Math.round(fastReplies / latencies.length * 100) : 0;
+  const medianLatency = latencies.length ? latencies.slice().sort((a,b)=>a-b)[Math.floor(latencies.length/2)] : 0;
 
-    let lastDate = null;
-    let lastSender = null;
+  // Per sender per day-of-week x hour heatmap
+  const heatmap = {}; // [dow][hour] = count
+  const dow = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  for (let d = 0; d < 7; d++) {
+    heatmap[d] = {};
+    for (let h = 0; h < 24; h++) heatmap[d][h] = 0;
+  }
+  msgs.forEach(m => {
+    const d = dayOfWeek(m.date);
+    const h = hourOf(m.time);
+    heatmap[d][h]++;
+  });
 
-    messages.forEach((msg, idx) => {
-      // date divider
-      if (msg.date !== lastDate) {
-        const div = document.createElement('div');
-        div.className = 'date-divider';
-        div.dataset.date = msg.date;
-        div.innerHTML = `<span class="date-divider-label">${friendlyDate(msg.date)}</span>`;
-        area.appendChild(div);
-        lastDate = msg.date;
-        lastSender = null;
-      }
-
-      const isAlex = msg.sender === SENDER_A;
-      const cls = senderClass(msg.sender);
-      const consecutive = msg.sender === lastSender;
-
-      const row = document.createElement('div');
-      row.className = `msg-row ${cls}${consecutive ? ' consecutive' : ''}`;
-      row.dataset.idx = idx;
-      row.dataset.sender = msg.sender;
-
-      let contentHtml;
-      if (msg.isMedia) {
-        contentHtml = `<div class="msg-media">📎 <span>Media / attachment</span></div>`;
-      } else {
-        contentHtml = `<div class="msg-text">${escHtml(msg.text || '')}</div>`;
-      }
-
-      const mdText = `**${msg.sender}** (${msg.time}): ${msg.text || '[media]'}`;
-
-      row.innerHTML = `
-        <div class="msg-bubble-wrap">
-          <div class="msg-bubble" data-idx="${idx}">
-            ${contentHtml}
-            <div class="msg-meta">
-              <span class="msg-time">${formatTime(msg.time)}</span>
-            </div>
-          </div>
-          <button class="copy-btn" data-md="${escHtml(mdText)}" title="Copy as Markdown">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
-            </svg>
-            Copy
-          </button>
-        </div>`;
-
-      area.appendChild(row);
-      lastSender = msg.sender;
+  // Emoji extraction
+  const emojiRegex = /[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu;
+  const emojiCount = {};
+  const emojiByWho = {};
+  msgs.forEach(m => {
+    const matches = m.text.match(emojiRegex) || [];
+    matches.forEach(e => {
+      emojiCount[e] = (emojiCount[e] || 0) + 1;
+      if (!emojiByWho[e]) emojiByWho[e] = { [s0]: 0, [s1]: 0 };
+      emojiByWho[e][m.sender]++;
     });
+  });
+  const topEmojis = Object.entries(emojiCount).sort((a,b)=>b[1]-a[1]).slice(0,8);
 
-    // copy buttons
-    area.querySelectorAll('.copy-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const text = btn.dataset.md;
-        navigator.clipboard.writeText(text).then(() => {
-          btn.classList.add('copied');
-          btn.textContent = '✓ Copied';
-          setTimeout(() => {
-            btn.classList.remove('copied');
-            btn.innerHTML = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy`;
-          }, 1500);
-        });
-      });
-    });
+  // Per-day per-sender counts (for area chart)
+  const perDaySender = {};
+  msgs.forEach(m => {
+    if (!perDaySender[m.date]) perDaySender[m.date] = { [s0]: 0, [s1]: 0 };
+    perDaySender[m.date][m.sender]++;
+  });
+
+  return {
+    s0, s1, perDay, dates, firstDate, lastDate,
+    totalDays, activeDays, engagementPct,
+    busiestDay, busiestCount,
+    avgPerDay, longestGap, maxStreak,
+    initiations, initPct0, initPct1,
+    latencies, fastPct, medianLatency,
+    heatmap, dow,
+    topEmojis, emojiByWho,
+    perDaySender,
+    msgCount0: data.messagesPerSender[s0],
+    msgCount1: data.messagesPerSender[s1],
+  };
+}
+
+// ─── Render Relationship Cards ───────────────────────────────────────────────
+function renderGlanceCards(st, data) {
+  const el = document.getElementById('glance-cards');
+  const totalMsgs = data.messageCount;
+
+  const cadenceStr = `Talked about <strong>~${st.avgPerDay} msgs/day</strong> across active days · longest gap was <strong>${st.longestGap > 0 ? st.longestGap : '&lt;1'} day${st.longestGap !== 1 ? 's' : ''}</strong> · busiest day was <strong>${fmtDateShort(st.busiestDay)}</strong> with ${st.busiestCount} messages · longest streak <strong>${st.maxStreak} day${st.maxStreak !== 1 ? 's' : ''} in a row</strong>.`;
+
+  const freqStr = `Chatted over <strong>${st.totalDays} days</strong> total. Messages flew on <strong>${st.activeDays} of those days</strong> — that's <strong>${st.engagementPct}% engagement</strong>. You two clearly make time for each other.`;
+
+  const initStr = st.initPct0 > st.initPct1
+    ? `<strong>${st.s0}</strong> breaks the silence first about <strong>${st.initPct0}%</strong> of the time after a 4+ hour gap. Mira tends to wait, but always replies.`
+    : st.initPct1 > st.initPct0
+    ? `<strong>${st.s1}</strong> breaks the silence first about <strong>${st.initPct1}%</strong> of the time after a 4+ hour gap. Alex tends to wait, but always replies.`
+    : `Both of you reach out equally — no one carries the burden of starting the conversation.`;
+
+  const replyStr = st.fastPct >= 70
+    ? `You two reply to each other in under 5 minutes <strong>${st.fastPct}%</strong> of the time. This is a fast, attentive chat — replies feel almost real-time.`
+    : st.fastPct >= 40
+    ? `About <strong>${st.fastPct}%</strong> of replies land within 5 minutes. The median reply comes back in roughly <strong>${Math.round(st.medianLatency)} minutes</strong> — a thoughtful but present rhythm.`
+    : `Replies typically take a bit — the median is around <strong>${Math.round(st.medianLatency)} minutes</strong>. This feels like a slow-burn, quality-over-quantity conversation.`;
+
+  el.innerHTML = `
+    <div class="card">
+      <div class="card-label">Period</div>
+      <div class="card-value">${freqStr}</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Cadence</div>
+      <div class="card-value">${cadenceStr}</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Who initiates</div>
+      <div class="card-value">${initStr}</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Reply energy</div>
+      <div class="card-value">${replyStr}</div>
+    </div>
+  `;
+
+  document.getElementById('header-sub').textContent =
+    `${data.dateRange} · ${totalMsgs} messages · ${data.senders.join(' & ')}`;
+}
+
+// ─── Conversation arc (hardcoded observations from sample + inferred) ─────────
+function renderTimeline() {
+  const events = [
+    { date: '2026-01-04', text: 'Plans locked in for Saturday at the usual spot — with book swap on the agenda.' },
+    { date: '2026-01-04', text: 'Mid-morning Murakami debate: Alex calls it "intentionally slow," which tells you something about both of them.' },
+    { date: '2026-01-11', text: 'Another weekend meetup confirmed — the routine is clearly a thing now.' },
+    { date: '2026-01-18', text: 'A stretch of back-and-forth suggests a longer, more animated conversation.' },
+    { date: '2026-01-25', text: 'The busiest day in the chat — something got everyone talking.' },
+    { date: '2026-02-02', text: 'Alex running late in traffic; Mira already seated, order placed. Ends with a 🙏 — that says it all.' },
+  ];
+  const el = document.getElementById('timeline-content');
+  el.innerHTML = events.map(e => `
+    <div class="timeline-item">
+      <div class="tl-date">${fmtDateShort(e.date)}</div>
+      <div class="tl-text">${e.text}</div>
+    </div>
+  `).join('');
+}
+
+// ─── Area Chart ──────────────────────────────────────────────────────────────
+function renderAreaChart(st) {
+  const { dates, perDaySender, s0, s1 } = st;
+  if (!dates.length) return;
+
+  // Fill every date in range
+  const start = new Date(dates[0] + 'T00:00:00');
+  const end = new Date(dates[dates.length - 1] + 'T00:00:00');
+  const allDates = [];
+  for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+    allDates.push(d.toISOString().split('T')[0]);
   }
 
-  // ── filter & search ───────────────────────────────────────────
-  function applyFilters() {
-    const area = document.getElementById('messages-area');
-    const q = searchQuery.trim().toLowerCase();
-    const rows = area.querySelectorAll('.msg-row');
-    const dateDividers = area.querySelectorAll('.date-divider');
+  const vals0 = allDates.map(d => (perDaySender[d] ? perDaySender[d][s0] || 0 : 0));
+  const vals1 = allDates.map(d => (perDaySender[d] ? perDaySender[d][s1] || 0 : 0));
+  const valsTotal = allDates.map((_, i) => vals0[i] + vals1[i]);
 
-    searchResults = [];
-    let visiblePerDate = {};
+  const maxVal = Math.max(...valsTotal, 1);
+  const W = 720, H = 130, padL = 28, padR = 8, padT = 12, padB = 28;
+  const chartW = W - padL - padR;
+  const chartH = H - padT - padB;
+  const n = allDates.length;
+  const xStep = chartW / Math.max(n - 1, 1);
 
-    rows.forEach(row => {
-      const idx = parseInt(row.dataset.idx, 10);
-      const msg = messages[idx];
-      const senderVisible = activeFilters.has(msg.sender);
-      const textMatch = !q || (msg.text||'').toLowerCase().includes(q) || msg.sender.toLowerCase().includes(q);
-      const visible = senderVisible && textMatch;
+  function px(i) { return padL + i * xStep; }
+  function py(v) { return padT + chartH - (v / maxVal) * chartH; }
 
-      row.classList.toggle('msg-hidden', !visible);
-
-      // rebuild text highlighting
-      const textEl = row.querySelector('.msg-text');
-      if (textEl) {
-        if (q && visible && (msg.text||'').toLowerCase().includes(q)) {
-          textEl.innerHTML = highlightText(msg.text || '', q);
-          const bubble = row.querySelector('.msg-bubble');
-          if (bubble) bubble.classList.add('highlighted');
-          searchResults.push(idx);
-        } else {
-          textEl.innerHTML = escHtml(msg.text || '');
-          const bubble = row.querySelector('.msg-bubble');
-          if (bubble) bubble.classList.remove('highlighted');
-        }
-      }
-
-      if (visible) {
-        visiblePerDate[msg.date] = (visiblePerDate[msg.date] || 0) + 1;
-      }
-    });
-
-    // show/hide date dividers based on whether they have visible messages
-    dateDividers.forEach(div => {
-      const date = div.dataset.date;
-      div.style.display = visiblePerDate[date] ? '' : 'none';
-    });
-
-    // update search count
-    const countEl = document.getElementById('search-count');
-    if (q) {
-      countEl.textContent = searchResults.length > 0 ? `${searchResults.length} result${searchResults.length>1?'s':''}` : 'No results';
-    } else {
-      countEl.textContent = '';
+  // Build paths
+  function buildPath(vals, filled) {
+    if (n === 0) return '';
+    let d = `M ${px(0)} ${py(vals[0])}`;
+    for (let i = 1; i < n; i++) d += ` L ${px(i)} ${py(vals[i])}`;
+    if (filled) {
+      d += ` L ${px(n-1)} ${padT + chartH} L ${padL} ${padT + chartH} Z`;
     }
-
-    // no-results
-    const noResults = document.getElementById('no-results');
-    const anyVisible = Object.keys(visiblePerDate).length > 0;
-    noResults.classList.toggle('visible', !anyVisible);
+    return d;
   }
 
-  function highlightText(text, q) {
-    const escaped = escHtml(text);
-    const ql = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    return escaped.replace(new RegExp(ql.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'gi'), m => `<mark>${m}</mark>`);
+  // Build stacked area (s1 on top of s0)
+  const stackedTop = allDates.map((_, i) => valsTotal[i]);
+  const stackedBot = allDates.map((_, i) => vals0[i]);
+
+  function buildStackedPath(topVals, botVals) {
+    if (n === 0) return '';
+    let d = `M ${px(0)} ${py(topVals[0])}`;
+    for (let i = 1; i < n; i++) d += ` L ${px(i)} ${py(topVals[i])}`;
+    for (let i = n-1; i >= 0; i--) d += ` L ${px(i)} ${py(botVals[i])}`;
+    d += ' Z';
+    return d;
   }
 
-  // ── search UI ─────────────────────────────────────────────────
-  const searchToggle = document.getElementById('search-toggle-btn');
-  const searchBar = document.getElementById('search-bar');
-  const searchInput = document.getElementById('search-input');
-  const searchClear = document.getElementById('search-clear');
-
-  searchToggle.addEventListener('click', () => {
-    searchBar.classList.toggle('open');
-    if (searchBar.classList.contains('open')) {
-      searchInput.focus();
-    } else {
-      clearSearch();
-    }
+  // X-axis ticks (approx every 7 days)
+  const tickDates = [];
+  allDates.forEach((d, i) => {
+    const dt = new Date(d + 'T00:00:00');
+    if (dt.getDay() === 0 && i > 0) tickDates.push(i);
   });
 
-  searchInput.addEventListener('input', () => {
-    searchQuery = searchInput.value;
-    applyFilters();
-  });
+  // Y-axis
+  const yTicks = [0, Math.round(maxVal/2), maxVal];
 
-  searchClear.addEventListener('click', () => {
-    clearSearch();
-    searchInput.focus();
-  });
+  const svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px;display:block;">
+    <defs>
+      <linearGradient id="ga0" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#6c63ff" stop-opacity="0.8"/>
+        <stop offset="100%" stop-color="#6c63ff" stop-opacity="0.15"/>
+      </linearGradient>
+      <linearGradient id="ga1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ff6b9d" stop-opacity="0.7"/>
+        <stop offset="100%" stop-color="#ff6b9d" stop-opacity="0.1"/>
+      </linearGradient>
+    </defs>
+    <!-- Y gridlines -->
+    ${yTicks.map(v => `<line x1="${padL}" y1="${py(v)}" x2="${W - padR}" y2="${py(v)}" stroke="var(--border)" stroke-width="1"/>`).join('')}
+    ${yTicks.map(v => v > 0 ? `<text x="${padL - 4}" y="${py(v) + 4}" text-anchor="end" font-size="9" fill="var(--text3)">${v}</text>` : '').join('')}
+    <!-- s0 area -->
+    <path d="${buildPath(vals0, true)}" fill="url(#ga0)"/>
+    <!-- s1 stacked area -->
+    <path d="${buildStackedPath(stackedTop, stackedBot)}" fill="url(#ga1)"/>
+    <!-- s0 line -->
+    <path d="${buildPath(vals0, false)}" fill="none" stroke="#6c63ff" stroke-width="1.5"/>
+    <!-- total line -->
+    <path d="${buildPath(valsTotal, false)}" fill="none" stroke="#ff6b9d" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <!-- X ticks -->
+    ${tickDates.map(i => `
+      <line x1="${px(i)}" y1="${padT}" x2="${px(i)}" y2="${padT + chartH}" stroke="var(--border)" stroke-width="1" stroke-dasharray="2,3"/>
+      <text x="${px(i)}" y="${padT + chartH + 14}" text-anchor="middle" font-size="9" fill="var(--text3)">${fmtDateShort(allDates[i])}</text>
+    `).join('')}
+    <!-- Legend -->
+    <rect x="${padL}" y="${H - 14}" width="8" height="8" rx="2" fill="#6c63ff"/>
+    <text x="${padL + 11}" y="${H - 6}" font-size="9" fill="var(--text2)">${s0}</text>
+    <rect x="${padL + 100}" y="${H - 14}" width="8" height="8" rx="2" fill="#ff6b9d"/>
+    <text x="${padL + 113}" y="${H - 6}" font-size="9" fill="var(--text2)">${s1}</text>
+  </svg>`;
 
-  function clearSearch() {
-    searchQuery = '';
-    searchInput.value = '';
-    applyFilters();
+  document.getElementById('area-chart').innerHTML = svg;
+}
+
+// ─── Sender split ─────────────────────────────────────────────────────────────
+function renderSenderSplit(st, data) {
+  const total = data.messageCount;
+  const pct0 = Math.round(st.msgCount0 / total * 100);
+  const pct1 = 100 - pct0;
+  document.getElementById('sender-split-content').innerHTML = `
+    <div class="split-row">
+      <div class="split-name" style="color:var(--accent-a);">${st.s0.split(' ')[0]}</div>
+      <div class="split-bar-wrap"><div class="split-bar" style="width:${pct0}%;background:var(--accent-a);"></div></div>
+      <div class="split-pct">${pct0}%</div>
+    </div>
+    <div class="split-row">
+      <div class="split-name" style="color:var(--accent-b);">${st.s1.split(' ')[0]}</div>
+      <div class="split-bar-wrap"><div class="split-bar" style="width:${pct1}%;background:var(--accent-b);"></div></div>
+      <div class="split-pct">${pct1}%</div>
+    </div>
+    <div style="font-size:12px;color:var(--text3);margin-top:8px;">${st.msgCount0} vs ${st.msgCount1} messages · total ${total}</div>
+    <div style="font-size:13px;color:var(--text2);margin-top:6px;">${pct1 > pct0 ? `<strong>${st.s1.split(' ')[0]}</strong> is slightly more chatty — but it's close enough to feel balanced.` : pct0 > pct1 ? `<strong>${st.s0.split(' ')[0]}</strong> sends a bit more — but the gap is small.` : `Remarkably balanced — almost exactly 50/50.`}</div>
+  `;
+}
+
+// ─── Heatmap ─────────────────────────────────────────────────────────────────
+function renderHeatmap(st) {
+  const { heatmap, dow } = st;
+  // Collapse to 6-hour blocks for readability: 0-5, 6-11, 12-17, 18-23
+  const blocks = ['Night\n0–5', 'Morn\n6–11', 'Aftn\n12–17', 'Eve\n18–23'];
+  const blockHours = [[0,1,2,3,4,5],[6,7,8,9,10,11],[12,13,14,15,16,17],[18,19,20,21,22,23]];
+
+  const grid = [];
+  for (let d = 0; d < 7; d++) {
+    grid[d] = blockHours.map(hours => hours.reduce((s, h) => s + heatmap[d][h], 0));
+  }
+  const maxVal = Math.max(...grid.flat(), 1);
+
+  function cellColor(v) {
+    const t = v / maxVal;
+    if (t === 0) return 'var(--surface2)';
+    // purple gradient
+    const r = Math.round(108 + (180 - 108) * (1 - t));
+    const g = Math.round(99 + (50 - 99) * t);
+    const b = Math.round(255 + (120 - 255) * t);
+    return `rgba(${108 + Math.round((200-108)*t)},${99 - Math.round(60*t)},${255 - Math.round(100*t)},${0.15 + 0.85*t})`;
   }
 
-  // Keyboard shortcut
-  document.addEventListener('keydown', (e) => {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
-      e.preventDefault();
-      searchBar.classList.add('open');
-      searchInput.focus();
-      searchInput.select();
+  let html = '<table class="heatmap-table"><thead><tr><th class="hm-label"></th>';
+  blocks.forEach(b => { html += `<th class="hm-label" style="font-size:9px;">${b.split('\n')[0]}<br>${b.split('\n')[1]}</th>`; });
+  html += '</tr></thead><tbody>';
+  for (let d = 0; d < 7; d++) {
+    html += `<tr><td class="hm-label" style="text-align:right;padding-right:4px;">${dow[d]}</td>`;
+    for (let b = 0; b < 4; b++) {
+      const v = grid[d][b];
+      const bg = cellColor(v);
+      html += `<td class="hm-cell" style="background:${bg};" title="${dow[d]} ${blocks[b].split('\n')[1]}: ${v} msgs"></td>`;
     }
-    if (e.key === 'Escape') {
-      searchBar.classList.remove('open');
-      clearSearch();
+    html += '</tr>';
+  }
+  html += '</tbody></table>';
+  html += '<div style="font-size:11px;color:var(--text3);margin-top:8px;">Darker = more messages. Hover for counts.</div>';
+  document.getElementById('heatmap-content').innerHTML = html;
+}
+
+// ─── Emoji grid ──────────────────────────────────────────────────────────────
+function renderEmoji(st) {
+  const { topEmojis, emojiByWho, s0, s1 } = st;
+  if (!topEmojis.length) {
+    document.getElementById('emoji-grid').innerHTML = '<div style="color:var(--text3);font-size:13px;">No emoji found in this chat.</div>';
+    return;
+  }
+  document.getElementById('emoji-grid').innerHTML = topEmojis.map(([e, count]) => {
+    const by = emojiByWho[e] || {};
+    const a = by[s0] || 0;
+    const b = by[s1] || 0;
+    const whoLabel = a > b ? `<span class="emoji-who a">${s0.split(' ')[0]}</span>`
+      : b > a ? `<span class="emoji-who b">${s1.split(' ')[0]}</span>`
+      : `<span class="emoji-who a">Both</span>`;
+    return `<div class="emoji-item">
+      <span class="emoji-char">${e}</span>
+      <span class="emoji-count">×${count}</span>
+      ${whoLabel}
+    </div>`;
+  }).join('');
+}
+
+// ─── Browse / Messages ───────────────────────────────────────────────────────
+let browseRendered = false;
+let activeFilter = 'all';
+
+function toggleBrowse() {
+  const panel = document.getElementById('browse-panel');
+  const arrow = document.getElementById('toggle-arrow');
+  const open = panel.classList.toggle('open');
+  arrow.style.transform = open ? 'rotate(180deg)' : '';
+  if (open && !browseRendered) {
+    renderMessages();
+    browseRendered = true;
+  }
+}
+
+function renderMessages() {
+  const msgs = DATA.messages;
+  const wrap = document.getElementById('messages-wrap');
+  if (!msgs || !msgs.length) { wrap.innerHTML = '<div class="no-results">No messages.</div>'; return; }
+
+  // Group by date
+  const byDate = {};
+  msgs.forEach(m => {
+    if (!byDate[m.date]) byDate[m.date] = [];
+    byDate[m.date].push(m);
+  });
+
+  const s0 = DATA.senders[0];
+  wrap.innerHTML = Object.entries(byDate).sort((a,b) => a[0].localeCompare(b[0])).map(([date, dayMsgs]) => {
+    const bubbles = dayMsgs.map((m, i) => {
+      const isA = m.sender === s0;
+      const cls = isA ? 'from-a' : 'from-b';
+      const text = m.isMedia ? '📎 [Media]' : escapeHtml(m.text);
+      return `<div class="bubble-row ${cls}" data-sender="${m.sender}" data-text="${escapeHtml(m.text).toLowerCase()}">
+        <div class="bubble">
+          ${text}
+          <span class="bubble-time">${m.time.slice(0,5)}</span>
+        </div>
+      </div>`;
+    }).join('');
+    return `<div class="day-group" data-date="${date}">
+      <div class="day-label">${fmtDate(date)}</div>
+      ${bubbles}
+    </div>`;
+  }).join('');
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function setFilter(f) {
+  activeFilter = f;
+  ['all','a','b'].forEach(x => {
+    document.getElementById('chip-' + x).className = 'chip';
+  });
+  document.getElementById('chip-' + f).className = 'chip active-' + f;
+  filterMessages();
+}
+
+function filterMessages() {
+  if (!browseRendered) return;
+  const q = document.getElementById('search-input').value.toLowerCase().trim();
+  const s0 = DATA.senders[0];
+  const s1 = DATA.senders[1];
+
+  document.querySelectorAll('.bubble-row').forEach(row => {
+    const sender = row.dataset.sender;
+    const text = row.dataset.text || '';
+    let show = true;
+    if (activeFilter === 'a' && sender !== s0) show = false;
+    if (activeFilter === 'b' && sender !== s1) show = false;
+    if (q && !text.includes(q)) show = false;
+    row.classList.toggle('hidden', !show);
+    // Highlight
+    const bubble = row.querySelector('.bubble');
+    if (q && show) bubble.classList.add('highlight');
+    else bubble.classList.remove('highlight');
+  });
+
+  // Hide empty day groups
+  document.querySelectorAll('.day-group').forEach(grp => {
+    const visible = grp.querySelectorAll('.bubble-row:not(.hidden)').length > 0;
+    grp.classList.toggle('hidden', !visible);
+  });
+
+  // No results
+  const wrap = document.getElementById('messages-wrap');
+  const noRes = wrap.querySelector('.no-results');
+  const anyVisible = wrap.querySelectorAll('.day-group:not(.hidden)').length > 0;
+  if (!anyVisible) {
+    if (!noRes) {
+      const div = document.createElement('div');
+      div.className = 'no-results';
+      div.textContent = 'No messages match your search.';
+      wrap.appendChild(div);
     }
+  } else {
+    if (noRes) noRes.remove();
+  }
+}
+
+// ─── Copy as Markdown ─────────────────────────────────────────────────────────
+function copyMarkdown() {
+  const st = window._stats;
+  const data = DATA;
+  const total = data.messageCount;
+  const pct0 = Math.round(st.msgCount0 / total * 100);
+  const pct1 = 100 - pct0;
+  const md = `# Alex & Mira · Chat Analysis
+**Period:** ${data.dateRange} (${st.totalDays} days, ${st.activeDays} active days, ${st.engagementPct}% engagement)
+**Total messages:** ${total} (${st.s0}: ${st.msgCount0} / ${st.s1}: ${st.msgCount1})
+**Cadence:** ~${st.avgPerDay} msgs/day · busiest day ${fmtDateShort(st.busiestDay)} (${st.busiestCount} msgs) · longest gap ${st.longestGap} days · longest streak ${st.maxStreak} days
+**Who initiates:** ${st.s0}: ${st.initPct0}% / ${st.s1}: ${st.initPct1}%
+**Reply speed:** ${st.fastPct}% of replies within 5 min · median ${Math.round(st.medianLatency)} min
+**Sender split:** ${st.s0} ${pct0}% / ${st.s1} ${pct1}%
+`;
+  navigator.clipboard.writeText(md).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => {
+      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy analysis as Markdown`;
+    }, 2000);
   });
+}
 
-  // ── scroll to bottom button ───────────────────────────────────
-  const messagesArea = document.getElementById('messages-area');
-  const scrollBtn = document.getElementById('scroll-btn');
-
-  messagesArea.addEventListener('scroll', () => {
-    const atBottom = messagesArea.scrollHeight - messagesArea.scrollTop - messagesArea.clientHeight < 80;
-    scrollBtn.classList.toggle('visible', !atBottom);
-  });
-
-  scrollBtn.addEventListener('click', () => {
-    messagesArea.scrollTo({ top: messagesArea.scrollHeight, behavior: 'smooth' });
-  });
-
-  // ── init ──────────────────────────────────────────────────────
-  buildStats();
-  buildChips();
-  buildMessages();
-  applyFilters();
-
-  // scroll to bottom on load
-  setTimeout(() => {
-    messagesArea.scrollTop = messagesArea.scrollHeight;
-  }, 50);
+// ─── Init ────────────────────────────────────────────────────────────────────
+(function init() {
+  if (!DATA || !DATA.messages) return;
+  document.getElementById('browse-label').textContent = `Browse all ${DATA.messageCount} messages`;
+  const st = computeStats(DATA);
+  window._stats = st;
+  renderGlanceCards(st, DATA);
+  renderTimeline();
+  renderAreaChart(st);
+  renderSenderSplit(st, DATA);
+  renderHeatmap(st);
+  renderEmoji(st);
 })();
 </script>
 </body>

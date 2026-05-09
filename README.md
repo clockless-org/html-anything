@@ -2,29 +2,23 @@
 
 [![skills.sh](https://skills.sh/b/clockless-org/html-anything)](https://skills.sh/clockless-org/html-anything)
 
-> Turn any file or URL into a single self-contained HTML page that's the
-> **best reading experience for that specific content** — designed by an
-> LLM, written as one self-contained `.html` you can email, share, or host.
+> An agent skill that turns any file or URL into an **interactive HTML
+> infographic** — the AI analyzes the content, finds the patterns, and
+> designs a single self-contained page that shows you *what's actually
+> there*. Not a format converter.
 
-This is **not** a format converter. Pandoc and a thousand other tools already
-do that, and they produce *correct* but *plain* output. The premise here is
-that the same content type deserves different presentations depending on
-its shape — a 2-person friend chat shouldn't render the same as a
-200-person Slack channel; a 5-page recipe PDF shouldn't render the same
-as a 500-page report. The right reading experience is a *design decision*,
-and design is what LLMs are good at now.
+```
+WhatsApp export → relationship timeline + topic clusters + reply-time graph + emoji map
+CSV (50K rows)  → summary charts + sortable table + outlier callouts
+Long PDF        → key claims extracted + section nav + a 5-min summary view
+GitHub repo     → architecture diagram + file tree + the 3 files that explain it
+```
 
-So: drop in a file (or a URL), an LLM looks at a sample, picks the right
-UI, and writes the HTML+CSS+JS. The full data is inlined into that HTML —
-the LLM only ever sees a sample. Output is one file. Open it. Send it.
+Drop in a file, get back a `.html` you can open, email, share, or host.
 
-Inspired by [Thariq's "Unreasonable Effectiveness of HTML"][thariq] and
-the [HKUDS/CLI-Anything][cli-anything] thesis that **tomorrow's users are
-agents**: if HTML is what humans read best, agents should produce HTML —
-*for this content*, not for this format.
-
-[thariq]: https://x.com/trq212
-[cli-anything]: https://github.com/HKUDS/CLI-Anything
+[See live examples →](https://clockless-org.github.io/html-anything/examples/) ·
+[How it works ↓](#how-it-works) ·
+[Add a source ↓](#contributing)
 
 ## Install
 

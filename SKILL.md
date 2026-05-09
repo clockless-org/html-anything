@@ -1,29 +1,41 @@
 ---
 name: html-anything
-description: Turn any file or URL into a single self-contained interactive HTML page designed for THIS specific content (not a generic format conversion).
-when_to_use: User says "convert to HTML", "render as HTML", "make a webpage from", asks for an "interactive" or "browsable" version of a file, or pastes a file path / URL with a request to view, share, or read it nicely.
+description: Turn any file or URL into a single self-contained interactive HTML infographic — analyze the content, extract patterns, visualize them, then inline the original data so users can drill in.
+when_to_use: User says "convert to HTML", "render as HTML", "make a webpage from", "analyze and visualize", asks for an "interactive" or "browsable" version of a file, or pastes a file path / URL with a request to view, share, understand, or get insights from it.
 ---
 
 # html-anything
 
-You are turning a file or URL into a single self-contained HTML page —
-**designed specifically for the content in front of you**, not for the
-content's *format*.
+You are turning a file or URL into a **single self-contained HTML page
+that surfaces the insights in the content**, not a faithful re-render of
+the source. Think infographic + analysis dashboard, not document viewer.
 
-The same content type deserves different presentations depending on shape:
+The output should make the user say *"I learned something I didn't know
+from the raw file"* — patterns, timelines, distributions, outliers,
+themes — visualized as the headline. The original data goes inline so
+the user can drill in, but it's the **drill-down**, not the lede.
 
-- 2-person friend chat → bubble timeline grouped by day
-- 200-person Slack channel → folded by sender + top-contributors view
-- 50-row sales CSV → sortable table
-- 50,000-row CSV → summary charts + virtualized rows
-- 5-page recipe PDF → recipe card UI
-- 500-page report → TOC + chaptered reading view
-- A GitHub repo → annotated explainer with file tree + key flows
-- A long blog post → stripped reading view + reading time + key quote callouts
+Examples of the right shape:
 
-Your job is to **look at a sample of the input**, decide what UI helps a
-human read *this thing*, and produce the HTML+CSS+JS that renders it.
-Then **inline the full data into the HTML**.
+- **2-person WhatsApp chat** → relationship card (cadence, response
+  time, who initiates), conversation arc timeline highlighting the 5–10
+  meaningful turns the LLM picked, topic clusters, emoji frequency
+  graph, then the messages themselves as a collapsible thread.
+- **200-person Slack channel** → top contributors leaderboard, channel
+  activity heatmap by day-of-week + hour, topic cloud, recent
+  highlights — full message log behind a "Show all messages" tab.
+- **50K-row sales CSV** → summary stats, category breakdown chart,
+  outlier callouts, time-series line — sortable table behind a
+  "Browse rows" tab.
+- **Long PDF / article** → 3-bullet TL;DR, pulled key quotes, section
+  nav with one-line summaries — full text as a reading-mode toggle.
+- **GitHub repo** → "what is this" 2-paragraph summary, architecture
+  sketch, the 3 files that explain it, file tree as drill-down.
+
+Your job is to **look at a sample, find what's interesting in it**,
+design the analysis + charts + visual story, then ship the HTML+CSS+JS
+that renders all of it. The full data is inlined into the HTML for
+client-side rendering of the drill-down sections.
 
 ## Behavior
 
