@@ -955,4 +955,108 @@ mark {
 
     // Tooltip
     g.addEventListener('mouseenter', e => {
-      tooltip.style
+      tooltip.style.display = 'block';
+      tooltip.style.left = (e.clientX + 14) + 'px';
+      tooltip.style.top = (e.clientY - 10) + 'px';
+      document.getElementById('tip-name').textContent = place._displayName;
+      document.getElementById('tip-note').textContent = place.note || place.comment || place._city;
+    });
+    g.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+    g.addEventListener('click', () => openPanel(place));
+  });
+
+  function placeCard(place, idx) {
+    const note = place.note || place.comment || 'Saved place';
+    return `<button class="place-row" data-idx="${idx}" data-city="${place._city}">
+      <span class="place-row-pin" aria-hidden="true">•</span>
+      <span class="place-row-body">
+        <span class="place-row-name">${escapeHtml(place._displayName)}</span>
+        <span class="place-row-note">${escapeHtml(note)}</span>
+      </span>
+      <span class="place-row-city">${escapeHtml(place._city)}</span>
+    </button>`;
+  }
+
+  function renderCities() {
+    const grid = document.getElementById('city-grid');
+    grid.innerHTML = sortedCities.map(([city, count]) => `
+      <button class="city-card" data-city="${escapeHtml(city)}">
+        <span class="city-card-header">
+          <span class="city-name">${escapeHtml(city)}</span>
+          <span class="city-badge">${count}</span>
+        </span>
+      </button>
+    `).join('');
+    grid.querySelectorAll('.city-card').forEach(btn => {
+      btn.addEventListener('click', () => setCityFilter(btn.dataset.city));
+    });
+  }
+
+  let activeCity = 'all';
+  let searchText = '';
+
+  function renderFilters() {
+    const controls = document.getElementById('list-controls');
+    controls.innerHTML = '<button class="list-filter-btn active" data-city="all">All</button>' +
+      sortedCities.slice(0, 12).map(([city]) => `<button class="list-filter-btn" data-city="${escapeHtml(city)}">${escapeHtml(city)}</button>`).join('');
+    controls.querySelectorAll('.list-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => setCityFilter(btn.dataset.city));
+    });
+  }
+
+  function setCityFilter(city) {
+    activeCity = city || 'all';
+    document.querySelectorAll('.list-filter-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.city === activeCity));
+    renderPlaces();
+  }
+
+  function renderPlaces() {
+    const q = searchText.toLowerCase();
+    const filtered = places.filter(p => {
+      const hay = [p.name, p.note, p.comment, p._city, p._continent].join(' ').toLowerCase();
+      return (activeCity === 'all' || p._city === activeCity) && (!q || hay.includes(q));
+    });
+    document.getElementById('empty-state').style.display = filtered.length ? 'none' : 'block';
+    const list = document.getElementById('places-list');
+    list.innerHTML = filtered.map((p) => placeCard(p, places.indexOf(p))).join('');
+    list.querySelectorAll('.place-row').forEach(card => {
+      card.addEventListener('click', () => openPanel(places[Number(card.dataset.idx)]));
+    });
+  }
+
+  function openPanel(place) {
+    const panel = document.getElementById('side-panel');
+    document.getElementById('panel-overlay').classList.add('active');
+    panel.classList.add('open');
+    document.getElementById('panel-name').textContent = place._displayName;
+    document.getElementById('panel-body').innerHTML = `
+      <p><strong>City:</strong> ${escapeHtml(place._city)}</p>
+      <p><strong>Region:</strong> ${escapeHtml(place._continent)}</p>
+      <p>${escapeHtml(place.note || place.comment || 'No note saved.')}</p>
+      ${place.mapsUrl ? `<p><a href="${escapeHtml(place.mapsUrl)}" target="_blank" rel="noopener">Open in Google Maps</a></p>` : ''}
+    `;
+  }
+
+  function closePanel() {
+    document.getElementById('panel-overlay').classList.remove('active');
+    document.getElementById('side-panel').classList.remove('open');
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  document.getElementById('global-search').addEventListener('input', e => {
+    searchText = e.target.value;
+    renderPlaces();
+  });
+  document.getElementById('panel-close').addEventListener('click', closePanel);
+  document.getElementById('panel-overlay').addEventListener('click', closePanel);
+
+  renderCities();
+  renderFilters();
+  renderPlaces();
+})();
+</script>
+</body>
+</html>

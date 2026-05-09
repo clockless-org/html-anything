@@ -1167,4 +1167,126 @@ function buildHRChart(){
   const first10 = hrEntries.slice(0,Math.min(10,hrEntries.length)).map(x=>x.avg);
   const last10  = hrEntries.slice(-Math.min(10,hrEntries.length)).map(x=>x.avg);
   const firstAvg = first10.reduce((a,b)=>a+b,0)/first10.length;
-  const lastAvg  = last10.reduce((a,b)=>a+b
+  const lastAvg  = last10.reduce((a,b)=>a+b,0)/last10.length;
+  const delta = lastAvg - firstAvg;
+  sub.textContent = `First 10-day average: ${Math.round(firstAvg)} bpm · latest 10-day average: ${Math.round(lastAvg)} bpm (${delta >= 0 ? '+' : ''}${delta.toFixed(1)}).`;
+
+  const svg = document.getElementById('hr-chart');
+  const W = svg.clientWidth||600; const H=140;
+  const pad={t:10,b:28,l:38,r:12};
+  const vals = hrEntries.map(x=>x.avg);
+  const minV = Math.floor(Math.min(...vals)-2);
+  const maxV = Math.ceil(Math.max(...vals)+2);
+  const xStep = (W-pad.l-pad.r)/Math.max(1,hrEntries.length-1);
+  const y = v => pad.t + (H-pad.t-pad.b)*(1-(v-minV)/(maxV-minV||1));
+  const pts = hrEntries.map((e,i)=>({x:pad.l+i*xStep,y:y(e.avg),d:e.d,v:e.avg}));
+  const path = 'M'+pts.map(p=>`${p.x.toFixed(1)},${p.y.toFixed(1)}`).join('L');
+  svg.setAttribute('height',H);
+  svg.innerHTML = `
+    <line x1="${pad.l}" x2="${W-pad.r}" y1="${y(minV)}" y2="${y(minV)}" stroke="var(--border)"/>
+    <line x1="${pad.l}" x2="${W-pad.r}" y1="${y(maxV)}" y2="${y(maxV)}" stroke="var(--border)"/>
+    <text x="${pad.l-5}" y="${y(maxV)+4}" text-anchor="end" font-size="10" fill="var(--fg-muted)">${maxV}</text>
+    <text x="${pad.l-5}" y="${y(minV)+4}" text-anchor="end" font-size="10" fill="var(--fg-muted)">${minV}</text>
+    <path d="${path}" fill="none" stroke="var(--red)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  `;
+
+  document.getElementById('hr-cards').innerHTML = [
+    {label:'Average', val:Math.round(vals.reduce((a,b)=>a+b,0)/vals.length)+' bpm', sub:'all logged days'},
+    {label:'Lowest', val:Math.round(Math.min(...vals))+' bpm', sub:'lowest daily average'},
+    {label:'Highest', val:Math.round(Math.max(...vals))+' bpm', sub:'highest daily average'},
+  ].map(c=>`<div class="card"><div class="card-label">${c.label}</div><div class="card-value">${c.val}</div><div class="card-sub">${c.sub}</div></div>`).join('');
+}
+
+let workoutPage = 0;
+let workoutQuery = '';
+let workoutType = 'All';
+let workoutSort = 'startDate';
+let workoutDir = -1;
+const WORKOUT_PAGE_SIZE = 24;
+
+function buildWorkoutFilters(){
+  const types = ['All', ...Array.from(new Set(workouts.map(w=>w.type))).sort()];
+  const chips = document.getElementById('type-filter-chips');
+  chips.innerHTML = types.map(t=>`<button class="chip${t==='All'?' active':''}" data-type="${t}">${t}</button>`).join('');
+  chips.querySelectorAll('.chip').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      workoutType = btn.dataset.type;
+      workoutPage = 0;
+      chips.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c===btn));
+      buildWorkoutTable();
+    });
+  });
+  document.getElementById('workout-search').addEventListener('input',e=>{
+    workoutQuery = e.target.value.toLowerCase();
+    workoutPage = 0;
+    buildWorkoutTable();
+  });
+  document.querySelectorAll('#workout-table th[data-col]').forEach(th=>{
+    th.addEventListener('click',()=>{
+      const col = th.dataset.col;
+      workoutDir = workoutSort===col ? workoutDir*-1 : -1;
+      workoutSort = col;
+      buildWorkoutTable();
+    });
+  });
+}
+
+function buildWorkoutTable(){
+  let rows = workouts.filter(w=>{
+    const hay = [w.type,w.startDate,w.distanceM,w.kcal].join(' ').toLowerCase();
+    return (workoutType==='All'||w.type===workoutType) && (!workoutQuery || hay.includes(workoutQuery));
+  });
+  rows.sort((a,b)=>{
+    const av=a[workoutSort]||0, bv=b[workoutSort]||0;
+    return (typeof av==='number'?av-bv:String(av).localeCompare(String(bv))) * workoutDir;
+  });
+  const start = workoutPage*WORKOUT_PAGE_SIZE;
+  const pageRows = rows.slice(start,start+WORKOUT_PAGE_SIZE);
+  document.getElementById('workout-tbody').innerHTML = pageRows.map(w=>`
+    <tr>
+      <td>${fmtDateShort((w.startDate||'').slice(0,10))}</td>
+      <td><span class="workout-type-badge" style="background:${typeColor(w.type)}22;color:${typeColor(w.type)}">${w.type}</span></td>
+      <td>${fmtDuration(w.durationSec||0)}</td>
+      <td>${fmtDistance(w.distanceM||0)}</td>
+      <td>${w.kcal?fmtNum(Math.round(w.kcal)):'—'}</td>
+    </tr>
+  `).join('');
+  const totalPages = Math.max(1, Math.ceil(rows.length/WORKOUT_PAGE_SIZE));
+  document.getElementById('page-info').textContent = `${rows.length} workouts · page ${workoutPage+1} of ${totalPages}`;
+  document.getElementById('page-btns').innerHTML = `
+    <button class="page-btn" ${workoutPage===0?'disabled':''} id="prev-page">Previous</button>
+    <button class="page-btn" ${workoutPage>=totalPages-1?'disabled':''} id="next-page">Next</button>
+  `;
+  document.getElementById('prev-page')?.addEventListener('click',()=>{ workoutPage=Math.max(0,workoutPage-1); buildWorkoutTable(); });
+  document.getElementById('next-page')?.addEventListener('click',()=>{ workoutPage=Math.min(totalPages-1,workoutPage+1); buildWorkoutTable(); });
+}
+
+function copyMarkdown(){
+  const summary = [
+    '# Sam Reyes — Apple Health',
+    '',
+    `- Steps: ${fmtNum(Math.round(totalSteps))}`,
+    `- Workouts: ${totalWorkouts}`,
+    `- Active calories: ${fmtNum(Math.round(totalKcal))}`,
+    `- Date range: ${DATA.dateRange}`,
+  ].join('\n');
+  navigator.clipboard?.writeText(summary);
+}
+window.copyMarkdown = copyMarkdown;
+
+buildHero();
+buildKpiCards();
+buildStepsYearToggle();
+buildStepsChart(stepsYear);
+buildHeatmap();
+buildSleep();
+buildWorkoutTypeBars();
+buildPRs();
+buildWorkoutFreq();
+buildHRChart();
+buildWorkoutFilters();
+buildWorkoutTable();
+})();
+</script>
+</body>
+</html>

@@ -12,12 +12,25 @@
  */
 import { test } from "node:test"
 import assert from "node:assert/strict"
+import * as fs from "node:fs/promises"
 import * as path from "node:path"
 import { fileURLToPath } from "node:url"
+import { Script } from "node:vm"
 import { pickParser } from "../../dist/parse/index.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const REPO = path.resolve(__dirname, "..", "..")
+
+async function walkFiles(dir) {
+  const entries = await fs.readdir(dir, { withFileTypes: true })
+  const files = []
+  for (const entry of entries) {
+    const full = path.join(dir, entry.name)
+    if (entry.isDirectory()) files.push(...await walkFiles(full))
+    else files.push(full)
+  }
+  return files
+}
 
 test("pdf parser extracts text + headings from the synthetic fixture", async () => {
   const fp = path.join(REPO, "examples/pdf/input.pdf")
@@ -62,6 +75,36 @@ test("htmlize fallback: source-prompt resolution covers pdf-document + docx-docu
   const names = parsers.map(p => p.name)
   assert.ok(names.includes("pdf"))
   assert.ok(names.includes("docx"))
+})
+
+test("checked-in example pages are complete and have parseable inline scripts", async () => {
+  const examplesDir = path.join(REPO, "examples")
+  const files = (await walkFiles(examplesDir))
+    .filter(file => file.endsWith(`${path.sep}output.html`) || file === path.join(examplesDir, "index.html"))
+    .sort()
+  assert.ok(files.length >= 20, `expected many checked-in HTML examples, got ${files.length}`)
+
+  const indexHtml = await fs.readFile(path.join(examplesDir, "index.html"), "utf8")
+  const linkedOutputs = [...indexHtml.matchAll(/href="([^"]+\/output\.html)"/g)].map(m => m[1])
+  for (const href of linkedOutputs) {
+    const target = path.join(examplesDir, href)
+    const stat = await fs.stat(target)
+    assert.ok(stat.isFile(), `index links missing example output: ${href}`)
+  }
+
+  for (const file of files) {
+    const rel = path.relative(REPO, file)
+    const html = await fs.readFile(file, "utf8")
+    const openScripts = (html.match(/<script\b/gi) || []).length
+    const closeScripts = (html.match(/<\/script>/gi) || []).length
+    assert.equal(openScripts, closeScripts, `${rel} has unclosed <script> tags`)
+    assert.match(html, /<\/body>\s*<\/html>\s*$/i, `${rel} is missing closing body/html tags`)
+
+    const scripts = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)]
+    scripts.forEach((m, i) => {
+      assert.doesNotThrow(() => new Script(m[1], { filename: `${rel}#script${i + 1}` }))
+    })
+  }
 })
 
 test("jsonl parser ingests the synthetic JSONL event stream + infers schema + outliers", async () => {
@@ -125,6 +168,22 @@ test("registry exposes jsonl + log parser names", async () => {
   const names = parsers.map(p => p.name)
   assert.ok(names.includes("jsonl"), `parsers missing 'jsonl' — got ${names.join(", ")}`)
   assert.ok(names.includes("log"), `parsers missing 'log' — got ${names.join(", ")}`)
+})
+
+test("experiential parser includes derived leaderboards in full data", async () => {
+  const spotifyParser = await pickParser(path.join(REPO, "examples/spotify-history/input.json"))
+  assert.equal(spotifyParser?.name, "experiential")
+  const spotify = await spotifyParser.parse(path.join(REPO, "examples/spotify-history/input.json"))
+  assert.equal(spotify.contentType, "spotify-history")
+  assert.ok(Array.isArray(spotify.data.topArtistsAllTime) && spotify.data.topArtistsAllTime.length >= 5)
+  assert.ok(Array.isArray(spotify.data.topTracksAllTime) && spotify.data.topTracksAllTime.length >= 5)
+
+  const twitchParser = await pickParser(path.join(REPO, "examples/twitch-history/input.csv"))
+  assert.equal(twitchParser?.name, "experiential")
+  const twitch = await twitchParser.parse(path.join(REPO, "examples/twitch-history/input.csv"))
+  assert.equal(twitch.contentType, "twitch-history")
+  assert.ok(Array.isArray(twitch.data.topChannels) && twitch.data.topChannels.length >= 5)
+  assert.ok(Array.isArray(twitch.data.topCategories) && twitch.data.topCategories.length >= 3)
 })
 
 test("finance parser routes a bank-transaction CSV to the bank-transactions content type", async () => {

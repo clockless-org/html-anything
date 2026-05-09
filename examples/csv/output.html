@@ -677,8 +677,6 @@ mark{
 
   // ─── footer ────────────────────────────────────────────────────────────────
   document.getElementById('footer-meta').textContent =
-    `${DATA.rowCount} rows · ${DATA.columnCount} columns · ${(DATA.meta?.sizeBytes||DATA.sizeBytes||3243/1024).toFixed?.(DATA.meta?.sizeBytes||DATA.sizeBytes||3243)>1000?(((DATA.meta?.sizeBytes||DATA.sizeBytes||3243)/1024).toFixed(1)+'KB'):(DATA.meta?.sizeBytes||DATA.sizeBytes||3243)+' bytes':''} `;
-  document.getElementById('footer-meta').textContent =
     `${DATA.rowCount} rows · ${DATA.columnCount} columns · ${((DATA.meta?.sizeBytes||DATA.sizeBytes||3243)/1024).toFixed(1)} KB`;
 
   // ─── KPI CARDS ─────────────────────────────────────────────────────────────

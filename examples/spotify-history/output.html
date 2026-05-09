@@ -799,7 +799,9 @@ const plays = (DATA.plays || []).map(p => ({
 const totalPlays = DATA.totalPlays || plays.length;
 const totalMs = DATA.totalMs || plays.reduce((s, p) => s + p.msPlayed, 0);
 const totalHours = Math.round(totalMs / 3600000);
-const topArtistsAllTime = DATA.topArtistsAllTime || [];
+const topArtistsAllTime = DATA.topArtistsAllTime || Object.entries(DATA.artistTotals || {})
+  .sort((a, b) => b[1] - a[1])
+  .map(([artist, count]) => ({ artist, count }));
 const topPerYear = DATA.topPerYear || {};
 const dateRange = DATA.dateRange || '';
 
@@ -1361,4 +1363,46 @@ function renderSearch() {
   searchRendered = true;
   filteredPlays = [...plays].reverse();
   renderPlays('');
-  document.getElementById
+  document.getElementById('search-input').addEventListener('input', e => {
+    const q = e.target.value.trim().toLowerCase();
+    searchPage = 0;
+    filteredPlays = plays
+      .filter(p =>
+        p.track.toLowerCase().includes(q) ||
+        p.artist.toLowerCase().includes(q) ||
+        (p.album || '').toLowerCase().includes(q)
+      )
+      .reverse();
+    renderPlays(q);
+  });
+  document.getElementById('load-more-btn').addEventListener('click', () => {
+    searchPage++;
+    renderPlays(document.getElementById('search-input').value.trim().toLowerCase());
+  });
+}
+
+function renderPlays(q) {
+  const list = document.getElementById('plays-list');
+  const count = document.getElementById('search-count');
+  const btn = document.getElementById('load-more-btn');
+  const visible = filteredPlays.slice(0, (searchPage + 1) * PAGE_SIZE);
+  count.textContent = q
+    ? `${fmt(filteredPlays.length)} matching plays`
+    : `${fmt(filteredPlays.length)} plays, newest first`;
+  list.innerHTML = visible.map((p, i) => `
+    <div class="play-item">
+      <div class="${i < 3 && !q ? 'play-rank top' : 'play-rank'}">${i + 1}</div>
+      <div class="play-info">
+        <div class="play-track">${escHtml(p.track)}</div>
+        <div class="play-artist">${escHtml(p.artist)} · ${p.ts.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
+      </div>
+      <div class="play-duration">${fmtMs(p.msPlayed)}</div>
+    </div>
+  `).join('');
+  btn.style.display = filteredPlays.length > visible.length ? 'block' : 'none';
+}
+
+renderTimeline();
+</script>
+</body>
+</html>

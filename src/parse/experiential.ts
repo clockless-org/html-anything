@@ -147,10 +147,21 @@ function parseSpotify(raw: string, meta: ParsedFile["meta"]): ParsedFile {
   for (const [year, m] of Object.entries(yearArtist)) {
     topPerYear[year] = Object.entries(m).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([artist, count]) => ({ artist, count }))
   }
+  const topArtistsAllTime = Object.entries(artistTotals).sort((a, b) => b[1] - a[1]).slice(0, 20).map(([artist, count]) => ({ artist, count }))
+  const topTracksAllTime = Object.entries(trackTotals).sort((a, b) => b[1] - a[1]).slice(0, 20).map(([key, count]) => {
+    const separator = key.indexOf(" — ")
+    return {
+      artist: separator >= 0 ? key.slice(0, separator) : "",
+      track: separator >= 0 ? key.slice(separator + 3) : key,
+      count,
+    }
+  })
   const dateRange = plays.length ? `${plays[0].ts.slice(0, 10)} → ${plays[plays.length - 1].ts.slice(0, 10)}` : "(empty)"
 
   const data = {
     plays,
+    topArtistsAllTime,
+    topTracksAllTime,
     topPerYear,
     artistTotals,
     trackTotals,
@@ -161,7 +172,8 @@ function parseSpotify(raw: string, meta: ParsedFile["meta"]): ParsedFile {
 
   const sample = {
     plays: plays.slice(0, 5).concat(plays.slice(-3)),
-    topArtistsAllTime: Object.entries(artistTotals).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([artist, count]) => ({ artist, count })),
+    topArtistsAllTime: topArtistsAllTime.slice(0, 10),
+    topTracksAllTime: topTracksAllTime.slice(0, 10),
     topPerYear,
     dateRange,
     totalPlays: plays.length,
@@ -225,22 +237,26 @@ function parseTwitchViews(header: string[], rows: string[][], meta: ParsedFile["
     totalSec += v.durationSec
   }
   const dateRange = views.length ? `${views[0].ts.slice(0, 10)} → ${views[views.length - 1].ts.slice(0, 10)}` : "(empty)"
+  const topChannels = Object.entries(byChannel).sort((a, b) => b[1].hours - a[1].hours).slice(0, 12)
+    .map(([channel, s]) => ({ channel, hours: Math.round(s.hours * 10) / 10, sessions: s.sessions }))
+  const topCategories = Object.entries(byCategory).sort((a, b) => b[1] - a[1]).slice(0, 8)
+    .map(([category, hours]) => ({ category, hours: Math.round(hours * 10) / 10 }))
 
   const data = {
     views,
     messages: [] as Array<unknown>,
     byChannel,
     byCategory,
+    topChannels,
+    topCategories,
     totalHours: totalSec / 3600,
     totalSessions: views.length,
     dateRange,
   }
   const sample = {
     views: views.slice(0, 5).concat(views.slice(-2)),
-    topChannels: Object.entries(byChannel).sort((a, b) => b[1].hours - a[1].hours).slice(0, 8)
-      .map(([channel, s]) => ({ channel, hours: Math.round(s.hours * 10) / 10, sessions: s.sessions })),
-    topCategories: Object.entries(byCategory).sort((a, b) => b[1] - a[1]).slice(0, 6)
-      .map(([category, hours]) => ({ category, hours: Math.round(hours * 10) / 10 })),
+    topChannels: topChannels.slice(0, 8),
+    topCategories: topCategories.slice(0, 6),
     totalHours: Math.round((totalSec / 3600) * 10) / 10,
     totalSessions: views.length,
     dateRange,
@@ -275,10 +291,11 @@ function parseTwitchMessages(header: string[], rows: string[][], meta: ParsedFil
   const byChannel: Record<string, number> = {}
   for (const m of messages) byChannel[m.channel] = (byChannel[m.channel] || 0) + 1
   const dateRange = messages.length ? `${messages[0].ts.slice(0, 10)} → ${messages[messages.length - 1].ts.slice(0, 10)}` : "(empty)"
-  const data = { views: [], messages, byChannel, byCategory: {}, totalHours: 0, totalSessions: 0, dateRange }
+  const topChannels = Object.entries(byChannel).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([channel, count]) => ({ channel, count }))
+  const data = { views: [], messages, byChannel, byCategory: {}, topChannels, topCategories: [], totalHours: 0, totalSessions: 0, dateRange }
   const sample = {
     messages: messages.slice(0, 12),
-    topChannels: Object.entries(byChannel).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([channel, count]) => ({ channel, count })),
+    topChannels,
     totalMessages: messages.length,
     dateRange,
   }

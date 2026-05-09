@@ -702,8 +702,12 @@ function animateNum(el, target, suffix, decimals){
 // ─── data ─────────────────────────────────────────────────────────────
 const D = DATA;
 const views = (D.views||[]).slice().sort((a,b)=>new Date(b.ts)-new Date(a.ts));
-const topChannels = D.topChannels||[];
-const topCategories = D.topCategories||[];
+const topChannels = D.topChannels || Object.entries(D.byChannel || {})
+  .sort((a,b)=>(b[1].hours || b[1])-(a[1].hours || a[1]))
+  .map(([channel,s])=>({channel,hours:s.hours || 0,sessions:s.sessions || s}));
+const topCategories = D.topCategories || Object.entries(D.byCategory || {})
+  .sort((a,b)=>b[1]-a[1])
+  .map(([category,hours])=>({category,hours}));
 const totalHours = D.totalHours||0;
 const totalSessions = D.totalSessions||views.length;
 const dateRange = D.dateRange||'';
