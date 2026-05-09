@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CI failure — feat/payment-pending-queue (run #482)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --primary:#a03b00; --primary-container:#c94c00; --primary-fixed:#ffdbcd;
+  --primary-fixed-dim:#ffb597; --on-primary:#fff; --accent-glow:#E8400D;
+  --secondary:#d5baff; --secondary-container:#7b40e0; --tertiary:#4d44e3; --accent-cyan:#00D4FF;
+  --bg:#fff8f6; --surface:#fff8f6; --surface-container-lowest:#fff;
+  --surface-container-low:#fbf2ef; --surface-container:#f5ece9; --surface-container-high:#efe6e3;
+  --fg-1:#1e1b19; --fg-2:#594138; --fg-muted:#8d7166;
+  --border:rgba(0,0,0,.06); --border-strong:rgba(0,0,0,.12); --outline-variant:#e1bfb2;
+  --green:#10b981; --blue:#3b82f6; --yellow:#f59e0b; --red:#ef4444;
+  --font-headline:'Space Grotesk',ui-sans-serif,system-ui,sans-serif;
+  --font-body:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;
+  --font-mono:'SF Mono','Menlo',ui-monospace,monospace;
+  --space-xs:4px; --space-sm:8px; --space-md:12px; --space-lg:16px;
+  --space-xl:20px; --space-2xl:24px; --space-3xl:32px; --space-4xl:48px; --space-5xl:64px;
+  --radius-sm:8px; --radius-md:12px; --radius-lg:16px; --radius-xl:20px; --radius-2xl:28px; --radius-pill:9999px;
+  --shadow-sm:0 1px 2px rgba(30,27,25,.04); --shadow-md:0 4px 12px rgba(30,27,25,.08);
+  --shadow-lg:0 8px 24px rgba(30,27,25,.12); --shadow-accent:0 8px 24px rgba(160,59,0,.15);
+  --gradient-primary:linear-gradient(135deg,#a03b00 0%,#c94c00 100%);
+  --gradient-hero:linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
+  --gradient-text:linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:#060B18; --surface:#0B1426; --surface-container-lowest:#101D35;
+    --surface-container-low:#101D35; --surface-container:#162544; --surface-container-high:#1c2d52;
+    --fg-1:#F8FAFC; --fg-2:#CBD5E1; --fg-muted:#64748B;
+    --border:rgba(255,255,255,.08); --border-strong:rgba(255,255,255,.14);
+    --primary:#FF6B35; --accent-glow:#00D4FF;
+    --shadow-md:0 4px 12px rgba(0,0,0,.4); --shadow-lg:0 8px 24px rgba(0,0,0,.5);
+  }
+}
+*,*::before,*::after{box-sizing:border-box;margin:0}
+html,body{background:var(--bg);color:var(--fg-1);font-family:var(--font-body);
+  font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body{min-height:100vh}
+main{max-width:1240px;margin:0 auto;padding:var(--space-2xl) var(--space-xl) var(--space-5xl)}
+h1,h2,h3,h4{font-family:var(--font-headline);letter-spacing:-.01em;font-weight:600;color:var(--fg-1)}
+h1{font-size:clamp(28px,5vw,44px);font-weight:700;line-height:1.05;letter-spacing:-.02em}
+h2{font-size:clamp(20px,2.4vw,24px);margin-bottom:var(--space-md)}
+h3{font-size:17px;margin-bottom:var(--space-sm)}
+.muted{color:var(--fg-muted)}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+button{font:inherit;cursor:pointer;border:none;background:transparent;color:inherit}
+input,select{font:inherit;color:var(--fg-1)}
+.hero{padding:var(--space-3xl) 0 var(--space-2xl);border-bottom:1px solid var(--border)}
+.hero .eyebrow{display:inline-flex;gap:var(--space-sm);align-items:center;
+  background:var(--surface-container);color:var(--primary);
+  padding:var(--space-xs) var(--space-md);border-radius:var(--radius-pill);
+  font-family:var(--font-mono);font-size:11.5px;font-weight:500;
+  text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-lg)}
+.hero h1{background:var(--gradient-text);-webkit-background-clip:text;background-clip:text;color:transparent;max-width:22ch}
+.hero .editorial{margin-top:var(--space-lg);max-width:64ch;color:var(--fg-2);font-size:16px;line-height:1.55}
+.hero-actions{display:flex;gap:var(--space-md);margin-top:var(--space-xl);flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-lg);
+  border-radius:var(--radius-pill);font-weight:600;font-size:14px;border:1px solid var(--border-strong);
+  background:var(--surface-container-lowest);color:var(--fg-1);transition:all .15s ease;cursor:pointer}
+.btn:hover{background:var(--surface-container);box-shadow:var(--shadow-sm)}
+.btn.primary{background:var(--gradient-primary);color:var(--on-primary);border-color:transparent}
+.btn.primary:hover{box-shadow:var(--shadow-accent)}
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:var(--space-lg);margin-top:var(--space-3xl)}
+.kpi{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:var(--space-lg) var(--space-xl);box-shadow:var(--shadow-sm)}
+.kpi .label{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--fg-muted);font-weight:500}
+.kpi .value{font-family:var(--font-headline);font-size:28px;font-weight:600;margin-top:var(--space-xs);color:var(--fg-1)}
+.kpi .value.accent{color:var(--primary)}
+.kpi .value.green{color:var(--green)} .kpi .value.red{color:var(--red)} .kpi .value.yellow{color:var(--yellow)}
+.kpi .sub{font-size:12.5px;color:var(--fg-muted);margin-top:2px;font-family:var(--font-mono)}
+.section{margin-top:var(--space-4xl)}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-lg);gap:var(--space-md);flex-wrap:wrap}
+.section-head .meta{font-size:13px;color:var(--fg-muted);font-family:var(--font-mono)}
+.card{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:var(--space-xl);box-shadow:var(--shadow-sm)}
+.card h3{margin-bottom:var(--space-md)}
+.hyp{display:inline-flex;align-items:center;gap:6px;padding:2px 10px;border-radius:var(--radius-pill);
+  background:var(--secondary);color:var(--secondary-container);font-family:var(--font-mono);font-size:10.5px;
+  font-weight:600;text-transform:uppercase;letter-spacing:.06em;border:1px solid var(--secondary-container)}
+.hyp::before{content:"•";color:var(--secondary-container)}
+.badge{display:inline-flex;align-items:center;padding:1px 8px;border-radius:var(--radius-pill);
+  background:var(--surface-container);color:var(--fg-2);font-family:var(--font-mono);font-size:11px;font-weight:500}
+.badge.green{background:rgba(16,185,129,.14);color:var(--green)}
+.badge.red{background:rgba(239,68,68,.14);color:var(--red)}
+.badge.yellow{background:rgba(245,158,11,.16);color:var(--yellow)}
+.badge.blue{background:rgba(59,130,246,.14);color:var(--blue)}
+.badge.app{background:rgba(160,59,0,.12);color:var(--primary)}
+.badge.vendor{background:var(--surface-container);color:var(--fg-muted)}
+.checklist{list-style:none;margin:0;padding:0}
+.checklist li{display:flex;gap:var(--space-md);align-items:flex-start;padding:var(--space-sm) 0;
+  border-bottom:1px solid var(--border)}
+.checklist li:last-child{border-bottom:none}
+.checklist .num{font-family:var(--font-mono);font-size:11px;color:var(--fg-muted);
+  background:var(--surface-container);border-radius:var(--radius-pill);padding:2px 8px;
+  min-width:26px;text-align:center;flex-shrink:0}
+.checklist .text{flex:1;color:var(--fg-2)}
+.checklist .text code{font-family:var(--font-mono);font-size:13px;background:var(--surface-container);
+  padding:1px 6px;border-radius:var(--radius-sm)}
+.hotspots{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-lg)}
+.hotspot{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:var(--space-lg);position:relative}
+.hotspot .head{display:flex;align-items:center;justify-content:space-between;gap:var(--space-md);margin-bottom:var(--space-sm)}
+.hotspot .path{font-family:var(--font-mono);font-size:13.5px;color:var(--fg-1);font-weight:600;
+  word-break:break-all}
+.hotspot .why{color:var(--fg-2);font-size:13.5px;line-height:1.5;margin-top:var(--space-xs)}
+.hotspot .why .hyp{margin-right:var(--space-xs)}
+.searchbox{display:flex;gap:var(--space-sm);align-items:center;background:var(--surface-container-lowest);
+  border:1px solid var(--border);border-radius:var(--radius-pill);padding:var(--space-xs) var(--space-md);
+  max-width:380px}
+.searchbox input{flex:1;border:none;outline:none;background:transparent;padding:var(--space-xs) 0;font-size:14px}
+mark{background:var(--primary-fixed);color:var(--fg-1);padding:0 2px;border-radius:2px}
+details{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:var(--space-md) var(--space-lg);transition:background .15s ease}
+details[open]{box-shadow:var(--shadow-sm)}
+details > summary{cursor:pointer;font-weight:600;font-size:15.5px;color:var(--fg-1);list-style:none;
+  display:flex;align-items:center;justify-content:space-between;gap:var(--space-md)}
+details > summary::-webkit-details-marker{display:none}
+details > summary::after{content:"▾";color:var(--fg-muted);transition:transform .15s ease}
+details[open] > summary::after{transform:rotate(180deg)}
+details > .body{margin-top:var(--space-md)}
+.diff{font-family:var(--font-mono);font-size:12.5px;line-height:1.5;white-space:pre;overflow-x:auto;
+  background:var(--surface-container-low);border-radius:var(--radius-md);padding:var(--space-md);
+  border:1px solid var(--border)}
+.diff .ln{display:inline-block;width:54px;color:var(--fg-muted);user-select:none;text-align:right;
+  padding-right:var(--space-md)}
+.diff .add{background:rgba(16,185,129,.10);display:block}
+.diff .add .ln{color:var(--green)}
+.diff .del{background:rgba(239,68,68,.10);display:block}
+.diff .del .ln{color:var(--red)}
+.diff .ctx{display:block;color:var(--fg-2)}
+.diff .hunk{display:block;color:var(--secondary-container);background:var(--surface-container);
+  padding:var(--space-xs) var(--space-md);margin:var(--space-md) calc(-1 * var(--space-md)) var(--space-xs);
+  font-weight:600}
+.diff .file-head{display:block;color:var(--primary);font-weight:600;
+  background:var(--primary-fixed);padding:var(--space-sm) var(--space-md);
+  margin:var(--space-md) calc(-1 * var(--space-md)) var(--space-sm);border-radius:var(--radius-sm)}
+.log-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px}
+.log-table td{padding:2px var(--space-sm);vertical-align:top;border-bottom:1px solid rgba(0,0,0,.02)}
+.log-table tr.error td{background:rgba(239,68,68,.06)}
+.log-table tr.warning td{background:rgba(245,158,11,.06)}
+.log-table tr.group td{background:var(--surface-container);color:var(--secondary-container);font-weight:600}
+.log-table .ln{width:54px;text-align:right;color:var(--fg-muted);padding-right:var(--space-md)}
+.log-table .text{white-space:pre-wrap;color:var(--fg-1)}
+.log-table tr.error .text{color:var(--red)}
+.log-table tr.warning .text{color:var(--yellow)}
+.frames{list-style:none;padding:0;margin:0}
+.frames li{padding:var(--space-sm) var(--space-md);border-bottom:1px solid var(--border);
+  font-family:var(--font-mono);font-size:13px;display:flex;gap:var(--space-md);align-items:flex-start}
+.frames li:last-child{border-bottom:none}
+.frames .marker{width:90px;flex-shrink:0;color:var(--fg-muted);font-size:11px;text-transform:uppercase;
+  letter-spacing:.05em;font-weight:600}
+.frames .marker.app{color:var(--primary)}
+.frames .marker.vendor{color:var(--fg-muted)}
+.frames .body{flex:1;min-width:0}
+.frames .file{color:var(--fg-1);font-weight:500;word-break:break-all}
+.frames .fn{color:var(--fg-2);font-size:12.5px}
+.frames .fold-toggle{cursor:pointer;background:var(--surface-container);color:var(--fg-muted);
+  padding:var(--space-sm) var(--space-md);border-radius:var(--radius-sm);font-style:italic;font-size:12.5px}
+.frames .fold-toggle:hover{color:var(--fg-1)}
+.commits{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:var(--space-md)}
+.commits li{padding:var(--space-md) var(--space-lg);background:var(--surface-container-lowest);
+  border:1px solid var(--border);border-radius:var(--radius-lg);display:flex;gap:var(--space-md);align-items:flex-start}
+.commits .hash{font-family:var(--font-mono);font-size:12px;background:var(--surface-container);
+  color:var(--secondary-container);padding:2px 10px;border-radius:var(--radius-pill);flex-shrink:0;
+  align-self:flex-start;margin-top:2px}
+.commits .meta{flex:1}
+.commits .subject{font-weight:600;color:var(--fg-1);margin-bottom:2px}
+.commits .author{color:var(--fg-muted);font-size:12.5px;font-family:var(--font-mono)}
+.commits .stat{margin-top:var(--space-xs);color:var(--fg-2);font-size:13px}
+.cause-chain{display:flex;flex-direction:column;gap:var(--space-md)}
+.cause{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:var(--space-lg)}
+.cause.deepest{border-color:var(--primary);box-shadow:var(--shadow-accent)}
+.cause .type{font-family:var(--font-mono);font-size:13.5px;color:var(--fg-1);font-weight:600}
+.cause .msg{color:var(--fg-2);margin-top:2px;font-size:13.5px}
+.cause .top-frame{margin-top:var(--space-sm);font-family:var(--font-mono);font-size:12.5px;color:var(--fg-muted)}
+.failing-tests{display:flex;flex-direction:column;gap:var(--space-md)}
+.failing-test{background:var(--surface-container-lowest);border:1px solid var(--border);border-left:3px solid var(--red);
+  border-radius:var(--radius-md);padding:var(--space-md) var(--space-lg)}
+.failing-test .name{font-family:var(--font-mono);font-size:13.5px;color:var(--fg-1);font-weight:600}
+.failing-test .where{font-family:var(--font-mono);font-size:12px;color:var(--fg-muted);margin-top:2px}
+.failing-test .msg{color:var(--fg-2);font-size:13.5px;margin-top:var(--space-xs)}
+.risk-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.risk-table th{text-align:left;padding:var(--space-sm) var(--space-md);font-weight:600;font-size:12px;
+  color:var(--fg-muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border-strong)}
+.risk-table td{padding:var(--space-sm) var(--space-md);border-bottom:1px solid var(--border);vertical-align:top}
+.risk-table .path{font-family:var(--font-mono);font-size:13px;color:var(--fg-1);word-break:break-all}
+.risk-table .delta{font-family:var(--font-mono);font-size:12.5px;white-space:nowrap}
+.risk-table .delta .add{color:var(--green)}
+.risk-table .delta .del{color:var(--red)}
+.risk-table .why{color:var(--fg-2);font-size:13px}
+.empty{color:var(--fg-muted);font-style:italic;padding:var(--space-md) 0}
+footer{margin-top:var(--space-5xl);padding-top:var(--space-xl);border-top:1px solid var(--border);
+  color:var(--fg-muted);font-size:13px;line-height:1.5}
+@media (max-width:780px){
+  .frames .marker{width:70px}
+}
+  </style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <div class="eyebrow">CI log · github-actions · failed</div>
+    <h1>Failed: FAIL  tests/checkout/charge.test.ts > chargeOrder > queues the charge and returns pending </h1>
+    <p class="editorial">Failure first appears at line 82. 2 failing tests detected. Exit code 1.</p>
+    <div class="hero-actions">
+      <button class="btn primary" id="copy-md-btn">Copy summary</button>
+      <a class="btn" href="#raw-section">Jump to raw artifact</a>
+    </div>
+    <div class="kpi-row" id="kpi-row"><div class="kpi"><div class="label">Status</div><div class="value red">FAILED</div></div><div class="kpi"><div class="label">Steps</div><div class="value ">8</div></div><div class="kpi"><div class="label">Errors</div><div class="value red">7</div></div><div class="kpi"><div class="label">Failing tests</div><div class="value red">2</div></div><div class="kpi"><div class="label">Warnings</div><div class="value ">0</div></div><div class="kpi"><div class="label">Total lines</div><div class="value ">139</div></div></div>
+  </header>
+  <section class="section" >
+    <div class="section-head"><h2>Run summary</h2></div>
+    <div class="card">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:var(--space-md)">
+        <div><div class="muted mono" style="font-size:11px;text-transform:uppercase;letter-spacing:.06em">Provider</div><div style="font-weight:600">github-actions</div></div>
+        <div><div class="muted mono" style="font-size:11px;text-transform:uppercase;letter-spacing:.06em">Status</div><div style="font-weight:600;color:var(--red)">FAILED</div></div>
+        <div><div class="muted mono" style="font-size:11px;text-transform:uppercase;letter-spacing:.06em">Exit code</div><div style="font-weight:600">1</div></div>
+        <div><div class="muted mono" style="font-size:11px;text-transform:uppercase;letter-spacing:.06em">Headline</div><div>FAIL  tests/checkout/charge.test.ts &gt; chargeOrder &gt; queues the charge and returns pending for a pending_review status</div></div>
+      </div>
+      <div style="margin-top:var(--space-lg);display:flex;flex-wrap:wrap;gap:var(--space-xs)"><span class="badge green" title="lines 4–8">GITHUB_TOKEN Permissions <span class="muted mono" style="margin-left:6px">5L</span></span><span class="badge green" title="lines 14–23">Run actions/checkout@v4 <span class="muted mono" style="margin-left:6px">10L</span></span><span class="badge green" title="lines 33–37">Run actions/setup-node@v4 <span class="muted mono" style="margin-left:6px">5L</span></span><span class="badge green" title="lines 39–42">Run npm ci <span class="muted mono" style="margin-left:6px">4L</span></span><span class="badge green" title="lines 45–48">Run npm run lint <span class="muted mono" style="margin-left:6px">4L</span></span><span class="badge green" title="lines 52–55">Run npm run typecheck <span class="muted mono" style="margin-left:6px">4L</span></span><span class="badge green" title="lines 59–62">Run npm test -- --reporter=verbose <span class="muted mono" style="margin-left:6px">4L</span></span><span class="badge green" title="lines 136–137">Cleaning up orphan processes <span class="muted mono" style="margin-left:6px">2L</span></span></div>
+    </div>
+  </section>
+<section class="section" >
+    <div class="section-head"><h2>Review checklist</h2></div>
+    <div class="card"><ol class="checklist"><li><span class="num">1</span><span class="text">Re-run the workflow on the same revision to confirm the failure reproduces (flaky vs real regression).</span></li><li><span class="num">2</span><span class="text">Reproduce <code>chargeOrder &gt; queues the charge and returns pending for a pending_review status</code> locally with the same node / python / go version.</span></li><li><span class="num">3</span><span class="text">Open <code>tests/checkout/charge.test.ts</code> and read the assertion in context.</span></li><li><span class="num">4</span><span class="text">Compare the failing run's environment (runner image, node version, package-lock) against the last passing run.</span></li><li><span class="num">5</span><span class="text">Walk the log's step strip above and skim the failed step's first 10 and last 10 lines.</span></li></ol></div>
+  </section>
+<section class="section" >
+    <div class="section-head"><h2>Risk hotspots</h2></div>
+    <div class="hotspots"><div class="hotspot">
+          <div class="head"><span class="path">FAIL  tests/checkout/charge.test.ts &gt; chargeOrder &gt; queues the charge and return</span><span class="badge red">line 82</span></div>
+          <div class="why"><span class="hyp">Hypothesis</span> First error at line 82; whatever ran in the seconds before may be the source. Read the prior 6–10 lines for setup state.</div>
+        </div><div class="hotspot">
+          <div class="head"><span class="path">FAIL  tests/checkout/charge.test.ts &gt; chargeOrder &gt; queues the charge for a requ</span><span class="badge red">line 101</span></div>
+          <div class="why"><span class="hyp">Hypothesis</span> First error at line 101; whatever ran in the seconds before may be the source. Read the prior 6–10 lines for setup state.</div>
+        </div><div class="hotspot">
+          <div class="head"><span class="path">npm ERR! Lifecycle script `test` failed with error:</span><span class="badge red">line 128</span></div>
+          <div class="why"><span class="hyp">Hypothesis</span> First error at line 128; whatever ran in the seconds before may be the source. Read the prior 6–10 lines for setup state.</div>
+        </div><div class="hotspot">
+          <div class="head"><span class="path">chargeOrder &gt; queues the charge and returns pending for a pending_review status</span><span class="badge yellow">line 83</span></div>
+          <div class="why"><span class="hyp">Hypothesis</span> Failing assertion. Reproduce locally with the same revision before treating it as a real regression.</div>
+        </div><div class="hotspot">
+          <div class="head"><span class="path">chargeOrder &gt; queues the charge for a requires_action status</span><span class="badge yellow">line 102</span></div>
+          <div class="why"><span class="hyp">Hypothesis</span> Failing assertion. Reproduce locally with the same revision before treating it as a real regression.</div>
+        </div></div>
+  </section>
+<section class="section" >
+    <div class="section-head"><h2>Suspected root cause</h2></div>
+    <div class="cause-chain"><div class="cause deepest">
+          <div style="display:flex;align-items:center;gap:var(--space-sm);justify-content:space-between"><span class="hyp">Hypothesis</span><span class="muted mono" style="font-size:11.5px">candidate 1 of 2</span></div>
+          <div class="msg" style="margin-top:var(--space-sm)">The failing assertions (chargeOrder &gt; queues the charge and returns pending for a pending_review status; chargeOrder &gt; queues the charge for a requires_action status) reflects a real production-code regression introduced on this branch.</div>
+          <div class="top-frame">tests/checkout/charge.test.ts (log line 83)</div>
+          <div class="msg" style="margin-top:var(--space-sm);font-size:13px"><strong>Distinguishing test:</strong> Re-run on the same revision; if it fails again, this is a real regression. If it passes, see the next hypothesis (flaky test).</div>
+        </div><div class="cause ">
+          <div style="display:flex;align-items:center;gap:var(--space-sm);justify-content:space-between"><span class="hyp">Hypothesis</span><span class="muted mono" style="font-size:11.5px">candidate 2 of 2</span></div>
+          <div class="msg" style="margin-top:var(--space-sm)">The failure is environmental — a flaky test, a slow setup step, or a network call to an external service that was momentarily unavailable.</div>
+          <div class="top-frame">No evidence in the log itself; this is the null hypothesis to rule out before touching code.</div>
+          <div class="msg" style="margin-top:var(--space-sm);font-size:13px"><strong>Distinguishing test:</strong> Re-run the job. If the failure does not reproduce, this is the cause.</div>
+        </div></div>
+  </section>
+<section class="section" >
+    <div class="section-head"><h2>Failing tests</h2></div>
+    <div class="failing-tests"><div class="failing-test">
+              <div class="name">chargeOrder &gt; queues the charge and returns pending for a pending_review status</div>
+              <div class="where">tests/checkout/charge.test.ts · log line 83</div>
+              
+            </div><div class="failing-test">
+              <div class="name">chargeOrder &gt; queues the charge for a requires_action status</div>
+              <div class="where">tests/checkout/charge.test.ts · log line 102</div>
+              
+            </div></div>
+  </section>
+<details class="section" id="raw-section"><summary><h2 style="margin:0">Log</h2></summary><div class="body"><div class="searchbox" style="margin-bottom:var(--space-md);max-width:100%"><input id="raw-search" type="search" placeholder="Search every log line…"></div>
+      <div style="overflow-x:auto;background:var(--surface-container-low);border-radius:var(--radius-md);padding:var(--space-md);border:1px solid var(--border);max-height:560px;overflow-y:auto">
+      <table class="log-table" id="raw-content"><tbody><tr class=""><td class="ln">1</td><td class="text" data-text="Current runner version: &#39;2.319.1&#39;" data-original="Current runner version: &#39;2.319.1&#39;">Current runner version: &#39;2.319.1&#39;</td></tr><tr class=""><td class="ln">2</td><td class="text" data-text="Operating System: Ubuntu 22.04.4 LTS" data-original="Operating System: Ubuntu 22.04.4 LTS">Operating System: Ubuntu 22.04.4 LTS</td></tr><tr class=""><td class="ln">3</td><td class="text" data-text="Runner Image: ubuntu-22.04 / 20240428.1" data-original="Runner Image: ubuntu-22.04 / 20240428.1">Runner Image: ubuntu-22.04 / 20240428.1</td></tr><tr class="group"><td class="ln">4</td><td class="text" data-text="##[group]GITHUB_TOKEN Permissions" data-original="##[group]GITHUB_TOKEN Permissions">##[group]GITHUB_TOKEN Permissions</td></tr><tr class=""><td class="ln">5</td><td class="text" data-text="  Contents: read" data-original="  Contents: read">  Contents: read</td></tr><tr class=""><td class="ln">6</td><td class="text" data-text="  Metadata: read" data-original="  Metadata: read">  Metadata: read</td></tr><tr class=""><td class="ln">7</td><td class="text" data-text="  Packages: read" data-original="  Packages: read">  Packages: read</td></tr><tr class=""><td class="ln">8</td><td class="text" data-text="##[endgroup]" data-original="##[endgroup]">##[endgroup]</td></tr><tr class=""><td class="ln">9</td><td class="text" data-text="Prepare workflow directory" data-original="Prepare workflow directory">Prepare workflow directory</td></tr><tr class=""><td class="ln">10</td><td class="text" data-text="Prepare all required actions" data-original="Prepare all required actions">Prepare all required actions</td></tr><tr class=""><td class="ln">11</td><td class="text" data-text="Getting action download info" data-original="Getting action download info">Getting action download info</td></tr><tr class=""><td class="ln">12</td><td class="text" data-text="Download action repository &#39;actions/checkout@v4&#39; (SHA:b4ffde65f46336ab88eb53be808477a3936bae11)" data-original="Download action repository &#39;actions/checkout@v4&#39; (SHA:b4ffde65f46336ab88eb53be808477a3936bae11)">Download action repository &#39;actions/checkout@v4&#39; (SHA:b4ffde65f46336ab88eb53be808477a3936bae11)</td></tr><tr class=""><td class="ln">13</td><td class="text" data-text="Download action repository &#39;actions/setup-node@v4&#39; (SHA:60edb5dd545a775178f52524783378180af0d1f8)" data-original="Download action repository &#39;actions/setup-node@v4&#39; (SHA:60edb5dd545a775178f52524783378180af0d1f8)">Download action repository &#39;actions/setup-node@v4&#39; (SHA:60edb5dd545a775178f52524783378180af0d1f8)</td></tr><tr class="group"><td class="ln">14</td><td class="text" data-text="##[group]Run actions/checkout@v4" data-original="##[group]Run actions/checkout@v4">##[group]Run actions/checkout@v4</td></tr><tr class=""><td class="ln">15</td><td class="text" data-text="with:" data-original="with:">with:</td></tr><tr class=""><td class="ln">16</td><td class="text" data-text="  repository: clockless-org/checkout-service" data-original="  repository: clockless-org/checkout-service">  repository: clockless-org/checkout-service</td></tr><tr class=""><td class="ln">17</td><td class="text" data-text="  token: ***" data-original="  token: ***">  token: ***</td></tr><tr class=""><td class="ln">18</td><td class="text" data-text="  ssh-strict: true" data-original="  ssh-strict: true">  ssh-strict: true</td></tr><tr class=""><td class="ln">19</td><td class="text" data-text="  persist-credentials: true" data-original="  persist-credentials: true">  persist-credentials: true</td></tr><tr class=""><td class="ln">20</td><td class="text" data-text="  fetch-depth: 1" data-original="  fetch-depth: 1">  fetch-depth: 1</td></tr><tr class=""><td class="ln">21</td><td class="text" data-text="env:" data-original="env:">env:</td></tr><tr class=""><td class="ln">22</td><td class="text" data-text="  NODE_VERSION: 20" data-original="  NODE_VERSION: 20">  NODE_VERSION: 20</td></tr><tr class=""><td class="ln">23</td><td class="text" data-text="##[endgroup]" data-original="##[endgroup]">##[endgroup]</td></tr><tr class=""><td class="ln">24</td><td class="text" data-text="Syncing repository: clockless-org/checkout-service" data-original="Syncing repository: clockless-org/checkout-service">Syncing repository: clockless-org/checkout-service</td></tr><tr class=""><td class="ln">25</td><td class="text" data-text="Getting Git version info" data-original="Getting Git version info">Getting Git version info</td></tr><tr class=""><td class="ln">26</td><td class="text" data-text="Initializing the repository" data-original="Initializing the repository">Initializing the repository</td></tr><tr class=""><td class="ln">27</td><td class="text" data-text="Determining the checkout info" data-original="Determining the checkout info">Determining the checkout info</td></tr><tr class=""><td class="ln">28</td><td class="text" data-text="Fetching the repository" data-original="Fetching the repository">Fetching the repository</td></tr><tr class=""><td class="ln">29</td><td class="text" data-text="Determining the default branch" data-original="Determining the default branch">Determining the default branch</td></tr><tr class=""><td class="ln">30</td><td class="text" data-text="Checking out the ref refs/heads/feat/payment-pending-queue" data-original="Checking out the ref refs/heads/feat/payment-pending-queue">Checking out the ref refs/heads/feat/payment-pending-queue</td></tr><tr class=""><td class="ln">31</td><td class="text" data-text="[command]/usr/bin/git log -1 --format=&#39;%H&#39;" data-original="[command]/usr/bin/git log -1 --format=&#39;%H&#39;">[command]/usr/bin/git log -1 --format=&#39;%H&#39;</td></tr><tr class=""><td class="ln">32</td><td class="text" data-text="&#39;b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1&#39;" data-original="&#39;b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1&#39;">&#39;b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1&#39;</td></tr><tr class="group"><td class="ln">33</td><td class="text" data-text="##[group]Run actions/setup-node@v4" data-original="##[group]Run actions/setup-node@v4">##[group]Run actions/setup-node@v4</td></tr><tr class=""><td class="ln">34</td><td class="text" data-text="with:" data-original="with:">with:</td></tr><tr class=""><td class="ln">35</td><td class="text" data-text="  node-version: 20" data-original="  node-version: 20">  node-version: 20</td></tr><tr class=""><td class="ln">36</td><td class="text" data-text="  cache: npm" data-original="  cache: npm">  cache: npm</td></tr><tr class=""><td class="ln">37</td><td class="text" data-text="##[endgroup]" data-original="##[endgroup]">##[endgroup]</td></tr><tr class=""><td class="ln">38</td><td class="text" data-text="Found in cache @ /opt/hostedtoolcache/node/20.13.1/x64" data-original="Found in cache @ /opt/hostedtoolcache/node/20.13.1/x64">Found in cache @ /opt/hostedtoolcache/node/20.13.1/x64</td></tr><tr class="group"><td class="ln">39</td><td class="text" data-text="##[group]Run npm ci" data-original="##[group]Run npm ci">##[group]Run npm ci</td></tr><tr class=""><td class="ln">40</td><td class="text" data-text="npm ci" data-original="npm ci">npm ci</td></tr><tr class=""><td class="ln">41</td><td class="text" data-text="shell: /usr/bin/bash -e {0}" data-original="shell: /usr/bin/bash -e {0}">shell: /usr/bin/bash -e {0}</td></tr><tr class=""><td class="ln">42</td><td class="text" data-text="##[endgroup]" data-original="##[endgroup]">##[endgroup]</td></tr><tr class=""><td class="ln">43</td><td class="text" data-text="added 612 packages, and audited 613 packages in 6s" data-original="added 612 packages, and audited 613 packages in 6s">added 612 packages, and audited 613 packages in 6s</td></tr><tr class=""><td class="ln">44</td><td class="text" data-text="found 0 vulnerabilities" data-original="found 0 vulnerabilities">found 0 vulnerabilities</td></tr><tr class="group"><td class="ln">45</td><td class="text" data-text="##[group]Run npm run lint" data-original="##[group]Run npm run lint">##[group]Run npm run lint</td></tr><tr class=""><td class="ln">46</td><td class="text" data-text="npm run lint" data-original="npm run lint">npm run lint</td></tr><tr class=""><td class="ln">47</td><td class="text" data-text="shell: /usr/bin/bash -e {0}" data-original="shell: /usr/bin/bash -e {0}">shell: /usr/bin/bash -e {0}</td></tr><tr class=""><td class="ln">48</td><td class="text" data-text="##[endgroup]" data-original="##[endgroup]">##[endgroup]</td></tr><tr class=""><td class="ln">49</td><td class="text" data-text="&gt; checkout-service@0.4.1 lint" data-original="&gt; checkout-service@0.4.1 lint">&gt; checkout-service@0.4.1 lint</td></tr><tr class=""><td class="ln">50</td><td class="text" data-text="&gt; eslint --max-warnings=0 src tests" data-original="&gt; eslint --max-warnings=0 src tests">&gt; eslint --max-warnings=0 src tests</td></tr><tr class=""><td class="ln">51</td><td class="text" data-text="All files pass lint." data-original="All files pass lint.">All files pass lint.</td></tr><tr class="group"><td class="ln">52</td><td class="text" data-text="##[group]Run npm run typecheck" data-original="##[group]Run npm run typecheck">##[group]Run npm run typecheck</td></tr><tr class=""><td class="ln">53</td><td class="text" data-text="npm run typecheck" data-original="npm run typecheck">npm run typecheck</td></tr><tr class=""><td class="ln">54</td><td class="text" data-text="shell: /usr/bin/bash -e {0}" data-original="shell: /usr/bin/bash -e {0}">shell: /usr/bin/bash -e {0}</td></tr><tr class=""><td class="ln">55</td><td class="text" data-text="##[endgroup]" data-original="##[endgroup]">##[endgroup]</td></tr><tr class=""><td class="ln">56</td><td class="text" data-text="&gt; checkout-service@0.4.1 typecheck" data-original="&gt; checkout-service@0.4.1 typecheck">&gt; checkout-service@0.4.1 typecheck</td></tr><tr class=""><td class="ln">57</td><td class="text" data-text="&gt; tsc --noEmit" data-original="&gt; tsc --noEmit">&gt; tsc --noEmit</td></tr><tr class=""><td class="ln">58</td><td class="text" data-text="All files typecheck cleanly." data-original="All files typecheck cleanly.">All files typecheck cleanly.</td></tr><tr class="group"><td class="ln">59</td><td class="text" data-text="##[group]Run npm test -- --reporter=verbose" data-original="##[group]Run npm test -- --reporter=verbose">##[group]Run npm test -- --reporter=verbose</td></tr><tr class=""><td class="ln">60</td><td class="text" data-text="npm test -- --reporter=verbose" data-original="npm test -- --reporter=verbose">npm test -- --reporter=verbose</td></tr><tr class=""><td class="ln">61</td><td class="text" data-text="shell: /usr/bin/bash -e {0}" data-original="shell: /usr/bin/bash -e {0}">shell: /usr/bin/bash -e {0}</td></tr><tr class=""><td class="ln">62</td><td class="text" data-text="##[endgroup]" data-original="##[endgroup]">##[endgroup]</td></tr><tr class=""><td class="ln">63</td><td class="text" data-text="&gt; checkout-service@0.4.1 test" data-original="&gt; checkout-service@0.4.1 test">&gt; checkout-service@0.4.1 test</td></tr><tr class=""><td class="ln">64</td><td class="text" data-text="&gt; vitest run --reporter=verbose" data-original="&gt; vitest run --reporter=verbose">&gt; vitest run --reporter=verbose</td></tr><tr class=""><td class="ln">65</td><td class="text" data-text="2026-05-04T16:21:34.5513921Z" data-original="2026-05-04T16:21:34.5513921Z">2026-05-04T16:21:34.5513921Z</td></tr><tr class=""><td class="ln">66</td><td class="text" data-text=" RUN  v1.5.0 /home/runner/work/checkout-service/checkout-service" data-original=" RUN  v1.5.0 /home/runner/work/checkout-service/checkout-service"> RUN  v1.5.0 /home/runner/work/checkout-service/checkout-service</td></tr><tr class=""><td class="ln">67</td><td class="text" data-text="2026-05-04T16:21:35.9413012Z" data-original="2026-05-04T16:21:35.9413012Z">2026-05-04T16:21:35.9413012Z</td></tr><tr class=""><td class="ln">68</td><td class="text" data-text=" ✓ tests/auth/session.test.ts (4 tests) 12ms" data-original=" ✓ tests/auth/session.test.ts (4 tests) 12ms"> ✓ tests/auth/session.test.ts (4 tests) 12ms</td></tr><tr class=""><td class="ln">69</td><td class="text" data-text="   ✓ verifySession &gt; returns null for empty token" data-original="   ✓ verifySession &gt; returns null for empty token">   ✓ verifySession &gt; returns null for empty token</td></tr><tr class=""><td class="ln">70</td><td class="text" data-text="   ✓ verifySession &gt; returns null for expired token" data-original="   ✓ verifySession &gt; returns null for expired token">   ✓ verifySession &gt; returns null for expired token</td></tr><tr class=""><td class="ln">71</td><td class="text" data-text="   ✓ verifySession &gt; returns null when issuer does not match" data-original="   ✓ verifySession &gt; returns null when issuer does not match">   ✓ verifySession &gt; returns null when issuer does not match</td></tr><tr class=""><td class="ln">72</td><td class="text" data-text="   ✓ verifySession &gt; returns the decoded session for a valid token" data-original="   ✓ verifySession &gt; returns the decoded session for a valid token">   ✓ verifySession &gt; returns the decoded session for a valid token</td></tr><tr class=""><td class="ln">73</td><td class="text" data-text=" ✓ tests/order/total.test.ts (8 tests) 21ms" data-original=" ✓ tests/order/total.test.ts (8 tests) 21ms"> ✓ tests/order/total.test.ts (8 tests) 21ms</td></tr><tr class=""><td class="ln">74</td><td class="text" data-text="   ✓ totalCents &gt; sums lineItem prices" data-original="   ✓ totalCents &gt; sums lineItem prices">   ✓ totalCents &gt; sums lineItem prices</td></tr><tr class=""><td class="ln">75</td><td class="text" data-text="   ✓ totalCents &gt; applies tax_rate" data-original="   ✓ totalCents &gt; applies tax_rate">   ✓ totalCents &gt; applies tax_rate</td></tr><tr class=""><td class="ln">76</td><td class="text" data-text="   ✓ totalCents &gt; rounds to integer cents" data-original="   ✓ totalCents &gt; rounds to integer cents">   ✓ totalCents &gt; rounds to integer cents</td></tr><tr class=""><td class="ln">77</td><td class="text" data-text="   ✓ totalCents &gt; applies a percent discount" data-original="   ✓ totalCents &gt; applies a percent discount">   ✓ totalCents &gt; applies a percent discount</td></tr><tr class=""><td class="ln">78</td><td class="text" data-text="   ✓ totalCents &gt; applies a fixed discount" data-original="   ✓ totalCents &gt; applies a fixed discount">   ✓ totalCents &gt; applies a fixed discount</td></tr><tr class=""><td class="ln">79</td><td class="text" data-text="   ✓ totalCents &gt; clamps a discount to the subtotal" data-original="   ✓ totalCents &gt; clamps a discount to the subtotal">   ✓ totalCents &gt; clamps a discount to the subtotal</td></tr><tr class=""><td class="ln">80</td><td class="text" data-text="   ✓ totalCents &gt; handles zero items" data-original="   ✓ totalCents &gt; handles zero items">   ✓ totalCents &gt; handles zero items</td></tr><tr class=""><td class="ln">81</td><td class="text" data-text="   ✓ totalCents &gt; handles a single item" data-original="   ✓ totalCents &gt; handles a single item">   ✓ totalCents &gt; handles a single item</td></tr><tr class="error"><td class="ln">82</td><td class="text" data-text="FAIL  tests/checkout/charge.test.ts &gt; chargeOrder &gt; queues the charge and returns pending for a pending_review status" data-original="FAIL  tests/checkout/charge.test.ts &gt; chargeOrder &gt; queues the charge and returns pending for a pending_review status">FAIL  tests/checkout/charge.test.ts &gt; chargeOrder &gt; queues the charge and returns pending for a pending_review status</td></tr><tr class=""><td class="ln">83</td><td class="text" data-text="   ✕ chargeOrder &gt; queues the charge and returns pending for a pending_review status (8 ms)" data-original="   ✕ chargeOrder &gt; queues the charge and returns pending for a pending_review status (8 ms)">   ✕ chargeOrder &gt; queues the charge and returns pending for a pending_review status (8 ms)</td></tr><tr class=""><td class="ln">84</td><td class="text" data-text="2026-05-04T16:21:38.1235921Z" data-original="2026-05-04T16:21:38.1235921Z">2026-05-04T16:21:38.1235921Z</td></tr><tr class=""><td class="ln">85</td><td class="text" data-text="     AssertionError: expected { ok: false, reason: &#39;pending_review&#39;, …(1) } to deeply equal { ok: false, reason: &#39;pending&#39;, chargeId: &#39;ch_003&#39; }" data-original="     AssertionError: expected { ok: false, reason: &#39;pending_review&#39;, …(1) } to deeply equal { ok: false, reason: &#39;pending&#39;, chargeId: &#39;ch_003&#39; }">     AssertionError: expected { ok: false, reason: &#39;pending_review&#39;, …(1) } to deeply equal { ok: false, reason: &#39;pending&#39;, chargeId: &#39;ch_003&#39; }</td></tr><tr class=""><td class="ln">86</td><td class="text" data-text="2026-05-04T16:21:38.1237721Z" data-original="2026-05-04T16:21:38.1237721Z">2026-05-04T16:21:38.1237721Z</td></tr><tr class=""><td class="ln">87</td><td class="text" data-text="     - Expected" data-original="     - Expected">     - Expected</td></tr><tr class=""><td class="ln">88</td><td class="text" data-text="     + Received" data-original="     + Received">     + Received</td></tr><tr class=""><td class="ln">89</td><td class="text" data-text="2026-05-04T16:21:38.1240421Z" data-original="2026-05-04T16:21:38.1240421Z">2026-05-04T16:21:38.1240421Z</td></tr><tr class=""><td class="ln">90</td><td class="text" data-text="       Object {" data-original="       Object {">       Object {</td></tr><tr class=""><td class="ln">91</td><td class="text" data-text="         &quot;chargeId&quot;: &quot;ch_003&quot;," data-original="         &quot;chargeId&quot;: &quot;ch_003&quot;,">         &quot;chargeId&quot;: &quot;ch_003&quot;,</td></tr><tr class=""><td class="ln">92</td><td class="text" data-text="         &quot;ok&quot;: false," data-original="         &quot;ok&quot;: false,">         &quot;ok&quot;: false,</td></tr><tr class=""><td class="ln">93</td><td class="text" data-text="     -   &quot;reason&quot;: &quot;pending&quot;," data-original="     -   &quot;reason&quot;: &quot;pending&quot;,">     -   &quot;reason&quot;: &quot;pending&quot;,</td></tr><tr class=""><td class="ln">94</td><td class="text" data-text="     +   &quot;reason&quot;: &quot;pending_review&quot;," data-original="     +   &quot;reason&quot;: &quot;pending_review&quot;,">     +   &quot;reason&quot;: &quot;pending_review&quot;,</td></tr><tr class=""><td class="ln">95</td><td class="text" data-text="       }" data-original="       }">       }</td></tr><tr class=""><td class="ln">96</td><td class="text" data-text="2026-05-04T16:21:38.1246721Z" data-original="2026-05-04T16:21:38.1246721Z">2026-05-04T16:21:38.1246721Z</td></tr><tr class=""><td class="ln">97</td><td class="text" data-text="      at tests/checkout/charge.test.ts:32:21" data-original="      at tests/checkout/charge.test.ts:32:21">      at tests/checkout/charge.test.ts:32:21</td></tr><tr class=""><td class="ln">98</td><td class="text" data-text="      at runWithTimeout (node_modules/vitest/dist/index.js:241:13)" data-original="      at runWithTimeout (node_modules/vitest/dist/index.js:241:13)">      at runWithTimeout (node_modules/vitest/dist/index.js:241:13)</td></tr><tr class=""><td class="ln">99</td><td class="text" data-text="      at Module.runTest (node_modules/vitest/dist/index.js:412:7)" data-original="      at Module.runTest (node_modules/vitest/dist/index.js:412:7)">      at Module.runTest (node_modules/vitest/dist/index.js:412:7)</td></tr><tr class=""><td class="ln">100</td><td class="text" data-text="2026-05-04T16:21:38.1250321Z" data-original="2026-05-04T16:21:38.1250321Z">2026-05-04T16:21:38.1250321Z</td></tr><tr class="error"><td class="ln">101</td><td class="text" data-text="FAIL  tests/checkout/charge.test.ts &gt; chargeOrder &gt; queues the charge for a requires_action status" data-original="FAIL  tests/checkout/charge.test.ts &gt; chargeOrder &gt; queues the charge for a requires_action status">FAIL  tests/checkout/charge.test.ts &gt; chargeOrder &gt; queues the charge for a requires_action status</td></tr><tr class=""><td class="ln">102</td><td class="text" data-text="   ✕ chargeOrder &gt; queues the charge for a requires_action status (4 ms)" data-original="   ✕ chargeOrder &gt; queues the charge for a requires_action status (4 ms)">   ✕ chargeOrder &gt; queues the charge for a requires_action status (4 ms)</td></tr><tr class=""><td class="ln">103</td><td class="text" data-text="2026-05-04T16:21:38.1614101Z" data-original="2026-05-04T16:21:38.1614101Z">2026-05-04T16:21:38.1614101Z</td></tr><tr class=""><td class="ln">104</td><td class="text" data-text="     AssertionError: expected &#39;requires_action&#39; to be &#39;pending&#39; // Object.is equality" data-original="     AssertionError: expected &#39;requires_action&#39; to be &#39;pending&#39; // Object.is equality">     AssertionError: expected &#39;requires_action&#39; to be &#39;pending&#39; // Object.is equality</td></tr><tr class=""><td class="ln">105</td><td class="text" data-text="2026-05-04T16:21:38.1615901Z" data-original="2026-05-04T16:21:38.1615901Z">2026-05-04T16:21:38.1615901Z</td></tr><tr class=""><td class="ln">106</td><td class="text" data-text="     - Expected" data-original="     - Expected">     - Expected</td></tr><tr class=""><td class="ln">107</td><td class="text" data-text="     + Received" data-original="     + Received">     + Received</td></tr><tr class=""><td class="ln">108</td><td class="text" data-text="2026-05-04T16:21:38.1618601Z" data-original="2026-05-04T16:21:38.1618601Z">2026-05-04T16:21:38.1618601Z</td></tr><tr class=""><td class="ln">109</td><td class="text" data-text="     - &quot;pending&quot;" data-original="     - &quot;pending&quot;">     - &quot;pending&quot;</td></tr><tr class=""><td class="ln">110</td><td class="text" data-text="     + &quot;requires_action&quot;" data-original="     + &quot;requires_action&quot;">     + &quot;requires_action&quot;</td></tr><tr class=""><td class="ln">111</td><td class="text" data-text="2026-05-04T16:21:38.1621301Z" data-original="2026-05-04T16:21:38.1621301Z">2026-05-04T16:21:38.1621301Z</td></tr><tr class=""><td class="ln">112</td><td class="text" data-text="      at tests/checkout/charge.test.ts:42:25" data-original="      at tests/checkout/charge.test.ts:42:25">      at tests/checkout/charge.test.ts:42:25</td></tr><tr class=""><td class="ln">113</td><td class="text" data-text="      at runWithTimeout (node_modules/vitest/dist/index.js:241:13)" data-original="      at runWithTimeout (node_modules/vitest/dist/index.js:241:13)">      at runWithTimeout (node_modules/vitest/dist/index.js:241:13)</td></tr><tr class=""><td class="ln">114</td><td class="text" data-text="      at Module.runTest (node_modules/vitest/dist/index.js:412:7)" data-original="      at Module.runTest (node_modules/vitest/dist/index.js:412:7)">      at Module.runTest (node_modules/vitest/dist/index.js:412:7)</td></tr><tr class=""><td class="ln">115</td><td class="text" data-text="2026-05-04T16:21:38.1624901Z" data-original="2026-05-04T16:21:38.1624901Z">2026-05-04T16:21:38.1624901Z</td></tr><tr class=""><td class="ln">116</td><td class="text" data-text=" ✓ tests/checkout/charge.test.ts &gt; chargeOrder &gt; returns ok for a succeeded charge" data-original=" ✓ tests/checkout/charge.test.ts &gt; chargeOrder &gt; returns ok for a succeeded charge"> ✓ tests/checkout/charge.test.ts &gt; chargeOrder &gt; returns ok for a succeeded charge</td></tr><tr class=""><td class="ln">117</td><td class="text" data-text=" ✓ tests/checkout/charge.test.ts &gt; chargeOrder &gt; returns the failure reason for a hard-declined charge" data-original=" ✓ tests/checkout/charge.test.ts &gt; chargeOrder &gt; returns the failure reason for a hard-declined charge"> ✓ tests/checkout/charge.test.ts &gt; chargeOrder &gt; returns the failure reason for a hard-declined charge</td></tr><tr class=""><td class="ln">118</td><td class="text" data-text=" ✓ tests/checkout/webhook.test.ts (3 tests) 9ms" data-original=" ✓ tests/checkout/webhook.test.ts (3 tests) 9ms"> ✓ tests/checkout/webhook.test.ts (3 tests) 9ms</td></tr><tr class=""><td class="ln">119</td><td class="text" data-text="   ✓ paymentWebhook &gt; returns 204 for unknown event types" data-original="   ✓ paymentWebhook &gt; returns 204 for unknown event types">   ✓ paymentWebhook &gt; returns 204 for unknown event types</td></tr><tr class=""><td class="ln">120</td><td class="text" data-text="   ✓ paymentWebhook &gt; transitions the order to paid on charge.succeeded" data-original="   ✓ paymentWebhook &gt; transitions the order to paid on charge.succeeded">   ✓ paymentWebhook &gt; transitions the order to paid on charge.succeeded</td></tr><tr class=""><td class="ln">121</td><td class="text" data-text="   ✓ paymentWebhook &gt; transitions the order to failed on charge.failed" data-original="   ✓ paymentWebhook &gt; transitions the order to failed on charge.failed">   ✓ paymentWebhook &gt; transitions the order to failed on charge.failed</td></tr><tr class=""><td class="ln">122</td><td class="text" data-text="2026-05-04T16:21:38.2412101Z" data-original="2026-05-04T16:21:38.2412101Z">2026-05-04T16:21:38.2412101Z</td></tr><tr class=""><td class="ln">123</td><td class="text" data-text=" Test Files  1 failed | 3 passed (4)" data-original=" Test Files  1 failed | 3 passed (4)"> Test Files  1 failed | 3 passed (4)</td></tr><tr class=""><td class="ln">124</td><td class="text" data-text="      Tests  2 failed | 13 passed (15)" data-original="      Tests  2 failed | 13 passed (15)">      Tests  2 failed | 13 passed (15)</td></tr><tr class=""><td class="ln">125</td><td class="text" data-text="   Start at  16:21:35" data-original="   Start at  16:21:35">   Start at  16:21:35</td></tr><tr class=""><td class="ln">126</td><td class="text" data-text="   Duration  2.30s" data-original="   Duration  2.30s">   Duration  2.30s</td></tr><tr class=""><td class="ln">127</td><td class="text" data-text="2026-05-04T16:21:38.2416621Z" data-original="2026-05-04T16:21:38.2416621Z">2026-05-04T16:21:38.2416621Z</td></tr><tr class="error"><td class="ln">128</td><td class="text" data-text="npm ERR! Lifecycle script `test` failed with error:" data-original="npm ERR! Lifecycle script `test` failed with error:">npm ERR! Lifecycle script `test` failed with error:</td></tr><tr class="error"><td class="ln">129</td><td class="text" data-text="npm ERR! Error: command failed" data-original="npm ERR! Error: command failed">npm ERR! Error: command failed</td></tr><tr class="error"><td class="ln">130</td><td class="text" data-text="npm ERR!   in workspace: checkout-service@0.4.1" data-original="npm ERR!   in workspace: checkout-service@0.4.1">npm ERR!   in workspace: checkout-service@0.4.1</td></tr><tr class="error"><td class="ln">131</td><td class="text" data-text="npm ERR!   at location: /home/runner/work/checkout-service/checkout-service" data-original="npm ERR!   at location: /home/runner/work/checkout-service/checkout-service">npm ERR!   at location: /home/runner/work/checkout-service/checkout-service</td></tr><tr class="error"><td class="ln">132</td><td class="text" data-text="##[error]Process completed with exit code 1." data-original="##[error]Process completed with exit code 1.">##[error]Process completed with exit code 1.</td></tr><tr class=""><td class="ln">133</td><td class="text" data-text="Post job cleanup." data-original="Post job cleanup.">Post job cleanup.</td></tr><tr class=""><td class="ln">134</td><td class="text" data-text="[command]/usr/bin/git version" data-original="[command]/usr/bin/git version">[command]/usr/bin/git version</td></tr><tr class=""><td class="ln">135</td><td class="text" data-text="git version 2.43.0" data-original="git version 2.43.0">git version 2.43.0</td></tr><tr class="group"><td class="ln">136</td><td class="text" data-text="##[group]Cleaning up orphan processes" data-original="##[group]Cleaning up orphan processes">##[group]Cleaning up orphan processes</td></tr><tr class=""><td class="ln">137</td><td class="text" data-text="##[endgroup]" data-original="##[endgroup]">##[endgroup]</td></tr><tr class=""><td class="ln">138</td><td class="text" data-text="Cleaning up orphan processes" data-original="Cleaning up orphan processes">Cleaning up orphan processes</td></tr><tr class=""><td class="ln">139</td><td class="text" data-text="" data-original=""></td></tr></tbody></table></div></div></details>
+  <footer>
+    <p><em>Generated locally — your diff / log / trace never left your machine. The full artifact is embedded in this HTML and rendered in your browser. The analysis above is a <strong>hypothesis</strong> from a sample, not a verdict; verify against the runtime before acting on it.</em></p>
+  </footer>
+</main>
+<script>const DATA = {"kind":"ci-log","provider":"github-actions","status":"failed","exitCode":1,"groups":[{"id":"g_0001","name":"GITHUB_TOKEN Permissions","startLine":4,"endLine":8,"lineCount":5,"status":"ok"},{"id":"g_0002","name":"Run actions/checkout@v4","startLine":14,"endLine":23,"lineCount":10,"status":"ok"},{"id":"g_0003","name":"Run actions/setup-node@v4","startLine":33,"endLine":37,"lineCount":5,"status":"ok"},{"id":"g_0004","name":"Run npm ci","startLine":39,"endLine":42,"lineCount":4,"status":"ok"},{"id":"g_0005","name":"Run npm run lint","startLine":45,"endLine":48,"lineCount":4,"status":"ok"},{"id":"g_0006","name":"Run npm run typecheck","startLine":52,"endLine":55,"lineCount":4,"status":"ok"},{"id":"g_0007","name":"Run npm test -- --reporter=verbose","startLine":59,"endLine":62,"lineCount":4,"status":"ok"},{"id":"g_0008","name":"Cleaning up orphan processes","startLine":136,"endLine":137,"lineCount":2,"status":"ok"}],"errors":[{"id":"e_0001","lineNum":82,"severity":"error","text":"FAIL  tests/checkout/charge.test.ts > chargeOrder > queues the charge and returns pending for a pending_review status","groupId":null},{"id":"e_0002","lineNum":101,"severity":"error","text":"FAIL  tests/checkout/charge.test.ts > chargeOrder > queues the charge for a requires_action status","groupId":null},{"id":"e_0003","lineNum":128,"severity":"error","text":"npm ERR! Lifecycle script `test` failed with error:","groupId":null},{"id":"e_0004","lineNum":129,"severity":"error","text":"npm ERR! Error: command failed","groupId":null},{"id":"e_0005","lineNum":130,"severity":"error","text":"npm ERR!   in workspace: checkout-service@0.4.1","groupId":null},{"id":"e_0006","lineNum":131,"severity":"error","text":"npm ERR!   at location: /home/runner/work/checkout-service/checkout-service","groupId":null},{"id":"e_0007","lineNum":132,"severity":"error","text":"Process completed with exit code 1.","groupId":null}],"failingTests":[{"id":"ft_0001","name":"chargeOrder > queues the charge and returns pending for a pending_review status","file":"tests/checkout/charge.test.ts","line":null,"message":null,"lineNum":83},{"id":"ft_0002","name":"chargeOrder > queues the charge for a requires_action status","file":"tests/checkout/charge.test.ts","line":null,"message":null,"lineNum":102}],"totals":{"lines":139,"groups":8,"errors":7,"warnings":0,"failingTests":2},"rawLines":[{"num":1,"text":"Current runner version: '2.319.1'","groupId":null},{"num":2,"text":"Operating System: Ubuntu 22.04.4 LTS","groupId":null},{"num":3,"text":"Runner Image: ubuntu-22.04 / 20240428.1","groupId":null},{"num":4,"text":"##[group]GITHUB_TOKEN Permissions","groupId":"g_0001"},{"num":5,"text":"  Contents: read","groupId":"g_0001"},{"num":6,"text":"  Metadata: read","groupId":"g_0001"},{"num":7,"text":"  Packages: read","groupId":"g_0001"},{"num":8,"text":"##[endgroup]","groupId":"g_0001"},{"num":9,"text":"Prepare workflow directory","groupId":null},{"num":10,"text":"Prepare all required actions","groupId":null},{"num":11,"text":"Getting action download info","groupId":null},{"num":12,"text":"Download action repository 'actions/checkout@v4' (SHA:b4ffde65f46336ab88eb53be808477a3936bae11)","groupId":null},{"num":13,"text":"Download action repository 'actions/setup-node@v4' (SHA:60edb5dd545a775178f52524783378180af0d1f8)","groupId":null},{"num":14,"text":"##[group]Run actions/checkout@v4","groupId":"g_0002"},{"num":15,"text":"with:","groupId":"g_0002"},{"num":16,"text":"  repository: clockless-org/checkout-service","groupId":"g_0002"},{"num":17,"text":"  token: ***","groupId":"g_0002"},{"num":18,"text":"  ssh-strict: true","groupId":"g_0002"},{"num":19,"text":"  persist-credentials: true","groupId":"g_0002"},{"num":20,"text":"  fetch-depth: 1","groupId":"g_0002"},{"num":21,"text":"env:","groupId":"g_0002"},{"num":22,"text":"  NODE_VERSION: 20","groupId":"g_0002"},{"num":23,"text":"##[endgroup]","groupId":"g_0002"},{"num":24,"text":"Syncing repository: clockless-org/checkout-service","groupId":null},{"num":25,"text":"Getting Git version info","groupId":null},{"num":26,"text":"Initializing the repository","groupId":null},{"num":27,"text":"Determining the checkout info","groupId":null},{"num":28,"text":"Fetching the repository","groupId":null},{"num":29,"text":"Determining the default branch","groupId":null},{"num":30,"text":"Checking out the ref refs/heads/feat/payment-pending-queue","groupId":null},{"num":31,"text":"[command]/usr/bin/git log -1 --format='%H'","groupId":null},{"num":32,"text":"'b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1'","groupId":null},{"num":33,"text":"##[group]Run actions/setup-node@v4","groupId":"g_0003"},{"num":34,"text":"with:","groupId":"g_0003"},{"num":35,"text":"  node-version: 20","groupId":"g_0003"},{"num":36,"text":"  cache: npm","groupId":"g_0003"},{"num":37,"text":"##[endgroup]","groupId":"g_0003"},{"num":38,"text":"Found in cache @ /opt/hostedtoolcache/node/20.13.1/x64","groupId":null},{"num":39,"text":"##[group]Run npm ci","groupId":"g_0004"},{"num":40,"text":"npm ci","groupId":"g_0004"},{"num":41,"text":"shell: /usr/bin/bash -e {0}","groupId":"g_0004"},{"num":42,"text":"##[endgroup]","groupId":"g_0004"},{"num":43,"text":"added 612 packages, and audited 613 packages in 6s","groupId":null},{"num":44,"text":"found 0 vulnerabilities","groupId":null},{"num":45,"text":"##[group]Run npm run lint","groupId":"g_0005"},{"num":46,"text":"npm run lint","groupId":"g_0005"},{"num":47,"text":"shell: /usr/bin/bash -e {0}","groupId":"g_0005"},{"num":48,"text":"##[endgroup]","groupId":"g_0005"},{"num":49,"text":"> checkout-service@0.4.1 lint","groupId":null},{"num":50,"text":"> eslint --max-warnings=0 src tests","groupId":null},{"num":51,"text":"All files pass lint.","groupId":null},{"num":52,"text":"##[group]Run npm run typecheck","groupId":"g_0006"},{"num":53,"text":"npm run typecheck","groupId":"g_0006"},{"num":54,"text":"shell: /usr/bin/bash -e {0}","groupId":"g_0006"},{"num":55,"text":"##[endgroup]","groupId":"g_0006"},{"num":56,"text":"> checkout-service@0.4.1 typecheck","groupId":null},{"num":57,"text":"> tsc --noEmit","groupId":null},{"num":58,"text":"All files typecheck cleanly.","groupId":null},{"num":59,"text":"##[group]Run npm test -- --reporter=verbose","groupId":"g_0007"},{"num":60,"text":"npm test -- --reporter=verbose","groupId":"g_0007"},{"num":61,"text":"shell: /usr/bin/bash -e {0}","groupId":"g_0007"},{"num":62,"text":"##[endgroup]","groupId":"g_0007"},{"num":63,"text":"> checkout-service@0.4.1 test","groupId":null},{"num":64,"text":"> vitest run --reporter=verbose","groupId":null},{"num":65,"text":"2026-05-04T16:21:34.5513921Z","groupId":null},{"num":66,"text":" RUN  v1.5.0 /home/runner/work/checkout-service/checkout-service","groupId":null},{"num":67,"text":"2026-05-04T16:21:35.9413012Z","groupId":null},{"num":68,"text":" ✓ tests/auth/session.test.ts (4 tests) 12ms","groupId":null},{"num":69,"text":"   ✓ verifySession > returns null for empty token","groupId":null},{"num":70,"text":"   ✓ verifySession > returns null for expired token","groupId":null},{"num":71,"text":"   ✓ verifySession > returns null when issuer does not match","groupId":null},{"num":72,"text":"   ✓ verifySession > returns the decoded session for a valid token","groupId":null},{"num":73,"text":" ✓ tests/order/total.test.ts (8 tests) 21ms","groupId":null},{"num":74,"text":"   ✓ totalCents > sums lineItem prices","groupId":null},{"num":75,"text":"   ✓ totalCents > applies tax_rate","groupId":null},{"num":76,"text":"   ✓ totalCents > rounds to integer cents","groupId":null},{"num":77,"text":"   ✓ totalCents > applies a percent discount","groupId":null},{"num":78,"text":"   ✓ totalCents > applies a fixed discount","groupId":null},{"num":79,"text":"   ✓ totalCents > clamps a discount to the subtotal","groupId":null},{"num":80,"text":"   ✓ totalCents > handles zero items","groupId":null},{"num":81,"text":"   ✓ totalCents > handles a single item","groupId":null},{"num":82,"text":"FAIL  tests/checkout/charge.test.ts > chargeOrder > queues the charge and returns pending for a pending_review status","groupId":null},{"num":83,"text":"   ✕ chargeOrder > queues the charge and returns pending for a pending_review status (8 ms)","groupId":null},{"num":84,"text":"2026-05-04T16:21:38.1235921Z","groupId":null},{"num":85,"text":"     AssertionError: expected { ok: false, reason: 'pending_review', …(1) } to deeply equal { ok: false, reason: 'pending', chargeId: 'ch_003' }","groupId":null},{"num":86,"text":"2026-05-04T16:21:38.1237721Z","groupId":null},{"num":87,"text":"     - Expected","groupId":null},{"num":88,"text":"     + Received","groupId":null},{"num":89,"text":"2026-05-04T16:21:38.1240421Z","groupId":null},{"num":90,"text":"       Object {","groupId":null},{"num":91,"text":"         \"chargeId\": \"ch_003\",","groupId":null},{"num":92,"text":"         \"ok\": false,","groupId":null},{"num":93,"text":"     -   \"reason\": \"pending\",","groupId":null},{"num":94,"text":"     +   \"reason\": \"pending_review\",","groupId":null},{"num":95,"text":"       }","groupId":null},{"num":96,"text":"2026-05-04T16:21:38.1246721Z","groupId":null},{"num":97,"text":"      at tests/checkout/charge.test.ts:32:21","groupId":null},{"num":98,"text":"      at runWithTimeout (node_modules/vitest/dist/index.js:241:13)","groupId":null},{"num":99,"text":"      at Module.runTest (node_modules/vitest/dist/index.js:412:7)","groupId":null},{"num":100,"text":"2026-05-04T16:21:38.1250321Z","groupId":null},{"num":101,"text":"FAIL  tests/checkout/charge.test.ts > chargeOrder > queues the charge for a requires_action status","groupId":null},{"num":102,"text":"   ✕ chargeOrder > queues the charge for a requires_action status (4 ms)","groupId":null},{"num":103,"text":"2026-05-04T16:21:38.1614101Z","groupId":null},{"num":104,"text":"     AssertionError: expected 'requires_action' to be 'pending' // Object.is equality","groupId":null},{"num":105,"text":"2026-05-04T16:21:38.1615901Z","groupId":null},{"num":106,"text":"     - Expected","groupId":null},{"num":107,"text":"     + Received","groupId":null},{"num":108,"text":"2026-05-04T16:21:38.1618601Z","groupId":null},{"num":109,"text":"     - \"pending\"","groupId":null},{"num":110,"text":"     + \"requires_action\"","groupId":null},{"num":111,"text":"2026-05-04T16:21:38.1621301Z","groupId":null},{"num":112,"text":"      at tests/checkout/charge.test.ts:42:25","groupId":null},{"num":113,"text":"      at runWithTimeout (node_modules/vitest/dist/index.js:241:13)","groupId":null},{"num":114,"text":"      at Module.runTest (node_modules/vitest/dist/index.js:412:7)","groupId":null},{"num":115,"text":"2026-05-04T16:21:38.1624901Z","groupId":null},{"num":116,"text":" ✓ tests/checkout/charge.test.ts > chargeOrder > returns ok for a succeeded charge","groupId":null},{"num":117,"text":" ✓ tests/checkout/charge.test.ts > chargeOrder > returns the failure reason for a hard-declined charge","groupId":null},{"num":118,"text":" ✓ tests/checkout/webhook.test.ts (3 tests) 9ms","groupId":null},{"num":119,"text":"   ✓ paymentWebhook > returns 204 for unknown event types","groupId":null},{"num":120,"text":"   ✓ paymentWebhook > transitions the order to paid on charge.succeeded","groupId":null},{"num":121,"text":"   ✓ paymentWebhook > transitions the order to failed on charge.failed","groupId":null},{"num":122,"text":"2026-05-04T16:21:38.2412101Z","groupId":null},{"num":123,"text":" Test Files  1 failed | 3 passed (4)","groupId":null},{"num":124,"text":"      Tests  2 failed | 13 passed (15)","groupId":null},{"num":125,"text":"   Start at  16:21:35","groupId":null},{"num":126,"text":"   Duration  2.30s","groupId":null},{"num":127,"text":"2026-05-04T16:21:38.2416621Z","groupId":null},{"num":128,"text":"npm ERR! Lifecycle script `test` failed with error:","groupId":null},{"num":129,"text":"npm ERR! Error: command failed","groupId":null},{"num":130,"text":"npm ERR!   in workspace: checkout-service@0.4.1","groupId":null},{"num":131,"text":"npm ERR!   at location: /home/runner/work/checkout-service/checkout-service","groupId":null},{"num":132,"text":"##[error]Process completed with exit code 1.","groupId":null},{"num":133,"text":"Post job cleanup.","groupId":null},{"num":134,"text":"[command]/usr/bin/git version","groupId":null},{"num":135,"text":"git version 2.43.0","groupId":null},{"num":136,"text":"##[group]Cleaning up orphan processes","groupId":"g_0008"},{"num":137,"text":"##[endgroup]","groupId":"g_0008"},{"num":138,"text":"Cleaning up orphan processes","groupId":null},{"num":139,"text":"","groupId":null}],"sourceFile":"input.log","sizeBytes":8754,"format":"ci-log"};</script>
+<script>
+(function(){
+  const $ = sel => document.querySelector(sel);
+  const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+  function escHtml(s){return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+  function escapeRegex(s){return String(s).replace(/[.*+?^()|[\]\\{}]/g, "\\$&")}
+  function highlight(s, q){
+    if (!q) return escHtml(s);
+    const re = new RegExp("(" + escapeRegex(q) + ")", "ig");
+    return escHtml(s).replace(re, "<mark>$1</mark>");
+  }
+
+  /* ---------- search across raw drill-down ---------- */
+  const rawSearch = $("#raw-search");
+  if (rawSearch) {
+    rawSearch.addEventListener("input", () => {
+      const q = rawSearch.value.trim();
+      const target = $("#raw-content");
+      if (!target) return;
+      const lines = target.querySelectorAll("[data-text]");
+      let firstHit = null;
+      lines.forEach(el => {
+        const text = el.getAttribute("data-text") || "";
+        if (!q) {
+          el.innerHTML = el.getAttribute("data-original") || escHtml(text);
+          el.style.display = "";
+        } else {
+          if (text.toLowerCase().includes(q.toLowerCase())) {
+            el.innerHTML = highlight(text, q);
+            el.style.display = "";
+            if (!firstHit) firstHit = el;
+          } else {
+            el.style.display = "none";
+          }
+        }
+      });
+      const summary = $("#raw-section");
+      if (summary && q) summary.open = true;
+      if (firstHit) firstHit.scrollIntoView({block: "center", behavior: "smooth"});
+    });
+  }
+
+  /* ---------- vendor frame fold (stack-trace) ---------- */
+  $$(".fold-toggle").forEach(t => {
+    t.addEventListener("click", () => {
+      const list = t.closest("ul").querySelectorAll("li.frame.vendor");
+      const folded = t.getAttribute("data-folded") === "1";
+      list.forEach(el => { el.style.display = folded ? "" : "none"; });
+      t.setAttribute("data-folded", folded ? "0" : "1");
+      t.textContent = folded ? "Hide framework / vendor frames" : ("Show " + list.length + " framework / vendor frames");
+    });
+    // start folded
+    const list = t.closest("ul").querySelectorAll("li.frame.vendor");
+    list.forEach(el => { el.style.display = "none"; });
+  });
+
+  /* ---------- copy summary ---------- */
+  const btn = $("#copy-md-btn");
+  if (btn) {
+    btn.addEventListener("click", async () => {
+      const md = window.__MARKDOWN_SUMMARY__ || "";
+      try {
+        await navigator.clipboard.writeText(md);
+        btn.textContent = "Copied!";
+        setTimeout(() => { btn.textContent = "Copy summary"; }, 1500);
+      } catch {
+        window.prompt("Copy this Markdown:", md);
+      }
+    });
+  }
+})();
+</script>
+<script>window.__MARKDOWN_SUMMARY__ = "# CI run — failed\n\n- Provider: github-actions\n- Exit code: 1\n- Lines: 139 · Steps: 8 · Errors: 7 · Failing tests: 2\n\n## Suspected cause (hypothesis)\n1. The failing assertions (chargeOrder > queues the charge and returns pending for a pending_review status; chargeOrder > queues the charge for a requires_action status) reflects a real production-code regression introduced on this branch. — distinguishing test: Re-run on the same revision; if it fails again, this is a real regression. If it passes, see the next hypothesis (flaky test).\n2. The failure is environmental — a flaky test, a slow setup step, or a network call to an external service that was momentarily unavailable. — distinguishing test: Re-run the job. If the failure does not reproduce, this is the cause.\n\n## Failing tests\n- **chargeOrder > queues the charge and returns pending for a pending_review status** — tests/checkout/charge.test.ts\n- **chargeOrder > queues the charge for a requires_action status** — tests/checkout/charge.test.ts\n\n## Review checklist\n1. Re-run the workflow on the same revision to confirm the failure reproduces (flaky vs real regression).\n2. Reproduce chargeOrder &gt; queues the charge and returns pending for a pending_review status locally with the same node / python / go version.\n3. Open tests/checkout/charge.test.ts and read the assertion in context.\n4. Compare the failing run's environment (runner image, node version, package-lock) against the last passing run.\n5. Walk the log's step strip above and skim the failed step's first 10 and last 10 lines.\n\n_Hypothesis from log scan. Verify against the runtime before acting._";</script>
+</body>
+</html>
