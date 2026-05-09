@@ -159,6 +159,9 @@ client-side rendering of the drill-down sections.
 | [`prompts/reading-list.md`](./prompts/reading-list.md) | Pocket / Instapaper / Raindrop / Matter / Readwise Reader / Omnivore CSV / JSON exports — reading-queue audit: saving-rhythm timeline, top domains, status / collection breakdown, stale-inbox callouts, searchable cards |
 | [`prompts/github-repo.md`](./prompts/github-repo.md) | github.com/owner/repo URLs |
 | [`prompts/url-article.md`](./prompts/url-article.md) | Blog posts, news articles, long-form web pages |
+| [`prompts/medical-visit.md`](./prompts/medical-visit.md) | Clinical visit summaries (`.md` / `.txt`) — care-record summary: encounters, vitals (label-only, no interpretation), medication mentions, missing-info & "ask your clinician" question list. Synthetic data only. |
+| [`prompts/lab-results.md`](./prompts/lab-results.md) | Laboratory results CSV with reference ranges (header trio of test/value/reference) — out-of-reference callouts using *"outside the reference range printed on this row"*, trend sparklines for repeated tests, panel grouping. |
+| [`prompts/legal-chronology.md`](./prompts/legal-chronology.md) | Free-text legal case chronologies (`.md` / `.txt`) — case header, deadline map (dates listed on the document), filings list, parties, missing-exhibit callouts, "ask your attorney" question list. Synthetic data only. |
 | [`prompts/default.md`](./prompts/default.md) | Anything else |
 
 Long-document sources (`markdown`, `pdf`, `docx`) also load
@@ -244,6 +247,29 @@ OpenGraph unfurls, no dead-link verification calls). Open-original
 links are plain `<a href target="_blank" rel="noopener noreferrer">`.
 Duplicate, stale, and dead-link flags are heuristic-only hypotheses,
 not verdicts.
+
+Sensitive-record sources (`medical-visit`, `lab-results`,
+`legal-chronology`) also load
+[`prompts/_sensitive.md`](./prompts/_sensitive.md) — the shared
+contract for the sensitive-record pack: timeline of events, parties
++ roles, documents (with "missing" badge for items the record
+references but does not include), missing information & "ask
+your clinician / attorney / case manager" question list, and a
+searchable record drill-down. Subtype-specific layers add
+out-of-reference callouts + trend sparklines (lab-results),
+encounter cards + medications (medical-visit), and case header +
+deadline map + filings list (legal-chronology). **Hard rule**:
+outputs are organizational summaries — never medical, legal,
+immigration, or insurance advice. The page never diagnoses,
+prognoses, prescribes, recommends a treatment, computes a statute
+of limitations, opines on a motion, or tells the user what to file
+/ take / pay. Out-of-range lab rows are flagged with the canonical
+phrase *"outside the reference range printed on this row"* —
+never *"abnormal"*. Deadlines are *"dates listed on this
+document"*. Examples shipped in this repo under
+`examples/medical-visit/`, `examples/lab-results/`, and
+`examples/legal-chronology/` are **fully synthetic**; do not commit
+real records.
 
 **Adding a new source** = drop a new `<source>.md` in `prompts/`,
 following the same shape as existing ones. No code changes, no

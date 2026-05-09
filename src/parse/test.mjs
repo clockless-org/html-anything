@@ -478,3 +478,80 @@ test("geo family prompts are present on disk", async () => {
     assert.ok(stat.isFile(), `missing prompt file: ${name}`)
   }
 })
+
+test("sensitive parser routes the synthetic medical-visit fixture to medical-visit", async () => {
+  const fp = path.join(REPO, "examples/medical-visit/input.md")
+  const parser = await pickParser(fp)
+  assert.equal(parser?.name, "sensitive")
+  const out = await parser.parse(fp)
+  assert.equal(out.contentType, "medical-visit")
+  assert.equal(out.data.format, "medical-visit")
+  assert.ok(out.data.encounters.length >= 3, `expected >= 3 encounters, got ${out.data.encounters.length}`)
+  assert.ok(out.data.medications.length >= 2, `expected >= 2 medications`)
+  assert.ok(out.data.parties.length >= 2, "expected providers + patient as parties")
+  assert.ok(out.data.openQuestions.length > 0, "should surface at least one ask-your-clinician question")
+  // Family contract: events / parties / documents / missingItems / openQuestions all present.
+  for (const k of ["events", "parties", "documents", "missingItems", "openQuestions"]) {
+    assert.ok(Array.isArray(out.data[k]), `missing required field: ${k}`)
+  }
+})
+
+test("sensitive parser routes the synthetic lab-results fixture to lab-results", async () => {
+  const fp = path.join(REPO, "examples/lab-results/input.csv")
+  const parser = await pickParser(fp)
+  assert.equal(parser?.name, "sensitive")
+  const out = await parser.parse(fp)
+  assert.equal(out.contentType, "lab-results")
+  assert.equal(out.data.format, "lab-results")
+  assert.ok(out.data.rows.length >= 25, `expected >= 25 rows, got ${out.data.rows.length}`)
+  assert.ok(out.data.outOfRange.length > 0, "fixture should have out-of-reference rows")
+  // Out-of-range rows must carry an explicit direction (above/below).
+  for (const r of out.data.outOfRange) {
+    assert.ok(r.direction === "above" || r.direction === "below",
+      `out-of-range row has wrong direction: ${r.direction}`)
+  }
+  // Trends must form when the same test appears more than once.
+  assert.ok(out.data.trends.length > 0, "expected at least one trend (A1c / LDL / HDL repeat across draws)")
+  // Open questions phrased as questions, never imperatives.
+  for (const q of out.data.openQuestions) {
+    assert.ok(/^Ask /.test(q.question) || /\?$/.test(q.question),
+      `open question must start with 'Ask ' or end with '?': ${q.question}`)
+  }
+})
+
+test("sensitive parser routes the synthetic legal-chronology fixture to legal-chronology", async () => {
+  const fp = path.join(REPO, "examples/legal-chronology/input.md")
+  const parser = await pickParser(fp)
+  assert.equal(parser?.name, "sensitive")
+  const out = await parser.parse(fp)
+  assert.equal(out.contentType, "legal-chronology")
+  assert.equal(out.data.format, "legal-chronology")
+  assert.ok(out.data.events.length >= 15, `expected >= 15 events, got ${out.data.events.length}`)
+  assert.ok(out.data.filings.length >= 5, `expected >= 5 filings, got ${out.data.filings.length}`)
+  assert.ok(out.data.deadlines.length >= 3, `expected >= 3 deadlines`)
+  assert.ok(out.data.documents.length >= 3, `expected exhibits in documents — got ${out.data.documents.length}`)
+  // Case header must extract docket + court from the synthetic chronology.
+  assert.ok(out.data.caseHeader.docket, "missing docket")
+  assert.ok(out.data.caseHeader.court, "missing court")
+})
+
+test("registry order: sensitive comes before finance and markdown", async () => {
+  const { parsers } = await import("../../dist/parse/index.js")
+  const names = parsers.map(p => p.name)
+  const sensitiveIdx = names.indexOf("sensitive")
+  const financeIdx = names.indexOf("finance")
+  const markdownIdx = names.indexOf("markdown")
+  assert.ok(sensitiveIdx >= 0, `parsers missing 'sensitive' — got ${names.join(", ")}`)
+  assert.ok(sensitiveIdx < financeIdx, "sensitive must come before finance (lab-results would otherwise be mis-routed)")
+  assert.ok(sensitiveIdx < markdownIdx, "sensitive must come before markdown (medical-visit / legal-chronology would otherwise be mis-routed)")
+})
+
+test("sensitive family prompts are present on disk", async () => {
+  const fs = await import("node:fs/promises")
+  const expectedPrompts = ["_sensitive.md", "medical-visit.md", "lab-results.md", "legal-chronology.md"]
+  for (const name of expectedPrompts) {
+    const p = path.join(REPO, "prompts", name)
+    const stat = await fs.stat(p)
+    assert.ok(stat.isFile(), `missing prompt file: ${name}`)
+  }
+})

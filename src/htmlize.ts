@@ -245,6 +245,18 @@ function familyFor(contentType: string): string | null {
   ) {
     return "_geo.md"
   }
+  // Sensitive-record sources (lab results CSV, medical visit /
+  // legal chronology markdown). Share the timeline / parties /
+  // documents / missing-and-next-questions / drill-down contract,
+  // and the hard rule that outputs are organizational summaries —
+  // never medical, legal, immigration, or insurance advice.
+  if (
+    contentType === "lab-results" ||
+    contentType === "medical-visit" ||
+    contentType === "legal-chronology"
+  ) {
+    return "_sensitive.md"
+  }
   return null
 }
 
