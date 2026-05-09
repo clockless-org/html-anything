@@ -1,0 +1,630 @@
+{
+  "name": "Brewline Support · Acme Coffee",
+  "type": "private_supergroup",
+  "id": 9988776655,
+  "messages": [
+    {
+      "id": 4001,
+      "type": "message",
+      "date": "2026-04-13T13:01:00",
+      "date_unixtime": "1776085260",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "morning team — our brewline dashboard is showing every hopper as offline since 8am. we've had no orders ingested. is it on your end or ours?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "morning team — our brewline dashboard is showing every hopper as offline since 8am. we've had no orders ingested. is it on your end or ours?"
+        }
+      ]
+    },
+    {
+      "id": 4002,
+      "type": "message",
+      "date": "2026-04-13T13:02:48",
+      "date_unixtime": "1776085368",
+      "from": "Jamie (Brewline)",
+      "from_id": "user5550222",
+      "text": "hi olivia — we see the same on our side, investigating. apologies. I'll have a status update in 15.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "hi olivia — we see the same on our side, investigating. apologies. I'll have a status update in 15."
+        }
+      ],
+      "reply_to_message_id": 4001
+    },
+    {
+      "id": 4003,
+      "type": "message",
+      "date": "2026-04-13T13:14:30",
+      "date_unixtime": "1776086070",
+      "from": "Jamie (Brewline)",
+      "from_id": "user5550222",
+      "text": "update: it's on us. our queue worker hit a timeout cascade at 7:55am. we're rolling a fix now, eta 20 minutes to recovery.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "update: it's on us. our queue worker hit a timeout cascade at 7:55am. we're rolling a fix now, eta 20 minutes to recovery."
+        }
+      ]
+    },
+    {
+      "id": 4004,
+      "type": "message",
+      "date": "2026-04-13T13:16:00",
+      "date_unixtime": "1776086160",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "ok thanks. can you confirm: any data was lost? we have 4 retail locations that have been pushing orders this morning.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "ok thanks. can you confirm: any data was lost? we have 4 retail locations that have been pushing orders this morning."
+        }
+      ]
+    },
+    {
+      "id": 4005,
+      "type": "message",
+      "date": "2026-04-13T13:17:42",
+      "date_unixtime": "1776086262",
+      "from": "Jamie (Brewline)",
+      "from_id": "user5550222",
+      "text": "no data loss — orders were buffered on the device side. they'll sync as soon as the queue is healthy.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "no data loss — orders were buffered on the device side. they'll sync as soon as the queue is healthy."
+        }
+      ],
+      "reply_to_message_id": 4004
+    },
+    {
+      "id": 4006,
+      "type": "message",
+      "date": "2026-04-13T13:32:00",
+      "date_unixtime": "1776087120",
+      "from": "Tariq (Brewline)",
+      "from_id": "user5550333",
+      "text": "queue is healthy, sync is in progress. seeing 1,847 buffered orders flowing through now.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "queue is healthy, sync is in progress. seeing 1,847 buffered orders flowing through now."
+        }
+      ]
+    },
+    {
+      "id": 4007,
+      "type": "message",
+      "date": "2026-04-13T13:38:18",
+      "date_unixtime": "1776087498",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "I see them on our dashboard. all 4 stores are reporting again. thank you both.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "I see them on our dashboard. all 4 stores are reporting again. thank you both."
+        }
+      ]
+    },
+    {
+      "id": 4008,
+      "type": "message",
+      "date": "2026-04-13T13:38:50",
+      "date_unixtime": "1776087530",
+      "from": "Jamie (Brewline)",
+      "from_id": "user5550222",
+      "text": "you're welcome — really sorry about the disruption. we'll send you a postmortem by friday and a service credit on the next invoice.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "you're welcome — really sorry about the disruption. we'll send you a postmortem by friday and a service credit on the next invoice."
+        }
+      ]
+    },
+    {
+      "id": 4009,
+      "type": "message",
+      "date": "2026-04-13T13:39:30",
+      "date_unixtime": "1776087570",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "appreciated. one ask: can you also flag what we should look for on our side next time so we know whether to ping you immediately?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "appreciated. one ask: can you also flag what we should look for on our side next time so we know whether to ping you immediately?"
+        }
+      ]
+    },
+    {
+      "id": 4010,
+      "type": "message",
+      "date": "2026-04-13T13:41:01",
+      "date_unixtime": "1776087661",
+      "from": "Jamie (Brewline)",
+      "from_id": "user5550222",
+      "text": "yes — if your dashboard shows >5 minutes of consecutive 'offline' on more than 2 hoppers, that's almost always us. ping immediately, it'll never be a false alarm.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "yes — if your dashboard shows >5 minutes of consecutive 'offline' on more than 2 hoppers, that's almost always us. ping immediately, it'll never be a false alarm."
+        }
+      ],
+      "reply_to_message_id": 4009
+    },
+    {
+      "id": 4011,
+      "type": "message",
+      "date": "2026-04-14T15:11:09",
+      "date_unixtime": "1776179469",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "hey — got a billing q. our invoice for april shows a 15% over-quota fee but we're tracking 11k events under the 12k limit. can you take a look?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "hey — got a billing q. our invoice for april shows a 15% over-quota fee but we're tracking 11k events under the 12k limit. can you take a look?"
+        }
+      ]
+    },
+    {
+      "id": 4012,
+      "type": "message",
+      "date": "2026-04-14T15:18:30",
+      "date_unixtime": "1776179910",
+      "from": "Tariq (Brewline)",
+      "from_id": "user5550333",
+      "text": "looking now. one moment.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "looking now. one moment."
+        }
+      ]
+    },
+    {
+      "id": 4013,
+      "type": "message",
+      "date": "2026-04-14T15:24:40",
+      "date_unixtime": "1776180280",
+      "from": "Tariq (Brewline)",
+      "from_id": "user5550333",
+      "text": "found it — the buffered orders from yesterday's outage came in as a single burst and tripped our daily-spike rule. that's a billing bug on our end, you should not be charged for that.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "found it — the buffered orders from yesterday's outage came in as a single burst and tripped our daily-spike rule. that's a billing bug on our end, you should not be charged for that."
+        }
+      ]
+    },
+    {
+      "id": 4014,
+      "type": "message",
+      "date": "2026-04-14T15:25:11",
+      "date_unixtime": "1776180311",
+      "from": "Tariq (Brewline)",
+      "from_id": "user5550333",
+      "text": "I'll credit the over-quota fee on this invoice and patch the spike rule so it ignores backfill bursts. you should see the corrected invoice within the hour.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "I'll credit the over-quota fee on this invoice and patch the spike rule so it ignores backfill bursts. you should see the corrected invoice within the hour."
+        }
+      ]
+    },
+    {
+      "id": 4015,
+      "type": "message",
+      "date": "2026-04-14T15:25:48",
+      "date_unixtime": "1776180348",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "perfect, thanks tariq.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "perfect, thanks tariq."
+        }
+      ]
+    },
+    {
+      "id": 4016,
+      "type": "message",
+      "date": "2026-04-14T16:32:00",
+      "date_unixtime": "1776184320",
+      "from": "Tariq (Brewline)",
+      "from_id": "user5550333",
+      "text": "corrected invoice is sent — just resend, original is voided. credit of $186.40 applied.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "corrected invoice is sent — just resend, original is voided. credit of $186.40 applied."
+        }
+      ]
+    },
+    {
+      "id": 4017,
+      "type": "message",
+      "date": "2026-04-14T16:33:11",
+      "date_unixtime": "1776184391",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "got it. thanks.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "got it. thanks."
+        }
+      ]
+    },
+    {
+      "id": 4018,
+      "type": "message",
+      "date": "2026-04-15T18:02:18",
+      "date_unixtime": "1776276138",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "different topic: we've been asking for csv export on the orders dashboard for a while. any update?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "different topic: we've been asking for csv export on the orders dashboard for a while. any update?"
+        }
+      ]
+    },
+    {
+      "id": 4019,
+      "type": "message",
+      "date": "2026-04-15T18:08:30",
+      "date_unixtime": "1776276510",
+      "from": "Jamie (Brewline)",
+      "from_id": "user5550222",
+      "text": "yes — it's on the roadmap for q2. our pm is actually writing the spec this week. would you be open to a 15-minute call to walk through what columns and filters matter most to you?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "yes — it's on the roadmap for q2. our pm is actually writing the spec this week. would you be open to a 15-minute call to walk through what columns and filters matter most to you?"
+        }
+      ]
+    },
+    {
+      "id": 4020,
+      "type": "message",
+      "date": "2026-04-15T18:09:40",
+      "date_unixtime": "1776276580",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "yes. tomorrow afternoon works, after 3pm pacific.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "yes. tomorrow afternoon works, after 3pm pacific."
+        }
+      ]
+    },
+    {
+      "id": 4021,
+      "type": "message",
+      "date": "2026-04-15T18:10:18",
+      "date_unixtime": "1776276618",
+      "from": "Jamie (Brewline)",
+      "from_id": "user5550222",
+      "text": "I'll send a calendar invite for thursday 3:30pm pacific with our pm.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "I'll send a calendar invite for thursday 3:30pm pacific with our pm."
+        }
+      ]
+    },
+    {
+      "id": 4022,
+      "type": "message",
+      "date": "2026-04-15T18:11:00",
+      "date_unixtime": "1776276660",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "great.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "great."
+        }
+      ]
+    },
+    {
+      "id": 4023,
+      "type": "message",
+      "date": "2026-04-16T22:48:09",
+      "date_unixtime": "1776379689",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "talked to your pm earlier — really helpful. she said the export will support all 12 columns we use plus a date-range filter. eta end of may?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "talked to your pm earlier — really helpful. she said the export will support all 12 columns we use plus a date-range filter. eta end of may?"
+        }
+      ]
+    },
+    {
+      "id": 4024,
+      "type": "message",
+      "date": "2026-04-16T22:50:18",
+      "date_unixtime": "1776379818",
+      "from": "Jamie (Brewline)",
+      "from_id": "user5550222",
+      "text": "yes — she walked me through it after your call. we'll have a beta in two weeks for you to test, public release end of may.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "yes — she walked me through it after your call. we'll have a beta in two weeks for you to test, public release end of may."
+        }
+      ]
+    },
+    {
+      "id": 4025,
+      "type": "message",
+      "date": "2026-04-16T22:51:00",
+      "date_unixtime": "1776379860",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "amazing. happy to be the beta tester.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "amazing. happy to be the beta tester."
+        }
+      ]
+    },
+    {
+      "id": 4026,
+      "type": "message",
+      "date": "2026-04-17T19:11:00",
+      "date_unixtime": "1776453060",
+      "from": "Tariq (Brewline)",
+      "from_id": "user5550333",
+      "text": "as promised — postmortem for monday's outage is attached. tldr: a config drift from a deploy on sunday set our queue worker timeout 10x too low. the cascade was the symptom; the root cause was the config drift.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "as promised — postmortem for monday's outage is attached. tldr: a config drift from a deploy on sunday set our queue worker timeout 10x too low. the cascade was the symptom; the root cause was the config drift."
+        }
+      ],
+      "file": "brewline-postmortem-2026-04-13.pdf",
+      "mime_type": "application/pdf"
+    },
+    {
+      "id": 4027,
+      "type": "message",
+      "date": "2026-04-17T19:12:48",
+      "date_unixtime": "1776453168",
+      "from": "Tariq (Brewline)",
+      "from_id": "user5550333",
+      "text": "we've added a config-drift monitor that pages on-call within 30 seconds of any prod-config change that doesn't match our terraform state. small thing, big effect.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "we've added a config-drift monitor that pages on-call within 30 seconds of any prod-config change that doesn't match our terraform state. small thing, big effect."
+        }
+      ]
+    },
+    {
+      "id": 4028,
+      "type": "message",
+      "date": "2026-04-17T19:18:11",
+      "date_unixtime": "1776453491",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "thanks for the writeup, that's a thorough postmortem. forwarding to our cto.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "thanks for the writeup, that's a thorough postmortem. forwarding to our cto."
+        }
+      ]
+    },
+    {
+      "id": 4029,
+      "type": "message",
+      "date": "2026-04-17T19:24:00",
+      "date_unixtime": "1776453840",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "[forwarded] our cto says 'this is the kind of postmortem I wish more vendors wrote, please thank them'",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "[forwarded] our cto says 'this is the kind of postmortem I wish more vendors wrote, please thank them'"
+        }
+      ],
+      "forwarded_from": "Olivia Rao"
+    },
+    {
+      "id": 4030,
+      "type": "message",
+      "date": "2026-04-17T19:25:00",
+      "date_unixtime": "1776453900",
+      "from": "Jamie (Brewline)",
+      "from_id": "user5550222",
+      "text": "that means a lot, thank you. and please thank your cto.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "that means a lot, thank you. and please thank your cto."
+        }
+      ]
+    },
+    {
+      "id": 4031,
+      "type": "message",
+      "date": "2026-04-21T16:00:00",
+      "date_unixtime": "1776787200",
+      "from": "Jamie (Brewline)",
+      "from_id": "user5550222",
+      "text": "good news — csv export beta is live for your account a week early. log in and you should see the new 'export' button on the orders page. would love your feedback this week.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "good news — csv export beta is live for your account a week early. log in and you should see the new 'export' button on the orders page. would love your feedback this week."
+        }
+      ]
+    },
+    {
+      "id": 4032,
+      "type": "message",
+      "date": "2026-04-21T16:08:18",
+      "date_unixtime": "1776787698",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "wow, fast. trying it now.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "wow, fast. trying it now."
+        }
+      ]
+    },
+    {
+      "id": 4033,
+      "type": "message",
+      "date": "2026-04-21T16:14:09",
+      "date_unixtime": "1776788049",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "first impressions: works, the date filter is exactly what we wanted. small thing — when I export over 50k rows the page hangs for a few seconds before the download starts. is there a progress indicator coming?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "first impressions: works, the date filter is exactly what we wanted. small thing — when I export over 50k rows the page hangs for a few seconds before the download starts. is there a progress indicator coming?"
+        }
+      ]
+    },
+    {
+      "id": 4034,
+      "type": "message",
+      "date": "2026-04-21T16:18:30",
+      "date_unixtime": "1776788310",
+      "from": "Jamie (Brewline)",
+      "from_id": "user5550222",
+      "text": "good catch. progress bar + 'export in background, we'll email you the link' fallback for >25k rows is on the v2 list. I'll bump it up so it's in v1.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "good catch. progress bar + 'export in background, we'll email you the link' fallback for >25k rows is on the v2 list. I'll bump it up so it's in v1."
+        }
+      ],
+      "reply_to_message_id": 4033
+    },
+    {
+      "id": 4035,
+      "type": "message",
+      "date": "2026-04-21T16:19:00",
+      "date_unixtime": "1776788340",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "thanks 🙏",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "thanks 🙏"
+        }
+      ]
+    },
+    {
+      "id": 4036,
+      "type": "message",
+      "date": "2026-04-22T15:32:18",
+      "date_unixtime": "1776871938",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "another small one — could the export include the 'cancellation_reason' column? we need it for our weekly ops review.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "another small one — could the export include the 'cancellation_reason' column? we need it for our weekly ops review."
+        }
+      ]
+    },
+    {
+      "id": 4037,
+      "type": "message",
+      "date": "2026-04-22T15:40:00",
+      "date_unixtime": "1776872400",
+      "from": "Jamie (Brewline)",
+      "from_id": "user5550222",
+      "text": "yes, easy add. it'll be in tomorrow's beta build.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "yes, easy add. it'll be in tomorrow's beta build."
+        }
+      ],
+      "reply_to_message_id": 4036
+    },
+    {
+      "id": 4038,
+      "type": "message",
+      "date": "2026-04-23T17:05:08",
+      "date_unixtime": "1776963908",
+      "from": "Jamie (Brewline)",
+      "from_id": "user5550222",
+      "text": "tomorrow's beta is now today's beta — cancellation_reason column is in. progress bar lands monday.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "tomorrow's beta is now today's beta — cancellation_reason column is in. progress bar lands monday."
+        }
+      ]
+    },
+    {
+      "id": 4039,
+      "type": "message",
+      "date": "2026-04-23T17:09:42",
+      "date_unixtime": "1776964182",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "verified. perfect.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "verified. perfect."
+        }
+      ]
+    },
+    {
+      "id": 4040,
+      "type": "message",
+      "date": "2026-04-24T16:20:00",
+      "date_unixtime": "1777047600",
+      "from": "Olivia Rao",
+      "from_id": "user5550111",
+      "text": "appreciate the responsiveness this week. the outage on monday could have been a brutal start but you turned it around.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "appreciate the responsiveness this week. the outage on monday could have been a brutal start but you turned it around."
+        }
+      ]
+    },
+    {
+      "id": 4041,
+      "type": "message",
+      "date": "2026-04-24T16:21:30",
+      "date_unixtime": "1777047690",
+      "from": "Jamie (Brewline)",
+      "from_id": "user5550222",
+      "text": "thank you — that's the loop we try to close every time. have a good weekend.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "thank you — that's the loop we try to close every time. have a good weekend."
+        }
+      ]
+    }
+  ]
+}

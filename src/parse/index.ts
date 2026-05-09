@@ -11,6 +11,10 @@ import type { Parser } from "../types.js"
 import { parser as emailParser } from "./email.js"
 import { parser as transcriptParser } from "./transcript.js"
 import { parser as whatsappParser } from "./whatsapp.js"
+import { parser as slackParser } from "./slack.js"
+import { parser as discordParser } from "./discord.js"
+import { parser as telegramParser } from "./telegram.js"
+import { parser as imessageParser } from "./imessage.js"
 import { parser as csvParser } from "./csv.js"
 import { parser as markdownParser } from "./markdown.js"
 import { parser as jsonParser } from "./json.js"
@@ -22,9 +26,13 @@ export const parsers: Parser[] = [
   emailParser,      // .eml / .mbox (also catches Gmail Takeout exports)
   transcriptParser, // .vtt / .srt / timecoded .txt (Zoom, Teams, Meet, YouTube)
   whatsappParser,   // .txt with timestamp prefix
-  csvParser,        // .csv / .tsv
+  slackParser,      // .json — Slack channel export array
+  discordParser,    // .json / .csv — DiscordChatExporter
+  telegramParser,   // .json — Telegram Desktop result.json
+  imessageParser,   // .csv — iMessage-style / generic multi-sender chat
+  csvParser,        // .csv / .tsv (generic tabular fallback)
   markdownParser,   // .md / .markdown
-  jsonParser,       // .json
+  jsonParser,       // .json (generic fallback)
   pdfParser,        // .pdf
   docxParser,       // .docx
   textParser,       // catch-all (plain text)

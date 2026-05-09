@@ -1,0 +1,864 @@
+{
+  "channel": "product-launch",
+  "messages": [
+    {
+      "type": "message",
+      "user": "U01MIRA",
+      "user_profile": {
+        "real_name": "Mira Park",
+        "display_name": "mira",
+        "name": "mira"
+      },
+      "text": "morning all — launch comms doc is up. <@U02SAML> can you take a pass on the engineering risks section today",
+      "ts": "1776092520.653962"
+    },
+    {
+      "type": "message",
+      "user": "U02SAML",
+      "user_profile": {
+        "real_name": "Sam Liu",
+        "display_name": "sam",
+        "name": "sam"
+      },
+      "text": "yeah will look this afternoon. quick read says rollout plan is missing the kill-switch path",
+      "ts": "1776092670.530139"
+    },
+    {
+      "type": "message",
+      "user": "U01MIRA",
+      "user_profile": {
+        "real_name": "Mira Park",
+        "display_name": "mira",
+        "name": "mira"
+      },
+      "text": "good catch. add it. also pull <@U05PRYA> in, she wrote the original",
+      "ts": "1776092745.934202"
+    },
+    {
+      "type": "message",
+      "user": "U05PRYA",
+      "user_profile": {
+        "real_name": "Priya Shah",
+        "display_name": "priya",
+        "name": "priya"
+      },
+      "text": "on it",
+      "ts": "1776092772.954984"
+    },
+    {
+      "type": "message",
+      "user": "U03JRDN",
+      "user_profile": {
+        "real_name": "Jordan Reyes",
+        "display_name": "jordan",
+        "name": "jordan"
+      },
+      "text": "design review tomorrow at 11. agenda is pinned. mostly the empty-state polish + the mobile sheet",
+      "ts": "1776098521.793734"
+    },
+    {
+      "type": "message",
+      "user": "U06DREW",
+      "user_profile": {
+        "real_name": "Drew Kim",
+        "display_name": "drew",
+        "name": "drew"
+      },
+      "text": "I'll be there. quick fyi <!here> we're aiming for a thursday cut, friday rollout — so feedback today/tomorrow only please",
+      "ts": "1776098598.618808",
+      "reactions": [
+        {
+          "name": "+1",
+          "count": 4
+        },
+        {
+          "name": "white_check_mark",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "type": "message",
+      "user": "U04CASE",
+      "user_profile": {
+        "real_name": "Casey Brooks",
+        "display_name": "casey",
+        "name": "casey"
+      },
+      "text": "noted, will get my mobile sheet PR up by EOD",
+      "ts": "1776098706.485121"
+    },
+    {
+      "type": "message",
+      "user": "U02SAML",
+      "user_profile": {
+        "real_name": "Sam Liu",
+        "display_name": "sam",
+        "name": "sam"
+      },
+      "text": "PR-2841 is up for the kill-switch — small change, just a feature flag tied to the existing config",
+      "ts": "1776103882.326342",
+      "files": [
+        {
+          "name": "PR-2841-diff.patch",
+          "mimetype": "text/x-patch"
+        }
+      ]
+    },
+    {
+      "type": "message",
+      "user": "U06DREW",
+      "user_profile": {
+        "real_name": "Drew Kim",
+        "display_name": "drew",
+        "name": "drew"
+      },
+      "text": "lgtm, approving. let's land it today so qa has it for tomorrow",
+      "ts": "1776103989.837593",
+      "reactions": [
+        {
+          "name": "shipit",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "type": "message",
+      "user": "U04CASE",
+      "user_profile": {
+        "real_name": "Casey Brooks",
+        "display_name": "casey"
+      },
+      "text": "PR-2842 — mobile sheet. has the keyboard-avoidance fix from <#C098JRDN|design-systems>. need a designer to glance at the rest motion",
+      "ts": "1776111600.600189",
+      "thread_ts": "1776111600.600189",
+      "reply_count": 4
+    },
+    {
+      "type": "message",
+      "user": "U03JRDN",
+      "user_profile": {
+        "real_name": "Jordan Reyes",
+        "display_name": "jordan",
+        "name": "jordan"
+      },
+      "text": "looking now",
+      "ts": "1776112272.599800",
+      "thread_ts": "1776111600.600189"
+    },
+    {
+      "type": "message",
+      "user": "U03JRDN",
+      "user_profile": {
+        "real_name": "Jordan Reyes",
+        "display_name": "jordan",
+        "name": "jordan"
+      },
+      "text": "rest motion is fine — but the dismiss timing is too snappy. can you bump it to 220ms with the standard ease-out",
+      "ts": "1776112550.912176",
+      "thread_ts": "1776111600.600189"
+    },
+    {
+      "type": "message",
+      "user": "U04CASE",
+      "user_profile": {
+        "real_name": "Casey Brooks",
+        "display_name": "casey",
+        "name": "casey"
+      },
+      "text": "bumped. want me to merge",
+      "ts": "1776112593.244878",
+      "thread_ts": "1776111600.600189"
+    },
+    {
+      "type": "message",
+      "user": "U03JRDN",
+      "user_profile": {
+        "real_name": "Jordan Reyes",
+        "display_name": "jordan",
+        "name": "jordan"
+      },
+      "text": "yes ship it",
+      "ts": "1776112621.451884",
+      "thread_ts": "1776111600.600189",
+      "reactions": [
+        {
+          "name": "rocket",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "message",
+      "user": "U03JRDN",
+      "user_profile": {
+        "real_name": "Jordan Reyes",
+        "display_name": "jordan",
+        "name": "jordan"
+      },
+      "text": "design review notes are in the doc. tldr: empty state is approved, sheet is approved, header lockup needs one more round",
+      "ts": "1776181680.512388"
+    },
+    {
+      "type": "message",
+      "user": "U01MIRA",
+      "user_profile": {
+        "real_name": "Mira Park",
+        "display_name": "mira",
+        "name": "mira"
+      },
+      "text": "sounds good. <@U03JRDN> can you ship the header revision by tomorrow EOD?",
+      "ts": "1776181751.938900"
+    },
+    {
+      "type": "message",
+      "user": "U03JRDN",
+      "user_profile": {
+        "real_name": "Jordan Reyes",
+        "display_name": "jordan",
+        "name": "jordan"
+      },
+      "text": "yes, I'll send it tonight.",
+      "ts": "1776181782.563673"
+    },
+    {
+      "type": "message",
+      "user": "U05PRYA",
+      "user_profile": {
+        "real_name": "Priya Shah",
+        "display_name": "priya",
+        "name": "priya"
+      },
+      "text": "data quick check — 3% of accounts will hit the v2 path on day 1 because of the gradual rollout. is that what we want, or are we starting at 100%?",
+      "ts": "1776187350.466888"
+    },
+    {
+      "type": "message",
+      "user": "U06DREW",
+      "user_profile": {
+        "real_name": "Drew Kim",
+        "display_name": "drew",
+        "name": "drew"
+      },
+      "text": "let's start at 3% and ramp. if friday is clean we go to 25 monday, 100 tuesday",
+      "ts": "1776187508.367411"
+    },
+    {
+      "type": "message",
+      "user": "U06DREW",
+      "user_profile": {
+        "real_name": "Drew Kim",
+        "display_name": "drew",
+        "name": "drew"
+      },
+      "text": "decision logged: gradual rollout, 3 → 25 → 100 over 3 days",
+      "ts": "1776187533.893785",
+      "reactions": [
+        {
+          "name": "white_check_mark",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "type": "message",
+      "user": "U02SAML",
+      "user_profile": {
+        "real_name": "Sam Liu",
+        "display_name": "sam",
+        "name": "sam"
+      },
+      "text": "kill-switch is merged. I'll write the runbook for it tomorrow",
+      "ts": "1776187812.607131"
+    },
+    {
+      "type": "message",
+      "user": "U01MIRA",
+      "user_profile": {
+        "real_name": "Mira Park",
+        "display_name": "mira",
+        "name": "mira"
+      },
+      "text": "thanks sam. action item: runbook by wednesday EOD",
+      "ts": "1776187864.630364"
+    },
+    {
+      "type": "message",
+      "user": "U04CASE",
+      "user_profile": {
+        "real_name": "Casey Brooks",
+        "display_name": "casey",
+        "name": "casey"
+      },
+      "text": "qa flagged a state-flicker on slow networks when the sheet first opens. repro is 1 in 4. will look in the morning",
+      "ts": "1776196218.497759"
+    },
+    {
+      "type": "message",
+      "user": "U06DREW",
+      "user_profile": {
+        "real_name": "Drew Kim",
+        "display_name": "drew",
+        "name": "drew"
+      },
+      "text": "is it a launch blocker?",
+      "ts": "1776196266.727905"
+    },
+    {
+      "type": "message",
+      "user": "U04CASE",
+      "user_profile": {
+        "real_name": "Casey Brooks",
+        "display_name": "casey",
+        "name": "casey"
+      },
+      "text": "probably not. it's cosmetic. but if it's a 200ms layout shift it'll hit our perf budget",
+      "ts": "1776196301.899682"
+    },
+    {
+      "type": "message",
+      "user": "U02SAML",
+      "user_profile": {
+        "real_name": "Sam Liu",
+        "display_name": "sam",
+        "name": "sam"
+      },
+      "text": "+1, want to see numbers before we call it. priya can you pull the lcp delta on the staging build?",
+      "ts": "1776196328.799604"
+    },
+    {
+      "type": "message",
+      "user": "U05PRYA",
+      "user_profile": {
+        "real_name": "Priya Shah",
+        "display_name": "priya",
+        "name": "priya"
+      },
+      "text": "tomorrow morning, will send numbers",
+      "ts": "1776196359.609521"
+    },
+    {
+      "type": "message",
+      "user": "U05PRYA",
+      "user_profile": {
+        "real_name": "Priya Shah",
+        "display_name": "priya",
+        "name": "priya"
+      },
+      "text": "lcp on staging is +18ms vs prod. flicker is 90ms layout shift, well under our 250ms budget. not a blocker",
+      "ts": "1776261300.069569"
+    },
+    {
+      "type": "message",
+      "user": "U06DREW",
+      "user_profile": {
+        "real_name": "Drew Kim",
+        "display_name": "drew",
+        "name": "drew"
+      },
+      "text": "good. casey ship the fix in a follow-up if you have time but don't hold the launch on it",
+      "ts": "1776261381.496885"
+    },
+    {
+      "type": "message",
+      "user": "U04CASE",
+      "user_profile": {
+        "real_name": "Casey Brooks",
+        "display_name": "casey",
+        "name": "casey"
+      },
+      "text": "got it",
+      "ts": "1776261404.934100"
+    },
+    {
+      "type": "message",
+      "user": "U02SAML",
+      "user_profile": {
+        "real_name": "Sam Liu",
+        "display_name": "sam",
+        "name": "sam"
+      },
+      "text": "runbook is up: <https://acme.example/runbooks/launch-2026-04|launch runbook>. rollback steps, kill-switch trigger, on-call rotation",
+      "ts": "1776265809.764527"
+    },
+    {
+      "type": "message",
+      "user": "U01MIRA",
+      "user_profile": {
+        "real_name": "Mira Park",
+        "display_name": "mira",
+        "name": "mira"
+      },
+      "text": "skimmed, looks good. <@U06DREW> please give it a final read",
+      "ts": "1776265854.644657"
+    },
+    {
+      "type": "message",
+      "user": "U06DREW",
+      "user_profile": {
+        "real_name": "Drew Kim",
+        "display_name": "drew",
+        "name": "drew"
+      },
+      "text": "approved",
+      "ts": "1776268800.907438"
+    },
+    {
+      "type": "message",
+      "user": "U03JRDN",
+      "user_profile": {
+        "real_name": "Jordan Reyes",
+        "display_name": "jordan",
+        "name": "jordan"
+      },
+      "text": "header revision attached — three options. team poll inside",
+      "ts": "1776273303.620220",
+      "files": [
+        {
+          "name": "header-options.png",
+          "mimetype": "image/png"
+        }
+      ]
+    },
+    {
+      "type": "message",
+      "user": "U01MIRA",
+      "user_profile": {
+        "real_name": "Mira Park",
+        "display_name": "mira",
+        "name": "mira"
+      },
+      "text": "going with option B. it reads cleaner at small sizes",
+      "ts": "1776273500.048727"
+    },
+    {
+      "type": "message",
+      "user": "U02SAML",
+      "user_profile": {
+        "real_name": "Sam Liu",
+        "display_name": "sam",
+        "name": "sam"
+      },
+      "text": "+1 B",
+      "ts": "1776273535.328439"
+    },
+    {
+      "type": "message",
+      "user": "U04CASE",
+      "user_profile": {
+        "real_name": "Casey Brooks",
+        "display_name": "casey",
+        "name": "casey"
+      },
+      "text": "B",
+      "ts": "1776273552.701072"
+    },
+    {
+      "type": "message",
+      "user": "U05PRYA",
+      "user_profile": {
+        "real_name": "Priya Shah",
+        "display_name": "priya",
+        "name": "priya"
+      },
+      "text": "B",
+      "ts": "1776273573.737452"
+    },
+    {
+      "type": "message",
+      "user": "U06DREW",
+      "user_profile": {
+        "real_name": "Drew Kim",
+        "display_name": "drew",
+        "name": "drew"
+      },
+      "text": "decision: option B for the header lockup",
+      "ts": "1776273601.607718",
+      "reactions": [
+        {
+          "name": "white_check_mark",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "type": "message",
+      "user": "U03JRDN",
+      "user_profile": {
+        "real_name": "Jordan Reyes",
+        "display_name": "jordan",
+        "name": "jordan"
+      },
+      "text": "header B is in. design freeze starting now per the comms doc",
+      "ts": "1776291080.420578"
+    },
+    {
+      "type": "message",
+      "user": "U06DREW",
+      "user_profile": {
+        "real_name": "Drew Kim",
+        "display_name": "drew",
+        "name": "drew"
+      },
+      "text": "<!here> code freeze in effect. only fixes for launch-blocking issues until friday rollout",
+      "ts": "1776348131.074994",
+      "reactions": [
+        {
+          "name": "+1",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "type": "message",
+      "user": "U04CASE",
+      "user_profile": {
+        "real_name": "Casey Brooks",
+        "display_name": "casey",
+        "name": "casey"
+      },
+      "text": "qa pass 2 is green except one accessibility issue — focus trap in the sheet doesn't include the close button",
+      "ts": "1776351332.911198"
+    },
+    {
+      "type": "message",
+      "user": "U03JRDN",
+      "user_profile": {
+        "real_name": "Jordan Reyes",
+        "display_name": "jordan",
+        "name": "jordan"
+      },
+      "text": "blocking. let's fix",
+      "ts": "1776351365.543417"
+    },
+    {
+      "type": "message",
+      "user": "U04CASE",
+      "user_profile": {
+        "real_name": "Casey Brooks",
+        "display_name": "casey",
+        "name": "casey"
+      },
+      "text": "agreed, on it",
+      "ts": "1776351398.579567"
+    },
+    {
+      "type": "message",
+      "user": "U04CASE",
+      "user_profile": {
+        "real_name": "Casey Brooks",
+        "display_name": "casey",
+        "name": "casey"
+      },
+      "text": "PR-2851 — focus trap fix. small. needs one approval",
+      "ts": "1776357050.563918"
+    },
+    {
+      "type": "message",
+      "user": "U02SAML",
+      "user_profile": {
+        "real_name": "Sam Liu",
+        "display_name": "sam",
+        "name": "sam"
+      },
+      "text": "approved. running ci",
+      "ts": "1776357187.597111"
+    },
+    {
+      "type": "message",
+      "user": "U04CASE",
+      "user_profile": {
+        "real_name": "Casey Brooks",
+        "display_name": "casey",
+        "name": "casey"
+      },
+      "text": "merged.",
+      "ts": "1776358874.020320"
+    },
+    {
+      "type": "message",
+      "user": "U05PRYA",
+      "user_profile": {
+        "real_name": "Priya Shah",
+        "display_name": "priya",
+        "name": "priya"
+      },
+      "text": "dashboard is wired — we'll see the v2 funnel from friday morning. baseline funnel is in the same view for comparison",
+      "ts": "1776372240.644114"
+    },
+    {
+      "type": "message",
+      "user": "U01MIRA",
+      "user_profile": {
+        "real_name": "Mira Park",
+        "display_name": "mira",
+        "name": "mira"
+      },
+      "text": "perfect. I'll lead the rollout call at 9am pacific friday",
+      "ts": "1776372311.463921"
+    },
+    {
+      "type": "message",
+      "user": "U01MIRA",
+      "user_profile": {
+        "real_name": "Mira Park",
+        "display_name": "mira",
+        "name": "mira"
+      },
+      "text": "<!here> rollout call starting now. we're at 3% in 5 minutes",
+      "ts": "1776441600.946171"
+    },
+    {
+      "type": "message",
+      "user": "U02SAML",
+      "user_profile": {
+        "real_name": "Sam Liu",
+        "display_name": "sam",
+        "name": "sam"
+      },
+      "text": "we're live at 3%. error rate is steady, p95 latency steady",
+      "ts": "1776442110.331370"
+    },
+    {
+      "type": "message",
+      "user": "U05PRYA",
+      "user_profile": {
+        "real_name": "Priya Shah",
+        "display_name": "priya",
+        "name": "priya"
+      },
+      "text": "first conversions coming in. funnel completion is +0.4pp vs control on the early sample (small N)",
+      "ts": "1776442154.817411",
+      "reactions": [
+        {
+          "name": "tada",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "type": "message",
+      "user": "U06DREW",
+      "user_profile": {
+        "real_name": "Drew Kim",
+        "display_name": "drew",
+        "name": "drew"
+      },
+      "text": "30 min mark — clean. holding at 3% through the weekend, ramp monday",
+      "ts": "1776443422.598790"
+    },
+    {
+      "type": "message",
+      "user": "U04CASE",
+      "user_profile": {
+        "real_name": "Casey Brooks",
+        "display_name": "casey",
+        "name": "casey"
+      },
+      "text": "no errors in sentry from the v2 path. aside from one onboarding telemetry warning that's pre-existing",
+      "ts": "1776445315.058788"
+    },
+    {
+      "type": "message",
+      "user": "U01MIRA",
+      "user_profile": {
+        "real_name": "Mira Park",
+        "display_name": "mira",
+        "name": "mira"
+      },
+      "text": "team this is great. thanks everyone for the push this week. nicely done",
+      "ts": "1776446102.924731",
+      "reactions": [
+        {
+          "name": "heart",
+          "count": 4
+        },
+        {
+          "name": "rocket",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "type": "message",
+      "user": "U06DREW",
+      "user_profile": {
+        "real_name": "Drew Kim",
+        "display_name": "drew",
+        "name": "drew"
+      },
+      "text": "monday ramp — going to 25% at 9am pacific. team: keep an eye on the dashboard",
+      "ts": "1776697860.660189"
+    },
+    {
+      "type": "message",
+      "user": "U05PRYA",
+      "user_profile": {
+        "real_name": "Priya Shah",
+        "display_name": "priya",
+        "name": "priya"
+      },
+      "text": "25% is live. funnel is +0.3pp vs control, holding",
+      "ts": "1776699249.619809"
+    },
+    {
+      "type": "message",
+      "user": "U02SAML",
+      "user_profile": {
+        "real_name": "Sam Liu",
+        "display_name": "sam",
+        "name": "sam"
+      },
+      "text": "edge case bug — users on safari 16 with a saved card see the legacy sheet, not v2. css selector regression",
+      "ts": "1776709211.938208"
+    },
+    {
+      "type": "message",
+      "user": "U06DREW",
+      "user_profile": {
+        "real_name": "Drew Kim",
+        "display_name": "drew",
+        "name": "drew"
+      },
+      "text": "what's the impact",
+      "ts": "1776709260.716320"
+    },
+    {
+      "type": "message",
+      "user": "U02SAML",
+      "user_profile": {
+        "real_name": "Sam Liu",
+        "display_name": "sam",
+        "name": "sam"
+      },
+      "text": "about 3% of mobile traffic. cosmetic, no data loss. we'll patch tomorrow morning",
+      "ts": "1776709308.344378"
+    },
+    {
+      "type": "message",
+      "user": "U06DREW",
+      "user_profile": {
+        "real_name": "Drew Kim",
+        "display_name": "drew",
+        "name": "drew"
+      },
+      "text": "ok, hold the 100% ramp until that's out. action item: <@U02SAML> ship the safari fix tuesday morning",
+      "ts": "1776709350.828762"
+    },
+    {
+      "type": "message",
+      "user": "U02SAML",
+      "user_profile": {
+        "real_name": "Sam Liu",
+        "display_name": "sam",
+        "name": "sam"
+      },
+      "text": "PR-2867 up — safari selector fix, qa green on real device",
+      "ts": "1776783308.247928"
+    },
+    {
+      "type": "message",
+      "user": "U04CASE",
+      "user_profile": {
+        "real_name": "Casey Brooks",
+        "display_name": "casey",
+        "name": "casey"
+      },
+      "text": "approved",
+      "ts": "1776784211.293510"
+    },
+    {
+      "type": "message",
+      "user": "U02SAML",
+      "user_profile": {
+        "real_name": "Sam Liu",
+        "display_name": "sam",
+        "name": "sam"
+      },
+      "text": "merged + deployed",
+      "ts": "1776785442.838632"
+    },
+    {
+      "type": "message",
+      "user": "U06DREW",
+      "user_profile": {
+        "real_name": "Drew Kim",
+        "display_name": "drew",
+        "name": "drew"
+      },
+      "text": "going to 100% in 30 min",
+      "ts": "1776785520.711051"
+    },
+    {
+      "type": "message",
+      "user": "U05PRYA",
+      "user_profile": {
+        "real_name": "Priya Shah",
+        "display_name": "priya",
+        "name": "priya"
+      },
+      "text": "100% live. dashboard looks healthy",
+      "ts": "1776787278.250260",
+      "reactions": [
+        {
+          "name": "tada",
+          "count": 5
+        },
+        {
+          "name": "shipit",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "type": "message",
+      "user": "U01MIRA",
+      "user_profile": {
+        "real_name": "Mira Park",
+        "display_name": "mira",
+        "name": "mira"
+      },
+      "text": "day-after numbers: funnel +0.31pp vs the control window, error rate flat, p95 down 80ms because the v2 path skips an extra render. not bad team",
+      "ts": "1776866400.203300"
+    },
+    {
+      "type": "message",
+      "user": "U06DREW",
+      "user_profile": {
+        "real_name": "Drew Kim",
+        "display_name": "drew",
+        "name": "drew"
+      },
+      "text": "decision: leaving the rollout at 100% with a 1-week monitoring window before we delete the legacy code paths",
+      "ts": "1776866440.843035",
+      "reactions": [
+        {
+          "name": "white_check_mark",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "type": "message",
+      "user": "U03JRDN",
+      "user_profile": {
+        "real_name": "Jordan Reyes",
+        "display_name": "jordan",
+        "name": "jordan"
+      },
+      "text": "post-mortem doc is up — please add notes by monday",
+      "ts": "1776966492.495507"
+    },
+    {
+      "type": "message",
+      "user": "U01MIRA",
+      "user_profile": {
+        "real_name": "Mira Park",
+        "display_name": "mira",
+        "name": "mira"
+      },
+      "text": "thanks all — closing out the launch channel for now. follow-ups in <#C099FOLO|product-followups>",
+      "ts": "1777044600.036727"
+    }
+  ]
+}

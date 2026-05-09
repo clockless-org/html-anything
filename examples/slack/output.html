@@ -1,0 +1,1225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acme · #product-launch — two-week launch run-up</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Brand */
+      --primary: #a03b00;
+      --primary-container: #c94c00;
+      --primary-fixed: #ffdbcd;
+      --primary-fixed-dim: #ffb597;
+      --on-primary: #ffffff;
+      --accent-glow: #E8400D;
+
+      /* Secondary / tertiary */
+      --secondary: #d5baff;
+      --secondary-container: #7b40e0;
+      --tertiary: #4d44e3;
+      --accent-cyan: #00D4FF;
+
+      /* Surfaces */
+      --bg: #fff8f6;
+      --surface: #fff8f6;
+      --surface-container-lowest: #ffffff;
+      --surface-container-low: #fbf2ef;
+      --surface-container: #f5ece9;
+      --surface-container-high: #efe6e3;
+
+      /* Text */
+      --fg-1: #1e1b19;
+      --fg-2: #594138;
+      --fg-muted: #8d7166;
+
+      /* Borders */
+      --border: rgba(0, 0, 0, 0.06);
+      --border-strong: rgba(0, 0, 0, 0.12);
+      --outline-variant: #e1bfb2;
+
+      /* Status */
+      --green: #10b981;
+      --blue: #3b82f6;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+
+      /* Typography */
+      --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+      --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+      --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+
+      /* Spacing (4px base) */
+      --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+      --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+      --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+
+      /* Radius */
+      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+      --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 2px rgba(30, 27, 25, 0.04);
+      --shadow-md: 0 4px 12px rgba(30, 27, 25, 0.08);
+      --shadow-lg: 0 8px 24px rgba(30, 27, 25, 0.12);
+      --shadow-accent: 0 8px 24px rgba(160, 59, 0, 0.15);
+
+      /* Gradients */
+      --gradient-primary: linear-gradient(135deg, #a03b00 0%, #c94c00 100%);
+      --gradient-hero: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
+      --gradient-text: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #060B18;
+        --surface: #0B1426;
+        --surface-container-lowest: #101D35;
+        --surface-container-low: #101D35;
+        --surface-container: #162544;
+        --surface-container-high: #1c2d52;
+        --fg-1: #F8FAFC;
+        --fg-2: #CBD5E1;
+        --fg-muted: #64748B;
+        --border: rgba(255, 255, 255, 0.08);
+        --border-strong: rgba(255, 255, 255, 0.14);
+        --primary: #FF6B35;
+        --accent-glow: #00D4FF;
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+        --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--fg-1);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: var(--space-lg);
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: var(--space-md);
+      }
+    }
+
+    /* Header card */
+    .channel-header {
+      background: linear-gradient(135deg, var(--surface-container-low) 0%, var(--surface-container) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+      margin-bottom: var(--space-3xl);
+      box-shadow: var(--shadow-md);
+    }
+
+    .channel-header h1 {
+      font-family: var(--font-headline);
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--space-md);
+      color: var(--fg-1);
+    }
+
+    @media (max-width: 640px) {
+      .channel-header h1 {
+        font-size: 24px;
+      }
+    }
+
+    .channel-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-lg);
+      font-size: 14px;
+      color: var(--fg-2);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .meta-item strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .channel-summary {
+      font-size: 15px;
+      color: var(--fg-2);
+      line-height: 1.6;
+    }
+
+    /* Grid layout for analysis cards */
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-2xl);
+      margin-bottom: var(--space-3xl);
+    }
+
+    .card {
+      background: var(--surface-container-lowest);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-title {
+      font-family: var(--font-headline);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--space-lg);
+      color: var(--fg-1);
+    }
+
+    /* Contributors leaderboard */
+    .leaderboard-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-md);
+      margin-bottom: var(--space-sm);
+      background: var(--surface-container-low);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .leaderboard-item:hover {
+      background: var(--surface-container);
+    }
+
+    .leaderboard-item.active {
+      background: var(--primary-fixed);
+      border-left: 3px solid var(--primary);
+    }
+
+    .leaderboard-name {
+      font-weight: 600;
+      color: var(--fg-1);
+    }
+
+    .leaderboard-count {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--fg-muted);
+    }
+
+    .leaderboard-pct {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--primary);
+      font-weight: 600;
+      margin-left: var(--space-md);
+    }
+
+    /* Heatmap */
+    .heatmap-container {
+      overflow-x: auto;
+      margin-top: var(--space-lg);
+    }
+
+    .heatmap-svg {
+      min-width: 100%;
+      height: auto;
+    }
+
+    /* Volume chart */
+    .volume-chart {
+      width: 100%;
+      height: 200px;
+      margin-top: var(--space-lg);
+    }
+
+    /* Reactions */
+    .reaction-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      background: var(--surface-container);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: var(--space-sm) var(--space-md);
+      margin: var(--space-xs);
+      font-size: 13px;
+      color: var(--fg-2);
+    }
+
+    .reaction-emoji {
+      font-size: 16px;
+    }
+
+    /* Decisions/Actions */
+    .signal-section {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .signal-label {
+      font-family: var(--font-headline);
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      margin-bottom: var(--space-md);
+    }
+
+    .signal-item {
+      background: var(--surface-container-low);
+      border-left: 3px solid var(--primary);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-md);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .signal-item:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .signal-item.decision {
+      border-left-color: var(--green);
+    }
+
+    .signal-item.action {
+      border-left-color: var(--blue);
+    }
+
+    .signal-item.question {
+      border-left-color: var(--yellow);
+    }
+
+    .signal-text {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: var(--space-sm);
+      color: var(--fg-1);
+    }
+
+    .signal-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--fg-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* Topics/Keywords */
+    .topic-bar {
+      display: flex;
+      align-items: center;
+      margin-bottom: var(--space-lg);
+      gap: var(--space-md);
+    }
+
+    .topic-label {
+      font-size: 14px;
+      font-weight: 500;
+      min-width: 80px;
+      color: var(--fg-2);
+    }
+
+    .topic-bar-bg {
+      flex: 1;
+      height: 24px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary-container));
+      border-radius: var(--radius-sm);
+      position: relative;
+    }
+
+    .topic-count {
+      position: absolute;
+      right: var(--space-sm);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--on-primary);
+      font-family: var(--font-mono);
+    }
+
+    /* Threads of note */
+    .thread-card {
+      background: var(--surface-container);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+
+    .thread-parent {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: var(--space-md);
+      color: var(--fg-1);
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .thread-parent-sender {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .thread-stats {
+      display: flex;
+      gap: var(--space-lg);
+      font-size: 13px;
+      color: var(--fg-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* Drill-down / Log */
+    .drill-down-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-lg);
+      background: var(--surface-container-low);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      margin-bottom: var(--space-2xl);
+      transition: background 0.2s;
+    }
+
+    .drill-down-header:hover {
+      background: var(--surface-container);
+    }
+
+    .drill-down-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-md);
+      font-family: var(--font-headline);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--fg-1);
+    }
+
+    .drill-down-toggle .icon {
+      transition: transform 0.3s;
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+    }
+
+    .drill-down-toggle.open .icon {
+      transform: rotate(180deg);
+    }
+
+    .drill-down-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+
+    .drill-down-content.open {
+      max-height: 4000px;
+      overflow: visible;
+    }
+
+    /* Search & filters */
+    .search-bar {
+      display: flex;
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 200px;
+      padding: var(--space-md) var(--space-lg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-container-lowest);
+      color: var(--fg-1);
+      font-family: var(--font-body);
+      font-size: 14px;
+    }
+
+    .search-input::placeholder {
+      color: var(--fg-muted);
+    }
+
+    .filter-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .filter-chip {
+      padding: var(--space-sm) var(--space-md);
+      background: var(--surface-container);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--fg-2);
+      transition: all 0.2s;
+    }
+
+    .filter-chip:hover {
+      border-color: var(--primary);
+    }
+
+    .filter-chip.active {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    /* Message log */
+    .message-group {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .message-group-date {
+      font-family: var(--font-headline);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--fg-muted);
+      margin-bottom: var(--space-lg);
+      margin-top: var(--space-lg);
+    }
+
+    .message {
+      margin-bottom: var(--space-lg);
+      padding: var(--space-lg);
+      background: var(--surface-container-low);
+      border-radius: var(--radius-md);
+      border-left: 2px solid var(--border);
+    }
+
+    .message.highlight {
+      border-left-color: var(--accent-glow);
+      background: var(--surface-container);
+      box-shadow: 0 0 12px rgba(232, 64, 13, 0.1);
+    }
+
+    .message-thread-reply {
+      margin-left: var(--space-2xl);
+      border-left-color: var(--secondary-container);
+    }
+
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-sm);
+    }
+
+    .message-sender {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 14px;
+    }
+
+    .message-time {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--fg-muted);
+    }
+
+    .message-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--fg-1);
+      margin-bottom: var(--space-md);
+      word-break: break-word;
+    }
+
+    .message-text.mark {
+      background-color: var(--primary-fixed-dim);
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+
+    .message-reactions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-md);
+    }
+
+    .message-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      background: var(--surface-container);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 2px 6px;
+      font-size: 11px;
+      color: var(--fg-muted);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: var(--space-5xl);
+      padding-top: var(--space-2xl);
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--fg-muted);
+      text-align: center;
+    }
+
+    /* Copy button */
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--primary);
+      color: var(--on-primary);
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .copy-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Utilities */
+    .empty-state {
+      padding: var(--space-2xl);
+      text-align: center;
+      color: var(--fg-muted);
+      font-style: italic;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Channel Header -->
+    <div class="channel-header">
+      <h1>#product-launch</h1>
+      <div class="channel-meta">
+        <div class="meta-item">
+          <strong id="msg-count">70</strong> messages
+        </div>
+        <div class="meta-item">
+          <strong id="sender-count">6</strong> people
+        </div>
+        <div class="meta-item">
+          <span id="date-range">Apr 13 – Apr 24, 2026</span>
+        </div>
+        <div class="meta-item">
+          <strong id="active-days">10</strong> active days
+        </div>
+      </div>
+      <div class="channel-summary" id="channel-summary">
+        A high-tempo product launch channel — peak activity Monday/Tuesday afternoons with a sharp taper post-launch. Drew, Casey, and Sam carry the bulk of decisions and technical work.
+      </div>
+    </div>
+
+    <!-- Analysis Grid -->
+    <div class="analysis-grid">
+      <!-- Activity Heatmap -->
+      <div class="card full-width">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-lg);">
+          <h2 class="card-title">Activity heatmap</h2>
+          <button class="copy-btn" onclick="copySection('heatmap-section')">
+            <span>📋</span> Copy
+          </button>
+        </div>
+        <div class="heatmap-container" id="heatmap-section">
+          <svg id="heatmap-svg" class="heatmap-svg" viewBox="0 0 800 200" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+      </div>
+
+      <!-- Contributors -->
+      <div class="card">
+        <h2 class="card-title">Contributors</h2>
+        <div id="leaderboard"></div>
+      </div>
+
+      <!-- Top Reactions (if available) -->
+      <div class="card" id="reactions-card">
+        <h2 class="card-title">Top reactions</h2>
+        <div id="reactions-list"></div>
+      </div>
+
+      <!-- Volume Over Time -->
+      <div class="card full-width">
+        <h2 class="card-title">Volume over time</h2>
+        <canvas id="volume-canvas" class="volume-chart"></canvas>
+      </div>
+
+      <!-- Decisions, Actions, Questions -->
+      <div class="card full-width">
+        <h2 class="card-title">Decisions & action items</h2>
+        
+        <div class="signal-section" id="decisions-section">
+          <div class="signal-label">Decisions</div>
+          <div id="decisions-list"></div>
+        </div>
+
+        <div class="signal-section" id="actions-section">
+          <div class="signal-label">Action items</div>
+          <div id="actions-list"></div>
+        </div>
+
+        <div class="signal-section" id="questions-section">
+          <div class="signal-label">Open questions</div>
+          <div id="questions-list"></div>
+        </div>
+      </div>
+
+      <!-- Threads of Note -->
+      <div class="card full-width" id="threads-card">
+        <h2 class="card-title">Threads of note</h2>
+        <div id="threads-list"></div>
+      </div>
+
+      <!-- Topics -->
+      <div class="card full-width">
+        <h2 class="card-title">Topics</h2>
+        <div id="topics-list"></div>
+      </div>
+    </div>
+
+    <!-- Drill-Down Log -->
+    <div class="card full-width">
+      <div class="drill-down-header" id="drill-toggle">
+        <div class="drill-down-toggle">
+          <svg class="icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+          </svg>
+          Browse all <span id="total-msg-count">70</span> messages
+        </div>
+      </div>
+      <div class="drill-down-content" id="drill-content">
+        <div style="padding: var(--space-2xl);">
+          <div class="search-bar">
+            <input type="text" id="search-input" class="search-input" placeholder="🔍 Search messages...">
+            <div class="filter-chips" id="filter-chips"></div>
+          </div>
+          <div id="message-log"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>💾 <em>Generated locally — your chat export never left your machine. The full log is embedded in this HTML and rendered in your browser. For sharing, prefer an anonymized export.</em></p>
+    </div>
+  </div>
+
+  <script>
+    const DATA = {"messages":[{"id":"m_0001","ts":"2026-04-13 15:02:00","date":"2026-04-13","time":"15:02:00","tsEpoch":1776092520653.962,"sender":"Mira Park","text":"morning all — launch comms doc is up. <@U02SAML> can you take a pass on the engineering risks section today","channel":"product-launch","isThreadReply":false},{"id":"m_0002","ts":"2026-04-13 15:04:30","date":"2026-04-13","time":"15:04:30","tsEpoch":1776092670530.139,"sender":"Sam Liu","text":"yeah will look this afternoon. quick read says rollout plan is missing the kill-switch path","channel":"product-launch","isThreadReply":false},{"id":"m_0003","ts":"2026-04-13 15:05:45","date":"2026-04-13","time":"15:05:45","tsEpoch":1776092745934.202,"sender":"Mira Park","text":"good catch. add it. also pull <@U05PRYA> in, she wrote the original","channel":"product-launch","isThreadReply":false},{"id":"m_0004","ts":"2026-04-13 15:06:12","date":"2026-04-13","time":"15:06:12","tsEpoch":1776092772954.984,"sender":"Priya Shah","text":"on it","channel":"product-launch","isThreadReply":false},{"id":"m_0005","ts":"2026-04-13 16:42:01","date":"2026-04-13","time":"16:42:01","tsEpoch":1776098521793.7341,"sender":"Jordan Reyes","text":"design review tomorrow at 11. agenda is pinned. mostly the empty-state polish + the mobile sheet","channel":"product-launch","isThreadReply":false},{"id":"m_0006","ts":"2026-04-13 16:43:18","date":"2026-04-13","time":"16:43:18","tsEpoch":1776098598618.808,"sender":"Drew Kim","text":"I'll be there. quick fyi <!here> we're aiming for a thursday cut, friday rollout — so feedback today/tomorrow only please","channel":"product-launch","isThreadReply":false,"reactions":[{"name":"+1","count":4},{"name":"white_check_mark","count":2}],"reactionCount":6},{"id":"m_0007","ts":"2026-04-13 16:45:06","date":"2026-04-13","time":"16:45:06","tsEpoch":1776098706485.121,"sender":"Casey Brooks","text":"noted, will get my mobile sheet PR up by EOD","channel":"product-launch","isThreadReply":false},{"id":"m_0008","ts":"2026-04-13 18:11:22","date":"2026-04-13","time":"18:11:22","tsEpoch":1776103882326.342,"sender":"Sam Liu","text":"PR-2841 is up for the kill-switch — small change, just a feature flag tied to the existing config","channel":"product-launch","isThreadReply":false,"attachmentCount":1,"isMedia":true},{"id":"m_0009","ts":"2026-04-13 18:13:09","date":"2026-04-13","time":"18:13:09","tsEpoch":1776103989837.593,"sender":"Drew Kim","text":"lgtm, approving. let's land it today so qa has it for tomorrow","channel":"product-launch","isThreadReply":false,"reactions":[{"name":"shipit","count":3}],"reactionCount":3},{"id":"m_0010","ts":"2026-04-13 20:20:00","date":"2026-04-13","time":"20:20:00","tsEpoch":1776111600600.189,"sender":"Casey Brooks","text":"PR-2842 — mobile sheet. has the keyboard-avoidance fix from #design-systems. need a designer to glance at the rest motion","channel":"product-launch","isThreadReply":false,"replyCount":4},{"id":"m_0011","ts":"2026-04-13 20:31:12","date":"2026-04-13","time":"20:31:12","tsEpoch":1776112272599.8,"sender":"Jordan Reyes","text":"looking now","channel":"product-launch","threadId":"1776111600.600189","isThreadReply":true},{"id":"m_0012","ts":"2026-04-13 20:35:50","date":"2026-04-13","time":"20:35:50","tsEpoch":1776112550912.1758,"sender":"Jordan Reyes","text":"rest motion is fine — but the dismiss timing is too snappy. can you bump it to 220ms with the standard ease-out","channel":"product-launch","threadId":"1776111600.600189","isThreadReply":true},{"id":"m_0013","ts":"2026-04-13 20:36:33","date":"2026-04-13","time":"20:36:33","tsEpoch":1776112593244.8782,"sender":"Casey Brooks","text":"bumped. want me to merge","channel":"product-launch","threadId":"1776111600.600189","isThreadReply":true},{"id":"m_0014","ts":"2026-04-13 20:37:01","date":"2026-04-13","time":"20:37:01","tsEpoch":1776112621451.884,"sender":"Jordan Reyes","text":"yes ship it","channel":"product-launch","threadId":"1776111600.600189","isThreadReply":true,"reactions":[{"name":"rocket","count":1}],"reactionCount":1},{"id":"m_0015","ts":"2026-04-14 15:48:00","date":"2026-04-14","time":"15:48:00","tsEpoch":1776181680512.388,"sender":"Jordan Reyes","text":"design review notes are in the doc. tldr: empty state is approved, sheet is approved, header lockup needs one more round","channel":"product-launch","isThreadReply":false},{"id":"m_0016","ts":"2026-04-14 15:49:11","date":"2026-04-14","time":"15:49:11","tsEpoch":1776181751938.9,"sender":"Mira Park","text":"sounds good. <@U03JRDN> can you ship the header revision by tomorrow EOD?","channel":"product-launch","isThreadReply":false},{"id":"m_0017","ts":"2026-04-14 15:49:42","date":"2026-04-14","time":"15:49:42","tsEpoch":1776181782563.673,"sender":"Jordan Reyes","text":"yes, I'll send it tonight.","channel":"product-launch","isThreadReply":false},{"id":"m_0018","ts":"2026-04-14 17:22:30","date":"2026-04-14","time":"17:22:30","tsEpoch":1776187350466.888,"sender":"Priya Shah","text":"data quick check — 3% of accounts will hit the v2 path on day 1 because of the gradual rollout. is that what we want, or are we starting at 100%?","channel":"product-launch","isThreadReply":false},{"id":"m_0019","ts":"2026-04-14 17:25:08","date":"2026-04-14","time":"17:25:08","tsEpoch":1776187508367.411,"sender":"Drew Kim","text":"let's start at 3% and ramp. if friday is clean we go to 25 monday, 100 tuesday","channel":"product-launch","isThreadReply":false},{"id":"m_0020","ts":"2026-04-14 17:25:33","date":"2026-04-14","time":"17:25:33","tsEpoch":1776187533893.785,"sender":"Drew Kim","text":"decision logged: gradual rollout, 3 → 25 → 100 over 3 days","channel":"product-launch","isThreadReply":false,"reactions":[{"name":"white_check_mark","count":5}],"reactionCount":5},{"id":"m_0021","ts":"2026-04-14 17:30:12","date":"2026-04-14","time":"17:30:12","tsEpoch":1776187812607.131,"sender":"Sam Liu","text":"kill-switch is merged. I'll write the runbook for it tomorrow","channel":"product-launch","isThreadReply":false},{"id":"m_0022","ts":"2026-04-14 17:31:04","date":"2026-04-14","time":"17:31:04","tsEpoch":1776187864630.364,"sender":"Mira Park","text":"thanks sam. action item: runbook by wednesday EOD","channel":"product-launch","isThreadReply":false},{"id":"m_0023","ts":"2026-04-14 19:50:18","date":"2026-04-14","time":"19:50:18","tsEpoch":1776196218497.759,"sender":"Casey Brooks","text":"qa flagged a state-flicker on slow networks when the sheet first opens. repro is 1 in 4. will look in the morning","channel":"product-launch","isThreadReply":false},{"id":"m_0024","ts":"2026-04-14 19:51:06","date":"2026-04-14","time":"19:51:06","tsEpoch":1776196266727.905,"sender":"Drew Kim","text":"is it a launch blocker?","channel":"product-launch","isThreadReply":false},{"id":"m_0025","ts":"2026-04-14 19:51:41","date":"2026-04-14","time":"19:51:41","tsEpoch":1776196301899.6821,"sender":"Casey Brooks","text":"probably not. it's cosmetic. but if it's a 200ms layout shift it'll hit our perf budget","channel":"product-launch","isThreadReply":false},{"id":"m_0026","ts":"2026-04-14 19:52:08","date":"2026-04-14","time":"19:52:08","tsEpoch":1776196328799.604,"sender":"Sam Liu","text":"+1, want to see numbers before we call it. priya can you pull the lcp delta on the staging build?","channel":"product-launch","isThreadReply":false},{"id":"m_0027","ts":"2026-04-14 19:52:39","date":"2026-04-14","time":"19:52:39","tsEpoch":1776196359609.521,"sender":"Priya Shah","text":"tomorrow morning, will send numbers","channel":"product-launch","isThreadReply":false},{"id":"m_0028","ts":"2026-04-15 13:55:00","date":"2026-04-15","time":"13:55:00","tsEpoch":1776261300069.569,"sender":"Priya Shah","text":"lcp on staging is +18ms vs prod. flicker is 90ms layout shift, well under our 250ms budget. not a blocker","channel":"product-launch","isThreadReply":false},{"id":"m_0029","ts":"2026-04-15 13:56:21","date":"2026-04-15","time":"13:56:21","tsEpoch":1776261381496.885,"sender":"Drew Kim","text":"good. casey ship the fix in a follow-up if you have time but don't hold the launch on it","channel":"product-launch","isThreadReply":false},{"id":"m_0030","ts":"2026-04-15 13:56:44","date":"2026-04-15","time":"13:56:44","tsEpoch":1776261404934.0999,"sender":"Casey Brooks","text":"got it","channel":"product-launch","isThreadReply":false},{"id":"m_0031","ts":"2026-04-15 15:10:09","date":"2026-04-15","time":"15:10:09","tsEpoch":1776265809764.527,"sender":"Sam Liu","text":"runbook is up: launch runbook (https://acme.example/runbooks/launch-2026-04). rollback steps, kill-switch trigger, on-call rotation","channel":"product-launch","isThreadReply":false},{"id":"m_0032","ts":"2026-04-15 15:10:54","date":"2026-04-15","time":"15:10:54","tsEpoch":1776265854644.657,"sender":"Mira Park","text":"skimmed, looks good. <@U06DREW> please give it a final read","channel":"product-launch","isThreadReply":false},{"id":"m_0033","ts":"2026-04-15 16:00:00","date":"2026-04-15","time":"16:00:00","tsEpoch":1776268800907.438,"sender":"Drew Kim","text":"approved","channel":"product-launch","isThreadReply":false},{"id":"m_0034","ts":"2026-04-15 17:15:03","date":"2026-04-15","time":"17:15:03","tsEpoch":1776273303620.22,"sender":"Jordan Reyes","text":"header revision attached — three options. team poll inside","channel":"product-launch","isThreadReply":false,"attachmentCount":1,"isMedia":true},{"id":"m_0035","ts":"2026-04-15 17:18:20","date":"2026-04-15","time":"17:18:20","tsEpoch":1776273500048.727,"sender":"Mira Park","text":"going with option B. it reads cleaner at small sizes","channel":"product-launch","isThreadReply":false},{"id":"m_0036","ts":"2026-04-15 17:18:55","date":"2026-04-15","time":"17:18:55","tsEpoch":1776273535328.439,"sender":"Sam Liu","text":"+1 B","channel":"product-launch","isThreadReply":false},{"id":"m_0037","ts":"2026-04-15 17:19:12","date":"2026-04-15","time":"17:19:12","tsEpoch":1776273552701.072,"sender":"Casey Brooks","text":"B","channel":"product-launch","isThreadReply":false},{"id":"m_0038","ts":"2026-04-15 17:19:33","date":"2026-04-15","time":"17:19:33","tsEpoch":1776273573737.4521,"sender":"Priya Shah","text":"B","channel":"product-launch","isThreadReply":false},{"id":"m_0039","ts":"2026-04-15 17:20:01","date":"2026-04-15","time":"17:20:01","tsEpoch":1776273601607.718,"sender":"Drew Kim","text":"decision: option B for the header lockup","channel":"product-launch","isThreadReply":false,"reactions":[{"name":"white_check_mark","count":4}],"reactionCount":4},{"id":"m_0040","ts":"2026-04-15 22:11:20","date":"2026-04-15","time":"22:11:20","tsEpoch":1776291080420.5781,"sender":"Jordan Reyes","text":"header B is in. design freeze starting now per the comms doc","channel":"product-launch","isThreadReply":false},{"id":"m_0041","ts":"2026-04-16 14:02:11","date":"2026-04-16","time":"14:02:11","tsEpoch":1776348131074.9941,"sender":"Drew Kim","text":"<!here> code freeze in effect. only fixes for launch-blocking issues until friday rollout","channel":"product-launch","isThreadReply":false,"reactions":[{"name":"+1","count":5}],"reactionCount":5},{"id":"m_0042","ts":"2026-04-16 14:55:32","date":"2026-04-16","time":"14:55:32","tsEpoch":1776351332911.198,"sender":"Casey Brooks","text":"qa pass 2 is green except one accessibility issue — focus trap in the sheet doesn't include the close button","channel":"product-launch","isThreadReply":false},{"id":"m_0043","ts":"2026-04-16 14:56:05","date":"2026-04-16","time":"14:56:05","tsEpoch":1776351365543.417,"sender":"Jordan Reyes","text":"blocking. let's fix","channel":"product-launch","isThreadReply":false},{"id":"m_0044","ts":"2026-04-16 14:56:38","date":"2026-04-16","time":"14:56:38","tsEpoch":1776351398579.567,"sender":"Casey Brooks","text":"agreed, on it","channel":"product-launch","isThreadReply":false},{"id":"m_0045","ts":"2026-04-16 16:30:50","date":"2026-04-16","time":"16:30:50","tsEpoch":1776357050563.9182,"sender":"Casey Brooks","text":"PR-2851 — focus trap fix. small. needs one approval","channel":"product-launch","isThreadReply":false},{"id":"m_0046","ts":"2026-04-16 16:33:07","date":"2026-04-16","time":"16:33:07","tsEpoch":1776357187597.111,"sender":"Sam Liu","text":"approved. running ci","channel":"product-launch","isThreadReply":false},{"id":"m_0047","ts":"2026-04-16 17:01:14","date":"2026-04-16","time":"17:01:14","tsEpoch":1776358874020.3198,"sender":"Casey Brooks","text":"merged.","channel":"product-launch","isThreadReply":false},{"id":"m_0048","ts":"2026-04-16 20:44:00","date":"2026-04-16","time":"20:44:00","tsEpoch":1776372240644.114,"sender":"Priya Shah","text":"dashboard is wired — we'll see the v2 funnel from friday morning. baseline funnel is in the same view for comparison","channel":"product-launch","isThreadReply":false},{"id":"m_0049","ts":"2026-04-16 20:45:11","date":"2026-04-16","time":"20:45:11","tsEpoch":1776372311463.9211,"sender":"Mira Park","text":"perfect. I'll lead the rollout call at 9am pacific friday","channel":"product-launch","isThreadReply":false},{"id":"m_0050","ts":"2026-04-17 16:00:00","date":"2026-04-17","time":"16:00:00","tsEpoch":1776441600946.1711,"sender":"Mira Park","text":"<!here> rollout call starting now. we're at 3% in 5 minutes","channel":"product-launch","isThreadReply":false},{"id":"m_0051","ts":"2026-04-17 16:08:30","date":"2026-04-17","time":"16:08:30","tsEpoch":1776442110331.37,"sender":"Sam Liu","text":"we're live at 3%. error rate is steady, p95 latency steady","channel":"product-launch","isThreadReply":false},{"id":"m_0052","ts":"2026-04-17 16:09:14","date":"2026-04-17","time":"16:09:14","tsEpoch":1776442154817.411,"sender":"Priya Shah","text":"first conversions coming in. funnel completion is +0.4pp vs control on the early sample (small N)","channel":"product-launch","isThreadReply":false,"reactions":[{"name":"tada","count":6}],"reactionCount":6},{"id":"m_0053","ts":"2026-04-17 16:30:22","date":"2026-04-17","time":"16:30:22","tsEpoch":1776443422598.79,"sender":"Drew Kim","text":"30 min mark — clean. holding at 3% through the weekend, ramp monday","channel":"product-launch","isThreadReply":false},{"id":"m_0054","ts":"2026-04-17 17:01:55","date":"2026-04-17","time":"17:01:55","tsEpoch":1776445315058.788,"sender":"Casey Brooks","text":"no errors in sentry from the v2 path. aside from one onboarding telemetry warning that's pre-existing","channel":"product-launch","isThreadReply":false},{"id":"m_0055","ts":"2026-04-17 17:15:02","date":"2026-04-17","time":"17:15:02","tsEpoch":1776446102924.731,"sender":"Mira Park","text":"team this is great. thanks everyone for the push this week. nicely done","channel":"product-launch","isThreadReply":false,"reactions":[{"name":"heart","count":4},{"name":"rocket","count":3}],"reactionCount":7},{"id":"m_0056","ts":"2026-04-20 15:11:00","date":"2026-04-20","time":"15:11:00","tsEpoch":1776697860660.189,"sender":"Drew Kim","text":"monday ramp — going to 25% at 9am pacific. team: keep an eye on the dashboard","channel":"product-launch","isThreadReply":false},{"id":"m_0057","ts":"2026-04-20 15:34:09","date":"2026-04-20","time":"15:34:09","tsEpoch":1776699249619.8088,"sender":"Priya Shah","text":"25% is live. funnel is +0.3pp vs control, holding","channel":"product-launch","isThreadReply":false},{"id":"m_0058","ts":"2026-04-20 18:20:11","date":"2026-04-20","time":"18:20:11","tsEpoch":1776709211938.208,"sender":"Sam Liu","text":"edge case bug — users on safari 16 with a saved card see the legacy sheet, not v2. css selector regression","channel":"product-launch","isThreadReply":false},{"id":"m_0059","ts":"2026-04-20 18:21:00","date":"2026-04-20","time":"18:21:00","tsEpoch":1776709260716.32,"sender":"Drew Kim","text":"what's the impact","channel":"product-launch","isThreadReply":false},{"id":"m_0060","ts":"2026-04-20 18:21:48","date":"2026-04-20","time":"18:21:48","tsEpoch":1776709308344.378,"sender":"Sam Liu","text":"about 3% of mobile traffic. cosmetic, no data loss. we'll patch tomorrow morning","channel":"product-launch","isThreadReply":false},{"id":"m_0061","ts":"2026-04-20 18:22:30","date":"2026-04-20","time":"18:22:30","tsEpoch":1776709350828.762,"sender":"Drew Kim","text":"ok, hold the 100% ramp until that's out. action item: <@U02SAML> ship the safari fix tuesday morning","channel":"product-launch","isThreadReply":false},{"id":"m_0062","ts":"2026-04-21 14:55:08","date":"2026-04-21","time":"14:55:08","tsEpoch":1776783308247.928,"sender":"Sam Liu","text":"PR-2867 up — safari selector fix, qa green on real device","channel":"product-launch","isThreadReply":false},{"id":"m_0063","ts":"2026-04-21 15:10:11","date":"2026-04-21","time":"15:10:11","tsEpoch":1776784211293.51,"sender":"Casey Brooks","text":"approved","channel":"product-launch","isThreadReply":false},{"id":"m_0064","ts":"2026-04-21 15:30:42","date":"2026-04-21","time":"15:30:42","tsEpoch":1776785442838.632,"sender":"Sam Liu","text":"merged + deployed","channel":"product-launch","isThreadReply":false},{"id":"m_0065","ts":"2026-04-21 15:32:00","date":"2026-04-21","time":"15:32:00","tsEpoch":1776785520711.051,"sender":"Drew Kim","text":"going to 100% in 30 min","channel":"product-launch","isThreadReply":false},{"id":"m_0066","ts":"2026-04-21 16:01:18","date":"2026-04-21","time":"16:01:18","tsEpoch":1776787278250.26,"sender":"Priya Shah","text":"100% live. dashboard looks healthy","channel":"product-launch","isThreadReply":false,"reactions":[{"name":"tada","count":5},{"name":"shipit","count":4}],"reactionCount":9},{"id":"m_0067","ts":"2026-04-22 14:00:00","date":"2026-04-22","time":"14:00:00","tsEpoch":1776866400203.3,"sender":"Mira Park","text":"day-after numbers: funnel +0.31pp vs the control window, error rate flat, p95 down 80ms because the v2 path skips an extra render. not bad team","channel":"product-launch","isThreadReply":false},{"id":"m_0068","ts":"2026-04-22 14:00:40","date":"2026-04-22","time":"14:00:40","tsEpoch":1776866440843.035,"sender":"Drew Kim","text":"decision: leaving the rollout at 100% with a 1-week monitoring window before we delete the legacy code paths","channel":"product-launch","isThreadReply":false,"reactions":[{"name":"white_check_mark","count":5}],"reactionCount":5},{"id":"m_0069","ts":"2026-04-23 17:48:12","date":"2026-04-23","time":"17:48:12","tsEpoch":1776966492495.507,"sender":"Jordan Reyes","text":"post-mortem doc is up — please add notes by monday","channel":"product-launch","isThreadReply":false},{"id":"m_0070","ts":"2026-04-24 15:30:00","date":"2026-04-24","time":"15:30:00","tsEpoch":1777044600036.727,"sender":"Mira Park","text":"thanks all — closing out the launch channel for now. follow-ups in #product-followups","channel":"product-launch","isThreadReply":false}],"senders":[{"sender":"Drew Kim","count":15,"firstTs":"2026-04-13 16:43:18","lastTs":"2026-04-22 14:00:40"},{"sender":"Casey Brooks","count":13,"firstTs":"2026-04-13 16:45:06","lastTs":"2026-04-21 15:10:11"},{"sender":"Sam Liu","count":12,"firstTs":"2026-04-13 15:04:30","lastTs":"2026-04-21 15:30:42"},{"sender":"Mira Park","count":11,"firstTs":"2026-04-13 15:02:00","lastTs":"2026-04-24 15:30:00"},{"sender":"Jordan Reyes","count":10,"firstTs":"2026-04-13 16:42:01","lastTs":"2026-04-23 17:48:12"},{"sender":"Priya Shah","count":9,"firstTs":"2026-04-13 15:06:12","lastTs":"2026-04-21 16:01:18"}],"messagesPerSender":{"Drew Kim":15,"Casey Brooks":13,"Sam Liu":12,"Mira Park":11,"Jordan Reyes":10,"Priya Shah":9},"dateRange":"2026-04-13 → 2026-04-24","messageCount":70,"senderCount":6,"reactionCount":51,"threadCount":1,"mediaCount":2,"heatmap":[{"dow":1,"hour":15,"count":6},{"dow":1,"hour":16,"count":3},{"dow":1,"hour":18,"count":6},{"dow":1,"hour":20,"count":5},{"dow":2,"hour":14,"count":1},{"dow":2,"hour":15,"count":6},{"dow":2,"hour":16,"count":1},{"dow":2,"hour":17,"count":5},{"dow":2,"hour":19,"count":5},{"dow":3,"hour":13,"count":3},{"dow":3,"hour":14,"count":2},{"dow":3,"hour":15,"count":2},{"dow":3,"hour":16,"count":1},{"dow":3,"hour":17,"count":6},{"dow":3,"hour":22,"count":1},{"dow":4,"hour":14,"count":4},{"dow":4,"hour":16,"count":2},{"dow":4,"hour":17,"count":2},{"dow":4,"hour":20,"count":2},{"dow":5,"hour":15,"count":1},{"dow":5,"hour":16,"count":4},{"dow":5,"hour":17,"count":2}],"volumeByDay":[{"date":"2026-04-13","count":14},{"date":"2026-04-14","count":13},{"date":"2026-04-15","count":13},{"date":"2026-04-16","count":9},{"date":"2026-04-17","count":6},{"date":"2026-04-20","count":6},{"date":"2026-04-21","count":5},{"date":"2026-04-22","count":2},{"date":"2026-04-23","count":1},{"date":"2026-04-24","count":1}],"threads":[{"id":"1776111600.600189","parentId":"m_0012","parentSender":"Jordan Reyes","parentText":"rest motion is fine — but the dismiss timing is too snappy. can you bump it to 220ms with the standard ease-out","participants":["Jordan Reyes","Casey Brooks"],"messageCount":5,"firstTs":"2026-04-13 20:35:50","lastTs":"2026-04-13 20:37:01","reactionCount":1}],"actionable":[{"id":"m_0006","ts":"2026-04-13 16:43:18","sender":"Drew Kim","text":"I'll be there. quick fyi <!here> we're aiming for a thursday cut, friday rollout — so feedback today/tomorrow only please","signal":"action"},{"id":"m_0009","ts":"2026-04-13 18:13:09","sender":"Drew Kim","text":"lgtm, approving. let's land it today so qa has it for tomorrow","signal":"decision"},{"id":"m_0014","ts":"2026-04-13 20:37:01","sender":"Jordan Reyes","text":"yes ship it","signal":"decision"},{"id":"m_0015","ts":"2026-04-14 15:48:00","sender":"Jordan Reyes","text":"design review notes are in the doc. tldr: empty state is approved, sheet is approved, header lockup needs one more round","signal":"decision"},{"id":"m_0016","ts":"2026-04-14 15:49:11","sender":"Mira Park","text":"sounds good. <@U03JRDN> can you ship the header revision by tomorrow EOD?","signal":"action"},{"id":"m_0017","ts":"2026-04-14 15:49:42","sender":"Jordan Reyes","text":"yes, I'll send it tonight.","signal":"action"},{"id":"m_0018","ts":"2026-04-14 17:22:30","sender":"Priya Shah","text":"data quick check — 3% of accounts will hit the v2 path on day 1 because of the gradual rollout. is that what we want, or are we starting at 100%?","signal":"question"},{"id":"m_0019","ts":"2026-04-14 17:25:08","sender":"Drew Kim","text":"let's start at 3% and ramp. if friday is clean we go to 25 monday, 100 tuesday","signal":"decision"},{"id":"m_0021","ts":"2026-04-14 17:30:12","sender":"Sam Liu","text":"kill-switch is merged. I'll write the runbook for it tomorrow","signal":"action"},{"id":"m_0022","ts":"2026-04-14 17:31:04","sender":"Mira Park","text":"thanks sam. action item: runbook by wednesday EOD","signal":"action"},{"id":"m_0024","ts":"2026-04-14 19:51:06","sender":"Drew Kim","text":"is it a launch blocker?","signal":"question"},{"id":"m_0026","ts":"2026-04-14 19:52:08","sender":"Sam Liu","text":"+1, want to see numbers before we call it. priya can you pull the lcp delta on the staging build?","signal":"action"},{"id":"m_0028","ts":"2026-04-15 13:55:00","sender":"Priya Shah","text":"lcp on staging is +18ms vs prod. flicker is 90ms layout shift, well under our 250ms budget. not a blocker","signal":"decision"},{"id":"m_0029","ts":"2026-04-15 13:56:21","sender":"Drew Kim","text":"good. casey ship the fix in a follow-up if you have time but don't hold the launch on it","signal":"action"},{"id":"m_0033","ts":"2026-04-15 16:00:00","sender":"Drew Kim","text":"approved","signal":"decision"},{"id":"m_0035","ts":"2026-04-15 17:18:20","sender":"Mira Park","text":"going with option B. it reads cleaner at small sizes","signal":"decision"},{"id":"m_0043","ts":"2026-04-16 14:56:05","sender":"Jordan Reyes","text":"blocking. let's fix","signal":"decision"},{"id":"m_0044","ts":"2026-04-16 14:56:38","sender":"Casey Brooks","text":"agreed, on it","signal":"decision"},{"id":"m_0046","ts":"2026-04-16 16:33:07","sender":"Sam Liu","text":"approved. running ci","signal":"decision"},{"id":"m_0048","ts":"2026-04-16 20:44:00","sender":"Priya Shah","text":"dashboard is wired — we'll see the v2 funnel from friday morning. baseline funnel is in the same view for comparison","signal":"decision"},{"id":"m_0049","ts":"2026-04-16 20:45:11","sender":"Mira Park","text":"perfect. I'll lead the rollout call at 9am pacific friday","signal":"action"},{"id":"m_0060","ts":"2026-04-20 18:21:48","sender":"Sam Liu","text":"about 3% of mobile traffic. cosmetic, no data loss. we'll patch tomorrow morning","signal":"decision"},{"id":"m_0061","ts":"2026-04-20 18:22:30","sender":"Drew Kim","text":"ok, hold the 100% ramp until that's out. action item: <@U02SAML> ship the safari fix tuesday morning","signal":"action"},{"id":"m_0063","ts":"2026-04-21 15:10:11","sender":"Casey Brooks","text":"approved","signal":"decision"},{"id":"m_0070","ts":"2026-04-24 15:30:00","sender":"Mira Park","text":"thanks all — closing out the launch channel for now. follow-ups in #product-followups","signal":"action"}],"topReactions":[{"name":"white_check_mark","count":16},{"name":"tada","count":11},{"name":"+1","count":9},{"name":"shipit","count":7},{"name":"rocket","count":4},{"name":"heart","count":4}],"platform":"slack","channel":"product-launch"};
+
+    // Emoji map for reactions
+    const EMOJI_MAP = {
+      'white_check_mark': '✅',
+      'tada': '🎉',
+      '+1': '👍',
+      'shipit': '🚀',
+      'rocket': '🚀',
+      'heart': '❤️',
+      'thinking_face': '🤔',
+      'eyes': '👀'
+    };
+
+    function getEmoji(name) {
+      return EMOJI_MAP[name] || '✨';
+    }
+
+    // ===== HEATMAP =====
+    function renderHeatmap() {
+      const heatmap = DATA.heatmap || [];
+      const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      
+      const cellSize = 20;
+      const cellGap = 2;
+      const labelWidth = 40;
+      const labelHeight = 20;
+      
+      const svg = document.getElementById('heatmap-svg');
+      const width = labelWidth + (24 * (cellSize + cellGap)) + 40;
+      const height = labelHeight + (7 * (cellSize + cellGap)) + 20;
+      
+      svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+      
+      // Find max count for scaling
+      const counts = heatmap.map(d => d.count);
+      const maxCount = Math.max(...counts, 1);
+      
+      // Day labels
+      days.forEach((day, i) => {
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', labelWidth - 5);
+        text.setAttribute('y', labelHeight + i * (cellSize + cellGap) + cellSize / 2 + 4);
+        text.setAttribute('font-size', '12');
+        text.setAttribute('font-weight', '500');
+        text.setAttribute('text-anchor', 'end');
+        text.setAttribute('fill', 'var(--fg-muted)');
+        text.textContent = day;
+        svg.appendChild(text);
+      });
+      
+      // Hour markers (every 6 hours)
+      for (let h = 0; h < 24; h += 6) {
+        const x = labelWidth + h * (cellSize + cellGap) + cellSize / 2;
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', x);
+        text.setAttribute('y', labelHeight - 5);
+        text.setAttribute('font-size', '11');
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('fill', 'var(--fg-muted)');
+        text.textContent = h + ':00';
+        svg.appendChild(text);
+      }
+      
+      // Heat cells
+      heatmap.forEach(item => {
+        const intensity = item.count / maxCount;
+        const hue = 10;
+        const sat = 60 + intensity * 30;
+        const light = 85 - intensity * 40;
+        const color = `hsl(${hue}, ${sat}%, ${light}%)`;
+        
+        const x = labelWidth + item.hour * (cellSize + cellGap);
+        const y = labelHeight + item.dow * (cellSize + cellGap);
+        
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('x', x);
+        rect.setAttribute('y', y);
+        rect.setAttribute('width', cellSize);
+        rect.setAttribute('height', cellSize);
+        rect.setAttribute('fill', color);
+        rect.setAttribute('stroke', 'var(--border)');
+        rect.setAttribute('stroke-width', '1');
+        rect.setAttribute('rx', '3');
+        
+        const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+        title.textContent = `${days[item.dow]} ${item.hour}:00 — ${item.count} message${item.count !== 1 ? 's' : ''}`;
+        rect.appendChild(title);
+        
+        svg.appendChild(rect);
+      });
+    }
+
+    // ===== LEADERBOARD =====
+    function renderLeaderboard() {
+      const senders = DATA.senders || [];
+      const total = senders.reduce((sum, s) => sum + s.count, 0);
+      const board = document.getElementById('leaderboard');
+      
+      senders.forEach((sender, idx) => {
+        const pct = ((sender.count / total) * 100).toFixed(1);
+        const isLarge = sender.count / total > 0.25;
+        
+        const div = document.createElement('div');
+        div.className = 'leaderboard-item';
+        div.setAttribute('data-sender', sender.sender);
+        div.onclick = () => filterBySender(sender.sender, div);
+        
+        div.innerHTML = `
+          <div>
+            <div class="leaderboard-name">${sender.sender}</div>
+            <div class="leaderboard-count">${sender.count} messages${isLarge ? ' ⭐' : ''}</div>
+          </div>
+          <div class="leaderboard-pct">${pct}%</div>
+        `;
+        
+        board.appendChild(div);
+      });
+    }
+
+    // ===== REACTIONS =====
+    function renderReactions() {
+      const reactions = DATA.topReactions || [];
+      if (reactions.length === 0) {
+        document.getElementById('reactions-card').classList.add('hidden');
+        return;
+      }
+      
+      const list = document.getElementById('reactions-list');
+      reactions.forEach(r => {
+        const chip = document.createElement('div');
+        chip.className = 'reaction-chip';
+        chip.innerHTML = `<span class="reaction-emoji">${getEmoji(r.name)}</span> <strong>${r.count}</strong>`;
+        list.appendChild(chip);
+      });
+    }
+
+    // ===== VOLUME CHART =====
+    function renderVolumeChart() {
+      const volumeByDay = DATA.volumeByDay || [];
+      if (volumeByDay.length === 0) return;
+      
+      const canvas = document.getElementById('volume-canvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Simple line chart
+      const padding = 40;
+      const width = canvas.width;
+      const height = canvas.height;
+      const chartWidth = width - padding * 2;
+      const chartHeight = height - padding * 2;
+      
+      const maxVolume = Math.max(...volumeByDay.map(d => d.count), 10);
+      
+      // Draw background
+      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--surface-container-low').trim();
+      ctx.fillRect(0, 0, width, height);
+      
+      // Draw grid
+      ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--border').trim();
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= 5; i++) {
+        const y = padding + (i * chartHeight / 5);
+        ctx.beginPath();
+        ctx.moveTo(padding, y);
+        ctx.lineTo(width - padding, y);
+        ctx.stroke();
+      }
+      
+      // Draw line
+      ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
+      ctx.lineWidth = 2;
+      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary-fixed').trim();
+      ctx.beginPath();
+      
+      volumeByDay.forEach((d, idx) => {
+        const x = padding + (idx / Math.max(volumeByDay.length - 1, 1)) * chartWidth;
+        const y = height - padding - (d.count / maxVolume) * chartHeight;
+        
+        if (idx === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      });
+      ctx.stroke();
+      
+      // Fill area
+      ctx.lineTo(width - padding, height - padding);
+      ctx.lineTo(padding, height - padding);
+      ctx.closePath();
+      ctx.fill();
+      
+      // Labels
+      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--fg-muted').trim();
+      ctx.font = '12px var(--font-body)';
+      ctx.textAlign = 'center';
+      volumeByDay.forEach((d, idx) => {
+        const x = padding + (idx / Math.max(volumeByDay.length - 1, 1)) * chartWidth;
+        ctx.fillText(d.date.split('-')[2], x, height - padding + 20);
+      });
+    }
+
+    // ===== DECISIONS & ACTIONS =====
+    function renderActionable() {
+      const actionable = DATA.actionable || [];
+      
+      const decisions = actionable.filter(a => a.signal === 'decision');
+      const actions = actionable.filter(a => a.signal === 'action');
+      const questions = actionable.filter(a => a.signal === 'question');
+      
+      renderSignalList(decisions, 'decisions-list', 'decision');
+      renderSignalList(actions, 'actions-list', 'action');
+      renderSignalList(questions, 'questions-list', 'question');
+      
+      if (decisions.length === 0) {
+        document.getElementById('decisions-list').innerHTML = '<div class="empty-state">No decisions surfaced.</div>';
+      }
+      if (actions.length === 0) {
+        document.getElementById('actions-list').innerHTML = '<div class="empty-state">No action items tracked.</div>';
+      }
+      if (questions.length === 0) {
+        document.getElementById('questions-list').innerHTML = '<div class="empty-state">No open questions.</div>';
+      }
+    }
+
+    function renderSignalList(items, containerId, signalType) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      
+      items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = `signal-item ${signalType}`;
+        div.innerHTML = `
+          <div class="signal-text">${escapeHtml(item.text)}</div>
+          <div class="signal-meta">
+            <span>${item.sender}</span>
+            <span>${item.ts}</span>
+          </div>
+        `;
+        div.onclick = () => jumpToMessage(item.id);
+        container.appendChild(div);
+      });
+    }
+
+    // ===== THREADS OF NOTE =====
+    function renderThreads() {
+      const threads = DATA.threads || [];
+      if (threads.length === 0) {
+        document.getElementById('threads-card').classList.add('hidden');
+        return;
+      }
+      
+      const list = document.getElementById('threads-list');
+      threads.slice(0, 5).forEach(thread => {
+        const div = document.createElement('div');
+        div.className = 'thread-card';
+        div.innerHTML = `
+          <div class="thread-parent">
+            <span class="thread-parent-sender">${thread.parentSender}</span>: ${escapeHtml(thread.parentText).substring(0, 100)}${thread.parentText.length > 100 ? '...' : ''}
+          </div>
+          <div class="thread-stats">
+            <span>💬 ${thread.messageCount} replies</span>
+            <span>👥 ${thread.participants.length} people</span>
+            <span>⏱️ ${thread.lastTs}</span>
+          </div>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    // ===== TOPICS =====
+    function renderTopics() {
+      const topicData = generateTopics();
+      const list = document.getElementById('topics-list');
+      
+      topicData.forEach(topic => {
+        const pct = (topic.count / topicData.reduce((s, t) => s + t.count, 0)) * 100;
+        const div = document.createElement('div');
+        div.className = 'topic-bar';
+        div.innerHTML = `
+          <div class="topic-label">${topic.label}</div>
+          <div class="topic-bar-bg" style="width: ${Math.max(pct, 5)}%;">
+            <div class="topic-count">${topic.count}</div>
+          </div>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    function generateTopics() {
+      const messages = DATA.messages || [];
+      const topics = {
+        'Design & UX': 0,
+        'Engineering': 0,
+        'Testing & QA': 0,
+        'Launch planning': 0,
+        'Performance': 0,
+        'Rollout': 0
+      };
+      
+      messages.forEach(msg => {
+        const text = msg.text.toLowerCase();
+        if (text.includes('design') || text.includes('mobile') || text.includes('sheet') || text.includes('ui')) topics['Design & UX']++;
+        else if (text.includes('pr') || text.includes('code') || text.includes('merge') || text.includes('feature flag')) topics['Engineering']++;
+        else if (text.includes('qa') || text.includes('test') || text.includes('staging')) topics['Testing & QA']++;
+        else if (text.includes('launch') || text.includes('comms') || text.includes('runbook')) topics['Launch planning']++;
+        else if (text.includes('performance') || text.includes('lcp') || text.includes('error')) topics['Performance']++;
+        else if (text.includes('rollout') || text.includes('100%') || text.includes('monitoring')) topics['Rollout']++;
+      });
+      
+      return Object.entries(topics)
+        .map(([label, count]) => ({ label, count }))
+        .filter(t => t.count > 0)
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 6);
+    }
+
+    // ===== MESSAGE LOG =====
+    function renderMessageLog() {
+      const messages = DATA.messages || [];
+      const logContainer = document.getElementById('message-log');
+      
+      let currentDate = null;
+      let html = '';
+      
+      messages.forEach((msg, idx) => {
+        if (msg.date !== currentDate) {
+          if (currentDate !== null) html += '</div>';
+          html += `<div class="message-group"><div class="message-group-date">${formatDate(msg.date)}</div>`;
+          currentDate = msg.date;
+        }
+        
+        const indent = msg.isThreadReply ? ' message-thread-reply' : '';
+        const prefix = msg.isThreadReply ? '↳ ' : '';
+        
+        let reactionsHtml = '';
+        if (msg.reactions && msg.reactions.length > 0) {
+          reactionsHtml = '<div class="message-reactions">';
+          msg.reactions.forEach(r => {
+            reactionsHtml += `<div class="message-badge">${getEmoji(r.name)} <strong>${r.count}</strong></div>`;
+          });
+          reactionsHtml += '</div>';
+        }
+        
+        html += `
+          <div class="message${indent}" id="msg-${msg.id}" data-sender="${msg.sender}">
+            <div class="message-header">
+              <span class="message-sender">${prefix}${msg.sender}</span>
+              <span class="message-time">${msg.time}</span>
+            </div>
+            <div class="message-text">${escapeHtml(msg.text)}</div>
+            ${msg.attachmentCount ? '<div class="message-badge">📎 ' + msg.attachmentCount + ' file' + (msg.attachmentCount > 1 ? 's' : '') + '</div>' : ''}
+            ${reactionsHtml}
+          </div>
+        `;
+      });
+      
+      if (currentDate !== null) html += '</div>';
+      logContainer.innerHTML = html;
+    }
+
+    function formatDate(dateStr) {
+      const date = new Date(dateStr + 'T00:00:00Z');
+      return date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    // ===== SEARCH & FILTER =====
+    function initSearch() {
+      const searchInput = document.getElementById('search-input');
+      const filterChips = document.getElementById('filter-chips');
+      const senders = DATA.senders || [];
+      
+      // Create sender filter chips
+      senders.forEach(sender => {
+        const chip = document.createElement('button');
+        chip.className = 'filter-chip';
+        chip.textContent = sender.sender;
+        chip.dataset.sender = sender.sender;
+        chip.onclick = (e) => {
+          e.stopPropagation();
+          chip.classList.toggle('active');
+          applyFilters();
+        };
+        filterChips.appendChild(chip);
+      });
+      
+      searchInput.addEventListener('input', applyFilters);
+    }
+
+    function applyFilters() {
+      const searchText = document.getElementById('search-input').value.toLowerCase();
+      const activeSenders = Array.from(document.querySelectorAll('.filter-chip.active')).map(c => c.dataset.sender);
+      
+      document.querySelectorAll('.message').forEach(msg => {
+        const sender = msg.dataset.sender;
+        const text = msg.textContent.toLowerCase();
+        
+        const matchesSearch = searchText === '' || text.includes(searchText);
+        const matchesSender = activeSenders.length === 0 || activeSenders.includes(sender);
+        const shouldShow = matchesSearch && matchesSender;
+        
+        msg.classList.toggle('hidden', !shouldShow);
+        msg.classList.toggle('highlight', shouldShow && searchText !== '' && text.includes(searchText));
+      });
+    }
+
+    function filterBySender(sender, element) {
+      element.classList.toggle('active');
+      const chip = document.querySelector(`.filter-chip[data-sender="${sender}"]`);
+      if (chip) chip.classList.toggle('active');
+      applyFilters();
+    }
+
+    function jumpToMessage(msgId) {
+      const msg = document.getElementById(msgId);
+      if (msg) {
+        document.getElementById('drill-toggle').click();
+        setTimeout(() => {
+          msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          msg.classList.add('highlight');
+          setTimeout(() => msg.classList.remove('highlight'), 2000);
+        }, 300);
+      }
+    }
+
+    // ===== DRILL-DOWN TOGGLE =====
+    function initDrillDown() {
+      const toggle = document.getElementById('drill-toggle');
+      const content = document.getElementById('drill-content');
+      
+      toggle.addEventListener('click', () => {
+        toggle.querySelector('.drill-down-toggle').classList.toggle('open');
+        content.classList.toggle('open');
+      });
+    }
+
+    // ===== COPY FUNCTIONALITY =====
+    function copySection(sectionId) {
+      const section = document.getElementById(sectionId);
+      if (!section) return;
+      
+      const text = section.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Copied to clipboard!');
+      });
+    }
+
+    // ===== UTILITIES =====
+    function escapeHtml(text) {
+      const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+      return text.replace(/[&<>"']/g, m => map[m]);
+    }
+
+    // ===== INIT =====
+    function init() {
+      renderHeatmap();
+      renderLeaderboard();
+      renderReactions();
+      renderVolumeChart();
+      renderActionable();
+      renderThreads();
+      renderTopics();
+      renderMessageLog();
+      initSearch();
+      initDrillDown();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

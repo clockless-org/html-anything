@@ -1,0 +1,1182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brewline Support · Acme Coffee — week of Apr 13</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Brand */
+      --primary: #a03b00;
+      --primary-container: #c94c00;
+      --primary-fixed: #ffdbcd;
+      --primary-fixed-dim: #ffb597;
+      --on-primary: #ffffff;
+      --accent-glow: #E8400D;
+
+      /* Secondary / tertiary */
+      --secondary: #d5baff;
+      --secondary-container: #7b40e0;
+      --tertiary: #4d44e3;
+      --accent-cyan: #00D4FF;
+
+      /* Surfaces */
+      --bg: #fff8f6;
+      --surface: #fff8f6;
+      --surface-container-lowest: #ffffff;
+      --surface-container-low: #fbf2ef;
+      --surface-container: #f5ece9;
+      --surface-container-high: #efe6e3;
+
+      /* Text */
+      --fg-1: #1e1b19;
+      --fg-2: #594138;
+      --fg-muted: #8d7166;
+
+      /* Borders */
+      --border: rgba(0, 0, 0, 0.06);
+      --border-strong: rgba(0, 0, 0, 0.12);
+      --outline-variant: #e1bfb2;
+
+      /* Status */
+      --green: #10b981;
+      --blue: #3b82f6;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+
+      /* Typography */
+      --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+      --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+      --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+
+      /* Spacing */
+      --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+      --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+      --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+
+      /* Radius */
+      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+      --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 2px rgba(30, 27, 25, 0.04);
+      --shadow-md: 0 4px 12px rgba(30, 27, 25, 0.08);
+      --shadow-lg: 0 8px 24px rgba(30, 27, 25, 0.12);
+      --shadow-accent: 0 8px 24px rgba(160, 59, 0, 0.15);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #060B18;
+        --surface: #0B1426;
+        --surface-container-lowest: #101D35;
+        --surface-container-low: #101D35;
+        --surface-container: #162544;
+        --surface-container-high: #1c2d52;
+        --fg-1: #F8FAFC;
+        --fg-2: #CBD5E1;
+        --fg-muted: #64748B;
+        --border: rgba(255, 255, 255, 0.08);
+        --border-strong: rgba(255, 255, 255, 0.14);
+        --primary: #FF6B35;
+        --accent-glow: #00D4FF;
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+        --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg-1);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--space-lg);
+    }
+
+    /* Header */
+    .header {
+      margin-bottom: var(--space-4xl);
+    }
+
+    .channel-card {
+      background: var(--surface-container);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+      margin-bottom: var(--space-3xl);
+    }
+
+    .channel-title {
+      font-family: var(--font-headline);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--fg-1);
+      margin-bottom: var(--space-md);
+    }
+
+    .channel-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-lg);
+      margin-top: var(--space-lg);
+      font-size: 14px;
+      color: var(--fg-2);
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .meta-label {
+      color: var(--fg-muted);
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .meta-value {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--fg-1);
+    }
+
+    .channel-summary {
+      margin-top: var(--space-lg);
+      padding-top: var(--space-lg);
+      border-top: 1px solid var(--border);
+      color: var(--fg-2);
+      font-size: 15px;
+    }
+
+    /* Section heading */
+    .section-heading {
+      font-family: var(--font-headline);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--fg-1);
+      margin-bottom: var(--space-2xl);
+      margin-top: var(--space-4xl);
+    }
+
+    /* Cards grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--space-2xl);
+      margin-bottom: var(--space-4xl);
+    }
+
+    .card {
+      background: var(--surface-container-low);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Heatmap */
+    .heatmap-svg {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+    }
+
+    .heatmap-cell {
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .heatmap-cell:hover {
+      opacity: 0.8;
+    }
+
+    /* Leaderboard */
+    .leaderboard-list {
+      list-style: none;
+    }
+
+    .leaderboard-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-lg);
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .leaderboard-item:hover {
+      background-color: var(--surface-container-high);
+    }
+
+    .leaderboard-item:last-child {
+      border-bottom: none;
+    }
+
+    .leaderboard-rank {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      min-width: 40px;
+    }
+
+    .leaderboard-name {
+      flex: 1;
+      margin: 0 var(--space-lg);
+      font-weight: 600;
+      color: var(--fg-1);
+    }
+
+    .leaderboard-count {
+      font-family: var(--font-mono);
+      color: var(--fg-muted);
+      font-size: 14px;
+    }
+
+    .leaderboard-percent {
+      background: var(--primary-fixed);
+      color: var(--primary);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      min-width: 50px;
+      text-align: center;
+    }
+
+    /* Volume chart */
+    .volume-chart {
+      width: 100%;
+      height: 200px;
+      margin: var(--space-lg) 0;
+    }
+
+    /* Actions panel */
+    .actions-panel {
+      background: var(--surface-container-low);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+      margin-bottom: var(--space-3xl);
+    }
+
+    .action-group {
+      margin-bottom: var(--space-3xl);
+    }
+
+    .action-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .action-group-title {
+      font-family: var(--font-headline);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--fg-1);
+      margin-bottom: var(--space-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .action-badge {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .action-badge.decision {
+      background-color: var(--primary);
+    }
+
+    .action-badge.action {
+      background-color: var(--blue);
+    }
+
+    .action-badge.question {
+      background-color: var(--yellow);
+    }
+
+    .action-list {
+      list-style: none;
+    }
+
+    .action-item {
+      padding: var(--space-lg);
+      border-left: 3px solid var(--border-strong);
+      margin-bottom: var(--space-md);
+      background: var(--surface-container-lowest);
+      border-radius: var(--radius-sm);
+    }
+
+    .action-item.decision {
+      border-left-color: var(--primary);
+    }
+
+    .action-item.action {
+      border-left-color: var(--blue);
+    }
+
+    .action-item.question {
+      border-left-color: var(--yellow);
+    }
+
+    .action-sender {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 13px;
+    }
+
+    .action-time {
+      color: var(--fg-muted);
+      font-size: 12px;
+      display: block;
+      margin-bottom: var(--space-xs);
+    }
+
+    .action-text {
+      color: var(--fg-2);
+      margin-top: var(--space-sm);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .empty-state {
+      color: var(--fg-muted);
+      font-style: italic;
+      padding: var(--space-lg);
+      text-align: center;
+    }
+
+    /* Topics */
+    .topics-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      margin: var(--space-lg) 0;
+    }
+
+    .topic-chip {
+      background: var(--primary-fixed);
+      color: var(--primary);
+      padding: var(--space-sm) var(--space-lg);
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .topic-count {
+      background: rgba(160, 59, 0, 0.2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+
+    /* Drill-down */
+    .drill-down-toggle {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: var(--space-md) var(--space-xl);
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: var(--space-2xl);
+      transition: background-color 0.2s;
+    }
+
+    .drill-down-toggle:hover {
+      background-color: var(--primary-container);
+    }
+
+    .drill-down-content {
+      display: none;
+    }
+
+    .drill-down-content.open {
+      display: block;
+    }
+
+    .search-box {
+      display: flex;
+      gap: var(--space-md);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .search-input {
+      flex: 1;
+      padding: var(--space-md) var(--space-lg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      background: var(--surface-container-lowest);
+      color: var(--fg-1);
+    }
+
+    .search-input::placeholder {
+      color: var(--fg-muted);
+    }
+
+    .filter-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .filter-chip {
+      padding: var(--space-sm) var(--space-lg);
+      border: 1px solid var(--border);
+      background: var(--surface-container-lowest);
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.2s;
+      color: var(--fg-2);
+    }
+
+    .filter-chip:hover {
+      background: var(--surface-container);
+      border-color: var(--border-strong);
+    }
+
+    .filter-chip.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .message-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3xl);
+    }
+
+    .timeline-day {
+      margin-bottom: var(--space-3xl);
+    }
+
+    .timeline-day-header {
+      font-family: var(--font-headline);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--fg-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--space-xl);
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .message-bubble {
+      display: flex;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-xl);
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message-bubble.hidden {
+      display: none;
+    }
+
+    .message-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary-container));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .message-content {
+      flex: 1;
+    }
+
+    .message-header {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-md);
+      margin-bottom: var(--space-xs);
+    }
+
+    .message-sender {
+      font-weight: 600;
+      color: var(--fg-1);
+    }
+
+    .message-time {
+      font-size: 12px;
+      color: var(--fg-muted);
+      font-family: var(--font-mono);
+    }
+
+    .message-text {
+      color: var(--fg-2);
+      line-height: 1.6;
+      word-break: break-word;
+      padding: var(--space-md) var(--space-lg);
+      background: var(--surface-container-lowest);
+      border-radius: var(--radius-md);
+      border-left: 3px solid var(--border);
+    }
+
+    .message-text.highlighted {
+      background: rgba(245, 158, 11, 0.15);
+      border-left-color: var(--yellow);
+    }
+
+    .message-reply-to {
+      font-size: 12px;
+      color: var(--fg-muted);
+      margin-bottom: var(--space-sm);
+      font-style: italic;
+    }
+
+    .copy-button {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--fg-2);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font-body);
+    }
+
+    .copy-button:hover {
+      background: var(--surface-container);
+      border-color: var(--border-strong);
+    }
+
+    .copy-button.copied {
+      background: var(--green);
+      color: white;
+      border-color: var(--green);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: var(--space-5xl);
+      padding-top: var(--space-3xl);
+      border-top: 1px solid var(--border);
+      color: var(--fg-muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: var(--space-md);
+      }
+
+      .channel-title {
+        font-size: 22px;
+      }
+
+      .section-heading {
+        font-size: 18px;
+      }
+
+      .channel-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .leaderboard-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-md);
+      }
+
+      .message-header {
+        flex-direction: column;
+      }
+
+      .heatmap-svg {
+        transform: scale(0.9);
+        transform-origin: 0 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="channel-card">
+        <h1 class="channel-title">Brewline Support · Acme Coffee</h1>
+        <p class="channel-summary">Customer support channel managing orders, integrations, and feature requests. Fast-moving during incidents, steady cadence otherwise.</p>
+        <div class="channel-meta">
+          <div class="meta-item">
+            <span class="meta-label">Platform</span>
+            <span class="meta-value">Telegram</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Type</span>
+            <span class="meta-value">Private Supergroup</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Messages</span>
+            <span class="meta-value">41</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Participants</span>
+            <span class="meta-value">3</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Date Range</span>
+            <span class="meta-value">Apr 13 – 24, 2026</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Active Days</span>
+            <span class="meta-value">9 of 12</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Activity Heatmap -->
+    <h2 class="section-heading">Activity heatmap</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <svg class="heatmap-svg" viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" id="heatmap"></svg>
+      </div>
+    </div>
+
+    <!-- Volume Over Time -->
+    <h2 class="section-heading">Volume over time</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <canvas id="volumeChart" class="volume-chart"></canvas>
+      </div>
+    </div>
+
+    <!-- Contributors Leaderboard -->
+    <h2 class="section-heading">Contributors</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <ul class="leaderboard-list" id="leaderboard"></ul>
+      </div>
+    </div>
+
+    <!-- Decisions & Action Items -->
+    <h2 class="section-heading">Decisions & action items</h2>
+    <div class="actions-panel" id="actionsPanel"></div>
+
+    <!-- Topics -->
+    <h2 class="section-heading">Topics</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="topics-chips" id="topicsList"></div>
+      </div>
+    </div>
+
+    <!-- Drill-Down -->
+    <h2 class="section-heading">Browse all messages</h2>
+    <button class="drill-down-toggle" id="toggleDrill">Expand message log</button>
+    <div class="drill-down-content" id="drillDown">
+      <div class="search-box">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search messages...">
+      </div>
+      <div class="filter-chips" id="filterChips"></div>
+      <div class="message-timeline" id="timeline"></div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p><em>Generated locally — your chat export never left your machine. The full log is embedded in this HTML and rendered in your browser. For sharing, prefer an anonymized export.</em></p>
+    </div>
+  </div>
+
+  <script>
+    const DATA = {"messages":[{"id":"m_0001","ts":"2026-04-13 13:01:00","date":"2026-04-13","time":"13:01:00","tsEpoch":1776085260000,"sender":"Olivia Rao","text":"morning team — our brewline dashboard is showing every hopper as offline since 8am. we've had no orders ingested. is it on your end or ours?","channel":"Brewline Support · Acme Coffee"},{"id":"m_0002","ts":"2026-04-13 13:02:48","date":"2026-04-13","time":"13:02:48","tsEpoch":1776085368000,"sender":"Jamie (Brewline)","text":"hi olivia — we see the same on our side, investigating. apologies. I'll have a status update in 15.","channel":"Brewline Support · Acme Coffee","replyToId":"m_tg_4001"},{"id":"m_0003","ts":"2026-04-13 13:14:30","date":"2026-04-13","time":"13:14:30","tsEpoch":1776086070000,"sender":"Jamie (Brewline)","text":"update: it's on us. our queue worker hit a timeout cascade at 7:55am. we're rolling a fix now, eta 20 minutes to recovery.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0004","ts":"2026-04-13 13:16:00","date":"2026-04-13","time":"13:16:00","tsEpoch":1776086160000,"sender":"Olivia Rao","text":"ok thanks. can you confirm: any data was lost? we have 4 retail locations that have been pushing orders this morning.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0005","ts":"2026-04-13 13:17:42","date":"2026-04-13","time":"13:17:42","tsEpoch":1776086262000,"sender":"Jamie (Brewline)","text":"no data loss — orders were buffered on the device side. they'll sync as soon as the queue is healthy.","channel":"Brewline Support · Acme Coffee","replyToId":"m_tg_4004"},{"id":"m_0006","ts":"2026-04-13 13:32:00","date":"2026-04-13","time":"13:32:00","tsEpoch":1776087120000,"sender":"Tariq (Brewline)","text":"queue is healthy, sync is in progress. seeing 1,847 buffered orders flowing through now.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0007","ts":"2026-04-13 13:38:18","date":"2026-04-13","time":"13:38:18","tsEpoch":1776087498000,"sender":"Olivia Rao","text":"I see them on our dashboard. all 4 stores are reporting again. thank you both.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0008","ts":"2026-04-13 13:38:50","date":"2026-04-13","time":"13:38:50","tsEpoch":1776087530000,"sender":"Jamie (Brewline)","text":"you're welcome — really sorry about the disruption. we'll send you a postmortem by friday and a service credit on the next invoice.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0009","ts":"2026-04-13 13:39:30","date":"2026-04-13","time":"13:39:30","tsEpoch":1776087570000,"sender":"Olivia Rao","text":"appreciated. one ask: can you also flag what we should look for on our side next time so we know whether to ping you immediately?","channel":"Brewline Support · Acme Coffee"},{"id":"m_0010","ts":"2026-04-13 13:41:01","date":"2026-04-13","time":"13:41:01","tsEpoch":1776087661000,"sender":"Jamie (Brewline)","text":"yes — if your dashboard shows >5 minutes of consecutive 'offline' on more than 2 hoppers, that's almost always us. ping immediately, it'll never be a false alarm.","channel":"Brewline Support · Acme Coffee","replyToId":"m_tg_4009"},{"id":"m_0011","ts":"2026-04-14 15:11:09","date":"2026-04-14","time":"15:11:09","tsEpoch":1776179469000,"sender":"Olivia Rao","text":"hey — got a billing q. our invoice for april shows a 15% over-quota fee but we're tracking 11k events under the 12k limit. can you take a look?","channel":"Brewline Support · Acme Coffee"},{"id":"m_0012","ts":"2026-04-14 15:18:30","date":"2026-04-14","time":"15:18:30","tsEpoch":1776179910000,"sender":"Tariq (Brewline)","text":"looking now. one moment.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0013","ts":"2026-04-14 15:24:40","date":"2026-04-14","time":"15:24:40","tsEpoch":1776180280000,"sender":"Tariq (Brewline)","text":"found it — the buffered orders from yesterday's outage came in as a single burst and tripped our daily-spike rule. that's a billing bug on our end, you should not be charged for that.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0014","ts":"2026-04-14 15:25:11","date":"2026-04-14","time":"15:25:11","tsEpoch":1776180311000,"sender":"Tariq (Brewline)","text":"I'll credit the over-quota fee on this invoice and patch the spike rule so it ignores backfill bursts. you should see the corrected invoice within the hour.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0015","ts":"2026-04-14 15:25:48","date":"2026-04-14","time":"15:25:48","tsEpoch":1776180348000,"sender":"Olivia Rao","text":"perfect, thanks tariq.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0016","ts":"2026-04-14 16:32:00","date":"2026-04-14","time":"16:32:00","tsEpoch":1776184320000,"sender":"Tariq (Brewline)","text":"corrected invoice is sent — just resend, original is voided. credit of $186.40 applied.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0017","ts":"2026-04-14 16:33:11","date":"2026-04-14","time":"16:33:11","tsEpoch":1776184391000,"sender":"Olivia Rao","text":"got it. thanks.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0018","ts":"2026-04-15 18:02:18","date":"2026-04-15","time":"18:02:18","tsEpoch":1776276138000,"sender":"Olivia Rao","text":"different topic: we've been asking for csv export on the orders dashboard for a while. any update?","channel":"Brewline Support · Acme Coffee"},{"id":"m_0019","ts":"2026-04-15 18:08:30","date":"2026-04-15","time":"18:08:30","tsEpoch":1776276510000,"sender":"Jamie (Brewline)","text":"yes — it's on the roadmap for q2. our pm is actually writing the spec this week. would you be open to a 15-minute call to walk through what columns and filters matter most to you?","channel":"Brewline Support · Acme Coffee"},{"id":"m_0020","ts":"2026-04-15 18:09:40","date":"2026-04-15","time":"18:09:40","tsEpoch":1776276580000,"sender":"Olivia Rao","text":"yes. tomorrow afternoon works, after 3pm pacific.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0021","ts":"2026-04-15 18:10:18","date":"2026-04-15","time":"18:10:18","tsEpoch":1776276618000,"sender":"Jamie (Brewline)","text":"I'll send a calendar invite for thursday 3:30pm pacific with our pm.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0022","ts":"2026-04-15 18:11:00","date":"2026-04-15","time":"18:11:00","tsEpoch":1776276660000,"sender":"Olivia Rao","text":"great.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0023","ts":"2026-04-16 22:48:09","date":"2026-04-16","time":"22:48:09","tsEpoch":1776379689000,"sender":"Olivia Rao","text":"talked to your pm earlier — really helpful. she said the export will support all 12 columns we use plus a date-range filter. eta end of may?","channel":"Brewline Support · Acme Coffee"},{"id":"m_0024","ts":"2026-04-16 22:50:18","date":"2026-04-16","time":"22:50:18","tsEpoch":1776379818000,"sender":"Jamie (Brewline)","text":"yes — she walked me through it after your call. we'll have a beta in two weeks for you to test, public release end of may.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0025","ts":"2026-04-16 22:51:00","date":"2026-04-16","time":"22:51:00","tsEpoch":1776379860000,"sender":"Olivia Rao","text":"amazing. happy to be the beta tester.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0026","ts":"2026-04-17 19:11:00","date":"2026-04-17","time":"19:11:00","tsEpoch":1776453060000,"sender":"Tariq (Brewline)","text":"as promised — postmortem for monday's outage is attached. tldr: a config drift from a deploy on sunday set our queue worker timeout 10x too low. the cascade was the symptom; the root cause was the config drift.","channel":"Brewline Support · Acme Coffee","isMedia":true,"attachmentCount":1},{"id":"m_0027","ts":"2026-04-17 19:12:48","date":"2026-04-17","time":"19:12:48","tsEpoch":1776453168000,"sender":"Tariq (Brewline)","text":"we've added a config-drift monitor that pages on-call within 30 seconds of any prod-config change that doesn't match our terraform state. small thing, big effect.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0028","ts":"2026-04-17 19:18:11","date":"2026-04-17","time":"19:18:11","tsEpoch":1776453491000,"sender":"Olivia Rao","text":"thanks for the writeup, that's a thorough postmortem. forwarding to our cto.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0029","ts":"2026-04-17 19:24:00","date":"2026-04-17","time":"19:24:00","tsEpoch":1776453840000,"sender":"Olivia Rao","text":"[forwarded] our cto says 'this is the kind of postmortem I wish more vendors wrote, please thank them'","channel":"Brewline Support · Acme Coffee","forwardedFrom":"Olivia Rao"},{"id":"m_0030","ts":"2026-04-17 19:25:00","date":"2026-04-17","time":"19:25:00","tsEpoch":1776453900000,"sender":"Jamie (Brewline)","text":"that means a lot, thank you. and please thank your cto.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0031","ts":"2026-04-21 16:00:00","date":"2026-04-21","time":"16:00:00","tsEpoch":1776787200000,"sender":"Jamie (Brewline)","text":"good news — csv export beta is live for your account a week early. log in and you should see the new 'export' button on the orders page. would love your feedback this week.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0032","ts":"2026-04-21 16:08:18","date":"2026-04-21","time":"16:08:18","tsEpoch":1776787698000,"sender":"Olivia Rao","text":"wow, fast. trying it now.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0033","ts":"2026-04-21 16:14:09","date":"2026-04-21","time":"16:14:09","tsEpoch":1776788049000,"sender":"Olivia Rao","text":"first impressions: works, the date filter is exactly what we wanted. small thing — when I export over 50k rows the page hangs for a few seconds before the download starts. is there a progress indicator coming?","channel":"Brewline Support · Acme Coffee"},{"id":"m_0034","ts":"2026-04-21 16:18:30","date":"2026-04-21","time":"16:18:30","tsEpoch":1776788310000,"sender":"Jamie (Brewline)","text":"good catch. progress bar + 'export in background, we'll email you the link' fallback for >25k rows is on the v2 list. I'll bump it up so it's in v1.","channel":"Brewline Support · Acme Coffee","replyToId":"m_tg_4033"},{"id":"m_0035","ts":"2026-04-21 16:19:00","date":"2026-04-21","time":"16:19:00","tsEpoch":1776788340000,"sender":"Olivia Rao","text":"thanks 🙏","channel":"Brewline Support · Acme Coffee"},{"id":"m_0036","ts":"2026-04-22 15:32:18","date":"2026-04-22","time":"15:32:18","tsEpoch":1776871938000,"sender":"Olivia Rao","text":"another small one — could the export include the 'cancellation_reason' column? we need it for our weekly ops review.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0037","ts":"2026-04-22 15:40:00","date":"2026-04-22","time":"15:40:00","tsEpoch":1776872400000,"sender":"Jamie (Brewline)","text":"yes, easy add. it'll be in tomorrow's beta build.","channel":"Brewline Support · Acme Coffee","replyToId":"m_tg_4036"},{"id":"m_0038","ts":"2026-04-23 17:05:08","date":"2026-04-23","time":"17:05:08","tsEpoch":1776963908000,"sender":"Jamie (Brewline)","text":"tomorrow's beta is now today's beta — cancellation_reason column is in. progress bar lands monday.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0039","ts":"2026-04-23 17:09:42","date":"2026-04-23","time":"17:09:42","tsEpoch":1776964182000,"sender":"Olivia Rao","text":"verified. perfect.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0040","ts":"2026-04-24 16:20:00","date":"2026-04-24","time":"16:20:00","tsEpoch":1777047600000,"sender":"Olivia Rao","text":"appreciate the responsiveness this week. the outage on monday could have been a brutal start but you turned it around.","channel":"Brewline Support · Acme Coffee"},{"id":"m_0041","ts":"2026-04-24 16:21:30","date":"2026-04-24","time":"16:21:30","tsEpoch":1777047690000,"sender":"Jamie (Brewline)","text":"thank you — that's the loop we try to close every time. have a good weekend.","channel":"Brewline Support · Acme Coffee"}],"senders":[{"sender":"Olivia Rao","count":20,"firstTs":"2026-04-13 13:01:00","lastTs":"2026-04-24 16:20:00"},{"sender":"Jamie (Brewline)","count":14,"firstTs":"2026-04-13 13:02:48","lastTs":"2026-04-24 16:21:30"},{"sender":"Tariq (Brewline)","count":7,"firstTs":"2026-04-13 13:32:00","lastTs":"2026-04-17 19:12:48"}],"messagesPerSender":{"Olivia Rao":20,"Jamie (Brewline)":14,"Tariq (Brewline)":7},"dateRange":"2026-04-13 → 2026-04-24","messageCount":41,"senderCount":3,"reactionCount":0,"threadCount":0,"mediaCount":1,"heatmap":[{"dow":1,"hour":13,"count":10},{"dow":2,"hour":15,"count":5},{"dow":2,"hour":16,"count":7},{"dow":3,"hour":15,"count":2},{"dow":3,"hour":18,"count":5},{"dow":4,"hour":17,"count":2},{"dow":4,"hour":22,"count":3},{"dow":5,"hour":16,"count":2},{"dow":5,"hour":19,"count":5}],"volumeByDay":[{"date":"2026-04-13","count":10},{"date":"2026-04-14","count":7},{"date":"2026-04-15","count":5},{"date":"2026-04-16","count":3},{"date":"2026-04-17","count":5},{"date":"2026-04-21","count":5},{"date":"2026-04-22","count":2},{"date":"2026-04-23","count":2},{"date":"2026-04-24","count":2}],"threads":[],"actionable":[{"id":"m_0001","ts":"2026-04-13 13:01:00","sender":"Olivia Rao","text":"morning team — our brewline dashboard is showing every hopper as offline since 8am. we've had no orders ingested. is it on your end or ours?","signal":"question"},{"id":"m_0004","ts":"2026-04-13 13:16:00","sender":"Olivia Rao","text":"ok thanks. can you confirm: any data was lost? we have 4 retail locations that have been pushing orders this morning.","signal":"action"},{"id":"m_0008","ts":"2026-04-13 13:38:50","sender":"Jamie (Brewline)","text":"you're welcome — really sorry about the disruption. we'll send you a postmortem by friday and a service credit on the next invoice.","signal":"decision"},{"id":"m_0009","ts":"2026-04-13 13:39:30","sender":"Olivia Rao","text":"appreciated. one ask: can you also flag what we should look for on our side next time so we know whether to ping you immediately?","signal":"action"},{"id":"m_0011","ts":"2026-04-14 15:11:09","sender":"Olivia Rao","text":"hey — got a billing q. our invoice for april shows a 15% over-quota fee but we're tracking 11k events under the 12k limit. can you take a look?","signal":"action"},{"id":"m_0018","ts":"2026-04-15 18:02:18","sender":"Olivia Rao","text":"different topic: we've been asking for csv export on the orders dashboard for a while. any update?","signal":"question"},{"id":"m_0019","ts":"2026-04-15 18:08:30","sender":"Jamie (Brewline)","text":"yes — it's on the roadmap for q2. our pm is actually writing the spec this week. would you be open to a 15-minute call to walk through what columns and filters matter most to you?","signal":"question"},{"id":"m_0021","ts":"2026-04-15 18:10:18","sender":"Jamie (Brewline)","text":"I'll send a calendar invite for thursday 3:30pm pacific with our pm.","signal":"action"},{"id":"m_0023","ts":"2026-04-16 22:48:09","sender":"Olivia Rao","text":"talked to your pm earlier — really helpful. she said the export will support all 12 columns we use plus a date-range filter. eta end of may?","signal":"question"},{"id":"m_0024","ts":"2026-04-16 22:50:18","sender":"Jamie (Brewline)","text":"yes — she walked me through it after your call. we'll have a beta in two weeks for you to test, public release end of may.","signal":"decision"},{"id":"m_0033","ts":"2026-04-21 16:14:09","sender":"Olivia Rao","text":"first impressions: works, the date filter is exactly what we wanted. small thing — when I export over 50k rows the page hangs for a few seconds before the download starts. is there a progress indicator coming?","signal":"question"},{"id":"m_0034","ts":"2026-04-21 16:18:30","sender":"Jamie (Brewline)","text":"good catch. progress bar + 'export in background, we'll email you the link' fallback for >25k rows is on the v2 list. I'll bump it up so it's in v1.","signal":"decision"}],"topReactions":[],"platform":"telegram","channel":"Brewline Support · Acme Coffee","chatType":"private_supergroup"};
+
+    // State
+    let selectedSender = null;
+    let searchQuery = '';
+
+    // Initialize
+    function init() {
+      renderChannelCard();
+      renderHeatmap();
+      renderVolumeChart();
+      renderLeaderboard();
+      renderActionsPanel();
+      renderTopics();
+      setupDrillDown();
+      setupSearch();
+      setupDrillDownToggle();
+    }
+
+    function renderChannelCard() {
+      // Already in HTML, just update if needed
+    }
+
+    function renderHeatmap() {
+      const heatmap = DATA.heatmap || [];
+      const svg = document.getElementById('heatmap');
+      const width = 800;
+      const height = 200;
+      const cellW = width / 24;
+      const cellH = height / 7;
+      const dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+      const maxCount = Math.max(...heatmap.map(h => h.count), 1);
+
+      svg.innerHTML = '';
+
+      // Labels
+      for (let d = 0; d < 7; d++) {
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', '10');
+        text.setAttribute('y', cellH * (d + 0.5) + 6);
+        text.setAttribute('font-size', '12');
+        text.setAttribute('font-weight', '600');
+        text.setAttribute('fill', 'var(--fg-muted)');
+        text.textContent = dow[d];
+        svg.appendChild(text);
+      }
+
+      // Hour labels (sparse)
+      for (let h = 0; h < 24; h += 6) {
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', 50 + cellW * h);
+        text.setAttribute('y', height - 5);
+        text.setAttribute('font-size', '11');
+        text.setAttribute('fill', 'var(--fg-muted)');
+        text.setAttribute('text-anchor', 'middle');
+        text.textContent = h + 'h';
+        svg.appendChild(text);
+      }
+
+      // Cells
+      const colors = [
+        'rgba(255, 219, 205, 0.3)',
+        'rgba(255, 181, 151, 0.6)',
+        'rgba(255, 107, 53, 0.8)',
+        'rgba(160, 59, 0, 1)'
+      ];
+
+      heatmap.forEach(cell => {
+        const x = 50 + cell.hour * cellW;
+        const y = cell.dow * cellH;
+        const intensity = Math.min(cell.count / maxCount, 1);
+        const colorIdx = Math.floor(intensity * (colors.length - 1));
+        const color = colors[colorIdx];
+
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('x', x + 2);
+        rect.setAttribute('y', y + 2);
+        rect.setAttribute('width', cellW - 4);
+        rect.setAttribute('height', cellH - 4);
+        rect.setAttribute('fill', color);
+        rect.setAttribute('rx', '4');
+        rect.setAttribute('class', 'heatmap-cell');
+        rect.setAttribute('title', `${dow[cell.dow]} ${cell.hour}h: ${cell.count} messages`);
+        svg.appendChild(rect);
+      });
+    }
+
+    function renderVolumeChart() {
+      const canvas = document.getElementById('volumeChart');
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      const volume = DATA.volumeByDay || [];
+
+      if (!volume.length) {
+        ctx.fillStyle = 'var(--fg-muted)';
+        ctx.fillText('No volume data', 10, 20);
+        return;
+      }
+
+      const maxCount = Math.max(...volume.map(v => v.count), 1);
+      const padding = 40;
+      const graphWidth = canvas.width - padding * 2;
+      const graphHeight = canvas.height - padding * 2;
+      const barWidth = Math.max(graphWidth / volume.length - 4, 2);
+
+      // Background
+      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--surface-container-lowest').trim();
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Grid
+      ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--border').trim();
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= 4; i++) {
+        const y = padding + (graphHeight / 4) * i;
+        ctx.beginPath();
+        ctx.moveTo(padding, y);
+        ctx.lineTo(canvas.width - padding, y);
+        ctx.stroke();
+      }
+
+      // Bars
+      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
+      volume.forEach((v, i) => {
+        const barHeight = (v.count / maxCount) * graphHeight;
+        const x = padding + (i / volume.length) * graphWidth;
+        const y = canvas.height - padding - barHeight;
+        ctx.fillRect(x, y, barWidth, barHeight);
+      });
+
+      // Labels
+      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--fg-muted').trim();
+      ctx.font = '11px monospace';
+      ctx.textAlign = 'center';
+
+      volume.forEach((v, i) => {
+        if (i % Math.ceil(volume.length / 5) === 0) {
+          const date = new Date(v.date);
+          const label = (date.getMonth() + 1) + '/' + date.getDate();
+          const x = padding + (i / volume.length) * graphWidth + barWidth / 2;
+          ctx.fillText(label, x, canvas.height - 10);
+        }
+      });
+
+      // Axis labels
+      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--fg-muted').trim();
+      ctx.textAlign = 'right';
+      for (let i = 0; i <= 4; i++) {
+        const count = Math.round((maxCount / 4) * i);
+        const y = canvas.height - padding - (graphHeight / 4) * i;
+        ctx.fillText(count, padding - 5, y + 4);
+      }
+    }
+
+    function renderLeaderboard() {
+      const leaderboard = document.getElementById('leaderboard');
+      const senders = DATA.senders || [];
+      const total = DATA.messageCount || 0;
+
+      leaderboard.innerHTML = senders.map((s, idx) => {
+        const percent = total ? Math.round((s.count / total) * 100) : 0;
+        return `
+          <li class="leaderboard-item" data-sender="${s.sender}">
+            <span class="leaderboard-rank">#${idx + 1}</span>
+            <span class="leaderboard-name">${s.sender}</span>
+            <span class="leaderboard-count">${s.count} msg</span>
+            <span class="leaderboard-percent">${percent}%</span>
+          </li>
+        `;
+      }).join('');
+
+      // Click handler
+      document.querySelectorAll('.leaderboard-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const sender = item.dataset.sender;
+          selectedSender = selectedSender === sender ? null : sender;
+          updateLeaderboardSelection();
+          updateFilterChips();
+          filterMessages();
+        });
+      });
+    }
+
+    function updateLeaderboardSelection() {
+      document.querySelectorAll('.leaderboard-item').forEach(item => {
+        if (selectedSender && item.dataset.sender === selectedSender) {
+          item.style.background = getComputedStyle(document.documentElement).getPropertyValue('--primary-fixed').trim();
+        } else {
+          item.style.background = '';
+        }
+      });
+    }
+
+    function renderActionsPanel() {
+      const panel = document.getElementById('actionsPanel');
+      const actions = DATA.actionable || [];
+
+      const decisions = actions.filter(a => a.signal === 'decision');
+      const actionItems = actions.filter(a => a.signal === 'action');
+      const questions = actions.filter(a => a.signal === 'question');
+
+      let html = '';
+
+      // Decisions
+      html += `
+        <div class="action-group">
+          <h3 class="action-group-title">
+            <span class="action-badge decision">✓</span> Decisions
+          </h3>
+          ${decisions.length ? `
+            <ul class="action-list">
+              ${decisions.map(d => `
+                <li class="action-item decision">
+                  <div class="action-time">${formatDate(d.ts)}</div>
+                  <div class="action-sender">${d.sender}</div>
+                  <div class="action-text">${escapeHtml(d.text)}</div>
+                </li>
+              `).join('')}
+            </ul>
+          ` : '<div class="empty-state">No decisions surfaced — this channel is mostly chatter.</div>'}
+        </div>
+      `;
+
+      // Action items
+      html += `
+        <div class="action-group">
+          <h3 class="action-group-title">
+            <span class="action-badge action">→</span> Action items
+          </h3>
+          ${actionItems.length ? `
+            <ul class="action-list">
+              ${actionItems.map(a => `
+                <li class="action-item action">
+                  <div class="action-time">${formatDate(a.ts)}</div>
+                  <div class="action-sender">${a.sender}</div>
+                  <div class="action-text">${escapeHtml(a.text)}</div>
+                </li>
+              `).join('')}
+            </ul>
+          ` : '<div class="empty-state">No action items surfaced.</div>'}
+        </div>
+      `;
+
+      // Questions
+      html += `
+        <div class="action-group">
+          <h3 class="action-group-title">
+            <span class="action-badge question">?</span> Open questions
+          </h3>
+          ${questions.length ? `
+            <ul class="action-list">
+              ${questions.map(q => `
+                <li class="action-item question">
+                  <div class="action-time">${formatDate(q.ts)}</div>
+                  <div class="action-sender">${q.sender}</div>
+                  <div class="action-text">${escapeHtml(q.text)}</div>
+                </li>
+              `).join('')}
+            </ul>
+          ` : '<div class="empty-state">No open questions.</div>'}
+        </div>
+      `;
+
+      panel.innerHTML = html;
+    }
+
+    function renderTopics() {
+      const messages = DATA.messages || [];
+      const stopwords = new Set(['is', 'it', 'to', 'the', 'a', 'and', 'or', 'in', 'on', 'at', 'of', 'for', 'we', 'you', 'i', 'that', 'this', 'with', 'from', 'be', 'are', 'can', 'will', 'have', 'been', 'but']);
+      const wordCount = {};
+
+      messages.forEach(m => {
+        const words = m.text.toLowerCase().match(/\b\w+\b/g) || [];
+        words.forEach(w => {
+          if (!stopwords.has(w) && w.length > 3) {
+            wordCount[w] = (wordCount[w] || 0) + 1;
+          }
+        });
+      });
+
+      const topWords = Object.entries(wordCount)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 8)
+        .map(([word, count]) => ({ word, count }));
+
+      const topicsList = document.getElementById('topicsList');
+      topicsList.innerHTML = topWords.map(t => `
+        <div class="topic-chip">
+          ${t.word}
+          <span class="topic-count">${t.count}</span>
+        </div>
+      `).join('');
+    }
+
+    function setupDrillDown() {
+      const drillDown = document.getElementById('drillDown');
+      const timeline = document.getElementById('timeline');
+      const messages = DATA.messages || [];
+
+      // Group by day
+      const byDay = {};
+      messages.forEach(m => {
+        if (!byDay[m.date]) byDay[m.date] = [];
+        byDay[m.date].push(m);
+      });
+
+      // Render
+      Object.entries(byDay).sort().forEach(([date, msgs]) => {
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'timeline-day';
+
+        const dateObj = new Date(date);
+        const dayName = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+
+        dayDiv.innerHTML = `<div class="timeline-day-header">${dayName}</div>`;
+
+        const bubblesDiv = document.createElement('div');
+        msgs.forEach(m => {
+          const bubble = renderMessageBubble(m);
+          bubblesDiv.appendChild(bubble);
+        });
+
+        dayDiv.appendChild(bubblesDiv);
+        timeline.appendChild(dayDiv);
+      });
+
+      setupFilterChips();
+    }
+
+    function setupFilterChips() {
+      const chipContainer = document.getElementById('filterChips');
+      const senders = DATA.senders || [];
+
+      chipContainer.innerHTML = `<div class="filter-chip" data-sender="">All senders</div>` +
+        senders.map(s => `<div class="filter-chip" data-sender="${s.sender}">${s.sender}</div>`).join('');
+
+      document.querySelectorAll('.filter-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          selectedSender = chip.dataset.sender || null;
+          updateFilterChips();
+          filterMessages();
+        });
+      });
+    }
+
+    function updateFilterChips() {
+      document.querySelectorAll('.filter-chip').forEach(chip => {
+        const sender = chip.dataset.sender || null;
+        if (sender === selectedSender) {
+          chip.classList.add('active');
+        } else {
+          chip.classList.remove('active');
+        }
+      });
+    }
+
+    function setupSearch() {
+      const searchInput = document.getElementById('searchInput');
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase();
+        filterMessages();
+      });
+    }
+
+    function filterMessages() {
+      document.querySelectorAll('.message-bubble').forEach(bubble => {
+        const sender = bubble.dataset.sender;
+        const text = bubble.dataset.text || '';
+
+        const senderMatch = !selectedSender || sender === selectedSender;
+        const textMatch = !searchQuery || text.includes(searchQuery);
+
+        bubble.classList.toggle('hidden', !(senderMatch && textMatch));
+
+        // Highlight search
+        if (searchQuery && textMatch) {
+          const textEl = bubble.querySelector('.message-text');
+          if (textEl) {
+            const regex = new RegExp(`(${searchQuery})`, 'gi');
+            textEl.innerHTML = textEl.textContent.replace(regex, '<mark>$1</mark>');
+            textEl.classList.add('highlighted');
+          }
+        }
+      });
+    }
+
+    function renderMessageBubble(msg) {
+      const div = document.createElement('div');
+      div.className = 'message-bubble';
+      div.dataset.sender = msg.sender;
+      div.dataset.text = msg.text.toLowerCase();
+
+      const initial = msg.sender.charAt(0).toUpperCase();
+
+      div.innerHTML = `
+        <div class="message-avatar">${initial}</div>
+        <div class="message-content">
+          <div class="message-header">
+            <span class="message-sender">${msg.sender}</span>
+            <span class="message-time">${msg.time}</span>
+          </div>
+          ${msg.replyToId ? `<div class="message-reply-to">↳ in reply to a message</div>` : ''}
+          <div class="message-text">${escapeHtml(msg.text)}</div>
+        </div>
+      `;
+
+      return div;
+    }
+
+    function setupDrillDownToggle() {
+      const btn = document.getElementById('toggleDrill');
+      const content = document.getElementById('drillDown');
+
+      btn.addEventListener('click', () => {
+        content.classList.toggle('open');
+        btn.textContent = content.classList.contains('open') ? 'Collapse message log' : 'Expand message log';
+      });
+    }
+
+    function formatDate(ts) {
+      return ts.split(' ')[1];
+    }
+
+    function escapeHtml(text) {
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+      return text.replace(/[&<>"']/g, m => map[m]);
+    }
+
+    // Start
+    init();
+  </script>
+</body>
+</html>

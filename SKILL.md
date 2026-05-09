@@ -92,7 +92,12 @@ client-side rendering of the drill-down sections.
 
 | Prompt file | When |
 |---|---|
-| [`prompts/whatsapp.md`](./prompts/whatsapp.md) | WhatsApp `_chat.txt` export |
+| [`prompts/whatsapp.md`](./prompts/whatsapp.md) | WhatsApp `_chat.txt` export — 1:1 / small-group relationship framing |
+| [`prompts/slack.md`](./prompts/slack.md) | Slack channel JSON export — multi-sender pack: heatmap, leaderboard, threaded drill-down |
+| [`prompts/discord.md`](./prompts/discord.md) | DiscordChatExporter JSON / CSV — community-server pack: leaderboard with long-tail, reply chains, emoji signature |
+| [`prompts/telegram.md`](./prompts/telegram.md) | Telegram Desktop `result.json` — personal/group/channel framing, reply chains, forwarded-from callouts |
+| [`prompts/imessage.md`](./prompts/imessage.md) | iMessage-style CSV (Date/Timestamp + Sender/From/IsFromMe + Message/Body/Text) — bubble drill-down with right-aligned own-side messages |
+| [`prompts/multi-sender-chat.md`](./prompts/multi-sender-chat.md) | Generic chat CSV from an unknown source — platform-agnostic heatmap + leaderboard + decisions |
 | [`prompts/csv.md`](./prompts/csv.md) | CSV / TSV tabular data |
 | [`prompts/markdown.md`](./prompts/markdown.md) | Markdown documents |
 | [`prompts/pdf.md`](./prompts/pdf.md) | `.pdf` — long-form documents, reports, papers |
@@ -109,6 +114,14 @@ Long-document sources (`markdown`, `pdf`, `docx`) also load
 insight-first guidance (TL;DR, claim cards, section nav, 5-min vs
 full reading mode). New long-document sources should follow the same
 pattern.
+
+Multi-sender chat sources (`slack`, `discord`, `telegram`, `imessage`,
+`multi-sender-chat`) also load
+[`prompts/_chat.md`](./prompts/_chat.md) — the shared contract for
+the chat pack: activity heatmap, contributor leaderboard, decisions /
+action items / open questions, topic clusters, and a searchable log
+drill-down. WhatsApp keeps its bespoke 1:1-relationship framing and is
+**not** part of this family.
 
 **Adding a new source** = drop a new `<source>.md` in `prompts/`,
 following the same shape as existing ones. No code changes, no

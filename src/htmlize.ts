@@ -151,6 +151,19 @@ function familyFor(contentType: string): string | null {
   ) {
     return "_document.md"
   }
+  // Multi-sender chat formats share the heatmap / leaderboard /
+  // decisions-and-actions / drill-down contract. WhatsApp keeps its
+  // bespoke 1:1-relationship framing — it has its own prompt — so it
+  // stays out of this family.
+  if (
+    contentType === "slack-chat" ||
+    contentType === "discord-chat" ||
+    contentType === "telegram-chat" ||
+    contentType === "imessage-chat" ||
+    contentType === "multi-sender-chat"
+  ) {
+    return "_chat.md"
+  }
   return null
 }
 
