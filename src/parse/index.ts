@@ -10,6 +10,7 @@ import * as path from "node:path"
 import type { Parser } from "../types.js"
 import { parser as emailParser } from "./email.js"
 import { parser as transcriptParser } from "./transcript.js"
+import { parser as wechatParser } from "./wechat.js"
 import { parser as whatsappParser } from "./whatsapp.js"
 import { parser as slackParser } from "./slack.js"
 import { parser as discordParser } from "./discord.js"
@@ -34,6 +35,7 @@ import { parser as textParser } from "./text.js"
 export const parsers: Parser[] = [
   emailParser,              // .eml / .mbox (also catches Gmail Takeout exports)
   transcriptParser,         // .vtt / .srt / timecoded .txt (Zoom, Teams, Meet, YouTube)
+  wechatParser,             // .html/.docx/.csv/.txt/.json — WeChatMsg / 留痕 relationship exports
   whatsappParser,           // .txt with timestamp prefix
   slackParser,              // .json — Slack channel export array
   discordParser,            // .json / .csv — DiscordChatExporter

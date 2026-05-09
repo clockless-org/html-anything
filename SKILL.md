@@ -17,10 +17,12 @@ the user can drill in, but it's the **drill-down**, not the lede.
 
 Examples of the right shape:
 
-- **2-person WhatsApp chat** → relationship card (cadence, response
-  time, who initiates), conversation arc timeline highlighting the 5–10
-  meaningful turns the LLM picked, topic clusters, emoji frequency
-  graph, then the messages themselves as a collapsible thread.
+- **2-person WhatsApp or WeChat / 微信 export** → mock-academic
+  relationship report: calendar heatmap, hourly chat rhythm, monthly
+  relative enthusiasm, signature words, high-frequency word
+  contribution, lexical sentiment, and relationship-keyword extraction.
+  Keep shareable reports aggregate-first; do not include a raw-message
+  appendix unless the user explicitly asks for one.
 - **200-person Slack channel** → top contributors leaderboard, channel
   activity heatmap by day-of-week + hour, topic cloud, recent
   highlights — full message log behind a "Show all messages" tab.
@@ -41,8 +43,9 @@ client-side rendering of the drill-down sections.
 
 1. **Identify the source the user wants converted.**
    - If they pasted a path or URL → confirm it (file exists, URL fetches).
-   - If they named a *kind* of data ("my WhatsApp chat", "my Spotify
-     history", "my Google Maps stars", "my Twitch viewing history"):
+   - If they named a *kind* of data ("my WeChat chat", "my WhatsApp
+     chat", "my Spotify history", "my Google Maps stars", "my Twitch
+     viewing history"):
      **don't ask for the file yet.** First read the matching source
      prompt's `## Export instructions` section and walk them through
      getting the data. Most data sources need a 2–4 step export from the
@@ -121,7 +124,8 @@ client-side rendering of the drill-down sections.
 | [`prompts/spotify-history.md`](./prompts/spotify-history.md) | Spotify Privacy export (Account Data or Extended Streaming History) — year-by-year scroll experience |
 | [`prompts/twitch-history.md`](./prompts/twitch-history.md) | Twitch data request export (viewing history + chat) — top streamers wall, chat heatmap |
 | [`prompts/iphone-health.md`](./prompts/iphone-health.md) | Apple Health `export.zip` (export.xml + workout-routes/) — personal health story with rings + sleep + routes |
-| [`prompts/whatsapp.md`](./prompts/whatsapp.md) | WhatsApp `_chat.txt` export — 1:1 / small-group relationship framing |
+| [`prompts/wechat.md`](./prompts/wechat.md) | WeChat / 微信 exports from WeChatMsg / 留痕 (`.html`, `.csv`, `.txt`, `.json`, `.docx`) — relationship report with calendar heatmap, relative enthusiasm, word specificity, contribution rating, sentiment trend, no raw appendix by default |
+| [`prompts/whatsapp.md`](./prompts/whatsapp.md) | WhatsApp `_chat.txt` export — same detailed relationship report as WeChat: calendar heatmap, relative enthusiasm, word specificity, contribution rating, sentiment trend, no raw appendix by default |
 | [`prompts/slack.md`](./prompts/slack.md) | Slack channel JSON export — multi-sender pack: heatmap, leaderboard, threaded drill-down |
 | [`prompts/discord.md`](./prompts/discord.md) | DiscordChatExporter JSON / CSV — community-server pack: leaderboard with long-tail, reply chains, emoji signature |
 | [`prompts/telegram.md`](./prompts/telegram.md) | Telegram Desktop `result.json` — personal/group/channel framing, reply chains, forwarded-from callouts |
@@ -175,8 +179,8 @@ Multi-sender chat sources (`slack`, `discord`, `telegram`, `imessage`,
 [`prompts/_chat.md`](./prompts/_chat.md) — the shared contract for
 the chat pack: activity heatmap, contributor leaderboard, decisions /
 action items / open questions, topic clusters, and a searchable log
-drill-down. WhatsApp keeps its bespoke 1:1-relationship framing and is
-**not** part of this family.
+drill-down. WhatsApp and WeChat keep the bespoke intimate-relationship
+report framing and are **not** part of this family.
 
 Developer-artifact sources (`git-diff`, `pr-review`, `ci-log`,
 `stack-trace`) also load

@@ -2,29 +2,20 @@
 
 [![skills.sh](https://skills.sh/b/clockless-org/html-anything)](https://skills.sh/clockless-org/html-anything)
 
-An [Agent Skill](https://agentskills.io) that turns files, folders, and URLs into one self-contained interactive HTML page. It is not a format converter: the agent samples the source, finds the interesting structure, designs the page, and inlines the full data so the output works offline.
+Turn files, folders, and URLs into one self-contained interactive HTML report.
 
-Good inputs:
-
-```text
-WhatsApp export       -> relationship timeline, emoji map, searchable messages
-Google Maps stars     -> personal atlas with place clusters and notes
-Spotify history       -> year-by-year listening story
-50K-row CSV           -> charts, outlier cards, virtualized drill-down table
-PDF / DOCX / Markdown -> TL;DR, claim cards, decisions, action items
-CI log / stack trace  -> failure summary, hypotheses, copyable ticket notes
-Obsidian vault        -> concept map, hubs, stale notes, TODOs
-```
+It is not a format converter. The agent samples the source, finds the interesting structure, designs the right charts and views, then inlines the full data into a single live `.html` file you can open, email, or host as static HTML.
 
 ## Preview
 
-[Open the live preview page](https://clockless-org.github.io/html-anything/examples/) or browse the checked-in examples under [`examples/`](./examples).
+- [Open all live examples](https://clockless-org.github.io/html-anything/examples/)
+- [Highlighted example: realistic couple chat report](https://clockless-org.github.io/html-anything/examples/wechat-couple/output.html)
 
-[![html-anything preview screenshot](./docs/preview.png)](https://clockless-org.github.io/html-anything/examples/)
+[![Realistic couple chat report screenshot](./docs/relationship-preview.png)](https://clockless-org.github.io/html-anything/examples/wechat-couple/output.html)
 
-## Install the Skill
+The highlighted example uses a synthetic WeChat-style couple chat: 52K messages over two years, with quiet days, work delays, short replies, small arguments, repairs, images, voice notes, transfers, and anonymized evidence snippets.
 
-Use one of these.
+## Install
 
 ### Codex
 
@@ -33,7 +24,7 @@ mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 git clone https://github.com/clockless-org/html-anything "${CODEX_HOME:-$HOME/.codex}/skills/html-anything"
 ```
 
-Restart Codex so it loads the new skill.
+Restart Codex so it loads the skill.
 
 ### Claude Code
 
@@ -56,7 +47,7 @@ To update a manual install later:
 git -C "${CODEX_HOME:-$HOME/.codex}/skills/html-anything" pull
 ```
 
-## Use It
+## Use
 
 Ask your agent in plain language:
 
@@ -72,18 +63,55 @@ Use html-anything on my Spotify history. Walk me through the export first.
 Make a one-page HTML dashboard from ./data/customers.csv.
 ```
 
-```text
-Turn this repo into a browsable architecture explainer:
-https://github.com/clockless-org/html-anything
-```
+If you name a source but do not have the file yet, the skill starts with export instructions first. For example: "my WeChat chat", "my WhatsApp chat", "my Spotify history", "my Google Maps stars", or "my Apple Health export".
 
-If you name a source but do not have the file yet, the skill starts with export instructions. For example, "my WhatsApp chat", "my Spotify history", "my Google Maps stars", and "my Apple Health export" all trigger a short export walkthrough before conversion.
+The result is a live `.html` file, not markdown: inline CSS, inline JS, inline data, works offline by double-clicking.
 
-By default the output is written next to the input as `<input-name>.html`, unless you ask for a different path. The output is a single file: inline CSS, inline JS, inline data, works by double-clicking, and can be emailed or hosted as static HTML.
+## Supported Sources
+
+| | Source | Inputs | Live HTML example |
+|---|---|---|---|
+| 💬 | WeChat / 微信 relationship chat | WeChatMsg / 留痕 exports: `.html`, `.csv`, `.txt`, `.json`, `.docx` | [Couple chat report](https://clockless-org.github.io/html-anything/examples/wechat-couple/output.html) |
+| 💬 | WhatsApp relationship chat | `_chat.txt` export | [WhatsApp report](https://clockless-org.github.io/html-anything/examples/whatsapp/output.html) |
+| 💬 | Slack | Channel JSON export, workspace zip `messages.json` | [Slack report](https://clockless-org.github.io/html-anything/examples/slack/output.html) |
+| 💬 | Discord | DiscordChatExporter `.json` or `.csv` | [Discord report](https://clockless-org.github.io/html-anything/examples/discord/output.html) |
+| 💬 | Telegram | Telegram Desktop `result.json` | [Telegram report](https://clockless-org.github.io/html-anything/examples/telegram/output.html) |
+| 💬 | iMessage-style / generic chat | CSV with date, sender/from/isFromMe, message/body/text columns | Live HTML generated from your export |
+| 📊 | CSV / TSV tables | `.csv`, `.tsv` | [CSV dashboard](https://clockless-org.github.io/html-anything/examples/csv/output.html) |
+| 📊 | JSON | `.json` | Live HTML generated from your file |
+| 📊 | JSONL / NDJSON events | `.jsonl`, `.ndjson`, line-delimited JSON in `.json`, `.log`, `.txt` | [Event stream report](https://clockless-org.github.io/html-anything/examples/jsonl/output.html) |
+| 📟 | Logs | `.log`, `.txt`; access logs, syslog, app logs, error logs | [Access log](https://clockless-org.github.io/html-anything/examples/log-access/output.html), [error log](https://clockless-org.github.io/html-anything/examples/log-error/output.html) |
+| 📄 | Markdown | `.md`, `.markdown`, `.mdown`, `.mkd` | [Reading view](https://clockless-org.github.io/html-anything/examples/markdown/output.html) |
+| 📄 | PDF | `.pdf` | [PDF report](https://clockless-org.github.io/html-anything/examples/pdf/output.html) |
+| 📄 | Word document | `.docx` | [DOCX report](https://clockless-org.github.io/html-anything/examples/docx/output.html) |
+| 📬 | Email archive | `.eml`, `.mbox`, Gmail Takeout mbox | [Mailbox report](https://clockless-org.github.io/html-anything/examples/email/output.html) |
+| 🎙️ | Meeting transcript | `.vtt`, `.srt`, timecoded Zoom / Teams / Meet `.txt` | [Sales call](https://clockless-org.github.io/html-anything/examples/transcript-sales-call/output.html), [product review](https://clockless-org.github.io/html-anything/examples/transcript-product-meeting/output.html) |
+| 🧑‍💻 | Git diff | `.diff`, raw `git diff` output | [Diff review](https://clockless-org.github.io/html-anything/examples/git-diff/output.html) |
+| 🧑‍💻 | PR patch | `.patch`, `git format-patch`, GitHub PR patch | [PR review](https://clockless-org.github.io/html-anything/examples/pr-review/output.html) |
+| 🧑‍💻 | CI / build / test log | GitHub Actions, GitLab CI, CircleCI, Buildkite, Jenkins, `npm test`, `pytest`, `go test` | [CI failure report](https://clockless-org.github.io/html-anything/examples/ci-log/output.html) |
+| 🧑‍💻 | Stack trace | Python, Node / JS, Java, Go, Ruby, Rust, .NET | [Stack trace report](https://clockless-org.github.io/html-anything/examples/stack-trace/output.html) |
+| 💵 | Bank transactions | Bank or credit-card CSV exports | Live HTML generated from your statement |
+| 💵 | Invoices / receipts | CSV with invoice number, customer, amount, status, due dates | Live HTML generated from your invoice export |
+| 💵 | Accounting export | QuickBooks, Xero, Wave general-ledger or P&L exports | Live HTML generated from your export |
+| 📅 | Calendar | `.ics`, `.ical`; Google Calendar, Outlook, Apple Calendar, Fastmail | Live HTML generated from your calendar |
+| ✅ | Issue tracker / Trello | Linear, Jira, GitHub Issues, Asana, ClickUp, Trello JSON | Live HTML generated from your board |
+| 🧠 | Obsidian / Notion / Markdown folder | Directories of markdown, Notion "Markdown & CSV" export | Live HTML generated from your workspace |
+| 🗺️ | GPX / KML routes | `.gpx`, `.kml` | Live HTML generated from your route |
+| 🗺️ | Travel itinerary / location history | Itinerary CSV, Google Takeout-style location JSON/CSV | Live HTML generated from your trip |
+| 🔖 | Bookmarks / URL list / reading list | Bookmarks HTML, URL text files, Pocket / Instapaper / Raindrop / Matter / Omnivore exports | [Market research bookmarks](https://clockless-org.github.io/html-anything/examples/bookmarks-market-research/output.html) |
+| 📚 | Bibliography | BibTeX `.bib`, RIS `.ris` | [Academic reading list](https://clockless-org.github.io/html-anything/examples/reading-list-academic/output.html) |
+| 🌍 | Google Maps saved places | Google Takeout saved places / starred places export | [Saved places atlas](https://clockless-org.github.io/html-anything/examples/google-maps-stars/output.html) |
+| 🎧 | Spotify history | Spotify Privacy export or Extended Streaming History | [Spotify history](https://clockless-org.github.io/html-anything/examples/spotify-history/output.html) |
+| 🟣 | Twitch history | Twitch data request export, viewing history, chat history | [Twitch history](https://clockless-org.github.io/html-anything/examples/twitch-history/output.html) |
+| ❤️ | Apple Health | Apple Health `export.zip`, `export.xml`, workout routes | [Health story](https://clockless-org.github.io/html-anything/examples/iphone-health/output.html) |
+| 🌐 | GitHub repo URL | `github.com/owner/repo` URLs, best in skill mode | Live HTML generated from the repo |
+| 🌐 | Article URL | Blog posts, news pages, long-form webpages, best in skill mode | Live HTML generated from the page |
+| 🩺 | Sensitive records | Medical visit notes, lab-results CSVs, legal chronologies | [Medical visit](https://clockless-org.github.io/html-anything/examples/medical-visit/output.html), [lab results](https://clockless-org.github.io/html-anything/examples/lab-results/output.html), [legal chronology](https://clockless-org.github.io/html-anything/examples/legal-chronology/output.html) |
+| ✨ | Anything else | Plain text or unknown file shape | Live HTML generated from the source |
 
 ## Standalone CLI
 
-The CLI uses the same prompt pack as the skill. It accepts local files and directories; URL handling is better in skill mode because the agent can fetch and inspect the page first.
+The CLI uses the same source pack as the skill. It accepts local files and directories; URL handling is better in skill mode because the agent can fetch and inspect the page first.
 
 ```bash
 git clone https://github.com/clockless-org/html-anything
@@ -93,83 +121,13 @@ export ANTHROPIC_API_KEY=sk-ant-...   # or OPENAI_API_KEY=sk-...
 npx tsx src/cli.ts examples/csv/input.csv --out /tmp/customers.html
 ```
 
-Options:
+## Defaults
 
-```bash
-npx tsx src/cli.ts <input> --out output.html --title "My Report" --model claude-sonnet-4-6
-```
-
-## Supported Sources
-
-Skill mode supports every prompt in [`prompts/`](./prompts). The CLI supports local files and directories through the parsers in [`src/parse/`](./src/parse).
-
-| Source | Inputs | Prompt |
-|---|---|---|
-| Generic table | `.csv`, `.tsv` | [`csv.md`](./prompts/csv.md) |
-| JSON | `.json` | [`json.md`](./prompts/json.md) |
-| JSONL / NDJSON events | `.jsonl`, `.ndjson`, line-delimited JSON in `.json`, `.log`, `.txt` | [`jsonl.md`](./prompts/jsonl.md) |
-| Logs | `.log`, `.txt`; access logs, syslog, app logs, error logs | [`log.md`](./prompts/log.md) |
-| Markdown document | `.md`, `.markdown`, `.mdown`, `.mkd` | [`markdown.md`](./prompts/markdown.md) |
-| PDF | `.pdf` | [`pdf.md`](./prompts/pdf.md) |
-| Word document | `.docx` | [`docx.md`](./prompts/docx.md) |
-| Email archive | `.eml`, `.mbox`, Gmail Takeout mbox | [`email.md`](./prompts/email.md) |
-| Meeting transcript | `.vtt`, `.srt`, timecoded Zoom / Teams / Meet `.txt` | [`transcript.md`](./prompts/transcript.md) |
-| WhatsApp | `_chat.txt` export | [`whatsapp.md`](./prompts/whatsapp.md) |
-| Slack | Channel JSON export, workspace zip `messages.json` | [`slack.md`](./prompts/slack.md) |
-| Discord | DiscordChatExporter `.json` or `.csv` | [`discord.md`](./prompts/discord.md) |
-| Telegram | Telegram Desktop `result.json` | [`telegram.md`](./prompts/telegram.md) |
-| iMessage-style chat | CSV with date, sender/from/isFromMe, and message/body/text columns | [`imessage.md`](./prompts/imessage.md) |
-| Generic multi-sender chat | Chat-shaped CSV from another platform | [`multi-sender-chat.md`](./prompts/multi-sender-chat.md) |
-| Git diff | `.diff`, raw `git diff` output | [`git-diff.md`](./prompts/git-diff.md) |
-| PR patch | `.patch`, `git format-patch`, GitHub PR patch | [`pr-review.md`](./prompts/pr-review.md) |
-| CI / build / test log | GitHub Actions, GitLab CI, CircleCI, Buildkite, Jenkins, `npm test`, `pytest`, `go test` | [`ci-log.md`](./prompts/ci-log.md) |
-| Stack trace | Python, Node / JS, Java, Go, Ruby, Rust, .NET | [`stack-trace.md`](./prompts/stack-trace.md) |
-| Bank transactions | Bank or credit-card CSV exports | [`bank-transactions.md`](./prompts/bank-transactions.md) |
-| Invoices / receipts | CSV with invoice number, customer, amount, status, due dates | [`invoices.md`](./prompts/invoices.md) |
-| Accounting export | QuickBooks, Xero, Wave general-ledger or P&L exports | [`quickbooks.md`](./prompts/quickbooks.md) |
-| Calendar | `.ics`, `.ical`; Google Calendar, Outlook, Apple Calendar, Fastmail | [`ics-calendar.md`](./prompts/ics-calendar.md) |
-| Issue tracker | Linear, Jira, GitHub Issues, Asana, ClickUp, generic tracker CSV | [`issue-tracker.md`](./prompts/issue-tracker.md) |
-| Trello | Trello board JSON export | [`trello-board.md`](./prompts/trello-board.md) |
-| Obsidian vault | Directory of `.md` files with `[[wikilinks]]` | [`obsidian-vault.md`](./prompts/obsidian-vault.md) |
-| Notion export | Notion "Markdown & CSV" workspace export directory | [`notion-export.md`](./prompts/notion-export.md) |
-| Markdown folder | Hugo, Jekyll, MkDocs, Bear exports, generic notes folders | [`markdown-folder.md`](./prompts/markdown-folder.md) |
-| GPX route | `.gpx` workouts and routes from Strava, Garmin, Komoot, Apple Health, Wahoo, Suunto | [`gpx.md`](./prompts/gpx.md) |
-| KML route | `.kml` from Google Earth, Google My Maps, saved-place exports | [`kml.md`](./prompts/kml.md) |
-| Travel itinerary | Multi-day itinerary CSV with date, location, type/title/time/notes/cost | [`travel-itinerary.md`](./prompts/travel-itinerary.md) |
-| Location history | Google Takeout-style JSON or flat CSV with timestamp, latitude, longitude | [`location-history.md`](./prompts/location-history.md) |
-| Browser bookmarks | Netscape bookmarks HTML from Chrome, Firefox, Safari, Edge, Pinboard, Raindrop | [`bookmarks.md`](./prompts/bookmarks.md) |
-| Bibliography | BibTeX `.bib`, RIS `.ris` from Zotero, Mendeley, EndNote, Google Scholar, JabRef | [`bibliography.md`](./prompts/bibliography.md) |
-| URL list | Plain `.txt` or Markdown with one URL per line | [`url-list.md`](./prompts/url-list.md) |
-| Reading list | Pocket, Instapaper, Raindrop, Matter, Readwise Reader, Omnivore CSV / JSON | [`reading-list.md`](./prompts/reading-list.md) |
-| Google Maps saved places | Google Takeout saved places / starred places export | [`google-maps-stars.md`](./prompts/google-maps-stars.md) |
-| Spotify history | Spotify Privacy export or Extended Streaming History | [`spotify-history.md`](./prompts/spotify-history.md) |
-| Twitch history | Twitch data request export, viewing history, chat history | [`twitch-history.md`](./prompts/twitch-history.md) |
-| Apple Health | Apple Health `export.zip`, `export.xml`, workout routes | [`iphone-health.md`](./prompts/iphone-health.md) |
-| GitHub repo URL | `github.com/owner/repo` URLs, best in skill mode | [`github-repo.md`](./prompts/github-repo.md) |
-| Article URL | Blog posts, news pages, long-form webpages, best in skill mode | [`url-article.md`](./prompts/url-article.md) |
-| Medical visit notes | `.md`, `.txt` summaries; organizational summary only | [`medical-visit.md`](./prompts/medical-visit.md) |
-| Lab results | CSV with test/value/reference-range columns; organizational summary only | [`lab-results.md`](./prompts/lab-results.md) |
-| Legal chronology | `.md`, `.txt` case chronology; organizational summary only | [`legal-chronology.md`](./prompts/legal-chronology.md) |
-| Anything else | Plain text or unknown file shape | [`default.md`](./prompts/default.md) |
-
-## Important Defaults
-
-- Outputs are single-file HTML. No multi-file apps, no server required.
-- Outputs are offline. Geo pages do not use map tiles; research pages do not fetch saved URLs or favicons.
-- The generated HTML embeds the source data client-side. Treat the `.html` file as sensitive as the original export.
-- Sensitive-record sources are for organization and review only. They do not provide medical, legal, tax, accounting, immigration, or insurance advice.
-- The LLM only sees a representative sample. The full source data is injected afterward as JSON and rendered client-side.
-
-## Add a Source
-
-Most new sources only need a prompt:
-
-1. Add `prompts/<source-name>.md`.
-2. Describe export instructions, data shape, must-have views, and source-specific safety rules.
-3. Add a small synthetic example under `examples/<source-name>/`.
-4. Regenerate examples with `npm run examples` when practical.
-
-Add a parser in [`src/parse/`](./src/parse) only when the CLI needs deterministic preprocessing, such as PDF text extraction, archive walking, binary formats, huge files, or source-specific sniffing. See [`docs/CONTRIBUTING.md`](./docs/CONTRIBUTING.md) for the parser contract.
+- Outputs are single-file live HTML. No server required.
+- Outputs work offline. Geo pages do not use map tiles.
+- The generated HTML embeds source data client-side. Treat it as sensitive as the original export.
+- Sensitive-record sources are for organization and review only, not medical, legal, tax, accounting, immigration, or insurance advice.
+- The agent sees a representative sample; the full source data is injected afterward and rendered client-side.
 
 ## License
 

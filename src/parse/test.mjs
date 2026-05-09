@@ -308,6 +308,55 @@ test("registry exposes finance parser before generic csv", async () => {
   assert.ok(financeIdx < csvIdx, `finance must come before csv in registry — got finance@${financeIdx}, csv@${csvIdx}`)
 })
 
+test("wechat parser routes a WeChatMsg-style CSV to the relationship report shape", async () => {
+  const fp = path.join(REPO, "examples/wechat-couple/input.csv")
+  const parser = await pickParser(fp)
+  assert.equal(parser?.name, "wechat")
+  const out = await parser.parse(fp)
+  assert.equal(out.contentType, "wechat-chat")
+  assert.equal(out.meta.sourceFormat, "csv")
+  assert.equal(out.meta.platform, "wechat")
+  assert.ok(out.meta.messageCount >= 50000, `expected a high-volume demo fixture, got ${out.meta.messageCount}`)
+  assert.ok(Array.isArray(out.data.calendarHeatmap) && out.data.calendarHeatmap.length > 0)
+  assert.ok(Array.isArray(out.data.hourlyDistribution) && out.data.hourlyDistribution.length === 24)
+  assert.ok(Array.isArray(out.data.monthlyStats) && out.data.monthlyStats.length >= 6)
+  assert.ok(Array.isArray(out.data.contributionWords) && out.data.contributionWords.length > 0)
+  assert.ok(Array.isArray(out.data.sentimentTimeline) && out.data.sentimentTimeline.length > 0)
+  assert.ok(Array.isArray(out.data.relationshipKeywords) && out.data.relationshipKeywords.length > 0)
+  const senders = Object.keys(out.data.wordSpecificity)
+  assert.ok(senders.includes("Partner A") && senders.includes("Partner B"), `missing sender specificity keys: ${senders.join(", ")}`)
+})
+
+test("whatsapp parser emits the shared relationship-report aggregations", async () => {
+  const fp = path.join(REPO, "examples/whatsapp/input.txt")
+  const parser = await pickParser(fp)
+  assert.equal(parser?.name, "whatsapp")
+  const out = await parser.parse(fp)
+  assert.equal(out.contentType, "whatsapp-chat")
+  assert.equal(out.meta.platform, "whatsapp")
+  assert.ok(out.meta.messageCount >= 80, `expected >=80 messages, got ${out.meta.messageCount}`)
+  assert.ok(Array.isArray(out.data.calendarHeatmap) && out.data.calendarHeatmap.length > 0)
+  assert.ok(Array.isArray(out.data.hourlyDistribution) && out.data.hourlyDistribution.length === 24)
+  assert.ok(Array.isArray(out.data.monthlyStats) && out.data.monthlyStats.length > 0)
+  assert.ok(Array.isArray(out.data.contributionWords) && out.data.contributionWords.length > 0)
+  assert.ok(Array.isArray(out.data.sentimentTimeline) && out.data.sentimentTimeline.length > 0)
+  assert.equal(typeof out.data.wordSpecificity, "object")
+  assert.equal(typeof out.data.replyStatsBySender, "object")
+  assert.equal(typeof out.data.initiationsBySender, "object")
+})
+
+test("registry exposes wechat parser before whatsapp, csv, docx, and research", async () => {
+  const { parsers } = await import("../../dist/parse/index.js")
+  const names = parsers.map(p => p.name)
+  const wechatIdx = names.indexOf("wechat")
+  assert.ok(wechatIdx >= 0, `parsers missing 'wechat' — got ${names.join(", ")}`)
+  for (const later of ["whatsapp", "csv", "docx", "research"]) {
+    const idx = names.indexOf(later)
+    assert.ok(idx >= 0, `parsers missing '${later}'`)
+    assert.ok(wechatIdx < idx, `wechat must come before ${later} — got wechat@${wechatIdx}, ${later}@${idx}`)
+  }
+})
+
 test("planning parser routes a founder .ics calendar to ics-calendar with weeks + back-to-back blocks", async () => {
   const fp = path.join(REPO, "examples/calendar-founder/input.ics")
   const parser = await pickParser(fp)

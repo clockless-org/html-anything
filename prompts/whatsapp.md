@@ -1,8 +1,15 @@
-# whatsapp — `_chat.txt` export
+# whatsapp — relationship-chat report
 
-A WhatsApp export. The output is **not a chat viewer** — it's an
-infographic that shows the user *what their relationship with this
-person/group looks like*, with the messages themselves as a drill-down.
+A WhatsApp `_chat.txt` export. For 1:1 chats and close small-group
+chats, use the same **detailed relationship-analysis report** as the
+WeChat / 微信 source: playful, data-dense, mock-academic, and much richer
+than a chat viewer.
+
+The output should feel like "I analyzed our whole chat history": a
+scrollable HTML data essay with calendar heatmaps, hourly rhythm,
+relative enthusiasm, signature words, high-frequency word contribution,
+rough sentiment, and love-keyword extraction. Do not include a raw
+message appendix by default.
 
 ## Export instructions (surface to the user before converting)
 
@@ -11,115 +18,131 @@ If the user said "convert my WhatsApp chat" without giving you a file:
 **On iPhone**:
 1. Open WhatsApp → tap the chat name at the top → scroll down → **Export Chat**.
 2. Choose **Without Media** unless they specifically want photos / voice
-   inlined (it makes the file 100× larger and most renderings don't use
-   them).
-3. Save to Files / share to themselves via Mail or AirDrop. They'll get
-   a `.zip` containing `_chat.txt`. Unzip it.
-4. Drop the `_chat.txt` path into Claude Code: "convert this".
+   included; text-only is better for analysis and much smaller.
+3. Save to Files / AirDrop / Mail. Unzip the export and provide the
+   `_chat.txt` path.
 
 **On Android**:
 1. Open WhatsApp → open the chat → ⋮ menu → **More** → **Export chat**.
-2. Choose Without Media.
-3. Save to phone storage or share to themselves. Same `.zip` shape.
+2. Choose **Without Media**.
+3. Save the `.zip`, unzip it, and provide `_chat.txt`.
 
-For a **group chat**, the same flow works — `senderCount` will be > 2
-and the prompt will pivot to the group-shape visualizations
-automatically.
+For public sharing, remind the user to anonymize names and remove
+private content. Prefer aggregate metrics over raw message text in the
+shareable report.
 
-## What to surface (the headline of the page)
+## Required report sections
 
-Look at the sample (first 8 + last 4 messages, sender stats,
-date range, message counts) and **infer + visualize**:
+Render these sections with visible headings. Use the precomputed DATA
+arrays where available; do not re-walk the full message log for heavy
+aggregations.
 
-### Relationship card (top)
+1. **Abstract** — a short mock-academic abstract in the user's language.
+   Include date range, total messages, active-day ratio, participants,
+   and the dimensions studied: frequency, time distribution, relative
+   enthusiasm, words, and sentiment.
+2. **Daily Chat Popularity Distribution** — a calendar heatmap from
+   `DATA.calendarHeatmap`, grouped by year/month. This is the "does the
+   relationship keep lighting up?" view. Use horizontal scroll on mobile.
+3. **Daily Chat Time Periods** — 24-hour bar chart from
+   `DATA.hourlyDistribution`. Surface late-night / early-morning
+   patterns with playful callouts only when supported by data.
+4. **Monthly Relative Enthusiasm Index** — a two-column or per-sender
+   bubble chart from `DATA.monthlyStats[].senders[].enthusiasmIndex`.
+   Use the formula `E = (sent - received) / (sent + received)`. Explain
+   that positive means "sent more than received this month", not "loves
+   more".
+5. **Word Specificity Statistics** — per-person top special words from
+   `DATA.wordSpecificity`: each person's口头禅 / signature vocabulary.
+6. **High-frequency Chat Words and Contribution Rating Distribution** —
+   mirrored bar chart from `DATA.contributionWords`, showing who uses
+   each shared high-frequency word more. Contribution formula:
+   `C = own_word_count / total_word_count`.
+7. **Lexical Sentiment Trend** — from `DATA.sentimentTimeline`. Label it
+   rough and lexicon-based; do not diagnose the relationship.
+8. **Love-related Keyword Extraction** — `DATA.relationshipKeywords`.
+   Keep the panel visual and playful, but do not render raw message text.
 
-- **Period covered** — date range with total days, plus what % of those
-  days had any messages (engagement frequency).
-- **Cadence** — average messages/day, busiest day, longest gap, longest
-  streak. Format like "talked ~12 msgs/day · 4-day longest gap · busiest
-  day was 2026-01-25 (47 messages)".
-- **Who leads** — for 2-person chats, the % split of who sends first
-  after a 4+ hour gap (this is "who initiates"). For group chats, the
-  top 3 most active senders.
-- **Conversation arc** — pick the 5–10 most meaningful turns from the
-  sample (a decision point, a plan being made, a milestone, a strong
-  emotional moment) and pin them on a horizontal timeline. Each pin is
-  one sentence the LLM writes, anchored to the date.
+## Optional sections (choose what fits)
 
-### Visualizations
+- **Relationship KPI cards** — total messages, active days, busiest day,
+  longest quiet gap, median reply time by sender, who re-starts after
+  4+ hour gaps (`DATA.initiationsBySender`).
+- **Love keyword panel** — `DATA.relationshipKeywords`: love, miss you,
+  good night, babe, hugs, etc. Translate labels to match the chat
+  language.
+- **Emoji signature** — per-sender emoji leaderboard from
+  `DATA.emojiStats`.
+- **Milestone timeline** — infer 5-8 relationship chapters from the
+  sample and date range. Make inference visibly tentative.
 
-Choose 3–5 of these based on what the data supports:
+## Visual direction
 
-- **Activity heatmap** — day-of-week × hour-of-day cells, intensity by
-  message count. Reveals "evening texter" vs "morning person" patterns.
-- **Volume over time** — sparkline / area chart of messages per
-  day or per week. Shows when the relationship was hot vs quiet.
-- **Sender split** — donut or stacked bar of message share, with
-  emoji-only-message percentage as a secondary metric.
-- **Reply latency distribution** — histogram of "minutes between message
-  and the next reply". Tells if the chat is fast-and-quippy or
-  slow-and-deliberate.
-- **Topic clusters** — pick 4–8 themes from the sample (work, food,
-  travel, weekend plans, books, …) and show a small bar chart of
-  message volume per theme. The LLM has to guess the themes from the
-  sample — that's part of the value.
-- **Emoji map** — top 8 emojis used and by whom. A surprising emoji
-  signature per person.
+- Treat the page like a polished data essay, not an admin dashboard.
+- A good structure is: title + abstract, Part 1 frequency, Part 2 words,
+  Part 3 sentiment and relationship keywords.
+- Use large, dense visualizations. This source is allowed to be richer
+  and more editorial than the generic chat pack.
+- Prefer two participant colors, often warm pink/red versus blue, while
+  still applying the Clockless design tokens from `_design.md`.
+- Use inline SVG or Canvas. No Chart.js, no ECharts, no CDN.
+- Do not include a raw-message appendix by default. For shareable
+  relationship reports, aggregate metrics are safer and visually cleaner
+  than a chat-log browser.
+- Include light + dark mode and mobile layout. Calendar and mirrored bar
+  charts may scroll horizontally on small screens.
 
-Don't try to do all of these. Pick the 3–5 that the LLM can actually
-populate from the sample + meta, and that fit the relationship's shape.
+## Interpretation rules
 
-### The messages themselves
-
-Below the analysis, include a **collapsible** "Browse all N messages"
-section with the full thread (data is inlined). Default to collapsed
-so the headline is the analysis, not the raw chat. Inside the panel:
-bubble timeline grouped by day, sender filter chips, search, date jump.
-
-## Always include
-
-- Light + dark mode (`prefers-color-scheme`).
-- Mobile-first responsive — analysis cards stack, charts shrink
-  gracefully.
-- Charts render with inline SVG (no Chart.js, no CDNs) for under ~1000
-  data points. For more, use Canvas.
-- Keep the page under 500 KB inlined. The full message log is in DATA;
-  don't duplicate it in the rendered HTML.
-- "Copy as Markdown" of the analysis section (so users can paste into
-  notes / share).
+- "Relative enthusiasm" means message-volume imbalance, not affection.
+- "Sentiment" is a lexical signal from the text, not psychological
+  assessment.
+- Word specificity can reveal style, jokes, and habits; do not shame
+  either person.
+- Make playful callouts only when supported by data.
 
 ## Data shape
 
 ```ts
 DATA = {
-  messages: [
-    { ts: "2026-01-04 09:12:07", date: "2026-01-04", time: "09:12:07",
-      sender: "Alex Chen", text: "...", isMedia?: boolean }
+  messages?: [
+    {
+      id: "m_000001",
+      ts: "2026-01-04 09:12:07",
+      date: "2026-01-04",
+      time: "09:12:07",
+      tsEpoch: 1767537127000,
+      sender: "Alex Chen",
+      text: "...",
+      isMedia?: false
+    }
   ],
-  senders: ["Alex Chen", "Mira Park"],
-  messagesPerSender: { "Alex Chen": 42, "Mira Park": 41 },
-  dateRange: "2026-01-04 → 2026-02-02",
-  messageCount: 83,
-  senderCount: 2,
-  mediaCount: 1,
-  meta: { sourceFile, sizeBytes, ... }
+  senders: [{ sender, count, firstTs, lastTs }],
+  messagesPerSender: { "Alex Chen": 42 },
+  heatmap: [{ dow: 0..6, hour: 0..23, count }],
+  volumeByDay: [{ date, count }],
+  calendarHeatmap: [{ date, count, month, year, dow }],
+  hourlyDistribution: [{ hour, count, bySender }],
+  monthlyStats: [{ month, total, activeDays, bySender, senders, sentiment }],
+  topWords: [{ word, count }],
+  wordSpecificity: { "Alex Chen": [{ word, count, specificity, share }] },
+  contributionWords: [{ word, count, bySender, shares, dominantSender, contributionRating }],
+  emojiStats: { "Alex Chen": [{ emoji, count }] },
+  sentimentTimeline: [{ month, positive, negative, score, normalizedScore }],
+  relationshipKeywords: [{ word, count }],
+  replyStatsBySender: { "Alex Chen": { medianMinutes, averageMinutes, p80Minutes } },
+  initiationsBySender: { "Alex Chen": 42 },
+  activeDayRatio,
+  busiestDay,
+  longestGapHours,
+  platform: "whatsapp"
 }
 ```
 
-The LLM also has the schema and stats in the prompt — use those to
-populate the headline cards. The full `messages` array is for the
-"Browse all" drill-down, where client-side JS renders bubbles.
+## Privacy footer
 
-## Tone
+Include a small footer:
 
-Analytical but warm. Headline copy should sound like an observation
-about the relationship, not a dashboard label. "You two reply to each
-other in under 5 minutes 80% of the time" is a sentence; "Avg reply
-latency: 4.2m" is a metric. Use sentences in the cards, metrics in the
-charts.
-
-## Privacy note (include in the page footer)
-
-Add a small footer line: *"Generated locally — your conversation data
-never left your machine. The full chat is embedded in this HTML and
-rendered in your browser."*
+> Generated locally from your WhatsApp export. Treat source chats as
+> private; this shareable report should use aggregate metrics and
+> anonymized names unless the user explicitly asks otherwise.

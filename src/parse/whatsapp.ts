@@ -13,10 +13,12 @@
 import * as fs from "node:fs/promises"
 import * as path from "node:path"
 import type { Parser, ParsedFile } from "../types.js"
+import { buildChatStats, type ChatMsg } from "./chat-shared.js"
+import { buildRelationshipChatInsights } from "./wechat.js"
 
 const MSG_RE = /^\[(\d{1,4}[/.-]\d{1,2}[/.-]\d{1,4}),?\s+(\d{1,2}:\d{2}(?::\d{2})?(?:\s*[AP]M)?)\]\s+([^:]+):\s*(.*)$/
 
-interface Msg { ts: string; date: string; time: string; sender: string; text: string; isMedia?: boolean }
+interface Msg extends ChatMsg {}
 
 export const parser: Parser = {
   name: "whatsapp",
@@ -39,16 +41,17 @@ export const parser: Parser = {
   },
   async parse(filepath: string): Promise<ParsedFile> {
     const raw = await fs.readFile(filepath, "utf8")
-    const messages: Msg[] = []
-    let curr: Msg | null = null
+    let parsedMessages: Array<Omit<Msg, "id" | "tsEpoch">> = []
+    let curr: Omit<Msg, "id" | "tsEpoch"> | null = null
     for (const line of raw.replace(/\r\n/g, "\n").split("\n")) {
       const m = MSG_RE.exec(line)
       if (m) {
-        if (curr) messages.push(curr)
+        if (curr) parsedMessages.push(curr)
+        const parsedTs = parseWhatsAppTs(m[1], m[2])
         curr = {
-          ts: `${m[1]} ${m[2]}`,
-          date: m[1],
-          time: m[2],
+          ts: parsedTs.ts,
+          date: parsedTs.date,
+          time: parsedTs.time,
           sender: m[3].trim(),
           text: m[4] || "",
           isMedia: /<Media omitted>|<image omitted>|<sticker omitted>/i.test(m[4] || ""),
@@ -57,40 +60,103 @@ export const parser: Parser = {
         curr.text += "\n" + line
       }
     }
-    if (curr) messages.push(curr)
+    if (curr) parsedMessages.push(curr)
 
-    const senders = Array.from(new Set(messages.map(m => m.sender)))
-    const messagesPerSender: Record<string, number> = {}
-    for (const m of messages) messagesPerSender[m.sender] = (messagesPerSender[m.sender] || 0) + 1
-    const dateRange = messages.length
-      ? `${messages[0].date} → ${messages[messages.length - 1].date}`
-      : "(empty)"
+    const messages: Msg[] = parsedMessages
+      .map((m, i) => ({
+        ...m,
+        id: `m_${String(i + 1).padStart(6, "0")}`,
+        tsEpoch: parseEpoch(m.ts),
+      }))
+      .filter(m => isFinite(m.tsEpoch))
+      .sort((a, b) => a.tsEpoch - b.tsEpoch)
+    messages.forEach((m, i) => { m.id = `m_${String(i + 1).padStart(6, "0")}` })
 
-    const stats = {
+    const stats = buildChatStats(messages, {
       sourceFile: path.basename(filepath),
       sizeBytes: Buffer.byteLength(raw, "utf8"),
-      messageCount: messages.length,
-      senderCount: senders.length,
-      senders,
-      messagesPerSender,
-      dateRange,
-      mediaCount: messages.filter(m => m.isMedia).length,
+      platform: "whatsapp",
+    })
+    const insights = buildRelationshipChatInsights(messages)
+    const meta: Record<string, unknown> & { sourceFile: string; sizeBytes: number } = {
+      ...stats.meta,
+      activeDayRatio: insights.activeDayRatio,
+      busiestDay: insights.busiestDay,
+      longestGapHours: insights.longestGapHours,
+      relationshipKeywordCount: insights.relationshipKeywords.reduce((n, w) => n + w.count, 0),
     }
-
-    // Sample for the LLM: first 8 + last 4. Keeps prompt tight while showing
-    // both opening tone and recent voice.
-    const sample = {
-      ...stats,
-      first: messages.slice(0, 8),
-      last: messages.slice(-4),
-    }
+    const senderNames = Array.isArray(meta.senders) ? (meta.senders as string[]) : []
 
     return {
       contentType: "whatsapp-chat",
-      summary: `WhatsApp chat export, ${messages.length} messages between ${senders.length} sender${senders.length === 1 ? "" : "s"} (${senders.join(", ")}), ${dateRange}.`,
-      sample,
-      data: { messages, ...stats },
-      meta: stats,
+      summary: `WhatsApp chat export, ${messages.length} messages between ${senderNames.length} sender${senderNames.length === 1 ? "" : "s"} (${senderNames.join(", ")}), ${meta.dateRange}.`,
+      sample: {
+        ...stats.sample,
+        ...meta,
+        calendarPreview: insights.calendarHeatmap.slice(-45),
+        hourlyDistribution: insights.hourlyDistribution,
+        monthlyStats: insights.monthlyStats.slice(-18),
+        topWords: insights.topWords.slice(0, 30),
+        wordSpecificity: Object.fromEntries(Object.entries(insights.wordSpecificity).map(([k, v]) => [k, v.slice(0, 20)])),
+        contributionWords: insights.contributionWords.slice(0, 30),
+        sentimentTimeline: insights.sentimentTimeline.slice(-18),
+        relationshipKeywords: insights.relationshipKeywords.slice(0, 20),
+        replyStatsBySender: insights.replyStatsBySender,
+        initiationsBySender: insights.initiationsBySender,
+      },
+      data: {
+        messages,
+        ...stats.derived,
+        platform: "whatsapp",
+        ...insights,
+      },
+      meta,
     }
   },
+}
+
+function parseWhatsAppTs(dateRaw: string, timeRaw: string): { ts: string; date: string; time: string } {
+  const parts = dateRaw.split(/[/.:-]/).map(n => parseInt(n, 10))
+  let year: number
+  let month: number
+  let day: number
+  if (String(parts[0]).length === 4 || parts[0] > 31) {
+    year = parts[0]
+    month = parts[1]
+    day = parts[2]
+  } else {
+    // WhatsApp's slash export is locale-dependent; MM/DD/YY is the most
+    // common English export shape. Ambiguous dates still sort consistently.
+    month = parts[0]
+    day = parts[1]
+    year = parts[2] < 100 ? 2000 + parts[2] : parts[2]
+  }
+  const timeMatch = /^(\d{1,2}):(\d{2})(?::(\d{2}))?\s*([AP]M)?$/i.exec(timeRaw.trim())
+  let hour = timeMatch ? parseInt(timeMatch[1], 10) : 0
+  const minute = timeMatch ? parseInt(timeMatch[2], 10) : 0
+  const second = timeMatch?.[3] ? parseInt(timeMatch[3], 10) : 0
+  const ampm = timeMatch?.[4]?.toUpperCase()
+  if (ampm === "PM" && hour < 12) hour += 12
+  if (ampm === "AM" && hour === 12) hour = 0
+  const d = new Date(year, month - 1, day, hour, minute, second)
+  const date = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`
+  const time = `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`
+  return { ts: `${date} ${time}`, date, time }
+}
+
+function parseEpoch(ts: string): number {
+  const m = /^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/.exec(ts)
+  if (!m) return NaN
+  return new Date(
+    parseInt(m[1], 10),
+    parseInt(m[2], 10) - 1,
+    parseInt(m[3], 10),
+    parseInt(m[4], 10),
+    parseInt(m[5], 10),
+    parseInt(m[6], 10),
+  ).getTime()
+}
+
+function pad(n: number): string {
+  return String(n).padStart(2, "0")
 }
