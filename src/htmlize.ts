@@ -164,6 +164,17 @@ function familyFor(contentType: string): string | null {
   ) {
     return "_chat.md"
   }
+  // Developer artifacts share the review-checklist / risk-hotspots /
+  // collapsible-raw / copyable-summary / hypothesis-discipline
+  // contract.
+  if (
+    contentType === "git-diff" ||
+    contentType === "pr-review" ||
+    contentType === "ci-log" ||
+    contentType === "stack-trace"
+  ) {
+    return "_developer.md"
+  }
   return null
 }
 

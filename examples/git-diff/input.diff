@@ -1,0 +1,135 @@
+diff --git a/src/auth/session.ts b/src/auth/session.ts
+index 1a2b3c4..5d6e7f8 100644
+--- a/src/auth/session.ts
++++ b/src/auth/session.ts
+@@ -1,12 +1,18 @@
+ import * as jwt from "jsonwebtoken"
+ import { logger } from "../obs/logger"
+
++const EXPECTED_ISSUER = process.env.SESSION_ISSUER || "clockless.ai"
++const CLOCK_SKEW_SECONDS = 30
++
+ export function verifySession(token: string) {
+   if (!token) return null
+-  const decoded = jwt.decode(token) as { exp: number; sub: string }
+-  if (decoded.exp < Date.now()) {
+-    logger.info({ sub: decoded.sub }, "session expired")
++  const decoded = jwt.decode(token) as { exp: number; sub: string; iss?: string } | null
++  if (!decoded) return null
++  if (decoded.iss !== EXPECTED_ISSUER) {
++    logger.warn({ iss: decoded.iss }, "unexpected issuer")
++    return null
++  }
++  if (decoded.exp < Math.floor(Date.now() / 1000) - CLOCK_SKEW_SECONDS) {
++    logger.info({ sub: decoded.sub }, "session expired")
+     return null
+   }
+   return decoded
+ }
+diff --git a/src/auth/middleware.ts b/src/auth/middleware.ts
+index 9e8d7c6..b1c2d3e 100644
+--- a/src/auth/middleware.ts
++++ b/src/auth/middleware.ts
+@@ -1,10 +1,14 @@
+ import type { Request, Response, NextFunction } from "express"
+ import { verifySession } from "./session"
+
+ export function requireSession(req: Request, res: Response, next: NextFunction) {
+-  const token = req.headers.authorization?.replace(/^Bearer /, "")
++  const auth = req.headers.authorization
++  if (!auth || !auth.startsWith("Bearer ")) {
++    return res.status(401).json({ error: "missing_authorization" })
++  }
++  const token = auth.slice("Bearer ".length).trim()
+   const session = verifySession(token || "")
+   if (!session) {
+-    return res.status(401).end()
++    return res.status(401).json({ error: "invalid_session" })
+   }
+   ;(req as any).session = session
+   next()
+diff --git a/tests/auth/session.test.ts b/tests/auth/session.test.ts
+index 4f5g6h7..a1b2c3d 100644
+--- a/tests/auth/session.test.ts
++++ b/tests/auth/session.test.ts
+@@ -1,20 +1,40 @@
+ import { describe, it, expect, vi } from "vitest"
+ import { verifySession } from "../../src/auth/session"
+ import * as jwt from "jsonwebtoken"
+
+ describe("verifySession", () => {
+   it("returns null for empty token", () => {
+     expect(verifySession("")).toBeNull()
+   })
+
+   it("returns null for expired token", () => {
+-    vi.spyOn(jwt, "decode").mockReturnValue({ exp: 0, sub: "u_1" })
++    vi.spyOn(jwt, "decode").mockReturnValue({ exp: 0, sub: "u_1", iss: "clockless.ai" })
+     expect(verifySession("expired")).toBeNull()
+   })
+
++  it("returns null when issuer does not match", () => {
++    vi.spyOn(jwt, "decode").mockReturnValue({
++      exp: Math.floor(Date.now() / 1000) + 3600,
++      sub: "u_1",
++      iss: "evil.example",
++    })
++    expect(verifySession("wrong-issuer")).toBeNull()
++  })
++
++  it("accepts a token within clock skew", () => {
++    vi.spyOn(jwt, "decode").mockReturnValue({
++      exp: Math.floor(Date.now() / 1000) - 10,
++      sub: "u_1",
++      iss: "clockless.ai",
++    })
++    expect(verifySession("recently-expired")).toBeTruthy()
++  })
++
++  it("returns null when decode returns null", () => {
++    vi.spyOn(jwt, "decode").mockReturnValue(null as any)
++    expect(verifySession("malformed")).toBeNull()
++  })
++
+   it("returns the decoded session for a valid token", () => {
+-    vi.spyOn(jwt, "decode").mockReturnValue({
+-      exp: Date.now() + 3600_000,
++    vi.spyOn(jwt, "decode").mockReturnValue({
++      exp: Math.floor(Date.now() / 1000) + 3600,
+       sub: "u_42",
++      iss: "clockless.ai",
+     })
+     expect(verifySession("good")).toMatchObject({ sub: "u_42" })
+   })
+ })
+diff --git a/migrations/0042_session_issuer.sql b/migrations/0042_session_issuer.sql
+new file mode 100644
+index 0000000..7654321
+--- /dev/null
++++ b/migrations/0042_session_issuer.sql
+@@ -0,0 +1,9 @@
++-- 0042_session_issuer
++-- Adds issuer column to sessions for cross-issuer verification.
++-- Backfills existing rows to the legacy issuer; safe under concurrent writes.
++
++ALTER TABLE sessions ADD COLUMN issuer TEXT;
++UPDATE sessions SET issuer = 'clockless.ai' WHERE issuer IS NULL;
++ALTER TABLE sessions ALTER COLUMN issuer SET NOT NULL;
++
++CREATE INDEX CONCURRENTLY idx_sessions_issuer ON sessions (issuer);
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 1234567..abcdef0 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -1,5 +1,11 @@
+ # Changelog
+
++## Unreleased
++
++- auth: verify JWT issuer against `SESSION_ISSUER` (default `clockless.ai`)
++- auth: convert `exp` comparison to seconds and tolerate 30s of clock skew
++- auth: return structured 401 errors instead of empty bodies
++
+ ## 0.4.1 — 2026-04-22
+
+ - csv: handle BOM-prefixed UTF-8 inputs

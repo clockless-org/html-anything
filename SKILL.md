@@ -105,6 +105,10 @@ client-side rendering of the drill-down sections.
 | [`prompts/email.md`](./prompts/email.md) | `.eml` / `.mbox` mailboxes (including Gmail Takeout exports) |
 | [`prompts/transcript.md`](./prompts/transcript.md) | `.vtt` / `.srt` / timecoded Zoom & Teams `.txt` meeting transcripts |
 | [`prompts/json.md`](./prompts/json.md) | JSON data files |
+| [`prompts/git-diff.md`](./prompts/git-diff.md) | `.diff`, raw `git diff` output — review checklist, risk map, collapsible diff |
+| [`prompts/pr-review.md`](./prompts/pr-review.md) | `.patch` (`git format-patch` mailbox or GitHub PR `.patch`) — commit timeline, evidence-based reviewer's checklist, test-touched flags |
+| [`prompts/ci-log.md`](./prompts/ci-log.md) | CI / build / test logs (GitHub Actions, GitLab CI, CircleCI, Buildkite, Jenkins, generic `npm test` / `pytest` / `go test`) — failure summary, suspected-cause hypotheses |
+| [`prompts/stack-trace.md`](./prompts/stack-trace.md) | Runtime stack traces (Python, Node / JS, Java, Go, Ruby, Rust, .NET) — likely-app-frame headline, folded vendor frames, cause chain |
 | [`prompts/github-repo.md`](./prompts/github-repo.md) | github.com/owner/repo URLs |
 | [`prompts/url-article.md`](./prompts/url-article.md) | Blog posts, news articles, long-form web pages |
 | [`prompts/default.md`](./prompts/default.md) | Anything else |
@@ -122,6 +126,15 @@ the chat pack: activity heatmap, contributor leaderboard, decisions /
 action items / open questions, topic clusters, and a searchable log
 drill-down. WhatsApp keeps its bespoke 1:1-relationship framing and is
 **not** part of this family.
+
+Developer-artifact sources (`git-diff`, `pr-review`, `ci-log`,
+`stack-trace`) also load
+[`prompts/_developer.md`](./prompts/_developer.md) — the shared
+contract for the developer-artifact pack: review checklist (concrete,
+evidence-based items), risk hotspots, collapsible raw diff / log /
+trace, copyable Markdown summary, and **hypothesis discipline**
+(every inferred cause / risk / call-site is labeled with a visible
+"Hypothesis" chip; no certainty claims).
 
 **Adding a new source** = drop a new `<source>.md` in `prompts/`,
 following the same shape as existing ones. No code changes, no

@@ -1,0 +1,252 @@
+From a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0 Mon Sep 17 00:00:00 2026
+From: Mira Park <mira@clockless.ai>
+Date: Mon, 4 May 2026 09:15:32 -0700
+Subject: [PATCH 1/3] checkout: fail closed when payment provider returns
+ ambiguous status
+
+Previously a `pending_review` response from the payment provider was
+treated as a successful charge by the order pipeline. That is unsafe
+under provider-side fraud holds — we'd ship the order before the
+charge resolved.
+
+This change routes any non-`succeeded` status into the new
+`pendingChargeQueue` and leaves the order in `awaiting_payment`.
+The webhook handler is responsible for transitioning out.
+---
+ src/checkout/charge.ts          | 24 ++++++++++++++++--------
+ src/checkout/pendingQueue.ts    | 18 ++++++++++++++++++
+ tests/checkout/charge.test.ts   | 38 +++++++++++++++++++++++++++++---------
+ 3 files changed, 63 insertions(+), 17 deletions(-)
+ create mode 100644 src/checkout/pendingQueue.ts
+
+diff --git a/src/checkout/charge.ts b/src/checkout/charge.ts
+index 1111111..2222222 100644
+--- a/src/checkout/charge.ts
++++ b/src/checkout/charge.ts
+@@ -1,18 +1,24 @@
+ import type { Order } from "../order/types"
+ import { provider } from "../payments/provider"
++import { enqueuePendingCharge } from "./pendingQueue"
+ import { logger } from "../obs/logger"
+
+ export async function chargeOrder(order: Order) {
+   const result = await provider.charge({
+     orderId: order.id,
+     amountCents: order.totalCents,
+     currency: order.currency,
+   })
+-  if (result.status === "succeeded") {
+-    return { ok: true as const, chargeId: result.id }
+-  }
+-  logger.warn({ orderId: order.id, status: result.status }, "charge failed")
+-  return { ok: false as const, reason: result.status }
++  if (result.status === "succeeded") {
++    return { ok: true as const, chargeId: result.id }
++  }
++  if (result.status === "pending_review" || result.status === "requires_action") {
++    logger.info({ orderId: order.id, status: result.status }, "charge pending — queued")
++    await enqueuePendingCharge(order.id, result.id)
++    return { ok: false as const, reason: "pending", chargeId: result.id }
++  }
++  logger.warn({ orderId: order.id, status: result.status }, "charge failed")
++  return { ok: false as const, reason: result.status }
+ }
+diff --git a/src/checkout/pendingQueue.ts b/src/checkout/pendingQueue.ts
+new file mode 100644
+index 0000000..3333333
+--- /dev/null
++++ b/src/checkout/pendingQueue.ts
+@@ -0,0 +1,18 @@
++import { db } from "../db"
++import { logger } from "../obs/logger"
++
++/**
++ * Records that a charge is awaiting external resolution. The webhook
++ * handler in `src/checkout/webhook.ts` reads from this table and
++ * transitions the order on `charge.succeeded` / `charge.failed`.
++ */
++export async function enqueuePendingCharge(orderId: string, chargeId: string) {
++  await db.pendingCharges.insert({
++    order_id: orderId,
++    charge_id: chargeId,
++    enqueued_at: new Date().toISOString(),
++    status: "awaiting_webhook",
++  })
++  logger.info({ orderId, chargeId }, "enqueued pending charge")
++}
++
+diff --git a/tests/checkout/charge.test.ts b/tests/checkout/charge.test.ts
+index 4444444..5555555 100644
+--- a/tests/checkout/charge.test.ts
++++ b/tests/checkout/charge.test.ts
+@@ -1,16 +1,38 @@
+ import { describe, it, expect, vi } from "vitest"
+ import { chargeOrder } from "../../src/checkout/charge"
+ import { provider } from "../../src/payments/provider"
++import * as pendingQueue from "../../src/checkout/pendingQueue"
+
+ describe("chargeOrder", () => {
+   it("returns ok for a succeeded charge", async () => {
+     vi.spyOn(provider, "charge").mockResolvedValue({ status: "succeeded", id: "ch_001" })
+     const result = await chargeOrder({ id: "o_1", totalCents: 1200, currency: "USD" } as any)
+     expect(result).toEqual({ ok: true, chargeId: "ch_001" })
+   })
+
+-  it("returns the failure reason for a failed charge", async () => {
+-    vi.spyOn(provider, "charge").mockResolvedValue({ status: "card_declined", id: "ch_002" })
+-    const result = await chargeOrder({ id: "o_2", totalCents: 800, currency: "USD" } as any)
+-    expect(result).toEqual({ ok: false, reason: "card_declined" })
+-  })
++  it("returns the failure reason for a hard-declined charge", async () => {
++    vi.spyOn(provider, "charge").mockResolvedValue({ status: "card_declined", id: "ch_002" })
++    const result = await chargeOrder({ id: "o_2", totalCents: 800, currency: "USD" } as any)
++    expect(result).toEqual({ ok: false, reason: "card_declined" })
++  })
++
++  it("queues the charge and returns pending for a pending_review status", async () => {
++    vi.spyOn(provider, "charge").mockResolvedValue({ status: "pending_review", id: "ch_003" })
++    const enqueueSpy = vi.spyOn(pendingQueue, "enqueuePendingCharge").mockResolvedValue(undefined as any)
++    const result = await chargeOrder({ id: "o_3", totalCents: 5400, currency: "USD" } as any)
++    expect(result).toEqual({ ok: false, reason: "pending", chargeId: "ch_003" })
++    expect(enqueueSpy).toHaveBeenCalledWith("o_3", "ch_003")
++  })
++
++  it("queues the charge for a requires_action status", async () => {
++    vi.spyOn(provider, "charge").mockResolvedValue({ status: "requires_action", id: "ch_004" })
++    const enqueueSpy = vi.spyOn(pendingQueue, "enqueuePendingCharge").mockResolvedValue(undefined as any)
++    const result = await chargeOrder({ id: "o_4", totalCents: 1500, currency: "USD" } as any)
++    expect(result.ok).toBe(false)
++    expect(result.reason).toBe("pending")
++    expect(enqueueSpy).toHaveBeenCalled()
++  })
+ })
+--
+2.45.0
+
+
+From b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1 Mon Sep 17 00:00:00 2026
+From: Mira Park <mira@clockless.ai>
+Date: Mon, 4 May 2026 11:42:08 -0700
+Subject: [PATCH 2/3] checkout: webhook drains pendingChargeQueue on
+ charge.succeeded / charge.failed
+
+Pairs with the previous commit. The webhook handler now reads the
+pendingCharges row, transitions the order's payment_state, and
+deletes the row.
+---
+ src/checkout/webhook.ts        | 22 +++++++++++++++++++++-
+ tests/checkout/webhook.test.ts | 28 ++++++++++++++++++++++++++++
+ 2 files changed, 49 insertions(+), 1 deletion(-)
+
+diff --git a/src/checkout/webhook.ts b/src/checkout/webhook.ts
+index 6666666..7777777 100644
+--- a/src/checkout/webhook.ts
++++ b/src/checkout/webhook.ts
+@@ -1,15 +1,35 @@
+ import type { Request, Response } from "express"
+ import { db } from "../db"
++import { logger } from "../obs/logger"
+
+ export async function paymentWebhook(req: Request, res: Response) {
+   const event = req.body as { type: string; data: { chargeId: string } }
+   if (event.type === "charge.succeeded") {
++    const pending = await db.pendingCharges.findByChargeId(event.data.chargeId)
++    if (pending) {
++      await db.orders.update(pending.order_id, { payment_state: "paid" })
++      await db.pendingCharges.deleteByChargeId(event.data.chargeId)
++      logger.info({ orderId: pending.order_id }, "drained pending charge: paid")
++    }
+     return res.status(200).end()
+   }
++  if (event.type === "charge.failed") {
++    const pending = await db.pendingCharges.findByChargeId(event.data.chargeId)
++    if (pending) {
++      await db.orders.update(pending.order_id, { payment_state: "failed" })
++      await db.pendingCharges.deleteByChargeId(event.data.chargeId)
++      logger.warn({ orderId: pending.order_id }, "drained pending charge: failed")
++    }
++    return res.status(200).end()
++  }
+   return res.status(204).end()
+ }
+diff --git a/tests/checkout/webhook.test.ts b/tests/checkout/webhook.test.ts
+index 8888888..9999999 100644
+--- a/tests/checkout/webhook.test.ts
++++ b/tests/checkout/webhook.test.ts
+@@ -1,8 +1,36 @@
+ import { describe, it, expect, vi } from "vitest"
+ import { paymentWebhook } from "../../src/checkout/webhook"
+ import { db } from "../../src/db"
+
+ describe("paymentWebhook", () => {
+   it("returns 204 for unknown event types", async () => {
+     const res = mockRes()
+     await paymentWebhook({ body: { type: "ping" } } as any, res)
+     expect(res.statusCode).toBe(204)
+   })
++
++  it("transitions the order to paid on charge.succeeded", async () => {
++    vi.spyOn(db.pendingCharges, "findByChargeId").mockResolvedValue({ order_id: "o_1", charge_id: "ch_1" } as any)
++    const updateSpy = vi.spyOn(db.orders, "update").mockResolvedValue(undefined as any)
++    const deleteSpy = vi.spyOn(db.pendingCharges, "deleteByChargeId").mockResolvedValue(undefined as any)
++    const res = mockRes()
++    await paymentWebhook({ body: { type: "charge.succeeded", data: { chargeId: "ch_1" } } } as any, res)
++    expect(updateSpy).toHaveBeenCalledWith("o_1", { payment_state: "paid" })
++    expect(deleteSpy).toHaveBeenCalledWith("ch_1")
++    expect(res.statusCode).toBe(200)
++  })
++
++  it("transitions the order to failed on charge.failed", async () => {
++    vi.spyOn(db.pendingCharges, "findByChargeId").mockResolvedValue({ order_id: "o_2", charge_id: "ch_2" } as any)
++    const updateSpy = vi.spyOn(db.orders, "update").mockResolvedValue(undefined as any)
++    vi.spyOn(db.pendingCharges, "deleteByChargeId").mockResolvedValue(undefined as any)
++    const res = mockRes()
++    await paymentWebhook({ body: { type: "charge.failed", data: { chargeId: "ch_2" } } } as any, res)
++    expect(updateSpy).toHaveBeenCalledWith("o_2", { payment_state: "failed" })
++    expect(res.statusCode).toBe(200)
++  })
+ })
+
+ function mockRes() {
+   const res: any = { statusCode: 0 }
+   res.status = (c: number) => { res.statusCode = c; return res }
+   res.end = () => res
+   res.json = () => res
+   return res
+ }
+--
+2.45.0
+
+
+From c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2 Mon Sep 17 00:00:00 2026
+From: Mira Park <mira@clockless.ai>
+Date: Mon, 4 May 2026 14:08:51 -0700
+Subject: [PATCH 3/3] db: migration for pending_charges table
+
+---
+ migrations/0051_pending_charges.sql | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 migrations/0051_pending_charges.sql
+
+diff --git a/migrations/0051_pending_charges.sql b/migrations/0051_pending_charges.sql
+new file mode 100644
+index 0000000..aaaaaaa
+--- /dev/null
++++ b/migrations/0051_pending_charges.sql
+@@ -0,0 +1,14 @@
++-- 0051_pending_charges
++-- Adds pending_charges table for charges awaiting external resolution.
++
++CREATE TABLE pending_charges (
++  id          BIGSERIAL PRIMARY KEY,
++  order_id    TEXT      NOT NULL,
++  charge_id   TEXT      NOT NULL UNIQUE,
++  status      TEXT      NOT NULL,
++  enqueued_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
++);
++
++CREATE INDEX idx_pending_charges_order_id ON pending_charges (order_id);
++CREATE INDEX idx_pending_charges_status   ON pending_charges (status);
++
+--
+2.45.0

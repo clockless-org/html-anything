@@ -20,22 +20,24 @@ import { parser as markdownParser } from "./markdown.js"
 import { parser as jsonParser } from "./json.js"
 import { parser as pdfParser } from "./pdf.js"
 import { parser as docxParser } from "./docx.js"
+import { parser as developerArtifactParser } from "./developer-artifact.js"
 import { parser as textParser } from "./text.js"
 
 export const parsers: Parser[] = [
-  emailParser,      // .eml / .mbox (also catches Gmail Takeout exports)
-  transcriptParser, // .vtt / .srt / timecoded .txt (Zoom, Teams, Meet, YouTube)
-  whatsappParser,   // .txt with timestamp prefix
-  slackParser,      // .json — Slack channel export array
-  discordParser,    // .json / .csv — DiscordChatExporter
-  telegramParser,   // .json — Telegram Desktop result.json
-  imessageParser,   // .csv — iMessage-style / generic multi-sender chat
-  csvParser,        // .csv / .tsv (generic tabular fallback)
-  markdownParser,   // .md / .markdown
-  jsonParser,       // .json (generic fallback)
-  pdfParser,        // .pdf
-  docxParser,       // .docx
-  textParser,       // catch-all (plain text)
+  emailParser,              // .eml / .mbox (also catches Gmail Takeout exports)
+  transcriptParser,         // .vtt / .srt / timecoded .txt (Zoom, Teams, Meet, YouTube)
+  whatsappParser,           // .txt with timestamp prefix
+  slackParser,              // .json — Slack channel export array
+  discordParser,            // .json / .csv — DiscordChatExporter
+  telegramParser,           // .json — Telegram Desktop result.json
+  imessageParser,           // .csv — iMessage-style / generic multi-sender chat
+  csvParser,                // .csv / .tsv (generic tabular fallback)
+  markdownParser,           // .md / .markdown
+  jsonParser,               // .json (generic fallback)
+  pdfParser,                // .pdf
+  docxParser,               // .docx
+  developerArtifactParser,  // .diff / .patch / .log / .txt — diffs, PRs, CI logs, traces
+  textParser,               // catch-all (plain text)
 ]
 
 export async function pickParser(filepath: string): Promise<Parser | null> {
