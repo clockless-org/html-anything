@@ -119,10 +119,10 @@ h2 {
 <body>
 <div class="wrap">
   <h1>html-<span>anything</span></h1>
-  <p class="tagline">Turn any file into a beautiful, interactive, shareable HTML.</p>
+  <p class="tagline">Turn any file into the best HTML reading experience for that specific content — designed by an LLM.</p>
 
   <div class="lede">
-    <p>WhatsApp exports, PDFs, transcripts, CSVs, codebases — drop in a file, get back a single self-contained HTML with a modern reading experience: dark mode, search, filters, sortable tables. Open it. Send it. Host it. <strong>Done.</strong></p>
+    <p>Not a format converter. The same content type deserves different presentations depending on shape — a 2-person friend chat shouldn't render the same as a 200-person Slack channel. The LLM looks at a sample of the file, designs the right UI <em>for this content</em>, and writes the HTML+CSS+JS. The full data is inlined. Output is one self-contained <code>.html</code> file.</p>
   </div>
 
   <pre class="cmd">$ npx html-anything chat.zip
@@ -132,24 +132,24 @@ h2 {
 
   <a class="demo" href="markdown/output.html">
     <h3>Markdown <span class="arrow">→</span></h3>
-    <p class="meta">input.md (3.2 KB) → output.html (10 KB)</p>
-    <p>A long-form essay rendered with sticky search, dark mode, mobile-friendly typography, and a TL;DR pinned at the top (when an LLM is available).</p>
+    <p class="meta">input.md (3 KB, long-form essay) → LLM-designed reading view</p>
+    <p>The LLM saw the headings + opening + length, picked typography that fits the tone, and decided what navigation this length deserves. Different essay → different design.</p>
   </a>
 
   <a class="demo" href="whatsapp/output.html">
     <h3>WhatsApp export <span class="arrow">→</span></h3>
-    <p class="meta">_chat.txt (3 KB, ~80 messages) → output.html (10 KB)</p>
-    <p>WhatsApp's <code>_chat.txt</code> export parsed and rendered as a scrollable summary. The full bubble timeline + sender filters ship in v0.1.</p>
+    <p class="meta">_chat.txt (~80 messages between 2 senders) → bubble timeline</p>
+    <p>The LLM saw "2 senders, 80 messages, 1-month range" and designed a 2-column bubble timeline. Same parser on a 200-person channel would get a different UI — the LLM picks per-content.</p>
   </a>
 
   <a class="demo" href="csv/output.html">
     <h3>CSV <span class="arrow">→</span></h3>
-    <p class="meta">input.csv (3 KB, 46 rows) → output.html (23 KB)</p>
-    <p>Sortable, searchable, sticky-header table. Click any column to sort. Numeric columns auto-right-align. The search box at the top filters rows live.</p>
+    <p class="meta">input.csv (46 rows, 8 columns, 3 numeric) → sortable table + summary</p>
+    <p>The LLM saw the schema and decided this size deserves a full sortable table. A 50K-row CSV would skew toward charts + virtualization instead.</p>
   </a>
 
   <p class="footer">
-    <a href="https://github.com/clockless-org/html-anything">github.com/clockless-org/html-anything</a> · Apache 2.0 · contributions welcome (write a converter)
+    <a href="https://github.com/clockless-org/html-anything">github.com/clockless-org/html-anything</a> · Apache 2.0 · contributions welcome (write a parser)
   </p>
 </div>
 </body>

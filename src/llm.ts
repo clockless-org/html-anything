@@ -29,8 +29,8 @@ function makeClaude(apiKey: string): LlmHelper {
           "content-type": "application/json",
         },
         body: JSON.stringify({
-          model: opts.model || "claude-haiku-4-5-20251001",
-          max_tokens: opts.maxTokens ?? 1024,
+          model: opts.model || "claude-sonnet-4-6",
+          max_tokens: opts.maxTokens ?? 16384,
           messages: [{ role: "user", content: prompt }],
         }),
       })

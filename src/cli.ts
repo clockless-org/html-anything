@@ -1,15 +1,18 @@
 #!/usr/bin/env node
 /**
- * html-anything CLI entry point.
+ * html-anything CLI.
  *
- *   html-anything <input>             produce <input-stem>.html beside it
+ * Pipeline: input file → parser → ParsedFile → htmlize (LLM) → HTML.
+ *
+ *   html-anything <input>             write <input-stem>.html alongside
  *   html-anything <input> --out X     write to X
- *   html-anything <input> --no-ai     skip LLM enrichment
- *   html-anything <input> --inline-media   base64 photos/voice into the HTML
+ *   html-anything <input> --title T   override the document title
+ *   html-anything <input> --model M   override the LLM model
  */
 import * as fs from "node:fs/promises"
 import * as path from "node:path"
-import { converters } from "./converters/index.js"
+import { pickParser } from "./parse/index.js"
+import { htmlize } from "./htmlize.js"
 import { makeLlm } from "./llm.js"
 import type { ConverterOptions } from "./types.js"
 
@@ -21,14 +24,14 @@ interface ParsedArgs {
   version: boolean
 }
 
-const PKG_VERSION = "0.0.1"
+const PKG_VERSION = "0.1.0"
 
 function parseArgs(argv: string[]): ParsedArgs {
   let input = ""
   let out: string | undefined
   let title: string | undefined
-  let ai = true
-  let inlineMedia = false
+  let model: string | undefined
+  let maxTokens: number | undefined
   let help = false
   let version = false
 
@@ -38,43 +41,33 @@ function parseArgs(argv: string[]): ParsedArgs {
     else if (a === "-V" || a === "--version") version = true
     else if (a === "--out" || a === "-o") out = argv[++i]
     else if (a === "--title") title = argv[++i]
-    else if (a === "--no-ai") ai = false
-    else if (a === "--ai") ai = true
-    else if (a === "--inline-media") inlineMedia = true
+    else if (a === "--model") model = argv[++i]
+    else if (a === "--max-tokens") maxTokens = parseInt(argv[++i] || "", 10)
     else if (a.startsWith("-")) throw new Error(`unknown flag: ${a}`)
     else if (!input) input = a
     else throw new Error(`unexpected positional argument: ${a}`)
   }
 
-  return { input, out, options: { ai, inlineMedia, title }, help, version }
+  return { input, out, options: { title, model, maxTokens }, help, version }
 }
 
 const HELP = `\
-html-anything — turn any file into a beautiful, interactive, shareable HTML
+html-anything — turn any file into a beautiful, interactive HTML
 
 Usage:
-  html-anything <input>                     produce <input-stem>.html
-  html-anything <input> --out OUT           write to OUT (default: alongside input)
+  html-anything <input>                     write <input-stem>.html alongside
+  html-anything <input> --out OUT           write to OUT
   html-anything <input> --title "Title"     override the document title
-  html-anything <input> --no-ai             skip LLM enrichment (deterministic, fast)
-  html-anything <input> --inline-media      base64 binary attachments into the HTML
+  html-anything <input> --model MODEL       LLM model (default: claude-sonnet-4-6)
+  html-anything <input> --max-tokens N      LLM output budget (default: 16384)
 
-Available converters:
-${converters.map(c => `  • ${c.name.padEnd(16)} ${c.matches.join(", ")}`).join("\n")}
+Required env: ANTHROPIC_API_KEY (or OPENAI_API_KEY).
 
-Tip: the output is a single self-contained .html file. Open it in a browser,
-email it as an attachment, or host it anywhere static files live.
+The LLM designs the reading experience for *this specific content* — the same
+input type renders differently depending on shape (2-person chat → bubble
+timeline; 200-person channel → folded by sender). The full data is inlined
+into the output; the LLM only ever sees a representative sample.
 `
-
-async function pickConverter(filepath: string) {
-  const ext = path.extname(filepath).toLowerCase()
-  const candidates = converters.filter(c => c.matches.some(m => ext === m || m === "*"))
-  for (const c of candidates) {
-    if (!c.detect) return c
-    if (await c.detect(filepath)) return c
-  }
-  return null
-}
 
 async function main() {
   let args: ParsedArgs
@@ -86,38 +79,33 @@ async function main() {
     process.exit(2)
   }
 
-  if (args.version) {
-    console.log(PKG_VERSION)
-    return
-  }
-  if (args.help || !args.input) {
-    console.log(HELP)
-    return
-  }
+  if (args.version) { console.log(PKG_VERSION); return }
+  if (args.help || !args.input) { console.log(HELP); return }
 
   const filepath = path.resolve(args.input)
-  try {
-    await fs.access(filepath)
-  } catch {
+  try { await fs.access(filepath) } catch {
     console.error(`html-anything: input not found: ${filepath}`)
     process.exit(1)
   }
 
-  const converter = await pickConverter(filepath)
-  if (!converter) {
-    console.error(`html-anything: no converter for ${path.extname(filepath) || "(no extension)"}`)
-    console.error(`available: ${converters.map(c => c.matches.join("/")).join(", ")}`)
+  const parser = await pickParser(filepath)
+  if (!parser) {
+    console.error(`html-anything: no parser for ${path.extname(filepath) || "(no extension)"}`)
+    process.exit(1)
+  }
+  process.stderr.write(`→ parsing as ${parser.name}…\n`)
+  const parsed = await parser.parse(filepath)
+  process.stderr.write(`  ${parsed.summary}\n`)
+
+  const llm = makeLlm()
+  if (!llm) {
+    console.error(`html-anything: ANTHROPIC_API_KEY (or OPENAI_API_KEY) required for LLM-driven rendering.`)
+    console.error(`              See https://github.com/clockless-org/html-anything for setup.`)
     process.exit(1)
   }
 
-  const llm = args.options.ai ? makeLlm() : null
-  if (args.options.ai && !llm) {
-    console.error(`html-anything: --ai requested but no provider env var set (ANTHROPIC_API_KEY / OPENAI_API_KEY)`)
-    console.error(`              re-run with --no-ai or set one of those.`)
-    process.exit(1)
-  }
-
-  const html = await converter.render({ filepath, options: args.options, llm })
+  process.stderr.write(`→ designing page…\n`)
+  const html = await htmlize(parsed, llm, args.options)
 
   const outPath = args.out
     ? path.resolve(args.out)

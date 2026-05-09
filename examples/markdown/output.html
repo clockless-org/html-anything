@@ -1,289 +1,827 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="light dark">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Long, Slow, Inevitable Death of the PDF</title>
-<style>/* Base styles for every html-anything output. Opinionated: one good design,
-   no themes. Light by default; respects prefers-color-scheme. */
-
-:root {
-  --ha-bg: #faf8f5;
-  --ha-fg: #1f1c19;
-  --ha-fg-muted: #6b665e;
-  --ha-surface: #ffffff;
-  --ha-border: #e9e4dc;
-  --ha-accent: #c0552a;
-  --ha-accent-soft: #fdeee5;
-  --ha-radius: 14px;
-  --ha-shadow: 0 1px 2px rgba(30, 27, 25, 0.04), 0 8px 24px rgba(30, 27, 25, 0.06);
-  --ha-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  --ha-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-  --ha-serif: "Iowan Old Style", "Apple Garamond", Baskerville, "Times New Roman", serif;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --ha-bg: #14110e;
-    --ha-fg: #f1ece5;
-    --ha-fg-muted: #9d958a;
-    --ha-surface: #1f1c19;
-    --ha-border: #2e2925;
-    --ha-accent: #ee8a5b;
-    --ha-accent-soft: #2c1d14;
-    --ha-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.4);
-  }
-}
-
-*, *::before, *::after { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
-body {
-  font-family: var(--ha-sans);
-  font-size: 15.5px;
-  line-height: 1.55;
-  color: var(--ha-fg);
-  background: var(--ha-bg);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-a { color: var(--ha-accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-.ha-bar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: color-mix(in srgb, var(--ha-bg) 78%, transparent);
-  backdrop-filter: saturate(140%) blur(12px);
-  border-bottom: 1px solid var(--ha-border);
-}
-.ha-bar__inner {
-  max-width: 920px;
-  margin: 0 auto;
-  padding: 14px 20px;
-  display: flex;
-  gap: 16px;
-  align-items: center;
-}
-.ha-bar__brand { flex: 1; min-width: 0; }
-.ha-bar__eyebrow {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ha-fg-muted);
-}
-.ha-bar__title {
-  margin: 0;
-  font-size: 17px;
-  font-weight: 700;
-  line-height: 1.2;
-  font-family: var(--ha-serif);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.ha-bar__search {
-  width: 220px;
-  max-width: 40vw;
-  padding: 9px 14px;
-  border: 1px solid var(--ha-border);
-  border-radius: 999px;
-  background: var(--ha-surface);
-  color: var(--ha-fg);
-  font: inherit;
-  outline: none;
-}
-.ha-bar__search:focus {
-  border-color: var(--ha-accent);
-  box-shadow: 0 0 0 3px var(--ha-accent-soft);
-}
-
-.ha-main {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 32px 20px 80px;
-}
-.ha-main h1, .ha-main h2, .ha-main h3 {
-  font-family: var(--ha-serif);
-  line-height: 1.25;
-  margin: 1.6em 0 0.5em;
-}
-.ha-main h1 { font-size: 32px; }
-.ha-main h2 { font-size: 22px; }
-.ha-main h3 { font-size: 18px; }
-.ha-main p { margin: 1em 0; }
-.ha-main code {
-  font-family: var(--ha-mono);
-  font-size: 0.92em;
-  background: var(--ha-surface);
-  border: 1px solid var(--ha-border);
-  border-radius: 6px;
-  padding: 1px 6px;
-}
-.ha-main pre {
-  font-family: var(--ha-mono);
-  font-size: 13.5px;
-  background: var(--ha-surface);
-  border: 1px solid var(--ha-border);
-  border-radius: var(--ha-radius);
-  padding: 16px 18px;
-  overflow-x: auto;
-}
-.ha-main pre code { background: none; border: none; padding: 0; }
-.ha-main blockquote {
-  border-left: 3px solid var(--ha-accent);
-  margin: 1em 0;
-  padding: 4px 16px;
-  color: var(--ha-fg-muted);
-}
-.ha-main hr {
-  border: 0;
-  border-top: 1px solid var(--ha-border);
-  margin: 2em 0;
-}
-.ha-main img { max-width: 100%; height: auto; border-radius: 8px; }
-.ha-main table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1em 0;
-  font-size: 14px;
-}
-.ha-main th, .ha-main td {
-  text-align: left;
-  padding: 8px 12px;
-  border-bottom: 1px solid var(--ha-border);
-}
-.ha-main th { font-weight: 700; color: var(--ha-fg-muted); }
-
-.ha-hidden { display: none !important; }
-
-.ha-footer {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 24px 20px 60px;
-  font-size: 12px;
-  color: var(--ha-fg-muted);
-  text-align: center;
-}
-
-.ha-scrolltop {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--ha-border);
-  border-radius: 999px;
-  background: var(--ha-surface);
-  color: var(--ha-fg);
-  font-size: 18px;
-  cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
-  box-shadow: var(--ha-shadow);
-}
-.ha-scrolltop--shown {
-  opacity: 1;
-  pointer-events: auto;
-}
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-.md-tldr {
-  background: var(--ha-accent-soft);
-  border-left: 3px solid var(--ha-accent);
-  border-radius: 4px;
-  padding: 12px 18px;
-  margin-bottom: 28px;
-  font-size: 14.5px;
-}
-.md-tldr strong {
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ha-accent);
-  display: block;
-  margin-bottom: 6px;
-}
-.md-tldr p { margin: 0; }
+  :root {
+    --bg: #faf9f7;
+    --surface: #ffffff;
+    --border: #e8e4de;
+    --text: #1a1917;
+    --text-muted: #6b6760;
+    --text-light: #9a9591;
+    --accent: #c44b1a;
+    --accent-soft: #fdf0eb;
+    --heading-color: #111110;
+    --blockquote-bg: #f5f3ef;
+    --blockquote-border: #c44b1a;
+    --code-bg: #f0ede8;
+    --link: #c44b1a;
+    --toc-bg: #f5f3ef;
+    --toc-active: #c44b1a;
+    --search-bg: #ffffff;
+    --search-border: #d4cfc8;
+    --highlight: #fde68a;
+    --shadow: 0 1px 3px rgba(0,0,0,0.07), 0 2px 12px rgba(0,0,0,0.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #161513;
+      --surface: #1e1d1a;
+      --border: #2e2c28;
+      --text: #e8e4dc;
+      --text-muted: #9a9590;
+      --text-light: #6b6760;
+      --accent: #e8703a;
+      --accent-soft: #2a1e16;
+      --heading-color: #f0ece4;
+      --blockquote-bg: #221e18;
+      --blockquote-border: #e8703a;
+      --code-bg: #252320;
+      --link: #e8703a;
+      --toc-bg: #1e1d1a;
+      --toc-active: #e8703a;
+      --search-bg: #1e1d1a;
+      --search-border: #3a3832;
+      --highlight: #78350f;
+      --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 2px 12px rgba(0,0,0,0.2);
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Lora', Georgia, 'Times New Roman', serif;
+    font-size: 18px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* Layout */
+  .page-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  @media (min-width: 900px) {
+    .layout {
+      grid-template-columns: 220px 1fr;
+      gap: 0 48px;
+      align-items: start;
+    }
+  }
+
+  /* Header */
+  .site-header {
+    padding: 32px 0 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px;
+  }
+
+  .search-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .search-input {
+    flex: 1;
+    background: var(--search-bg);
+    border: 1px solid var(--search-border);
+    border-radius: 8px;
+    padding: 9px 14px 9px 36px;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239a9591' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 10px center;
+  }
+  .search-input:focus { border-color: var(--accent); }
+  .search-input::placeholder { color: var(--text-light); }
+
+  .search-count {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    min-width: 60px;
+  }
+
+  /* TOC Sidebar */
+  .toc-sidebar {
+    display: none;
+  }
+  @media (min-width: 900px) {
+    .toc-sidebar {
+      display: block;
+      position: sticky;
+      top: 24px;
+      padding: 20px;
+      background: var(--toc-bg);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+  }
+
+  .toc-title {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 12px;
+  }
+
+  .toc-list {
+    list-style: none;
+  }
+
+  .toc-list li {
+    margin-bottom: 2px;
+  }
+
+  .toc-list a {
+    display: block;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 5px;
+    border-left: 2px solid transparent;
+    transition: color 0.15s, background 0.15s, border-color 0.15s;
+    line-height: 1.4;
+  }
+  .toc-list a:hover {
+    color: var(--text);
+    background: var(--border);
+  }
+  .toc-list a.active {
+    color: var(--toc-active);
+    border-left-color: var(--toc-active);
+    font-weight: 500;
+  }
+  .toc-list .toc-h3 a {
+    padding-left: 20px;
+    font-size: 12px;
+  }
+
+  /* Mobile TOC toggle */
+  .toc-mobile-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: var(--toc-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: left;
+  }
+  .toc-mobile-toggle:hover { color: var(--text); }
+  @media (min-width: 900px) { .toc-mobile-toggle { display: none; } }
+
+  .toc-mobile-panel {
+    display: none;
+    background: var(--toc-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  .toc-mobile-panel.open { display: block; }
+  @media (min-width: 900px) { .toc-mobile-panel { display: none !important; } }
+
+  /* Article */
+  .article-content {
+    min-width: 0;
+    padding-bottom: 80px;
+  }
+
+  /* Typography */
+  .article-content h1 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--heading-color);
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+
+  .article-content h2 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: clamp(1.2rem, 3vw, 1.55rem);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--heading-color);
+    margin-top: 52px;
+    margin-bottom: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    letter-spacing: -0.01em;
+  }
+
+  .article-content h3 {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--heading-color);
+    margin-top: 32px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+  }
+
+  .article-content p {
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+
+  .article-content strong {
+    font-weight: 600;
+    color: var(--heading-color);
+  }
+
+  .article-content em {
+    font-style: italic;
+  }
+
+  .article-content a {
+    color: var(--link);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  .article-content a:hover { text-decoration-thickness: 2px; }
+
+  .article-content ul, .article-content ol {
+    padding-left: 24px;
+    margin-bottom: 20px;
+  }
+
+  .article-content li {
+    margin-bottom: 8px;
+  }
+
+  .article-content blockquote {
+    background: var(--blockquote-bg);
+    border-left: 3px solid var(--blockquote-border);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 28px 0;
+    font-style: italic;
+    color: var(--text-muted);
+  }
+  .article-content blockquote p {
+    margin-bottom: 0;
+    color: var(--text-muted);
+  }
+
+  .article-content code {
+    background: var(--code-bg);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: 'SF Mono', 'Fira Code', 'Fira Mono', monospace;
+    font-size: 0.85em;
+    color: var(--accent);
+  }
+
+  .article-content pre {
+    background: var(--code-bg);
+    border-radius: 8px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+  .article-content pre code {
+    background: none;
+    padding: 0;
+    color: var(--text);
+    font-size: 0.88em;
+  }
+
+  .article-content hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  /* Highlight */
+  mark {
+    background: var(--highlight);
+    color: var(--text);
+    border-radius: 2px;
+    padding: 0 2px;
+  }
+
+  /* Copy button */
+  .article-header-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.15s, background 0.15s;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .copy-btn:hover { color: var(--text); background: var(--border); }
+  .copy-btn.copied { color: var(--accent); border-color: var(--accent); }
+
+  /* Meta bar */
+  .meta-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 36px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .meta-pill {
+    background: var(--code-bg);
+    border-radius: 100px;
+    padding: 3px 10px;
+  }
+
+  /* No-results */
+  .no-results {
+    display: none;
+    text-align: center;
+    padding: 60px 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+
+  /* Progress bar */
+  .read-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--accent);
+    z-index: 100;
+    transition: width 0.1s linear;
+    width: 0%;
+  }
+
+  /* Footer */
+  .site-footer {
+    margin-top: 40px;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 12px;
+    color: var(--text-light);
+    text-align: center;
+  }
+
+  /* Scroll to top */
+  .scroll-top {
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    color: var(--text-muted);
+    font-size: 18px;
+  }
+  .scroll-top.visible { opacity: 1; pointer-events: auto; }
+  .scroll-top:hover { color: var(--text); }
 </style>
 </head>
 <body>
-<header class="ha-bar">
-  <div class="ha-bar__inner">
-    <div class="ha-bar__brand">
-      <div class="ha-bar__eyebrow">Markdown · 581 words</div>
-      <h1 class="ha-bar__title">The Long, Slow, Inevitable Death of the PDF</h1>
+
+<div class="read-progress" id="readProgress"></div>
+
+<div class="page-wrapper">
+  <header class="site-header">
+    <div class="search-bar-wrap">
+      <input class="search-input" type="search" id="searchInput" placeholder="Search in document… (⌘F)" autocomplete="off" spellcheck="false">
+      <span class="search-count" id="searchCount"></span>
     </div>
-    <input class="ha-bar__search" type="search" placeholder="Search…" aria-label="Search">
+  </header>
+
+  <div class="layout">
+    <!-- TOC Mobile Toggle -->
+    <div id="tocMobileArea">
+      <button class="toc-mobile-toggle" id="tocToggle" aria-expanded="false">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="16" y2="12"/><line x1="3" y1="18" x2="11" y2="18"/></svg>
+        Table of contents
+      </button>
+      <div class="toc-mobile-panel" id="tocMobilePanel">
+        <div class="toc-title">Contents</div>
+        <ul class="toc-list" id="tocListMobile"></ul>
+      </div>
+    </div>
+
+    <!-- Desktop Sidebar -->
+    <aside class="toc-sidebar" aria-label="Table of contents">
+      <div class="toc-title">Contents</div>
+      <ul class="toc-list" id="tocListDesktop"></ul>
+    </aside>
+
+    <!-- Main Article -->
+    <main class="article-content" id="articleContent">
+      <div id="noResults" class="no-results">No matches found.</div>
+      <div id="renderedContent"></div>
+    </main>
   </div>
-</header>
-<main class="ha-main">
-<article class="md-body" data-searchable><h1>The Long, Slow, Inevitable Death of the PDF</h1>
-<p>The PDF is the universal output format. Every report, every spec, every contract, every menu, every receipt eventually becomes one. It is the text-based equivalent of a fax: hated, ubiquitous, immortal.</p>
-<p>This is mostly because nothing better has shown up. Word documents are proprietary. Markdown is too plain. HTML is too varied. So the PDF endures, like a cockroach with a &quot;Save As&quot; button.</p>
-<h2>Why PDFs persist</h2>
-<p>There are three real reasons:</p>
-<ol><li><strong>Faithful rendering.</strong> A PDF looks the same on every device, every</li></ol>
-<p>   printer, every reader. This was a miracle in 1993 and is still useful.</p>
-<ol><li><strong>Portability.</strong> One file, one click, one envelope.</li><li><strong>Print-to-screen consistency.</strong> Even if you never print it, it</li></ol>
-<p>   <em>implies</em> a page, which implies a finished thing, which implies trust.</p>
-<p>The first two have alternatives that finally work. The third is harder to reason about, but it might be where the PDF actually lives.</p>
-<h2>What&#39;s broken about it</h2>
-<p>A PDF is a closed format pretending to be an open one. The text inside is often hostile to copy-paste. Tables shatter on selection. Forms are hieroglyphics. Search works, but only barely. On a phone, a PDF asks you to <em>zoom into a thing designed for paper</em>, which is the digital equivalent of being handed a folded map and a compass.</p>
-<blockquote>The PDF is the only format I know of that simultaneously feels like a precious artifact and a hostile environment.</blockquote>
-<h2>What might replace it</h2>
-<p>The candidates have always existed. They just haven&#39;t won.</p>
-<h3>HTML</h3>
-<p>A single self-contained <code>.html</code> file can hold structure, color, illustrations, code, animation, search, and interactivity. It opens in any browser. It does not need an app. It is searchable, copyable, mobile-responsive when written correctly, and it is the format that agents already produce for the web.</p>
-<p>The downside has always been that authoring was hard. That is what just changed.</p>
-<h3>Markdown</h3>
-<p>Lighter than HTML, with the same portability. But markdown has no visual identity. A 100-page PDF and a 100-page markdown file feel nothing alike. Markdown is a working draft; PDF is a finished thing. This is sociology more than technology.</p>
-<h3>Notion / Slabs / Walling / Capacities</h3>
-<p>Beautiful, but locked. You don&#39;t have the file. You have a link, and the link only works while you&#39;re paying.</p>
-<h2>So what changes now</h2>
-<p>The shape of the answer is: <strong>make HTML feel finished</strong>. Authoring used to be the bottleneck — a designer to lay out the typography, an engineer to wire the interactions. Both of those are now things an agent can do in a single prompt.</p>
-<p>A PDF says &quot;this document is final.&quot; An HTML file produced by an agent that read your specs, your data, your repo, your meeting notes, <em>and turned them into a single file with search, navigation, dark mode and mobile responsiveness</em> says &quot;this document is alive.&quot;</p>
-<p>That second one is more useful.</p>
-<hr>
-<h2>Footnotes</h2>
-<ul><li>The single-self-contained-file thing matters. Multi-file SPAs are</li></ul>
-<p>  not portable; you can&#39;t email them.</p>
-<ul><li>Search inside the HTML file is non-negotiable. The number of times</li></ul>
-<p>  per week I <code>Cmd-F</code> inside a long document is the reason any reading   experience without it feels broken.</p>
-<ul><li>Mobile responsive is non-negotiable. People will read what you sent</li></ul>
-<p>  on a phone, in a hurry, between meetings. If they can&#39;t, they don&#39;t.</p>
-<p>The PDF is going to outlive every single one of us. But it shouldn&#39;t have to.</p></article>
-</main>
-<footer class="ha-footer">Generated by <a href="https://github.com/clockless-org/html-anything">html-anything</a> · open in any browser, share anywhere</footer>
-<button class="ha-scrolltop" type="button" aria-label="Scroll to top">↑</button>
+
+  <footer class="site-footer" id="siteFooter"></footer>
+</div>
+
+<button class="scroll-top" id="scrollTop" title="Back to top" aria-label="Back to top">↑</button>
+
+<script>const DATA = {"markdown":"# The Long, Slow, Inevitable Death of the PDF\n\nThe PDF is the universal output format. Every report, every spec, every\ncontract, every menu, every receipt eventually becomes one. It is the\ntext-based equivalent of a fax: hated, ubiquitous, immortal.\n\nThis is mostly because nothing better has shown up. Word documents are\nproprietary. Markdown is too plain. HTML is too varied. So the PDF\nendures, like a cockroach with a \"Save As\" button.\n\n## Why PDFs persist\n\nThere are three real reasons:\n\n1. **Faithful rendering.** A PDF looks the same on every device, every\n   printer, every reader. This was a miracle in 1993 and is still useful.\n2. **Portability.** One file, one click, one envelope.\n3. **Print-to-screen consistency.** Even if you never print it, it\n   *implies* a page, which implies a finished thing, which implies trust.\n\nThe first two have alternatives that finally work. The third is harder\nto reason about, but it might be where the PDF actually lives.\n\n## What's broken about it\n\nA PDF is a closed format pretending to be an open one. The text inside\nis often hostile to copy-paste. Tables shatter on selection. Forms are\nhieroglyphics. Search works, but only barely. On a phone, a PDF asks\nyou to *zoom into a thing designed for paper*, which is the digital\nequivalent of being handed a folded map and a compass.\n\n> The PDF is the only format I know of that simultaneously feels like a\n> precious artifact and a hostile environment.\n\n## What might replace it\n\nThe candidates have always existed. They just haven't won.\n\n### HTML\n\nA single self-contained `.html` file can hold structure, color,\nillustrations, code, animation, search, and interactivity. It opens\nin any browser. It does not need an app. It is searchable, copyable,\nmobile-responsive when written correctly, and it is the format that\nagents already produce for the web.\n\nThe downside has always been that authoring was hard. That is what\njust changed.\n\n### Markdown\n\nLighter than HTML, with the same portability. But markdown has no\nvisual identity. A 100-page PDF and a 100-page markdown file feel\nnothing alike. Markdown is a working draft; PDF is a finished thing.\nThis is sociology more than technology.\n\n### Notion / Slabs / Walling / Capacities\n\nBeautiful, but locked. You don't have the file. You have a link, and\nthe link only works while you're paying.\n\n## So what changes now\n\nThe shape of the answer is: **make HTML feel finished**. Authoring used\nto be the bottleneck — a designer to lay out the typography, an engineer\nto wire the interactions. Both of those are now things an agent can do\nin a single prompt.\n\nA PDF says \"this document is final.\" An HTML file produced by an agent\nthat read your specs, your data, your repo, your meeting notes, *and\nturned them into a single file with search, navigation, dark mode and\nmobile responsiveness* says \"this document is alive.\"\n\nThat second one is more useful.\n\n---\n\n## Footnotes\n\n- The single-self-contained-file thing matters. Multi-file SPAs are\n  not portable; you can't email them.\n- Search inside the HTML file is non-negotiable. The number of times\n  per week I `Cmd-F` inside a long document is the reason any reading\n  experience without it feels broken.\n- Mobile responsive is non-negotiable. People will read what you sent\n  on a phone, in a hurry, between meetings. If they can't, they don't.\n\nThe PDF is going to outlive every single one of us. But it shouldn't\nhave to.\n","headings":[{"level":1,"text":"The Long, Slow, Inevitable Death of the PDF"},{"level":2,"text":"Why PDFs persist"},{"level":2,"text":"What's broken about it"},{"level":2,"text":"What might replace it"},{"level":3,"text":"HTML"},{"level":3,"text":"Markdown"},{"level":3,"text":"Notion / Slabs / Walling / Capacities"},{"level":2,"text":"So what changes now"},{"level":2,"text":"Footnotes"}],"sourceFile":"input.md","sizeBytes":3429,"wordCount":581,"lineCount":90,"headingCount":9};</script>
 <script>
-(function () {
-  // Search: hide elements with [data-searchable] that don't match.
-  var input = document.querySelector('.ha-bar__search');
-  if (input) {
-    input.addEventListener('input', function () {
-      var q = input.value.trim().toLowerCase();
-      document.querySelectorAll('[data-searchable]').forEach(function (el) {
-        var hay = el.getAttribute('data-searchable-text') || el.textContent || '';
-        var hit = !q || hay.toLowerCase().indexOf(q) !== -1;
-        el.classList.toggle('ha-hidden', !hit);
+(function() {
+  // ─── Markdown Parser ───────────────────────────────────────────────────────
+  function parseMarkdown(md) {
+    const lines = md.split('\n');
+    let html = '';
+    let i = 0;
+    let inUl = false, inOl = false, inBlockquote = false, inPre = false;
+
+    function closeList() {
+      if (inUl) { html += '</ul>\n'; inUl = false; }
+      if (inOl) { html += '</ol>\n'; inOl = false; }
+    }
+    function closeBlockquote() {
+      if (inBlockquote) { html += '</blockquote>\n'; inBlockquote = false; }
+    }
+
+    function inlineFormat(text) {
+      // Escape HTML first
+      text = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+      // Code spans
+      text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+      // Bold + italic
+      text = text.replace(/\*\*\*([^*]+)\*\*\*/g, '<strong><em>$1</em></strong>');
+      // Bold
+      text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      text = text.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+      // Italic
+      text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+      text = text.replace(/_([^_]+)_/g, '<em>$1</em>');
+      // Links
+      text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+      // Strikethrough
+      text = text.replace(/~~([^~]+)~~/g, '<del>$1</del>');
+      return text;
+    }
+
+    function makeId(text) {
+      return text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
+    }
+
+    while (i < lines.length) {
+      const line = lines[i];
+
+      // Fenced code block
+      if (line.trim().startsWith('```')) {
+        closeList(); closeBlockquote();
+        const lang = line.trim().slice(3).trim();
+        let code = '';
+        i++;
+        while (i < lines.length && !lines[i].trim().startsWith('```')) {
+          code += lines[i].replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '\n';
+          i++;
+        }
+        html += `<pre><code${lang ? ` class="language-${lang}"` : ''}>${code.trimEnd()}</code></pre>\n`;
+        i++;
+        continue;
+      }
+
+      // Headings
+      const hMatch = line.match(/^(#{1,6})\s+(.+)$/);
+      if (hMatch) {
+        closeList(); closeBlockquote();
+        const level = hMatch[1].length;
+        const text = hMatch[2];
+        const id = makeId(text);
+        html += `<h${level} id="${id}">${inlineFormat(text)}</h${level}>\n`;
+        i++; continue;
+      }
+
+      // HR
+      if (/^[-*_]{3,}$/.test(line.trim())) {
+        closeList(); closeBlockquote();
+        html += '<hr>\n';
+        i++; continue;
+      }
+
+      // Blockquote
+      if (line.startsWith('> ') || line === '>') {
+        closeList();
+        const content = line.replace(/^>\s?/, '');
+        if (!inBlockquote) { html += '<blockquote>\n'; inBlockquote = true; }
+        html += `<p>${inlineFormat(content)}</p>\n`;
+        i++; continue;
+      } else {
+        closeBlockquote();
+      }
+
+      // Unordered list
+      const ulMatch = line.match(/^(\s*)[*\-+]\s+(.+)$/);
+      if (ulMatch) {
+        closeOl();
+        if (!inUl) { html += '<ul>\n'; inUl = true; }
+        html += `<li>${inlineFormat(ulMatch[2])}</li>\n`;
+        i++; continue;
+      }
+
+      // Ordered list
+      const olMatch = line.match(/^(\s*)\d+\.\s+(.+)$/);
+      if (olMatch) {
+        closeUl();
+        if (!inOl) { html += '<ol>\n'; inOl = true; }
+        html += `<li>${inlineFormat(olMatch[2])}</li>\n`;
+        i++; continue;
+      }
+
+      // Empty line
+      if (line.trim() === '') {
+        closeList(); closeBlockquote();
+        i++; continue;
+      }
+
+      // Paragraph
+      closeList(); closeBlockquote();
+      let para = line;
+      while (i + 1 < lines.length && lines[i+1].trim() !== '' && !lines[i+1].match(/^#{1,6}\s/) && !lines[i+1].startsWith('>') && !lines[i+1].match(/^(\s*)[*\-+]\s/) && !lines[i+1].match(/^(\s*)\d+\.\s/) && !lines[i+1].trim().startsWith('```') && !/^[-*_]{3,}$/.test(lines[i+1].trim())) {
+        i++;
+        para += ' ' + lines[i];
+      }
+      html += `<p>${inlineFormat(para)}</p>\n`;
+      i++;
+    }
+    closeList(); closeBlockquote();
+
+    function closeUl() { if (inUl) { html += '</ul>\n'; inUl = false; } }
+    function closeOl() { if (inOl) { html += '</ol>\n'; inOl = false; } }
+
+    return html;
+  }
+
+  // ─── Render ────────────────────────────────────────────────────────────────
+  const content = DATA.opening || '';
+  // Use full markdown if available
+  const rawMd = DATA.markdown || DATA.opening || '';
+
+  const rendered = parseMarkdown(rawMd);
+  const container = document.getElementById('renderedContent');
+  container.innerHTML = rendered;
+
+  // ─── Meta bar ─────────────────────────────────────────────────────────────
+  const article = document.getElementById('articleContent');
+  const metaBar = document.createElement('div');
+  metaBar.className = 'meta-bar';
+  const wc = DATA.wordCount ? `<span class="meta-pill">${DATA.wordCount} words</span>` : '';
+  const lc = DATA.lineCount ? `<span class="meta-pill">${DATA.lineCount} lines</span>` : '';
+  const hc = DATA.headingCount ? `<span class="meta-pill">${DATA.headingCount} sections</span>` : '';
+  const readTime = DATA.wordCount ? `<span class="meta-pill">~${Math.ceil(DATA.wordCount/200)} min read</span>` : '';
+  metaBar.innerHTML = wc + lc + hc + readTime;
+
+  // Copy button in header
+  const h1 = container.querySelector('h1');
+  if (h1) {
+    const headerRow = document.createElement('div');
+    headerRow.className = 'article-header-row';
+    h1.parentNode.insertBefore(headerRow, h1);
+    headerRow.appendChild(h1);
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'copy-btn';
+    copyBtn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy text`;
+    copyBtn.addEventListener('click', function() {
+      const text = container.innerText || container.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.textContent = '✓ Copied!';
+        copyBtn.classList.add('copied');
+        setTimeout(() => {
+          copyBtn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy text`;
+          copyBtn.classList.remove('copied');
+        }, 2000);
       });
     });
+    headerRow.appendChild(copyBtn);
+    container.insertBefore(metaBar, h1.parentNode.nextSibling || container.firstChild.nextSibling);
   }
-  // Scroll-to-top
-  var btn = document.querySelector('.ha-scrolltop');
-  if (btn) {
-    btn.addEventListener('click', function () {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // ─── TOC ──────────────────────────────────────────────────────────────────
+  const headings = container.querySelectorAll('h1, h2, h3, h4, h5, h6');
+  const tocDesktop = document.getElementById('tocListDesktop');
+  const tocMobile = document.getElementById('tocListMobile');
+
+  headings.forEach(h => {
+    if (!h.id) {
+      h.id = h.textContent.toLowerCase().replace(/[^\w\s-]/g,'').replace(/\s+/g,'-');
+    }
+    const li = document.createElement('li');
+    li.className = `toc-${h.tagName.toLowerCase()}`;
+    const a = document.createElement('a');
+    a.href = `#${h.id}`;
+    a.textContent = h.textContent;
+    a.dataset.target = h.id;
+    li.appendChild(a);
+    tocDesktop.appendChild(li.cloneNode(true));
+    tocMobile.appendChild(li);
+  });
+
+  // TOC active on scroll
+  const tocLinks = document.querySelectorAll('.toc-list a');
+  let observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tocLinks.forEach(a => a.classList.remove('active'));
+        const id = entry.target.id;
+        tocLinks.forEach(a => { if (a.dataset.target === id) a.classList.add('active'); });
+      }
     });
-    window.addEventListener('scroll', function () {
-      btn.classList.toggle('ha-scrolltop--shown', window.scrollY > 500);
+  }, { rootMargin: '-10% 0px -80% 0px' });
+  headings.forEach(h => observer.observe(h));
+
+  // Mobile TOC toggle
+  document.getElementById('tocToggle').addEventListener('click', function() {
+    const panel = document.getElementById('tocMobilePanel');
+    const open = panel.classList.toggle('open');
+    this.setAttribute('aria-expanded', open);
+  });
+
+  // Smooth scroll for TOC links
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      const id = this.dataset.target;
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Close mobile TOC
+      document.getElementById('tocMobilePanel').classList.remove('open');
     });
+  });
+
+  // ─── Search ───────────────────────────────────────────────────────────────
+  const searchInput = document.getElementById('searchInput');
+  const searchCount = document.getElementById('searchCount');
+  const noResults = document.getElementById('noResults');
+  let originalHTML = container.innerHTML;
+
+  // Keyboard shortcut
+  document.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'f') {
+      e.preventDefault();
+      searchInput.focus();
+      searchInput.select();
+    }
+    if (e.key === 'Escape') {
+      searchInput.value = '';
+      doSearch('');
+      searchInput.blur();
+    }
+  });
+
+  function escapeRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+  function doSearch(query) {
+    // Restore original
+    container.innerHTML = originalHTML;
+    if (!query.trim()) {
+      searchCount.textContent = '';
+      noResults.style.display = 'none';
+      container.style.display = '';
+      return;
+    }
+    const re = new RegExp(escapeRe(query), 'gi');
+    let count = 0;
+    function walkAndHighlight(node) {
+      if (node.nodeType === 3) {
+        const text = node.textContent;
+        if (re.test(text)) {
+          re.lastIndex = 0;
+          const frag = document.createDocumentFragment();
+          let last = 0, m;
+          re.lastIndex = 0;
+          while ((m = re.exec(text)) !== null) {
+            frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+            const mark = document.createElement('mark');
+            mark.textContent = m[0];
+            frag.appendChild(mark);
+            last = m.index + m[0].length;
+            count++;
+          }
+          frag.appendChild(document.createTextNode(text.slice(last)));
+          node.parentNode.replaceChild(frag, node);
+        }
+      } else if (node.nodeType === 1 && node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
+        Array.from(node.childNodes).forEach(walkAndHighlight);
+      }
+    }
+    walkAndHighlight(container);
+    if (count === 0) {
+      noResults.style.display = 'block';
+      container.style.display = 'none';
+      searchCount.textContent = '0 found';
+    } else {
+      noResults.style.display = 'none';
+      container.style.display = '';
+      searchCount.textContent = `${count} match${count !== 1 ? 'es' : ''}`;
+      // Scroll to first match
+      const first = container.querySelector('mark');
+      if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
+
+  let searchTimer;
+  searchInput.addEventListener('input', function() {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => doSearch(this.value), 120);
+  });
+
+  // ─── Read Progress ─────────────────────────────────────────────────────────
+  const progressBar = document.getElementById('readProgress');
+  const scrollTopBtn = document.getElementById('scrollTop');
+
+  window.addEventListener('scroll', function() {
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docH > 0 ? (window.scrollY / docH) * 100 : 0;
+    progressBar.style.width = pct + '%';
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  scrollTopBtn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ─── Footer ───────────────────────────────────────────────────────────────
+  const footer = document.getElementById('siteFooter');
+  footer.textContent = DATA.sourceFile ? `Source: ${DATA.sourceFile}` : '';
+
 })();
 </script>
-
 </body>
 </html>

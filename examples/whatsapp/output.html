@@ -1,275 +1,841 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="light dark">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Alex &amp; Mira</title>
-<style>/* Base styles for every html-anything output. Opinionated: one good design,
-   no themes. Light by default; respects prefers-color-scheme. */
-
-:root {
-  --ha-bg: #faf8f5;
-  --ha-fg: #1f1c19;
-  --ha-fg-muted: #6b665e;
-  --ha-surface: #ffffff;
-  --ha-border: #e9e4dc;
-  --ha-accent: #c0552a;
-  --ha-accent-soft: #fdeee5;
-  --ha-radius: 14px;
-  --ha-shadow: 0 1px 2px rgba(30, 27, 25, 0.04), 0 8px 24px rgba(30, 27, 25, 0.06);
-  --ha-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  --ha-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-  --ha-serif: "Iowan Old Style", "Apple Garamond", Baskerville, "Times New Roman", serif;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --ha-bg: #14110e;
-    --ha-fg: #f1ece5;
-    --ha-fg-muted: #9d958a;
-    --ha-surface: #1f1c19;
-    --ha-border: #2e2925;
-    --ha-accent: #ee8a5b;
-    --ha-accent-soft: #2c1d14;
-    --ha-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.4);
-  }
-}
-
-*, *::before, *::after { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
-body {
-  font-family: var(--ha-sans);
-  font-size: 15.5px;
-  line-height: 1.55;
-  color: var(--ha-fg);
-  background: var(--ha-bg);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-a { color: var(--ha-accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-.ha-bar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: color-mix(in srgb, var(--ha-bg) 78%, transparent);
-  backdrop-filter: saturate(140%) blur(12px);
-  border-bottom: 1px solid var(--ha-border);
-}
-.ha-bar__inner {
-  max-width: 920px;
-  margin: 0 auto;
-  padding: 14px 20px;
-  display: flex;
-  gap: 16px;
-  align-items: center;
-}
-.ha-bar__brand { flex: 1; min-width: 0; }
-.ha-bar__eyebrow {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ha-fg-muted);
-}
-.ha-bar__title {
-  margin: 0;
-  font-size: 17px;
-  font-weight: 700;
-  line-height: 1.2;
-  font-family: var(--ha-serif);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.ha-bar__search {
-  width: 220px;
-  max-width: 40vw;
-  padding: 9px 14px;
-  border: 1px solid var(--ha-border);
-  border-radius: 999px;
-  background: var(--ha-surface);
-  color: var(--ha-fg);
-  font: inherit;
-  outline: none;
-}
-.ha-bar__search:focus {
-  border-color: var(--ha-accent);
-  box-shadow: 0 0 0 3px var(--ha-accent-soft);
-}
-
-.ha-main {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 32px 20px 80px;
-}
-.ha-main h1, .ha-main h2, .ha-main h3 {
-  font-family: var(--ha-serif);
-  line-height: 1.25;
-  margin: 1.6em 0 0.5em;
-}
-.ha-main h1 { font-size: 32px; }
-.ha-main h2 { font-size: 22px; }
-.ha-main h3 { font-size: 18px; }
-.ha-main p { margin: 1em 0; }
-.ha-main code {
-  font-family: var(--ha-mono);
-  font-size: 0.92em;
-  background: var(--ha-surface);
-  border: 1px solid var(--ha-border);
-  border-radius: 6px;
-  padding: 1px 6px;
-}
-.ha-main pre {
-  font-family: var(--ha-mono);
-  font-size: 13.5px;
-  background: var(--ha-surface);
-  border: 1px solid var(--ha-border);
-  border-radius: var(--ha-radius);
-  padding: 16px 18px;
-  overflow-x: auto;
-}
-.ha-main pre code { background: none; border: none; padding: 0; }
-.ha-main blockquote {
-  border-left: 3px solid var(--ha-accent);
-  margin: 1em 0;
-  padding: 4px 16px;
-  color: var(--ha-fg-muted);
-}
-.ha-main hr {
-  border: 0;
-  border-top: 1px solid var(--ha-border);
-  margin: 2em 0;
-}
-.ha-main img { max-width: 100%; height: auto; border-radius: 8px; }
-.ha-main table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1em 0;
-  font-size: 14px;
-}
-.ha-main th, .ha-main td {
-  text-align: left;
-  padding: 8px 12px;
-  border-bottom: 1px solid var(--ha-border);
-}
-.ha-main th { font-weight: 700; color: var(--ha-fg-muted); }
-
-.ha-hidden { display: none !important; }
-
-.ha-footer {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 24px 20px 60px;
-  font-size: 12px;
-  color: var(--ha-fg-muted);
-  text-align: center;
-}
-
-.ha-scrolltop {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--ha-border);
-  border-radius: 999px;
-  background: var(--ha-surface);
-  color: var(--ha-fg);
-  font-size: 18px;
-  cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
-  box-shadow: var(--ha-shadow);
-}
-.ha-scrolltop--shown {
-  opacity: 1;
-  pointer-events: auto;
-}
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-.wa-stub h2 { margin-top: 0; }
-.wa-stub__note { color: var(--ha-fg-muted); font-size: 14px; }
-.wa-stub__sample { margin-top: 24px; }
-.wa-stub__sample summary { cursor: pointer; color: var(--ha-accent); font-weight: 600; }
-.wa-stub__sample ul { padding-left: 0; list-style: none; margin-top: 12px; }
-.wa-stub__sample li { padding: 6px 0; border-bottom: 1px solid var(--ha-border); font-size: 14px; }
-.wa-stub__ts { font-family: var(--ha-mono); color: var(--ha-fg-muted); font-size: 12px; margin-right: 8px; }
+  :root {
+    --bg: #f0f2f5;
+    --surface: #ffffff;
+    --header-bg: #075e54;
+    --header-text: #ffffff;
+    --bubble-alex: #ffffff;
+    --bubble-mira: #dcf8c6;
+    --bubble-alex-text: #111;
+    --bubble-mira-text: #111;
+    --time-color: #888;
+    --date-pill-bg: #e1e1e1;
+    --date-pill-text: #555;
+    --border: #e4e4e4;
+    --search-bg: #ffffff;
+    --search-border: #ccc;
+    --input-focus: #075e54;
+    --highlight: #ffe082;
+    --highlight-current: #ffb300;
+    --meta-bg: #e8f5e9;
+    --meta-text: #2e7d32;
+    --shadow: 0 1px 2px rgba(0,0,0,0.12);
+    --radius: 8px;
+    --font: 'Inter', system-ui, -apple-system, sans-serif;
+    --media-icon: #888;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0b141a;
+      --surface: #1f2c34;
+      --header-bg: #1f2c34;
+      --header-text: #e9edef;
+      --bubble-alex: #202c33;
+      --bubble-mira: #005c4b;
+      --bubble-alex-text: #e9edef;
+      --bubble-mira-text: #e9edef;
+      --time-color: #8696a0;
+      --date-pill-bg: #182229;
+      --date-pill-text: #8696a0;
+      --border: #2a3942;
+      --search-bg: #2a3942;
+      --search-border: #3b4a54;
+      --input-focus: #00a884;
+      --highlight: #7b5c00;
+      --highlight-current: #e6a817;
+      --meta-bg: #0d2b22;
+      --meta-text: #4caf50;
+      --shadow: 0 1px 2px rgba(0,0,0,0.4);
+      --media-icon: #8696a0;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--bubble-alex-text);
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .app {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--bg);
+    position: relative;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--header-bg);
+    color: var(--header-text);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .avatar-pair {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+    border: 2px solid var(--header-bg);
+    flex-shrink: 0;
+  }
+
+  .avatar-alex { background: #128c7e; }
+  .avatar-mira { background: #25d366; margin-left: -10px; }
+
+  .header-info { flex: 1; min-width: 0; }
+  .header-title { font-size: 16px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .header-sub { font-size: 12px; opacity: 0.75; margin-top: 1px; }
+
+  .header-actions { display: flex; gap: 8px; align-items: center; }
+
+  .btn-icon {
+    background: none;
+    border: none;
+    color: var(--header-text);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.85;
+    transition: background 0.15s, opacity 0.15s;
+  }
+  .btn-icon:hover { background: rgba(255,255,255,0.15); opacity: 1; }
+  .btn-icon svg { width: 20px; height: 20px; fill: currentColor; }
+
+  /* SEARCH BAR */
+  .search-bar {
+    background: var(--header-bg);
+    padding: 0 16px 10px;
+    display: none;
+    flex-shrink: 0;
+  }
+  .search-bar.visible { display: block; }
+
+  .search-inner {
+    display: flex;
+    align-items: center;
+    background: var(--search-bg);
+    border-radius: 20px;
+    padding: 6px 12px;
+    gap: 8px;
+    border: 1px solid var(--search-border);
+  }
+
+  .search-inner svg { width: 16px; height: 16px; fill: var(--time-color); flex-shrink: 0; }
+
+  #searchInput {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    color: var(--bubble-alex-text);
+    font-family: var(--font);
+  }
+  #searchInput::placeholder { color: var(--time-color); }
+
+  .search-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .search-count { font-size: 12px; color: var(--time-color); white-space: nowrap; }
+  .btn-nav {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px 4px;
+    color: var(--time-color);
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    transition: background 0.15s;
+  }
+  .btn-nav:hover { background: var(--border); }
+  .btn-nav:disabled { opacity: 0.3; cursor: default; }
+  .btn-nav svg { width: 16px; height: 16px; fill: currentColor; }
+
+  .btn-clear {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--time-color);
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    transition: background 0.15s;
+  }
+  .btn-clear:hover { background: var(--border); }
+  .btn-clear svg { width: 14px; height: 14px; fill: currentColor; }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--meta-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 16px;
+    display: none;
+    gap: 16px;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+  .stats-bar.visible { display: flex; }
+  .stat-item { display: flex; flex-direction: column; align-items: center; }
+  .stat-num { font-size: 15px; font-weight: 600; color: var(--meta-text); }
+  .stat-label { font-size: 11px; color: var(--time-color); margin-top: 1px; }
+
+  /* MESSAGES AREA */
+  .messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 8px 16px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .messages::-webkit-scrollbar { width: 4px; }
+  .messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* DATE DIVIDER */
+  .date-divider {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0 8px;
+  }
+  .date-pill {
+    background: var(--date-pill-bg);
+    color: var(--date-pill-text);
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  /* BUBBLE ROWS */
+  .msg-row {
+    display: flex;
+    margin: 2px 0;
+    padding: 0 4px;
+  }
+  .msg-row.alex { justify-content: flex-start; }
+  .msg-row.mira { justify-content: flex-end; }
+
+  .msg-row.first-in-group { margin-top: 6px; }
+
+  .bubble {
+    max-width: min(75%, 480px);
+    padding: 6px 10px 4px 10px;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: var(--shadow);
+    word-break: break-word;
+    white-space: pre-wrap;
+  }
+
+  .msg-row.alex .bubble {
+    background: var(--bubble-alex);
+    color: var(--bubble-alex-text);
+    border-top-left-radius: 2px;
+  }
+  .msg-row.mira .bubble {
+    background: var(--bubble-mira);
+    color: var(--bubble-mira-text);
+    border-top-right-radius: 2px;
+  }
+
+  /* Tail */
+  .msg-row.first-in-group.alex .bubble::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -7px;
+    border-width: 0 0 8px 8px;
+    border-style: solid;
+    border-color: transparent transparent transparent var(--bubble-alex);
+    filter: drop-shadow(-1px 1px 1px rgba(0,0,0,0.08));
+  }
+  .msg-row.first-in-group.mira .bubble::before {
+    content: '';
+    position: absolute;
+    top: 0; right: -7px;
+    border-width: 0 8px 8px 0;
+    border-style: solid;
+    border-color: transparent var(--bubble-mira) transparent transparent;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.08));
+  }
+
+  .bubble-text {
+    font-size: 14.5px;
+    line-height: 1.45;
+  }
+
+  .bubble-meta {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4px;
+    margin-top: 2px;
+  }
+
+  .bubble-time {
+    font-size: 11px;
+    color: var(--time-color);
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .sender-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #128c7e;
+    margin-bottom: 2px;
+    display: none;
+  }
+
+  .media-placeholder {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--media-icon);
+    font-size: 13px;
+    font-style: italic;
+    padding: 4px 0;
+  }
+  .media-placeholder svg { width: 20px; height: 20px; fill: var(--media-icon); flex-shrink: 0; }
+
+  /* Highlight */
+  mark {
+    background: var(--highlight);
+    color: inherit;
+    border-radius: 2px;
+    padding: 0 1px;
+  }
+  mark.current {
+    background: var(--highlight-current);
+  }
+
+  /* COPY button on hover */
+  .bubble-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .msg-row.alex .bubble-wrap { align-items: flex-start; }
+  .msg-row.mira .bubble-wrap { align-items: flex-end; }
+
+  .copy-btn {
+    display: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-family: var(--font);
+    cursor: pointer;
+    color: var(--time-color);
+    margin-top: 2px;
+    transition: background 0.1s;
+    white-space: nowrap;
+  }
+  .copy-btn:hover { background: var(--border); }
+  .bubble:hover + .copy-btn,
+  .copy-btn:focus,
+  .copy-btn:active { display: block; }
+
+  @media (hover: hover) {
+    .msg-row:hover .copy-btn { display: block; }
+  }
+
+  /* EMPTY SEARCH */
+  .no-results {
+    text-align: center;
+    padding: 32px 16px;
+    color: var(--time-color);
+    font-size: 14px;
+    display: none;
+  }
+
+  /* SCROLL TO BOTTOM */
+  .scroll-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--time-color);
+    transition: opacity 0.2s;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 50;
+  }
+  .scroll-btn.visible { opacity: 1; pointer-events: all; }
+  .scroll-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+  @media (min-width: 600px) {
+    .messages { padding: 16px 24px 20px; }
+    .bubble { max-width: 65%; }
+    .header { padding: 12px 20px; }
+    .search-bar { padding: 0 20px 12px; }
+  }
 </style>
 </head>
 <body>
-<header class="ha-bar">
-  <div class="ha-bar__inner">
-    <div class="ha-bar__brand">
-      <div class="ha-bar__eyebrow">WhatsApp · 83 messages · 2 senders</div>
-      <h1 class="ha-bar__title">Alex &amp; Mira</h1>
+<script>const DATA = {"messages":[{"ts":"2026-01-04 09:12:07","date":"2026-01-04","time":"09:12:07","sender":"Alex Chen","text":"hey are we still on for sat","isMedia":false},{"ts":"2026-01-04 09:14:22","date":"2026-01-04","time":"09:14:22","sender":"Mira Park","text":"yes! 11ish at the usual?","isMedia":false},{"ts":"2026-01-04 09:14:51","date":"2026-01-04","time":"09:14:51","sender":"Alex Chen","text":"perfect","isMedia":false},{"ts":"2026-01-04 09:15:04","date":"2026-01-04","time":"09:15:04","sender":"Alex Chen","text":"bringing the books from last time","isMedia":false},{"ts":"2026-01-04 09:15:38","date":"2026-01-04","time":"09:15:38","sender":"Mira Park","text":"omg yes please","isMedia":false},{"ts":"2026-01-04 09:16:02","date":"2026-01-04","time":"09:16:02","sender":"Mira Park","text":"did you finish the murakami","isMedia":false},{"ts":"2026-01-04 09:18:11","date":"2026-01-04","time":"09:18:11","sender":"Alex Chen","text":"half. it's good but it's slow","isMedia":false},{"ts":"2026-01-04 09:18:34","date":"2026-01-04","time":"09:18:34","sender":"Alex Chen","text":"like, intentionally slow","isMedia":false},{"ts":"2026-01-04 09:19:00","date":"2026-01-04","time":"09:19:00","sender":"Mira Park","text":"thats the point i think","isMedia":false},{"ts":"2026-01-04 09:19:42","date":"2026-01-04","time":"09:19:42","sender":"Mira Park","text":"let me know when you finish, want to talk about it","isMedia":false},{"ts":"2026-01-06 14:22:18","date":"2026-01-06","time":"14:22:18","sender":"Alex Chen","text":"random q — do you know any good ramen places near pioneer square","isMedia":false},{"ts":"2026-01-06 14:25:03","date":"2026-01-06","time":"14:25:03","sender":"Mira Park","text":"kizuki on 1st? open late too","isMedia":false},{"ts":"2026-01-06 14:25:30","date":"2026-01-06","time":"14:25:30","sender":"Alex Chen","text":"oh nice. how busy is it usually","isMedia":false},{"ts":"2026-01-06 14:26:11","date":"2026-01-06","time":"14:26:11","sender":"Mira Park","text":"7pm = full. 9pm = walk in","isMedia":false},{"ts":"2026-01-06 14:26:33","date":"2026-01-06","time":"14:26:33","sender":"Alex Chen","text":"noted, thx","isMedia":false},{"ts":"2026-01-08 19:44:52","date":"2026-01-08","time":"19:44:52","sender":"Mira Park","text":"ok finished murakami","isMedia":false},{"ts":"2026-01-08 19:45:09","date":"2026-01-08","time":"19:45:09","sender":"Mira Park","text":"need to debrief","isMedia":false},{"ts":"2026-01-08 19:46:21","date":"2026-01-08","time":"19:46:21","sender":"Alex Chen","text":"hahah ok","isMedia":false},{"ts":"2026-01-08 19:46:48","date":"2026-01-08","time":"19:46:48","sender":"Alex Chen","text":"i'm at the part where the cat shows up","isMedia":false},{"ts":"2026-01-08 19:47:12","date":"2026-01-08","time":"19:47:12","sender":"Mira Park","text":"oh you're early then","isMedia":false},{"ts":"2026-01-08 19:47:28","date":"2026-01-08","time":"19:47:28","sender":"Mira Park","text":"just keep going. trust the cat.","isMedia":false},{"ts":"2026-01-09 10:01:33","date":"2026-01-09","time":"10:01:33","sender":"Alex Chen","text":"lunch wed?","isMedia":false},{"ts":"2026-01-09 10:03:04","date":"2026-01-09","time":"10:03:04","sender":"Mira Park","text":"can't wed, dentist","isMedia":false},{"ts":"2026-01-09 10:03:21","date":"2026-01-09","time":"10:03:21","sender":"Mira Park","text":"thursday tho","isMedia":false},{"ts":"2026-01-09 10:03:55","date":"2026-01-09","time":"10:03:55","sender":"Alex Chen","text":"thursday works. that new place on cherry?","isMedia":false},{"ts":"2026-01-09 10:04:18","date":"2026-01-09","time":"10:04:18","sender":"Mira Park","text":"yes please","isMedia":false},{"ts":"2026-01-09 10:04:41","date":"2026-01-09","time":"10:04:41","sender":"Alex Chen","text":"12:30","isMedia":false},{"ts":"2026-01-09 10:04:55","date":"2026-01-09","time":"10:04:55","sender":"Mira Park","text":"👍","isMedia":false},{"ts":"2026-01-12 12:35:18","date":"2026-01-12","time":"12:35:18","sender":"Mira Park","text":"i'm here","isMedia":false},{"ts":"2026-01-12 12:35:42","date":"2026-01-12","time":"12:35:42","sender":"Mira Park","text":"outside, the patio looks open","isMedia":false},{"ts":"2026-01-12 12:36:08","date":"2026-01-12","time":"12:36:08","sender":"Alex Chen","text":"5 min!","isMedia":false},{"ts":"2026-01-12 12:42:11","date":"2026-01-12","time":"12:42:11","sender":"Alex Chen","text":"walking up","isMedia":false},{"ts":"2026-01-13 08:14:02","date":"2026-01-13","time":"08:14:02","sender":"Alex Chen","text":"that lunch was excellent","isMedia":false},{"ts":"2026-01-13 08:14:33","date":"2026-01-13","time":"08:14:33","sender":"Mira Park","text":"agreed. the squash thing???","isMedia":false},{"ts":"2026-01-13 08:14:51","date":"2026-01-13","time":"08:14:51","sender":"Alex Chen","text":"i'm thinking about it still","isMedia":false},{"ts":"2026-01-15 21:03:44","date":"2026-01-15","time":"21:03:44","sender":"Mira Park","text":"ok finished the rewrite of the proposal","isMedia":false},{"ts":"2026-01-15 21:04:18","date":"2026-01-15","time":"21:04:18","sender":"Mira Park","text":"would you read it before i send tomorrow","isMedia":false},{"ts":"2026-01-15 21:04:42","date":"2026-01-15","time":"21:04:42","sender":"Alex Chen","text":"yes! send it","isMedia":false},{"ts":"2026-01-15 21:05:55","date":"2026-01-15","time":"21:05:55","sender":"Mira Park","text":"<Media omitted>","isMedia":true},{"ts":"2026-01-15 21:06:32","date":"2026-01-15","time":"21:06:32","sender":"Alex Chen","text":"opening","isMedia":false},{"ts":"2026-01-15 21:18:11","date":"2026-01-15","time":"21:18:11","sender":"Alex Chen","text":"ok read it. one structural thing — section 3 should come before section 2. otherwise great.","isMedia":false},{"ts":"2026-01-15 21:19:04","date":"2026-01-15","time":"21:19:04","sender":"Mira Park","text":"hmm i can see that","isMedia":false},{"ts":"2026-01-15 21:19:32","date":"2026-01-15","time":"21:19:32","sender":"Mira Park","text":"also the pricing table is too long","isMedia":false},{"ts":"2026-01-15 21:20:00","date":"2026-01-15","time":"21:20:00","sender":"Alex Chen","text":"yeah cut to 3 tiers","isMedia":false},{"ts":"2026-01-15 21:20:18","date":"2026-01-15","time":"21:20:18","sender":"Mira Park","text":"ok","isMedia":false},{"ts":"2026-01-15 21:20:41","date":"2026-01-15","time":"21:20:41","sender":"Mira Park","text":"thank you, will fix and send tomorrow","isMedia":false},{"ts":"2026-01-18 11:22:08","date":"2026-01-18","time":"11:22:08","sender":"Alex Chen","text":"brunch saturday?","isMedia":false},{"ts":"2026-01-18 11:24:33","date":"2026-01-18","time":"11:24:33","sender":"Mira Park","text":"with the group?","isMedia":false},{"ts":"2026-01-18 11:24:51","date":"2026-01-18","time":"11:24:51","sender":"Alex Chen","text":"yeah. j and r are in town","isMedia":false},{"ts":"2026-01-18 11:25:14","date":"2026-01-18","time":"11:25:14","sender":"Mira Park","text":"oh nice. yes — where","isMedia":false},{"ts":"2026-01-18 11:25:42","date":"2026-01-18","time":"11:25:42","sender":"Alex Chen","text":"thinking the place by greenlake","isMedia":false},{"ts":"2026-01-18 11:26:11","date":"2026-01-18","time":"11:26:11","sender":"Mira Park","text":"that's perfect, walkable for me","isMedia":false},{"ts":"2026-01-18 11:26:38","date":"2026-01-18","time":"11:26:38","sender":"Alex Chen","text":"10:30 reservation","isMedia":false},{"ts":"2026-01-18 11:26:55","date":"2026-01-18","time":"11:26:55","sender":"Mira Park","text":"👍👍👍","isMedia":false},{"ts":"2026-01-23 09:48:21","date":"2026-01-23","time":"09:48:21","sender":"Mira Park","text":"brunch was so good","isMedia":false},{"ts":"2026-01-23 09:48:42","date":"2026-01-23","time":"09:48:42","sender":"Mira Park","text":"the eggs at that place","isMedia":false},{"ts":"2026-01-23 09:49:11","date":"2026-01-23","time":"09:49:11","sender":"Alex Chen","text":"i KNOW","isMedia":false},{"ts":"2026-01-23 09:49:38","date":"2026-01-23","time":"09:49:38","sender":"Alex Chen","text":"also j said hi to you twice","isMedia":false},{"ts":"2026-01-23 09:50:02","date":"2026-01-23","time":"09:50:02","sender":"Mira Park","text":"he's such a sweetheart","isMedia":false},{"ts":"2026-01-25 18:31:04","date":"2026-01-25","time":"18:31:04","sender":"Mira Park","text":"would you watch a movie with me thursday","isMedia":false},{"ts":"2026-01-25 18:31:27","date":"2026-01-25","time":"18:31:27","sender":"Mira Park","text":"at home, not theater","isMedia":false},{"ts":"2026-01-25 18:32:00","date":"2026-01-25","time":"18:32:00","sender":"Alex Chen","text":"yes. what","isMedia":false},{"ts":"2026-01-25 18:32:23","date":"2026-01-25","time":"18:32:23","sender":"Mira Park","text":"drive my car","isMedia":false},{"ts":"2026-01-25 18:32:48","date":"2026-01-25","time":"18:32:48","sender":"Alex Chen","text":"i've never seen it actually","isMedia":false},{"ts":"2026-01-25 18:33:11","date":"2026-01-25","time":"18:33:11","sender":"Mira Park","text":"WHAT","isMedia":false},{"ts":"2026-01-25 18:33:31","date":"2026-01-25","time":"18:33:31","sender":"Mira Park","text":"how","isMedia":false},{"ts":"2026-01-25 18:33:49","date":"2026-01-25","time":"18:33:49","sender":"Alex Chen","text":"just never got around to it","isMedia":false},{"ts":"2026-01-25 18:34:08","date":"2026-01-25","time":"18:34:08","sender":"Mira Park","text":"ok thursday. 7. i'm bringing snacks.","isMedia":false},{"ts":"2026-01-25 18:34:30","date":"2026-01-25","time":"18:34:30","sender":"Alex Chen","text":"deal","isMedia":false},{"ts":"2026-01-29 07:11:18","date":"2026-01-29","time":"07:11:18","sender":"Alex Chen","text":"the rest of that book btw — i finished it","isMedia":false},{"ts":"2026-01-29 07:11:42","date":"2026-01-29","time":"07:11:42","sender":"Alex Chen","text":"i don't know how to feel","isMedia":false},{"ts":"2026-01-29 07:12:08","date":"2026-01-29","time":"07:12:08","sender":"Mira Park","text":"😄","isMedia":false},{"ts":"2026-01-29 07:12:33","date":"2026-01-29","time":"07:12:33","sender":"Mira Park","text":"thats the right reaction","isMedia":false},{"ts":"2026-01-29 07:13:01","date":"2026-01-29","time":"07:13:01","sender":"Mira Park","text":"meet for coffee soon and we'll talk about it","isMedia":false},{"ts":"2026-01-29 07:13:24","date":"2026-01-29","time":"07:13:24","sender":"Alex Chen","text":"yes. monday?","isMedia":false},{"ts":"2026-01-29 07:13:48","date":"2026-01-29","time":"07:13:48","sender":"Mira Park","text":"monday works. early — 8?","isMedia":false},{"ts":"2026-01-29 07:14:09","date":"2026-01-29","time":"07:14:09","sender":"Alex Chen","text":"8 it is","isMedia":false},{"ts":"2026-02-02 08:02:11","date":"2026-02-02","time":"08:02:11","sender":"Mira Park","text":"where are u","isMedia":false},{"ts":"2026-02-02 08:02:38","date":"2026-02-02","time":"08:02:38","sender":"Alex Chen","text":"walking up, sorry","isMedia":false},{"ts":"2026-02-02 08:03:00","date":"2026-02-02","time":"08:03:00","sender":"Alex Chen","text":"traffic was nuts","isMedia":false},{"ts":"2026-02-02 08:03:21","date":"2026-02-02","time":"08:03:21","sender":"Mira Park","text":"ok sat at the back","isMedia":false},{"ts":"2026-02-02 08:03:42","date":"2026-02-02","time":"08:03:42","sender":"Mira Park","text":"ordered for u","isMedia":false},{"ts":"2026-02-02 08:04:08","date":"2026-02-02","time":"08:04:08","sender":"Alex Chen","text":"🙏\n","isMedia":false}],"sourceFile":"input.txt","sizeBytes":4711,"messageCount":83,"senderCount":2,"senders":["Alex Chen","Mira Park"],"messagesPerSender":{"Alex Chen":38,"Mira Park":45},"dateRange":"2026-01-04 → 2026-02-02","mediaCount":1};</script>
+<div class="app">
+  <header class="header">
+    <div class="avatar-pair">
+      <div class="avatar avatar-alex">A</div>
+      <div class="avatar avatar-mira">M</div>
     </div>
-    
-  </div>
-</header>
-<main class="ha-main">
+    <div class="header-info">
+      <div class="header-title">Alex &amp; Mira</div>
+      <div class="header-sub" id="headerSub">loading…</div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-icon" id="statsToggle" title="Stats" aria-label="Toggle stats">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-7 14H7v-2h5v2zm5-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+      </button>
+      <button class="btn-icon" id="searchToggle" title="Search" aria-label="Toggle search">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      </button>
+    </div>
+  </header>
 
-<div class="wa-stub">
-  <h2>Parsed.</h2>
-  <p>Found <strong>83</strong> messages from <strong>2</strong> senders, between <strong>2026-01-04</strong> and <strong>2026-02-02</strong>.</p>
-  <p class="wa-stub__note">The full bubble-timeline UI is being built. For now this page confirms the export was recognized. Track progress at <a href="https://github.com/clockless-org/html-anything/issues">github.com/clockless-org/html-anything</a>.</p>
-  <details class="wa-stub__sample">
-    <summary>Show first 20 messages (raw parse)</summary>
-    <ul>
-      <li><span class="wa-stub__ts">2026-01-04 09:12:07</span> <strong>Alex Chen</strong>: hey are we still on for sat</li>
-      <li><span class="wa-stub__ts">2026-01-04 09:14:22</span> <strong>Mira Park</strong>: yes! 11ish at the usual?</li>
-      <li><span class="wa-stub__ts">2026-01-04 09:14:51</span> <strong>Alex Chen</strong>: perfect</li>
-      <li><span class="wa-stub__ts">2026-01-04 09:15:04</span> <strong>Alex Chen</strong>: bringing the books from last time</li>
-      <li><span class="wa-stub__ts">2026-01-04 09:15:38</span> <strong>Mira Park</strong>: omg yes please</li>
-      <li><span class="wa-stub__ts">2026-01-04 09:16:02</span> <strong>Mira Park</strong>: did you finish the murakami</li>
-      <li><span class="wa-stub__ts">2026-01-04 09:18:11</span> <strong>Alex Chen</strong>: half. it&#39;s good but it&#39;s slow</li>
-      <li><span class="wa-stub__ts">2026-01-04 09:18:34</span> <strong>Alex Chen</strong>: like, intentionally slow</li>
-      <li><span class="wa-stub__ts">2026-01-04 09:19:00</span> <strong>Mira Park</strong>: thats the point i think</li>
-      <li><span class="wa-stub__ts">2026-01-04 09:19:42</span> <strong>Mira Park</strong>: let me know when you finish, want to talk about it</li>
-      <li><span class="wa-stub__ts">2026-01-06 14:22:18</span> <strong>Alex Chen</strong>: random q — do you know any good ramen places near pioneer square</li>
-      <li><span class="wa-stub__ts">2026-01-06 14:25:03</span> <strong>Mira Park</strong>: kizuki on 1st? open late too</li>
-      <li><span class="wa-stub__ts">2026-01-06 14:25:30</span> <strong>Alex Chen</strong>: oh nice. how busy is it usually</li>
-      <li><span class="wa-stub__ts">2026-01-06 14:26:11</span> <strong>Mira Park</strong>: 7pm = full. 9pm = walk in</li>
-      <li><span class="wa-stub__ts">2026-01-06 14:26:33</span> <strong>Alex Chen</strong>: noted, thx</li>
-      <li><span class="wa-stub__ts">2026-01-08 19:44:52</span> <strong>Mira Park</strong>: ok finished murakami</li>
-      <li><span class="wa-stub__ts">2026-01-08 19:45:09</span> <strong>Mira Park</strong>: need to debrief</li>
-      <li><span class="wa-stub__ts">2026-01-08 19:46:21</span> <strong>Alex Chen</strong>: hahah ok</li>
-      <li><span class="wa-stub__ts">2026-01-08 19:46:48</span> <strong>Alex Chen</strong>: i&#39;m at the part where the cat shows up</li>
-      <li><span class="wa-stub__ts">2026-01-08 19:47:12</span> <strong>Mira Park</strong>: oh you&#39;re early then</li>
-    </ul>
-  </details>
+  <div class="search-bar" id="searchBar">
+    <div class="search-inner">
+      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 7.01 5 9.5 5 14 7.01 14 9.5 14z"/></svg>
+      <input type="search" id="searchInput" placeholder="Search messages…" autocomplete="off" autocorrect="off" spellcheck="false">
+      <div class="search-nav">
+        <span class="search-count" id="searchCount"></span>
+        <button class="btn-nav" id="prevMatch" title="Previous" disabled>
+          <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/></svg>
+        </button>
+        <button class="btn-nav" id="nextMatch" title="Next" disabled>
+          <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+        </button>
+      </div>
+      <button class="btn-clear" id="clearSearch" title="Clear">
+        <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-item">
+      <span class="stat-num" id="statTotal">—</span>
+      <span class="stat-label">messages</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" id="statAlex">—</span>
+      <span class="stat-label">Alex Chen</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" id="statMira">—</span>
+      <span class="stat-label">Mira Park</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" id="statDays">—</span>
+      <span class="stat-label">days active</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" id="statMedia">—</span>
+      <span class="stat-label">media</span>
+    </div>
+  </div>
+
+  <div class="messages" id="messages">
+    <div class="no-results" id="noResults">No messages found</div>
+  </div>
+
+  <button class="scroll-btn" id="scrollBtn" title="Scroll to bottom" aria-label="Scroll to bottom">
+    <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+  </button>
 </div>
-</main>
-<footer class="ha-footer">Generated by <a href="https://github.com/clockless-org/html-anything">html-anything</a> · open in any browser, share anywhere</footer>
-<button class="ha-scrolltop" type="button" aria-label="Scroll to top">↑</button>
+
 <script>
-(function () {
-  // Search: hide elements with [data-searchable] that don't match.
-  var input = document.querySelector('.ha-bar__search');
-  if (input) {
-    input.addEventListener('input', function () {
-      var q = input.value.trim().toLowerCase();
-      document.querySelectorAll('[data-searchable]').forEach(function (el) {
-        var hay = el.getAttribute('data-searchable-text') || el.textContent || '';
-        var hit = !q || hay.toLowerCase().indexOf(q) !== -1;
-        el.classList.toggle('ha-hidden', !hit);
+(function() {
+  const messages = DATA.messages || [];
+  const senders = DATA.senders || [];
+  const stats = {
+    total: DATA.messageCount || 0,
+    perSender: DATA.messagesPerSender || {},
+    dateRange: DATA.dateRange || '',
+    media: DATA.mediaCount || 0
+  };
+
+  const SENDER_A = senders[0] || 'Alex Chen';
+  const SENDER_B = senders[1] || 'Mira Park';
+
+  // ── Populate stats bar ──────────────────────────────────────────
+  document.getElementById('statTotal').textContent = stats.total;
+  document.getElementById('statAlex').textContent = stats.perSender[SENDER_A] || 0;
+  document.getElementById('statMira').textContent = stats.perSender[SENDER_B] || 0;
+  document.getElementById('statMedia').textContent = stats.media;
+
+  // Count unique days
+  const uniqueDays = new Set(messages.map(m => m.date));
+  document.getElementById('statDays').textContent = uniqueDays.size;
+
+  // Header sub
+  if (stats.dateRange) {
+    document.getElementById('headerSub').textContent = stats.dateRange;
+  } else if (messages.length) {
+    const first = messages[0].date;
+    const last = messages[messages.length - 1].date;
+    document.getElementById('headerSub').textContent = first === last ? first : first + ' → ' + last;
+  }
+
+  // ── Format date for divider ────────────────────────────────────
+  function formatDate(dateStr) {
+    if (!dateStr) return '';
+    try {
+      const d = new Date(dateStr + 'T00:00:00');
+      const today = new Date();
+      const yesterday = new Date(today);
+      yesterday.setDate(today.getDate() - 1);
+      const normalize = x => x.toISOString().slice(0,10);
+      if (normalize(d) === normalize(today)) return 'Today';
+      if (normalize(d) === normalize(yesterday)) return 'Yesterday';
+      return d.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', year: d.getFullYear() !== today.getFullYear() ? 'numeric' : undefined });
+    } catch(e) { return dateStr; }
+  }
+
+  function formatTime(timeStr) {
+    if (!timeStr) return '';
+    try {
+      const parts = timeStr.split(':');
+      let h = parseInt(parts[0]), m = parts[1];
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      return h + ':' + m + ' ' + ampm;
+    } catch(e) { return timeStr; }
+  }
+
+  // ── Build DOM ───────────────────────────────────────────────────
+  const container = document.getElementById('messages');
+  const noResults = document.getElementById('noResults');
+  const fragment = document.createDocumentFragment();
+
+  let lastDate = null;
+  let lastSender = null;
+
+  const bubbleEls = []; // { el: bubbleEl, textNode: span, originalText, sender, date }
+
+  messages.forEach((msg, i) => {
+    const isAlex = msg.sender === SENDER_A;
+    const senderClass = isAlex ? 'alex' : 'mira';
+    const isNewDate = msg.date !== lastDate;
+    const isFirstInGroup = msg.sender !== lastSender || isNewDate;
+
+    if (isNewDate) {
+      const divider = document.createElement('div');
+      divider.className = 'date-divider';
+      divider.innerHTML = '<span class="date-pill">' + escapeHtml(formatDate(msg.date)) + '</span>';
+      fragment.appendChild(divider);
+      lastDate = msg.date;
+    }
+
+    const row = document.createElement('div');
+    row.className = 'msg-row ' + senderClass + (isFirstInGroup ? ' first-in-group' : '');
+    row.dataset.index = i;
+
+    const wrap = document.createElement('div');
+    wrap.className = 'bubble-wrap';
+
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+
+    if (msg.isMedia) {
+      const mp = document.createElement('div');
+      mp.className = 'media-placeholder';
+      mp.innerHTML = '<svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-1 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg><span>📎 Media</span>';
+      bubble.appendChild(mp);
+    } else {
+      const textSpan = document.createElement('span');
+      textSpan.className = 'bubble-text';
+      textSpan.textContent = msg.text || '';
+      bubble.appendChild(textSpan);
+
+      bubbleEls.push({
+        el: bubble,
+        textSpan: textSpan,
+        row: row,
+        originalText: msg.text || '',
+        sender: msg.sender,
+        date: msg.date,
+        time: msg.time,
+        index: i
       });
+    }
+
+    const meta = document.createElement('div');
+    meta.className = 'bubble-meta';
+    const timeEl = document.createElement('span');
+    timeEl.className = 'bubble-time';
+    timeEl.textContent = formatTime(msg.time);
+    meta.appendChild(timeEl);
+    bubble.appendChild(meta);
+
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'copy-btn';
+    copyBtn.textContent = 'Copy';
+    copyBtn.addEventListener('click', () => {
+      const textToCopy = msg.text || '';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          copyBtn.textContent = 'Copied!';
+          setTimeout(() => { copyBtn.textContent = 'Copy'; }, 1500);
+        });
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = textToCopy;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => { copyBtn.textContent = 'Copy'; }, 1500);
+      }
     });
+
+    wrap.appendChild(bubble);
+    if (!msg.isMedia) wrap.appendChild(copyBtn);
+    row.appendChild(wrap);
+    fragment.appendChild(row);
+
+    lastSender = msg.sender;
+  });
+
+  container.insertBefore(fragment, noResults);
+
+  // ── Search ──────────────────────────────────────────────────────
+  let matchIndices = []; // indices into bubbleEls
+  let currentMatch = -1;
+
+  const searchInput = document.getElementById('searchInput');
+  const searchCount = document.getElementById('searchCount');
+  const prevBtn = document.getElementById('prevMatch');
+  const nextBtn = document.getElementById('nextMatch');
+  const clearBtn = document.getElementById('clearSearch');
+
+  function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
-  // Scroll-to-top
-  var btn = document.querySelector('.ha-scrolltop');
-  if (btn) {
-    btn.addEventListener('click', function () {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-    window.addEventListener('scroll', function () {
-      btn.classList.toggle('ha-scrolltop--shown', window.scrollY > 500);
-    });
+
+  function escapeRegex(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
+
+  function clearHighlights() {
+    bubbleEls.forEach(b => {
+      b.textSpan.innerHTML = '';
+      b.textSpan.textContent = b.originalText;
+    });
+    matchIndices = [];
+    currentMatch = -1;
+    searchCount.textContent = '';
+    prevBtn.disabled = true;
+    nextBtn.disabled = true;
+    noResults.style.display = 'none';
+  }
+
+  function doSearch(query) {
+    clearHighlights();
+    if (!query.trim()) return;
+
+    const regex = new RegExp('(' + escapeRegex(query.trim()) + ')', 'gi');
+    let count = 0;
+
+    bubbleEls.forEach((b, i) => {
+      const text = b.originalText;
+      if (regex.test(text)) {
+        matchIndices.push(i);
+        regex.lastIndex = 0;
+      }
+      // Highlight
+      const highlighted = text.replace(regex, '<mark>$1</mark>');
+      if (highlighted !== escapeHtml(text)) {
+        b.textSpan.innerHTML = highlighted;
+        count++;
+      } else if (highlighted !== text) {
+        b.textSpan.innerHTML = highlighted;
+      }
+      regex.lastIndex = 0;
+    });
+
+    // Rebuild matchIndices properly
+    matchIndices = [];
+    bubbleEls.forEach((b, i) => {
+      if (b.textSpan.querySelector('mark')) {
+        matchIndices.push(i);
+      }
+    });
+
+    if (matchIndices.length === 0) {
+      noResults.style.display = 'block';
+      searchCount.textContent = '0 results';
+      prevBtn.disabled = true;
+      nextBtn.disabled = true;
+    } else {
+      noResults.style.display = 'none';
+      prevBtn.disabled = false;
+      nextBtn.disabled = false;
+      currentMatch = 0;
+      highlightCurrent();
+    }
+  }
+
+  function highlightCurrent() {
+    // Remove all current marks
+    document.querySelectorAll('mark.current').forEach(m => m.classList.remove('current'));
+
+    if (matchIndices.length === 0) return;
+
+    const bIdx = matchIndices[currentMatch];
+    const b = bubbleEls[bIdx];
+    const marks = b.textSpan.querySelectorAll('mark');
+    if (marks.length > 0) {
+      marks[0].classList.add('current');
+      b.el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+    searchCount.textContent = (currentMatch + 1) + ' / ' + matchIndices.length;
+  }
+
+  searchInput.addEventListener('input', () => {
+    doSearch(searchInput.value);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (matchIndices.length === 0) return;
+    currentMatch = (currentMatch + 1) % matchIndices.length;
+    highlightCurrent();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (matchIndices.length === 0) return;
+    currentMatch = (currentMatch - 1 + matchIndices.length) % matchIndices.length;
+    highlightCurrent();
+  });
+
+  clearBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    clearHighlights();
+  });
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'f') {
+      e.preventDefault();
+      openSearch();
+    }
+    if (e.key === 'Escape') {
+      if (document.getElementById('searchBar').classList.contains('visible')) {
+        closeSearch();
+      }
+    }
+    if (e.key === 'Enter' && document.activeElement === searchInput) {
+      e.preventDefault();
+      if (e.shiftKey) {
+        prevBtn.click();
+      } else {
+        nextBtn.click();
+      }
+    }
+  });
+
+  function openSearch() {
+    document.getElementById('searchBar').classList.add('visible');
+    searchInput.focus();
+    searchInput.select();
+  }
+
+  function closeSearch() {
+    document.getElementById('searchBar').classList.remove('visible');
+    searchInput.value = '';
+    clearHighlights();
+  }
+
+  document.getElementById('searchToggle').addEventListener('click', () => {
+    const bar = document.getElementById('searchBar');
+    if (bar.classList.contains('visible')) {
+      closeSearch();
+    } else {
+      openSearch();
+    }
+  });
+
+  // Stats toggle
+  document.getElementById('statsToggle').addEventListener('click', () => {
+    document.getElementById('statsBar').classList.toggle('visible');
+  });
+
+  // Scroll to bottom button
+  const messagesEl = document.getElementById('messages');
+  const scrollBtn = document.getElementById('scrollBtn');
+
+  messagesEl.addEventListener('scroll', () => {
+    const atBottom = messagesEl.scrollHeight - messagesEl.scrollTop - messagesEl.clientHeight < 80;
+    scrollBtn.classList.toggle('visible', !atBottom);
+  });
+
+  scrollBtn.addEventListener('click', () => {
+    messagesEl.scrollTo({ top: messagesEl.scrollHeight, behavior: 'smooth' });
+  });
+
+  // Scroll to bottom on load
+  requestAnimationFrame(() => {
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  });
+
 })();
 </script>
-
 </body>
 </html>

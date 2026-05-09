@@ -1,7 +1,7 @@
 {
   "name": "html-anything",
-  "version": "0.0.1",
-  "description": "Turn any file into a beautiful, interactive, shareable HTML.",
+  "version": "0.1.0",
+  "description": "Turn any file into the best possible HTML reading experience for that specific content — designed by an LLM, rendered as a single self-contained file.",
   "license": "Apache-2.0",
   "type": "module",
   "bin": {
@@ -11,7 +11,7 @@
     "build": "tsc",
     "dev": "tsx src/cli.ts",
     "test": "node --test",
-    "examples": "tsx src/cli.ts examples/markdown/input.md --no-ai --out examples/markdown/output.html --title 'The Long, Slow, Inevitable Death of the PDF' && tsx src/cli.ts examples/whatsapp/input.txt --no-ai --out examples/whatsapp/output.html --title 'Alex & Mira' && tsx src/cli.ts examples/csv/input.csv --no-ai --out examples/csv/output.html --title 'Coffee Equipment Sales — January 2026'"
+    "examples": "tsx src/cli.ts examples/markdown/input.md --out examples/markdown/output.html --title 'The Long, Slow, Inevitable Death of the PDF' && tsx src/cli.ts examples/whatsapp/input.txt --out examples/whatsapp/output.html --title 'Alex & Mira' && tsx src/cli.ts examples/csv/input.csv --out examples/csv/output.html --title 'Coffee Equipment Sales — January 2026'"
   },
   "files": [
     "dist",
