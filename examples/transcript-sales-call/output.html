@@ -1,0 +1,892 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Northwind × Clockless — Pilot Scoping Call</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #a03b00;
+      --primary-container: #c94c00;
+      --primary-fixed: #ffdbcd;
+      --primary-fixed-dim: #ffb597;
+      --on-primary: #ffffff;
+      --accent-glow: #E8400D;
+      --secondary: #d5baff;
+      --secondary-container: #7b40e0;
+      --tertiary: #4d44e3;
+      --accent-cyan: #00D4FF;
+      --bg: #fff8f6;
+      --surface: #fff8f6;
+      --surface-container-lowest: #ffffff;
+      --surface-container-low: #fbf2ef;
+      --surface-container: #f5ece9;
+      --surface-container-high: #efe6e3;
+      --fg-1: #1e1b19;
+      --fg-2: #594138;
+      --fg-muted: #8d7166;
+      --border: rgba(0, 0, 0, 0.06);
+      --border-strong: rgba(0, 0, 0, 0.12);
+      --outline-variant: #e1bfb2;
+      --green: #10b981;
+      --blue: #3b82f6;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+      --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+      --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+      --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 12px;
+      --space-lg: 16px;
+      --space-xl: 20px;
+      --space-2xl: 24px;
+      --space-3xl: 32px;
+      --space-4xl: 48px;
+      --space-5xl: 64px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      --radius-2xl: 28px;
+      --radius-pill: 9999px;
+      --shadow-sm: 0 1px 2px rgba(30, 27, 25, 0.04);
+      --shadow-md: 0 4px 12px rgba(30, 27, 25, 0.08);
+      --shadow-lg: 0 8px 24px rgba(30, 27, 25, 0.12);
+      --shadow-accent: 0 8px 24px rgba(160, 59, 0, 0.15);
+      --gradient-primary: linear-gradient(135deg, #a03b00 0%, #c94c00 100%);
+      --gradient-hero: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
+      --gradient-text: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #060B18;
+        --surface: #0B1426;
+        --surface-container-lowest: #101D35;
+        --surface-container-low: #101D35;
+        --surface-container: #162544;
+        --surface-container-high: #1c2d52;
+        --fg-1: #F8FAFC;
+        --fg-2: #CBD5E1;
+        --fg-muted: #64748B;
+        --border: rgba(255, 255, 255, 0.08);
+        --border-strong: rgba(255, 255, 255, 0.14);
+        --primary: #FF6B35;
+        --accent-glow: #00D4FF;
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+        --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--fg-1);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    body {
+      padding: var(--space-lg);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: var(--space-md);
+      }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--space-md);
+      color: var(--fg-1);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: var(--space-lg);
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-top: var(--space-3xl);
+      margin-bottom: var(--space-lg);
+    }
+
+    h3 {
+      font-size: 1.125rem;
+    }
+
+    h4 {
+      font-size: 1rem;
+    }
+
+    p {
+      margin-bottom: var(--space-md);
+      color: var(--fg-2);
+    }
+
+    .header {
+      margin-bottom: var(--space-4xl);
+    }
+
+    .header-subtitle {
+      font-size: 1.125rem;
+      color: var(--fg-2);
+      margin-bottom: var(--space-lg);
+      max-width: 90%;
+    }
+
+    .meeting-card {
+      background: var(--surface-container-lowest);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+      margin-bottom: var(--space-3xl);
+      box-shadow: var(--shadow-md);
+    }
+
+    .meeting-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-xl);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meta-label {
+      font-size: 0.875rem;
+      color: var(--fg-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-xs);
+      font-weight: 500;
+    }
+
+    .meta-value {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--primary);
+      font-family: var(--font-mono);
+    }
+
+    .speakers-section {
+      margin-bottom: var(--space-3xl);
+    }
+
+    .speaker-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .speaker-card {
+      background: var(--surface-container);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      border: 1px solid var(--border);
+    }
+
+    .speaker-name {
+      font-weight: 600;
+      color: var(--fg-1);
+      margin-bottom: var(--space-sm);
+      font-family: var(--font-headline);
+    }
+
+    .speaker-stat {
+      font-size: 0.875rem;
+      color: var(--fg-muted);
+      margin-bottom: var(--space-xs);
+    }
+
+    .speaker-bar-container {
+      margin-top: var(--space-md);
+    }
+
+    .speaker-bar {
+      height: 8px;
+      background: var(--surface-container-low);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      margin-bottom: var(--space-sm);
+    }
+
+    .speaker-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--primary-container));
+      transition: width 0.3s ease;
+    }
+
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-xl);
+      margin-bottom: var(--space-3xl);
+    }
+
+    @media (max-width: 640px) {
+      .insight-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .insight-card {
+      background: var(--surface-container);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      border-left: 4px solid var(--primary);
+    }
+
+    .insight-card h3 {
+      margin-bottom: var(--space-md);
+      font-size: 1rem;
+    }
+
+    .insight-empty {
+      color: var(--fg-muted);
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+
+    .decision-item, .question-item, .risk-item {
+      background: var(--surface-container-lowest);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      margin-bottom: var(--space-md);
+      border: 1px solid var(--border);
+    }
+
+    .decision-item {
+      border-left: 3px solid var(--green);
+    }
+
+    .question-item {
+      border-left: 3px solid var(--blue);
+    }
+
+    .risk-item {
+      border-left: 3px solid var(--red);
+    }
+
+    .item-speaker {
+      font-size: 0.8rem;
+      color: var(--fg-muted);
+      margin-bottom: var(--space-xs);
+      font-weight: 500;
+    }
+
+    .item-text {
+      margin-bottom: var(--space-sm);
+      font-size: 0.95rem;
+      color: var(--fg-2);
+    }
+
+    .item-time {
+      font-size: 0.75rem;
+      background: var(--surface-container-high);
+      color: var(--fg-muted);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      cursor: pointer;
+      display: inline-block;
+      transition: all 0.2s ease;
+    }
+
+    .item-time:hover {
+      background: var(--primary-fixed);
+      color: var(--primary);
+    }
+
+    .timeline-section {
+      margin-bottom: var(--space-3xl);
+    }
+
+    .timeline-viz {
+      background: var(--surface-container);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      overflow-x: auto;
+      border: 1px solid var(--border);
+    }
+
+    .timeline-svg {
+      width: 100%;
+      min-height: 200px;
+    }
+
+    .actions-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface-container);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .actions-table thead {
+      background: var(--surface-container-high);
+      border-bottom: 1px solid var(--border-strong);
+    }
+
+    .actions-table th {
+      padding: var(--space-md);
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--fg-1);
+      font-family: var(--font-headline);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .actions-table td {
+      padding: var(--space-md);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    .actions-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .action-owner {
+      font-weight: 600;
+      color: var(--primary);
+      font-family: var(--font-headline);
+    }
+
+    .action-due {
+      color: var(--fg-muted);
+      font-family: var(--font-mono);
+    }
+
+    .action-due.pending {
+      color: var(--fg-muted);
+      font-style: italic;
+    }
+
+    .action-time {
+      font-size: 0.75rem;
+      background: var(--surface-container-lowest);
+      color: var(--fg-muted);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      cursor: pointer;
+    }
+
+    .transcript-section {
+      margin-bottom: var(--space-4xl);
+    }
+
+    .transcript-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      margin-bottom: var(--space-xl);
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 200px;
+      padding: var(--space-md);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      background: var(--surface-container-lowest);
+      color: var(--fg-1);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+    }
+
+    .search-box::placeholder {
+      color: var(--fg-muted);
+    }
+
+    .speaker-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .filter-chip {
+      padding: var(--space-sm) var(--space-md);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-pill);
+      background: var(--surface-container);
+      color: var(--fg-2);
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+
+    .filter-chip:hover {
+      background: var(--surface-container-high);
+      border-color: var(--primary);
+    }
+
+    .filter-chip.active {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    .cue {
+      background: var(--surface-container);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-md);
+      border: 1px solid var(--border);
+      border-left: 3px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .cue:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .cue.hidden {
+      display: none;
+    }
+
+    .cue-speaker {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.95rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    .cue-text {
+      color: var(--fg-2);
+      margin-bottom: var(--space-md);
+      line-height: 1.6;
+      word-break: break-word;
+    }
+
+    .cue-text mark {
+      background: var(--yellow);
+      color: var(--fg-1);
+      padding: 2px 4px;
+      border-radius: 2px;
+      font-weight: 500;
+    }
+
+    .cue-footer {
+      display: flex;
+      gap: var(--space-md);
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .cue-time {
+      font-family: var(--font-mono);
+      background: var(--surface-container-high);
+      color: var(--fg-muted);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .cue-time:hover {
+      background: var(--primary-fixed);
+      color: var(--primary);
+    }
+
+    .copy-btn {
+      background: var(--surface-container-high);
+      border: 1px solid var(--border);
+      color: var(--fg-muted);
+      cursor: pointer;
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      transition: all 0.2s ease;
+      font-family: var(--font-body);
+    }
+
+    .copy-btn:hover {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    .copy-btn.copied {
+      background: var(--green);
+      color: var(--on-primary);
+      border-color: var(--green);
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding-top: var(--space-2xl);
+      margin-top: var(--space-4xl);
+      color: var(--fg-muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .footer p {
+      margin-bottom: var(--space-md);
+    }
+
+    .stat-callout {
+      background: var(--primary-fixed);
+      border-left: 4px solid var(--primary);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-xl);
+      color: var(--fg-1);
+    }
+
+    .talk-chart {
+      margin-top: var(--space-lg);
+    }
+
+    .chart-label {
+      font-size: 0.8rem;
+      color: var(--fg-muted);
+      margin-top: var(--space-sm);
+    }
+
+    button {
+      font-family: var(--font-body);
+      cursor: pointer;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    a:hover {
+      opacity: 0.8;
+    }
+
+    .highlight {
+      background: var(--primary-fixed);
+      color: var(--fg-1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Northwind × Clockless</h1>
+      <p class="header-subtitle">Pilot Scoping Call — Exploratory discussion on deployment optimization and pricing.</p>
+    </div>
+
+    <!-- Meeting Card -->
+    <div class="meeting-card">
+      <div class="meeting-meta">
+        <div class="meta-item">
+          <span class="meta-label">Duration</span>
+          <span class="meta-value" id="duration">5m 39s</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Cues</span>
+          <span class="meta-value" id="cueCount">43</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Speakers</span>
+          <span class="meta-value" id="speakerCount">4</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Cadence</span>
+          <span class="meta-value" id="cadence">7.6 cues/min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Speakers Section -->
+    <div class="speakers-section">
+      <h2>Speakers</h2>
+      <div class="speaker-list" id="speakersList">
+        <!-- Dynamically populated -->
+      </div>
+    </div>
+
+    <!-- Talk-time callout -->
+    <div id="talkTimeCallout" class="stat-callout" style="display: none;"></div>
+
+    <!-- Decisions Section -->
+    <div class="insight-grid">
+      <div class="insight-card">
+        <h3>Decisions</h3>
+        <div id="decisionsList">
+          <p class="insight-empty">Detecting decisions...</p>
+        </div>
+      </div>
+
+      <!-- Action Items Section -->
+      <div class="insight-card">
+        <h3>Action Items</h3>
+        <div id="actionsList">
+          <p class="insight-empty">Detecting action items...</p>
+        </div>
+      </div>
+
+      <!-- Open Questions Section -->
+      <div class="insight-card">
+        <h3>Open Questions</h3>
+        <div id="questionsList">
+          <p class="insight-empty">Analyzing questions...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline Section -->
+    <div class="timeline-section">
+      <h2>Timeline</h2>
+      <div class="timeline-viz">
+        <svg class="timeline-svg" id="timelineSvg"></svg>
+      </div>
+    </div>
+
+    <!-- Transcript Section -->
+    <div class="transcript-section">
+      <h2>Transcript</h2>
+      
+      <div class="transcript-controls">
+        <input 
+          type="text" 
+          class="search-box" 
+          id="searchInput" 
+          placeholder="Search transcript..."
+          autocomplete="off"
+        >
+        <div class="speaker-filter" id="speakerFilterChips">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <div id="transcriptList">
+        <!-- Dynamically populated -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p><strong>Note:</strong> Auto-generated transcripts occasionally swap speakers or miss words. Treat this scorecard as a starting draft and verify key decisions with the recording.</p>
+      <p><em>Generated locally — your transcript never left your machine. The full timecoded conversation is embedded in this HTML and rendered in your browser. For sharing, prefer an anonymized export.</em></p>
+    </div>
+  </div>
+
+  <script>
+    const DATA = {"cues":[{"id":"c_0001","startMs":0,"endMs":4500,"durationMs":4500,"startLabel":"00:00","speaker":"Sam Reyes","text":"All right, looks like we have everyone. Thanks for making time on a Friday."},{"id":"c_0002","startMs":4500,"endMs":9200,"durationMs":4700,"startLabel":"00:04","speaker":"Jordan Nakamura","text":"Of course. Casey just joined too — she runs procurement on our side."},{"id":"c_0003","startMs":9200,"endMs":13800,"durationMs":4600,"startLabel":"00:09","speaker":"Casey Kim","text":"Hi, nice to meet you both. Just here to listen for the commercial parts."},{"id":"c_0004","startMs":13800,"endMs":21600,"durationMs":7800,"startLabel":"00:13","speaker":"Sam Reyes","text":"Perfect. Quick framing — we've got thirty-five minutes booked. I'd like to spend ten on the pain you mentioned in the discovery call, then have Priya walk through how we'd actually solve it, and leave fifteen for pricing and your security questions."},{"id":"c_0005","startMs":21600,"endMs":42100,"durationMs":20500,"startLabel":"00:21","speaker":"Jordan Nakamura","text":"Sounds good. I'll re-state the pain quickly so Priya has it fresh. So today we have about fourteen engineers across two teams shipping into the same monorepo, and our deploy pipeline is taking forty-two minutes end to end. That's the real number. The bigger problem is that when something fails halfway through, we have no idea which step actually broke — we just see a red check on GitHub. People are rebasing and re-running and burning a half day a week each."},{"id":"c_0006","startMs":42100,"endMs":48800,"durationMs":6700,"startLabel":"00:42","speaker":"Priya Shah","text":"Got it. And the forty-two minutes — is that from PR open to production, or from merge to production?"},{"id":"c_0007","startMs":48800,"endMs":54500,"durationMs":5700,"startLabel":"00:48","speaker":"Jordan Nakamura","text":"Merge to production. PR feedback is faster, maybe twelve minutes for tests."},{"id":"c_0008","startMs":54500,"endMs":60300,"durationMs":5800,"startLabel":"00:54","speaker":"Priya Shah","text":"Okay. And what fraction of those red checks are flakes versus real failures, roughly?"},{"id":"c_0009","startMs":60300,"endMs":66700,"durationMs":6400,"startLabel":"01:00","speaker":"Jordan Nakamura","text":"Honestly we don't know. That's part of the problem — we can't tell them apart without re-running."},{"id":"c_0010","startMs":66700,"endMs":94500,"durationMs":27800,"startLabel":"01:06","speaker":"Priya Shah","text":"Right. Let me share my screen — I'll show you what our pipeline view looks like for a similar size team. So this is a customer with sixteen engineers, comparable monorepo. The thing I want to point at first is this column on the right — every step of every run gets a confidence score. So you can see, for this run, the integration tests step is flagged as flake-likely with a ninety-two percent confidence. That's the diff that matters for you."},{"id":"c_0011","startMs":94500,"endMs":100800,"durationMs":6300,"startLabel":"01:34","speaker":"Jordan Nakamura","text":"Wait — how does that score get computed? Is that a model, or rules?"},{"id":"c_0012","startMs":100800,"endMs":113700,"durationMs":12900,"startLabel":"01:40","speaker":"Priya Shah","text":"Both. The first layer is rule-based — looking at exit codes, error patterns, retry-on-rerun behavior. The second layer is a small classifier we train per-customer on your last thirty days of runs. So accuracy ramps up over the first week or two."},{"id":"c_0013","startMs":113700,"endMs":120100,"durationMs":6400,"startLabel":"01:53","speaker":"Jordan Nakamura","text":"Per customer, meaning our data stays in our tenant?"},{"id":"c_0014","startMs":120100,"endMs":128500,"durationMs":8400,"startLabel":"02:00","speaker":"Priya Shah","text":"Correct. We never train cross-tenant. Each customer gets their own classifier. I can send you the architecture diagram after the call."},{"id":"c_0015","startMs":128500,"endMs":134200,"durationMs":5700,"startLabel":"02:08","speaker":"Casey Kim","text":"And on data retention — how long do you keep the build logs themselves?"},{"id":"c_0016","startMs":134200,"endMs":144800,"durationMs":10600,"startLabel":"02:14","speaker":"Priya Shah","text":"Default is ninety days hot, then archived for a year. But it's configurable down to thirty days hot, zero archive. I want to double-check the exact archive numbers and follow up with you — I think there's a tier with seven-day retention but I don't want to misquote."},{"id":"c_0017","startMs":144800,"endMs":149300,"durationMs":4500,"startLabel":"02:24","speaker":"Casey Kim","text":"Please. We'll need that in writing for our InfoSec review."},{"id":"c_0018","startMs":149300,"endMs":156400,"durationMs":7100,"startLabel":"02:29","speaker":"Sam Reyes","text":"Priya will get that to you in the follow-up. Casey, anything else from the security side I should make sure we cover?"},{"id":"c_0019","startMs":156400,"endMs":163700,"durationMs":7300,"startLabel":"02:36","speaker":"Casey Kim","text":"We have a standard questionnaire. I'll send it over after this call — usually takes vendors a week to turn it around."},{"id":"c_0020","startMs":163700,"endMs":168100,"durationMs":4400,"startLabel":"02:43","speaker":"Sam Reyes","text":"That works. We turn ours around in about three business days."},{"id":"c_0021","startMs":168100,"endMs":175900,"durationMs":7800,"startLabel":"02:48","speaker":"Jordan Nakamura","text":"Okay. So pricing — what does this actually cost for a team of fourteen?"},{"id":"c_0022","startMs":175900,"endMs":191200,"durationMs":15300,"startLabel":"02:55","speaker":"Sam Reyes","text":"For your size, the right SKU is the Team plan at thirty-nine per engineer per month, billed annually. So roughly six-five-four-six a month, sixty-six K a year. That includes the per-tenant classifier, ninety-day retention default, and twenty-four-by-five support."},{"id":"c_0023","startMs":191200,"endMs":197800,"durationMs":6600,"startLabel":"03:11","speaker":"Jordan Nakamura","text":"And if we wanted to try it before signing a year, what's the path?"},{"id":"c_0024","startMs":197800,"endMs":211400,"durationMs":13600,"startLabel":"03:17","speaker":"Sam Reyes","text":"That's actually what I wanted to propose. Thirty-day paid pilot, full feature access, prorated to roughly fifty-four hundred. If you commit at the end, that prorate gets credited back against the annual. If you don't, nothing further owed."},{"id":"c_0025","startMs":211400,"endMs":217500,"durationMs":6100,"startLabel":"03:31","speaker":"Jordan Nakamura","text":"I like that shape. Casey, anything that would block this on procurement?"},{"id":"c_0026","startMs":217500,"endMs":226200,"durationMs":8700,"startLabel":"03:37","speaker":"Casey Kim","text":"The pilot dollar amount is under our threshold so it doesn't need legal sign-off, but we still need the security questionnaire back before we wire anything."},{"id":"c_0027","startMs":226200,"endMs":230700,"durationMs":4500,"startLabel":"03:46","speaker":"Jordan Nakamura","text":"Okay. Then assuming security checks out, let's go with the thirty-day pilot."},{"id":"c_0028","startMs":230700,"endMs":234900,"durationMs":4200,"startLabel":"03:50","speaker":"Sam Reyes","text":"Great. I'll send the SOW over by end of day next Friday."},{"id":"c_0029","startMs":234900,"endMs":242300,"durationMs":7400,"startLabel":"03:54","speaker":"Priya Shah","text":"And on my side, I'll have a sandbox provisioned for you by Tuesday so your team can start poking at the dashboards."},{"id":"c_0030","startMs":242300,"endMs":249700,"durationMs":7400,"startLabel":"04:02","speaker":"Jordan Nakamura","text":"Perfect. One thing I should flag — we're also evaluating Lattica. They reached out three weeks ago."},{"id":"c_0031","startMs":249700,"endMs":256000,"durationMs":6300,"startLabel":"04:09","speaker":"Sam Reyes","text":"Appreciate the heads up. Where are you with them?"},{"id":"c_0032","startMs":256000,"endMs":265400,"durationMs":9400,"startLabel":"04:16","speaker":"Jordan Nakamura","text":"They sent us a similar pricing structure but no per-tenant classifier story — it's a shared model. That's actually been the main thing pushing us toward you."},{"id":"c_0033","startMs":265400,"endMs":271200,"durationMs":5800,"startLabel":"04:25","speaker":"Priya Shah","text":"Yeah, that's the architectural fork. Happy to dig into it more if you want a side-by-side."},{"id":"c_0034","startMs":271200,"endMs":278800,"durationMs":7600,"startLabel":"04:31","speaker":"Jordan Nakamura","text":"Maybe in week two. The other thing to flag — we have a board meeting on March fifth, so I'd want a clear read on the pilot results before then."},{"id":"c_0035","startMs":278800,"endMs":287100,"durationMs":8300,"startLabel":"04:38","speaker":"Sam Reyes","text":"Noted. Pilot starts Tuesday, we'll plan a midpoint review around February twenty-fifth so you have data to walk into that board meeting with."},{"id":"c_0036","startMs":287100,"endMs":291500,"durationMs":4400,"startLabel":"04:47","speaker":"Jordan Nakamura","text":"That's exactly what I needed to hear."},{"id":"c_0037","startMs":291500,"endMs":301700,"durationMs":10200,"startLabel":"04:51","speaker":"Priya Shah","text":"One last question for you — what does success look like for the pilot? If we don't define it now, I worry it'll be ambiguous in week four."},{"id":"c_0038","startMs":301700,"endMs":314200,"durationMs":12500,"startLabel":"05:01","speaker":"Jordan Nakamura","text":"Good question. I'd say two things: cut deploy time from forty-two to under twenty-five, and reduce the half-day-per-engineer-per-week we lose to debugging red checks down to under one hour."},{"id":"c_0039","startMs":314200,"endMs":321300,"durationMs":7100,"startLabel":"05:14","speaker":"Priya Shah","text":"Both measurable. I'll write those into the SOW success criteria so we're not negotiating it at week four."},{"id":"c_0040","startMs":321300,"endMs":325700,"durationMs":4400,"startLabel":"05:21","speaker":"Sam Reyes","text":"Anything else for us before we wrap?"},{"id":"c_0041","startMs":325700,"endMs":330100,"durationMs":4400,"startLabel":"05:25","speaker":"Casey Kim","text":"Just the questionnaire — I'll send it within the hour."},{"id":"c_0042","startMs":330100,"endMs":336400,"durationMs":6300,"startLabel":"05:30","speaker":"Jordan Nakamura","text":"I think we're set. Thanks both — looking forward to seeing what the sandbox looks like."},{"id":"c_0043","startMs":336400,"endMs":339600,"durationMs":3200,"startLabel":"05:36","speaker":"Sam Reyes","text":"Same. Talk Tuesday."}],"speakers":[{"name":"Jordan Nakamura","cueCount":16,"wordCount":325,"talkSeconds":123,"sharePct":36.2},{"name":"Priya Shah","cueCount":10,"wordCount":310,"talkSeconds":103,"sharePct":30.3},{"name":"Sam Reyes","cueCount":11,"wordCount":219,"talkSeconds":78,"sharePct":22.9},{"name":"Casey Kim","cueCount":6,"wordCount":96,"talkSeconds":36,"sharePct":10.6}],"sourceFile":"input.vtt","sizeBytes":7880,"format":"vtt","durationMs":339600,"durationLabel":"5m 39s","cueCount":43,"speakerCount":4,"hasSpeakerLabels":true};
+
+    let activeFilters = new Set();
+    let allCues = [];
+
+    function formatTime(ms) {
+      const seconds = Math.floor(ms / 1000);
+      const mins = Math.floor(seconds / 60);
+      const secs = seconds % 60;
+      if (mins === 0) return `${secs}s`;
+      return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    function renderSpeakers() {
+      const listEl = document.getElementById('speakersList');
+      const speakers = DATA.speakers || [];
+      
+      if (!speakers.length) {
+        listEl.innerHTML = '<p class="insight-empty">No speaker data available.</p>';
+        return;
+      }
+
+      const maxShare = Math.max(...speakers.map(s => s.sharePct));
+      const minShare = Math.min(...speakers.map(s => s.sharePct));
+
+      listEl.innerHTML = speakers.map(speaker => `
+        <div class="speaker-card">
+          <div class="speaker-name">${speaker.name}</div>
+          <div class="speaker-stat">${speaker.cueCount} cues · ${speaker.wordCount} words</div>
+          <div class="speaker-stat" style="color: var(--primary); font-weight: 600;">${speaker.sharePct}% talk time</div>
+          <div class="speaker-bar-container">
+            <div class="speaker-bar">
+              <div class="speaker-bar-fill" style="width: ${speaker.sharePct}%"></div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Show callout if one speaker dominates
+      if (maxShare > 60) {
+        const topSpeaker = speakers.find(s => s.sharePct === maxShare);
+        const callout = document.getElementById('talkTimeCallout');
+        callout.innerHTML = `<strong>${topSpeaker.name}</strong> held approximately <strong>${topSpeaker.sharePct}%</strong> of the floor — this call leaned heavily on their input.`;
+        callout.style.display = 'block';
+      }
+    }
+
+    function extractDecisions() {
+      const decisions = [];
+      const keywords = ['let\'s', 'we\'ll', 'we\'re', 'i\'m in', 'approved', 'going with', 'decide', 'agreed', 'moving forward'];
+      
+      DATA.cues.forEach((cue, idx) => {
+        const text = cue.text.toLowerCase();
+        if (keywords.some(kw => text.includes(kw)) && text.length > 30) {
+          // Light filtering: if it sounds like a decision
+          if (text.includes('will') || text.includes('let\'s') || text.includes('going') || text.includes('agreed')) {
+            decisions.push({
+              text: cue.text.substring(0, 120),
+              speaker: cue.speaker,
+              time: cue.startLabel,
+              cueId: cue.id
+            });
+          }
+        }
+      });
+
+      return decisions.slice(0, 5); // Top 5
+    }
+
+    function extractActions() {
+      const actions = [];
+      const keywords = ['i\'ll', 'i can', 'let me', 'i\'m going to', 'we\'ll', 'send', 'share', 'follow up'];
+      
+      DATA.cues.forEach((cue) => {
+        const text = cue.text.toLowerCase();
+        if (cue.speaker && keywords.some(kw => text.includes(kw))) {
+          // Extract first-person commitment
+          if (text.includes('i\'ll') || text.includes('i can') || text.includes('let me')) {
+            actions.push({
+              owner: cue.speaker,
+              what: cue.text.substring(0, 100),
+              due: null,
+              time: cue.startLabel,
+              cueId: cue.id
+            });
+          }
+        }
+      });
+
+      return actions.slice(0, 6);
+    }
+
+    function extractQuestions() {
+      const questions = [];
+      
+      DATA.cues.forEach((cue, idx) => {
+        const text = cue.text.trim();
+        if (text.endsWith('?')) {
+          // Check if next few cues answer it
+          const nextText = idx + 1 < DATA.cues.length ? DATA.cues[idx + 1].text.toLowerCase() : '';
+          const isAnswered = nextText.length > 20 && !nextText.endsWith('?');
+          
+          if (!isAnswered && text.length > 15) {
+            questions.push({
+              text: text.substring(0, 110),
+              speaker: cue.speaker,
+              time: cue.startLabel,
+              cueId: cue.id
+            });
+          }
+        }
+      });
+
+      return questions.slice(0, 4);
+    }
+
+    function renderDecisions() {
+      const decisions = extractDecisions();
+      const listEl = document.getElementById('decisionsList');
+      
+      if (!decisions.length) {
+        listEl.innerHTML = '<p class="insight-empty">No clear decisions recorded — this looked like an exploratory call.</p>';
+        return;
+      }
+
+      listEl.innerHTML = decisions.map((d, i) => `
+        <div class="decision-item">
+          <div class="item-speaker">${d.speaker}</div>
+          <div class="item-text">${d.text}${d.text.length >= 119 ? '…' : ''}</div>
+          <div><span class="item-time" onclick="jumpToCue('${d.cueId}')">[${d.time}]</span></div>
+        </div>
+      `).join('');
+    }
+
+    function renderActions() {
+      const actions = extractActions();
+      const listEl = document.getElementById('actionsList');
+      
+      if (!actions.length) {
+        listEl.innerHTML = '<p class="insight-empty">No action items captured.</p>';
+        return;
+      }
+
+      listEl.innerHTML = `
+        <table class="actions-table">
+          <thead>
+            <tr>
+              <th>Owner</th>
+              <th>Action</th>
+              <th>Due</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${actions.map(a => `
+              <tr>
+                <td><span class="action-owner">${a.owner}</span></td>
+                <td>${a.what}${a.what.length >= 99 ? '…' : ''}</td>
+                <td><span class="action-due pending">—</span></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function renderQuestions() {
+      const questions = extractQuestions();
+      const listEl = document.getElementById('questionsList');
+      
+      if (!questions.length) {
+        listEl.innerHTML = '<p class="insight-empty">Every question raised got an answer.</p>';
+        return;
+      }
+
+      listEl.innerHTML = questions.map((q) => `
+        <div class="question-item">
+          <div class="item-speaker">${q.speaker}</div>
+          <div class="item-text">${q.text}${q.text.length >= 109 ? '…' : ''}</div>
+          <div><span class="item-time" onclick="jumpToCue('${q.cueId}')">[${q.time}]</span></div>
+        </div>
+      `).join('');
+    }
+
+    function renderTimeline() {
+      const svg = document.getElementById('timelineSvg');
+      const speakers = DATA.speakers || [];
+      const totalMs = DATA.durationMs || 300000;
+      
+      const svgWidth = 800;
+      const svgHeight = Math.max(150, speakers.length * 40 +

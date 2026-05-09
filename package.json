@@ -11,7 +11,7 @@
     "build": "tsc",
     "dev": "tsx src/cli.ts",
     "test": "node --test",
-    "examples": "tsx src/cli.ts examples/markdown/input.md --out examples/markdown/output.html --title 'The Long, Slow, Inevitable Death of the PDF' && tsx src/cli.ts examples/whatsapp/input.txt --out examples/whatsapp/output.html --title 'Alex & Mira' && tsx src/cli.ts examples/csv/input.csv --out examples/csv/output.html --title 'Coffee Equipment Sales — January 2026' && tsx src/cli.ts examples/pdf/input.pdf --out examples/pdf/output.html --title 'The State of Mid-Market Battery Storage — 2026 Outlook' && tsx src/cli.ts examples/docx/input.docx --out examples/docx/output.html --title 'RFC-014: Pricing Page V2 — Decision Memo'"
+    "examples": "tsx src/cli.ts examples/markdown/input.md --out examples/markdown/output.html --title 'The Long, Slow, Inevitable Death of the PDF' && tsx src/cli.ts examples/whatsapp/input.txt --out examples/whatsapp/output.html --title 'Alex & Mira' && tsx src/cli.ts examples/csv/input.csv --out examples/csv/output.html --title 'Coffee Equipment Sales — January 2026' && tsx src/cli.ts examples/pdf/input.pdf --out examples/pdf/output.html --title 'The State of Mid-Market Battery Storage — 2026 Outlook' && tsx src/cli.ts examples/docx/input.docx --out examples/docx/output.html --title 'RFC-014: Pricing Page V2 — Decision Memo' && tsx src/cli.ts examples/transcript-sales-call/input.vtt --out examples/transcript-sales-call/output.html --title 'Northwind × Clockless — Pilot Scoping Call' && tsx src/cli.ts examples/transcript-product-meeting/input.srt --out examples/transcript-product-meeting/output.html --title 'Pricing Page V2 — Sprint Review'"
   },
   "files": [
     "dist",

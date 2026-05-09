@@ -8,6 +8,7 @@
  */
 import * as path from "node:path"
 import type { Parser } from "../types.js"
+import { parser as transcriptParser } from "./transcript.js"
 import { parser as whatsappParser } from "./whatsapp.js"
 import { parser as csvParser } from "./csv.js"
 import { parser as markdownParser } from "./markdown.js"
@@ -17,6 +18,7 @@ import { parser as docxParser } from "./docx.js"
 import { parser as textParser } from "./text.js"
 
 export const parsers: Parser[] = [
+  transcriptParser, // .vtt / .srt / timecoded .txt (Zoom, Teams, Meet, YouTube)
   whatsappParser,   // .txt with timestamp prefix
   csvParser,        // .csv / .tsv
   markdownParser,   // .md / .markdown

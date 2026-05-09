@@ -1,0 +1,167 @@
+1
+00:00:00,000 --> 00:00:04,800
+Casey Lin: Okay, let's do this. Sprint review for the pricing page.
+
+2
+00:00:04,800 --> 00:00:11,200
+Casey Lin: Quick agenda — Mia walks us through final hi-fi, Wes and Devon update on the engineering side, then we lock what's actually shipping Friday.
+
+3
+00:00:11,200 --> 00:00:16,500
+Mia Torres: Sounds good. I'll share my screen — give me one second.
+
+4
+00:00:16,500 --> 00:00:31,200
+Mia Torres: Right. So this is where we landed. Three pricing tiers across the top — Starter, Pro, and Scale. The big change from last week is the comparison table. I tried two versions and honestly neither felt right at this card density.
+
+5
+00:00:31,200 --> 00:00:36,800
+Devon Park: Yeah, I built the prototype for that table on Monday and it adds about eighty kilobytes to the page.
+
+6
+00:00:36,800 --> 00:00:42,300
+Wes Chen: And it doesn't render well on mobile under three-fifty pixels wide. We'd have to redesign the breakpoint.
+
+7
+00:00:42,300 --> 00:00:48,100
+Casey Lin: Okay, that's a real trade-off. Mia, what would you cut to make it ship?
+
+8
+00:00:48,100 --> 00:00:57,700
+Mia Torres: I'd cut the comparison table from this sprint and keep just the three tier cards. That's what most of the inbound is responding to anyway based on the May test.
+
+9
+00:00:57,700 --> 00:01:02,400
+Casey Lin: I'm fine with that. Anyone disagree? Going once.
+
+10
+00:01:02,400 --> 00:01:07,800
+Devon Park: No, it's the right call. Comparison table can be its own ticket next sprint.
+
+11
+00:01:07,800 --> 00:01:14,500
+Casey Lin: Decision then — we ship without the comparison table this sprint. Mia, will you file the follow-up ticket?
+
+12
+00:01:14,500 --> 00:01:18,200
+Mia Torres: Yep, I'll write it up after this meeting.
+
+13
+00:01:18,200 --> 00:01:25,400
+Casey Lin: Second thing — the tier names. Pro is doing weird things in user testing. People assume it's the cheapest paid tier.
+
+14
+00:01:25,400 --> 00:01:31,800
+Mia Torres: I noticed that too. I think we should just call it Team. It maps to what they actually buy.
+
+15
+00:01:31,800 --> 00:01:36,500
+Wes Chen: Are we changing the underlying SKU IDs? Because that's a Stripe migration if so.
+
+16
+00:01:36,500 --> 00:01:43,200
+Mia Torres: No — display name only. The internal SKU stays plan_pro. So no Stripe work.
+
+17
+00:01:43,200 --> 00:01:50,800
+Casey Lin: Okay then let's do it. Pro becomes Team in the UI. Mia, that goes in the same hi-fi update?
+
+18
+00:01:50,800 --> 00:01:53,900
+Mia Torres: Yes. Tuesday EOD.
+
+19
+00:01:53,900 --> 00:02:00,500
+Casey Lin: Wes, what's the engineering picture? When can the page actually go behind the flag?
+
+20
+00:02:00,500 --> 00:02:14,200
+Wes Chen: I need Mia's final hi-fi by Tuesday end of day to wire it up. Stripe checkout link is a one-day swap once she lands. So I can have it behind the flag by Wednesday end of day, ready for QA Thursday.
+
+21
+00:02:14,200 --> 00:02:21,500
+Devon Park: I'll add the analytics tracking by Thursday morning. We'll need the conversion events defined before then though — I haven't gotten that spec.
+
+22
+00:02:21,500 --> 00:02:26,800
+Casey Lin: That's on me. I'll send you the event list by Tuesday morning.
+
+23
+00:02:26,800 --> 00:02:33,400
+Devon Park: Great. Then yeah, Thursday for tracking, Friday morning for QA cycle, ship Friday afternoon if no surprises.
+
+24
+00:02:33,400 --> 00:02:39,200
+Casey Lin: Quick question — should we A/B-test the prices? I keep going back and forth on this.
+
+25
+00:02:39,200 --> 00:02:48,500
+Mia Torres: I think we should hold off. We don't have enough traffic on the pricing page to get a clean read in under three weeks, and we're going to keep iterating anyway.
+
+26
+00:02:48,500 --> 00:02:52,800
+Wes Chen: Plus the experiment infrastructure for pricing tiers is a whole project itself.
+
+27
+00:02:52,800 --> 00:02:57,500
+Casey Lin: Fair. Let's defer A/B and just ship. We can revisit in Q2.
+
+28
+00:02:57,500 --> 00:03:04,800
+Devon Park: One concern — mobile QA. Mia, are we doing real device testing or just Chrome devtools?
+
+29
+00:03:04,800 --> 00:03:14,200
+Mia Torres: I'd really want at least an iPhone 12 and a mid-tier Android in front of someone before we ship. The new card layout has some Safari-specific quirks I caught last week.
+
+30
+00:03:14,200 --> 00:03:20,800
+Casey Lin: Okay — Wes, can you book thirty minutes Friday morning with someone in IT to grab the test devices?
+
+31
+00:03:20,800 --> 00:03:25,000
+Wes Chen: I'll set it up. Adding it to my Friday now.
+
+32
+00:03:25,000 --> 00:03:32,300
+Casey Lin: Risks I want to surface for the wider team — biggest one is that we're shipping without the comparison table, so sales might push back.
+
+33
+00:03:32,300 --> 00:03:38,500
+Mia Torres: I can write a note in the launch doc explaining why and what's coming next sprint. That'll cut down on the back-and-forth.
+
+34
+00:03:38,500 --> 00:03:42,800
+Casey Lin: Perfect. Add that to your Tuesday list.
+
+35
+00:03:42,800 --> 00:03:50,200
+Casey Lin: Last thing — how are we measuring success post-launch? I want this defined before we hit publish.
+
+36
+00:03:50,200 --> 00:04:00,500
+Devon Park: I'd propose two numbers — start-trial conversion rate from the pricing page, and Team-tier share of new signups. Baseline against the last 30 days.
+
+37
+00:04:00,500 --> 00:04:08,800
+Casey Lin: That works. Devon, can you build a small dashboard so we're not chasing this in Mixpanel every Monday?
+
+38
+00:04:08,800 --> 00:04:14,500
+Devon Park: Yep. I'll have it up by the end of next week. Lower priority than the launch itself.
+
+39
+00:04:14,500 --> 00:04:18,200
+Casey Lin: Anything else? Anyone blocked or sandbagging?
+
+40
+00:04:18,200 --> 00:04:23,500
+Wes Chen: Nope. Tuesday hi-fi, Wednesday flag, Thursday tracking, Friday QA, Friday ship.
+
+41
+00:04:23,500 --> 00:04:28,200
+Mia Torres: Same. I have everything I need to land Tuesday.
+
+42
+00:04:28,200 --> 00:04:32,500
+Casey Lin: All right. Talk Wednesday standup.

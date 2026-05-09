@@ -1,0 +1,141 @@
+WEBVTT
+
+NOTE
+Synthetic transcript for html-anything's example pack. Names and
+companies are fictional; any resemblance to real customers is
+coincidental.
+
+00:00:00.000 --> 00:00:04.500
+<v Sam Reyes>All right, looks like we have everyone. Thanks for making time on a Friday.</v>
+
+00:00:04.500 --> 00:00:09.200
+<v Jordan Nakamura>Of course. Casey just joined too — she runs procurement on our side.</v>
+
+00:00:09.200 --> 00:00:13.800
+<v Casey Kim>Hi, nice to meet you both. Just here to listen for the commercial parts.</v>
+
+00:00:13.800 --> 00:00:21.600
+<v Sam Reyes>Perfect. Quick framing — we've got thirty-five minutes booked. I'd like to spend ten on the pain you mentioned in the discovery call, then have Priya walk through how we'd actually solve it, and leave fifteen for pricing and your security questions.</v>
+
+00:00:21.600 --> 00:00:26.400
+<v Jordan Nakamura>Sounds good. I'll re-state the pain quickly so Priya has it fresh.</v>
+
+00:00:26.400 --> 00:00:42.100
+<v Jordan Nakamura>So today we have about fourteen engineers across two teams shipping into the same monorepo, and our deploy pipeline is taking forty-two minutes end to end. That's the real number. The bigger problem is that when something fails halfway through, we have no idea which step actually broke — we just see a red check on GitHub. People are rebasing and re-running and burning a half day a week each.</v>
+
+00:00:42.100 --> 00:00:48.800
+<v Priya Shah>Got it. And the forty-two minutes — is that from PR open to production, or from merge to production?</v>
+
+00:00:48.800 --> 00:00:54.500
+<v Jordan Nakamura>Merge to production. PR feedback is faster, maybe twelve minutes for tests.</v>
+
+00:00:54.500 --> 00:01:00.300
+<v Priya Shah>Okay. And what fraction of those red checks are flakes versus real failures, roughly?</v>
+
+00:01:00.300 --> 00:01:06.700
+<v Jordan Nakamura>Honestly we don't know. That's part of the problem — we can't tell them apart without re-running.</v>
+
+00:01:06.700 --> 00:01:13.200
+<v Priya Shah>Right. Let me share my screen — I'll show you what our pipeline view looks like for a similar size team.</v>
+
+00:01:13.200 --> 00:01:34.500
+<v Priya Shah>So this is a customer with sixteen engineers, comparable monorepo. The thing I want to point at first is this column on the right — every step of every run gets a confidence score. So you can see, for this run, the integration tests step is flagged as flake-likely with a ninety-two percent confidence. That's the diff that matters for you.</v>
+
+00:01:34.500 --> 00:01:40.800
+<v Jordan Nakamura>Wait — how does that score get computed? Is that a model, or rules?</v>
+
+00:01:40.800 --> 00:01:53.700
+<v Priya Shah>Both. The first layer is rule-based — looking at exit codes, error patterns, retry-on-rerun behavior. The second layer is a small classifier we train per-customer on your last thirty days of runs. So accuracy ramps up over the first week or two.</v>
+
+00:01:53.700 --> 00:02:00.100
+<v Jordan Nakamura>Per customer, meaning our data stays in our tenant?</v>
+
+00:02:00.100 --> 00:02:08.500
+<v Priya Shah>Correct. We never train cross-tenant. Each customer gets their own classifier. I can send you the architecture diagram after the call.</v>
+
+00:02:08.500 --> 00:02:14.200
+<v Casey Kim>And on data retention — how long do you keep the build logs themselves?</v>
+
+00:02:14.200 --> 00:02:24.800
+<v Priya Shah>Default is ninety days hot, then archived for a year. But it's configurable down to thirty days hot, zero archive. I want to double-check the exact archive numbers and follow up with you — I think there's a tier with seven-day retention but I don't want to misquote.</v>
+
+00:02:24.800 --> 00:02:29.300
+<v Casey Kim>Please. We'll need that in writing for our InfoSec review.</v>
+
+00:02:29.300 --> 00:02:36.400
+<v Sam Reyes>Priya will get that to you in the follow-up. Casey, anything else from the security side I should make sure we cover?</v>
+
+00:02:36.400 --> 00:02:43.700
+<v Casey Kim>We have a standard questionnaire. I'll send it over after this call — usually takes vendors a week to turn it around.</v>
+
+00:02:43.700 --> 00:02:48.100
+<v Sam Reyes>That works. We turn ours around in about three business days.</v>
+
+00:02:48.100 --> 00:02:55.900
+<v Jordan Nakamura>Okay. So pricing — what does this actually cost for a team of fourteen?</v>
+
+00:02:55.900 --> 00:03:11.200
+<v Sam Reyes>For your size, the right SKU is the Team plan at thirty-nine per engineer per month, billed annually. So roughly six-five-four-six a month, sixty-six K a year. That includes the per-tenant classifier, ninety-day retention default, and twenty-four-by-five support.</v>
+
+00:03:11.200 --> 00:03:17.800
+<v Jordan Nakamura>And if we wanted to try it before signing a year, what's the path?</v>
+
+00:03:17.800 --> 00:03:31.400
+<v Sam Reyes>That's actually what I wanted to propose. Thirty-day paid pilot, full feature access, prorated to roughly fifty-four hundred. If you commit at the end, that prorate gets credited back against the annual. If you don't, nothing further owed.</v>
+
+00:03:31.400 --> 00:03:37.500
+<v Jordan Nakamura>I like that shape. Casey, anything that would block this on procurement?</v>
+
+00:03:37.500 --> 00:03:46.200
+<v Casey Kim>The pilot dollar amount is under our threshold so it doesn't need legal sign-off, but we still need the security questionnaire back before we wire anything.</v>
+
+00:03:46.200 --> 00:03:50.700
+<v Jordan Nakamura>Okay. Then assuming security checks out, let's go with the thirty-day pilot.</v>
+
+00:03:50.700 --> 00:03:54.900
+<v Sam Reyes>Great. I'll send the SOW over by end of day next Friday.</v>
+
+00:03:54.900 --> 00:04:02.300
+<v Priya Shah>And on my side, I'll have a sandbox provisioned for you by Tuesday so your team can start poking at the dashboards.</v>
+
+00:04:02.300 --> 00:04:09.700
+<v Jordan Nakamura>Perfect. One thing I should flag — we're also evaluating Lattica. They reached out three weeks ago.</v>
+
+00:04:09.700 --> 00:04:16.000
+<v Sam Reyes>Appreciate the heads up. Where are you with them?</v>
+
+00:04:16.000 --> 00:04:25.400
+<v Jordan Nakamura>They sent us a similar pricing structure but no per-tenant classifier story — it's a shared model. That's actually been the main thing pushing us toward you.</v>
+
+00:04:25.400 --> 00:04:31.200
+<v Priya Shah>Yeah, that's the architectural fork. Happy to dig into it more if you want a side-by-side.</v>
+
+00:04:31.200 --> 00:04:38.800
+<v Jordan Nakamura>Maybe in week two. The other thing to flag — we have a board meeting on March fifth, so I'd want a clear read on the pilot results before then.</v>
+
+00:04:38.800 --> 00:04:47.100
+<v Sam Reyes>Noted. Pilot starts Tuesday, we'll plan a midpoint review around February twenty-fifth so you have data to walk into that board meeting with.</v>
+
+00:04:47.100 --> 00:04:51.500
+<v Jordan Nakamura>That's exactly what I needed to hear.</v>
+
+00:04:51.500 --> 00:05:01.700
+<v Priya Shah>One last question for you — what does success look like for the pilot? If we don't define it now, I worry it'll be ambiguous in week four.</v>
+
+00:05:01.700 --> 00:05:14.200
+<v Jordan Nakamura>Good question. I'd say two things: cut deploy time from forty-two to under twenty-five, and reduce the half-day-per-engineer-per-week we lose to debugging red checks down to under one hour.</v>
+
+00:05:14.200 --> 00:05:21.300
+<v Priya Shah>Both measurable. I'll write those into the SOW success criteria so we're not negotiating it at week four.</v>
+
+00:05:21.300 --> 00:05:25.700
+<v Sam Reyes>Anything else for us before we wrap?</v>
+
+00:05:25.700 --> 00:05:30.100
+<v Casey Kim>Just the questionnaire — I'll send it within the hour.</v>
+
+00:05:30.100 --> 00:05:36.400
+<v Jordan Nakamura>I think we're set. Thanks both — looking forward to seeing what the sandbox looks like.</v>
+
+00:05:36.400 --> 00:05:39.600
+<v Sam Reyes>Same. Talk Tuesday.</v>

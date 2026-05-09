@@ -148,6 +148,18 @@ h2 {
     <p>The LLM saw the schema and decided this size deserves a full sortable table. A 50K-row CSV would skew toward charts + virtualization instead.</p>
   </a>
 
+  <a class="demo" href="transcript-sales-call/output.html">
+    <h3>Meeting transcript — sales call <span class="arrow">→</span></h3>
+    <p class="meta">input.vtt (43 cues, 4 speakers, pilot-scoping call) → meeting scorecard</p>
+    <p>The LLM saw a 4-speaker WebVTT transcript with a clear decision (pilot agreed) and a follow-up commitment, and designed talk-time bars, a decisions panel, an action-items table grouped by owner, and a searchable transcript with timestamp chips. A standup with 6 quick speakers would render as a different shape.</p>
+  </a>
+
+  <a class="demo" href="transcript-product-meeting/output.html">
+    <h3>Meeting transcript — product review <span class="arrow">→</span></h3>
+    <p class="meta">input.srt (39 cues, 4 speakers, sprint review) → meeting scorecard</p>
+    <p>An SRT-format internal review with three decisions, six action items, two open questions, and one risk. The LLM picked the speaker timeline + decisions cards + action-items-by-owner table for this shape — the same parser on a 1:1 sync would produce something tighter.</p>
+  </a>
+
   <p class="footer">
     <a href="https://github.com/clockless-org/html-anything">github.com/clockless-org/html-anything</a> · Apache 2.0 · contributions welcome (write a parser)
   </p>

@@ -59,6 +59,8 @@ client-side rendering of the drill-down sections.
    - Tabular data: header + first 5 rows + last 2 rows + column stats.
    - Chat: first 8 + last 4 messages + sender list.
    - Long text: first 1500 chars + headings + word count.
+   - Meeting transcript: speaker stats with talk-time + first 12 cues +
+     last 4 cues + each speaker's opening turn + the longest cues.
    - URL article: first 2-3K chars of the rendered text + meta.
    - Repo: README + tree + 3 key files.
 
@@ -93,6 +95,7 @@ client-side rendering of the drill-down sections.
 | [`prompts/markdown.md`](./prompts/markdown.md) | Markdown documents |
 | [`prompts/pdf.md`](./prompts/pdf.md) | `.pdf` — long-form documents, reports, papers |
 | [`prompts/docx.md`](./prompts/docx.md) | `.docx` — Word memos, RFCs, briefs |
+| [`prompts/transcript.md`](./prompts/transcript.md) | `.vtt` / `.srt` / timecoded Zoom & Teams `.txt` meeting transcripts |
 | [`prompts/json.md`](./prompts/json.md) | JSON data files |
 | [`prompts/github-repo.md`](./prompts/github-repo.md) | github.com/owner/repo URLs |
 | [`prompts/url-article.md`](./prompts/url-article.md) | Blog posts, news articles, long-form web pages |
