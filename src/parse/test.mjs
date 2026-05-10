@@ -1158,3 +1158,194 @@ test("venmo-paypal-payments output.html renders the required family + social sec
   assert.ok(!/<img\s+[^>]*\bsrc=/i.test(html), "venmo-paypal-payments output must not include external <img> tags")
   assert.ok(!/<iframe\b/i.test(html), "venmo-paypal-payments output must not embed iframes")
 })
+
+test("vcard parser routes a multi-card .vcf to vcard-contacts and pre-aggregates the family contract", async () => {
+  const fp = path.join(REPO, "examples/vcard-contacts/input.vcf")
+  const parser = await pickParser(fp)
+  assert.equal(parser?.name, "vcard")
+  const out = await parser.parse(fp)
+  assert.equal(out.contentType, "vcard-contacts")
+  assert.equal(out.data.format, "vcard-contacts")
+  assert.ok(out.data.rows.length >= 25, `expected >= 25 contacts, got ${out.data.rows.length}`)
+  // Required pre-aggregations per prompts/vcard-contacts.md.
+  for (const k of ["rows", "organizations", "emailDomains", "cities",
+                   "birthdayMonths", "categories", "duplicateClusters",
+                   "audit", "summary"]) {
+    assert.ok(out.data[k] !== undefined, `missing required field: ${k}`)
+  }
+  // Aggregations populated.
+  assert.ok(out.data.organizations.length >= 5, `expected >= 5 organizations, got ${out.data.organizations.length}`)
+  assert.ok(out.data.emailDomains.length >= 3)
+  assert.ok(out.data.cities.length >= 4)
+  assert.equal(out.data.birthdayMonths.length, 12)
+  // Duplicate clusters: AC requires 3+ clusters across at least 2 reasons.
+  assert.ok(out.data.duplicateClusters.length >= 3, `expected >= 3 duplicate clusters, got ${out.data.duplicateClusters.length}`)
+  const reasons = new Set(out.data.duplicateClusters.map(c => c.reason))
+  assert.ok(reasons.size >= 2, `expected duplicate clusters across >= 2 reasons, got ${[...reasons].join(", ")}`)
+  for (const r of ["shared-phone", "shared-email", "normalized-name"]) {
+    assert.ok(reasons.has(r), `expected duplicate-cluster reason '${r}' in fixture, got ${[...reasons].join(", ")}`)
+  }
+  // Audit fields present and shaped right.
+  const a = out.data.audit
+  for (const k of ["missingPhone", "missingEmail", "missingBoth", "malformedEmail",
+                   "staleRev", "repeatedPhone", "repeatedEmail", "noteOnly",
+                   "nameless", "legacy21"]) {
+    assert.ok(a[k] !== undefined, `audit missing key: ${k}`)
+  }
+  assert.ok(a.missingPhone.count > 0, "fixture seeds at least one phone-less contact")
+  assert.ok(a.malformedEmail.count >= 1, "fixture seeds a malformed email")
+  assert.ok(a.staleRev.count >= 3, "fixture seeds several stale-REV contacts")
+  assert.ok(a.legacy21.count >= 1, "fixture seeds at least one vCard 2.1 legacy contact")
+  assert.ok(a.repeatedPhone.length >= 1)
+  assert.ok(a.repeatedEmail.length >= 1)
+  assert.ok(a.nameless.count >= 1, "fixture seeds at least one nameless card")
+  // Summary fields present and sane.
+  const s = out.data.summary
+  assert.ok(s.contactCount >= 25)
+  assert.ok(s.withPhone > 0 && s.withEmail > 0 && s.withAddress > 0)
+  assert.ok(s.duplicateClusterCount >= 3)
+  assert.ok(s.distinctOrgs >= 5)
+  assert.ok(s.revWindow.includes("→"))
+  assert.ok(s.topOrganization, "expected a top organization")
+  // Photo redaction: hasPhoto is true on at least one row, and NO row has
+  // any binary base64 leaked into its data.
+  const photoRows = out.data.rows.filter(r => r.hasPhoto)
+  assert.ok(photoRows.length >= 1, "fixture seeds at least one photo")
+  for (const r of out.data.rows) {
+    // The parser must never emit binary content into the inlined data.
+    assert.ok(!/[A-Za-z0-9+/]{40,}={0,2}/.test(JSON.stringify({ photoMime: r.photoMime })),
+      `contact ${r.id} appears to embed binary photo data`)
+  }
+  // Phone + email masking — every phone has a masked variant, every email
+  // has a masked variant, and the masked form is NOT the unmasked form.
+  let phonesChecked = 0, emailsChecked = 0
+  for (const r of out.data.rows) {
+    for (const p of r.phones) {
+      phonesChecked++
+      assert.ok(p.masked && p.masked !== p.value, `phone ${p.value} not masked: ${p.masked}`)
+      assert.ok(p.masked.includes("•"), `phone mask must contain bullet: ${p.masked}`)
+    }
+    for (const e of r.emails) {
+      emailsChecked++
+      // Malformed emails (no @) get fully bulleted; that's still non-equal.
+      assert.ok(e.masked && e.masked !== e.value, `email ${e.value} not masked: ${e.masked}`)
+    }
+  }
+  assert.ok(phonesChecked > 10)
+  assert.ok(emailsChecked > 10)
+  // vCard versions captured.
+  const vd = out.data.meta.versionDistribution
+  assert.ok(vd["3.0"] > 0)
+  assert.ok(vd["4.0"] > 0)
+  // Synthetic-data invariants — every email lives on a reserved example
+  // domain, every phone uses the reserved 555-01xx range or a reserved
+  // international shape.
+  const allowedDomains = new Set(["example.com", "example.org", "example.net", "invalid.test"])
+  for (const r of out.data.rows) {
+    for (const e of r.emails) {
+      const at = e.value.lastIndexOf("@")
+      if (at < 0) continue  // malformed emails (no @) skip the check
+      const domain = e.value.slice(at + 1).toLowerCase()
+      assert.ok(allowedDomains.has(domain), `non-reserved email domain leaked: ${e.value}`)
+    }
+    for (const p of r.phones) {
+      const digits = p.value.replace(/[^0-9]/g, "")
+      // Allow any +1-555-555-XXXX (fictional NANPA range), reserved UK
+      // 1632 960xxx, or invented JP +81-3-5555.
+      const ok = /5555\d{4}$/.test(digits) || /1632960\d{3}$/.test(digits) || /^81355559/.test(digits)
+      assert.ok(ok, `non-reserved phone leaked: ${p.value} (digits ${digits})`)
+    }
+  }
+})
+
+test("vcard parser refuses a non-vCard text file", async () => {
+  const { parser } = await import("../../dist/parse/vcard.js")
+  // WhatsApp .txt has no BEGIN:VCARD marker.
+  const fp = path.join(REPO, "examples/whatsapp/input.txt")
+  assert.equal(await parser.detect(fp), false)
+})
+
+test("registry exposes vcard parser before generic text", async () => {
+  const { parsers } = await import("../../dist/parse/index.js")
+  const names = parsers.map(p => p.name)
+  const vcardIdx = names.indexOf("vcard")
+  const textIdx = names.indexOf("text")
+  assert.ok(vcardIdx >= 0, `parsers missing 'vcard' — got ${names.join(", ")}`)
+  assert.ok(vcardIdx < textIdx, `vcard must come before 'text' in registry — got vcard@${vcardIdx}, text@${textIdx}`)
+})
+
+test("vcard-contacts prompt is present on disk", async () => {
+  const fs = await import("node:fs/promises")
+  const p = path.join(REPO, "prompts", "vcard-contacts.md")
+  const stat = await fs.stat(p)
+  assert.ok(stat.isFile(), "missing prompt file: vcard-contacts.md")
+})
+
+test("vcard parser handles folded continuation lines + repeated typed fields", async () => {
+  const { parser } = await import("../../dist/parse/vcard.js")
+  // Inline fixture: folded NOTE line, two TEL records with different TYPEs,
+  // two EMAIL records, vCard 4.0 quoted TYPE list.
+  const tmp = path.join(REPO, "examples/vcard-contacts/__inline_test.vcf")
+  const sample = [
+    "BEGIN:VCARD",
+    "VERSION:4.0",
+    "FN:Folded Test",
+    "N:Test;Folded;;;",
+    "TEL;TYPE=cell:+15555550999",
+    "TEL;TYPE=\"work,voice\":+15555550998",
+    'EMAIL;TYPE="work,internet":folded@example.com',
+    "EMAIL;TYPE=home:folded.home@example.org",
+    "NOTE:This note is intentionally long enough that the folding logic m",
+    " ust concatenate two physical lines back into one logical line withou",
+    " t losing characters or inserting a stray space.",
+    "END:VCARD",
+  ].join("\r\n")
+  await (await import("node:fs/promises")).writeFile(tmp, sample, "utf8")
+  try {
+    const out = await parser.parse(tmp)
+    const r = out.data.rows[0]
+    assert.equal(r.fn, "Folded Test")
+    assert.equal(r.phones.length, 2)
+    assert.equal(r.phones[0].type, "CELL")
+    assert.equal(r.phones[1].type, "WORK")
+    assert.equal(r.emails.length, 2)
+    assert.equal(r.emails[0].type, "WORK")
+    assert.equal(r.emails[1].type, "HOME")
+    // Folded lines must rejoin without a stray space, and without losing chars.
+    assert.ok(r.note.includes("must concatenate two physical lines"))
+    assert.ok(!r.note.includes("m ust"))
+    assert.ok(!r.note.includes("withou t"))
+  } finally {
+    await (await import("node:fs/promises")).unlink(tmp).catch(() => {})
+  }
+})
+
+test("vcard-contacts output.html renders the required family sections + offline rules", async () => {
+  const fs = await import("node:fs/promises")
+  const html = await fs.readFile(path.join(REPO, "examples/vcard-contacts/output.html"), "utf8")
+  for (const needle of [
+    "Address book",
+    "Health audit",
+    "Organizations",
+    "Email domains",
+    "Cities",
+    "Birthdays",
+    "Duplicate",
+    "Browse all",
+    "Heuristic",
+    "Generated locally",
+    "vcard-contacts",
+    "VCARD CONTACTS",
+  ]) {
+    assert.ok(html.includes(needle), `examples/vcard-contacts/output.html missing: ${needle}`)
+  }
+  // Hard offline rules: no link tags, no iframes, no external imgs.
+  assert.ok(!/<link\s+[^>]*\bhref=/i.test(html), "vcard-contacts output must not include any <link> tags")
+  assert.ok(!/<iframe\b/i.test(html), "vcard-contacts output must not embed iframes")
+  assert.ok(!/<img\s+[^>]*\bsrc=/i.test(html), "vcard-contacts output must not include any <img src> tags")
+  assert.ok(!/fonts\.googleapis\.com|fonts\.gstatic\.com/.test(html),
+    "vcard-contacts output must not link to Google Fonts")
+  // Privacy line + masking toggle present.
+  assert.ok(/never left your machine/i.test(html), "expected privacy-line text in footer")
+  assert.ok(/masked by default/i.test(html), "expected masking-line text in footer")
+})

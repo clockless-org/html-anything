@@ -1,0 +1,375 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Mom
+N:Acharya;Riya;;;
+TEL;TYPE=CELL:+15555550101
+EMAIL;TYPE=HOME:riya.synth@example.com
+ADR;TYPE=HOME:;;421 Synthetic Way;Brookline;MA;02446;United States
+BDAY:1962-05-12
+CATEGORIES:Family
+NOTE:Mom — favorite color is forest green\, prefers texts to calls.
+REV:20240909T130000Z
+UID:synth-mom-1
+PHOTO;TYPE=JPEG;ENCODING=BASE64:[REDACTED-SYNTHETIC]
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Mom (Riya)
+N:Acharya;Riya;;;
+TEL;TYPE=CELL:+15555550101
+EMAIL;TYPE=HOME:riya.synth@example.com
+BDAY:1962-05-12
+REV:20210105T120000Z
+UID:synth-mom-2
+END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+FN:Riya Acharya
+N:Acharya;Riya;;;
+TEL;TYPE=cell:+15555550101
+EMAIL;TYPE=home:riya.synth@example.com
+ADR;TYPE=home:;;421 Synthetic Way;Brookline;MA;02446;United States
+BDAY:1962-05-12
+REV:20260218T091500Z
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Dad
+N:Acharya;Naveen;;;
+NICKNAME:Dad
+TEL;TYPE=CELL:+15555550118
+TEL;TYPE=HOME:+15555550224
+EMAIL;TYPE=HOME:naveen.synth@example.org
+ADR;TYPE=HOME:;;421 Synthetic Way;Brookline;MA;02446;United States
+BDAY:1958-11-30
+CATEGORIES:Family
+NOTE:Dad. Best reached evenings after 7pm Eastern.
+REV:20251205T090000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+FN:Anya Acharya
+N:Acharya;Anya;;;
+TEL;TYPE=cell:+15555550138
+EMAIL;TYPE=work:anya.a@example.com
+ADR;TYPE=home:;;421 Synthetic Way;Brookline;MA;02446;United States
+BDAY:1990-03-22
+CATEGORIES:Family
+REV:20251130T120000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Maeve Tindall
+N:Tindall;Maeve;;;
+ORG:Solare Global;Engineering
+TITLE:Senior Software Engineer
+TEL;TYPE=WORK:+15555550207
+TEL;TYPE=CELL:+15555550230
+EMAIL;TYPE=WORK:m.tindall@example.com
+ADR;TYPE=WORK:;;44 Demonstration Plaza\, Floor 12;San Francisco;CA;94107;United States
+BDAY:1991-06-12
+CATEGORIES:Coworker,Solare
+REV:20231012T120000Z
+UID:synth-solare-0
+PHOTO;TYPE=JPEG;ENCODING=BASE64:[REDACTED-SYNTHETIC]
+END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+FN:Hanan Boutros
+N:Boutros;Hanan;;;
+ORG:Solare Global;Engineering
+TITLE:Engineering Manager
+TEL;TYPE=WORK:+15555550208
+TEL;TYPE=CELL:+15555550231
+EMAIL;TYPE=WORK:hanan.b@example.com
+ADR;TYPE=WORK:;;44 Demonstration Plaza\, Floor 12;San Francisco;CA;94107;United States
+BDAY:1985-09-04
+CATEGORIES:Coworker,Solare
+REV:20240122T130000Z
+UID:synth-solare-1
+PHOTO:data:image/jpeg;base64,[REDACTED-SYNTHETIC]
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Mira Salonen
+N:Salonen;Mira;;;
+ORG:Solare Global;Engineering
+TITLE:Staff Designer
+TEL;TYPE=WORK:+15555550210
+TEL;TYPE=CELL:+15555550232
+EMAIL;TYPE=WORK:mira.s@example.com
+ADR;TYPE=WORK:;;44 Demonstration Plaza\, Floor 12;San Francisco;CA;94107;United States
+CATEGORIES:Coworker,Solare
+REV:20240811T100000Z
+UID:synth-solare-2
+END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+FN:Aleksandr Volkov
+N:Volkov;Aleksandr;;;
+ORG:Solare Global;Engineering
+TITLE:Site Reliability
+TEL;TYPE=WORK:+15555550211
+TEL;TYPE=CELL:+15555550233
+EMAIL;TYPE=WORK:alex.v@example.com
+ADR;TYPE=WORK:;;44 Demonstration Plaza\, Floor 12;San Francisco;CA;94107;United States
+BDAY:1988-11-20
+CATEGORIES:Coworker,Solare
+REV:20250214T120000Z
+UID:synth-solare-3
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Calla Reyes
+N:Reyes;Calla;;;
+ORG:Solare Global;Engineering
+TITLE:Product Manager
+TEL;TYPE=WORK:+15555550212
+TEL;TYPE=CELL:+15555550234
+EMAIL;TYPE=WORK:calla.r@example.com
+ADR;TYPE=WORK:;;44 Demonstration Plaza\, Floor 12;San Francisco;CA;94107;United States
+BDAY:1992-02-19
+CATEGORIES:Coworker,Solare
+REV:20250903T140000Z
+UID:synth-solare-4
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Jia Mwangi
+N:Mwangi;Jia;;;
+ORG:Drysdale Variety Co.
+TITLE:Operations Lead
+TEL;TYPE=WORK:+15555550241
+EMAIL;TYPE=WORK:jia.mwangi@example.org
+ADR;TYPE=WORK:;;12 Imaginary Mews;Brooklyn;NY;11211;United States
+CATEGORIES:Coworker,Drysdale
+NOTE:Old colleague at Drysdale\, kept in touch via LinkedIn.
+REV:20190614T120000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Field Hartwell
+N:Hartwell;Field;;;
+ORG:Drysdale Variety Co.
+TITLE:Account Manager
+TEL;TYPE=WORK:+15555550242
+EMAIL;TYPE=WORK:field.h@example.org
+ADR;TYPE=WORK:;;12 Imaginary Mews;Brooklyn;NY;11211;United States
+CATEGORIES:Coworker,Drysdale
+REV:20180322T120000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Petra Fall
+N:Fall;Petra;;;
+ORG:Drysdale Variety Co.
+TITLE:Designer
+TEL;TYPE=WORK:+15555550243
+EMAIL;TYPE=WORK:petra.fall@example.org
+ADR;TYPE=WORK:;;12 Imaginary Mews;Brooklyn;NY;11211;United States
+CATEGORIES:Coworker,Drysdale
+REV:20200715T120000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+FN:Owen Skylight
+N:Skylight;Owen;;;
+ORG:Atlas Monthly
+TITLE:Editor
+TEL;TYPE=work:+15555550261
+EMAIL;TYPE=work:owen.s@example.net
+BDAY:1987-08-09
+CATEGORIES:Coworker,Atlas
+REV:20230118T100000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+FN:Quinn Drysdale
+N:Drysdale;Quinn;;;
+ORG:Atlas Monthly
+TITLE:Writer
+TEL;TYPE=work:+15555550262
+EMAIL;TYPE=work:quinn.d@example.net
+BDAY:1990-04-02
+CATEGORIES:Coworker,Atlas
+REV:20230118T100000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+KIND:org
+FN:Brookline Family Dental
+ORG:Brookline Family Dental
+TEL;TYPE=WORK:+15555550311
+TEL;TYPE=FAX:+15555550312
+EMAIL;TYPE=WORK:front.desk@example.com
+ADR;TYPE=WORK:;;200 Imaginary Drive\, Suite 4;Brookline;MA;02446;United States
+URL:https://example.com/brookline-dental
+CATEGORIES:Service,Health
+NOTE:Cleaning every 6 months — last visit Q1 2025.
+REV:20250318T140000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Mongoose Garage
+ORG:Mongoose Garage
+TEL;TYPE=WORK:+15555550321
+ADR;TYPE=WORK:;;88 Synthetic Avenue;Cambridge;MA;02139;United States
+CATEGORIES:Service
+REV:20240608T100000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Verdant Repo Animal Hospital
+ORG:Verdant Repo Animal Hospital
+TEL;TYPE=WORK:+15555550331
+EMAIL;TYPE=WORK:appointments@example.org
+ADR;TYPE=WORK:;;12 Demonstration Court;Brookline;MA;02446;United States
+CATEGORIES:Service,Pets
+NOTE:Cat: Plum. Annual checkup December.
+REV:20251201T130000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:The Pickled Onion
+ORG:The Pickled Onion
+TEL;TYPE=WORK:+15555550341
+ADR;TYPE=WORK:;;55 Fictional Square;Boston;MA;02114;United States
+URL:https://example.org/pickled-onion
+CATEGORIES:Restaurant
+NOTE:Anniversary spot\, reserve 4 weeks ahead.
+REV:20240210T180000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Sam Nightingale
+N:Nightingale;Sam;;;
+ORG:Backslash Burrito
+TEL;TYPE=CELL:+15555550401
+EMAIL;TYPE=HOME:samn@example.net
+BDAY:1989-07-14
+CATEGORIES:College,Friend
+NOTE:Roommate sophomore year.
+REV:20191102T120000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Marbleweather
+N:Weather;Mara;;;
+NICKNAME:Marbleweather
+TEL;TYPE=CELL:+15555550402
+EMAIL;TYPE=HOME:marbleweather@example.com
+BDAY:1990-12-04
+CATEGORIES:College
+REV:20180918T120000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Skylight Diner
+ORG:Skylight Diner
+TEL;TYPE=WORK:+15555550411
+CATEGORIES:Restaurant
+REV:20170522T120000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+FN:Folded Paper Studio
+ORG:Folded Paper Studio
+TEL;TYPE=work:+44 1632 960123
+EMAIL;TYPE=work:hello@example.org
+ADR;TYPE=work:;;21 Invented Lane;London;;EC1A 1BB;United Kingdom
+URL:https://example.org/folded-paper
+CATEGORIES:Vendor
+REV:20251010T090000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+FN:Tide Reports KK
+ORG:Tide Reports KK
+TEL;TYPE=work:+81-3-5555-9012
+EMAIL;TYPE=work:office@example.net
+ADR;TYPE=work:;;1-2-3 Synthetic-cho;Tokyo;;100-0001;Japan
+CATEGORIES:Vendor
+REV:20250629T120000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+KIND:group
+FN:Family Group
+EMAIL;TYPE=home:family@example.com
+CATEGORIES:Family
+REV:20240715T100000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Plumber referral
+NOTE:Friend recommended a plumber named Pat — get number from Anya.
+REV:20240320T120000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:
+TEL;TYPE=CELL:+15555550521
+REV:20231004T120000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Q (sticker design)
+EMAIL;TYPE=HOME:q.sticker[at]example.com
+REV:20230811T120000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Pat Pickle (plumber)
+N:Pickle;Pat;;;
+TEL;TYPE=CELL:+15555550601
+EMAIL;TYPE=HOME:pat.p@example.org
+REV:20240811T120000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+FN:Patty Pickle
+N:Pickle;Patty;;;
+TEL;TYPE=cell:+15555550602
+EMAIL;TYPE=home:pat.p@example.org
+BDAY:1985-03-15
+CATEGORIES:Service
+NOTE:Plumber. Quote on bathroom retrofit early 2024.
+REV:20240218T120000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Mezzanine Tape Studio
+ORG:Mezzanine Tape
+TEL;TYPE=STUDIOLINE:+15555550701
+EMAIL;TYPE=WORK:studio@example.net
+ADR;TYPE=WORK:;;9 Imaginary Wharf;Portland;OR;97209;United States
+REV:20240517T120000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:2.1
+FN:Quincy Old
+N:Old;Quincy;;;
+TEL;TYPE=VOICE;HOME:+15555550801
+EMAIL;TYPE=INTERNET:quincy@example.com
+REV:20140822T120000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Briar Stoneham
+N:Stoneham;Briar;;;
+ORG:Long Take Sports
+TITLE:Editor
+TEL;TYPE=CELL:+15555550901
+EMAIL;TYPE=WORK:briar.s@example.com
+REV:20180101T120000Z
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Calla R. Reyes
+N:Reyes;Calla;R.;;
+ORG:Solare Global
+TITLE:Product Manager
+TEL;TYPE=CELL:+15555550942
+EMAIL;TYPE=HOME:calla.reyes@example.net
+REV:20220919T120000Z
+END:VCARD

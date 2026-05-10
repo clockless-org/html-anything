@@ -33,6 +33,7 @@ import { parser as researchParser } from "./research.js"
 import { parser as geoParser } from "./geo.js"
 import { parser as experientialParser } from "./experiential.js"
 import { parser as aiChatExportParser } from "./ai-chat-export.js"
+import { parser as vcardParser } from "./vcard.js"
 import { parser as textParser } from "./text.js"
 
 export const parsers: Parser[] = [
@@ -61,6 +62,7 @@ export const parsers: Parser[] = [
   docxParser,               // .docx
   developerArtifactParser,  // .diff / .patch / .log / .txt — diffs, PRs, CI logs, traces
   logParser,                // .log / .txt — Apache/Nginx access logs, syslog, error/app logs
+  vcardParser,              // .vcf / .vcard — Apple/Google/iCloud/Outlook contacts exports
   textParser,               // catch-all (plain text)
 ]
 

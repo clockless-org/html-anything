@@ -185,6 +185,12 @@ h2 .emoji { margin-right: 8px; letter-spacing: 0; }
     <p>The skill walked the user through the Google Takeout flow, then designed a photo-memory page entirely from sidecar JSON — never opening the actual photos or videos. Hero strip with media / album / geotag / device counts, monthly bars stacked by photo+video, year × month heatmap, day-of-week × hour heatmap, inline-SVG places scatter (no map tiles, no geocoding), album cards with hashed-from-filename mosaic and overlap signals, device leaderboard with monthly sparklines, plus an audit row for burst clusters, edited / original pairs, possible duplicates, and missing metadata. Searchable drill-down with raw sidecar expand. No real photos, no Google Photos CDN, no Maps tiles — fully offline.</p>
   </a>
 
+  <a class="demo" href="vcard-contacts/output.html">
+    <h3><span class="emoji">👥</span>Contacts — address book audit <span class="arrow">→</span></h3>
+    <p class="meta">Contacts.vcf (34 contacts, vCard 3.0 + 4.0 mix, synthetic) → address book audit + relationship atlas</p>
+    <p>The skill walked the user through exporting from Apple Contacts / Google Contacts / iCloud, then designed a quiet, observational audit page: reachability KPIs, health-audit cards (missing phone / email / both, malformed emails, stale revisions, repeated phones / emails, note-only and nameless cards, legacy vCard 2.1), an organizations + email-domain + city + birthday + tag relationship atlas, a read-only duplicate merge worksheet that surfaces shared-phone / shared-email / normalized-name clusters side-by-side, and a searchable contact grid with phone &amp; email <strong>masked by default</strong> (per-card reveal + page-wide toggle, both local-only). Photos are flagged but never embedded. Fully offline — no avatars, no Gravatar, no geocoding.</p>
+  </a>
+
   <a class="demo" href="venmo-paypal-payments/output.html">
     <h3><span class="emoji">🤝</span>Venmo / PayPal — social payments <span class="arrow">→</span></h3>
     <p class="meta">Venmo statement CSV (180 transactions across 28 months, 5 housemates &amp; friends, synthetic) → human layer of money</p>
