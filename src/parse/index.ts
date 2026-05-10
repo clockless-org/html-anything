@@ -46,7 +46,7 @@ export const parsers: Parser[] = [
   telegramParser,           // .json — Telegram Desktop result.json
   imessageParser,           // .csv — iMessage-style / generic multi-sender chat
   geoParser,                // .gpx / .kml — routes; .csv (travel itinerary) / .json (location history)
-  experientialParser,       // .json (spotify), .csv (twitch / google-maps-stars), .xml (apple health)
+  experientialParser,       // .json (spotify, youtube-watch-history), .csv (twitch / google-maps-stars / amazon-orders), .xml (apple health)
   planningParser,           // .ics / .json (Trello) / .csv (Linear/Jira/GitHub issue trackers)
   sensitiveParser,          // .csv (lab-results), .md/.markdown (medical-visit, legal-chronology) — must run before finance & markdown
   financeParser,            // .csv / .tsv — bank txns, invoices, QuickBooks/Xero GL & P&L

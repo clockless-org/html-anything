@@ -883,6 +883,105 @@ test("kindle-highlights prompt is present on disk", async () => {
   assert.ok(stat.isFile(), "missing prompt file: kindle-highlights.md")
 })
 
+test("experiential parser routes the synthetic YouTube watch-history fixture to youtube-watch-history", async () => {
+  const fp = path.join(REPO, "examples/youtube-watch-history/input.json")
+  const parser = await pickParser(fp)
+  assert.equal(parser?.name, "experiential")
+  const out = await parser.parse(fp)
+  assert.equal(out.contentType, "youtube-watch-history")
+  assert.equal(out.data.format, "youtube-watch-history")
+  assert.ok(out.data.rows.length >= 200, `expected >= 200 watch events, got ${out.data.rows.length}`)
+  // Required pre-aggregations per prompts/youtube-watch-history.md.
+  for (const k of ["rows", "summary", "channels", "topics", "bucketTotals",
+                   "monthTotals", "weekTotals", "hourCounts", "dowCounts", "heatmap",
+                   "rediscoveries", "binges"]) {
+    assert.ok(out.data[k] !== undefined, `missing required field: ${k}`)
+  }
+  // Channel leaderboard + topic mix populated.
+  assert.ok(out.data.channels.length >= 5, `expected >= 5 channels, got ${out.data.channels.length}`)
+  assert.ok(out.data.topics.length >= 4, `expected >= 4 topic buckets, got ${out.data.topics.length}`)
+  // Histograms shaped right.
+  assert.equal(out.data.hourCounts.length, 24)
+  assert.equal(out.data.dowCounts.length, 7)
+  assert.equal(out.data.heatmap.length, 7)
+  assert.equal(out.data.heatmap[0].length, 24)
+  // Summary fields present and sane.
+  const s = out.data.summary
+  assert.ok(s.totalCount > 0)
+  assert.ok(s.uniqueChannels > 0)
+  assert.ok(s.uniqueVideos > 0)
+  assert.ok(s.dateRange.includes("→"))
+  assert.ok(typeof s.lateNightShare === "number")
+  // Fixture intentionally includes binge clusters + rediscoveries.
+  assert.ok(out.data.binges.length >= 3, `fixture should expose at least 3 binge clusters — got ${out.data.binges.length}`)
+  assert.ok(out.data.rediscoveries.length >= 3, `fixture should expose at least 3 rediscoveries — got ${out.data.rediscoveries.length}`)
+  // Removed-video entries flagged.
+  assert.ok(s.removedCount >= 1, "fixture includes a 'removed video' Takeout entry")
+  // Synthetic-data invariants — no real YouTube channels leaked.
+  const fakeChannelNames = new Set([
+    "Kestrel and Compass", "Foothold Lab", "Atlas Monthly", "Slow Ladder Studios",
+    "Backslash Burrito", "Mongoose Garage", "Verdant Repo",
+    "Mezzanine Tape", "Lofi Buoy", "Marbleweather",
+    "The Pickled Onion", "Skylight Diner", "Drysdale Variety",
+    "Indie Sliver", "NES Catacombs", "Tide Reports", "Slow Public",
+    "Spice Drawer", "Thrifty Pantry", "Quiet Engine", "Fern and Folio",
+    "Late Hour Theory", "Owl Spotted", "Folded Paper", "Brick and Mortar",
+    "Long Take Sports", "Mile and Marker", "Pocket Geography",
+  ])
+  for (const c of out.data.channels) {
+    if (c.name === "(unknown channel)") continue
+    assert.ok(fakeChannelNames.has(c.name), `non-synthetic channel name leaked: ${c.name}`)
+  }
+})
+
+test("experiential parser does NOT confuse YouTube + Spotify JSON", async () => {
+  // Spotify JSON has trackName + ms_played; YouTube JSON has products: ["YouTube"]
+  // and titleUrl. Check that detection routes each to the right contentType.
+  const ytFp = path.join(REPO, "examples/youtube-watch-history/input.json")
+  const spFp = path.join(REPO, "examples/spotify-history/input.json")
+  const yt = await pickParser(ytFp)
+  const sp = await pickParser(spFp)
+  assert.equal(yt?.name, "experiential")
+  assert.equal(sp?.name, "experiential")
+  const ytOut = await yt.parse(ytFp)
+  const spOut = await sp.parse(spFp)
+  assert.equal(ytOut.contentType, "youtube-watch-history")
+  assert.equal(spOut.contentType, "spotify-history")
+})
+
+test("youtube-watch-history prompt is present on disk", async () => {
+  const fs = await import("node:fs/promises")
+  const p = path.join(REPO, "prompts", "youtube-watch-history.md")
+  const stat = await fs.stat(p)
+  assert.ok(stat.isFile(), "missing prompt file: youtube-watch-history.md")
+})
+
+test("youtube-watch-history output.html renders the required family sections", async () => {
+  const fs = await import("node:fs/promises")
+  const html = await fs.readFile(path.join(REPO, "examples/youtube-watch-history/output.html"), "utf8")
+  for (const needle of [
+    "Activity timeline",
+    "Binge sessions",
+    "Channels",
+    "Topics",
+    "Attention audit",
+    "Browse all watches",
+    "Late-night share",
+    "Rediscovery list",
+    "Heuristic",
+    "Generated locally",
+    "youtube-watch-history",
+  ]) {
+    assert.ok(html.includes(needle), `examples/youtube-watch-history/output.html missing: ${needle}`)
+  }
+  // Hard offline rule: no Google Fonts, no YouTube CDN fetches, no iframes.
+  assert.ok(!/fonts\.googleapis\.com|fonts\.gstatic\.com/.test(html),
+    "youtube-watch-history output must not link to Google Fonts")
+  assert.ok(!/<link\s+[^>]*\bhref=/i.test(html), "youtube-watch-history output must not include any <link> tags")
+  assert.ok(!/<iframe\b/i.test(html), "youtube-watch-history output must not embed iframes")
+  assert.ok(!/<img\s+[^>]*\bsrc=/i.test(html), "youtube-watch-history output must not include external <img> tags")
+})
+
 test("kindle-highlights output.html renders the required family sections", async () => {
   const fs = await import("node:fs/promises")
   const html = await fs.readFile(path.join(REPO, "examples/kindle-highlights/output.html"), "utf8")

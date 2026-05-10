@@ -24,6 +24,12 @@
  *                          `Items.csv`). Item-level row per ordered item.
  *                          Detected by header containing `Order ID`
  *                          plus one of `ASIN` / `Title` / `Product Name`.
+ *   - youtube-watch-history — Google Takeout "YouTube and YouTube Music"
+ *                          watch-history.json. Array of objects with
+ *                          `header: "YouTube"`, `title`, `titleUrl`,
+ *                          `subtitles[0].name`, `time`, `products`. The
+ *                          parser also accepts the rare empty-subtitles
+ *                          shape (removed / private videos).
  */
 import * as fs from "node:fs/promises"
 import * as path from "node:path"
@@ -37,7 +43,7 @@ export const parser: Parser = {
     const base = path.basename(filepath).toLowerCase()
     try {
       const head = await readHead(filepath, 8192)
-      if (ext === ".json") return looksLikeSpotify(head, base)
+      if (ext === ".json") return looksLikeYoutube(head, base) || looksLikeSpotify(head, base)
       if (ext === ".csv") return looksLikeAmazon(head, base) || looksLikeTwitch(head, base) || looksLikeStars(head, base)
       if (ext === ".xml") return looksLikeAppleHealth(head)
     } catch { /* fall through */ }
@@ -51,7 +57,10 @@ export const parser: Parser = {
       sourceFile: path.basename(filepath),
       sizeBytes: Buffer.byteLength(raw, "utf8"),
     }
-    if (ext === ".json") return parseSpotify(raw, meta)
+    if (ext === ".json") {
+      if (looksLikeYoutube(raw.slice(0, 8192), base)) return parseYoutube(raw, meta)
+      return parseSpotify(raw, meta)
+    }
     if (ext === ".csv") {
       const firstLine = (raw.split(/\r?\n/, 1)[0] || "").toLowerCase()
       if (looksLikeAmazon(firstLine, base)) return parseAmazon(raw, meta)
@@ -71,6 +80,20 @@ function looksLikeSpotify(head: string, base: string): boolean {
   const hasTrackKey = /"master_metadata_track_name"|"trackName"\s*:/i.test(head)
   const hasPlayKey = /"ms_played"\s*:|"msPlayed"\s*:|"endTime"\s*:/i.test(head)
   return hasTrackKey && hasPlayKey
+}
+
+function looksLikeYoutube(head: string, base: string): boolean {
+  if (/^watch-history\.json$/i.test(base)) return true
+  // Google Takeout YouTube-distinctive shape: `header: "YouTube"` plus
+  // either a youtube.com titleUrl or a `products: ["YouTube"]` array,
+  // and a `time` ISO field. `subtitles` may be absent on removed /
+  // private videos, so don't require it.
+  const hasYoutubeHeader = /"header"\s*:\s*"YouTube(?:\s+Music)?"/.test(head)
+  const hasProductYoutube = /"products"\s*:\s*\[[^\]]*"YouTube"/.test(head)
+  const hasTitleUrl = /"titleUrl"\s*:\s*"https?:\/\/(?:www\.)?youtube\.com\/watch/.test(head)
+  const hasTime = /"time"\s*:\s*"\d{4}-\d{2}-\d{2}T/.test(head)
+  if (!hasTime) return false
+  return (hasYoutubeHeader && (hasProductYoutube || hasTitleUrl)) || hasTitleUrl
 }
 
 function looksLikeTwitch(head: string, base: string): boolean {
@@ -215,6 +238,416 @@ function parseSpotify(raw: string, meta: ParsedFile["meta"]): ParsedFile {
       dateRange,
     },
   }
+}
+
+// ----------------------------------- youtube-watch-history
+
+interface YoutubeWatch {
+  id: string                    // synthetic row id (`yt_000123`)
+  ts: string                    // ISO timestamp
+  title: string                 // cleaned title (with leading "Watched " stripped)
+  rawTitle: string              // verbatim Takeout title field
+  videoId: string | null        // 11-char YouTube id, parsed from titleUrl
+  videoUrl: string | null       // full https URL, kept for display
+  channelName: string | null
+  channelId: string | null
+  topic: string                 // heuristic bucket: learning / coding / music / cooking / news / gaming / entertainment / vlog / craft / late-night / other
+  topicInferred: boolean        // always true (no Takeout-provided category)
+  bucket: "learning" | "entertainment" | "music" | "other"
+  hour: number                  // 0–23, UTC
+  dow: number                   // 0=Sun
+  date: string                  // YYYY-MM-DD (UTC)
+  isLateNight: boolean          // 0–4 hour bucket
+  isRemoved: boolean            // missing titleUrl / "removed video" / "private video"
+}
+
+const YOUTUBE_TOPIC_KEYWORDS: Array<[RegExp, string]> = [
+  [/\b(lecture|professor|university|course|class|study|tutorial|explained|how (?:does|do|to)|why (?:does|do|is)|history of|economics|physics|chemistry|biology|geography|map|maps|antibiotic|engineer|engineering|science|theorem|proof|equation|calculus|statistics|grammar|language)\b/i, "learning"],
+  [/\b(rust|python|typescript|javascript|js\b|node|react|vue|svelte|deno|bun|kubernetes|k8s|docker|postgres|mysql|sqlite|database|sql|api|backend|frontend|devops|terraform|aws\b|azure|gcp|linux|kernel|compile|compiler|debug|debugger|ide|vscode|vim|neovim|git\b|github|gitlab|orm|async|thread|memory leak|coding|code review|side project|open source)\b/i, "coding"],
+  [/\b(music|song|songs|piano|guitar|cello|violin|orchestra|symphony|jazz|lo[-]?fi|lofi|ambient|synth|techno|house music|hip[-\s]?hop|rap\b|vinyl|record|records|choral|hour of|listening room|mix\b|mixtape|playlist)\b/i, "music"],
+  [/\b(recipe|cooking|cook|sourdough|bread|stew|soup|olive oil|knife|kitchen|baking|sandwich|breakfast|lunch|dinner|meal[-\s]?prep|leftovers|pantry|yogurt|spice)\b/i, "cooking"],
+  [/\b(news|election|budget|council|zoning|public comment|harbor|transit|water bill|local government)\b/i, "news"],
+  [/\b(game|games|gaming|playthrough|speedrun|roguelite|rpg|fps\b|nintendo|playstation|xbox|steam deck|cartridge|hard mode|boss|level)\b/i, "gaming"],
+  [/\b(workshop|woodworking|chisel|plane|workbench|origami|fold|folded|crease|sharpening|restore|restored|repair|refinish|hand tool)\b/i, "craft"],
+  [/\b(insomnia|midnight|late[-\s]?night|conspiracy|unsolved|true crime|sleep)\b/i, "late-night"],
+  [/\b(walk|river|sunday|afternoon|notes from|small studio|read this month|drawing|tree|training run|cold morning|10[-\s]?mile|5[-\s]?mile|12[-\s]?mile|mile|marathon)\b/i, "vlog"],
+  [/\b(diner|jukebox|sandwich|parade|small[-\s]?town|pancake|cinematic universe|review|reviews|reviewing)\b/i, "entertainment"],
+  [/\b(team|defense|box score|coach|league|nba|nfl|mlb|nhl|fifa|cricket|football|basketball|baseball)\b/i, "entertainment"],
+]
+
+function inferYoutubeTopic(title: string, channelName: string | null): string {
+  const haystack = (channelName ? channelName + " " : "") + title
+  for (const [re, t] of YOUTUBE_TOPIC_KEYWORDS) if (re.test(haystack)) return t
+  return "other"
+}
+
+const YT_TOPIC_BUCKET: Record<string, "learning" | "entertainment" | "music" | "other"> = {
+  learning: "learning",
+  coding: "learning",
+  news: "learning",
+  craft: "learning",
+  music: "music",
+  cooking: "entertainment",
+  gaming: "entertainment",
+  entertainment: "entertainment",
+  vlog: "entertainment",
+  "late-night": "other",
+  other: "other",
+}
+
+function parseYoutube(raw: string, meta: ParsedFile["meta"]): ParsedFile {
+  const arr = JSON.parse(raw) as unknown[]
+  if (!Array.isArray(arr)) throw new Error("youtube-watch-history: expected JSON array")
+
+  const watches: YoutubeWatch[] = []
+  let counter = 0
+  for (const r of arr) {
+    if (!r || typeof r !== "object") continue
+    const o = r as Record<string, unknown>
+    // Only YouTube products (skip stray YouTube Music search rows that may
+    // appear in the same Takeout file).
+    const products = Array.isArray(o.products) ? o.products as unknown[] : []
+    if (products.length && !products.includes("YouTube") && !products.includes("YouTube Music")) continue
+    const time = typeof o.time === "string" ? o.time : ""
+    if (!time) continue
+    const ts = new Date(time)
+    if (Number.isNaN(ts.getTime())) continue
+    const rawTitle = typeof o.title === "string" ? o.title : ""
+    const titleStripped = rawTitle.replace(/^Watched\s+/, "").trim() || "(untitled)"
+    const titleUrl = typeof o.titleUrl === "string" ? o.titleUrl : ""
+    const videoIdMatch = /[?&]v=([A-Za-z0-9_-]{6,16})/.exec(titleUrl)
+    const videoId = videoIdMatch ? videoIdMatch[1] : null
+    let channelName: string | null = null
+    let channelId: string | null = null
+    if (Array.isArray(o.subtitles) && o.subtitles.length > 0) {
+      const s = o.subtitles[0] as Record<string, unknown>
+      if (typeof s?.name === "string") channelName = s.name
+      if (typeof s?.url === "string") {
+        const m = /\/channel\/([A-Za-z0-9_-]+)/.exec(s.url)
+        if (m) channelId = m[1]
+      }
+    }
+    const isRemoved =
+      !titleUrl ||
+      /a video that has been removed/i.test(rawTitle) ||
+      /a private video/i.test(rawTitle)
+    const topic = inferYoutubeTopic(titleStripped, channelName)
+    counter += 1
+    const dow = ts.getUTCDay()
+    const hour = ts.getUTCHours()
+    watches.push({
+      id: `yt_${counter.toString().padStart(6, "0")}`,
+      ts: ts.toISOString(),
+      title: titleStripped,
+      rawTitle,
+      videoId,
+      videoUrl: titleUrl || null,
+      channelName,
+      channelId,
+      topic,
+      topicInferred: true,
+      bucket: YT_TOPIC_BUCKET[topic] || "other",
+      hour,
+      dow,
+      date: ts.toISOString().slice(0, 10),
+      isLateNight: hour < 5,
+      isRemoved,
+    })
+  }
+
+  watches.sort((a, b) => a.ts.localeCompare(b.ts))
+
+  const totalCount = watches.length
+  const dateRange = totalCount
+    ? `${watches[0].date} → ${watches[totalCount - 1].date}`
+    : "(empty)"
+  const durLabel = durationLabel(watches[0]?.date, watches[totalCount - 1]?.date)
+
+  // Channel leaderboard
+  const channelAgg: Record<string, {
+    name: string
+    channelId: string | null
+    count: number
+    first: string
+    last: string
+    topic: string
+    sampleTitles: Array<{ title: string; ts: string; videoId: string | null; topic: string }>
+  }> = {}
+  for (const w of watches) {
+    const key = w.channelName || "(unknown channel)"
+    const entry = channelAgg[key] = channelAgg[key] || {
+      name: key,
+      channelId: w.channelId,
+      count: 0,
+      first: w.date,
+      last: w.date,
+      topic: w.topic,
+      sampleTitles: [],
+    }
+    entry.count += 1
+    if (w.date < entry.first) entry.first = w.date
+    if (w.date > entry.last) entry.last = w.date
+    if (entry.sampleTitles.length < 6) {
+      entry.sampleTitles.push({ title: w.title, ts: w.ts, videoId: w.videoId, topic: w.topic })
+    }
+  }
+  const channels = Object.values(channelAgg)
+    .sort((a, b) => b.count - a.count)
+    .map(c => ({ ...c, share: totalCount ? c.count / totalCount : 0 }))
+
+  // Topic breakdown
+  const topicAgg: Record<string, { count: number; channels: Set<string> }> = {}
+  for (const w of watches) {
+    const e = topicAgg[w.topic] = topicAgg[w.topic] || { count: 0, channels: new Set<string>() }
+    e.count += 1
+    e.channels.add(w.channelName || "(unknown channel)")
+  }
+  const topics = Object.entries(topicAgg)
+    .map(([topic, e]) => ({
+      topic,
+      count: e.count,
+      channels: e.channels.size,
+      share: totalCount ? e.count / totalCount : 0,
+      bucket: YT_TOPIC_BUCKET[topic] || "other",
+    }))
+    .sort((a, b) => b.count - a.count)
+
+  // Bucket totals: learning vs entertainment vs music vs other
+  const buckets: Record<string, number> = { learning: 0, entertainment: 0, music: 0, other: 0 }
+  for (const w of watches) buckets[w.bucket] = (buckets[w.bucket] || 0) + 1
+  const bucketTotals = ["learning", "music", "entertainment", "other"].map(b => ({
+    bucket: b,
+    count: buckets[b] || 0,
+    share: totalCount ? (buckets[b] || 0) / totalCount : 0,
+  }))
+
+  // Monthly + weekly histograms (UTC).
+  const monthAgg: Record<string, { count: number; sessions: Set<string> }> = {}
+  const weekAgg: Record<string, number> = {}
+  for (const w of watches) {
+    const month = w.date.slice(0, 7)
+    const me = monthAgg[month] = monthAgg[month] || { count: 0, sessions: new Set<string>() }
+    me.count += 1
+    me.sessions.add(w.date)
+    const wk = isoWeek(w.date)
+    weekAgg[wk] = (weekAgg[wk] || 0) + 1
+  }
+  const monthTotals = Object.keys(monthAgg).sort().map(m => ({
+    month: m,
+    count: monthAgg[m].count,
+    activeDays: monthAgg[m].sessions.size,
+  }))
+  const weekTotals = Object.keys(weekAgg).sort().map(w => ({ week: w, count: weekAgg[w] }))
+
+  // Hour-of-day + day-of-week distributions.
+  const hourCounts = new Array(24).fill(0)
+  const dowCounts = new Array(7).fill(0)
+  let lateNightCount = 0
+  for (const w of watches) {
+    hourCounts[w.hour] += 1
+    dowCounts[w.dow] += 1
+    if (w.isLateNight) lateNightCount += 1
+  }
+
+  // Day-of-week × hour heatmap (7 × 24 cells).
+  const heatmap: number[][] = Array.from({ length: 7 }, () => new Array(24).fill(0))
+  for (const w of watches) heatmap[w.dow][w.hour] += 1
+
+  // Repeat-watch detection: same videoId watched 3+ times.
+  const byVid: Record<string, { videoId: string; title: string; channel: string | null; topic: string; count: number; first: string; last: string; sampleIds: string[] }> = {}
+  for (const w of watches) {
+    if (!w.videoId) continue
+    const e = byVid[w.videoId] = byVid[w.videoId] || {
+      videoId: w.videoId,
+      title: w.title,
+      channel: w.channelName,
+      topic: w.topic,
+      count: 0,
+      first: w.date,
+      last: w.date,
+      sampleIds: [],
+    }
+    e.count += 1
+    if (w.date < e.first) e.first = w.date
+    if (w.date > e.last) e.last = w.date
+    if (e.sampleIds.length < 8) e.sampleIds.push(w.id)
+  }
+  const rediscoveries = Object.values(byVid)
+    .filter(v => v.count >= 3)
+    .map(v => ({
+      videoId: v.videoId,
+      title: v.title,
+      channel: v.channel,
+      topic: v.topic,
+      timesWatched: v.count,
+      firstSeen: v.first,
+      lastSeen: v.last,
+      cadenceLabel: cadenceLabel(v.first, v.last, v.count),
+      sampleIds: v.sampleIds,
+    }))
+    .sort((a, b) => b.timesWatched - a.timesWatched)
+
+  // Binge sessions: cluster nearby watches with gaps under 45 minutes.
+  // (Per the issue spec.) Need at least 4 watches in the cluster to count.
+  const sessions = detectBingeSessions(watches, 45)
+  const binges = sessions
+    .filter(s => s.itemIds.length >= 4)
+    .map(s => ({
+      start: s.start,
+      end: s.end,
+      durationMin: s.durationMin,
+      count: s.itemIds.length,
+      topChannel: s.topChannel,
+      sampleTitles: s.sampleTitles,
+      itemIds: s.itemIds,
+    }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 12)
+
+  // Busiest day / week.
+  const dayAgg: Record<string, number> = {}
+  for (const w of watches) dayAgg[w.date] = (dayAgg[w.date] || 0) + 1
+  const busiestDay = Object.entries(dayAgg).sort((a, b) => b[1] - a[1])[0] || null
+  const busiestWeek = Object.entries(weekAgg).sort((a, b) => b[1] - a[1])[0] || null
+
+  // Removed-content count (Takeout emits these for taken-down / private videos).
+  const removedCount = watches.filter(w => w.isRemoved).length
+
+  const summary = {
+    totalCount,
+    uniqueChannels: Object.keys(channelAgg).length,
+    uniqueVideos: Object.keys(byVid).length,
+    dateRange,
+    durationLabel: durLabel,
+    activeDays: Object.keys(dayAgg).length,
+    activeMonths: monthTotals.length,
+    busiestDay: busiestDay ? { date: busiestDay[0], count: busiestDay[1] } : null,
+    busiestWeek: busiestWeek ? { week: busiestWeek[0], count: busiestWeek[1] } : null,
+    lateNightCount,
+    lateNightShare: totalCount ? lateNightCount / totalCount : 0,
+    removedCount,
+    bingeCount: binges.length,
+    rediscoveryCount: rediscoveries.length,
+    topChannel: channels[0]?.name || null,
+    topChannelShare: channels[0]?.share || 0,
+    topTopic: topics[0]?.topic || null,
+    topTopicShare: topics[0]?.share || 0,
+    learningShare: totalCount ? (buckets.learning || 0) / totalCount : 0,
+    entertainmentShare: totalCount ? (buckets.entertainment || 0) / totalCount : 0,
+    musicShare: totalCount ? (buckets.music || 0) / totalCount : 0,
+  }
+
+  const data = {
+    format: "youtube-watch-history",
+    rows: watches,
+    summary,
+    channels,
+    topics,
+    bucketTotals,
+    monthTotals,
+    weekTotals,
+    hourCounts,
+    dowCounts,
+    heatmap,
+    rediscoveries,
+    binges,
+    meta: {
+      ...meta,
+      shape: "youtube-watch-history",
+    },
+  }
+
+  const sample = {
+    summary,
+    topChannels: channels.slice(0, 8),
+    topics,
+    bucketTotals,
+    monthTotals,
+    hourCounts,
+    dowCounts,
+    rediscoveries: rediscoveries.slice(0, 6),
+    binges: binges.slice(0, 4),
+    firstWatches: watches.slice(0, 6),
+    lastWatches: watches.slice(-3),
+  }
+
+  const lateLabel = totalCount ? Math.round(summary.lateNightShare * 100) + "%" : "0%"
+  const summaryLine =
+    `YouTube watch history — ${totalCount} watches across ${summary.uniqueChannels} channels (${dateRange}, ${durLabel}). ` +
+    `Top channel: ${summary.topChannel || "—"}. Late-night share: ${lateLabel}.`
+
+  return {
+    contentType: "youtube-watch-history",
+    summary: summaryLine,
+    sample,
+    data,
+    meta: {
+      ...meta,
+      shape: "youtube-watch-history",
+      totalCount,
+      uniqueChannels: summary.uniqueChannels,
+      uniqueVideos: summary.uniqueVideos,
+      dateRange,
+    },
+  }
+}
+
+interface BingeSession {
+  start: string
+  end: string
+  durationMin: number
+  itemIds: string[]
+  topChannel: string | null
+  sampleTitles: string[]
+}
+
+function detectBingeSessions(watches: YoutubeWatch[], gapMinutes: number): BingeSession[] {
+  if (!watches.length) return []
+  const sorted = [...watches].sort((a, b) => a.ts.localeCompare(b.ts))
+  const gapMs = gapMinutes * 60_000
+  const sessions: BingeSession[] = []
+  let cur: { start: number; end: number; ids: string[]; channels: Record<string, number>; titles: string[] } | null = null
+  for (const w of sorted) {
+    const t = Date.parse(w.ts)
+    if (!Number.isFinite(t)) continue
+    if (cur && t - cur.end <= gapMs) {
+      cur.end = t
+      cur.ids.push(w.id)
+      const ch = w.channelName || "(unknown channel)"
+      cur.channels[ch] = (cur.channels[ch] || 0) + 1
+      if (cur.titles.length < 6) cur.titles.push(w.title)
+    } else {
+      if (cur) sessions.push(finalizeSession(cur))
+      cur = { start: t, end: t, ids: [w.id], channels: {}, titles: [w.title] }
+      const ch = w.channelName || "(unknown channel)"
+      cur.channels[ch] = 1
+    }
+  }
+  if (cur) sessions.push(finalizeSession(cur))
+  return sessions
+}
+
+function finalizeSession(s: { start: number; end: number; ids: string[]; channels: Record<string, number>; titles: string[] }): BingeSession {
+  const top = Object.entries(s.channels).sort((a, b) => b[1] - a[1])[0]
+  return {
+    start: new Date(s.start).toISOString(),
+    end: new Date(s.end).toISOString(),
+    durationMin: Math.round((s.end - s.start) / 60_000),
+    itemIds: s.ids,
+    topChannel: top ? top[0] : null,
+    sampleTitles: s.titles.slice(0, 6),
+  }
+}
+
+function isoWeek(dateYmd: string): string {
+  const d = new Date(dateYmd + "T00:00:00Z")
+  // Thursday in current week decides the year per ISO 8601.
+  const thu = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()))
+  const day = thu.getUTCDay() || 7
+  thu.setUTCDate(thu.getUTCDate() + 4 - day)
+  const yearStart = new Date(Date.UTC(thu.getUTCFullYear(), 0, 1))
+  const week = Math.ceil((((thu.getTime() - yearStart.getTime()) / 86400000) + 1) / 7)
+  return thu.getUTCFullYear() + "-W" + String(week).padStart(2, "0")
 }
 
 // ----------------------------------- twitch

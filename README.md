@@ -105,6 +105,7 @@ The result is a live `.html` file, not markdown: inline CSS, inline JS, inline d
 | 🟣 | Twitch history | Twitch data request export, viewing history, chat history | [Twitch history](https://clockless-org.github.io/html-anything/examples/twitch-history/output.html) |
 | ❤️ | Apple Health | Apple Health `export.zip`, `export.xml`, workout routes | [Health story](https://clockless-org.github.io/html-anything/examples/iphone-health/output.html) |
 | 📦 | Amazon order history | Amazon "Request Your Information" / legacy Order Reports CSV (`Retail.OrderHistory.*.csv`, `Items.csv`) | [Amazon orders](https://clockless-org.github.io/html-anything/examples/amazon-orders/output.html) |
+| ▶️ | YouTube watch history | Google Takeout `Takeout/YouTube and YouTube Music/history/watch-history.json` | [YouTube watch history](https://clockless-org.github.io/html-anything/examples/youtube-watch-history/output.html) |
 | 📖 | Kindle highlights | `My Clippings.txt` from a Kindle device, plus per-book Kindle Notebook HTML emails | [Kindle highlights](https://clockless-org.github.io/html-anything/examples/kindle-highlights/output.html) |
 | 🌐 | GitHub repo URL | `github.com/owner/repo` URLs, best in skill mode | Live HTML generated from the repo |
 | 🌐 | Article URL | Blog posts, news pages, long-form webpages, best in skill mode | Live HTML generated from the page |
