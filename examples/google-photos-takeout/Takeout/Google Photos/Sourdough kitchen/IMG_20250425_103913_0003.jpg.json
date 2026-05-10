@@ -1,0 +1,46 @@
+{
+  "title": "IMG_20250425_103913_0003.jpg",
+  "description": "",
+  "imageViews": "6",
+  "creationTime": {
+    "timestamp": "1745578607",
+    "formatted": "25 Apr 2025 11:01:16 UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1745577553",
+    "formatted": "25 Apr 2025 10:39:13 UTC"
+  },
+  "geoData": {
+    "latitude": 0,
+    "longitude": 0,
+    "altitude": 0,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "geoDataExif": {
+    "latitude": 0,
+    "longitude": 0,
+    "altitude": 0,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "url": "https://photos.google.com/photo/SYNTHETIC_IMG_20250425_103913_0003_jpg",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": ""
+      },
+      "deviceType": "CAMERA"
+    }
+  },
+  "favorited": false,
+  "archived": false,
+  "trashed": false,
+  "exif": {
+    "cameraMake": "Canon",
+    "cameraModel": "Canon EOS 70D",
+    "lens": "EF 24-70mm",
+    "focalLength": 49,
+    "iso": 196
+  }
+}

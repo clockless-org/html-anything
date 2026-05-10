@@ -1,0 +1,32 @@
+{
+  "title": "IMG_20240509_070554_0012.jpg",
+  "description": "",
+  "imageViews": "14",
+  "creationTime": {
+    "timestamp": "1715239044",
+    "formatted": "09 May 2024 07:52:24 UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1715238354",
+    "formatted": "09 May 2024 07:05:54 UTC"
+  },
+  "geoData": {
+    "latitude": 42.092172,
+    "longitude": 12.450653,
+    "altitude": 144.2,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "geoDataExif": {
+    "latitude": 42.092172,
+    "longitude": 12.450653,
+    "altitude": 144.2,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "url": "https://photos.google.com/photo/SYNTHETIC_IMG_20240509_070554_0012_jpg",
+  "googlePhotosOrigin": {},
+  "favorited": false,
+  "archived": false,
+  "trashed": false
+}

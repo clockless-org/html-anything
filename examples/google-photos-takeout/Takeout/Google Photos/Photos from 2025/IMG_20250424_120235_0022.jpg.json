@@ -1,0 +1,32 @@
+{
+  "title": "IMG_20250424_120235_0022.jpg",
+  "description": "",
+  "imageViews": "12",
+  "creationTime": {
+    "timestamp": "1745498257",
+    "formatted": "24 Apr 2025 12:24:50 UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1745496155",
+    "formatted": "24 Apr 2025 12:02:35 UTC"
+  },
+  "geoData": {
+    "latitude": 35.696388,
+    "longitude": 139.620246,
+    "altitude": 50.8,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "geoDataExif": {
+    "latitude": 35.696388,
+    "longitude": 139.620246,
+    "altitude": 50.8,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "url": "https://photos.google.com/photo/SYNTHETIC_IMG_20250424_120235_0022_jpg",
+  "googlePhotosOrigin": {},
+  "favorited": false,
+  "archived": false,
+  "trashed": false
+}

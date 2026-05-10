@@ -1,0 +1,39 @@
+{
+  "title": "IMG_20250305_062225_0012.jpg",
+  "description": "",
+  "imageViews": "0",
+  "creationTime": {
+    "timestamp": "1741159089",
+    "formatted": "05 Mar 2025 07:00:54 UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1741155745",
+    "formatted": "05 Mar 2025 06:22:25 UTC"
+  },
+  "geoData": {
+    "latitude": 30.256605,
+    "longitude": -97.748883,
+    "altitude": 15.1,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "geoDataExif": {
+    "latitude": 30.256605,
+    "longitude": -97.748883,
+    "altitude": 15.1,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "url": "https://photos.google.com/photo/SYNTHETIC_IMG_20250305_062225_0012_jpg",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": "Camera"
+      },
+      "deviceType": "ANDROID_PHONE"
+    }
+  },
+  "favorited": false,
+  "archived": false,
+  "trashed": false
+}

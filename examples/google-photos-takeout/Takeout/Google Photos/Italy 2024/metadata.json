@@ -1,0 +1,17 @@
+{
+  "title": "Italy 2024",
+  "description": "",
+  "access": "protected",
+  "date": {
+    "timestamp": "1715558400",
+    "formatted": "13 May 2024 00:00:00 UTC"
+  },
+  "location": "",
+  "geoData": {
+    "latitude": 41.9028,
+    "longitude": 12.4964,
+    "altitude": 0,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  }
+}

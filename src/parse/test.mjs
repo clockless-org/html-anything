@@ -1038,6 +1038,104 @@ test("social-payments parser routes a synthetic Venmo CSV", async () => {
   }
 })
 
+test("photos-takeout parser routes the synthetic Google Photos Takeout fixture to google-photos-takeout", async () => {
+  const { parser } = await import("../../dist/parse/photos-takeout.js")
+  const fp = path.join(REPO, "examples/google-photos-takeout/Takeout/Google Photos")
+  assert.equal(parser.name, "google-photos-takeout")
+  assert.ok(await parser.detect(fp), "photos-takeout parser should detect the fixture directory")
+  const out = await parser.parse(fp)
+  assert.equal(out.contentType, "google-photos-takeout")
+  assert.equal(out.data.format, "google-photos-takeout")
+  assert.ok(out.data.rows.length >= 200, `expected >= 200 media rows, got ${out.data.rows.length}`)
+  // Required pre-aggregations per prompts/google-photos-takeout.md.
+  for (const k of ["rows", "summary", "albums", "devices",
+                   "monthTotals", "yearTotals", "yearMonthHeatmap",
+                   "hourCounts", "dowCounts", "heatmap",
+                   "places", "bursts", "editedPairs", "duplicates"]) {
+    assert.ok(out.data[k] !== undefined, `missing required field: ${k}`)
+  }
+  // Albums + devices populated.
+  assert.ok(out.data.albums.length >= 5, `expected >= 5 albums, got ${out.data.albums.length}`)
+  assert.ok(out.data.devices.length >= 3, `expected >= 3 devices, got ${out.data.devices.length}`)
+  // Histograms shaped right.
+  assert.equal(out.data.hourCounts.length, 24)
+  assert.equal(out.data.dowCounts.length, 7)
+  assert.equal(out.data.heatmap.length, 7)
+  assert.equal(out.data.heatmap[0].length, 24)
+  assert.ok(out.data.yearMonthHeatmap.years.length >= 1)
+  // Summary fields present and sane.
+  const s = out.data.summary
+  assert.ok(s.totalCount > 0)
+  assert.ok(s.photoCount > 0)
+  assert.ok(s.videoCount > 0)
+  assert.ok(s.albumCount >= 5)
+  assert.ok(s.deviceCount >= 3)
+  assert.ok(s.dateRange.includes("→"))
+  assert.ok(typeof s.geoShare === "number" && s.geoShare > 0)
+  // Fixture intentionally exercises bursts, duplicates, edited pairs, and missing-metadata.
+  assert.ok(out.data.bursts.length >= 2, `fixture should expose >= 2 burst clusters — got ${out.data.bursts.length}`)
+  assert.ok(out.data.editedPairs.length >= 1, `fixture should expose >= 1 edited/original pair — got ${out.data.editedPairs.length}`)
+  assert.ok(out.data.duplicates.length >= 1, `fixture should expose >= 1 duplicate group — got ${out.data.duplicates.length}`)
+  assert.ok(s.missingTimestampCount >= 1, "fixture seeds at least one record without photoTakenTime")
+  assert.ok(s.missingGeoCount >= 1, "fixture has photos with no GPS")
+  // Places: clusters + bbox present.
+  assert.ok(out.data.places.clusters.length >= 1)
+  assert.ok(out.data.places.bbox)
+  // Synthetic-data invariants — no real device or album names leaked.
+  const fakeAlbumNames = new Set([
+    "Photos from 2024", "Photos from 2025", "Iceland 2024", "Italy 2024",
+    "Sourdough kitchen", "Family", "Austin coffee crawl",
+  ])
+  for (const a of out.data.albums) {
+    assert.ok(fakeAlbumNames.has(a.name), `non-synthetic album name leaked: ${a.name}`)
+  }
+  for (const r of out.data.rows.slice(0, 50)) {
+    assert.ok(/^IMG_|^VID_/.test(r.filename) || /SYNTHETIC/i.test(r.filename) || /NOTIME/i.test(r.filename),
+      `non-synthetic filename pattern: ${r.filename}`)
+  }
+})
+
+test("photos-takeout parser refuses an empty directory and a non-directory", async () => {
+  const { parser } = await import("../../dist/parse/photos-takeout.js")
+  // Empty: docx examples dir has no sidecar JSON.
+  assert.equal(await parser.detect(path.join(REPO, "examples/docx")), false)
+  // File: not a directory.
+  assert.equal(await parser.detect(path.join(REPO, "examples/spotify-history/input.json")), false)
+})
+
+test("google-photos-takeout prompt is present on disk", async () => {
+  const fs = await import("node:fs/promises")
+  const p = path.join(REPO, "prompts", "google-photos-takeout.md")
+  const stat = await fs.stat(p)
+  assert.ok(stat.isFile(), "missing prompt file: google-photos-takeout.md")
+})
+
+test("google-photos-takeout output.html renders the required family sections + offline rules", async () => {
+  const fs = await import("node:fs/promises")
+  const html = await fs.readFile(path.join(REPO, "examples/google-photos-takeout/output.html"), "utf8")
+  for (const needle of [
+    "Activity timeline",
+    "Places",
+    "Albums",
+    "Cameras &amp; devices",
+    "Bursts &amp; duplicates",
+    "Browse all media",
+    "Heuristic",
+    "Generated locally",
+    "google-photos-takeout",
+    "GOOGLE PHOTOS TAKEOUT",
+    "Geotag coverage",
+  ]) {
+    assert.ok(html.includes(needle), `examples/google-photos-takeout/output.html missing: ${needle}`)
+  }
+  // Hard offline rules: no network resources, no map tiles, no embedded photos.
+  assert.ok(!/<link\s+[^>]*\bhref=/i.test(html), "google-photos-takeout output must not include any <link> tags")
+  assert.ok(!/<iframe\b/i.test(html), "google-photos-takeout output must not embed iframes")
+  assert.ok(!/<img\s+[^>]*\bsrc=/i.test(html), "google-photos-takeout output must not include any <img src> tags")
+  assert.ok(!/fonts\.googleapis\.com|fonts\.gstatic\.com/.test(html),
+    "google-photos-takeout output must not link to Google Fonts")
+})
+
 test("venmo-paypal-payments output.html renders the required family + social sections", async () => {
   const fs = await import("node:fs/promises")
   const html = await fs.readFile(path.join(REPO, "examples/venmo-paypal-payments/output.html"), "utf8")

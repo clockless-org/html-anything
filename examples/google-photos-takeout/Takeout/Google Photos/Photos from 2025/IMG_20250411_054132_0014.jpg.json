@@ -1,0 +1,32 @@
+{
+  "title": "IMG_20250411_054132_0014.jpg",
+  "description": "",
+  "imageViews": "2",
+  "creationTime": {
+    "timestamp": "1744352858",
+    "formatted": "11 Apr 2025 06:06:51 UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1744350092",
+    "formatted": "11 Apr 2025 05:41:32 UTC"
+  },
+  "geoData": {
+    "latitude": 0,
+    "longitude": 0,
+    "altitude": 0,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "geoDataExif": {
+    "latitude": 0,
+    "longitude": 0,
+    "altitude": 0,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "url": "https://photos.google.com/photo/SYNTHETIC_IMG_20250411_054132_0014_jpg",
+  "googlePhotosOrigin": {},
+  "favorited": false,
+  "archived": false,
+  "trashed": false
+}

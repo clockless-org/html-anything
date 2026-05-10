@@ -1,0 +1,17 @@
+{
+  "title": "Iceland 2024",
+  "description": "",
+  "access": "protected",
+  "date": {
+    "timestamp": "1726574400",
+    "formatted": "17 Sep 2024 12:00:00 UTC"
+  },
+  "location": "",
+  "geoData": {
+    "latitude": 64.1466,
+    "longitude": -21.9426,
+    "altitude": 0,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  }
+}

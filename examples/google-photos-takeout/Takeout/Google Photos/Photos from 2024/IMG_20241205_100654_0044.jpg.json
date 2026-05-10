@@ -1,0 +1,39 @@
+{
+  "title": "IMG_20241205_100654_0044.jpg",
+  "description": "",
+  "imageViews": "4",
+  "creationTime": {
+    "timestamp": "1733394627",
+    "formatted": "05 Dec 2024 10:52:56 UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1733393214",
+    "formatted": "05 Dec 2024 10:06:54 UTC"
+  },
+  "geoData": {
+    "latitude": 42.05202,
+    "longitude": 12.376573,
+    "altitude": 80.5,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "geoDataExif": {
+    "latitude": 42.05202,
+    "longitude": 12.376573,
+    "altitude": 80.5,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "url": "https://photos.google.com/photo/SYNTHETIC_IMG_20241205_100654_0044_jpg",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": "DCIM"
+      },
+      "deviceType": "IOS_PHONE"
+    }
+  },
+  "favorited": false,
+  "archived": false,
+  "trashed": false
+}

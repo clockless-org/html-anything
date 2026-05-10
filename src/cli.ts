@@ -13,9 +13,10 @@ import * as fs from "node:fs/promises"
 import * as path from "node:path"
 import { pickParser } from "./parse/index.js"
 import { parser as knowledgeBaseParser } from "./parse/knowledge-base.js"
+import { parser as photosTakeoutParser } from "./parse/photos-takeout.js"
 import { htmlize } from "./htmlize.js"
 import { makeLlm } from "./llm.js"
-import type { ConverterOptions } from "./types.js"
+import type { ConverterOptions, Parser } from "./types.js"
 
 interface ParsedArgs {
   input: string
@@ -93,12 +94,17 @@ async function main() {
     return
   }
 
-  const parser = stat.isDirectory()
-    ? knowledgeBaseParser
-    : await pickParser(filepath)
+  let parser: Parser | null
+  if (stat.isDirectory()) {
+    if (photosTakeoutParser.detect && await photosTakeoutParser.detect(filepath)) parser = photosTakeoutParser
+    else if (knowledgeBaseParser.detect && await knowledgeBaseParser.detect(filepath)) parser = knowledgeBaseParser
+    else parser = null
+  } else {
+    parser = await pickParser(filepath)
+  }
   if (!parser) {
     const reason = stat.isDirectory()
-      ? "(no markdown files found)"
+      ? "(directory: no Google Photos sidecars and no markdown files found)"
       : (path.extname(filepath) || "(no extension)")
     console.error(`html-anything: no parser for ${reason}`)
     process.exit(1)

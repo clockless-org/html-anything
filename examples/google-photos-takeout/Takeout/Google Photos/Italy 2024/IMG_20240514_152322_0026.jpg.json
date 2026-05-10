@@ -1,0 +1,36 @@
+{
+  "title": "IMG_20240514_152322_0026.jpg",
+  "description": "",
+  "imageViews": "4",
+  "creationTime": {
+    "timestamp": "1715700966",
+    "formatted": "14 May 2024 16:18:16 UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1715700202",
+    "formatted": "14 May 2024 15:23:22 UTC"
+  },
+  "geoData": {
+    "latitude": 41.945797,
+    "longitude": 12.650563,
+    "altitude": 130.1,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "geoDataExif": {
+    "latitude": 41.945797,
+    "longitude": 12.650563,
+    "altitude": 130.1,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "url": "https://photos.google.com/photo/SYNTHETIC_IMG_20240514_152322_0026_jpg",
+  "googlePhotosOrigin": {
+    "webUpload": {
+      "computerUpload": {}
+    }
+  },
+  "favorited": false,
+  "archived": false,
+  "trashed": false
+}

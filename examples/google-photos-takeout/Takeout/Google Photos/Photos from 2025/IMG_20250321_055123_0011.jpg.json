@@ -1,0 +1,32 @@
+{
+  "title": "IMG_20250321_055123_0011.jpg",
+  "description": "",
+  "imageViews": "8",
+  "creationTime": {
+    "timestamp": "1742538183",
+    "formatted": "21 Mar 2025 06:22:40 UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1742536283",
+    "formatted": "21 Mar 2025 05:51:23 UTC"
+  },
+  "geoData": {
+    "latitude": 40.419938,
+    "longitude": -3.744104,
+    "altitude": 171.9,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "geoDataExif": {
+    "latitude": 40.419938,
+    "longitude": -3.744104,
+    "altitude": 171.9,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "url": "https://photos.google.com/photo/SYNTHETIC_IMG_20250321_055123_0011_jpg",
+  "googlePhotosOrigin": {},
+  "favorited": false,
+  "archived": false,
+  "trashed": false
+}

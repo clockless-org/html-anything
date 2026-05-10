@@ -1,0 +1,32 @@
+{
+  "title": "IMG_20240512_081428_0028.heic",
+  "description": "",
+  "imageViews": "10",
+  "creationTime": {
+    "timestamp": "1715503300",
+    "formatted": "12 May 2024 09:04:28 UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1715501668",
+    "formatted": "12 May 2024 08:14:28 UTC"
+  },
+  "geoData": {
+    "latitude": 41.827306,
+    "longitude": 12.685516,
+    "altitude": 199.3,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "geoDataExif": {
+    "latitude": 41.827306,
+    "longitude": 12.685516,
+    "altitude": 199.3,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "url": "https://photos.google.com/photo/SYNTHETIC_IMG_20240512_081428_0028_heic",
+  "googlePhotosOrigin": {},
+  "favorited": false,
+  "archived": false,
+  "trashed": false
+}

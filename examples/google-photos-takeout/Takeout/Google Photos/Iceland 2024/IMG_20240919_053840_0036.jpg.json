@@ -1,0 +1,32 @@
+{
+  "title": "IMG_20240919_053840_0036.jpg",
+  "description": "",
+  "imageViews": "11",
+  "creationTime": {
+    "timestamp": "1726724784",
+    "formatted": "19 Sep 2024 06:31:15 UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1726724320",
+    "formatted": "19 Sep 2024 05:38:40 UTC"
+  },
+  "geoData": {
+    "latitude": 64.271549,
+    "longitude": -21.668699,
+    "altitude": 56.4,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "geoDataExif": {
+    "latitude": 64.271549,
+    "longitude": -21.668699,
+    "altitude": 56.4,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "url": "https://photos.google.com/photo/SYNTHETIC_IMG_20240919_053840_0036_jpg",
+  "googlePhotosOrigin": {},
+  "favorited": false,
+  "archived": false,
+  "trashed": false
+}

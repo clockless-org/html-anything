@@ -1,0 +1,32 @@
+{
+  "title": "IMG_20250326_003233_0024.jpg",
+  "description": "",
+  "imageViews": "6",
+  "creationTime": {
+    "timestamp": "1742952677",
+    "formatted": "26 Mar 2025 00:34:31 UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1742949153",
+    "formatted": "26 Mar 2025 00:32:33 UTC"
+  },
+  "geoData": {
+    "latitude": 30.25222,
+    "longitude": -97.697625,
+    "altitude": 163.1,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "geoDataExif": {
+    "latitude": 30.25222,
+    "longitude": -97.697625,
+    "altitude": 163.1,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "url": "https://photos.google.com/photo/SYNTHETIC_IMG_20250326_003233_0024_jpg",
+  "googlePhotosOrigin": {},
+  "favorited": false,
+  "archived": false,
+  "trashed": false
+}

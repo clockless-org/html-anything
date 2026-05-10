@@ -1,0 +1,17 @@
+{
+  "title": "Austin coffee crawl",
+  "description": "",
+  "access": "protected",
+  "date": {
+    "timestamp": "1740268800",
+    "formatted": "23 Feb 2025 00:00:00 UTC"
+  },
+  "location": "",
+  "geoData": {
+    "latitude": 30.2672,
+    "longitude": -97.7431,
+    "altitude": 0,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  }
+}

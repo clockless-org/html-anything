@@ -1,0 +1,17 @@
+{
+  "title": "Sourdough kitchen",
+  "description": "",
+  "access": "protected",
+  "date": {
+    "timestamp": "1726272000",
+    "formatted": "14 Sep 2024 00:00:00 UTC"
+  },
+  "location": "",
+  "geoData": {
+    "latitude": 30.2672,
+    "longitude": -97.7431,
+    "altitude": 0,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  }
+}

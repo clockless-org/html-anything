@@ -1,0 +1,17 @@
+{
+  "title": "Family",
+  "description": "",
+  "access": "protected",
+  "date": {
+    "timestamp": "1731369600",
+    "formatted": "12 Nov 2024 00:00:00 UTC"
+  },
+  "location": "",
+  "geoData": {
+    "latitude": 30.2672,
+    "longitude": -97.7431,
+    "altitude": 0,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  }
+}

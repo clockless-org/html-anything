@@ -1,0 +1,39 @@
+{
+  "title": "IMG_20241113_215407_0088-dup.heic",
+  "description": "",
+  "imageViews": "1",
+  "creationTime": {
+    "timestamp": "1731535477",
+    "formatted": "13 Nov 2024 21:59:10 UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1731534847",
+    "formatted": "13 Nov 2024 21:54:07 UTC"
+  },
+  "geoData": {
+    "latitude": 0,
+    "longitude": 0,
+    "altitude": 0,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "geoDataExif": {
+    "latitude": 0,
+    "longitude": 0,
+    "altitude": 0,
+    "latitudeSpan": 0,
+    "longitudeSpan": 0
+  },
+  "url": "https://photos.google.com/photo/SYNTHETIC_IMG_20241113_215407_0088_dup_heic",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": "Camera"
+      },
+      "deviceType": "ANDROID_PHONE"
+    }
+  },
+  "favorited": false,
+  "archived": false,
+  "trashed": false
+}
