@@ -10,6 +10,7 @@ import * as path from "node:path"
 import type { Parser } from "../types.js"
 import { parser as emailParser } from "./email.js"
 import { parser as transcriptParser } from "./transcript.js"
+import { parser as kindleParser } from "./kindle.js"
 import { parser as wechatParser } from "./wechat.js"
 import { parser as whatsappParser } from "./whatsapp.js"
 import { parser as slackParser } from "./slack.js"
@@ -37,6 +38,7 @@ export const parsers: Parser[] = [
   emailParser,              // .eml / .mbox (also catches Gmail Takeout exports)
   transcriptParser,         // .vtt / .srt / timecoded .txt (Zoom, Teams, Meet, YouTube)
   aiChatExportParser,       // .json (ChatGPT / Claude / generic conversations) / .md / .txt — must run before wechat/whatsapp/slack/sensitive/markdown/json
+  kindleParser,             // .txt (My Clippings.txt) / .html (Kindle Notebook email) — must run before whatsapp/research/text so Kindle clippings aren't mis-routed
   wechatParser,             // .html/.docx/.csv/.txt/.json — WeChatMsg / 留痕 relationship exports
   whatsappParser,           // .txt with timestamp prefix
   slackParser,              // .json — Slack channel export array

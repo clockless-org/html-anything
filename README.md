@@ -105,6 +105,7 @@ The result is a live `.html` file, not markdown: inline CSS, inline JS, inline d
 | 🟣 | Twitch history | Twitch data request export, viewing history, chat history | [Twitch history](https://clockless-org.github.io/html-anything/examples/twitch-history/output.html) |
 | ❤️ | Apple Health | Apple Health `export.zip`, `export.xml`, workout routes | [Health story](https://clockless-org.github.io/html-anything/examples/iphone-health/output.html) |
 | 📦 | Amazon order history | Amazon "Request Your Information" / legacy Order Reports CSV (`Retail.OrderHistory.*.csv`, `Items.csv`) | [Amazon orders](https://clockless-org.github.io/html-anything/examples/amazon-orders/output.html) |
+| 📖 | Kindle highlights | `My Clippings.txt` from a Kindle device, plus per-book Kindle Notebook HTML emails | [Kindle highlights](https://clockless-org.github.io/html-anything/examples/kindle-highlights/output.html) |
 | 🌐 | GitHub repo URL | `github.com/owner/repo` URLs, best in skill mode | Live HTML generated from the repo |
 | 🌐 | Article URL | Blog posts, news pages, long-form webpages, best in skill mode | Live HTML generated from the page |
 | 🩺 | Sensitive records | Medical visit notes, lab-results CSVs, legal chronologies | [Medical visit](https://clockless-org.github.io/html-anything/examples/medical-visit/output.html), [lab results](https://clockless-org.github.io/html-anything/examples/lab-results/output.html), [legal chronology](https://clockless-org.github.io/html-anything/examples/legal-chronology/output.html) |

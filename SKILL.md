@@ -122,6 +122,7 @@ client-side rendering of the drill-down sections.
 |---|---|
 | [`prompts/google-maps-stars.md`](./prompts/google-maps-stars.md) | Google Maps stars / saved places (via Google Takeout) — interactive personal world atlas |
 | [`prompts/amazon-orders.md`](./prompts/amazon-orders.md) | Amazon "Request Your Information" / legacy Order Reports CSV — personal commerce memory + money audit (spend over years, reorder DNA, categories, recipients, returns / refunds, searchable item drill-down) |
+| [`prompts/kindle-highlights.md`](./prompts/kindle-highlights.md) | Kindle `My Clippings.txt` (USB) + per-book Kindle Notebook HTML email export — personal reading-memory atlas (books shelf, monthly reading rhythm + hour-of-day strip, heuristic theme clusters, searchable quote browser with Copy-as-Markdown) |
 | [`prompts/spotify-history.md`](./prompts/spotify-history.md) | Spotify Privacy export (Account Data or Extended Streaming History) — year-by-year scroll experience |
 | [`prompts/twitch-history.md`](./prompts/twitch-history.md) | Twitch data request export (viewing history + chat) — top streamers wall, chat heatmap |
 | [`prompts/iphone-health.md`](./prompts/iphone-health.md) | Apple Health `export.zip` (export.xml + workout-routes/) — personal health story with rings + sleep + routes |

@@ -805,6 +805,101 @@ test("ai-chat-export family prompts are present on disk", async () => {
   }
 })
 
+test("kindle parser routes My Clippings.txt to kindle-highlights and pre-aggregates the family contract", async () => {
+  const fp = path.join(REPO, "examples/kindle-highlights/input.txt")
+  const parser = await pickParser(fp)
+  assert.equal(parser?.name, "kindle")
+  const out = await parser.parse(fp)
+  assert.equal(out.contentType, "kindle-highlights")
+  assert.equal(out.data.format, "kindle-highlights")
+  assert.equal(out.data.subtype, "my-clippings")
+  assert.ok(out.data.rows.length >= 80, `expected >= 80 clippings, got ${out.data.rows.length}`)
+  // Required pre-aggregations per prompts/kindle-highlights.md.
+  for (const k of ["rows", "books", "authors", "yearTotals", "monthTotals", "hourCounts", "themeClusters", "duplicateGroups", "summary"]) {
+    assert.ok(out.data[k] !== undefined, `missing required field: ${k}`)
+  }
+  // Books, authors, types all populate.
+  assert.ok(out.data.books.length >= 5, `expected >= 5 books, got ${out.data.books.length}`)
+  assert.ok(out.data.authors.length >= 4, `expected >= 4 authors, got ${out.data.authors.length}`)
+  assert.equal(out.data.hourCounts.length, 24)
+  // Summary fields present and sane.
+  const s = out.data.summary
+  assert.ok(s.highlightCount > 0, "missing highlights")
+  assert.ok(s.noteCount > 0, "missing notes")
+  assert.ok(s.bookmarkCount > 0, "missing bookmarks")
+  assert.ok(typeof s.topAuthor === "string" && s.topAuthor.length > 0, "missing topAuthor")
+  assert.ok(s.duplicateGroupCount >= 1, "fixture intentionally includes a duplicate-extension highlight")
+  assert.ok(s.notesAttachedCount >= 1, "fixture includes notes attached to highlights")
+  assert.ok(s.bookmarksOnlyBookCount >= 1, "fixture includes a bookmarks-only book")
+  // Year + month totals follow stacked shape.
+  for (const y of out.data.yearTotals) {
+    for (const k of ["year", "highlights", "notes", "bookmarks"]) {
+      assert.ok(k in y, `yearTotals missing ${k}`)
+    }
+  }
+  // Theme clusters labeled with `key` + `keyword` + counts.
+  for (const t of out.data.themeClusters) {
+    for (const k of ["key", "keyword", "count", "bookIds", "sampleClippingIds"]) {
+      assert.ok(k in t, `themeCluster missing ${k}`)
+    }
+    assert.ok(t.count >= 3, `cluster ${t.key} below min count`)
+  }
+  // Non-Latin clippings are tagged so the keyword roll-up can skip them.
+  const nonLatin = out.data.rows.filter(r => r.lang === "non-latin")
+  assert.ok(nonLatin.length >= 1, "fixture includes a non-Latin highlight (Korean)")
+  // Synthetic-data invariants — every author is from our fake list (no real Kindle leaks).
+  const fakeAuthors = new Set([
+    "Jia Mwangi", "Aleksandr Volkov", "Maeve Tindall", "Hanan Boutros",
+    "Mira Salonen", "Calla Reyes", "이지원",
+  ])
+  for (const a of out.data.authors) {
+    assert.ok(fakeAuthors.has(a.name), `non-synthetic author leaked: ${a.name}`)
+  }
+})
+
+test("kindle parser refuses a generic .txt that does not look like My Clippings", async () => {
+  const { parser } = await import("../../dist/parse/kindle.js")
+  const fp = path.join(REPO, "examples/whatsapp/input.txt")
+  // WhatsApp .txt has no `==========` separator and no Highlight/Note kind.
+  const ok = await parser.detect(fp)
+  assert.equal(ok, false, "kindle parser should not claim a WhatsApp chat")
+})
+
+test("registry order: kindle comes before whatsapp + text + research", async () => {
+  const { parsers } = await import("../../dist/parse/index.js")
+  const names = parsers.map(p => p.name)
+  const kindleIdx = names.indexOf("kindle")
+  assert.ok(kindleIdx >= 0, `parsers missing 'kindle' — got ${names.join(", ")}`)
+  for (const after of ["whatsapp", "text", "research"]) {
+    const i = names.indexOf(after)
+    assert.ok(i > kindleIdx, `kindle must come before '${after}' — got kindle@${kindleIdx}, ${after}@${i}`)
+  }
+})
+
+test("kindle-highlights prompt is present on disk", async () => {
+  const fs = await import("node:fs/promises")
+  const p = path.join(REPO, "prompts", "kindle-highlights.md")
+  const stat = await fs.stat(p)
+  assert.ok(stat.isFile(), "missing prompt file: kindle-highlights.md")
+})
+
+test("kindle-highlights output.html renders the required family sections", async () => {
+  const fs = await import("node:fs/promises")
+  const html = await fs.readFile(path.join(REPO, "examples/kindle-highlights/output.html"), "utf8")
+  for (const needle of [
+    "Reading rhythm",
+    "Bookshelf",
+    "Themes you return to",
+    "Quote browser",
+    "Heuristic",
+    "Hour-of-day",
+    "Generated locally",
+    "kindle-highlights",
+  ]) {
+    assert.ok(html.includes(needle), `examples/kindle-highlights/output.html missing: ${needle}`)
+  }
+})
+
 test("ai-chat-export output.html files render the required family sections", async () => {
   const fs = await import("node:fs/promises")
   for (const rel of ["examples/chatgpt-export/output.html", "examples/ai-chat-log/output.html"]) {
