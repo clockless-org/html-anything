@@ -359,38 +359,70 @@ html[data-ha-style="document"] header.hero::before {
 
 html[data-ha-style="developer"] {
   color-scheme: dark;
-  --ha-style-accent: #38bdf8;
-  --ha-style-accent-2: #f97316;
-  --ha-style-badge-bg: rgba(8,16,31,.82);
-  --ha-style-badge-fg: #dbeafe;
-  --primary: #38bdf8;
-  --primary-container: #0e7490;
-  --primary-fixed: #0f2942;
-  --secondary-container: #f97316;
-  --bg: #07111f;
-  --surface: #07111f;
-  --surface-container-lowest: #0b1426;
-  --surface-container-low: #0f1b31;
-  --surface-container: #13233d;
-  --surface-container-high: #1b2f50;
-  --fg-1: #f8fafc;
-  --fg-2: #cbd5e1;
-  --fg-muted: #94a3b8;
-  --border: rgba(148,163,184,.18);
-  --green: #34d399;
-  --red: #fb7185;
-  --yellow: #fbbf24;
-  --gradient-hero: linear-gradient(135deg, #0f172a 0%, #0e7490 100%);
-  --gradient-text: linear-gradient(135deg, #38bdf8 0%, #f97316 100%);
+  --ha-style-accent: #33ff00;
+  --ha-style-accent-2: #ffb000;
+  --ha-style-badge-bg: #0a0a0a;
+  --ha-style-badge-fg: #33ff00;
+  --primary: #33ff00;
+  --on-primary: #050505;
+  --primary-container: #33ff00;
+  --primary-fixed: #102610;
+  --secondary-container: #ffb000;
+  --bg: #0a0a0a;
+  --surface: #0a0a0a;
+  --surface-container-lowest: #0a0a0a;
+  --surface-container-low: #0d160d;
+  --surface-container: #102610;
+  --surface-container-high: #153315;
+  --fg-1: #33ff00;
+  --fg-2: #b7ff9a;
+  --fg-muted: #1f521f;
+  --border: #1f521f;
+  --border-strong: #33ff00;
+  --green: #33ff00;
+  --red: #ff3333;
+  --yellow: #ffb000;
+  --gradient-hero: none;
+  --gradient-text: none;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-accent: none;
+  --font-headline: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-body: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-pill: 0;
 }
 html[data-ha-style="developer"] body {
   background-color: var(--bg) !important;
-  background-image:
-    linear-gradient(rgba(56,189,248,.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56,189,248,.05) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-image: repeating-linear-gradient(to bottom, rgba(51,255,0,.045) 0, rgba(51,255,0,.045) 1px, transparent 1px, transparent 4px);
+  background-size: auto;
+  text-shadow: 0 0 5px rgba(51,255,0,.5);
 }
-html[data-ha-style="developer"] body::before { content: "developer"; }
+html[data-ha-style="developer"] body::before {
+  content: "developer";
+  border-radius: 0;
+  border-color: var(--primary);
+  box-shadow: none;
+  text-shadow: 0 0 5px rgba(51,255,0,.5);
+}
+html[data-ha-style="developer"] .hero::before,
+html[data-ha-style="developer"] header.hero::before {
+  width: 100%;
+  height: auto;
+  margin-bottom: 16px;
+  border-radius: 0;
+  background: transparent;
+  color: var(--fg-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  content: "review@html-anything:~/artifact$ scan --risk --evidence";
+}
 html[data-ha-style="developer"] pre,
 html[data-ha-style="developer"] code,
 html[data-ha-style="developer"] .mono {

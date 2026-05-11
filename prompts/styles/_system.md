@@ -119,8 +119,9 @@ When they conflict:
 
 ## Implementation Rules
 
-- Use Clockless tokens from `prompts/_design.md` as the brand base, but do not
-  let those tokens flatten all styles into one look.
+- Use Clockless tokens from `prompts/_design.md` as the brand base unless the
+  selected style provides a complete style-native token override. Do not let a
+  shared token set flatten all styles into one look.
 - Use semantic, style-specific classes such as `.lesson-stage`,
   `.atlas-timeline`, `.ops-command-bar`, `.evidence-workbench`,
   `.dossier-sheet`, not only generic `.hero`, `.card`, `.grid`.

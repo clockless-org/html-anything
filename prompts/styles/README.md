@@ -22,7 +22,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `map-atlas` | Places, routes, trips, rideshare, location/photo geodata | Spatial atlas with map/route stage, place drawer, filters, waypoint browser |
 | `network-map` | People, senders, contacts, communities, payments, professional networks | Relationship graph with entity inspector, clusters, hubs, linked records |
 | `document` | Essays, articles, reading lists, research collections, PDFs, DOCX, legal/medical/lab records, policy docs | Document review with cover, reading rail, body sheet, evidence/citations, drill-down |
-| `developer` | Repos, diffs, PRs, CI logs, traces | Evidence-based technical report with risks, hotspots, raw evidence |
+| `developer` | Repos, diffs, PRs, CI logs, traces | Terminal evidence workbench with risks, hotspots, raw evidence |
 
 ## System Names
 
@@ -36,7 +36,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `map-atlas` | Map Atlas |
 | `network-map` | Network Map |
 | `document` | Document Review |
-| `developer` | Evidence Workbench |
+| `developer` | Terminal Evidence Workbench |
 
 ## Notes From DESIGN.md Libraries
 
@@ -53,8 +53,9 @@ not as a brand library to copy. It shows that a good style file should include:
 - responsive behavior,
 - quick agent instructions.
 
-For html-anything, keep Clockless tokens from `prompts/_design.md` as the brand
-base. Borrow archetypes, not brand identities:
+For html-anything, keep Clockless tokens from `prompts/_design.md` as the
+default brand base unless a style explicitly provides a complete token
+override. Borrow archetypes, not brand identities:
 
 - warm workspace systems → `default`, `document`, `timeline-story`
 - precision product / dark app systems → `dashboard`, `developer`

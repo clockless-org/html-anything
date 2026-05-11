@@ -1,15 +1,21 @@
 # Design system (shared)
 
 Every HTML page produced by html-anything uses the **Clockless design
-system**. The LLM picks the layout and the visual story; the tokens
-below are non-negotiable so all outputs feel like one product line.
+system** by default. The LLM picks the layout and the visual story; the
+tokens below keep outputs feeling like one product line.
+
+Style-specific prompts may provide a complete replacement token system for a
+specialized surface. When they do, the style prompt wins for that selected
+style only, and the output should still centralize every color, font, spacing,
+radius, and effect in CSS variables.
 
 ## How to use
 
 Paste this into the `:root` of your inline `<style>` and use the
 variables (`var(--primary)`, `var(--font-headline)`, etc.) for every
-color, font, spacing and radius decision. Do not invent your own
-palette. Do not pick a different font.
+color, font, spacing and radius decision unless the selected style prompt
+explicitly replaces the token system. Do not invent your own palette. Do not
+pick a different font outside those style-level tokens.
 
 ## Tokens (light theme — default)
 

@@ -69,37 +69,42 @@ what you suspect, and keep those two layers separate.
 
 ## Always include
 
-- Light + dark mode (`prefers-color-scheme`).
-- Mobile-first responsive — analysis cards stack, raw drill-down
-  becomes a single-column scroll on narrow viewports.
-- Charts/visuals render inline SVG (no Chart.js, no CDNs).
-- Monospace (`var(--font-mono)`) for every code, file path, line
-  number, hash, frame, and log line. Body text in `var(--font-body)`.
-- Diff coloring: additions in `var(--green)`, deletions in
-  `var(--red)`, context in `var(--fg-2)`. CI log errors in
-  `var(--red)`, warnings in `var(--yellow)`. Keep the cream surface
-  underneath — don't paint the whole panel red.
-- Full-text search across the raw artifact — Cmd-F-style box that
-  filters or highlights matching lines.
-- Page total under ~500 KB inlined where possible. The raw artifact
-  drives size, so render it once (do not duplicate raw text into
-  multiple panels).
-- A footer line that the analysis is best-effort and a hypothesis,
-  not a verdict.
+- Terminal CLI dark mode only. Use the developer style's token override:
+  black background, terminal green foreground, amber warnings, red errors,
+  square corners, 1px borders, no shadows.
+- Mobile-first responsive — terminal panes stack, raw drill-down becomes a
+  single-column scroll on narrow viewports, and long code/log lines wrap only
+  where doing so will not destroy evidence readability.
+- Charts/visuals render as inline SVG or ASCII-style bars (no Chart.js, no
+  CDNs). Prefer `[|||||.....]`, hunk strips, ledgers, and directory rollups
+  over glossy charts.
+- Monospace (`var(--font-mono)`) for every visible character: body text,
+  headings, code, file path, line number, hash, frame, and log line.
+- Diff coloring: additions in `var(--green)`, deletions in `var(--red)`,
+  context in `var(--fg-2)`. CI log errors in `var(--red)`, warnings in
+  `var(--yellow)`. Keep panels black; do not paint the whole panel red.
+- Full-text search across the raw artifact — terminal prompt style field
+  (`grep@raw:~$`) that filters or highlights matching lines.
+- Page total under ~500 KB inlined where possible. The raw artifact drives
+  size, so render it once (do not duplicate raw text into multiple panels).
+- A footer line that the analysis is best-effort and a hypothesis, not a
+  verdict.
 
 ## Tone
 
 Operator-grade. Direct, specific, hedged where it should be hedged.
+Use terminal labels naturally (`[ERR]`, `[WARN]`, `[OK]`, `[HYP]`, `exit=1`,
+`scan --risk`, `grep`) without turning the report into parody.
 "The `auth/session.ts` change removes the expiry check entirely;
 worth confirming the test added below covers the long-lived-session
 case" is a sentence; "Risk: high" alone is not. Use sentences in the
-hotspot cards; metrics in the totals row.
+hotspot panes; metrics in the totals row.
 
 ## Privacy / safety note (include in the page footer)
 
 Add a small footer line:
 
-> *Generated locally — your diff / log / trace never left your machine.
-> The full artifact is embedded in this HTML and rendered in your
-> browser. The analysis above is a hypothesis from a sample, not a
-> verdict; verify against the runtime before acting on it.*
+> *[LOCAL] Generated locally — your diff / log / trace never left your
+> machine. The full artifact is embedded in this HTML and rendered in your
+> browser. The analysis above is a hypothesis from a sample, not a verdict;
+> verify against the runtime before acting on it.*

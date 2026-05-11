@@ -33,7 +33,7 @@ You are not converting the file — you are designing the right reading UX *for 
 Produce a complete \`<!doctype html>\` document with these properties:
 1. **Single file.** Inline ALL CSS in <style>, ALL JS in <script>. No external resources except a Google Font import if useful (pick one). No CDNs for libraries.
 2. **Mobile-first responsive.** Looks right on phone, scales up.
-3. **Light + dark mode** via prefers-color-scheme. Tasteful, modern type.
+3. **Light + dark mode** via prefers-color-scheme unless the selected style explicitly declares a dark-only surface. Tasteful, modern type.
 4. **Search and copy by default.** Cmd-F-style search box that filters or highlights. Copy buttons where they help.
 5. **Self-contained.** Must work offline by double-clicking the file.
 
@@ -51,8 +51,8 @@ export async function htmlize(
   options: ConverterOptions = {},
 ): Promise<string> {
   // Three prompts get loaded for every conversion:
-  //   1. _design.md — Clockless design tokens (colors, fonts, spacing).
-  //      Non-negotiable; applied to every output for brand consistency.
+  //   1. _design.md — default Clockless design tokens (colors, fonts,
+  //      spacing), unless the selected style provides a complete override.
   //   2. <contentType>.md — source-specific guidance (what to analyze,
   //      what to visualize, data shape). Falls back to default.md.
   //   3. styles/<style>.md — the page-shape contract. Defaults to auto
