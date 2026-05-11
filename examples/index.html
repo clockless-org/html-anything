@@ -249,12 +249,13 @@ a { color: inherit; }
 .featured { margin: 24px 0 54px; }
 .featured-grid {
   display: grid;
-  grid-template-columns: repeat(6, minmax(160px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
 }
 .feature-card {
   position: relative;
-  min-height: 220px;
+  aspect-ratio: 16 / 9;
+  min-height: 0;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -271,15 +272,16 @@ a { color: inherit; }
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background: var(--surface);
   transition: transform 0.35s ease;
 }
-.feature-card:hover img { transform: scale(1.04); }
+.feature-card:hover img { transform: scale(1.025); }
 .feature-card::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 25%, rgba(30, 27, 25, 0.76));
+  background: linear-gradient(180deg, transparent 45%, rgba(30, 27, 25, 0.76));
 }
 .feature-card .feature-body {
   position: relative;
@@ -305,9 +307,9 @@ a { color: inherit; }
   gap: 18px;
 }
 .collection-card {
-  display: grid;
-  grid-template-columns: 42% 1fr;
-  min-height: 310px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 22px;
@@ -322,7 +324,9 @@ a { color: inherit; }
 }
 .media-link {
   position: relative;
-  min-height: 100%;
+  display: block;
+  aspect-ratio: 16 / 9;
+  min-height: 0;
   overflow: hidden;
   background: var(--surface-2);
 }
@@ -330,8 +334,9 @@ a { color: inherit; }
 .media-link video {
   width: 100%;
   height: 100%;
-  min-height: 310px;
-  object-fit: cover;
+  min-height: 0;
+  object-fit: contain;
+  background: var(--surface);
   display: block;
   transition: transform 0.35s ease;
 }
@@ -343,7 +348,7 @@ a { color: inherit; }
 }
 .media-link.has-video:hover video { opacity: 1; }
 .collection-card:hover .media-link img,
-.collection-card:hover .media-link video { transform: scale(1.035); }
+.collection-card:hover .media-link video { transform: scale(1.02); }
 .media-badge {
   position: absolute;
   z-index: 2;
@@ -510,7 +515,7 @@ footer.foot a { color: var(--primary); }
 
 @media (max-width: 1040px) {
   .hero { grid-template-columns: 1fr; }
-  .featured-grid { grid-template-columns: repeat(3, 1fr); }
+  .featured-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .gallery { grid-template-columns: 1fr; }
 }
 @media (max-width: 700px) {
@@ -518,10 +523,7 @@ footer.foot a { color: var(--primary); }
   .hero-stats { grid-template-columns: 1fr; }
   .control-top { align-items: flex-start; flex-direction: column; }
   .status { text-align: left; }
-  .featured-grid { grid-template-columns: repeat(2, 1fr); }
-  .feature-card { min-height: 190px; }
-  .collection-card { grid-template-columns: 1fr; }
-  .media-link img, .media-link video { min-height: 230px; }
+  .featured-grid { grid-template-columns: 1fr; }
   .section-title { display: block; }
   .matrix-grid { grid-template-columns: 1fr; }
   .matrix-grid .head { display: none; }
@@ -549,8 +551,8 @@ footer.foot a { color: var(--primary); }
     <div class="hero-panel">
       <p class="label">Example map</p>
       <div class="hero-stats">
-        <div class="hero-stat"><strong>49</strong><span>live output pages</span></div>
-        <div class="hero-stat"><strong>11</strong><span>source collections</span></div>
+        <div class="hero-stat"><strong>30</strong><span>curated output pages</span></div>
+        <div class="hero-stat"><strong>10</strong><span>source collections</span></div>
         <div class="hero-stat"><strong>8</strong><span>auto styles</span></div>
       </div>
     </div>
@@ -571,7 +573,7 @@ footer.foot a { color: var(--primary); }
     <div class="section-title">
       <div>
         <h2>Featured outputs</h2>
-        <p>Six examples that show the range: prompt-only teaching, private chats, personal archives, place data, finance ops, and developer review.</p>
+        <p>Five examples that show the range: prompt-only teaching, private chats, personal archives, place data, and developer review.</p>
       </div>
     </div>
     <div class="featured-grid" id="featured-grid"></div>
@@ -597,7 +599,7 @@ footer.foot a { color: var(--primary); }
 
   <footer class="foot">
     <div><a href="https://github.com/clockless-org/html-anything">github.com/clockless-org/html-anything</a> · Apache 2.0</div>
-    <div>49 live demos · grouped by source and style</div>
+    <div>30 curated demos · grouped by source and style</div>
   </footer>
 </div>
 
@@ -608,79 +610,59 @@ footer.foot a { color: var(--primary); }
     "wechat-couple": ["Couple chat rhythm", "WeChat export", "Relationship report", "relationship", "A two-year relationship report with activity rhythms, response patterns, and selected insights."],
     "whatsapp": ["WhatsApp chat", "WhatsApp export", "Relationship report", "relationship", "A two-sender WhatsApp archive summarized without exposing raw private text by default."],
     "slack": ["Slack channel", "Slack export", "Network map", "network-map", "Team messages folded by sender, decisions, threads, and action-item callouts."],
-    "discord": ["Discord community", "Discord export", "Network map", "network-map", "Server activity clustered by contributors, channels, and rhythm."],
-    "telegram": ["Telegram chat", "Telegram result.json", "Network map", "network-map", "Multi-sender chat export with hubs, activity patterns, and searchable records."],
     "email": ["Email archive", "Mailbox sample", "Network map", "network-map", "Threads, senders, open loops, and follow-up hotspots."],
     "amazon-orders": ["Amazon orders", "Orders CSV", "Timeline story", "timeline-story", "Three years of purchases as a commerce-memory timeline."],
     "spotify-history": ["Spotify history", "Streaming export", "Timeline story", "timeline-story", "Listening history as a year-by-year music story."],
-    "youtube-watch-history": ["YouTube watch history", "Takeout JSON", "Timeline story", "timeline-story", "Watch activity clustered by channels, binges, and attention patterns."],
     "iphone-health": ["Apple Health", "Health export", "Timeline story", "timeline-story", "Activity, sleep, workouts, and rhythm patterns as a personal timeline."],
     "kindle-highlights": ["Kindle highlights", "My Clippings.txt", "Timeline story", "timeline-story", "Highlights and notes organized into books, themes, and quote browser."],
-    "goodreads": ["Goodreads library", "Goodreads CSV", "Document review", "document", "Books read, rated, and shelved as a reading-life dossier."],
-    "twitch-history": ["Twitch viewing", "Viewing export", "Timeline story", "timeline-story", "Top streamers, viewing windows, and fan-rhythm heatmaps."],
     "browser-history": ["Browser history", "Browser export", "Timeline story", "timeline-story", "Browsing sessions clustered into topics, returners, and search patterns."],
     "chatgpt-export": ["ChatGPT archive", "conversations.json", "Timeline story", "timeline-story", "AI conversations clustered into topics, projects, and recurring threads."],
-    "ai-chat-log": ["Generic AI chat log", "Chat transcript", "Timeline story", "timeline-story", "A chat session rendered as structured turns, tool calls, and revisions."],
     "notes-vault": ["Notes vault", "Markdown folder", "Timeline story", "timeline-story", "A folder of notes becomes topic clusters, backlinks, and last-edited rhythm."],
-    "google-maps-stars": ["Google Maps stars", "Saved places", "Map atlas", "map-atlas", "Starred places plotted as a personal world atlas."],
     "google-photos-takeout": ["Google Photos atlas", "Takeout folder", "Map atlas", "map-atlas", "EXIF and sidecar metadata become places, albums, bursts, and device patterns."],
     "rideshare-history": ["Rideshare history", "Uber/Lyft CSV", "Map atlas", "map-atlas", "Commute lanes, airport runs, late-night returns, and route clusters."],
     "run-route": ["Morning run route", "GPX file", "Map atlas", "map-atlas", "A GPX route rendered with split times, elevation, and inline map geometry."],
-    "itinerary-trip": ["Trip itinerary", "Itinerary CSV", "Map atlas", "map-atlas", "Multi-day travel plan with conflicts, neighborhoods, and cost hints."],
     "linkedin-connections": ["LinkedIn network", "Connections CSV", "Network map", "network-map", "Professional connections clustered by era, company, and role."],
     "vcard-contacts": ["Address book", "vCard file", "Network map", "network-map", "Contacts grouped by organizations, domains, cities, birthdays, and duplicate candidates."],
     "venmo-paypal-payments": ["Venmo / PayPal", "Payments CSV", "Network map", "network-map", "Counterparties, categories, time patterns, and who-paid-whom relationships."],
     "markdown": ["Long-form essay", "Markdown file", "Document review", "document", "A markdown essay becomes a polished reading view with anchored navigation."],
     "bookmarks-market-research": ["Market bookmarks", "Bookmarks HTML", "Document review", "document", "Bookmarks grouped into themes, domains, duplicates, and research signals."],
-    "reading-list-academic": ["Academic reading list", "BibTeX", "Document review", "document", "Citation list as a research dossier with topic clusters and queue cards."],
     "pdf": ["PDF report", "PDF document", "Document review", "document", "A long report distilled into claims, evidence, summary, and navigation."],
-    "docx": ["DOCX memo", "Word document", "Document review", "document", "A decision memo rendered with rationale, alternatives, and follow-ups."],
-    "medical-visit": ["Medical visit note", "Clinical note", "Document review", "document", "Synthetic note organized with caveats and clinician questions."],
-    "lab-results": ["Lab results", "Lab PDF/text", "Document review", "document", "Panels, ranges, trends, and observation-only explanations."],
     "legal-chronology": ["Legal chronology", "Case notes", "Document review", "document", "Timeline of parties, exhibits, and observational summary."],
     "csv": ["Sales CSV", "CSV table", "Ops console", "dashboard", "Tabular data with summary, sortable rows, and chart-friendly structure."],
     "bank-transactions": ["Bank statement", "Transactions CSV", "Ops console", "dashboard", "Cashflow timeline, categories, recurring vendors, and anomaly callouts."],
-    "invoices": ["Invoices", "Receivables CSV", "Ops console", "dashboard", "Aging buckets, customer breakdowns, and outstanding invoice queue."],
     "quickbooks": ["QuickBooks ledger", "General ledger", "Ops console", "dashboard", "Ledger export as P&L view, category breakdown, and anomaly flags."],
-    "calendar-founder": ["Founder calendar", "ICS calendar", "Ops console", "dashboard", "Two weeks of time allocation, conflicts, follow-ups, and meeting load."],
     "backlog-product": ["Product backlog", "Issue CSV", "Ops console", "dashboard", "Issues grouped by epic, owner, blocked state, and stale tickets."],
     "transcript-sales-call": ["Sales call", "Transcript", "Ops console", "dashboard", "Talk time, decisions, action items, risks, and searchable transcript."],
-    "transcript-product-meeting": ["Product meeting", "SRT transcript", "Ops console", "dashboard", "Sprint review with decisions, owners, open questions, and risk register."],
-    "jsonl": ["JSONL events", "Event stream", "Ops console", "dashboard", "Application events summarized by severity, schema, and outliers."],
-    "log-access": ["Access log", "Nginx log", "Ops console", "dashboard", "Traffic by status, hot paths, slow requests, and IP-pattern flags."],
     "log-error": ["Error log", "Service log", "Ops console", "dashboard", "Incident log grouped by severity, stack groups, and recovery path."],
     "git-diff": ["Git diff", "Patch file", "Developer review", "developer", "Code changes with risk callouts and evidence-margin annotations."],
-    "pr-review": ["PR review", "Pull request", "Developer review", "developer", "Patch review with hotspots, checklist, and copyable handoff."],
-    "ci-log": ["CI failure", "CI log", "Developer review", "developer", "Failure log grouped by step, stack, and likely-cause hypothesis."],
-    "stack-trace": ["Stack trace", "Error trace", "Developer review", "developer", "Raw frames deduplicated by signature with likely cause."]
+    "ci-log": ["CI failure", "CI log", "Developer review", "developer", "Failure log grouped by step, stack, and likely-cause hypothesis."]
   };
 
   const sourceGroups = [
     ["prompt", "Prompt to lesson", "Prompt", "#", "#0f766e", "Start with one sentence and produce a real teaching page, not a blank template.", ["solar-system-studio"]],
     ["chats", "Relationship chats", "Chats", "~", "#be3455", "1:1 exports become rhythm reports with timing, initiation, sentiment, and privacy-aware evidence.", ["wechat-couple", "whatsapp"]],
-    ["chats", "Team and community messages", "Chats", "~", "#355f91", "Multi-sender conversations become people maps, decisions, activity rhythm, and searchable context.", ["slack", "discord", "telegram", "email"]],
-    ["personal", "Personal timelines", "Personal data", "»", "#9a4b14", "Consumer histories become memory timelines: orders, music, video, health, reading, browsing.", ["amazon-orders", "spotify-history", "youtube-watch-history", "iphone-health", "kindle-highlights", "goodreads", "twitch-history", "browser-history"]],
-    ["personal", "AI and notes archives", "Personal data", "»", "#7b40e0", "AI conversations and notes folders become topic maps, project threads, and knowledge trails.", ["chatgpt-export", "ai-chat-log", "notes-vault"]],
-    ["places", "Places and movement", "Geo", "+", "#17695a", "Location-rich sources become atlases: saved places, photos, rides, GPX routes, and itineraries.", ["google-maps-stars", "google-photos-takeout", "rideshare-history", "run-route", "itinerary-trip"]],
+    ["chats", "Team and community messages", "Chats", "~", "#355f91", "Multi-sender conversations become people maps, decisions, activity rhythm, and searchable context.", ["slack", "email"]],
+    ["personal", "Personal timelines", "Personal data", "»", "#9a4b14", "Consumer histories become memory timelines: orders, music, health, reading, and browsing.", ["amazon-orders", "spotify-history", "iphone-health", "kindle-highlights", "browser-history"]],
+    ["personal", "AI and notes archives", "Personal data", "»", "#7b40e0", "AI conversations and notes folders become topic maps, project threads, and knowledge trails.", ["chatgpt-export", "notes-vault"]],
+    ["places", "Places and movement", "Geo", "+", "#17695a", "Location-rich sources become atlases: photos, rides, and GPX routes.", ["google-photos-takeout", "rideshare-history", "run-route"]],
     ["people", "People and payment networks", "People", "×", "#355f91", "Contacts, professional networks, and payments become hubs, clusters, and relationship ledgers.", ["linkedin-connections", "vcard-contacts", "venmo-paypal-payments"]],
-    ["docs", "Documents and research", "Files", "§", "#8b3f1f", "Markdown, PDFs, DOCX, citations, records, and bookmarks become polished dossiers.", ["markdown", "bookmarks-market-research", "reading-list-academic", "pdf", "docx", "medical-visit", "lab-results", "legal-chronology"]],
-    ["work", "Finance and operations", "Work data", "=", "#0f5f6f", "Tables, finance exports, issue trackers, calendars, and transcripts become working consoles.", ["csv", "bank-transactions", "invoices", "quickbooks", "calendar-founder", "backlog-product", "transcript-sales-call", "transcript-product-meeting"]],
-    ["work", "Logs and event streams", "Work data", "=", "#466089", "JSONL, access logs, and error logs become incident-aware dashboards with outlier lanes.", ["jsonl", "log-access", "log-error"]],
-    ["dev", "Developer review artifacts", "Developer", "!", "#38bdf8", "Diffs, PRs, CI logs, and stack traces become risk-aware review workbenches.", ["git-diff", "pr-review", "ci-log", "stack-trace"]]
+    ["docs", "Documents and research", "Files", "§", "#8b3f1f", "Markdown, PDFs, records, and bookmarks become polished dossiers.", ["markdown", "bookmarks-market-research", "pdf", "legal-chronology"]],
+    ["work", "Work data consoles", "Work data", "=", "#0f5f6f", "Tables, finance exports, issue trackers, transcripts, and logs become working consoles.", ["csv", "bank-transactions", "quickbooks", "backlog-product", "transcript-sales-call", "log-error"]],
+    ["dev", "Developer review artifacts", "Developer", "!", "#38bdf8", "Diffs and CI logs become risk-aware review workbenches.", ["git-diff", "ci-log"]]
   ].map(makeGroup);
 
   const styleDefs = [
     ["teaching", "Teaching lab", "Style", "#", "#0f766e", "Visual stage first, entity selector, controls, and check-yourself moments.", ["solar-system-studio"]],
     ["relationship", "Relationship report", "Style", "~", "#be3455", "Aggregate-first private chat analysis: rhythm, initiation, response, mood, and evidence snippets.", ["wechat-couple", "whatsapp"]],
-    ["timeline-story", "Timeline story", "Style", "»", "#9a4b14", "Chronological memory pages with chapters, rhythm strips, and searchable drawers.", ["amazon-orders", "spotify-history", "youtube-watch-history", "iphone-health", "kindle-highlights", "twitch-history", "browser-history", "chatgpt-export", "ai-chat-log", "notes-vault"]],
-    ["map-atlas", "Map atlas", "Style", "+", "#17695a", "Spatial stage, place drawer, waypoint browser, and offline SVG geography.", ["google-maps-stars", "google-photos-takeout", "rideshare-history", "run-route", "itinerary-trip"]],
-    ["network-map", "Network map", "Style", "×", "#355f91", "People, senders, counterparties, and communities shown as hubs and clusters.", ["linkedin-connections", "vcard-contacts", "slack", "discord", "telegram", "email", "venmo-paypal-payments"]],
-    ["document", "Document review", "Style", "§", "#8b3f1f", "Reading rail, evidence margin, summary, and source-grounded drill-down.", ["markdown", "bookmarks-market-research", "reading-list-academic", "pdf", "docx", "medical-visit", "lab-results", "legal-chronology", "goodreads"]],
-    ["dashboard", "Ops console", "Style", "=", "#0f5f6f", "KPI rail, charts, filters, flag queue, and searchable operational data grid.", ["csv", "jsonl", "log-access", "log-error", "transcript-sales-call", "transcript-product-meeting", "bank-transactions", "invoices", "quickbooks", "calendar-founder", "backlog-product"]],
-    ["developer", "Developer review", "Style", "!", "#38bdf8", "Risk hotspots, raw evidence, copyable handoff, and implementation-review flow.", ["git-diff", "pr-review", "ci-log", "stack-trace"]]
+    ["timeline-story", "Timeline story", "Style", "»", "#9a4b14", "Chronological memory pages with chapters, rhythm strips, and searchable drawers.", ["amazon-orders", "spotify-history", "iphone-health", "kindle-highlights", "browser-history", "chatgpt-export", "notes-vault"]],
+    ["map-atlas", "Map atlas", "Style", "+", "#17695a", "Spatial stage, place drawer, waypoint browser, and offline SVG geography.", ["google-photos-takeout", "rideshare-history", "run-route"]],
+    ["network-map", "Network map", "Style", "×", "#355f91", "People, senders, counterparties, and communities shown as hubs and clusters.", ["linkedin-connections", "vcard-contacts", "slack", "email", "venmo-paypal-payments"]],
+    ["document", "Document review", "Style", "§", "#8b3f1f", "Reading rail, evidence margin, summary, and source-grounded drill-down.", ["markdown", "bookmarks-market-research", "pdf", "legal-chronology"]],
+    ["dashboard", "Ops console", "Style", "=", "#0f5f6f", "KPI rail, charts, filters, flag queue, and searchable operational data grid.", ["csv", "log-error", "transcript-sales-call", "bank-transactions", "quickbooks", "backlog-product"]],
+    ["developer", "Developer review", "Style", "!", "#38bdf8", "Risk hotspots, raw evidence, copyable handoff, and implementation-review flow.", ["git-diff", "ci-log"]]
   ].map(makeGroup);
 
-  const featured = ["wechat-couple", "solar-system-studio", "google-photos-takeout", "amazon-orders", "quickbooks", "git-diff"];
+  const featured = ["wechat-couple", "solar-system-studio", "google-photos-takeout", "amazon-orders", "git-diff"];
   const sourceFilters = [
     ["all", "All", "#a03b00"],
     ["prompt", "Prompt", "#0f766e"],
