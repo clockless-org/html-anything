@@ -43,7 +43,7 @@ export type AiChatFormat = "chatgpt-export" | "claude-chat-export" | "generic-co
 /**
  * `ParsedFile.contentType` is one of these. We collapse the markdown-log
  * and generic-JSON formats under the umbrella `ai-chat-export` content
- * type so a single per-source prompt (`prompts/ai-chat-export.md`) covers
+ * type so a single per-source prompt (`prompts/sources/ai-chat-export.md`) covers
  * both, while the more-specific ChatGPT and Claude prompts handle their
  * own quirks.
  */

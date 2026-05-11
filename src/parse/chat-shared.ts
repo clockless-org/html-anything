@@ -2,7 +2,7 @@
  * Shared shape + stat builder for the multi-chat-export pack
  * (Slack, Discord, Telegram, iMessage, generic multi-sender CSV).
  *
- * Why one shape: the chat prompt contract (`prompts/_chat.md`) promises
+ * Why one shape: the chat prompt contract (`prompts/sources/_chat.md`) promises
  * the LLM a uniform schema with messages + activity heatmap data + a
  * contributor leaderboard. Centralizing the derivation here means each
  * platform parser only has to map *its* native fields onto `ChatMsg`;

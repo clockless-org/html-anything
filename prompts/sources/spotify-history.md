@@ -119,5 +119,5 @@ DATA = {
 
 Personal, nostalgic, dignified. Bold display headlines (Space Grotesk
 600+), warm body type. Not "Spotify Wrapped" green-and-pink — use the
-Clockless tokens from `_design.md` so this output feels like part of
+Clockless tokens from `prompts/styles/_design.md` so this output feels like part of
 the html-anything family, not a Spotify imitation.

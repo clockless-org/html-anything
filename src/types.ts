@@ -60,6 +60,7 @@ export interface ConverterOptions {
 export type HtmlAnythingStyle =
   | "default"
   | "teaching"
+  | "interactive-learning"
   | "relationship"
   | "living-essay"
   | "dashboard"

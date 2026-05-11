@@ -129,7 +129,7 @@ based on what the data supports.
   at render or click time. Don't load avatars from chat.openai.com,
   don't fetch model cards, don't unfurl URLs in the message
   bodies. The only allowed external resource is the Google Fonts
-  import in `_design.md`.
+  import in `prompts/styles/_design.md`.
 - **Synthetic data only in committed examples.** Real ChatGPT /
   Claude exports often contain personal context, customer data,
   credentials, prompts that reveal proprietary information. Never

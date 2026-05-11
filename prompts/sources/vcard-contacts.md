@@ -301,7 +301,7 @@ spreadsheets gently saying *"by the way, you've got six different
 later?"* — not a Google-style "your address book is **23%**
 unhealthy! Take action!"
 
-Use the Clockless tokens from `_design.md` (Space Grotesk + Plus
+Use the Clockless tokens from `prompts/styles/_design.md` (Space Grotesk + Plus
 Jakarta Sans, brand orange `--primary`, surface cream in light
 mode). This is part of the html-anything family — never an
 Outlook skeuomorph or a Google-Contacts UI clone.

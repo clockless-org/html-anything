@@ -5,7 +5,7 @@
  * The canonical pipeline is `dist/cli.js → htmlize → LLM`, but example
  * regeneration may run on machines without an Anthropic / OpenAI key.
  * This script reuses the same parser, then applies a hand-tuned template
- * that satisfies the prompts/amazon-orders.md contract:
+ * that satisfies the prompts/sources/amazon-orders.md contract:
  *
  *   1. Hero summary card (spend / orders / years / top category)
  *   2. Yearly + monthly spend timeline

@@ -24,7 +24,7 @@
  *     shape as `My Clippings.txt`.
  *
  * Output: a "kindle-highlights" ParsedFile shaped per
- * prompts/kindle-highlights.md — rows + books + authors +
+ * prompts/sources/kindle-highlights.md — rows + books + authors +
  * yearTotals + monthTotals + hourCounts + themeClusters +
  * duplicateGroups + summary, pre-aggregated so the page can render
  * thousands of clippings without recomputing on the client.

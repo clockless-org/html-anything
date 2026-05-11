@@ -260,7 +260,7 @@ current company listed and most of them haven't shown up in your feed
 in years"* — not LinkedIn's "Your network grew **18%** this quarter!
 Send connection requests to grow more!"
 
-Use the Clockless tokens from `_design.md` (Space Grotesk + Plus
+Use the Clockless tokens from `prompts/styles/_design.md` (Space Grotesk + Plus
 Jakarta Sans, brand orange `--primary`, surface cream in light mode).
 This is part of the html-anything family — never a LinkedIn skeuomorph
 or a Sales Navigator UI clone.

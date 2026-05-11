@@ -3,7 +3,7 @@
  *
  * Personal exports from services where the LLM should design a
  * "re-experience this" page rather than a flat report. Each export has
- * its own prompt under `prompts/`; this parser sniffs the file shape
+ * its own prompt under `prompts/sources/`; this parser sniffs the file shape
  * and stamps the matching `contentType` so the prompt is loaded.
  *
  *   - spotify-history    — Spotify "Download your data" JSON

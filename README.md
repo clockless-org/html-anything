@@ -146,7 +146,8 @@ every output into the same dashboard/report shape.
 | Content | Style |
 |---|---|
 | Unknown or mixed inputs | `default` (Insight Brief) |
-| Tutorials, lessons, explainers, "teach me" prompts, object/system explorers | `teaching` (Lesson Lab) |
+| Tutorials, lessons, explainers, "teach me" prompts | `teaching` (Lesson Lab) |
+| App-like object/system/spec explorers, anatomy/architecture/product studios | `interactive-learning` (Learning Studio) |
 | 1:1 chats and intimate message exports | `relationship` (Rhythm Report) |
 | Reflective essays, Kindle highlights, idea notes, concept-heavy reading archives | `living-essay` (Mycelium Writing Environment) |
 | Personal histories — chronological (orders, history, listening, health) **and** topical (Notion / Obsidian vaults) | `timeline-story` (Timeline Story) |
@@ -156,7 +157,7 @@ every output into the same dashboard/report shape.
 | Finance, spreadsheets, logs, backlog, operational data | `dashboard` (Ops Console) |
 | Essays, articles, reading lists, bookmarks, PDFs, DOCX, legal/medical/lab records | `document` (Document Review) |
 | Brand strategy essays, founder letters, article takeaways, lightweight reports meant to be shared as a sequence | `editorial-carousel` (Editorial Carousel) |
-| Logs, diffs, stack traces, CI failures, repos | `developer` (Evidence Workbench) |
+| Logs, diffs, stack traces, CI failures, repos | `developer` (Terminal Evidence Workbench) |
 
 You can still steer it naturally: "make it more tutorial-like", "more
 app-like", "less academic", "make it a carousel", "more dashboard-like",
@@ -165,10 +166,11 @@ or "more playful".
 Reusable style prompts live in [`prompts/styles/`](./prompts/styles/).
 The shared structural contract is
 [`prompts/styles/_system.md`](./prompts/styles/_system.md). There is a
-fallback `default` style plus 10 auto-selected styles (`teaching`,
-`relationship`, `living-essay`, `dashboard`, `timeline-story`,
-`map-atlas`, `network-map`, `document`, `editorial-carousel`, and
-`developer`), plus explicit overrides such as `paper-trail`.
+fallback `default` style plus 11 auto-selected styles (`teaching`,
+`interactive-learning`, `relationship`, `living-essay`, `dashboard`,
+`timeline-story`, `map-atlas`, `network-map`, `document`,
+`editorial-carousel`, and `developer`), plus explicit overrides such as
+`paper-trail`.
 
 Example explicit style override:
 
@@ -194,7 +196,7 @@ npx tsx src/cli.ts examples/itinerary-trip/input.csv \
 | 🤖 | AI chat exports | ChatGPT, Claude, generic AI chat logs |
 | ✨ | Anything else | Plain text, unknown file shapes, or a natural-language idea |
 
-The detailed source-specific instructions live in [`prompts/`](./prompts/).
+The detailed source-specific instructions live in [`prompts/sources/`](./prompts/sources/).
 
 ## Defaults
 

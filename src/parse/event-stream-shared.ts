@@ -1,7 +1,7 @@
 /**
  * Shared aggregation for the event-stream pack (JSONL/NDJSON parser
  * and the log parser). Both produce the same `DATA` shape — see
- * prompts/_event_stream.md for the contract — so the bucketing,
+ * prompts/sources/_event_stream.md for the contract — so the bucketing,
  * severity/category counts, top-N rollups, and outlier classification
  * live here once.
  *

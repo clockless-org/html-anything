@@ -247,7 +247,7 @@ maybe planning the year. The shortest highlights tend to come from
 fiction; the longest from anything by Hannah Arendt."* Not "your
 top genre is non-fiction!" Specific to the file.
 
-Use the Clockless tokens from `_design.md` (Space Grotesk + Plus
+Use the Clockless tokens from `prompts/styles/_design.md` (Space Grotesk + Plus
 Jakarta Sans, brand orange `--primary`, surface cream in light
 mode, proper currency + tabular-nums). This is part of the
 html-anything family — never a Kindle skeuomorph.

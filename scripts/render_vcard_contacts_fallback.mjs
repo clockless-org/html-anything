@@ -5,7 +5,7 @@
  * The canonical pipeline is `dist/cli.js → htmlize → LLM`, but example
  * regeneration may run on machines without an Anthropic / OpenAI key.
  * This script reuses the same parser, then applies a hand-tuned
- * template that satisfies the prompts/vcard-contacts.md contract:
+ * template that satisfies the prompts/sources/vcard-contacts.md contract:
  *
  *   1. Hero summary (contacts / reachability / window / top org)
  *   2. Address-book health audit (issue cards)

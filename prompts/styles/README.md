@@ -15,7 +15,8 @@ The default is `auto`: the agent picks a style from the request and source.
 | Style | Use when | Core shape |
 |---|---|---|
 | `default` | The input does not clearly fit a specialized style | Clean live page with strong summary, useful sections, practical drill-down |
-| `teaching` | Tutorial, lesson, "teach me", interactive object/system/spec exploration | Visual stage (or object stage), step rail / entity selector, try-it controls, check-yourself / live inspector |
+| `teaching` | Tutorial, lesson, "teach me", interactive explainers, course-like pages | Visual stage, step rail, try-it controls, concept cards, check-yourself, recap |
+| `interactive-learning` | App-like object/system studios, anatomy/architecture/spec exploration, manipulable learning models | Learning Studio with entity rail, central interactive stage, live inspector, layer/mode controls, comparison bench |
 | `relationship` | 1:1 chats and intimate message exports | Aggregate-first relationship rhythm report with anonymized evidence |
 | `living-essay` | Reflective essays, Kindle highlights, idea notes, and concept-heavy reading archives | Mycelium writing environment with a vertical question capsule, spore words, living SVG threads, and quiet appendix |
 | `dashboard` | Operational, tabular, finance, admin, log, planning data | Dense KPIs, charts, filters, flags, searchable table |
@@ -25,7 +26,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `network-map` | People, senders, contacts, communities, payments, professional networks | Relationship graph with entity inspector, clusters, hubs, linked records |
 | `document` | Essays, articles, reading lists, research collections, PDFs, DOCX, legal/medical/lab records, policy docs | Document review with cover, reading rail, body sheet, evidence/citations, drill-down |
 | `editorial-carousel` | Brand strategy essays, founder letters, article takeaways, lightweight reports meant to be shared as a sequence | Magazine-like issue with cover, spread rail, 4-8 argument spreads, evidence drawer, copy actions |
-| `developer` | Repos, diffs, PRs, CI logs, traces | Evidence-based technical report with risks, hotspots, raw evidence |
+| `developer` | Repos, diffs, PRs, CI logs, traces | Terminal evidence workbench with risks, hotspots, raw evidence |
 
 ## System Names
 
@@ -33,6 +34,7 @@ The default is `auto`: the agent picks a style from the request and source.
 |---|---|
 | `default` | Insight Brief |
 | `teaching` | Lesson Lab |
+| `interactive-learning` | Learning Studio |
 | `relationship` | Rhythm Report |
 | `living-essay` | Mycelium Writing Environment |
 | `dashboard` | Ops Console |
@@ -42,7 +44,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `network-map` | Network Map |
 | `document` | Document Review |
 | `editorial-carousel` | Editorial Carousel |
-| `developer` | Evidence Workbench |
+| `developer` | Terminal Evidence Workbench |
 
 ## Notes From DESIGN.md Libraries
 
@@ -59,19 +61,21 @@ not as a brand library to copy. It shows that a good style file should include:
 - responsive behavior,
 - quick agent instructions.
 
-For html-anything, keep Clockless tokens from `prompts/_design.md` as the brand
-base. Borrow archetypes, not brand identities:
+For html-anything, keep Clockless tokens from `prompts/styles/_design.md` as the
+default brand base unless a style explicitly provides a complete token
+override. Borrow archetypes, not brand identities:
 
 - warm workspace systems → `default`, `document`, `timeline-story`
 - precision product / dark app systems → `dashboard`, `developer`
-- cinematic stage / object galleries → `teaching`
+- cinematic lesson stages → `teaching`
+- app-like object/system studios → `interactive-learning`
 - temporal / scrollytelling systems → `timeline-story`
 - spatial atlas systems → `map-atlas`
 - tactile printed-artifact systems → `paper-trail`
 - graph / network systems → `network-map`
 - broadsheet / media systems → `document`
 - premium carousel / manifesto systems → `editorial-carousel`
-- playful canvas systems → `teaching`
+- playful canvas / learning studios → `teaching`, `interactive-learning`
 
 ## Use Case Routing
 
@@ -84,7 +88,8 @@ base. Borrow archetypes, not brand identities:
 | "Make it feel like tickets / receipts / a hotel folio / travel papers" | `paper-trail` |
 | "Who I know / talk to / pay / email" | `network-map` |
 | "Operate this queue / ledger / incident / backlog" | `dashboard` |
-| "Teach this idea or explore this object/system/spec" | `teaching` |
+| "Teach this idea as a lesson/tutorial" | `teaching` |
+| "Explore this object/system/spec as an interactive app/studio" | `interactive-learning` |
 | "Analyze this 1:1 relationship chat" | `relationship` |
 | "Read/synthesize this argument or research set" | `document` |
 | "Turn this essay into a carousel / make it feel like a magazine issue" | `editorial-carousel` |

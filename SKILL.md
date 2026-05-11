@@ -1,7 +1,7 @@
 ---
 name: html-anything
-description: Turn an idea, file, folder, or URL into a polished live HTML page. Use when the user wants a webpage, interactive teaching site, visual report, dashboard, atlas, browsable export, or shareable HTML artifact from a prompt or source.
-when_to_use: User says "make a webpage", "create a teaching site", "turn this into HTML", "visualize/analyze this", "make a dashboard/report/atlas", gives a file/folder/URL to make browsable, or names a data source they want exported and converted.
+description: Turn an idea, file, folder, or URL into a polished live HTML page. Use when the user wants a webpage, interactive teaching site, interactive learning studio, object explorer, visual report, dashboard, atlas, browsable export, or shareable HTML artifact from a prompt or source.
+when_to_use: User says "make a webpage", "create a teaching site", "make an interactive studio", "explore this object/system", "turn this into HTML", "visualize/analyze this", "make a dashboard/report/atlas", gives a file/folder/URL to make browsable, or names a data source they want exported and converted.
 ---
 
 # html-anything
@@ -98,7 +98,8 @@ model, density, chart grammar, and voice.
 | Auto style | Use for | Page shape |
 |---|---|---|
 | `default` | Unknown, mixed, or weakly classified briefs/sources | **Insight Brief**: answer header, primary insight panel, evidence stack, local drill-down |
-| `teaching` | Tutorials, lessons, "teach me", interactive explainers, course-like pages, **object/system/spec exploration** (anatomy, architecture, scientific topics, product specs) | **Lesson Lab**: visual stage (or object stage), step rail / entity selector, try-it controls, live inspector or check-yourself, recap or comparison |
+| `teaching` | Tutorials, lessons, "teach me", interactive explainers, course-like pages | **Lesson Lab**: visual stage, step rail, try-it controls, concept cards, check-yourself, recap |
+| `interactive-learning` | App-like object/system/spec studios, anatomy/architecture/product exploration, manipulable learning models | **Learning Studio**: entity rail, central interactive stage, live inspector, layer/mode controls, comparison bench |
 | `relationship` | 1:1 chats, couple/friend/family chats, WhatsApp/WeChat/iMessage relationship exports | **Rhythm Report**: aggregate-first pulse calendar, comparison lanes, evidence snippets, no raw appendix by default |
 | `living-essay` | Kindle highlights, reflective essays, idea notes, concept-heavy reading archives | **Mycelium Writing Environment**: paper manuscript, vertical margin question, inline spore words, living SVG threads, quiet appendix |
 | `dashboard` | Finance/admin data, logs, operational data, issue trackers, dense tabular queues | **Ops Console**: command bar, KPI rail, work surface, flag queue, searchable data grid |
@@ -107,7 +108,7 @@ model, density, chart grammar, and voice.
 | `network-map` | Contacts, LinkedIn, Slack, Discord, Telegram, email, Venmo/PayPal, people/org graphs | **Network Map**: graph canvas, entity inspector, cluster controls, hub cards, linked records |
 | `document` | Essays, articles, reading lists, bookmarks, research collections, PDFs, DOCX, legal/medical/lab/academic records | **Document Review**: cover, reading rail, body sheet, evidence margin, drill-down. Tone shifts narrative ↔ formal based on source. |
 | `editorial-carousel` | Brand strategy essays, founder letters, article takeaways, lightweight reports meant to be shared as a sequence | **Editorial Carousel**: issue cover, spread rail, 4-8 argument spreads, evidence drawer, copy actions |
-| `developer` | Diffs, PR patches, CI logs, stack traces, repos | **Evidence Workbench**: finding bar, hotspots, risk checklist, raw artifact navigator, copyable handoff |
+| `developer` | Diffs, PR patches, CI logs, stack traces, repos | **Terminal Evidence Workbench**: prompt line, hotspots, risk checklist, raw artifact navigator, copyable handoff |
 
 Explicit override styles:
 
@@ -118,7 +119,7 @@ Explicit override styles:
 Honor explicit style direction in natural language:
 
 - "make it a tutorial" / "teach me" → lean `teaching`.
-- "make it more app-like" / "explore this object" → lean `teaching` (object mode).
+- "make it more app-like" / "explore this object" / "interactive studio" → lean `interactive-learning`.
 - "less academic" → reduce formal `document` voice.
 - "make it a carousel" / "magazine feel" / "social post" → lean `editorial-carousel`.
 - "more dashboard-like" → increase density, filters, charts.
@@ -139,7 +140,7 @@ Honor explicit style direction in natural language:
 
 2. **Onboard exports when needed.**
    If the user names a source but has no file yet, read the matching
-   prompt in `prompts/<source>.md` and give concise export steps. Stop
+   prompt in `prompts/sources/<source>.md` and give concise export steps. Stop
    after the export guidance unless the file is already available.
 
 3. **Inspect the source or brief.**
@@ -149,8 +150,8 @@ Honor explicit style direction in natural language:
      web verification for current or high-stakes facts.
 
 4. **Load guidance.**
-   Read `prompts/_design.md` and the closest source prompt. If no source
-   prompt fits, use `prompts/default.md`. Apply shared family prompts when
+   Read `prompts/styles/_design.md` and the closest source prompt. If no source
+   prompt fits, use `prompts/sources/default.md`. Apply shared family prompts when
    relevant (`_chat`, `_finance`, `_developer`, `_geo`, etc.). If the chosen
    style has a prompt in `prompts/styles/<style>.md`, read and follow it. If a
    style prompt contains a reference contract or compliance gate, treat it as a
@@ -217,7 +218,7 @@ If the page fails, revise the HTML before presenting it.
 
 ## Design Requirements
 
-Read [`prompts/_design.md`](./prompts/_design.md) for Clockless tokens and
+Read [`prompts/styles/_design.md`](./prompts/styles/_design.md) for Clockless tokens and
 apply them by default.
 
 General requirements:
@@ -228,7 +229,7 @@ General requirements:
 - Inline CSS and JS in the HTML.
 - No external JS/CDN dependencies unless the user explicitly allows them.
 - The only default external font call is the Google Fonts import from
-  `_design.md`.
+  `prompts/styles/_design.md`.
 - Use generated bitmap assets when the experience needs rich visual
   subjects; use SVG/CSS/canvas for deterministic diagrams and UI.
 - Do not build a generic landing page when the user asked for a tool,
@@ -272,7 +273,7 @@ exports into the model unnecessarily.
 
 ## Source Prompts
 
-The source prompts under [`prompts/`](./prompts/) contain export steps and
+The source prompts under [`prompts/sources/`](./prompts/sources/) contain export steps and
 content-specific analysis guidance. Use the closest one:
 
 - Personal exports: `amazon-orders`, `youtube-watch-history`,
@@ -299,11 +300,13 @@ content-specific analysis guidance. Use the closest one:
 - AI chats: `chatgpt-export`, `claude-chat-export`, `ai-chat-export`.
 - URL/general: `url-article`, `default`.
 
-If no prompt fits, proceed from `default.md` and the user's brief.
+If no prompt fits, proceed from `prompts/sources/default.md` and the user's
+brief.
 
 Style prompts under [`prompts/styles/`](./prompts/styles/) define reusable page
 systems such as `Timeline Story`, `Map Atlas`, `Network Map`, `Lesson Lab`,
-`Ops Console`, `Mycelium Writing Environment` (`living-essay`), `Editorial
-Carousel`, and `Paper Trail` (explicit tactile printed-artifact override).
-They complement source prompts; they do not replace source-specific analysis.
-The style prompt is binding for the final HTML's layout and interaction system.
+`Learning Studio`, `Ops Console`, `Mycelium Writing Environment`
+(`living-essay`), `Editorial Carousel`, and `Paper Trail` (explicit tactile
+printed-artifact override). They complement source prompts; they do not
+replace source-specific analysis. The style prompt is binding for the final
+HTML's layout and interaction system.

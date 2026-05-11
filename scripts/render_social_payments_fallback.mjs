@@ -5,7 +5,7 @@
  * The canonical pipeline is `dist/cli.js → htmlize → LLM`, but example
  * regeneration may run on machines without an Anthropic / OpenAI key.
  * This script reuses the same parser, then applies a hand-tuned template
- * that satisfies the prompts/venmo-paypal-payments.md contract on top of
+ * that satisfies the prompts/sources/venmo-paypal-payments.md contract on top of
  * the _finance.md family contract:
  *
  *   1. Source-aware hero card (Venmo/PayPal · sent/received/net/people)

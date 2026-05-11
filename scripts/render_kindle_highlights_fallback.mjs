@@ -5,7 +5,7 @@
  * The canonical pipeline is `dist/cli.js → htmlize → LLM`, but example
  * regeneration may run on machines without an Anthropic / OpenAI key.
  * This script reuses the same parser, then applies a hand-tuned
- * template that satisfies the prompts/kindle-highlights.md contract:
+ * template that satisfies the prompts/sources/kindle-highlights.md contract:
  *
  *   1. Hero summary (books / clippings / window / top author)
  *   2. Yearly + monthly stacked bars (highlights / notes / bookmarks)

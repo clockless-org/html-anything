@@ -1,7 +1,7 @@
 /**
  * Shared aggregation for the finance pack (bank-transactions /
  * invoices / quickbooks parsers). They all produce the same `DATA`
- * shape — see prompts/_finance.md for the contract — so column
+ * shape — see prompts/sources/_finance.md for the contract — so column
  * detection, recurring-vendor detection, duplicate detection,
  * anomaly classification, and category rollups live here once.
  *

@@ -42,7 +42,7 @@ Interaction model:
 
 ## Visual Language
 
-- Use the Clockless tokens from `prompts/_design.md`.
+- Use the Clockless tokens from `prompts/styles/_design.md`.
 - Warm, clean, readable, and practical.
 - Use cards only for repeated items or genuinely grouped panels.
 - Use restrained accent color for the most important numbers, links, and active

@@ -13,7 +13,7 @@
  * Amount, …, From Email Address, To Email Address, Transaction ID, …".
  *
  * Output `contentType` is `venmo-paypal-payments` so htmlize loads the
- * `_finance.md` family contract plus `prompts/venmo-paypal-payments.md`.
+ * `prompts/sources/_finance.md` family contract plus `prompts/sources/venmo-paypal-payments.md`.
  *
  * Privacy: every example shipped with this repo is fully synthetic.
  * The parser never fetches anything; it only normalizes the rows the

@@ -5,7 +5,7 @@
  * The canonical pipeline is `dist/cli.js → htmlize → LLM`, but example
  * regeneration may run on machines without an Anthropic / OpenAI key.
  * This script reuses the same parser, then applies a hand-tuned template
- * that satisfies the prompts/google-photos-takeout.md contract:
+ * that satisfies the prompts/sources/google-photos-takeout.md contract:
  *
  *   1. Hero summary (media / photos / videos / albums / geo / device)
  *   2. Activity timeline — monthly bars + year × month heatmap +

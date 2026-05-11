@@ -69,7 +69,7 @@ Interaction model:
 
 ## Visual Language
 
-- Use the Clockless tokens from `prompts/_design.md`.
+- Use the Clockless tokens from `prompts/styles/_design.md`.
 - Strong typography, clear rules, disciplined whitespace.
 - Visual density is deliberate: broadsheet for many items, spacious
   essay mode for one long piece, quiet review surface for formal

@@ -14,7 +14,7 @@
  *            with "Ride ID" or "Lyft" in the header.
  *
  * Output `contentType` is `rideshare-history` so htmlize loads
- * `prompts/rideshare-history.md`. This parser deliberately does not
+ * `prompts/sources/rideshare-history.md`. This parser deliberately does not
  * join the `_finance.md` family — rideshare is about *time + place +
  * habit*, not cashflow categories.
  *

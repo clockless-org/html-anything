@@ -3,7 +3,7 @@
  *
  * Reads `.vcf` exports (Apple Contacts, Google Contacts, iCloud,
  * Android, Outlook) and turns them into a `vcard-contacts`
- * ParsedFile shaped per prompts/vcard-contacts.md. Handles vCard
+ * ParsedFile shaped per prompts/sources/vcard-contacts.md. Handles vCard
  * 3.0 + 4.0, multi-card files, folded continuation lines, repeated
  * typed properties, and photo redaction (metadata only — never the
  * binary).

@@ -44,7 +44,7 @@ Interaction model:
 
 ## Visual Language
 
-- Use the Clockless tokens from `prompts/_design.md`.
+- Use the Clockless tokens from `prompts/styles/_design.md`.
 - Quiet, utilitarian, scan-friendly.
 - Compact typography and stable grid tracks.
 - Use color semantically and sparingly.

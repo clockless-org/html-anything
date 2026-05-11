@@ -9,7 +9,7 @@
  * Detection runs the CSV through `detectColumns` + `classifySubtype`
  * to decide whether the file is finance-shaped at all. If yes, the
  * appropriate `contentType` is set so htmlize can pick the right
- * source prompt under the `_finance.md` family contract.
+ * source prompt under the `prompts/sources/_finance.md` family contract.
  *
  * The shared aggregator (`finance-shared.ts`) handles all the common
  * concerns (recurring vendors, duplicates, anomalies, category

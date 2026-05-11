@@ -46,7 +46,7 @@ Interaction model:
 
 ## Visual Language
 
-- Use the Clockless tokens from `prompts/_design.md`.
+- Use the Clockless tokens from `prompts/styles/_design.md`.
 - Keep the tone intimate but not cheesy.
 - Use warm surfaces, soft comparison colors, and compact labels.
 - Prefer anonymity by default: Person A / Person B or initials.

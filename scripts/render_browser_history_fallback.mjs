@@ -5,7 +5,7 @@
  * The canonical pipeline is `dist/cli.js → htmlize → LLM`, but example
  * regeneration may run on machines without an Anthropic / OpenAI key.
  * This script reuses the same parser, then applies a hand-tuned template
- * that satisfies the prompts/browser-history.md contract:
+ * that satisfies the prompts/sources/browser-history.md contract:
  *
  *   1. Hero summary (visits / domains / window / late-night share /
  *      privacy reminder chip)

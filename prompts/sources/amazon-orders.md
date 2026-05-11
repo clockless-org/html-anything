@@ -215,7 +215,7 @@ quietly your most consistent spend; you've bought the same brand of
 cat litter every 6 weeks for 3 years."* Not "Your spending is on
 trend!". Specific to the file.
 
-Use the Clockless tokens from `_design.md` (Space Grotesk + Plus
+Use the Clockless tokens from `prompts/styles/_design.md` (Space Grotesk + Plus
 Jakarta Sans, brand orange `--primary`, surface cream in light mode,
 proper currency + tabular-nums). This is part of the html-anything
 family — never an Amazon imitation.

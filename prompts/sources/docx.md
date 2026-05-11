@@ -4,7 +4,7 @@ Internal memos, RFCs, decision docs, briefs, contracts, drafts. The
 common shape: a structured document with headings, decisions / action
 items, and a clear authoring voice.
 
-Read [`prompts/_document.md`](./_document.md) for shared
+Read [`prompts/sources/_document.md`](./_document.md) for shared
 long-document guidance (TL;DR, claim cards, section nav, 5-minute vs
 full mode, search). The notes below are DOCX-specific.
 

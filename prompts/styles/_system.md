@@ -90,7 +90,7 @@ Good interaction primitives:
 
 - period scrubber,
 - stepper / lesson state,
-- selector + live inspector,
+- object/entity selector + live inspector,
 - hover/click tooltip,
 - filter chips,
 - linked highlighting across chart + list,
@@ -140,6 +140,8 @@ Avoid defaulting data to dashboard. Pick a system by use case:
   receipts, tickets, hotel folios, reservation bundles, and evidence packets.
 - **Network Map** for people, senders, communities, contacts, payments, email,
   and professional networks.
+- **Learning Studio** for app-like object, system, anatomy, architecture, or
+  spec exploration where a manipulable stage is the interface.
 - **Rhythm Report** for intimate 1:1 chats.
 - **Document Review** for long, formal, or evidence-heavy documents.
 - **Editorial Carousel** for arguments, research takeaways, and article-like
@@ -166,8 +168,9 @@ interaction, not by a generic component form.
 
 ## Implementation Rules
 
-- Use Clockless tokens from `prompts/_design.md` as the brand base, but do not
-  let those tokens flatten all styles into one look.
+- Use Clockless tokens from `prompts/styles/_design.md` as the brand base
+  unless the selected style provides a complete style-native token override.
+  Do not let a shared token set flatten all styles into one look.
 - Put `data-ha-style="<selected-style>"` on the root `<html>` element.
 - Use semantic, style-specific classes such as `.lesson-stage`,
   `.atlas-timeline`, `.ops-command-bar`, `.evidence-workbench`,
@@ -175,9 +178,10 @@ interaction, not by a generic component form.
 - The first viewport should visibly reveal the selected system before the user
   scrolls.
 - The primary interaction should be native to the system: a lesson stepper for
-  `teaching`, selector/inspector for `interactive-studio`, filters/table for
-  `dashboard`, margin-spore links for `living-essay`, spread rail / evidence
-  drawer for `editorial-carousel`, etc.
+  `teaching`, object selector/inspector for `interactive-learning`,
+  filters/table for `dashboard`, margin-spore links for `living-essay`,
+  spread rail / evidence drawer for `editorial-carousel`, document review
+  body for `document`, etc.
 - Do not include a visible "style badge" in real generated outputs. The style
   should be obvious from the structure.
 

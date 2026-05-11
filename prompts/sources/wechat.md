@@ -85,7 +85,7 @@ aggregations.
 - Use large, dense visualizations. This source is allowed to be richer
   and more editorial than the generic chat pack.
 - Prefer pink/red and blue as the two participant colors, but keep the
-  Clockless design tokens from `_design.md`. Do not make the whole page
+  Clockless design tokens from `prompts/styles/_design.md`. Do not make the whole page
   a single pink palette.
 - Use inline SVG or Canvas. No Chart.js, no ECharts, no CDN.
 - Do not include a raw-message appendix by default. For shareable

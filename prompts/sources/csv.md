@@ -28,7 +28,7 @@ Infer the story:
   column, as a small ranked list (not a full table).
 
 Render charts as inline SVG (no Chart.js, no CDNs). Use Clockless
-brand palette per `_design.md`. Up to 6 colors per chart.
+brand palette per `prompts/styles/_design.md`. Up to 6 colors per chart.
 
 ## The full table (drill-down)
 

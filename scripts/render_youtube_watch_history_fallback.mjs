@@ -5,7 +5,7 @@
  * The canonical pipeline is `dist/cli.js → htmlize → LLM`, but example
  * regeneration may run on machines without an Anthropic / OpenAI key.
  * This script reuses the same parser, then applies a hand-tuned template
- * that satisfies the prompts/youtube-watch-history.md contract:
+ * that satisfies the prompts/sources/youtube-watch-history.md contract:
  *
  *   1. Hero summary (watches / channels / window / late-night share)
  *   2. Monthly + weekly bars + day-of-week × hour heatmap

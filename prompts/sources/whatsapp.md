@@ -84,7 +84,7 @@ aggregations.
 - Use large, dense visualizations. This source is allowed to be richer
   and more editorial than the generic chat pack.
 - Prefer two participant colors, often warm pink/red versus blue, while
-  still applying the Clockless design tokens from `_design.md`.
+  still applying the Clockless design tokens from `prompts/styles/_design.md`.
 - Use inline SVG or Canvas. No Chart.js, no ECharts, no CDN.
 - Do not include a raw-message appendix by default. For shareable
   relationship reports, aggregate metrics are safer and visually cleaner
