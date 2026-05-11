@@ -13,7 +13,7 @@ you something you can open, share, or publish.
 
 ## Preview
 
-→ **[Open all live examples](https://clockless-org.github.io/html-anything/examples/)** — 48 demos, organized by style.
+→ **[Open the curated gallery](https://clockless-org.github.io/html-anything/examples/)** — 20 demos, organized by source and style.
 
 ### Featured
 
@@ -43,13 +43,13 @@ A small selection across the rest of the style catalog. Each links to the live p
 |---|---|---|
 | [Amazon order history →](https://clockless-org.github.io/html-anything/examples/amazon-orders/output.html) | 3 years of orders → personal commerce memory with cadence, returns, gifting. | `timeline-story` |
 | [Kindle highlights →](https://clockless-org.github.io/html-anything/examples/kindle-highlights/output.html) | Highlights become a mycelium writing field with a living margin question. | `living-essay` |
-| [Spotify listening history →](https://clockless-org.github.io/html-anything/examples/spotify-history/output.html) | Lifetime listening as a scroll-driven year-by-year story. | `timeline-story` |
+| [Apple Health →](https://clockless-org.github.io/html-anything/examples/iphone-health/output.html) | Activity, sleep, and workouts become a personal rhythm story. | `timeline-story` |
 | [LinkedIn connections →](https://clockless-org.github.io/html-anything/examples/linkedin-connections/output.html) | 12 years of connections clustered by company, role, and era. | `network-map` |
 | [CSV sales dashboard →](https://clockless-org.github.io/html-anything/examples/csv/output.html) | A small CSV becomes a sortable + summarized ops console. | `dashboard` |
 | [Google Photos atlas →](https://clockless-org.github.io/html-anything/examples/google-photos-takeout/output.html) | Takeout EXIF metadata becomes a place-driven memory map. | `map-atlas` |
 | [PR review →](https://clockless-org.github.io/html-anything/examples/pr-review/output.html) | A patch becomes a risk-annotated review brief with evidence. | `developer` |
 
-→ **[See the full gallery (48 demos) →](https://clockless-org.github.io/html-anything/examples/)**
+→ **[See the curated gallery (20 demos) →](https://clockless-org.github.io/html-anything/examples/)**
 
 ## Install
 
