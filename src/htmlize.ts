@@ -38,13 +38,26 @@ Produce a complete \`<!doctype html>\` document with these properties:
 5. **Self-contained.** Must work offline by double-clicking the file.
 6. **Style fidelity.** The selected style is a design system + layout system, not a palette. Reproduce the style's first viewport, component vocabulary, layout scaffold, interaction model, and motion grammar. Do not generate a generic report and recolor it.
 
+The selected style is binding. Build from the selected style's scaffold first,
+then adapt source-specific modules into that scaffold. Do not produce a generic
+\`hero + KPI cards + chart cards + table\` page when the style prompt specifies a
+different system. If the style prompt includes a reference contract or
+compliance gate, treat it as non-negotiable.
+
 The full data is given to you as a JSON object, but **embed it via the literal placeholder \`__DATA__\`** inside a <script> tag:
 \`\`\`
 <script>const DATA = __DATA__;</script>
 \`\`\`
 The host program will substitute \`__DATA__\` with the full data after you respond. You only see a sample, but write JS that handles the *full* shape using the schema in the user message.
 
-Return ONLY the HTML, starting with \`<!doctype html>\`. No markdown fences, no commentary.`
+Before returning, silently audit the HTML against:
+- the design tokens,
+- the selected style's required scaffold, class names, and interactions,
+- the source prompt's required analytical modules,
+- responsive behavior and offline constraints.
+
+If the audit fails, revise the HTML before returning it. Return ONLY the HTML,
+starting with \`<!doctype html>\`. No markdown fences, no commentary.`
 
 const STYLE_COMPLIANCE_PROMPT = `## Final style-compliance gate
 
@@ -133,7 +146,7 @@ function buildUserPrompt(
     JSON.stringify(parsed.sample, null, 2).slice(0, 16000),
     "```",
     "",
-    "Now produce the HTML.",
+    "Now produce the HTML. Treat the selected style as a hard contract, not a loose visual suggestion. Silently self-check style compliance before returning.",
   ].join("\n")
 }
 

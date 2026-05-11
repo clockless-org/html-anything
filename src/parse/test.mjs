@@ -93,6 +93,7 @@ test("htmlize auto style selector routes major source families", async () => {
   assert.equal(selectStyleForContent("csv-tabular", { style: "teaching" }), "teaching")
   assert.equal(selectStyleForContent("csv-tabular", { style: "living-essay" }), "living-essay")
   assert.equal(selectStyleForContent("markdown-document", { style: "editorial-carousel" }), "editorial-carousel")
+  assert.equal(selectStyleForContent("travel-itinerary", { style: "paper-trail" }), "paper-trail")
 })
 
 test("htmlize injects the selected style prompt into the LLM request", async () => {
@@ -122,6 +123,36 @@ test("htmlize injects the selected style prompt into the LLM request", async () 
   assert.match(seenPrompt, /Underlying System: Ops Console/)
   assert.match(seenPrompt, /# csv — tabular data/)
   assert.match(html, /"category":"A"/)
+})
+
+test("htmlize injects the explicit paper-trail style prompt into the LLM request", async () => {
+  const { htmlize } = await import("../../dist/htmlize.js")
+  const parsed = {
+    contentType: "travel-itinerary",
+    summary: "3 itinerary items across 1 day",
+    sample: { days: [{ date: "2026-05-05", items: [] }] },
+    data: { days: [{ date: "2026-05-05", items: [] }], items: [] },
+    meta: { sourceFile: "input.csv", sizeBytes: 64 },
+  }
+  let seenPrompt = ""
+  const llm = {
+    async ask(prompt) {
+      seenPrompt = prompt
+      return "<!doctype html><html><body><script>const DATA = __DATA__;</script></body></html>"
+    },
+  }
+  await htmlize(parsed, llm, { style: "paper-trail" })
+  assert.match(seenPrompt, /Selected style: paper-trail/)
+  assert.match(seenPrompt, /# Paper Trail Style/)
+  assert.match(seenPrompt, /Underlying System: Paper Trail/)
+  assert.match(seenPrompt, /Post Post Reference Contract/)
+  assert.match(seenPrompt, /--paper-reference-mustard: #FFC233/)
+  assert.match(seenPrompt, /Style Compliance Gate/)
+  assert.match(seenPrompt, /color-scheme: light/)
+  assert.match(seenPrompt, /warm light paper scene/)
+  assert.match(seenPrompt, /paper-rail/)
+  assert.match(seenPrompt, /Treat the selected style as a hard contract/)
+  assert.match(seenPrompt, /# travel-itinerary/)
 })
 
 test("checked-in example pages are complete and have parseable inline scripts", async () => {
