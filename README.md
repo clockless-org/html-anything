@@ -93,10 +93,11 @@ Each source is routed by `auto` to the page shape that fits it best. These thumb
 </tr>
 </table>
 
-Additional source fixtures that map cleanly to auto styles but do not yet have committed `output.html` previews:
+Additional source fixtures that map cleanly to auto styles but do not yet have committed gallery thumbnails (the `output.html` for each lives next to its `examples/<source>/input.*`):
 
 | Source fixture | Auto style |
 |---|---|
+| Browser history (browser-history) — Chrome / Edge / Brave / Safari / Firefox CSV or JSON history exports. Domain leaderboard, topic clusters, research sessions, returners, repeated searches; URLs only in the drill-down detail. | `personal-atlas` |
 | Product backlog (backlog-product) | `dashboard` |
 | Bank transactions (bank-transactions) | `dashboard` |
 | Founder calendar (calendar-founder) | `dashboard` |
@@ -215,7 +216,7 @@ fallback `default` style plus eight auto-selected specialized styles:
 
 |  | Source family | Examples |
 |---|---|---|
-| 💾 | Personal exports | Amazon orders, rideshare history, YouTube watch history, Spotify history, Google Maps saved places, Apple Health, Twitch, Kindle highlights |
+| 💾 | Personal exports | Amazon orders, rideshare history, browser history (Chrome / Edge / Safari / Firefox), YouTube watch history, Spotify history, Google Maps saved places, Apple Health, Twitch, Kindle highlights |
 | 🖼️ | Photos and contacts | Google Photos Takeout metadata, vCard contacts, LinkedIn connections |
 | 💬 | Chats and communities | WeChat, WhatsApp, Slack, Discord, Telegram, iMessage-style CSV |
 | 📊 | Data and operations | CSV / TSV, JSON, JSONL, logs, bank transactions, invoices, QuickBooks, Venmo / PayPal, calendar, issue trackers |

@@ -35,6 +35,13 @@
  *                          Email Address,Company,Position,Connected On`
  *                          (with optional 2-3 line "Notes:" preamble that
  *                          the parser strips). One row per connection.
+ *   - browser-history    — Chrome / Edge / Brave / Safari / Firefox history
+ *                          export. CSV with `url,title,visit_time` plus
+ *                          optional `visit_count,typed_count,transition`,
+ *                          or JSON array of the same shape. Filename hints:
+ *                          `history`, `browser`, `chrome`, `edge`, `safari`,
+ *                          `firefox`. SQLite blobs are refused with a
+ *                          clear conversion recipe.
  */
 import * as fs from "node:fs/promises"
 import * as path from "node:path"
@@ -48,8 +55,8 @@ export const parser: Parser = {
     const base = path.basename(filepath).toLowerCase()
     try {
       const head = await readHead(filepath, 8192)
-      if (ext === ".json") return looksLikeYoutube(head, base) || looksLikeSpotify(head, base)
-      if (ext === ".csv") return looksLikeLinkedIn(head, base) || looksLikeAmazon(head, base) || looksLikeTwitch(head, base) || looksLikeStars(head, base)
+      if (ext === ".json") return looksLikeYoutube(head, base) || looksLikeBrowserHistoryJson(head, base) || looksLikeSpotify(head, base)
+      if (ext === ".csv") return looksLikeLinkedIn(head, base) || looksLikeAmazon(head, base) || looksLikeTwitch(head, base) || looksLikeBrowserHistoryCsv(head, base) || looksLikeStars(head, base)
       if (ext === ".xml") return looksLikeAppleHealth(head)
     } catch { /* fall through */ }
     return false
@@ -63,7 +70,9 @@ export const parser: Parser = {
       sizeBytes: Buffer.byteLength(raw, "utf8"),
     }
     if (ext === ".json") {
-      if (looksLikeYoutube(raw.slice(0, 8192), base)) return parseYoutube(raw, meta)
+      const head = raw.slice(0, 8192)
+      if (looksLikeYoutube(head, base)) return parseYoutube(raw, meta)
+      if (looksLikeBrowserHistoryJson(head, base)) return parseBrowserHistoryJson(raw, meta)
       return parseSpotify(raw, meta)
     }
     if (ext === ".csv") {
@@ -72,6 +81,7 @@ export const parser: Parser = {
       const firstLine = (raw.split(/\r?\n/, 1)[0] || "").toLowerCase()
       if (looksLikeAmazon(firstLine, base)) return parseAmazon(raw, meta)
       if (looksLikeTwitch(firstLine, base)) return parseTwitch(raw, meta)
+      if (looksLikeBrowserHistoryCsv(head, base)) return parseBrowserHistoryCsv(raw, meta)
       return parseStars(raw, meta)
     }
     return parseAppleHealth(raw, meta)
@@ -141,6 +151,56 @@ function looksLikeLinkedIn(head: string, base: string): boolean {
     if (hasFirstName && hasLastName && hasConnectedOn && (hasCompany || hasPosition)) return true
   }
   return false
+}
+
+function looksLikeBrowserHistoryCsv(head: string, base: string): boolean {
+  const filenameHint = /history|browser|chrome|edge|brave|safari|firefox|places/i.test(base)
+  const firstLine = (head.split(/\r?\n/, 1)[0] || "").toLowerCase().replace(/^[﻿]/, "")
+  const cols = firstLine.split(/[,;\t]/).map(s => s.trim().replace(/^"|"$/g, ""))
+  if (cols.length < 2) return false
+  const hasUrl = cols.some(c => /^url$/.test(c) || /^urls?\.url$/.test(c) || /^visit_url$/.test(c) || /^link$/.test(c))
+  if (!hasUrl) return false
+  const hasTime =
+    cols.some(c => /^visit[ _-]?time$/.test(c)) ||
+    cols.some(c => /^last[ _-]?visit[ _-]?(time|date)$/.test(c)) ||
+    cols.some(c => /^visited[ _-]?on$/.test(c)) ||
+    cols.some(c => /^visit[ _-]?date$/.test(c)) ||
+    cols.some(c => /^date$/.test(c) && filenameHint) ||
+    cols.some(c => /^time(stamp)?$/.test(c) && filenameHint)
+  // Must have URL + time. Discriminate against generic CSVs that just happen to have a `url` column.
+  if (!hasTime) return false
+  // Anti-collide with Stars (Title,Note,URL,Comment) — that one lacks visit_time, so we already
+  // filter it out above. Anti-collide with reading-list CSVs by requiring filename hint OR
+  // the presence of a visit_count / typed_count / transition column.
+  const hasBrowserSignal =
+    filenameHint ||
+    cols.some(c => /^visit[ _-]?count$/.test(c)) ||
+    cols.some(c => /^typed[ _-]?count$/.test(c)) ||
+    cols.some(c => /^transition([ _-]?type)?$/.test(c))
+  return hasBrowserSignal
+}
+
+function looksLikeBrowserHistoryJson(head: string, base: string): boolean {
+  const filenameHint = /history|browser|chrome|edge|brave|safari|firefox|places/i.test(base)
+  // Refuse SQLite blobs early — caller should convert to CSV.
+  if (/^SQLite format 3/.test(head)) return false
+  // Look for a JSON object/array shape with url + visit_time-like keys.
+  const hasUrl = /"url"\s*:/i.test(head) || /"visit_url"\s*:/i.test(head)
+  const hasTimeKey =
+    /"visit_time"\s*:/i.test(head) ||
+    /"visitTime"\s*:/i.test(head) ||
+    /"last_visit_time"\s*:/i.test(head) ||
+    /"lastVisitTime"\s*:/i.test(head) ||
+    /"last_visit_date"\s*:/i.test(head) ||
+    /"visited_at"\s*:/i.test(head) ||
+    /"timestamp"\s*:/i.test(head) ||
+    /"date_added"\s*:/i.test(head)
+  // Discriminate against YouTube which uses `time` + youtube.com/watch.
+  if (/"header"\s*:\s*"YouTube/.test(head)) return false
+  if (!hasUrl || !hasTimeKey) return false
+  // Anti-collide with Spotify by ensuring no Spotify-distinctive keys appear.
+  if (/"master_metadata_track_name"|"trackName"\s*:|"ms_played"\s*:|"msPlayed"\s*:/.test(head)) return false
+  return filenameHint || /"visit_count"\s*:|"visitCount"\s*:|"typed_count"\s*:|"typedCount"\s*:|"transition"\s*:|"transition_type"\s*:/.test(head)
 }
 
 function looksLikeAmazon(head: string, base: string): boolean {
@@ -1927,6 +1987,623 @@ async function readHead(filepath: string, n: number): Promise<string> {
     await fd.close()
   }
 }
+
+// ----------------------------------- browser-history
+
+interface BrowserVisit {
+  id: string
+  ts: string
+  title: string
+  url: string
+  domain: string
+  host: string
+  path: string
+  query: string
+  queryMasked: boolean
+  visitCount: number
+  typedCount: number
+  transition: "typed" | "link" | "auto" | "reload" | "form" | "other"
+  isTyped: boolean
+  isSearch: boolean
+  searchQuery: string | null
+  topic: string
+  topicInferred: boolean
+  bucket: "work" | "personal" | "search" | "other"
+  hour: number
+  dow: number
+  date: string
+  isLateNight: boolean
+}
+
+const BH_TOPIC_DOMAINS: Array<[RegExp, string]> = [
+  [/^(github|gitlab|bitbucket)\.com$/i, "work-tools"],
+  [/^(linear|notion|atlassian|jira|trello|asana|monday|airtable|coda|clickup)\.(com|so|app)$/i, "work-tools"],
+  [/^(slack|figma|miro|loom|zoom|webex|teams\.microsoft|meet\.google)\.(com|us)$/i, "work-tools"],
+  [/^(vercel|netlify|render|fly\.io|railway|heroku|cloudflare|aws\.amazon|azure\.microsoft|console\.cloud\.google|gcp)\.com$/i, "work-tools"],
+  [/^(stripe|paddle|chargebee|recurly|quickbooks|gusto|brex|ramp|mercury)\.com$/i, "work-tools"],
+  [/^(stackoverflow|stackexchange|superuser|serverfault)\.com$/i, "coding-help"],
+  [/^(developer\.mozilla|mdn\.io|dev\.to|hashnode|medium|towardsdatascience|css-tricks|smashingmagazine)\.com$/i, "coding-help"],
+  [/^(npmjs|pypi|crates\.io|rubygems|hex\.pm|pkg\.go\.dev|maven|nuget)\.(org|com|io)$/i, "coding-help"],
+  [/^(docs\.|readthedocs|devdocs|reactjs|nextjs|vuejs|angular|rust-lang|python|nodejs|postgresql|sqlite|mongodb)\.(org|com|io|app)$/i, "coding-help"],
+  [/^(reddit|news\.ycombinator|lobste\.rs|x|twitter|bsky\.app|bluesky|mastodon|threads|linkedin|facebook|instagram|tiktok|pinterest|snapchat|tumblr)\.(com|app)$/i, "social"],
+  [/^(youtube|spotify|twitch|netflix|disneyplus|hulu|hbomax|max|appletv|primevideo|peacocktv|paramountplus|crunchyroll|soundcloud|bandcamp|mixcloud)\.(com|tv)$/i, "media"],
+  [/^(amazon|ebay|etsy|walmart|target|bestbuy|costco|aliexpress|shopify|wayfair|ikea|homedepot|lowes|wish|temu|shein|zara|uniqlo|nordstrom|macys)\.com$/i, "shopping"],
+  [/^(chase|bankofamerica|wellsfargo|citi|capitalone|usbank|hsbc|barclays|santander|mint|personalcapital|empower|fidelity|schwab|vanguard|robinhood|coinbase|kraken|gemini|paypal|venmo|wise|revolut|sofi|ally)\.com$/i, "finance-admin"],
+  [/^(irs|ssa|usps|dmv|gov|usa|treasury|hmrc|gov\.uk|service\.gov\.uk)\.(gov|com|uk)$/i, "finance-admin"],
+  [/^(google\.com\/maps|maps\.google|maps\.apple|booking|kayak|expedia|priceline|hotels|orbitz|tripadvisor|airbnb|vrbo|aa|delta|united|southwest|jetblue|alaskaair|britishairways|lufthansa|airfrance|emirates|qantas)\.(com|co\.uk)$/i, "travel"],
+  [/^(mychart|patient|kp|kaiserpermanente|webmd|healthline|drugs|mayoclinic|nhs|nih|pubmed|ncbi\.nlm\.nih)\.(com|org|uk|gov)$/i, "health"],
+  [/^(en\.wikipedia|wikipedia|wikimedia|wiktionary|notion\.so|confluence|wayback|archive)\.(org|so|com)$/i, "docs-knowledge"],
+  [/^(google|bing|duckduckgo|kagi|brave\.com\/search|search\.brave|yandex|baidu|ecosia|qwant|startpage|perplexity|you)\.(com|ai)$/i, "search"],
+  [/^(nytimes|bbc|reuters|theguardian|washingtonpost|wsj|ft|economist|apnews|bloomberg|cnbc|cnn|axios|politico|vox|theatlantic|newyorker|aljazeera|npr|abcnews|nbcnews|cbsnews)\.(com|co\.uk)$/i, "news"],
+]
+
+const BH_TOPIC_TITLE: Array<[RegExp, string]> = [
+  [/\b(pull request|merge request|issue|commit|branch|repo|pr review|cherry-pick|rebase)\b/i, "work-tools"],
+  [/\b(stack ?overflow|how to|error|exception|undefined|cannot|fix|debug|tutorial|cheat ?sheet)\b/i, "coding-help"],
+  [/\b(api|sdk|reference|docs?|documentation|guide)\b/i, "docs-knowledge"],
+  [/\b(news|breaking|live updates|election|stocks?|market)\b/i, "news"],
+  [/\b(reddit|hacker news|tweet|post|reply|thread|subreddit)\b/i, "social"],
+  [/\b(buy|cart|order|shipping|return|product|amazon|review)\b/i, "shopping"],
+  [/\b(bank|account|statement|invoice|tax|refund|payment|wire|transfer|w-?2|1099)\b/i, "finance-admin"],
+  [/\b(flight|hotel|trip|booking|reservation|itinerary|map|directions)\b/i, "travel"],
+  [/\b(symptom|dosage|insurance claim|appointment|prescription)\b/i, "health"],
+  [/\b(watch|video|episode|season|playlist|track|album|listen|stream)\b/i, "media"],
+]
+
+const BH_TOPIC_BUCKET: Record<string, "work" | "personal" | "search" | "other"> = {
+  "work-tools": "work",
+  "coding-help": "work",
+  "docs-knowledge": "work",
+  "news": "personal",
+  "social": "personal",
+  "media": "personal",
+  "shopping": "personal",
+  "finance-admin": "personal",
+  "travel": "personal",
+  "health": "personal",
+  "search": "search",
+  "other": "other",
+}
+
+// Common multi-part TLDs we collapse to eTLD+1.
+const BH_PSL_2 = new Set([
+  "co.uk","org.uk","ac.uk","gov.uk","nhs.uk",
+  "com.au","net.au","org.au","gov.au","edu.au",
+  "co.jp","ne.jp","or.jp","ac.jp","go.jp",
+  "co.nz","net.nz","org.nz","govt.nz",
+  "com.br","org.br","gov.br",
+  "com.mx","gob.mx",
+  "com.cn","org.cn","gov.cn","edu.cn",
+  "co.in","gov.in","ac.in","org.in",
+  "com.hk","org.hk","gov.hk",
+  "com.sg","gov.sg","edu.sg",
+])
+
+function eTldPlusOne(host: string): string {
+  if (!host) return ""
+  const h = host.toLowerCase().replace(/^www\./, "").replace(/^m\./, "")
+  const parts = h.split(".")
+  if (parts.length <= 2) return h
+  const last2 = parts.slice(-2).join(".")
+  const last3 = parts.slice(-3).join(".")
+  if (BH_PSL_2.has(last2)) return last3
+  return last2
+}
+
+function bhTransition(raw: string): "typed" | "link" | "auto" | "reload" | "form" | "other" {
+  const t = (raw || "").toLowerCase().trim()
+  if (!t) return "other"
+  if (/^typed/.test(t)) return "typed"
+  if (/^link/.test(t)) return "link"
+  if (/^auto|^subframe|^manual_subframe|^generated|^start_page|^bookmark/.test(t)) return "auto"
+  if (/^reload/.test(t)) return "reload"
+  if (/^form/.test(t)) return "form"
+  // Numeric Chromium transition codes: low byte is the type.
+  const n = Number(t)
+  if (Number.isFinite(n)) {
+    const core = n & 0xff
+    if (core === 1) return "link"
+    if (core === 2) return "typed"
+    if (core === 3) return "auto"
+    if (core === 7) return "form"
+    if (core === 8) return "reload"
+    if (core === 0) return "link"
+  }
+  return "other"
+}
+
+function bhInferTopic(domain: string, host: string, title: string): { topic: string; inferred: boolean } {
+  const lookup = (h: string): string | null => {
+    for (const [re, t] of BH_TOPIC_DOMAINS) if (re.test(h)) return t
+    return null
+  }
+  const direct = lookup(domain) || lookup(host)
+  if (direct) return { topic: direct, inferred: false }
+  for (const [re, t] of BH_TOPIC_TITLE) if (re.test(title || "")) return { topic: t, inferred: true }
+  return { topic: "other", inferred: true }
+}
+
+function bhParseTimestamp(raw: string): string | null {
+  if (!raw) return null
+  const trimmed = String(raw).trim()
+  if (!trimmed) return null
+  const n = Number(trimmed)
+  if (Number.isFinite(n) && /^\d+(\.\d+)?$/.test(trimmed)) {
+    // Heuristic: distinguish ms vs s vs us vs Chromium-epoch microseconds.
+    if (n > 1e16) {
+      // Chromium "WebKit time": microseconds since 1601-01-01.
+      const ms = (n / 1000) - 11_644_473_600_000
+      const d = new Date(ms)
+      if (!isNaN(d.getTime())) return d.toISOString()
+    }
+    if (n > 1e14) { // microseconds since unix epoch
+      const d = new Date(n / 1000)
+      if (!isNaN(d.getTime())) return d.toISOString()
+    }
+    if (n > 1e12) { // milliseconds since unix epoch
+      const d = new Date(n)
+      if (!isNaN(d.getTime())) return d.toISOString()
+    }
+    if (n > 1e9) { // seconds since unix epoch
+      const d = new Date(n * 1000)
+      if (!isNaN(d.getTime())) return d.toISOString()
+    }
+  }
+  // Try standard parse.
+  const d = new Date(trimmed.includes(" ") && !trimmed.includes("T") ? trimmed.replace(" ", "T") : trimmed)
+  if (!isNaN(d.getTime())) return d.toISOString()
+  return null
+}
+
+const BH_SEARCH_HOSTS = /^(www\.)?(google\.[a-z.]+|bing\.com|duckduckgo\.com|kagi\.com|search\.brave\.com|brave\.com|yandex\.[a-z.]+|baidu\.com|ecosia\.org|qwant\.com|startpage\.com|perplexity\.ai|you\.com)$/i
+
+function bhExtractSearchQuery(host: string, query: string): string | null {
+  if (!query) return null
+  if (!BH_SEARCH_HOSTS.test(host)) return null
+  // Search engines use q=, query=, p= (yahoo), wd= (baidu), text= (yandex).
+  const m = query.match(/(?:^|&)(q|query|p|wd|text)=([^&#]*)/i)
+  if (!m) return null
+  try {
+    return decodeURIComponent((m[2] || "").replace(/\+/g, " ")).trim() || null
+  } catch {
+    return (m[2] || "").trim() || null
+  }
+}
+
+function bhShouldMaskQuery(query: string): boolean {
+  if (!query) return false
+  if (/(?:^|[?&])(password|token|key|auth|session|access_token|id_token|refresh_token|secret)=/i.test(query)) return true
+  if (/@/.test(decodeURIComponentSafe(query))) return true
+  // Long digit-only chunks look like account / order numbers.
+  if (/(?:^|[=&])\d{8,}(?:&|$)/.test(query)) return true
+  return false
+}
+
+function decodeURIComponentSafe(s: string): string {
+  try { return decodeURIComponent(s.replace(/\+/g, " ")) } catch { return s }
+}
+
+function parseBrowserHistoryCsv(raw: string, meta: ParsedFile["meta"]): ParsedFile {
+  const rows = parseCsv(raw)
+  if (rows.length < 2) throw new Error("browser-history: no rows")
+  const header = rows[0].map(h => h.trim().toLowerCase())
+  const body = rows.slice(1)
+  const findIdx = (...names: RegExp[]): number => {
+    for (let i = 0; i < header.length; i++) {
+      const name = header[i]
+      for (const re of names) if (re.test(name)) return i
+    }
+    return -1
+  }
+  const colUrl = findIdx(/^url$/, /^urls?\.url$/, /^visit_url$/, /^link$/)
+  const colTitle = findIdx(/^title$/, /^urls?\.title$/, /^page[_ -]?title$/, /^name$/)
+  const colTime = findIdx(
+    /^visit[ _-]?time$/, /^last[ _-]?visit[ _-]?time$/, /^last[ _-]?visit[ _-]?date$/,
+    /^visited[ _-]?on$/, /^visit[ _-]?date$/, /^visited[ _-]?at$/,
+    /^timestamp$/, /^time$/, /^date$/,
+  )
+  const colVisitCount = findIdx(/^visit[ _-]?count$/, /^urls?\.visit_count$/, /^visits$/)
+  const colTypedCount = findIdx(/^typed[ _-]?count$/, /^urls?\.typed_count$/)
+  const colTransition = findIdx(/^transition([ _-]?type)?$/, /^visits?\.transition$/)
+  if (colUrl < 0 || colTime < 0) throw new Error("browser-history: missing url or visit_time column")
+
+  const records = body
+    .filter(r => r.length > Math.max(colUrl, colTime))
+    .map((r, i): BrowserVisit | null => normalizeVisit(
+      r[colUrl] || "",
+      colTitle >= 0 ? (r[colTitle] || "") : "",
+      r[colTime] || "",
+      colVisitCount >= 0 ? Number(r[colVisitCount] || 1) : 1,
+      colTypedCount >= 0 ? Number(r[colTypedCount] || 0) : 0,
+      colTransition >= 0 ? r[colTransition] || "" : "",
+      i,
+    ))
+    .filter((v): v is BrowserVisit => v !== null)
+
+  return finalizeBrowserHistory(records, meta)
+}
+
+function parseBrowserHistoryJson(raw: string, meta: ParsedFile["meta"]): ParsedFile {
+  let data: unknown = JSON.parse(raw)
+  if (data && typeof data === "object" && !Array.isArray(data)) {
+    const o = data as Record<string, unknown>
+    if (Array.isArray(o.history)) data = o.history
+    else if (Array.isArray(o.entries)) data = o.entries
+    else if (Array.isArray(o.visits)) data = o.visits
+    else if (Array.isArray(o.urls)) data = o.urls
+  }
+  if (!Array.isArray(data)) throw new Error("browser-history: expected JSON array")
+  const records: BrowserVisit[] = []
+  data.forEach((r, i) => {
+    if (!r || typeof r !== "object") return
+    const o = r as Record<string, unknown>
+    const url = (o.url as string) || (o.URL as string) || (o.visit_url as string) || (o.link as string) || ""
+    const title = (o.title as string) || (o.Title as string) || (o.name as string) || ""
+    const time =
+      (o.visit_time as string | number) ??
+      (o.visitTime as string | number) ??
+      (o.last_visit_time as string | number) ??
+      (o.lastVisitTime as string | number) ??
+      (o.last_visit_date as string | number) ??
+      (o.visited_at as string | number) ??
+      (o.timestamp as string | number) ??
+      (o.time as string | number) ??
+      (o.date as string | number) ??
+      (o.date_added as string | number) ?? ""
+    const visitCount = Number((o.visit_count as number) ?? (o.visitCount as number) ?? 1)
+    const typedCount = Number((o.typed_count as number) ?? (o.typedCount as number) ?? 0)
+    const transition = String((o.transition as string) ?? (o.transition_type as string) ?? "")
+    const visit = normalizeVisit(url, title, String(time), visitCount, typedCount, transition, i)
+    if (visit) records.push(visit)
+  })
+  return finalizeBrowserHistory(records, meta)
+}
+
+function normalizeVisit(
+  rawUrl: string,
+  rawTitle: string,
+  rawTime: string,
+  visitCount: number,
+  typedCount: number,
+  transitionRaw: string,
+  idx: number,
+): BrowserVisit | null {
+  if (!rawUrl) return null
+  const ts = bhParseTimestamp(rawTime)
+  if (!ts) return null
+  let host = ""
+  let pth = "/"
+  let query = ""
+  try {
+    const u = new URL(rawUrl)
+    host = u.hostname.toLowerCase()
+    pth = u.pathname || "/"
+    query = u.search ? u.search.slice(1) : ""
+  } catch {
+    // Fall back to a regex split when URL constructor refuses (e.g. about:blank).
+    const m = rawUrl.match(/^([a-z][a-z0-9+.-]*):\/\/([^/?#]+)([^?#]*)(?:\?([^#]*))?/i)
+    if (!m) return null
+    host = m[2].toLowerCase()
+    pth = m[3] || "/"
+    query = m[4] || ""
+  }
+  // Skip browser-internal noise.
+  if (/^chrome|^edge|^brave|^moz-extension|^chrome-extension|^about|^view-source/.test(rawUrl)) {
+    return null
+  }
+  const domain = eTldPlusOne(host)
+  const title = (rawTitle || "").trim() || (host + pth)
+  const transition = bhTransition(transitionRaw)
+  const isTyped = transition === "typed" || (Number.isFinite(typedCount) && typedCount > 0)
+  const isSearch = BH_SEARCH_HOSTS.test(host)
+  const searchQuery = isSearch ? bhExtractSearchQuery(host, query) : null
+  const queryMasked = bhShouldMaskQuery(query)
+  const { topic, inferred } = bhInferTopic(isSearch ? "search" : domain, host, title)
+  const finalTopic = isSearch ? "search" : topic
+  const bucket = BH_TOPIC_BUCKET[finalTopic] || "other"
+  const d = new Date(ts)
+  const hour = d.getUTCHours()
+  const dow = d.getUTCDay()
+  const date = d.toISOString().slice(0, 10)
+  const isLateNight = hour >= 0 && hour < 4
+  const id = "h_" + String(idx + 1).padStart(6, "0")
+  return {
+    id, ts, title, url: rawUrl, domain, host, path: pth, query, queryMasked,
+    visitCount: Number.isFinite(visitCount) && visitCount > 0 ? Math.floor(visitCount) : 1,
+    typedCount: Number.isFinite(typedCount) && typedCount > 0 ? Math.floor(typedCount) : 0,
+    transition, isTyped, isSearch, searchQuery,
+    topic: finalTopic, topicInferred: inferred || isSearch,
+    bucket, hour, dow, date, isLateNight,
+  }
+}
+
+function finalizeBrowserHistory(visits: BrowserVisit[], meta: ParsedFile["meta"]): ParsedFile {
+  visits.sort((a, b) => a.ts.localeCompare(b.ts))
+  const totalCount = visits.length
+  if (!totalCount) throw new Error("browser-history: no usable visits")
+
+  const firstTs = visits[0].ts
+  const lastTs = visits[visits.length - 1].ts
+  const dateRange = `${firstTs.slice(0, 10)} → ${lastTs.slice(0, 10)}`
+  const durLabel = durationLabel(firstTs.slice(0, 10), lastTs.slice(0, 10))
+
+  // Domains.
+  const domAgg: Record<string, { count: number; hosts: Set<string>; first: string; last: string; topics: Record<string, number>; sampleTitles: Array<{ title: string; ts: string; path: string; topic: string }> }> = {}
+  for (const v of visits) {
+    const d = v.domain || v.host || "(unknown)"
+    if (!domAgg[d]) domAgg[d] = { count: 0, hosts: new Set(), first: v.ts, last: v.ts, topics: {}, sampleTitles: [] }
+    const a = domAgg[d]
+    a.count += 1
+    a.hosts.add(v.host)
+    if (v.ts < a.first) a.first = v.ts
+    if (v.ts > a.last) a.last = v.ts
+    a.topics[v.topic] = (a.topics[v.topic] || 0) + 1
+    if (a.sampleTitles.length < 5) a.sampleTitles.push({ title: v.title, ts: v.ts, path: v.path, topic: v.topic })
+  }
+  const domains = Object.entries(domAgg)
+    .map(([domain, a]) => ({
+      domain,
+      hosts: a.hosts.size,
+      count: a.count,
+      share: a.count / totalCount,
+      first: a.first.slice(0, 10),
+      last: a.last.slice(0, 10),
+      topic: topKey(a.topics) || "other",
+      sampleTitles: a.sampleTitles,
+    }))
+    .sort((a, b) => b.count - a.count)
+
+  // Topics.
+  const topicAgg: Record<string, { count: number; domains: Set<string> }> = {}
+  for (const v of visits) {
+    if (!topicAgg[v.topic]) topicAgg[v.topic] = { count: 0, domains: new Set() }
+    topicAgg[v.topic].count += 1
+    topicAgg[v.topic].domains.add(v.domain || v.host)
+  }
+  const topics = Object.entries(topicAgg)
+    .map(([topic, a]) => ({
+      topic,
+      count: a.count,
+      domains: a.domains.size,
+      share: a.count / totalCount,
+      bucket: BH_TOPIC_BUCKET[topic] || "other",
+    }))
+    .sort((a, b) => b.count - a.count)
+
+  // Buckets.
+  const bucketAgg: Record<string, number> = {}
+  for (const v of visits) bucketAgg[v.bucket] = (bucketAgg[v.bucket] || 0) + 1
+  const bucketTotals = (["work", "personal", "search", "other"] as const).map(b => ({
+    bucket: b,
+    count: bucketAgg[b] || 0,
+    share: totalCount ? (bucketAgg[b] || 0) / totalCount : 0,
+  }))
+
+  // Time aggregates.
+  const monthAgg: Record<string, { count: number; days: Set<string> }> = {}
+  const weekAgg: Record<string, number> = {}
+  const dayAgg: Record<string, number> = {}
+  const hourCounts = new Array(24).fill(0)
+  const dowCounts = new Array(7).fill(0)
+  const heatmap = Array.from({ length: 7 }, () => new Array(24).fill(0))
+  const weekdayHeatmap = Array.from({ length: 7 }, () => new Array(24).fill(0))
+  const weekendHeatmap = Array.from({ length: 7 }, () => new Array(24).fill(0))
+  for (const v of visits) {
+    const month = v.date.slice(0, 7)
+    if (!monthAgg[month]) monthAgg[month] = { count: 0, days: new Set() }
+    monthAgg[month].count += 1
+    monthAgg[month].days.add(v.date)
+    const week = isoWeek(v.date)
+    weekAgg[week] = (weekAgg[week] || 0) + 1
+    dayAgg[v.date] = (dayAgg[v.date] || 0) + 1
+    hourCounts[v.hour] += 1
+    dowCounts[v.dow] += 1
+    heatmap[v.dow][v.hour] += 1
+    if (v.dow >= 1 && v.dow <= 5) weekdayHeatmap[v.dow][v.hour] += 1
+    else weekendHeatmap[v.dow][v.hour] += 1
+  }
+  const monthTotals = Object.entries(monthAgg)
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(([month, a]) => ({ month, count: a.count, activeDays: a.days.size }))
+  const weekTotals = Object.entries(weekAgg)
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(([week, count]) => ({ week, count }))
+
+  // Returners — same URL visited 5+ times.
+  const urlAgg: Record<string, { count: number; ids: string[]; first: string; last: string; title: string; domain: string }> = {}
+  for (const v of visits) {
+    const k = v.url
+    if (!urlAgg[k]) urlAgg[k] = { count: 0, ids: [], first: v.ts, last: v.ts, title: v.title, domain: v.domain }
+    urlAgg[k].count += 1
+    urlAgg[k].ids.push(v.id)
+    if (v.ts < urlAgg[k].first) urlAgg[k].first = v.ts
+    if (v.ts > urlAgg[k].last) urlAgg[k].last = v.ts
+    if (v.title && v.title.length > urlAgg[k].title.length) urlAgg[k].title = v.title
+  }
+  const returners = Object.entries(urlAgg)
+    .filter(([, a]) => a.count >= 5)
+    .map(([url, a]) => ({
+      url,
+      title: a.title,
+      domain: a.domain,
+      timesVisited: a.count,
+      firstSeen: a.first.slice(0, 10),
+      lastSeen: a.last.slice(0, 10),
+      cadenceLabel: cadenceLabel(a.first.slice(0, 10), a.last.slice(0, 10), a.count),
+      sampleIds: a.ids.slice(0, 6),
+    }))
+    .sort((a, b) => b.timesVisited - a.timesVisited)
+    .slice(0, 10)
+
+  // Sessions — ≥4 visits within 30-min gaps.
+  const sessions = detectBrowserSessions(visits, 30)
+
+  // Repeated searches — same search query 3+ times.
+  const searchAgg: Record<string, { count: number; engine: string; lastSeen: string }> = {}
+  for (const v of visits) {
+    if (!v.isSearch || !v.searchQuery) continue
+    const key = v.searchQuery.toLowerCase()
+    if (bhShouldMaskQuery("q=" + v.searchQuery)) continue
+    if (!searchAgg[key]) searchAgg[key] = { count: 0, engine: v.host, lastSeen: v.ts }
+    searchAgg[key].count += 1
+    if (v.ts > searchAgg[key].lastSeen) searchAgg[key].lastSeen = v.ts
+  }
+  const repeatedSearches = Object.entries(searchAgg)
+    .filter(([, a]) => a.count >= 3)
+    .map(([query, a]) => ({
+      query, engine: a.engine, count: a.count, lastSeen: a.lastSeen.slice(0, 10),
+    }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 10)
+
+  // Counts.
+  const lateNightCount = visits.filter(v => v.isLateNight).length
+  const typedCount = visits.filter(v => v.isTyped).length
+  const busiestDay = Object.entries(dayAgg).sort((a, b) => b[1] - a[1])[0] || null
+  const busiestWeek = Object.entries(weekAgg).sort((a, b) => b[1] - a[1])[0] || null
+
+  const summary = {
+    totalCount,
+    uniqueDomains: domains.length,
+    uniqueUrls: Object.keys(urlAgg).length,
+    dateRange,
+    durationLabel: durLabel,
+    activeDays: Object.keys(dayAgg).length,
+    activeMonths: monthTotals.length,
+    busiestDay: busiestDay ? { date: busiestDay[0], count: busiestDay[1] } : null,
+    busiestWeek: busiestWeek ? { week: busiestWeek[0], count: busiestWeek[1] } : null,
+    lateNightCount,
+    lateNightShare: totalCount ? lateNightCount / totalCount : 0,
+    typedCount,
+    typedShare: totalCount ? typedCount / totalCount : 0,
+    sessionCount: sessions.length,
+    returnerCount: returners.length,
+    repeatedSearchCount: repeatedSearches.length,
+    topDomain: domains[0]?.domain || null,
+    topDomainShare: domains[0]?.share || 0,
+    topTopic: topics[0]?.topic || null,
+    topTopicShare: topics[0]?.share || 0,
+    workShare: totalCount ? (bucketAgg.work || 0) / totalCount : 0,
+    personalShare: totalCount ? (bucketAgg.personal || 0) / totalCount : 0,
+    searchShare: totalCount ? (bucketAgg.search || 0) / totalCount : 0,
+  }
+
+  const data = {
+    format: "browser-history",
+    rows: visits,
+    summary,
+    domains,
+    topics,
+    bucketTotals,
+    monthTotals,
+    weekTotals,
+    hourCounts,
+    dowCounts,
+    heatmap,
+    weekdayHeatmap,
+    weekendHeatmap,
+    returners,
+    sessions,
+    repeatedSearches,
+    meta: { ...meta, shape: "browser-history" },
+  }
+
+  const sample = {
+    summary,
+    topDomains: domains.slice(0, 8),
+    topics,
+    bucketTotals,
+    monthTotals,
+    hourCounts,
+    dowCounts,
+    returners: returners.slice(0, 6),
+    sessions: sessions.slice(0, 4),
+    repeatedSearches: repeatedSearches.slice(0, 6),
+    firstVisits: visits.slice(0, 6),
+    lastVisits: visits.slice(-3),
+  }
+
+  const lateLabel = totalCount ? Math.round(summary.lateNightShare * 100) + "%" : "0%"
+  const summaryLine =
+    `Browser history — ${totalCount} visits across ${summary.uniqueDomains} domains (${dateRange}, ${durLabel}). ` +
+    `Top domain: ${summary.topDomain || "—"}. Late-night share: ${lateLabel}.`
+
+  return {
+    contentType: "browser-history",
+    summary: summaryLine,
+    sample,
+    data,
+    meta: {
+      ...meta,
+      shape: "browser-history",
+      totalCount,
+      uniqueDomains: summary.uniqueDomains,
+      uniqueUrls: summary.uniqueUrls,
+      dateRange,
+    },
+  }
+}
+
+interface BrowserSession {
+  start: string
+  end: string
+  durationMin: number
+  count: number
+  topDomain: string | null
+  topTopic: string | null
+  sampleTitles: string[]
+  itemIds: string[]
+  looksLikeResearch: boolean
+}
+
+function detectBrowserSessions(visits: BrowserVisit[], gapMinutes: number): BrowserSession[] {
+  if (!visits.length) return []
+  const sorted = [...visits].sort((a, b) => a.ts.localeCompare(b.ts))
+  const gapMs = gapMinutes * 60_000
+  const sessions: BrowserSession[] = []
+  let cur: { start: number; end: number; ids: string[]; titles: string[]; domains: Record<string, number>; topics: Record<string, number>; hasSearch: boolean } | null = null
+  for (const v of sorted) {
+    const t = Date.parse(v.ts)
+    if (!Number.isFinite(t)) continue
+    if (cur && t - cur.end <= gapMs) {
+      cur.end = t
+      cur.ids.push(v.id)
+      const d = v.domain || v.host || "(unknown)"
+      cur.domains[d] = (cur.domains[d] || 0) + 1
+      cur.topics[v.topic] = (cur.topics[v.topic] || 0) + 1
+      if (cur.titles.length < 6) cur.titles.push(v.title)
+      if (v.isSearch) cur.hasSearch = true
+    } else {
+      if (cur) sessions.push(finalizeBhSession(cur))
+      cur = { start: t, end: t, ids: [v.id], titles: [v.title], domains: {}, topics: {}, hasSearch: v.isSearch }
+      const d = v.domain || v.host || "(unknown)"
+      cur.domains[d] = 1
+      cur.topics[v.topic] = 1
+    }
+  }
+  if (cur) sessions.push(finalizeBhSession(cur))
+  // Only keep sessions with ≥4 visits.
+  return sessions.filter(s => s.count >= 4).sort((a, b) => b.durationMin - a.durationMin)
+}
+
+function finalizeBhSession(s: { start: number; end: number; ids: string[]; titles: string[]; domains: Record<string, number>; topics: Record<string, number>; hasSearch: boolean }): BrowserSession {
+  const topDom = Object.entries(s.domains).sort((a, b) => b[1] - a[1])[0]
+  const topTopic = Object.entries(s.topics).sort((a, b) => b[1] - a[1])[0]
+  const uniqueDomains = Object.keys(s.domains).length
+  return {
+    start: new Date(s.start).toISOString(),
+    end: new Date(s.end).toISOString(),
+    durationMin: Math.max(1, Math.round((s.end - s.start) / 60_000)),
+    count: s.ids.length,
+    topDomain: topDom ? topDom[0] : null,
+    topTopic: topTopic ? topTopic[0] : null,
+    sampleTitles: s.titles.slice(0, 6),
+    itemIds: s.ids,
+    looksLikeResearch: s.hasSearch && uniqueDomains >= 3,
+  }
+}
+
+// ----------------------------------- shared utilities
 
 function parseCsv(raw: string): string[][] {
   const rows: string[][] = []

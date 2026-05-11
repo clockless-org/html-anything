@@ -1020,6 +1020,93 @@ test("youtube-watch-history output.html renders the required family sections", a
   assert.ok(!/<img\s+[^>]*\bsrc=/i.test(html), "youtube-watch-history output must not include external <img> tags")
 })
 
+test("experiential parser routes the synthetic browser-history fixture to browser-history", async () => {
+  const fp = path.join(REPO, "examples/browser-history/input.csv")
+  const parser = await pickParser(fp)
+  assert.equal(parser?.name, "experiential")
+  const out = await parser.parse(fp)
+  assert.equal(out.contentType, "browser-history")
+  assert.equal(out.data.format, "browser-history")
+  assert.ok(out.data.rows.length >= 300, `expected >= 300 visits, got ${out.data.rows.length}`)
+  for (const k of ["rows", "summary", "domains", "topics", "bucketTotals",
+                   "monthTotals", "weekTotals", "hourCounts", "dowCounts", "heatmap",
+                   "weekdayHeatmap", "weekendHeatmap", "returners", "sessions",
+                   "repeatedSearches"]) {
+    assert.ok(out.data[k] !== undefined, `missing required field: ${k}`)
+  }
+  assert.ok(out.data.domains.length >= 10, `expected >= 10 domains, got ${out.data.domains.length}`)
+  assert.ok(out.data.topics.length >= 5, `expected >= 5 topic buckets, got ${out.data.topics.length}`)
+  assert.equal(out.data.hourCounts.length, 24)
+  assert.equal(out.data.dowCounts.length, 7)
+  assert.equal(out.data.heatmap.length, 7)
+  assert.equal(out.data.heatmap[0].length, 24)
+  // eTLD+1 collapsing — every leaderboard entry should be the registrable
+  // bare domain (no `www.` left over).
+  for (const d of out.data.domains) {
+    assert.ok(!/^www\./.test(d.domain), `domain should be eTLD+1 (no www): ${d.domain}`)
+  }
+  // Fixture intentionally seeds research sessions + returners + repeated searches.
+  assert.ok(out.data.sessions.length >= 3, `fixture should expose >= 3 sessions, got ${out.data.sessions.length}`)
+  assert.ok(out.data.sessions.some(s => s.looksLikeResearch),
+    "fixture should expose at least one 'looks like research' session")
+  assert.ok(out.data.returners.length >= 3, `fixture should expose >= 3 returners, got ${out.data.returners.length}`)
+  assert.ok(out.data.repeatedSearches.length >= 2,
+    `fixture should expose >= 2 repeated searches, got ${out.data.repeatedSearches.length}`)
+  const s = out.data.summary
+  assert.ok(s.totalCount > 0)
+  assert.ok(s.uniqueDomains > 0)
+  assert.ok(s.uniqueUrls > 0)
+  assert.ok(s.dateRange.includes("→"))
+  assert.ok(typeof s.lateNightShare === "number")
+  assert.ok(typeof s.workShare === "number" && typeof s.personalShare === "number")
+})
+
+test("browser-history detection does not steal Spotify or YouTube JSON", async () => {
+  const ytFp = path.join(REPO, "examples/youtube-watch-history/input.json")
+  const ytOut = await (await pickParser(ytFp)).parse(ytFp)
+  assert.equal(ytOut.contentType, "youtube-watch-history",
+    "browser-history detection must not steal YouTube JSON")
+  const spFp = path.join(REPO, "examples/spotify-history/input.json")
+  const spOut = await (await pickParser(spFp)).parse(spFp)
+  assert.equal(spOut.contentType, "spotify-history",
+    "browser-history detection must not steal Spotify JSON")
+})
+
+test("browser-history prompt is present on disk", async () => {
+  const fs = await import("node:fs/promises")
+  const p = path.join(REPO, "prompts", "browser-history.md")
+  const stat = await fs.stat(p)
+  assert.ok(stat.isFile(), "missing prompt file: browser-history.md")
+})
+
+test("browser-history output.html renders the required family sections + offline rules", async () => {
+  const fs = await import("node:fs/promises")
+  const html = await fs.readFile(path.join(REPO, "examples/browser-history/output.html"), "utf8")
+  for (const needle of [
+    "Activity timeline",
+    "Domains",
+    "Topics",
+    "Sessions",
+    "Attention audit",
+    "Browse all visits",
+    "Late-night share",
+    "Returners",
+    "Repeated searches",
+    "Heuristic",
+    "Generated locally",
+    "browser-history",
+  ]) {
+    assert.ok(html.includes(needle), `examples/browser-history/output.html missing: ${needle}`)
+  }
+  assert.ok(!/fonts\.googleapis\.com|fonts\.gstatic\.com/.test(html),
+    "browser-history output must not link to Google Fonts")
+  assert.ok(!/s2\/favicons|t0\.gstatic\.com|favicon\.ico/.test(html),
+    "browser-history output must not fetch favicons")
+  assert.ok(!/<link\s+[^>]*\bhref=/i.test(html), "browser-history output must not include any <link> tags")
+  assert.ok(!/<iframe\b/i.test(html), "browser-history output must not embed iframes")
+  assert.ok(!/<img\s+[^>]*\bsrc=/i.test(html), "browser-history output must not include external <img> tags")
+})
+
 test("kindle-highlights output.html renders the required family sections", async () => {
   const fs = await import("node:fs/promises")
   const html = await fs.readFile(path.join(REPO, "examples/kindle-highlights/output.html"), "utf8")

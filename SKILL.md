@@ -221,7 +221,10 @@ content-specific analysis guidance. Use the closest one:
   `spotify-history`, `google-maps-stars`, `google-photos-takeout`,
   `iphone-health`, `kindle-highlights`, `twitch-history`,
   `rideshare-history` (Uber + Lyft trip exports — mobility + spending
-  atlas with offline SVG places scatter, no map tiles, no geocoding).
+  atlas with offline SVG places scatter, no map tiles, no geocoding),
+  `browser-history` (Chrome / Edge / Brave / Safari / Firefox CSV or
+  JSON history export — domain leaderboard, topic clusters, research
+  sessions, returners, and repeated searches; URLs only in drill-down).
 - Chats: `wechat`, `whatsapp`, `slack`, `discord`, `telegram`,
   `imessage`, `multi-sender-chat`.
 - Data/admin: `csv`, `json`, `jsonl`, `log`, `bank-transactions`,
