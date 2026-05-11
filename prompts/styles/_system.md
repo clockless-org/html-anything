@@ -97,6 +97,8 @@ Avoid defaulting data to dashboard. Pick a system by use case:
   reading/listening/watching, and AI chat archives.
 - **Map Atlas** for places, trips, routes, rideshare, photo geodata, and
   location history.
+- **Paper Trail** for explicitly tactile artifact layouts: itineraries,
+  receipts, tickets, hotel folios, reservation bundles, and evidence packets.
 - **Network Map** for people, senders, communities, contacts, payments, email,
   and professional networks.
 - **Rhythm Report** for intimate 1:1 chats.
@@ -123,7 +125,7 @@ When they conflict:
   let those tokens flatten all styles into one look.
 - Use semantic, style-specific classes such as `.lesson-stage`,
   `.atlas-timeline`, `.ops-command-bar`, `.evidence-workbench`,
-  `.dossier-sheet`, not only generic `.hero`, `.card`, `.grid`.
+  `.paper-card`, `.dossier-sheet`, not only generic `.hero`, `.card`, `.grid`.
 - The first viewport should visibly reveal the selected system before the user
   scrolls.
 - The primary interaction should be native to the system: a lesson stepper for

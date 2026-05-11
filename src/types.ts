@@ -64,6 +64,7 @@ export type HtmlAnythingStyle =
   | "dashboard"
   | "timeline-story"
   | "map-atlas"
+  | "paper-trail"
   | "network-map"
   | "document"
   | "developer"

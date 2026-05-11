@@ -20,6 +20,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `dashboard` | Operational, tabular, finance, admin, log, planning data | Dense KPIs, charts, filters, flags, searchable table |
 | `timeline-story` | Personal histories — chronological (orders, listening, health) and topical (Notion / Obsidian vaults) | Scroll-driven story with timeline spine, chapters, rhythm strip, drawer |
 | `map-atlas` | Places, routes, trips, rideshare, location/photo geodata | Spatial atlas with map/route stage, place drawer, filters, waypoint browser |
+| `paper-trail` | Explicit tactile/printed-collateral requests: itineraries, hotel folios, receipts, tickets, reservation bundles | Artifact desk with folio tabs, receipt tape, stamp callouts, source drawer |
 | `network-map` | People, senders, contacts, communities, payments, professional networks | Relationship graph with entity inspector, clusters, hubs, linked records |
 | `document` | Essays, articles, reading lists, research collections, PDFs, DOCX, legal/medical/lab records, policy docs | Document review with cover, reading rail, body sheet, evidence/citations, drill-down |
 | `developer` | Repos, diffs, PRs, CI logs, traces | Evidence-based technical report with risks, hotspots, raw evidence |
@@ -34,6 +35,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `dashboard` | Ops Console |
 | `timeline-story` | Timeline Story |
 | `map-atlas` | Map Atlas |
+| `paper-trail` | Paper Trail |
 | `network-map` | Network Map |
 | `document` | Document Review |
 | `developer` | Evidence Workbench |
@@ -61,6 +63,7 @@ base. Borrow archetypes, not brand identities:
 - cinematic stage / object galleries → `teaching`
 - temporal / scrollytelling systems → `timeline-story`
 - spatial atlas systems → `map-atlas`
+- tactile printed-artifact systems → `paper-trail`
 - graph / network systems → `network-map`
 - broadsheet / media systems → `document`
 - playful canvas systems → `teaching`
@@ -72,6 +75,7 @@ base. Borrow archetypes, not brand identities:
 | "My listening/watch/browsing/order/reading year" | `timeline-story` |
 | "My Notion / Obsidian / markdown knowledge base" | `timeline-story` |
 | "Where I went / saved / traveled / rode" | `map-atlas` |
+| "Make it feel like tickets / receipts / a hotel folio / travel papers" | `paper-trail` |
 | "Who I know / talk to / pay / email" | `network-map` |
 | "Operate this queue / ledger / incident / backlog" | `dashboard` |
 | "Teach this idea or explore this object/system/spec" | `teaching` |
@@ -82,3 +86,10 @@ base. Borrow archetypes, not brand identities:
 
 Do not ask users to pick from these by default. Choose internally unless the
 user explicitly asks for style options.
+
+## Example Source For Paper Trail
+
+Use [`examples/itinerary-trip/input.csv`](../../examples/itinerary-trip/input.csv)
+as the first `paper-trail` example. It has flights, hotels, restaurants,
+scheduled stops, costs, and overlap warnings, so the style can render a natural
+desk of key cards, ticket stubs, receipt tape, and stamped conflict callouts.

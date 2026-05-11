@@ -63,6 +63,7 @@ const STYLES = new Set<HtmlAnythingStyle | "auto">([
   "dashboard",
   "timeline-story",
   "map-atlas",
+  "paper-trail",
   "network-map",
   "document",
   "developer",
@@ -83,7 +84,7 @@ Usage:
   html-anything <input>                     write <input-stem>.html alongside
   html-anything <input> --out OUT           write to OUT
   html-anything <input> --title "Title"     override the document title
-  html-anything <input> --style STYLE       auto, teaching, dashboard, ...
+  html-anything <input> --style STYLE       auto, teaching, paper-trail, ...
   html-anything <input> --model MODEL       LLM model (default: claude-sonnet-4-6)
   html-anything <input> --max-tokens N      LLM output budget (default: 16384)
 
@@ -94,10 +95,10 @@ input type renders differently depending on shape (2-person chat → bubble
 timeline; 200-person channel → folded by sender). The full data is inlined
 into the output; the LLM only ever sees a representative sample.
 
-Default style is auto. Auto injects one of the built-in style prompts
+Default style is auto. Auto injects one of the auto-routed style prompts
 (teaching, relationship, dashboard, timeline-story, map-atlas,
-network-map, document, developer, or default) based on the parsed
-content type.
+network-map, document, developer, or default) based on the parsed content type.
+Explicit overrides also include paper-trail.
 `
 
 async function main() {

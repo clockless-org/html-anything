@@ -131,7 +131,9 @@ if you need everything in one HTML file.
 You do not need to choose a style. The default is `auto`.
 
 Styles are design systems + layout systems, not CSS skins. The skill picks
-the system from the content, then builds the page inside that system:
+the system from the content, then builds the page inside that system. A few
+styles, such as `paper-trail`, are explicit overrides for a requested visual
+system rather than default auto routes:
 
 | Content | Style |
 |---|---|
@@ -140,6 +142,7 @@ the system from the content, then builds the page inside that system:
 | 1:1 chats and intimate message exports | `relationship` (Rhythm Report) |
 | Personal histories — chronological (orders, history, listening, health) **and** topical (Notion / Obsidian vaults) | `timeline-story` (Timeline Story) |
 | Places, trips, routes, rideshare, geotagged photos | `map-atlas` (Map Atlas) |
+| Tactile trip folders, hotel folios, receipts, tickets, reservation bundles | `paper-trail` (Paper Trail, explicit override) |
 | Contacts, LinkedIn, communities, email, social payments | `network-map` (Network Map) |
 | Finance, spreadsheets, logs, backlog, operational data | `dashboard` (Ops Console) |
 | Essays, articles, reading lists, bookmarks, PDFs, DOCX, legal/medical/lab records | `document` (Document Review) |
@@ -151,9 +154,18 @@ app-like", "less academic", "more dashboard-like", or "more playful".
 Reusable style prompts live in [`prompts/styles/`](./prompts/styles/).
 The shared structural contract is
 [`prompts/styles/_system.md`](./prompts/styles/_system.md). There is a
-fallback `default` style plus 8 auto-selected styles:
-`teaching`, `relationship`, `dashboard`, `timeline-story`, `map-atlas`,
-`network-map`, `document`, and `developer`.
+fallback `default` style, 8 auto-selected styles (`teaching`,
+`relationship`, `dashboard`, `timeline-story`, `map-atlas`, `network-map`,
+`document`, and `developer`), plus explicit overrides such as `paper-trail`.
+
+Example explicit style override:
+
+```bash
+npx tsx src/cli.ts examples/itinerary-trip/input.csv \
+  --style paper-trail \
+  --out /tmp/paper-trail-itinerary.html \
+  --title "Tokyo + Kyoto - 8-day itinerary"
+```
 
 ## Source Examples
 

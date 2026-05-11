@@ -97,6 +97,12 @@ model, density, chart grammar, and voice.
 | `document` | Essays, articles, reading lists, bookmarks, research collections, PDFs, DOCX, legal/medical/lab/academic records | **Document Review**: cover, reading rail, body sheet, evidence margin, drill-down. Tone shifts narrative ↔ formal based on source. |
 | `developer` | Diffs, PR patches, CI logs, stack traces, repos | **Evidence Workbench**: finding bar, hotspots, risk checklist, raw artifact navigator, copyable handoff |
 
+Explicit override styles:
+
+| Style | Use for | Page shape |
+|---|---|---|
+| `paper-trail` | User asks for a tactile/vintage hotel, key-card, receipt, ticket, folio, passport, field-note, or printed-collateral feel | **Paper Trail**: left rail, Post Post-style overlapping receipt/guide/key-card artifact desk, folio tabs, receipt tape, stamp callouts, source drawer |
+
 Honor explicit style direction in natural language:
 
 - "make it a tutorial" / "teach me" → lean `teaching`.
@@ -107,6 +113,8 @@ Honor explicit style direction in natural language:
 - "make it a map" / "spatial" → lean `map-atlas`.
 - "show relationships/network" → lean `network-map`.
 - "make it a year-in-review" / "story over time" → lean `timeline-story`.
+- "make it like this hotel key-card HTML" / "ticket/receipt/hotel folio"
+  → use `paper-trail` and follow `prompts/styles/paper-trail.md` exactly.
 - "more playful" → richer visuals, while keeping content accurate.
 - If nothing fits cleanly → use `default`.
 
@@ -131,7 +139,9 @@ Honor explicit style direction in natural language:
    Read `prompts/_design.md` and the closest source prompt. If no source
    prompt fits, use `prompts/default.md`. Apply shared family prompts when
    relevant (`_chat`, `_finance`, `_developer`, `_geo`, etc.). If the chosen
-   style has a prompt in `prompts/styles/<style>.md`, read and follow it.
+   style has a prompt in `prompts/styles/<style>.md`, read and follow it. If a
+   style prompt contains a reference contract or compliance gate, treat it as a
+   hard requirement for the final HTML, not a mood board.
 
 5. **Choose auto style.**
    Pick the page style internally. Do not ask the user to choose unless
@@ -156,6 +166,9 @@ Honor explicit style direction in natural language:
    - no obvious horizontal overflow,
    - primary interactions work,
    - generated assets load.
+   Also check that the final page visibly follows the selected style's
+   required first viewport, class vocabulary, interactions, and compliance
+   gate. If it does not, revise the HTML before handoff.
 
 9. **Handoff.**
    Give the user the local path or live link. Keep the explanation short.
@@ -248,5 +261,6 @@ If no prompt fits, proceed from `default.md` and the user's brief.
 
 Style prompts under [`prompts/styles/`](./prompts/styles/) define reusable page
 systems such as `Timeline Story`, `Map Atlas`, `Network Map`, `Lesson Lab`, and
-`Ops Console`. They complement source prompts; they do not replace
+`Ops Console`. `paper-trail` is available as an explicit tactile printed-
+artifact override. They complement source prompts; they do not replace
 source-specific analysis.
