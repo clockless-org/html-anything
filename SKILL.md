@@ -103,9 +103,10 @@ model, density, chart grammar, and voice.
 | `relationship` | 1:1 chats, couple/friend/family chats, WhatsApp/WeChat/iMessage relationship exports | **Rhythm Report**: aggregate-first pulse calendar, comparison lanes, evidence snippets, no raw appendix by default |
 | `living-essay` | Kindle highlights, reflective essays, idea notes, concept-heavy reading archives | **Mycelium Writing Environment**: paper manuscript, vertical margin question, inline spore words, living SVG threads, quiet appendix |
 | `dashboard` | Finance/admin data, logs, operational data, issue trackers, dense tabular queues | **Ops Console**: command bar, KPI rail, work surface, flag queue, searchable data grid |
+| `kinetic-scoreboard` | Multi-participant activity streams, team chats, ranked contributors, owners/reps/players by contribution or workload | **Kinetic Championship**: full-viewport lanes, live ranks, big counters, kinetic activity body, telemetry footer, linked evidence pits |
 | `timeline-story` | Personal histories — chronological (Amazon, browser, Spotify, YouTube, Twitch, Health, AI chats) **and** topical (Notion exports, Obsidian vaults, markdown folders) | **Timeline Story**: time lens, timeline spine, chapter panels, rhythm strip, memory drawer (or cluster cards for topical sources) |
 | `map-atlas` | Places, trips, routes, rideshare, location history, geotagged photo metadata | **Map Atlas**: spatial stage, place drawer, period/place filters, waypoint browser |
-| `network-map` | Contacts, LinkedIn, Slack, Discord, Telegram, email, Venmo/PayPal, people/org graphs | **Network Map**: graph canvas, entity inspector, cluster controls, hub cards, linked records |
+| `network-map` | Contacts, LinkedIn, email, Venmo/PayPal, people/org graphs, community relationship maps | **Network Map**: graph canvas, entity inspector, cluster controls, hub cards, linked records |
 | `document` | Essays, articles, reading lists, bookmarks, research collections, PDFs, DOCX, legal/medical/lab/academic records | **Document Review**: cover, reading rail, body sheet, evidence margin, drill-down. Tone shifts narrative ↔ formal based on source. |
 | `editorial-carousel` | Brand strategy essays, founder letters, article takeaways, lightweight reports meant to be shared as a sequence | **Editorial Carousel**: issue cover, spread rail, 4-8 argument spreads, evidence drawer, copy actions |
 | `developer` | Diffs, PR patches, CI logs, stack traces, repos | **Terminal Evidence Workbench**: prompt line, hotspots, risk checklist, raw artifact navigator, copyable handoff |
@@ -126,6 +127,7 @@ Honor explicit style direction in natural language:
 - "more editorial" without carousel/deck language → narrative `document` voice.
 - "make it a map" / "spatial" → lean `map-atlas`.
 - "show relationships/network" → lean `network-map`.
+- "who contributed most" / "make it feel like a race" → lean `kinetic-scoreboard`.
 - "make it a year-in-review" / "story over time" → lean `timeline-story`.
 - "make it like this hotel key-card HTML" / "ticket/receipt/hotel folio"
   → use `paper-trail` and follow `prompts/styles/paper-trail.md` exactly.

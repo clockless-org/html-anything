@@ -211,7 +211,12 @@ export function selectStyleForContent(contentType: string, options: ConverterOpt
   }
 
   if (
-    contentType === "slack-chat" ||
+    contentType === "slack-chat"
+  ) {
+    return "kinetic-scoreboard"
+  }
+
+  if (
     contentType === "discord-chat" ||
     contentType === "telegram-chat" ||
     contentType === "imessage-chat" ||

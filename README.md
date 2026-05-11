@@ -13,7 +13,7 @@ you something you can open, share, or publish.
 
 ## Preview
 
-→ **[Open the curated gallery](https://clockless-org.github.io/html-anything/examples/)** — 21 demos, organized by source and style.
+→ **[Open the curated gallery](https://clockless-org.github.io/html-anything/examples/)** — 22 demos, organized by source and style.
 
 ### Featured
 
@@ -44,13 +44,14 @@ A small selection across the rest of the style catalog. Each links to the live p
 | [Amazon order history →](https://clockless-org.github.io/html-anything/examples/amazon-orders/output.html) | 3 years of orders → personal commerce memory with cadence, returns, gifting. | `timeline-story` |
 | [Kindle highlights →](https://clockless-org.github.io/html-anything/examples/kindle-highlights/output.html) | Highlights become a mycelium writing field with a living margin question. | `living-essay` |
 | [Apple Health →](https://clockless-org.github.io/html-anything/examples/iphone-health/output.html) | Activity, sleep, and workouts become a personal rhythm story. | `timeline-story` |
+| [Slack championship →](https://clockless-org.github.io/html-anything/examples/slack/output.html) | Team activity becomes ranked kinetic lanes with decisions, topics, and linked evidence. | `kinetic-scoreboard` |
 | [LinkedIn connections →](https://clockless-org.github.io/html-anything/examples/linkedin-connections/output.html) | 12 years of connections clustered by company, role, and era. | `network-map` |
 | [Brand positioning carousel →](https://clockless-org.github.io/html-anything/examples/editorial-carousel/output.html) | A strategy essay becomes a 5-spread magazine carousel with source evidence. | `editorial-carousel` |
 | [CSV sales dashboard →](https://clockless-org.github.io/html-anything/examples/csv/output.html) | A small CSV becomes a sortable + summarized ops console. | `dashboard` |
 | [Google Photos atlas →](https://clockless-org.github.io/html-anything/examples/google-photos-takeout/output.html) | Takeout EXIF metadata becomes a place-driven memory map. | `map-atlas` |
 | [PR review →](https://clockless-org.github.io/html-anything/examples/pr-review/output.html) | A patch becomes a risk-annotated review brief with evidence. | `developer` |
 
-→ **[See the curated gallery (21 demos) →](https://clockless-org.github.io/html-anything/examples/)**
+→ **[See the curated gallery (22 demos) →](https://clockless-org.github.io/html-anything/examples/)**
 
 ## Install
 
@@ -150,6 +151,7 @@ every output into the same dashboard/report shape.
 | App-like object/system/spec explorers, anatomy/architecture/product studios | `interactive-learning` (Learning Studio) |
 | 1:1 chats and intimate message exports | `relationship` (Rhythm Report) |
 | Reflective essays, Kindle highlights, idea notes, concept-heavy reading archives | `living-essay` (Mycelium Writing Environment) |
+| Multi-participant activity streams, team chats, ranked contributors, owner/reps/players by workload | `kinetic-scoreboard` (Kinetic Championship) |
 | Personal histories — chronological (orders, history, listening, health) **and** topical (Notion / Obsidian vaults) | `timeline-story` (Timeline Story) |
 | Places, trips, routes, rideshare, geotagged photos | `map-atlas` (Map Atlas) |
 | Tactile trip folders, hotel folios, receipts, tickets, reservation bundles | `paper-trail` (Paper Trail, explicit override) |
@@ -166,11 +168,11 @@ or "more playful".
 Reusable style prompts live in [`prompts/styles/`](./prompts/styles/).
 The shared structural contract is
 [`prompts/styles/_system.md`](./prompts/styles/_system.md). There is a
-fallback `default` style plus 11 auto-selected styles (`teaching`,
+fallback `default` style plus 12 auto-selected styles (`teaching`,
 `interactive-learning`, `relationship`, `living-essay`, `dashboard`,
-`timeline-story`, `map-atlas`, `network-map`, `document`,
-`editorial-carousel`, and `developer`), plus explicit overrides such as
-`paper-trail`.
+`kinetic-scoreboard`, `timeline-story`, `map-atlas`, `network-map`,
+`document`, `editorial-carousel`, and `developer`), plus explicit overrides
+such as `paper-trail`.
 
 Example explicit style override:
 
@@ -180,7 +182,6 @@ npx tsx src/cli.ts examples/itinerary-trip/input.csv \
   --out /tmp/paper-trail-itinerary.html \
   --title "Tokyo + Kyoto - 8-day itinerary"
 ```
-
 ## Source Examples
 
 |  | Source family | Examples |

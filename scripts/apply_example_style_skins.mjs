@@ -37,7 +37,7 @@ const STYLE_BY_EXAMPLE = {
   "vcard-contacts": "network-map",
   "linkedin-connections": "network-map",
   "venmo-paypal-payments": "network-map",
-  "slack": "network-map",
+  "slack": "kinetic-scoreboard",
   "discord": "network-map",
   "telegram": "network-map",
   "email": "network-map",
@@ -368,6 +368,44 @@ html[data-ha-style="network-map"] header.hero::before {
     radial-gradient(circle at 70px 30px, var(--ha-style-accent) 0 7px, transparent 8px),
     linear-gradient(22deg, transparent 0 31%, color-mix(in srgb, var(--ha-style-accent) 60%, transparent) 32% 36%, transparent 37%),
     linear-gradient(160deg, transparent 0 43%, color-mix(in srgb, var(--ha-style-accent-2) 60%, transparent) 44% 48%, transparent 49%);
+}
+
+html[data-ha-style="kinetic-scoreboard"] {
+  --ha-style-accent: #e63946;
+  --ha-style-accent-2: #0d0d0d;
+  --primary: #0d0d0d;
+  --primary-container: #0d0d0d;
+  --primary-fixed: #ffe3e6;
+  --secondary-container: #e63946;
+  --bg: #f0efea;
+  --surface: #f0efea;
+  --surface-container-lowest: #fffdf6;
+  --surface-container-low: #e9e7df;
+  --surface-container: #dedbd1;
+  --surface-container-high: #d2cec2;
+  --fg-1: #0d0d0d;
+  --fg-2: #292621;
+  --fg-muted: #635f56;
+  --border: rgba(13,13,13,.24);
+  --gradient-hero: linear-gradient(135deg, #0d0d0d 0%, #e63946 100%);
+  --gradient-text: linear-gradient(135deg, #0d0d0d 0%, #e63946 100%);
+}
+html[data-ha-style="kinetic-scoreboard"] body {
+  background-color: var(--bg) !important;
+  background-image:
+    linear-gradient(rgba(13,13,13,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13,13,13,.055) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+html[data-ha-style="kinetic-scoreboard"] body::before { content: "kinetic"; }
+html[data-ha-style="kinetic-scoreboard"] .hero::before,
+html[data-ha-style="kinetic-scoreboard"] header.hero::before {
+  width: 92px;
+  height: 32px;
+  border-radius: 0;
+  background:
+    linear-gradient(90deg, transparent 0 8px, #0d0d0d 8px 16px, transparent 16px 76px, #0d0d0d 76px 84px, transparent 84px),
+    linear-gradient(0deg, transparent 0 12px, #0d0d0d 12px 18px, transparent 18px);
 }
 
 html[data-ha-style="dashboard"] {

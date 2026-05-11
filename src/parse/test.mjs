@@ -84,6 +84,7 @@ test("htmlize auto style selector routes major source families", async () => {
   assert.equal(selectStyleForContent("spotify-history"), "timeline-story")
   assert.equal(selectStyleForContent("browser-history"), "timeline-story")
   assert.equal(selectStyleForContent("kindle-highlights"), "living-essay")
+  assert.equal(selectStyleForContent("slack-chat"), "kinetic-scoreboard")
   assert.equal(selectStyleForContent("linkedin-connections"), "network-map")
   assert.equal(selectStyleForContent("csv-tabular"), "dashboard")
   assert.equal(selectStyleForContent("markdown-document"), "document")

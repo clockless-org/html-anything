@@ -1,1557 +1,779 @@
 <!doctype html>
-<html lang="en" data-ha-style="network-map">
+<html lang="en" data-ha-style="kinetic-scoreboard">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Acme · #product-launch — two-week launch run-up</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      /* Brand */
-      --primary: #a03b00;
-      --primary-container: #c94c00;
-      --primary-fixed: #ffdbcd;
-      --primary-fixed-dim: #ffb597;
-      --on-primary: #ffffff;
-      --accent-glow: #E8400D;
-
-      /* Secondary / tertiary */
-      --secondary: #d5baff;
-      --secondary-container: #7b40e0;
-      --tertiary: #4d44e3;
-      --accent-cyan: #00D4FF;
-
-      /* Surfaces */
-      --bg: #fff8f6;
-      --surface: #fff8f6;
-      --surface-container-lowest: #ffffff;
-      --surface-container-low: #fbf2ef;
-      --surface-container: #f5ece9;
-      --surface-container-high: #efe6e3;
-
-      /* Text */
-      --fg-1: #1e1b19;
-      --fg-2: #594138;
-      --fg-muted: #8d7166;
-
-      /* Borders */
-      --border: rgba(0, 0, 0, 0.06);
-      --border-strong: rgba(0, 0, 0, 0.12);
-      --outline-variant: #e1bfb2;
-
-      /* Status */
-      --green: #10b981;
-      --blue: #3b82f6;
-      --yellow: #f59e0b;
-      --red: #ef4444;
-
-      /* Typography */
-      --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-      --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
-      --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
-
-      /* Spacing (4px base) */
-      --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
-      --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
-      --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
-
-      /* Radius */
-      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
-      --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
-
-      /* Shadows */
-      --shadow-sm: 0 1px 2px rgba(30, 27, 25, 0.04);
-      --shadow-md: 0 4px 12px rgba(30, 27, 25, 0.08);
-      --shadow-lg: 0 8px 24px rgba(30, 27, 25, 0.12);
-      --shadow-accent: 0 8px 24px rgba(160, 59, 0, 0.15);
-
-      /* Gradients */
-      --gradient-primary: linear-gradient(135deg, #a03b00 0%, #c94c00 100%);
-      --gradient-hero: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
-      --gradient-text: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #060B18;
-        --surface: #0B1426;
-        --surface-container-lowest: #101D35;
-        --surface-container-low: #101D35;
-        --surface-container: #162544;
-        --surface-container-high: #1c2d52;
-        --fg-1: #F8FAFC;
-        --fg-2: #CBD5E1;
-        --fg-muted: #64748B;
-        --border: rgba(255, 255, 255, 0.08);
-        --border-strong: rgba(255, 255, 255, 0.14);
-        --primary: #FF6B35;
-        --accent-glow: #00D4FF;
-        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-        --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
-      }
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-body);
-      background: var(--bg);
-      color: var(--fg-1);
-      line-height: 1.6;
-      font-size: 15px;
-    }
-
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: var(--space-lg);
-    }
-
-    @media (max-width: 640px) {
-      .container {
-        padding: var(--space-md);
-      }
-    }
-
-    /* Header card */
-    .channel-header {
-      background: linear-gradient(135deg, var(--surface-container-low) 0%, var(--surface-container) 100%);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-2xl);
-      margin-bottom: var(--space-3xl);
-      box-shadow: var(--shadow-md);
-    }
-
-    .channel-header h1 {
-      font-family: var(--font-headline);
-      font-size: 32px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      margin-bottom: var(--space-md);
-      color: var(--fg-1);
-    }
-
-    @media (max-width: 640px) {
-      .channel-header h1 {
-        font-size: 24px;
-      }
-    }
-
-    .channel-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-lg);
-      margin-bottom: var(--space-lg);
-      font-size: 14px;
-      color: var(--fg-2);
-    }
-
-    .meta-item {
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-    }
-
-    .meta-item strong {
-      color: var(--primary);
-      font-weight: 600;
-    }
-
-    .channel-summary {
-      font-size: 15px;
-      color: var(--fg-2);
-      line-height: 1.6;
-    }
-
-    /* Grid layout for analysis cards */
-    .analysis-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: var(--space-2xl);
-      margin-bottom: var(--space-3xl);
-    }
-
-    .card {
-      background: var(--surface-container-lowest);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-2xl);
-      box-shadow: var(--shadow-md);
-    }
-
-    .card-title {
-      font-family: var(--font-headline);
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-bottom: var(--space-lg);
-      color: var(--fg-1);
-    }
-
-    /* Contributors leaderboard */
-    .leaderboard-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: var(--space-md);
-      margin-bottom: var(--space-sm);
-      background: var(--surface-container-low);
-      border-radius: var(--radius-md);
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .leaderboard-item:hover {
-      background: var(--surface-container);
-    }
-
-    .leaderboard-item.active {
-      background: var(--primary-fixed);
-      border-left: 3px solid var(--primary);
-    }
-
-    .leaderboard-name {
-      font-weight: 600;
-      color: var(--fg-1);
-    }
-
-    .leaderboard-count {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      color: var(--fg-muted);
-    }
-
-    .leaderboard-pct {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--primary);
-      font-weight: 600;
-      margin-left: var(--space-md);
-    }
-
-    /* Heatmap */
-    .heatmap-container {
-      overflow-x: auto;
-      margin-top: var(--space-lg);
-    }
-
-    .heatmap-svg {
-      min-width: 100%;
-      height: auto;
-    }
-
-    /* Volume chart */
-    .volume-chart {
-      width: 100%;
-      height: 200px;
-      margin-top: var(--space-lg);
-    }
-
-    /* Reactions */
-    .reaction-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-xs);
-      background: var(--surface-container);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-pill);
-      padding: var(--space-sm) var(--space-md);
-      margin: var(--space-xs);
-      font-size: 13px;
-      color: var(--fg-2);
-    }
-
-    .reaction-emoji {
-      font-size: 16px;
-    }
-
-    /* Decisions/Actions */
-    .signal-section {
-      margin-bottom: var(--space-2xl);
-    }
-
-    .signal-label {
-      font-family: var(--font-headline);
-      font-size: 14px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--primary);
-      margin-bottom: var(--space-md);
-    }
-
-    .signal-item {
-      background: var(--surface-container-low);
-      border-left: 3px solid var(--primary);
-      border-radius: var(--radius-md);
-      padding: var(--space-lg);
-      margin-bottom: var(--space-md);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .signal-item:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
-    }
-
-    .signal-item.decision {
-      border-left-color: var(--green);
-    }
-
-    .signal-item.action {
-      border-left-color: var(--blue);
-    }
-
-    .signal-item.question {
-      border-left-color: var(--yellow);
-    }
-
-    .signal-text {
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: var(--space-sm);
-      color: var(--fg-1);
-    }
-
-    .signal-meta {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      color: var(--fg-muted);
-      font-family: var(--font-mono);
-    }
-
-    /* Topics/Keywords */
-    .topic-bar {
-      display: flex;
-      align-items: center;
-      margin-bottom: var(--space-lg);
-      gap: var(--space-md);
-    }
-
-    .topic-label {
-      font-size: 14px;
-      font-weight: 500;
-      min-width: 80px;
-      color: var(--fg-2);
-    }
-
-    .topic-bar-bg {
-      flex: 1;
-      height: 24px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary-container));
-      border-radius: var(--radius-sm);
-      position: relative;
-    }
-
-    .topic-count {
-      position: absolute;
-      right: var(--space-sm);
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--on-primary);
-      font-family: var(--font-mono);
-    }
-
-    /* Threads of note */
-    .thread-card {
-      background: var(--surface-container);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: var(--space-lg);
-      margin-bottom: var(--space-lg);
-    }
-
-    .thread-parent {
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: var(--space-md);
-      color: var(--fg-1);
-      padding-bottom: var(--space-md);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .thread-parent-sender {
-      font-weight: 600;
-      color: var(--primary);
-    }
-
-    .thread-stats {
-      display: flex;
-      gap: var(--space-lg);
-      font-size: 13px;
-      color: var(--fg-muted);
-      font-family: var(--font-mono);
-    }
-
-    /* Drill-down / Log */
-    .drill-down-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: var(--space-lg);
-      background: var(--surface-container-low);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      cursor: pointer;
-      margin-bottom: var(--space-2xl);
-      transition: background 0.2s;
-    }
-
-    .drill-down-header:hover {
-      background: var(--surface-container);
-    }
-
-    .drill-down-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-md);
-      font-family: var(--font-headline);
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--fg-1);
-    }
-
-    .drill-down-toggle .icon {
-      transition: transform 0.3s;
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-    }
-
-    .drill-down-toggle.open .icon {
-      transform: rotate(180deg);
-    }
-
-    .drill-down-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease-out;
-    }
-
-    .drill-down-content.open {
-      max-height: 4000px;
-      overflow: visible;
-    }
-
-    /* Search & filters */
-    .search-bar {
-      display: flex;
-      gap: var(--space-md);
-      margin-bottom: var(--space-lg);
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .search-input {
-      flex: 1;
-      min-width: 200px;
-      padding: var(--space-md) var(--space-lg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      background: var(--surface-container-lowest);
-      color: var(--fg-1);
-      font-family: var(--font-body);
-      font-size: 14px;
-    }
-
-    .search-input::placeholder {
-      color: var(--fg-muted);
-    }
-
-    .filter-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-sm);
-    }
-
-    .filter-chip {
-      padding: var(--space-sm) var(--space-md);
-      background: var(--surface-container);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-pill);
-      cursor: pointer;
-      font-size: 13px;
-      color: var(--fg-2);
-      transition: all 0.2s;
-    }
-
-    .filter-chip:hover {
-      border-color: var(--primary);
-    }
-
-    .filter-chip.active {
-      background: var(--primary);
-      color: var(--on-primary);
-      border-color: var(--primary);
-    }
-
-    /* Message log */
-    .message-group {
-      margin-bottom: var(--space-2xl);
-    }
-
-    .message-group-date {
-      font-family: var(--font-headline);
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--fg-muted);
-      margin-bottom: var(--space-lg);
-      margin-top: var(--space-lg);
-    }
-
-    .message {
-      margin-bottom: var(--space-lg);
-      padding: var(--space-lg);
-      background: var(--surface-container-low);
-      border-radius: var(--radius-md);
-      border-left: 2px solid var(--border);
-    }
-
-    .message.highlight {
-      border-left-color: var(--accent-glow);
-      background: var(--surface-container);
-      box-shadow: 0 0 12px rgba(232, 64, 13, 0.1);
-    }
-
-    .message-thread-reply {
-      margin-left: var(--space-2xl);
-      border-left-color: var(--secondary-container);
-    }
-
-    .message-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: var(--space-sm);
-    }
-
-    .message-sender {
-      font-weight: 600;
-      color: var(--primary);
-      font-size: 14px;
-    }
-
-    .message-time {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--fg-muted);
-    }
-
-    .message-text {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--fg-1);
-      margin-bottom: var(--space-md);
-      word-break: break-word;
-    }
-
-    .message-text.mark {
-      background-color: var(--primary-fixed-dim);
-      padding: 2px 4px;
-      border-radius: 3px;
-    }
-
-    .message-reactions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-sm);
-      margin-top: var(--space-md);
-    }
-
-    .message-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-xs);
-      background: var(--surface-container);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 2px 6px;
-      font-size: 11px;
-      color: var(--fg-muted);
-    }
-
-    /* Footer */
-    .footer {
-      margin-top: var(--space-5xl);
-      padding-top: var(--space-2xl);
-      border-top: 1px solid var(--border);
-      font-size: 13px;
-      color: var(--fg-muted);
-      text-align: center;
-    }
-
-    /* Copy button */
-    .copy-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-sm);
-      padding: var(--space-sm) var(--space-md);
-      background: var(--primary);
-      color: var(--on-primary);
-      border: none;
-      border-radius: var(--radius-md);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .copy-btn:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-1px);
-    }
-
-    .copy-btn:active {
-      transform: translateY(0);
-    }
-
-    /* Utilities */
-    .empty-state {
-      padding: var(--space-2xl);
-      text-align: center;
-      color: var(--fg-muted);
-      font-style: italic;
-    }
-
-    .full-width {
-      grid-column: 1 / -1;
-    }
-
-    .hidden {
-      display: none;
-    }
-  </style>
-<!-- html-anything example style skin:start -->
-
-<style id="html-anything-example-style-skin">
-html[data-ha-style] {
-  --ha-style-accent: var(--primary, #a03b00);
-  --ha-style-accent-2: var(--secondary-container, #7b40e0);
-  --ha-style-badge-bg: rgba(255,255,255,.78);
-  --ha-style-badge-fg: var(--fg-1, #1e1b19);
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slack Channel - Kinetic Championship</title>
+<style>
+:root {
+  color-scheme: light;
+  --paper: #f0efea;
+  --ink: #0d0d0d;
+  --muted: #676158;
+  --rule: rgba(13, 13, 13, .28);
+  --soft-rule: rgba(13, 13, 13, .11);
+  --panel: #fffdf7;
+  --danger: #e63946;
+  --blue: #457b9d;
+  --green: #2a9d8f;
+  --amber: #f4a261;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
-html[data-ha-style] body {
-  position: relative;
-  background-attachment: fixed;
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(13,13,13,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13,13,13,.055) 1px, transparent 1px),
+    var(--paper);
+  background-size: 20px 20px;
+  color: var(--ink);
+  font-family: var(--sans);
+  overflow-x: hidden;
 }
-html[data-ha-style] body::before {
-  position: fixed;
-  z-index: 9999;
-  top: 12px;
-  right: 12px;
-  padding: 7px 10px;
-  border: 1px solid color-mix(in srgb, var(--ha-style-accent) 26%, transparent);
-  border-radius: 999px;
-  background: var(--ha-style-badge-bg);
-  color: var(--ha-style-badge-fg);
-  box-shadow: 0 6px 24px rgba(0,0,0,.10);
-  font: 700 10px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  letter-spacing: .1em;
+button, input { font: inherit; }
+.kinetic-arena {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  border-bottom: 2px solid var(--ink);
+}
+.championship-header {
+  min-height: 92px;
+  display: grid;
+  grid-template-columns: minmax(520px, .95fr) minmax(420px, 1fr) 150px;
+  align-items: stretch;
+  border-bottom: 2px solid var(--ink);
+  background: rgba(240,239,234,.94);
+}
+.event-lockup {
+  padding: 14px 18px 12px;
+  border-right: 2px solid var(--ink);
+}
+.mono {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em;
   text-transform: uppercase;
-  backdrop-filter: blur(16px);
+  color: var(--muted);
 }
-html[data-ha-style] .hero,
-html[data-ha-style] header.hero,
-html[data-ha-style] .top,
-html[data-ha-style] .header {
-  position: relative;
+h1 {
+  margin: 4px 0 0;
+  max-width: 760px;
+  font-size: clamp(34px, 4.7vw, 60px);
+  line-height: .82;
+  letter-spacing: -.05em;
+  text-transform: uppercase;
+  font-weight: 950;
 }
-html[data-ha-style] .hero::before,
-html[data-ha-style] header.hero::before {
-  content: "";
-  display: block;
-  width: 64px;
-  height: 6px;
-  margin-bottom: 18px;
-  border-radius: 999px;
-  background: var(--ha-style-accent);
+.scoreboard-leaderboard {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-right: 2px solid var(--ink);
 }
-
-html[data-ha-style="teaching"] {
-  --ha-style-accent: #0f766e;
-  --ha-style-accent-2: #f59e0b;
-  --primary: #0f766e;
-  --primary-container: #115e59;
-  --primary-fixed: #ccfbf1;
-  --secondary-container: #f59e0b;
-  --bg: #f6fbfb;
-  --surface: #f6fbfb;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #edf7f5;
-  --surface-container: #e5f1ee;
-  --surface-container-high: #d8e8e4;
-  --fg-1: #10201f;
-  --fg-2: #304c49;
-  --fg-muted: #647b78;
-  --border: rgba(15,118,110,.14);
-  --gradient-hero: linear-gradient(135deg, #0f766e 0%, #f59e0b 100%);
-  --gradient-text: linear-gradient(135deg, #0f766e 0%, #f59e0b 100%);
+.leader-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 9px 12px;
+  min-width: 0;
+  border-right: 1px solid var(--soft-rule);
+  border-bottom: 1px solid var(--soft-rule);
+  font-family: var(--mono);
+  text-transform: uppercase;
+  cursor: pointer;
 }
-html[data-ha-style="teaching"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    linear-gradient(rgba(15,118,110,.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15,118,110,.07) 1px, transparent 1px);
-  background-size: 32px 32px;
+.leader-row:nth-child(3n) { border-right: 0; }
+.leader-row strong { font-size: 18px; }
+.leader-row span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.leader-row[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.arena-controls {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  min-width: 150px;
 }
-html[data-ha-style="teaching"] body::before { content: "teaching"; }
-
-html[data-ha-style="relationship"] {
-  --ha-style-accent: #be3455;
-  --ha-style-accent-2: #317b93;
-  --primary: #be3455;
-  --primary-container: #a52d4b;
-  --primary-fixed: #ffe1e8;
-  --secondary-container: #317b93;
-  --bg: #fff7f8;
-  --surface: #fff7f8;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #fff0f3;
-  --surface-container: #f8e7eb;
-  --surface-container-high: #efdde3;
-  --fg-1: #28181c;
-  --fg-2: #5f3e48;
-  --fg-muted: #8d6b75;
-  --border: rgba(190,52,85,.14);
-  --rose: #e25b74;
-  --blue: #4f95a8;
-  --gradient-hero: linear-gradient(135deg, #be3455 0%, #317b93 100%);
-  --gradient-text: linear-gradient(135deg, #be3455 0%, #317b93 100%);
-}
-html[data-ha-style="relationship"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    linear-gradient(120deg, rgba(190,52,85,.08), transparent 36%),
-    linear-gradient(300deg, rgba(49,123,147,.08), transparent 40%);
-}
-html[data-ha-style="relationship"] body::before { content: "relationship"; }
-
-html[data-ha-style="timeline-story"] {
-  --ha-style-accent: #9a4b14;
-  --ha-style-accent-2: #2f6f73;
-  --primary: #9a4b14;
-  --primary-container: #7a3b10;
-  --primary-fixed: #ffe8cf;
-  --secondary-container: #2f6f73;
-  --bg: #fbf8f1;
-  --surface: #fbf8f1;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f4ecdf;
-  --surface-container: #eee3d3;
-  --surface-container-high: #e4d7c4;
-  --fg-1: #241b12;
-  --fg-2: #5c4b3d;
-  --fg-muted: #8a7968;
-  --border: rgba(154,75,20,.16);
-  --gradient-hero: linear-gradient(135deg, #9a4b14 0%, #2f6f73 100%);
-  --gradient-text: linear-gradient(135deg, #9a4b14 0%, #2f6f73 100%);
-}
-html[data-ha-style="timeline-story"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    linear-gradient(90deg, transparent 0 calc(50% - 1px), rgba(154,75,20,.16) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)),
-    radial-gradient(circle at 50% 72px, rgba(154,75,20,.20) 0 4px, transparent 5px);
-  background-size: 100% 100%, 100% 96px;
-}
-html[data-ha-style="timeline-story"] body::before { content: "timeline story"; }
-html[data-ha-style="timeline-story"] .hero::before,
-html[data-ha-style="timeline-story"] header.hero::before {
-  width: 8px;
-  height: 72px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, var(--ha-style-accent), var(--ha-style-accent-2));
-}
-
-html[data-ha-style="map-atlas"] {
-  --ha-style-accent: #17695a;
-  --ha-style-accent-2: #2f66a8;
-  --primary: #17695a;
-  --primary-container: #115346;
-  --primary-fixed: #daf5ec;
-  --secondary-container: #2f66a8;
-  --bg: #f4faf7;
-  --surface: #f4faf7;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #eaf4ef;
-  --surface-container: #e0eee8;
-  --surface-container-high: #d4e6de;
-  --fg-1: #10221d;
-  --fg-2: #365149;
-  --fg-muted: #6e837b;
-  --border: rgba(23,105,90,.16);
-  --gradient-hero: linear-gradient(135deg, #17695a 0%, #2f66a8 100%);
-  --gradient-text: linear-gradient(135deg, #17695a 0%, #2f66a8 100%);
-}
-html[data-ha-style="map-atlas"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    repeating-linear-gradient(24deg, rgba(23,105,90,.09) 0 1px, transparent 1px 34px),
-    repeating-linear-gradient(116deg, rgba(47,102,168,.08) 0 1px, transparent 1px 42px);
-}
-html[data-ha-style="map-atlas"] body::before { content: "map atlas"; }
-html[data-ha-style="map-atlas"] .hero::before,
-html[data-ha-style="map-atlas"] header.hero::before {
-  width: 78px;
-  height: 78px;
-  border: 2px solid var(--ha-style-accent);
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 55% 42%, var(--ha-style-accent) 0 4px, transparent 5px),
-    linear-gradient(45deg, transparent 47%, rgba(47,102,168,.55) 48% 52%, transparent 53%);
-}
-
-html[data-ha-style="network-map"] {
-  --ha-style-accent: #355f91;
-  --ha-style-accent-2: #a34d67;
-  --primary: #355f91;
-  --primary-container: #294b75;
-  --primary-fixed: #deebff;
-  --secondary-container: #a34d67;
-  --bg: #f7f8fb;
-  --surface: #f7f8fb;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #eef1f7;
-  --surface-container: #e6ebf3;
-  --surface-container-high: #dbe2ee;
-  --fg-1: #151b24;
-  --fg-2: #3f4a5b;
-  --fg-muted: #737e8f;
-  --border: rgba(53,95,145,.16);
-  --gradient-hero: linear-gradient(135deg, #355f91 0%, #a34d67 100%);
-  --gradient-text: linear-gradient(135deg, #355f91 0%, #a34d67 100%);
-}
-html[data-ha-style="network-map"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    radial-gradient(circle at 20% 20%, rgba(53,95,145,.22) 0 3px, transparent 4px),
-    radial-gradient(circle at 68% 34%, rgba(163,77,103,.18) 0 3px, transparent 4px),
-    linear-gradient(38deg, transparent 0 48%, rgba(53,95,145,.10) 49% 51%, transparent 52%);
-  background-size: 88px 88px, 118px 118px, 132px 132px;
-}
-html[data-ha-style="network-map"] body::before { content: "network map"; }
-html[data-ha-style="network-map"] .hero::before,
-html[data-ha-style="network-map"] header.hero::before {
-  width: 86px;
-  height: 46px;
-  border-radius: 999px;
-  background:
-    radial-gradient(circle at 18px 24px, var(--ha-style-accent) 0 7px, transparent 8px),
-    radial-gradient(circle at 44px 12px, var(--ha-style-accent-2) 0 6px, transparent 7px),
-    radial-gradient(circle at 70px 30px, var(--ha-style-accent) 0 7px, transparent 8px),
-    linear-gradient(22deg, transparent 0 31%, color-mix(in srgb, var(--ha-style-accent) 60%, transparent) 32% 36%, transparent 37%),
-    linear-gradient(160deg, transparent 0 43%, color-mix(in srgb, var(--ha-style-accent-2) 60%, transparent) 44% 48%, transparent 49%);
-}
-
-html[data-ha-style="dashboard"] {
-  --ha-style-accent: #0f5f6f;
-  --ha-style-accent-2: #8a5a16;
-  --primary: #0f5f6f;
-  --primary-container: #0b4c59;
-  --primary-fixed: #d8f2f5;
-  --secondary-container: #8a5a16;
-  --bg: #f5f7f9;
-  --surface: #f5f7f9;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #eef2f5;
-  --surface-container: #e7edf1;
-  --surface-container-high: #dce5ea;
-  --fg-1: #111827;
-  --fg-2: #374151;
-  --fg-muted: #6b7280;
-  --border: rgba(15,95,111,.16);
-  --gradient-hero: linear-gradient(135deg, #0f5f6f 0%, #083344 100%);
-  --gradient-text: linear-gradient(135deg, #0f5f6f 0%, #083344 100%);
-}
-html[data-ha-style="dashboard"] body {
-  background-color: var(--bg) !important;
-  background-image: linear-gradient(90deg, rgba(15,95,111,.08) 0 1px, transparent 1px);
-  background-size: 18px 100%;
-}
-html[data-ha-style="dashboard"] body::before { content: "dashboard"; }
-html[data-ha-style="dashboard"] .hero::before,
-html[data-ha-style="dashboard"] header.hero::before {
-  width: 100%;
-  height: 3px;
-  margin-bottom: 14px;
-}
-
-html[data-ha-style="document"] {
-  --ha-style-accent: #8b3f1f;
-  --ha-style-accent-2: #2f6f73;
-  --primary: #8b3f1f;
-  --primary-container: #703319;
-  --primary-fixed: #ffe4d5;
-  --secondary-container: #2f6f73;
-  --bg: #fbfaf7;
-  --surface: #fbfaf7;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f2efe8;
-  --surface-container: #e9e4da;
-  --surface-container-high: #ded7c9;
-  --fg-1: #211d18;
-  --fg-2: #554d44;
-  --fg-muted: #82786c;
-  --border: rgba(139,63,31,.16);
-  --font-headline: Georgia, "Iowan Old Style", "Times New Roman", serif;
-  --gradient-hero: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
-  --gradient-text: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
-}
-html[data-ha-style="document"] body {
-  background-color: var(--bg) !important;
-  background-image: linear-gradient(90deg, rgba(139,63,31,.18) 0 4px, transparent 4px);
-  background-size: 100% 100%;
-}
-html[data-ha-style="document"] body::before { content: "document"; }
-html[data-ha-style="document"] .hero::before,
-html[data-ha-style="document"] header.hero::before {
-  width: 42px;
-  height: 42px;
-  border-radius: 0;
+.arena-controls button,
+.arena-controls label {
+  border: 0;
+  border-bottom: 1px solid var(--ink);
   background: transparent;
-  border-top: 4px solid var(--ha-style-accent);
-  border-left: 4px solid var(--ha-style-accent);
+  color: var(--ink);
+  padding: 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  cursor: pointer;
 }
-
-html[data-ha-style="developer"] {
-  color-scheme: dark;
-  --ha-style-accent: #38bdf8;
-  --ha-style-accent-2: #f97316;
-  --ha-style-badge-bg: rgba(8,16,31,.82);
-  --ha-style-badge-fg: #dbeafe;
-  --primary: #38bdf8;
-  --primary-container: #0e7490;
-  --primary-fixed: #0f2942;
-  --secondary-container: #f97316;
-  --bg: #07111f;
-  --surface: #07111f;
-  --surface-container-lowest: #0b1426;
-  --surface-container-low: #0f1b31;
-  --surface-container: #13233d;
-  --surface-container-high: #1b2f50;
-  --fg-1: #f8fafc;
-  --fg-2: #cbd5e1;
-  --fg-muted: #94a3b8;
-  --border: rgba(148,163,184,.18);
-  --green: #34d399;
-  --red: #fb7185;
-  --yellow: #fbbf24;
-  --gradient-hero: linear-gradient(135deg, #0f172a 0%, #0e7490 100%);
-  --gradient-text: linear-gradient(135deg, #38bdf8 0%, #f97316 100%);
+.arena-controls label {
+  display: grid;
+  gap: 6px;
+  cursor: default;
 }
-html[data-ha-style="developer"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    linear-gradient(rgba(56,189,248,.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56,189,248,.05) 1px, transparent 1px);
-  background-size: 24px 24px;
+.arena-controls input { width: 100%; accent-color: var(--danger); }
+.competitor-lanes {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(245px, 1fr));
+  min-height: 0;
 }
-html[data-ha-style="developer"] body::before { content: "developer"; }
-html[data-ha-style="developer"] pre,
-html[data-ha-style="developer"] code,
-html[data-ha-style="developer"] .mono {
-  color: inherit;
+.competitor-lane {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 640px;
+  border-right: 2px solid var(--ink);
+  background:
+    linear-gradient(rgba(13,13,13,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13,13,13,.035) 1px, transparent 1px);
+  background-size: 20px 20px;
+  cursor: pointer;
+  outline: 0;
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+.competitor-lane:last-child { border-right: 0; }
+.competitor-lane.is-selected { background-color: rgba(255,255,255,.36); }
+.competitor-lane:focus-visible { box-shadow: inset 0 0 0 4px var(--danger); }
+.lane-header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  align-items: start;
+  padding: 14px 14px 12px;
+  border-bottom: 2px solid var(--ink);
+}
+.lane-no, .lane-rank {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.lane-name {
+  min-width: 0;
+  text-transform: uppercase;
+}
+.lane-name h2 {
+  margin: 0;
+  font-size: clamp(18px, 2.4vw, 30px);
+  line-height: .9;
+  letter-spacing: -.04em;
+  font-weight: 950;
+}
+.lane-name p { margin: 5px 0 0; color: var(--muted); font: 11px/1.1 var(--mono); text-transform: uppercase; }
+.lane-score {
+  grid-column: 1 / -1;
+  margin-top: 8px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px;
+}
+.lane-score strong {
+  font-size: clamp(42px, 5vw, 84px);
+  line-height: .78;
+  letter-spacing: -.08em;
+  font-weight: 950;
+}
+.lane-score span { color: var(--muted); font: 11px/1 var(--mono); text-transform: uppercase; }
+.kinetic-body {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  padding: 18px 10px;
+}
+.fiducial {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  color: var(--ink);
+  font: 700 18px/18px var(--mono);
+  opacity: .72;
+}
+.fiducial.a { top: 12px; left: 12px; }
+.fiducial.b { top: 12px; right: 12px; }
+.fiducial.c { bottom: 12px; left: 12px; }
+.fiducial.d { bottom: 12px; right: 12px; }
+.activity-strips {
+  position: absolute;
+  inset: 52px 24px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+.text-line {
+  height: 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--ink);
+  font: 700 8px/8px var(--mono);
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  opacity: .82;
+  transform-origin: center;
+  background: color-mix(in srgb, var(--lane-accent) 12%, transparent);
+}
+.barbell-track {
+  position: absolute;
+  left: 50%;
+  top: 68px;
+  bottom: 72px;
+  width: 2px;
+  transform: translateX(-50%);
+  background: repeating-linear-gradient(to bottom, rgba(13,13,13,.18), rgba(13,13,13,.18) 8px, transparent 8px, transparent 16px);
+}
+.kinetic-bar {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: min(210px, 72%);
+  height: 8px;
+  transform: translate(-50%, -50%);
+  background: var(--ink);
+  transition: opacity 160ms ease;
+}
+.kinetic-bar::before,
+.kinetic-bar::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 54px;
+  border: 5px solid var(--ink);
+  background: var(--paper);
+  transform: translateY(-50%);
+}
+.kinetic-bar::before { left: -26px; }
+.kinetic-bar::after { right: -26px; }
+.sweat-word {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  color: var(--lane-accent);
+  font: 900 11px/1 var(--mono);
+  text-transform: uppercase;
+  opacity: .82;
+  transform: rotate(var(--r));
+}
+.lane-tooltip {
+  position: absolute;
+  z-index: 3;
+  left: 14px;
+  right: 14px;
+  bottom: 54px;
+  padding: 10px;
+  border: 2px solid var(--ink);
+  background: var(--panel);
+  font: 11px/1.35 var(--mono);
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+.competitor-lane:hover .lane-tooltip,
+.competitor-lane:focus-visible .lane-tooltip,
+.competitor-lane.is-selected .lane-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+.telemetry-footer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 2px solid var(--ink);
+  font: 10px/1.2 var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.telemetry-footer div {
+  padding: 10px;
+  border-right: 1px solid var(--ink);
+}
+.telemetry-footer div:last-child { border-right: 0; }
+.telemetry-footer strong { display: block; font-size: 13px; letter-spacing: 0; }
+.evidence-pit {
+  padding: clamp(20px, 4vw, 58px);
+  background: var(--paper);
+  border-top: 2px solid var(--ink);
+}
+.pit-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+.pit-header h2 {
+  margin: 0;
+  max-width: 760px;
+  font-size: clamp(32px, 5vw, 72px);
+  line-height: .86;
+  letter-spacing: -.06em;
+  text-transform: uppercase;
+}
+.copy-summary {
+  margin-top: 14px;
+  border: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 12px;
+  font: 800 11px/1 var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.pit-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  border: 2px solid var(--ink);
+}
+.pit-kpis div { padding: 10px 14px; border-right: 1px solid var(--ink); font-family: var(--mono); text-transform: uppercase; }
+.pit-kpis div:last-child { border-right: 0; }
+.pit-kpis strong { display: block; font-size: 24px; font-family: var(--sans); letter-spacing: -.04em; }
+.pit-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  border: 2px solid var(--ink);
+  background: var(--panel);
+}
+.pit-panel {
+  grid-column: span 4;
+  min-height: 270px;
+  padding: 16px;
+  border-right: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+.pit-panel.wide { grid-column: span 8; }
+.pit-panel.full { grid-column: 1 / -1; }
+.pit-panel h3 {
+  margin: 0 0 14px;
+  font: 900 15px/1 var(--sans);
+  text-transform: uppercase;
+  letter-spacing: -.02em;
+}
+.heatmap {
+  display: grid;
+  gap: 4px;
+}
+.heat-row {
+  display: grid;
+  grid-template-columns: 78px repeat(24, 1fr);
+  gap: 2px;
+  align-items: center;
+}
+.heat-label { color: var(--muted); font: 10px/1 var(--mono); }
+.heat-cell {
+  aspect-ratio: 1;
+  min-width: 6px;
+  border: 1px solid rgba(13,13,13,.08);
+  background: color-mix(in srgb, var(--danger) calc(var(--v) * 70%), #f7f4ed);
+}
+.bar-row {
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  margin: 9px 0;
+  font: 11px/1 var(--mono);
+  text-transform: uppercase;
+}
+.bar-track { height: 10px; background: rgba(13,13,13,.08); border: 1px solid rgba(13,13,13,.14); }
+.bar-fill { height: 100%; width: calc(var(--v) * 100%); background: var(--ink); }
+.evidence-list {
+  display: grid;
+  gap: 10px;
+  max-height: 300px;
+  overflow: auto;
+  padding-right: 4px;
+}
+.evidence-item {
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  border: 1px solid var(--ink);
+  background: rgba(240,239,234,.55);
+}
+.evidence-item b { font: 800 11px/1 var(--mono); text-transform: uppercase; }
+.evidence-item span { color: var(--muted); font: 12px/1.35 var(--sans); }
+.match-log {
+  margin-top: 24px;
+  border: 2px solid var(--ink);
+  background: var(--panel);
+}
+.log-head {
+  display: grid;
+  grid-template-columns: 1fr minmax(220px, 340px);
+  gap: 16px;
+  padding: 14px;
+  border-bottom: 2px solid var(--ink);
+  align-items: center;
+}
+.log-head h3 { margin: 0; font-size: 22px; text-transform: uppercase; letter-spacing: -.03em; }
+.search-box {
+  width: 100%;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  padding: 10px 12px;
+  font-family: var(--mono);
+  text-transform: uppercase;
+}
+.record-list {
+  max-height: 540px;
+  overflow: auto;
+}
+.record {
+  display: grid;
+  grid-template-columns: 150px 160px 1fr auto;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--soft-rule);
+  align-items: start;
+}
+.record.is-hot { background: color-mix(in srgb, var(--danger) 10%, transparent); }
+.record .when, .record .who, .record .flags { font: 11px/1.2 var(--mono); text-transform: uppercase; color: var(--muted); }
+.record .txt { font-size: 14px; line-height: 1.35; }
+.empty { padding: 20px; color: var(--muted); font-family: var(--mono); text-transform: uppercase; }
+.privacy-note {
+  margin-top: 18px;
+  color: var(--muted);
+  font: 12px/1.45 var(--mono);
+  text-transform: uppercase;
+}
+@media (max-width: 1100px) {
+  .championship-header { grid-template-columns: 1fr; }
+  .event-lockup, .scoreboard-leaderboard { border-right: 0; }
+  .arena-controls { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .competitor-lanes { overflow-x: auto; grid-template-columns: repeat(4, minmax(280px, 72vw)); }
+  .pit-header { grid-template-columns: 1fr; }
+  .pit-kpis { grid-template-columns: repeat(2, 1fr); }
+  .pit-panel, .pit-panel.wide { grid-column: 1 / -1; }
+  .record { grid-template-columns: 1fr; }
+  .log-head { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 1ms !important; animation-duration: 1ms !important; animation-iteration-count: 1 !important; }
 }
 </style>
-<!-- html-anything example style skin:end -->
 </head>
 <body>
-  <div class="container">
-    <!-- Channel Header -->
-    <div class="channel-header">
-      <h1>#product-launch</h1>
-      <div class="channel-meta">
-        <div class="meta-item">
-          <strong id="msg-count">70</strong> messages
-        </div>
-        <div class="meta-item">
-          <strong id="sender-count">6</strong> people
-        </div>
-        <div class="meta-item">
-          <span id="date-range">Apr 13 – Apr 24, 2026</span>
-        </div>
-        <div class="meta-item">
-          <strong id="active-days">10</strong> active days
-        </div>
+<main>
+  <section class="kinetic-arena" aria-label="Kinetic Championship">
+    <header class="championship-header">
+      <div class="event-lockup">
+        <div class="mono">Source // Slack export // #product-launch // 2026-04-13 to 2026-04-24</div>
+        <h1>Kinetic Championship</h1>
       </div>
-      <div class="channel-summary" id="channel-summary">
-        A high-tempo product launch channel — peak activity Monday/Tuesday afternoons with a sharp taper post-launch. Drew, Casey, and Sam carry the bulk of decisions and technical work.
+      <div class="scoreboard-leaderboard" id="leaderboard" aria-label="Leaderboard"></div>
+      <div class="arena-controls">
+        <button type="button" id="motion-toggle">Pause motion</button>
+        <label>Speed <input id="speed" type="range" min="0.35" max="1.65" value="0.85" step="0.05"></label>
       </div>
+    </header>
+    <section class="competitor-lanes" id="lanes" aria-label="Competitor lanes"></section>
+  </section>
+
+  <section class="evidence-pit" aria-label="Post-match evidence">
+    <header class="pit-header">
+      <div>
+        <div class="mono">Post-match analysis // linked to selected lane</div>
+        <h2>Launch Channel Evidence Pit</h2>
+        <button class="copy-summary" type="button" id="copy-summary">Copy as Markdown</button>
+      </div>
+      <div class="pit-kpis" aria-label="Event summary">
+        <div><strong>70</strong>messages</div>
+        <div><strong>6</strong>senders</div>
+        <div><strong>5</strong>threaded plays</div>
+        <div><strong>51</strong>reactions</div>
+      </div>
+    </header>
+    <div class="pit-grid">
+      <section class="pit-panel wide">
+        <h3>Activity heatmap</h3>
+        <div class="heatmap" id="heatmap"></div>
+      </section>
+      <section class="pit-panel">
+        <h3>Topics</h3>
+        <div id="topics"></div>
+      </section>
+      <section class="pit-panel">
+        <h3>Decisions</h3>
+        <div class="evidence-list" id="decisions"></div>
+      </section>
+      <section class="pit-panel">
+        <h3>Action items</h3>
+        <div class="evidence-list" id="actions"></div>
+      </section>
+      <section class="pit-panel">
+        <h3>Threads</h3>
+        <div class="evidence-list" id="threads"></div>
+      </section>
     </div>
-
-    <!-- Analysis Grid -->
-    <div class="analysis-grid">
-      <!-- Activity Heatmap -->
-      <div class="card full-width">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-lg);">
-          <h2 class="card-title">Activity heatmap</h2>
-          <button class="copy-btn" onclick="copySection('heatmap-section')">
-            <span>📋</span> Copy
-          </button>
+    <section class="match-log">
+      <div class="log-head">
+        <div>
+          <div class="mono">Browse all 70 messages</div>
+          <h3>Match log</h3>
         </div>
-        <div class="heatmap-container" id="heatmap-section">
-          <svg id="heatmap-svg" class="heatmap-svg" viewBox="0 0 800 200" preserveAspectRatio="xMidYMid meet"></svg>
-        </div>
+        <input class="search-box" id="search" type="search" placeholder="Search messages / topics">
       </div>
+      <div class="record-list" id="records"></div>
+    </section>
+    <footer class="privacy-note">Generated locally - the full Slack export is embedded in this HTML and rendered in your browser. For sharing, prefer an anonymized export.</footer>
+  </section>
+</main>
+<script id="ha-data">const DATA = {"source":"Slack export","channel":"product-launch","dateRange":{"start":"2026-04-13","end":"2026-04-24"},"totalMessages":70,"totalSenders":6,"totalReactions":51,"threadCount":5,"fileCount":2,"senders":[{"id":"U06DREW","display":"Drew K.","handle":"drew","count":15,"words":169,"reactions":28,"decisions":6,"actions":4,"questions":2,"threads":0,"files":0,"hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,3,3,3,1,0,0,0,0],"fragments":["there","quick","fyi","lgtm","approving","let","land","start","and","decision","logged","gradual","rollout","launch","blocker","good","casey","ship","the","fix","approved","option","for","header","here","code","freeze","effect","min","mark","clean","holding","monday","ramp","going","25%","what","impact","hold","100%","leaving"],"firstSeen":"2026-04-13T16:43:18.000Z","lastSeen":"2026-04-22T14:00:40.000Z","score":4488,"pace":1.9,"peakHour":16},{"id":"U04CASE","display":"Casey B.","handle":"casey","count":13,"words":116,"reactions":0,"decisions":1,"actions":6,"questions":2,"threads":2,"files":0,"hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,1,2,3,0,2,2,0,0,0],"fragments":["noted","will","get","mobile","pr-2842","sheet","has","the","bumped","want","merge","flagged","state-flicker","slow","probably","not","cosmetic","but","got","pass","green","except","agreed","pr-2851","focus","trap","fix","small","merged","errors","sentry","from","approved"],"firstSeen":"2026-04-13T16:45:06.000Z","lastSeen":"2026-04-21T15:10:11.000Z","score":2415,"pace":2.2,"peakHour":17},{"id":"U01MIRA","display":"Mira P.","handle":"mira","count":11,"words":140,"reactions":7,"decisions":1,"actions":5,"questions":2,"threads":0,"files":0,"hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,5,1,3,0,0,1,0,0,0],"fragments":["morning","all","launch","comms","doc","good","catch","add","also","sounds","jordan","can","you","thanks","sam","action","item","runbook","skimmed","looks","drew","please","going","with","option","reads","perfect","lead","the","rollout","here","call","starting","now","team","this","great","day-after","numbers","funnel","31pp","closing","out"],"firstSeen":"2026-04-13T15:02:00.000Z","lastSeen":"2026-04-24T15:30:00.000Z","score":2400,"pace":1.6,"peakHour":15},{"id":"U03JRDN","display":"Jordan R.","handle":"jordan","count":10,"words":98,"reactions":1,"decisions":2,"actions":7,"questions":1,"threads":3,"files":1,"hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,1,2,0,0,3,0,1,0],"fragments":["design","review","tomorrow","looking","now","rest","motion","fine","but","yes","ship","notes","are","send","tonight","header","revision","attached","three","options","freeze","blocking","let","fix","post-mortem","doc","please"],"firstSeen":"2026-04-13T16:42:01.000Z","lastSeen":"2026-04-23T17:48:12.000Z","score":2353,"pace":2,"peakHour":20},{"id":"U02SAML","display":"Sam L.","handle":"sam","count":12,"words":133,"reactions":0,"decisions":1,"actions":5,"questions":1,"threads":0,"files":1,"hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,3,2,2,3,1,0,0,0,0],"fragments":["yeah","will","look","this","afternoon","pr-2841","for","the","kill-switch","merged","write","want","see","numbers","runbook","launch","approved","running","live","edge","case","bug","users","about","mobile","traffic","pr-2867","safari","selector","fix","deployed"],"firstSeen":"2026-04-13T15:04:30.000Z","lastSeen":"2026-04-21T15:30:42.000Z","score":2241,"pace":1.7,"peakHour":15},{"id":"U05PRYA","display":"Priya S.","handle":"priya","count":9,"words":107,"reactions":15,"decisions":0,"actions":3,"questions":1,"threads":0,"files":0,"hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,2,2,2,0,1,1,0,0,0],"fragments":["data","quick","check","tomorrow","morning","will","send","numbers","lcp","staging","+18ms","dashboard","wired","first","conversions","coming","funnel","25%","live","100%","looks","healthy"],"firstSeen":"2026-04-13T15:06:12.000Z","lastSeen":"2026-04-21T16:01:18.000Z","score":2179,"pace":1.3,"peakHour":15}],"lanePlayers":[{"id":"U06DREW","display":"Drew K.","handle":"drew","count":15,"words":169,"reactions":28,"decisions":6,"actions":4,"questions":2,"threads":0,"files":0,"hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,3,3,3,1,0,0,0,0],"fragments":["there","quick","fyi","lgtm","approving","let","land","start","and","decision","logged","gradual","rollout","launch","blocker","good","casey","ship","the","fix","approved","option","for","header","here","code","freeze","effect","min","mark","clean","holding","monday","ramp","going","25%","what","impact","hold","100%","leaving"],"firstSeen":"2026-04-13T16:43:18.000Z","lastSeen":"2026-04-22T14:00:40.000Z","score":4488,"pace":1.9,"peakHour":16,"rank":1,"lane":"01","accent":"#E63946","phase":"CONCENTRIC","load":"132KG"},{"id":"U04CASE","display":"Casey B.","handle":"casey","count":13,"words":116,"reactions":0,"decisions":1,"actions":6,"questions":2,"threads":2,"files":0,"hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,1,2,3,0,2,2,0,0,0],"fragments":["noted","will","get","mobile","pr-2842","sheet","has","the","bumped","want","merge","flagged","state-flicker","slow","probably","not","cosmetic","but","got","pass","green","except","agreed","pr-2851","focus","trap","fix","small","merged","errors","sentry","from","approved"],"firstSeen":"2026-04-13T16:45:06.000Z","lastSeen":"2026-04-21T15:10:11.000Z","score":2415,"pace":2.2,"peakHour":17,"rank":2,"lane":"02","accent":"#2A9D8F","phase":"CONTROL","load":"71KG"},{"id":"U01MIRA","display":"Mira P.","handle":"mira","count":11,"words":140,"reactions":7,"decisions":1,"actions":5,"questions":2,"threads":0,"files":0,"hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,5,1,3,0,0,1,0,0,0],"fragments":["morning","all","launch","comms","doc","good","catch","add","also","sounds","jordan","can","you","thanks","sam","action","item","runbook","skimmed","looks","drew","please","going","with","option","reads","perfect","lead","the","rollout","here","call","starting","now","team","this","great","day-after","numbers","funnel","31pp","closing","out"],"firstSeen":"2026-04-13T15:02:00.000Z","lastSeen":"2026-04-24T15:30:00.000Z","score":2400,"pace":1.6,"peakHour":15,"rank":3,"lane":"03","accent":"#457B9D","phase":"RECOVERY","load":"71KG"},{"id":"U03JRDN","display":"Jordan R.","handle":"jordan","count":10,"words":98,"reactions":1,"decisions":2,"actions":7,"questions":1,"threads":3,"files":1,"hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,1,2,0,0,3,0,1,0],"fragments":["design","review","tomorrow","looking","now","rest","motion","fine","but","yes","ship","notes","are","send","tonight","header","revision","attached","three","options","freeze","blocking","let","fix","post-mortem","doc","please"],"firstSeen":"2026-04-13T16:42:01.000Z","lastSeen":"2026-04-23T17:48:12.000Z","score":2353,"pace":2,"peakHour":20,"rank":4,"lane":"04","accent":"#F4A261","phase":"ECCENTRIC","load":"70KG"}],"heat":[{"date":"2026-04-13","hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,3,0,2,0,5,0,0,0],"total":14},{"date":"2026-04-14","hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,5,0,5,0,0,0,0],"total":13},{"date":"2026-04-15","hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,2,1,6,0,0,0,0,1,0],"total":13},{"date":"2026-04-16","hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,2,1,0,0,2,0,0,0],"total":9},{"date":"2026-04-17","hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,0,0,0,0,0,0],"total":6},{"date":"2026-04-20","hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,4,0,0,0,0,0],"total":6},{"date":"2026-04-21","hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,3,1,0,0,0,0,0,0,0],"total":5},{"date":"2026-04-22","hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0],"total":2},{"date":"2026-04-23","hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0],"total":1},{"date":"2026-04-24","hours":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],"total":1}],"hourTotals":[0,0,0,0,0,0,0,0,0,0,0,0,0,3,7,15,11,15,6,5,7,0,1,0],"decisions":[{"id":"m9","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-13T18:13:09.000Z","date":"2026-04-13","time":"18:13","hour":18,"text":"lgtm, approving. let's land it today so qa has it for tomorrow","wordCount":12,"reactions":3,"reactionNames":["shipit"],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":false,"isQuestion":false},{"id":"m14","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-13T20:37:01.000Z","date":"2026-04-13","time":"20:37","hour":20,"text":"yes ship it","wordCount":3,"reactions":1,"reactionNames":["rocket"],"files":[],"threadTs":"1776111600.600189","replyCount":0,"isDecision":true,"isAction":true,"isQuestion":false},{"id":"m15","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-14T15:48:00.000Z","date":"2026-04-14","time":"15:48","hour":15,"text":"design review notes are in the doc. tldr: empty state is approved, sheet is approved, header lockup needs one more round","wordCount":21,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":true,"isQuestion":false},{"id":"m20","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-14T17:25:33.000Z","date":"2026-04-14","time":"17:25","hour":17,"text":"decision logged: gradual rollout, 3 → 25 → 100 over 3 days","wordCount":8,"reactions":5,"reactionNames":["white_check_mark"],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":false,"isQuestion":false},{"id":"m33","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-15T16:00:00.000Z","date":"2026-04-15","time":"16:00","hour":16,"text":"approved","wordCount":1,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":false,"isQuestion":false},{"id":"m35","senderId":"U01MIRA","sender":"Mira P.","handle":"mira","timestamp":"2026-04-15T17:18:20.000Z","date":"2026-04-15","time":"17:18","hour":17,"text":"going with option B. it reads cleaner at small sizes","wordCount":9,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":false,"isQuestion":false},{"id":"m39","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-15T17:20:01.000Z","date":"2026-04-15","time":"17:20","hour":17,"text":"decision: option B for the header lockup","wordCount":6,"reactions":4,"reactionNames":["white_check_mark"],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":false,"isQuestion":false},{"id":"m46","senderId":"U02SAML","sender":"Sam L.","handle":"sam","timestamp":"2026-04-16T16:33:07.000Z","date":"2026-04-16","time":"16:33","hour":16,"text":"approved. running ci","wordCount":3,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":false,"isQuestion":false},{"id":"m61","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-20T18:22:30.000Z","date":"2026-04-20","time":"18:22","hour":18,"text":"ok, hold the 100% ramp until that's out. action item: @sam ship the safari fix tuesday morning","wordCount":17,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":true,"isQuestion":false},{"id":"m63","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-21T15:10:11.000Z","date":"2026-04-21","time":"15:10","hour":15,"text":"approved","wordCount":1,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":false,"isQuestion":false},{"id":"m68","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-22T14:00:40.000Z","date":"2026-04-22","time":"14:00","hour":14,"text":"decision: leaving the rollout at 100% with a 1-week monitoring window before we delete the legacy code paths","wordCount":17,"reactions":5,"reactionNames":["white_check_mark"],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":false,"isQuestion":false}],"actionItems":[{"id":"m1","senderId":"U01MIRA","sender":"Mira P.","handle":"mira","timestamp":"2026-04-13T15:02:00.000Z","date":"2026-04-13","time":"15:02","hour":15,"text":"morning all — launch comms doc is up. @sam can you take a pass on the engineering risks section today","wordCount":18,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":true},{"id":"m2","senderId":"U02SAML","sender":"Sam L.","handle":"sam","timestamp":"2026-04-13T15:04:30.000Z","date":"2026-04-13","time":"15:04","hour":15,"text":"yeah will look this afternoon. quick read says rollout plan is missing the kill-switch path","wordCount":15,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m3","senderId":"U01MIRA","sender":"Mira P.","handle":"mira","timestamp":"2026-04-13T15:05:45.000Z","date":"2026-04-13","time":"15:05","hour":15,"text":"good catch. add it. also pull @priya in, she wrote the original","wordCount":12,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m6","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-13T16:43:18.000Z","date":"2026-04-13","time":"16:43","hour":16,"text":"I'll be there. quick fyi @here we're aiming for a thursday cut, friday rollout — so feedback today/tomorrow only please","wordCount":20,"reactions":6,"reactionNames":["+1","white_check_mark"],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m7","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-13T16:45:06.000Z","date":"2026-04-13","time":"16:45","hour":16,"text":"noted, will get my mobile sheet PR up by EOD","wordCount":10,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m10","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-13T20:20:00.000Z","date":"2026-04-13","time":"20:20","hour":20,"text":"PR-2842 — mobile sheet. has the keyboard-avoidance fix from #design-systems. need a designer to glance at the rest motion","wordCount":17,"reactions":0,"reactionNames":[],"files":[],"threadTs":"1776111600.600189","replyCount":4,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m11","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-13T20:31:12.000Z","date":"2026-04-13","time":"20:31","hour":20,"text":"looking now","wordCount":2,"reactions":0,"reactionNames":[],"files":[],"threadTs":"1776111600.600189","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m12","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-13T20:35:50.000Z","date":"2026-04-13","time":"20:35","hour":20,"text":"rest motion is fine — but the dismiss timing is too snappy. can you bump it to 220ms with the standard ease-out","wordCount":21,"reactions":0,"reactionNames":[],"files":[],"threadTs":"1776111600.600189","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":true},{"id":"m13","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-13T20:36:33.000Z","date":"2026-04-13","time":"20:36","hour":20,"text":"bumped. want me to merge","wordCount":5,"reactions":0,"reactionNames":[],"files":[],"threadTs":"1776111600.600189","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":true},{"id":"m14","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-13T20:37:01.000Z","date":"2026-04-13","time":"20:37","hour":20,"text":"yes ship it","wordCount":3,"reactions":1,"reactionNames":["rocket"],"files":[],"threadTs":"1776111600.600189","replyCount":0,"isDecision":true,"isAction":true,"isQuestion":false},{"id":"m15","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-14T15:48:00.000Z","date":"2026-04-14","time":"15:48","hour":15,"text":"design review notes are in the doc. tldr: empty state is approved, sheet is approved, header lockup needs one more round","wordCount":21,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":true,"isQuestion":false},{"id":"m16","senderId":"U01MIRA","sender":"Mira P.","handle":"mira","timestamp":"2026-04-14T15:49:11.000Z","date":"2026-04-14","time":"15:49","hour":15,"text":"sounds good. @jordan can you ship the header revision by tomorrow EOD?","wordCount":12,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":true},{"id":"m17","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-14T15:49:42.000Z","date":"2026-04-14","time":"15:49","hour":15,"text":"yes, I'll send it tonight.","wordCount":5,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m18","senderId":"U05PRYA","sender":"Priya S.","handle":"priya","timestamp":"2026-04-14T17:22:30.000Z","date":"2026-04-14","time":"17:22","hour":17,"text":"data quick check — 3% of accounts will hit the v2 path on day 1 because of the gradual rollout. is that what we want, or are we starting at 100%?","wordCount":29,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":true}],"threads":[{"id":"m10","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-13T20:20:00.000Z","date":"2026-04-13","time":"20:20","hour":20,"text":"PR-2842 — mobile sheet. has the keyboard-avoidance fix from #design-systems. need a designer to glance at the rest motion","wordCount":17,"reactions":0,"reactionNames":[],"files":[],"threadTs":"1776111600.600189","replyCount":4,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m11","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-13T20:31:12.000Z","date":"2026-04-13","time":"20:31","hour":20,"text":"looking now","wordCount":2,"reactions":0,"reactionNames":[],"files":[],"threadTs":"1776111600.600189","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m12","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-13T20:35:50.000Z","date":"2026-04-13","time":"20:35","hour":20,"text":"rest motion is fine — but the dismiss timing is too snappy. can you bump it to 220ms with the standard ease-out","wordCount":21,"reactions":0,"reactionNames":[],"files":[],"threadTs":"1776111600.600189","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":true},{"id":"m13","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-13T20:36:33.000Z","date":"2026-04-13","time":"20:36","hour":20,"text":"bumped. want me to merge","wordCount":5,"reactions":0,"reactionNames":[],"files":[],"threadTs":"1776111600.600189","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":true},{"id":"m14","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-13T20:37:01.000Z","date":"2026-04-13","time":"20:37","hour":20,"text":"yes ship it","wordCount":3,"reactions":1,"reactionNames":["rocket"],"files":[],"threadTs":"1776111600.600189","replyCount":0,"isDecision":true,"isAction":true,"isQuestion":false}],"topics":[{"label":"engineering","count":26,"sample":["good catch. add it. also pull @priya in, she wrote the original","noted, will get my mobile sheet PR up by EOD","PR-2841 is up for the kill-switch — small change, just a feature flag tied to the existing config"]},{"label":"rollout","count":22,"sample":["morning all — launch comms doc is up. @sam can you take a pass on the engineering risks section today","yeah will look this afternoon. quick read says rollout plan is missing the kill-switch path","I'll be there. quick fyi @here we're aiming for a thursday cut, friday rollout — so feedback today/tomorrow only please"]},{"label":"decisions","count":21,"sample":["good catch. add it. also pull @priya in, she wrote the original","lgtm, approving. let's land it today so qa has it for tomorrow","yes ship it"]},{"label":"quality","count":14,"sample":["lgtm, approving. let's land it today so qa has it for tomorrow","PR-2842 — mobile sheet. has the keyboard-avoidance fix from #design-systems. need a designer to glance at the rest motion","qa flagged a state-flicker on slow networks when the sheet first opens. repro is 1 in 4. will look in the morning"]},{"label":"design","count":13,"sample":["design review tomorrow at 11. agenda is pinned. mostly the empty-state polish + the mobile sheet","noted, will get my mobile sheet PR up by EOD","PR-2842 — mobile sheet. has the keyboard-avoidance fix from #design-systems. need a designer to glance at the rest motion"]},{"label":"performance","count":6,"sample":["probably not. it's cosmetic. but if it's a 200ms layout shift it'll hit our perf budget","+1, want to see numbers before we call it. priya can you pull the lcp delta on the staging build?","lcp on staging is +18ms vs prod. flicker is 90ms layout shift, well under our 250ms budget. not a blocker"]}],"topReactions":[{"name":"white_check_mark","count":4},{"name":"+1","count":2},{"name":"shipit","count":2},{"name":"rocket","count":2},{"name":"tada","count":2},{"name":"heart","count":1}],"messages":[{"id":"m1","senderId":"U01MIRA","sender":"Mira P.","handle":"mira","timestamp":"2026-04-13T15:02:00.000Z","date":"2026-04-13","time":"15:02","hour":15,"text":"morning all — launch comms doc is up. @sam can you take a pass on the engineering risks section today","wordCount":18,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":true},{"id":"m2","senderId":"U02SAML","sender":"Sam L.","handle":"sam","timestamp":"2026-04-13T15:04:30.000Z","date":"2026-04-13","time":"15:04","hour":15,"text":"yeah will look this afternoon. quick read says rollout plan is missing the kill-switch path","wordCount":15,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m3","senderId":"U01MIRA","sender":"Mira P.","handle":"mira","timestamp":"2026-04-13T15:05:45.000Z","date":"2026-04-13","time":"15:05","hour":15,"text":"good catch. add it. also pull @priya in, she wrote the original","wordCount":12,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m4","senderId":"U05PRYA","sender":"Priya S.","handle":"priya","timestamp":"2026-04-13T15:06:12.000Z","date":"2026-04-13","time":"15:06","hour":15,"text":"on it","wordCount":2,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m5","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-13T16:42:01.000Z","date":"2026-04-13","time":"16:42","hour":16,"text":"design review tomorrow at 11. agenda is pinned. mostly the empty-state polish + the mobile sheet","wordCount":15,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m6","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-13T16:43:18.000Z","date":"2026-04-13","time":"16:43","hour":16,"text":"I'll be there. quick fyi @here we're aiming for a thursday cut, friday rollout — so feedback today/tomorrow only please","wordCount":20,"reactions":6,"reactionNames":["+1","white_check_mark"],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m7","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-13T16:45:06.000Z","date":"2026-04-13","time":"16:45","hour":16,"text":"noted, will get my mobile sheet PR up by EOD","wordCount":10,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m8","senderId":"U02SAML","sender":"Sam L.","handle":"sam","timestamp":"2026-04-13T18:11:22.000Z","date":"2026-04-13","time":"18:11","hour":18,"text":"PR-2841 is up for the kill-switch — small change, just a feature flag tied to the existing config","wordCount":16,"reactions":0,"reactionNames":[],"files":["PR-2841-diff.patch"],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m9","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-13T18:13:09.000Z","date":"2026-04-13","time":"18:13","hour":18,"text":"lgtm, approving. let's land it today so qa has it for tomorrow","wordCount":12,"reactions":3,"reactionNames":["shipit"],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":false,"isQuestion":false},{"id":"m10","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-13T20:20:00.000Z","date":"2026-04-13","time":"20:20","hour":20,"text":"PR-2842 — mobile sheet. has the keyboard-avoidance fix from #design-systems. need a designer to glance at the rest motion","wordCount":17,"reactions":0,"reactionNames":[],"files":[],"threadTs":"1776111600.600189","replyCount":4,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m11","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-13T20:31:12.000Z","date":"2026-04-13","time":"20:31","hour":20,"text":"looking now","wordCount":2,"reactions":0,"reactionNames":[],"files":[],"threadTs":"1776111600.600189","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m12","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-13T20:35:50.000Z","date":"2026-04-13","time":"20:35","hour":20,"text":"rest motion is fine — but the dismiss timing is too snappy. can you bump it to 220ms with the standard ease-out","wordCount":21,"reactions":0,"reactionNames":[],"files":[],"threadTs":"1776111600.600189","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":true},{"id":"m13","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-13T20:36:33.000Z","date":"2026-04-13","time":"20:36","hour":20,"text":"bumped. want me to merge","wordCount":5,"reactions":0,"reactionNames":[],"files":[],"threadTs":"1776111600.600189","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":true},{"id":"m14","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-13T20:37:01.000Z","date":"2026-04-13","time":"20:37","hour":20,"text":"yes ship it","wordCount":3,"reactions":1,"reactionNames":["rocket"],"files":[],"threadTs":"1776111600.600189","replyCount":0,"isDecision":true,"isAction":true,"isQuestion":false},{"id":"m15","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-14T15:48:00.000Z","date":"2026-04-14","time":"15:48","hour":15,"text":"design review notes are in the doc. tldr: empty state is approved, sheet is approved, header lockup needs one more round","wordCount":21,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":true,"isQuestion":false},{"id":"m16","senderId":"U01MIRA","sender":"Mira P.","handle":"mira","timestamp":"2026-04-14T15:49:11.000Z","date":"2026-04-14","time":"15:49","hour":15,"text":"sounds good. @jordan can you ship the header revision by tomorrow EOD?","wordCount":12,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":true},{"id":"m17","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-14T15:49:42.000Z","date":"2026-04-14","time":"15:49","hour":15,"text":"yes, I'll send it tonight.","wordCount":5,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m18","senderId":"U05PRYA","sender":"Priya S.","handle":"priya","timestamp":"2026-04-14T17:22:30.000Z","date":"2026-04-14","time":"17:22","hour":17,"text":"data quick check — 3% of accounts will hit the v2 path on day 1 because of the gradual rollout. is that what we want, or are we starting at 100%?","wordCount":29,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":true},{"id":"m19","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-14T17:25:08.000Z","date":"2026-04-14","time":"17:25","hour":17,"text":"let's start at 3% and ramp. if friday is clean we go to 25 monday, 100 tuesday","wordCount":17,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m20","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-14T17:25:33.000Z","date":"2026-04-14","time":"17:25","hour":17,"text":"decision logged: gradual rollout, 3 → 25 → 100 over 3 days","wordCount":8,"reactions":5,"reactionNames":["white_check_mark"],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":false,"isQuestion":false},{"id":"m21","senderId":"U02SAML","sender":"Sam L.","handle":"sam","timestamp":"2026-04-14T17:30:12.000Z","date":"2026-04-14","time":"17:30","hour":17,"text":"kill-switch is merged. I'll write the runbook for it tomorrow","wordCount":10,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m22","senderId":"U01MIRA","sender":"Mira P.","handle":"mira","timestamp":"2026-04-14T17:31:04.000Z","date":"2026-04-14","time":"17:31","hour":17,"text":"thanks sam. action item: runbook by wednesday EOD","wordCount":8,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m23","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-14T19:50:18.000Z","date":"2026-04-14","time":"19:50","hour":19,"text":"qa flagged a state-flicker on slow networks when the sheet first opens. repro is 1 in 4. will look in the morning","wordCount":19,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":true},{"id":"m24","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-14T19:51:06.000Z","date":"2026-04-14","time":"19:51","hour":19,"text":"is it a launch blocker?","wordCount":4,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":true},{"id":"m25","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-14T19:51:41.000Z","date":"2026-04-14","time":"19:51","hour":19,"text":"probably not. it's cosmetic. but if it's a 200ms layout shift it'll hit our perf budget","wordCount":16,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m26","senderId":"U02SAML","sender":"Sam L.","handle":"sam","timestamp":"2026-04-14T19:52:08.000Z","date":"2026-04-14","time":"19:52","hour":19,"text":"+1, want to see numbers before we call it. priya can you pull the lcp delta on the staging build?","wordCount":20,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":true},{"id":"m27","senderId":"U05PRYA","sender":"Priya S.","handle":"priya","timestamp":"2026-04-14T19:52:39.000Z","date":"2026-04-14","time":"19:52","hour":19,"text":"tomorrow morning, will send numbers","wordCount":5,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m28","senderId":"U05PRYA","sender":"Priya S.","handle":"priya","timestamp":"2026-04-15T13:55:00.000Z","date":"2026-04-15","time":"13:55","hour":13,"text":"lcp on staging is +18ms vs prod. flicker is 90ms layout shift, well under our 250ms budget. not a blocker","wordCount":19,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m29","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-15T13:56:21.000Z","date":"2026-04-15","time":"13:56","hour":13,"text":"good. casey ship the fix in a follow-up if you have time but don't hold the launch on it","wordCount":18,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m30","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-15T13:56:44.000Z","date":"2026-04-15","time":"13:56","hour":13,"text":"got it","wordCount":2,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m31","senderId":"U02SAML","sender":"Sam L.","handle":"sam","timestamp":"2026-04-15T15:10:09.000Z","date":"2026-04-15","time":"15:10","hour":15,"text":"runbook is up: launch runbook. rollback steps, kill-switch trigger, on-call rotation","wordCount":11,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m32","senderId":"U01MIRA","sender":"Mira P.","handle":"mira","timestamp":"2026-04-15T15:10:54.000Z","date":"2026-04-15","time":"15:10","hour":15,"text":"skimmed, looks good. @drew please give it a final read","wordCount":9,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m33","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-15T16:00:00.000Z","date":"2026-04-15","time":"16:00","hour":16,"text":"approved","wordCount":1,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":false,"isQuestion":false},{"id":"m34","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-15T17:15:03.000Z","date":"2026-04-15","time":"17:15","hour":17,"text":"header revision attached — three options. team poll inside","wordCount":8,"reactions":0,"reactionNames":[],"files":["header-options.png"],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m35","senderId":"U01MIRA","sender":"Mira P.","handle":"mira","timestamp":"2026-04-15T17:18:20.000Z","date":"2026-04-15","time":"17:18","hour":17,"text":"going with option B. it reads cleaner at small sizes","wordCount":9,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":false,"isQuestion":false},{"id":"m36","senderId":"U02SAML","sender":"Sam L.","handle":"sam","timestamp":"2026-04-15T17:18:55.000Z","date":"2026-04-15","time":"17:18","hour":17,"text":"+1 B","wordCount":1,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m37","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-15T17:19:12.000Z","date":"2026-04-15","time":"17:19","hour":17,"text":"B","wordCount":0,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m38","senderId":"U05PRYA","sender":"Priya S.","handle":"priya","timestamp":"2026-04-15T17:19:33.000Z","date":"2026-04-15","time":"17:19","hour":17,"text":"B","wordCount":0,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m39","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-15T17:20:01.000Z","date":"2026-04-15","time":"17:20","hour":17,"text":"decision: option B for the header lockup","wordCount":6,"reactions":4,"reactionNames":["white_check_mark"],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":false,"isQuestion":false},{"id":"m40","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-15T22:11:20.000Z","date":"2026-04-15","time":"22:11","hour":22,"text":"header B is in. design freeze starting now per the comms doc","wordCount":11,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m41","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-16T14:02:11.000Z","date":"2026-04-16","time":"14:02","hour":14,"text":"@here code freeze in effect. only fixes for launch-blocking issues until friday rollout","wordCount":13,"reactions":5,"reactionNames":["+1"],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m42","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-16T14:55:32.000Z","date":"2026-04-16","time":"14:55","hour":14,"text":"qa pass 2 is green except one accessibility issue — focus trap in the sheet doesn't include the close button","wordCount":18,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m43","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-16T14:56:05.000Z","date":"2026-04-16","time":"14:56","hour":14,"text":"blocking. let's fix","wordCount":3,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m44","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-16T14:56:38.000Z","date":"2026-04-16","time":"14:56","hour":14,"text":"agreed, on it","wordCount":3,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m45","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-16T16:30:50.000Z","date":"2026-04-16","time":"16:30","hour":16,"text":"PR-2851 — focus trap fix. small. needs one approval","wordCount":8,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m46","senderId":"U02SAML","sender":"Sam L.","handle":"sam","timestamp":"2026-04-16T16:33:07.000Z","date":"2026-04-16","time":"16:33","hour":16,"text":"approved. running ci","wordCount":3,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":false,"isQuestion":false},{"id":"m47","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-16T17:01:14.000Z","date":"2026-04-16","time":"17:01","hour":17,"text":"merged.","wordCount":1,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m48","senderId":"U05PRYA","sender":"Priya S.","handle":"priya","timestamp":"2026-04-16T20:44:00.000Z","date":"2026-04-16","time":"20:44","hour":20,"text":"dashboard is wired — we'll see the v2 funnel from friday morning. baseline funnel is in the same view for comparison","wordCount":21,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m49","senderId":"U01MIRA","sender":"Mira P.","handle":"mira","timestamp":"2026-04-16T20:45:11.000Z","date":"2026-04-16","time":"20:45","hour":20,"text":"perfect. I'll lead the rollout call at 9am pacific friday","wordCount":10,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m50","senderId":"U01MIRA","sender":"Mira P.","handle":"mira","timestamp":"2026-04-17T16:00:00.000Z","date":"2026-04-17","time":"16:00","hour":16,"text":"@here rollout call starting now. we're at 3% in 5 minutes","wordCount":11,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m51","senderId":"U02SAML","sender":"Sam L.","handle":"sam","timestamp":"2026-04-17T16:08:30.000Z","date":"2026-04-17","time":"16:08","hour":16,"text":"we're live at 3%. error rate is steady, p95 latency steady","wordCount":12,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m52","senderId":"U05PRYA","sender":"Priya S.","handle":"priya","timestamp":"2026-04-17T16:09:14.000Z","date":"2026-04-17","time":"16:09","hour":16,"text":"first conversions coming in. funnel completion is +0.4pp vs control on the early sample (small N)","wordCount":16,"reactions":6,"reactionNames":["tada"],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m53","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-17T16:30:22.000Z","date":"2026-04-17","time":"16:30","hour":16,"text":"30 min mark — clean. holding at 3% through the weekend, ramp monday","wordCount":12,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m54","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-17T17:01:55.000Z","date":"2026-04-17","time":"17:01","hour":17,"text":"no errors in sentry from the v2 path. aside from one onboarding telemetry warning that's pre-existing","wordCount":16,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m55","senderId":"U01MIRA","sender":"Mira P.","handle":"mira","timestamp":"2026-04-17T17:15:02.000Z","date":"2026-04-17","time":"17:15","hour":17,"text":"team this is great. thanks everyone for the push this week. nicely done","wordCount":13,"reactions":7,"reactionNames":["heart","rocket"],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m56","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-20T15:11:00.000Z","date":"2026-04-20","time":"15:11","hour":15,"text":"monday ramp — going to 25% at 9am pacific. team: keep an eye on the dashboard","wordCount":15,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m57","senderId":"U05PRYA","sender":"Priya S.","handle":"priya","timestamp":"2026-04-20T15:34:09.000Z","date":"2026-04-20","time":"15:34","hour":15,"text":"25% is live. funnel is +0.3pp vs control, holding","wordCount":10,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m58","senderId":"U02SAML","sender":"Sam L.","handle":"sam","timestamp":"2026-04-20T18:20:11.000Z","date":"2026-04-20","time":"18:20","hour":18,"text":"edge case bug — users on safari 16 with a saved card see the legacy sheet, not v2. css selector regression","wordCount":19,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m59","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-20T18:21:00.000Z","date":"2026-04-20","time":"18:21","hour":18,"text":"what's the impact","wordCount":3,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":true},{"id":"m60","senderId":"U02SAML","sender":"Sam L.","handle":"sam","timestamp":"2026-04-20T18:21:48.000Z","date":"2026-04-20","time":"18:21","hour":18,"text":"about 3% of mobile traffic. cosmetic, no data loss. we'll patch tomorrow morning","wordCount":14,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m61","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-20T18:22:30.000Z","date":"2026-04-20","time":"18:22","hour":18,"text":"ok, hold the 100% ramp until that's out. action item: @sam ship the safari fix tuesday morning","wordCount":17,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":true,"isQuestion":false},{"id":"m62","senderId":"U02SAML","sender":"Sam L.","handle":"sam","timestamp":"2026-04-21T14:55:08.000Z","date":"2026-04-21","time":"14:55","hour":14,"text":"PR-2867 up — safari selector fix, qa green on real device","wordCount":10,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m63","senderId":"U04CASE","sender":"Casey B.","handle":"casey","timestamp":"2026-04-21T15:10:11.000Z","date":"2026-04-21","time":"15:10","hour":15,"text":"approved","wordCount":1,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":false,"isQuestion":false},{"id":"m64","senderId":"U02SAML","sender":"Sam L.","handle":"sam","timestamp":"2026-04-21T15:30:42.000Z","date":"2026-04-21","time":"15:30","hour":15,"text":"merged + deployed","wordCount":2,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m65","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-21T15:32:00.000Z","date":"2026-04-21","time":"15:32","hour":15,"text":"going to 100% in 30 min","wordCount":6,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m66","senderId":"U05PRYA","sender":"Priya S.","handle":"priya","timestamp":"2026-04-21T16:01:18.000Z","date":"2026-04-21","time":"16:01","hour":16,"text":"100% live. dashboard looks healthy","wordCount":5,"reactions":9,"reactionNames":["tada","shipit"],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m67","senderId":"U01MIRA","sender":"Mira P.","handle":"mira","timestamp":"2026-04-22T14:00:00.000Z","date":"2026-04-22","time":"14:00","hour":14,"text":"day-after numbers: funnel +0.31pp vs the control window, error rate flat, p95 down 80ms because the v2 path skips an extra render. not bad team","wordCount":26,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false},{"id":"m68","senderId":"U06DREW","sender":"Drew K.","handle":"drew","timestamp":"2026-04-22T14:00:40.000Z","date":"2026-04-22","time":"14:00","hour":14,"text":"decision: leaving the rollout at 100% with a 1-week monitoring window before we delete the legacy code paths","wordCount":17,"reactions":5,"reactionNames":["white_check_mark"],"files":[],"threadTs":"","replyCount":0,"isDecision":true,"isAction":false,"isQuestion":false},{"id":"m69","senderId":"U03JRDN","sender":"Jordan R.","handle":"jordan","timestamp":"2026-04-23T17:48:12.000Z","date":"2026-04-23","time":"17:48","hour":17,"text":"post-mortem doc is up — please add notes by monday","wordCount":9,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":true,"isQuestion":false},{"id":"m70","senderId":"U01MIRA","sender":"Mira P.","handle":"mira","timestamp":"2026-04-24T15:30:00.000Z","date":"2026-04-24","time":"15:30","hour":15,"text":"thanks all — closing out the launch channel for now. follow-ups in #product-followups","wordCount":12,"reactions":0,"reactionNames":[],"files":[],"threadTs":"","replyCount":0,"isDecision":false,"isAction":false,"isQuestion":false}]};</script>
+<script>
+(function () {
+  const lanesEl = document.getElementById('lanes');
+  const leaderboardEl = document.getElementById('leaderboard');
+  const heatmapEl = document.getElementById('heatmap');
+  const topicsEl = document.getElementById('topics');
+  const decisionsEl = document.getElementById('decisions');
+  const actionsEl = document.getElementById('actions');
+  const threadsEl = document.getElementById('threads');
+  const recordsEl = document.getElementById('records');
+  const searchEl = document.getElementById('search');
+  const copyEl = document.getElementById('copy-summary');
+  const speedEl = document.getElementById('speed');
+  const toggleEl = document.getElementById('motion-toggle');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const state = {
+    selected: DATA.lanePlayers[0] ? DATA.lanePlayers[0].id : '',
+    phase: .28,
+    speed: Number(speedEl.value || .85),
+    paused: reduceMotion,
+    query: ''
+  };
 
-      <!-- Contributors -->
-      <div class="card">
-        <h2 class="card-title">Contributors</h2>
-        <div id="leaderboard"></div>
-      </div>
+  function esc(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, function (char) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char];
+    });
+  }
 
-      <!-- Top Reactions (if available) -->
-      <div class="card" id="reactions-card">
-        <h2 class="card-title">Top reactions</h2>
-        <div id="reactions-list"></div>
-      </div>
+  function clamp(min, max, value) {
+    return Math.max(min, Math.min(max, value));
+  }
 
-      <!-- Volume Over Time -->
-      <div class="card full-width">
-        <h2 class="card-title">Volume over time</h2>
-        <canvas id="volume-canvas" class="volume-chart"></canvas>
-      </div>
+  function formatScore(value) {
+    return Math.round(value).toLocaleString('en-US');
+  }
 
-      <!-- Decisions, Actions, Questions -->
-      <div class="card full-width">
-        <h2 class="card-title">Decisions & action items</h2>
-        
-        <div class="signal-section" id="decisions-section">
-          <div class="signal-label">Decisions</div>
-          <div id="decisions-list"></div>
-        </div>
+  function select(id) {
+    state.selected = id;
+    renderLeaderboard();
+    renderLaneSelection();
+    renderEvidence();
+    renderRecords();
+  }
 
-        <div class="signal-section" id="actions-section">
-          <div class="signal-label">Action items</div>
-          <div id="actions-list"></div>
-        </div>
+  function renderLeaderboard() {
+    leaderboardEl.innerHTML = DATA.senders.map(function (sender, index) {
+      return '<button class="leader-row" type="button" data-id="' + esc(sender.id) + '" aria-pressed="' + (sender.id === state.selected ? 'true' : 'false') + '">' +
+        '<strong>#' + (index + 1) + '</strong><span>' + esc(sender.display) + '</span><b>' + formatScore(sender.score) + '</b></button>';
+    }).join('');
+    Array.from(leaderboardEl.querySelectorAll('button')).forEach(function (button) {
+      button.addEventListener('click', function () { select(button.dataset.id); });
+    });
+  }
 
-        <div class="signal-section" id="questions-section">
-          <div class="signal-label">Open questions</div>
-          <div id="questions-list"></div>
-        </div>
-      </div>
+  function lineText(player, index) {
+    const fragments = player.fragments && player.fragments.length ? player.fragments : [player.display, 'launch', 'ship', 'review'];
+    const start = index % fragments.length;
+    const words = [];
+    for (let i = 0; i < 18; i++) words.push(fragments[(start + i) % fragments.length]);
+    return words.join(' / ');
+  }
 
-      <!-- Threads of Note -->
-      <div class="card full-width" id="threads-card">
-        <h2 class="card-title">Threads of note</h2>
-        <div id="threads-list"></div>
-      </div>
-
-      <!-- Topics -->
-      <div class="card full-width">
-        <h2 class="card-title">Topics</h2>
-        <div id="topics-list"></div>
-      </div>
-    </div>
-
-    <!-- Drill-Down Log -->
-    <div class="card full-width">
-      <div class="drill-down-header" id="drill-toggle">
-        <div class="drill-down-toggle">
-          <svg class="icon" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
-          </svg>
-          Browse all <span id="total-msg-count">70</span> messages
-        </div>
-      </div>
-      <div class="drill-down-content" id="drill-content">
-        <div style="padding: var(--space-2xl);">
-          <div class="search-bar">
-            <input type="text" id="search-input" class="search-input" placeholder="🔍 Search messages...">
-            <div class="filter-chips" id="filter-chips"></div>
-          </div>
-          <div id="message-log"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-      <p>💾 <em>Generated locally — your chat export never left your machine. The full log is embedded in this HTML and rendered in your browser. For sharing, prefer an anonymized export.</em></p>
-    </div>
-  </div>
-
-  <script>
-    const DATA = {"messages":[{"id":"m_0001","ts":"2026-04-13 15:02:00","date":"2026-04-13","time":"15:02:00","tsEpoch":1776092520653.962,"sender":"Mira Park","text":"morning all — launch comms doc is up. <@U02SAML> can you take a pass on the engineering risks section today","channel":"product-launch","isThreadReply":false},{"id":"m_0002","ts":"2026-04-13 15:04:30","date":"2026-04-13","time":"15:04:30","tsEpoch":1776092670530.139,"sender":"Sam Liu","text":"yeah will look this afternoon. quick read says rollout plan is missing the kill-switch path","channel":"product-launch","isThreadReply":false},{"id":"m_0003","ts":"2026-04-13 15:05:45","date":"2026-04-13","time":"15:05:45","tsEpoch":1776092745934.202,"sender":"Mira Park","text":"good catch. add it. also pull <@U05PRYA> in, she wrote the original","channel":"product-launch","isThreadReply":false},{"id":"m_0004","ts":"2026-04-13 15:06:12","date":"2026-04-13","time":"15:06:12","tsEpoch":1776092772954.984,"sender":"Priya Shah","text":"on it","channel":"product-launch","isThreadReply":false},{"id":"m_0005","ts":"2026-04-13 16:42:01","date":"2026-04-13","time":"16:42:01","tsEpoch":1776098521793.7341,"sender":"Jordan Reyes","text":"design review tomorrow at 11. agenda is pinned. mostly the empty-state polish + the mobile sheet","channel":"product-launch","isThreadReply":false},{"id":"m_0006","ts":"2026-04-13 16:43:18","date":"2026-04-13","time":"16:43:18","tsEpoch":1776098598618.808,"sender":"Drew Kim","text":"I'll be there. quick fyi <!here> we're aiming for a thursday cut, friday rollout — so feedback today/tomorrow only please","channel":"product-launch","isThreadReply":false,"reactions":[{"name":"+1","count":4},{"name":"white_check_mark","count":2}],"reactionCount":6},{"id":"m_0007","ts":"2026-04-13 16:45:06","date":"2026-04-13","time":"16:45:06","tsEpoch":1776098706485.121,"sender":"Casey Brooks","text":"noted, will get my mobile sheet PR up by EOD","channel":"product-launch","isThreadReply":false},{"id":"m_0008","ts":"2026-04-13 18:11:22","date":"2026-04-13","time":"18:11:22","tsEpoch":1776103882326.342,"sender":"Sam Liu","text":"PR-2841 is up for the kill-switch — small change, just a feature flag tied to the existing config","channel":"product-launch","isThreadReply":false,"attachmentCount":1,"isMedia":true},{"id":"m_0009","ts":"2026-04-13 18:13:09","date":"2026-04-13","time":"18:13:09","tsEpoch":1776103989837.593,"sender":"Drew Kim","text":"lgtm, approving. let's land it today so qa has it for tomorrow","channel":"product-launch","isThreadReply":false,"reactions":[{"name":"shipit","count":3}],"reactionCount":3},{"id":"m_0010","ts":"2026-04-13 20:20:00","date":"2026-04-13","time":"20:20:00","tsEpoch":1776111600600.189,"sender":"Casey Brooks","text":"PR-2842 — mobile sheet. has the keyboard-avoidance fix from #design-systems. need a designer to glance at the rest motion","channel":"product-launch","isThreadReply":false,"replyCount":4},{"id":"m_0011","ts":"2026-04-13 20:31:12","date":"2026-04-13","time":"20:31:12","tsEpoch":1776112272599.8,"sender":"Jordan Reyes","text":"looking now","channel":"product-launch","threadId":"1776111600.600189","isThreadReply":true},{"id":"m_0012","ts":"2026-04-13 20:35:50","date":"2026-04-13","time":"20:35:50","tsEpoch":1776112550912.1758,"sender":"Jordan Reyes","text":"rest motion is fine — but the dismiss timing is too snappy. can you bump it to 220ms with the standard ease-out","channel":"product-launch","threadId":"1776111600.600189","isThreadReply":true},{"id":"m_0013","ts":"2026-04-13 20:36:33","date":"2026-04-13","time":"20:36:33","tsEpoch":1776112593244.8782,"sender":"Casey Brooks","text":"bumped. want me to merge","channel":"product-launch","threadId":"1776111600.600189","isThreadReply":true},{"id":"m_0014","ts":"2026-04-13 20:37:01","date":"2026-04-13","time":"20:37:01","tsEpoch":1776112621451.884,"sender":"Jordan Reyes","text":"yes ship it","channel":"product-launch","threadId":"1776111600.600189","isThreadReply":true,"reactions":[{"name":"rocket","count":1}],"reactionCount":1},{"id":"m_0015","ts":"2026-04-14 15:48:00","date":"2026-04-14","time":"15:48:00","tsEpoch":1776181680512.388,"sender":"Jordan Reyes","text":"design review notes are in the doc. tldr: empty state is approved, sheet is approved, header lockup needs one more round","channel":"product-launch","isThreadReply":false},{"id":"m_0016","ts":"2026-04-14 15:49:11","date":"2026-04-14","time":"15:49:11","tsEpoch":1776181751938.9,"sender":"Mira Park","text":"sounds good. <@U03JRDN> can you ship the header revision by tomorrow EOD?","channel":"product-launch","isThreadReply":false},{"id":"m_0017","ts":"2026-04-14 15:49:42","date":"2026-04-14","time":"15:49:42","tsEpoch":1776181782563.673,"sender":"Jordan Reyes","text":"yes, I'll send it tonight.","channel":"product-launch","isThreadReply":false},{"id":"m_0018","ts":"2026-04-14 17:22:30","date":"2026-04-14","time":"17:22:30","tsEpoch":1776187350466.888,"sender":"Priya Shah","text":"data quick check — 3% of accounts will hit the v2 path on day 1 because of the gradual rollout. is that what we want, or are we starting at 100%?","channel":"product-launch","isThreadReply":false},{"id":"m_0019","ts":"2026-04-14 17:25:08","date":"2026-04-14","time":"17:25:08","tsEpoch":1776187508367.411,"sender":"Drew Kim","text":"let's start at 3% and ramp. if friday is clean we go to 25 monday, 100 tuesday","channel":"product-launch","isThreadReply":false},{"id":"m_0020","ts":"2026-04-14 17:25:33","date":"2026-04-14","time":"17:25:33","tsEpoch":1776187533893.785,"sender":"Drew Kim","text":"decision logged: gradual rollout, 3 → 25 → 100 over 3 days","channel":"product-launch","isThreadReply":false,"reactions":[{"name":"white_check_mark","count":5}],"reactionCount":5},{"id":"m_0021","ts":"2026-04-14 17:30:12","date":"2026-04-14","time":"17:30:12","tsEpoch":1776187812607.131,"sender":"Sam Liu","text":"kill-switch is merged. I'll write the runbook for it tomorrow","channel":"product-launch","isThreadReply":false},{"id":"m_0022","ts":"2026-04-14 17:31:04","date":"2026-04-14","time":"17:31:04","tsEpoch":1776187864630.364,"sender":"Mira Park","text":"thanks sam. action item: runbook by wednesday EOD","channel":"product-launch","isThreadReply":false},{"id":"m_0023","ts":"2026-04-14 19:50:18","date":"2026-04-14","time":"19:50:18","tsEpoch":1776196218497.759,"sender":"Casey Brooks","text":"qa flagged a state-flicker on slow networks when the sheet first opens. repro is 1 in 4. will look in the morning","channel":"product-launch","isThreadReply":false},{"id":"m_0024","ts":"2026-04-14 19:51:06","date":"2026-04-14","time":"19:51:06","tsEpoch":1776196266727.905,"sender":"Drew Kim","text":"is it a launch blocker?","channel":"product-launch","isThreadReply":false},{"id":"m_0025","ts":"2026-04-14 19:51:41","date":"2026-04-14","time":"19:51:41","tsEpoch":1776196301899.6821,"sender":"Casey Brooks","text":"probably not. it's cosmetic. but if it's a 200ms layout shift it'll hit our perf budget","channel":"product-launch","isThreadReply":false},{"id":"m_0026","ts":"2026-04-14 19:52:08","date":"2026-04-14","time":"19:52:08","tsEpoch":1776196328799.604,"sender":"Sam Liu","text":"+1, want to see numbers before we call it. priya can you pull the lcp delta on the staging build?","channel":"product-launch","isThreadReply":false},{"id":"m_0027","ts":"2026-04-14 19:52:39","date":"2026-04-14","time":"19:52:39","tsEpoch":1776196359609.521,"sender":"Priya Shah","text":"tomorrow morning, will send numbers","channel":"product-launch","isThreadReply":false},{"id":"m_0028","ts":"2026-04-15 13:55:00","date":"2026-04-15","time":"13:55:00","tsEpoch":1776261300069.569,"sender":"Priya Shah","text":"lcp on staging is +18ms vs prod. flicker is 90ms layout shift, well under our 250ms budget. not a blocker","channel":"product-launch","isThreadReply":false},{"id":"m_0029","ts":"2026-04-15 13:56:21","date":"2026-04-15","time":"13:56:21","tsEpoch":1776261381496.885,"sender":"Drew Kim","text":"good. casey ship the fix in a follow-up if you have time but don't hold the launch on it","channel":"product-launch","isThreadReply":false},{"id":"m_0030","ts":"2026-04-15 13:56:44","date":"2026-04-15","time":"13:56:44","tsEpoch":1776261404934.0999,"sender":"Casey Brooks","text":"got it","channel":"product-launch","isThreadReply":false},{"id":"m_0031","ts":"2026-04-15 15:10:09","date":"2026-04-15","time":"15:10:09","tsEpoch":1776265809764.527,"sender":"Sam Liu","text":"runbook is up: launch runbook (https://acme.example/runbooks/launch-2026-04). rollback steps, kill-switch trigger, on-call rotation","channel":"product-launch","isThreadReply":false},{"id":"m_0032","ts":"2026-04-15 15:10:54","date":"2026-04-15","time":"15:10:54","tsEpoch":1776265854644.657,"sender":"Mira Park","text":"skimmed, looks good. <@U06DREW> please give it a final read","channel":"product-launch","isThreadReply":false},{"id":"m_0033","ts":"2026-04-15 16:00:00","date":"2026-04-15","time":"16:00:00","tsEpoch":1776268800907.438,"sender":"Drew Kim","text":"approved","channel":"product-launch","isThreadReply":false},{"id":"m_0034","ts":"2026-04-15 17:15:03","date":"2026-04-15","time":"17:15:03","tsEpoch":1776273303620.22,"sender":"Jordan Reyes","text":"header revision attached — three options. team poll inside","channel":"product-launch","isThreadReply":false,"attachmentCount":1,"isMedia":true},{"id":"m_0035","ts":"2026-04-15 17:18:20","date":"2026-04-15","time":"17:18:20","tsEpoch":1776273500048.727,"sender":"Mira Park","text":"going with option B. it reads cleaner at small sizes","channel":"product-launch","isThreadReply":false},{"id":"m_0036","ts":"2026-04-15 17:18:55","date":"2026-04-15","time":"17:18:55","tsEpoch":1776273535328.439,"sender":"Sam Liu","text":"+1 B","channel":"product-launch","isThreadReply":false},{"id":"m_0037","ts":"2026-04-15 17:19:12","date":"2026-04-15","time":"17:19:12","tsEpoch":1776273552701.072,"sender":"Casey Brooks","text":"B","channel":"product-launch","isThreadReply":false},{"id":"m_0038","ts":"2026-04-15 17:19:33","date":"2026-04-15","time":"17:19:33","tsEpoch":1776273573737.4521,"sender":"Priya Shah","text":"B","channel":"product-launch","isThreadReply":false},{"id":"m_0039","ts":"2026-04-15 17:20:01","date":"2026-04-15","time":"17:20:01","tsEpoch":1776273601607.718,"sender":"Drew Kim","text":"decision: option B for the header lockup","channel":"product-launch","isThreadReply":false,"reactions":[{"name":"white_check_mark","count":4}],"reactionCount":4},{"id":"m_0040","ts":"2026-04-15 22:11:20","date":"2026-04-15","time":"22:11:20","tsEpoch":1776291080420.5781,"sender":"Jordan Reyes","text":"header B is in. design freeze starting now per the comms doc","channel":"product-launch","isThreadReply":false},{"id":"m_0041","ts":"2026-04-16 14:02:11","date":"2026-04-16","time":"14:02:11","tsEpoch":1776348131074.9941,"sender":"Drew Kim","text":"<!here> code freeze in effect. only fixes for launch-blocking issues until friday rollout","channel":"product-launch","isThreadReply":false,"reactions":[{"name":"+1","count":5}],"reactionCount":5},{"id":"m_0042","ts":"2026-04-16 14:55:32","date":"2026-04-16","time":"14:55:32","tsEpoch":1776351332911.198,"sender":"Casey Brooks","text":"qa pass 2 is green except one accessibility issue — focus trap in the sheet doesn't include the close button","channel":"product-launch","isThreadReply":false},{"id":"m_0043","ts":"2026-04-16 14:56:05","date":"2026-04-16","time":"14:56:05","tsEpoch":1776351365543.417,"sender":"Jordan Reyes","text":"blocking. let's fix","channel":"product-launch","isThreadReply":false},{"id":"m_0044","ts":"2026-04-16 14:56:38","date":"2026-04-16","time":"14:56:38","tsEpoch":1776351398579.567,"sender":"Casey Brooks","text":"agreed, on it","channel":"product-launch","isThreadReply":false},{"id":"m_0045","ts":"2026-04-16 16:30:50","date":"2026-04-16","time":"16:30:50","tsEpoch":1776357050563.9182,"sender":"Casey Brooks","text":"PR-2851 — focus trap fix. small. needs one approval","channel":"product-launch","isThreadReply":false},{"id":"m_0046","ts":"2026-04-16 16:33:07","date":"2026-04-16","time":"16:33:07","tsEpoch":1776357187597.111,"sender":"Sam Liu","text":"approved. running ci","channel":"product-launch","isThreadReply":false},{"id":"m_0047","ts":"2026-04-16 17:01:14","date":"2026-04-16","time":"17:01:14","tsEpoch":1776358874020.3198,"sender":"Casey Brooks","text":"merged.","channel":"product-launch","isThreadReply":false},{"id":"m_0048","ts":"2026-04-16 20:44:00","date":"2026-04-16","time":"20:44:00","tsEpoch":1776372240644.114,"sender":"Priya Shah","text":"dashboard is wired — we'll see the v2 funnel from friday morning. baseline funnel is in the same view for comparison","channel":"product-launch","isThreadReply":false},{"id":"m_0049","ts":"2026-04-16 20:45:11","date":"2026-04-16","time":"20:45:11","tsEpoch":1776372311463.9211,"sender":"Mira Park","text":"perfect. I'll lead the rollout call at 9am pacific friday","channel":"product-launch","isThreadReply":false},{"id":"m_0050","ts":"2026-04-17 16:00:00","date":"2026-04-17","time":"16:00:00","tsEpoch":1776441600946.1711,"sender":"Mira Park","text":"<!here> rollout call starting now. we're at 3% in 5 minutes","channel":"product-launch","isThreadReply":false},{"id":"m_0051","ts":"2026-04-17 16:08:30","date":"2026-04-17","time":"16:08:30","tsEpoch":1776442110331.37,"sender":"Sam Liu","text":"we're live at 3%. error rate is steady, p95 latency steady","channel":"product-launch","isThreadReply":false},{"id":"m_0052","ts":"2026-04-17 16:09:14","date":"2026-04-17","time":"16:09:14","tsEpoch":1776442154817.411,"sender":"Priya Shah","text":"first conversions coming in. funnel completion is +0.4pp vs control on the early sample (small N)","channel":"product-launch","isThreadReply":false,"reactions":[{"name":"tada","count":6}],"reactionCount":6},{"id":"m_0053","ts":"2026-04-17 16:30:22","date":"2026-04-17","time":"16:30:22","tsEpoch":1776443422598.79,"sender":"Drew Kim","text":"30 min mark — clean. holding at 3% through the weekend, ramp monday","channel":"product-launch","isThreadReply":false},{"id":"m_0054","ts":"2026-04-17 17:01:55","date":"2026-04-17","time":"17:01:55","tsEpoch":1776445315058.788,"sender":"Casey Brooks","text":"no errors in sentry from the v2 path. aside from one onboarding telemetry warning that's pre-existing","channel":"product-launch","isThreadReply":false},{"id":"m_0055","ts":"2026-04-17 17:15:02","date":"2026-04-17","time":"17:15:02","tsEpoch":1776446102924.731,"sender":"Mira Park","text":"team this is great. thanks everyone for the push this week. nicely done","channel":"product-launch","isThreadReply":false,"reactions":[{"name":"heart","count":4},{"name":"rocket","count":3}],"reactionCount":7},{"id":"m_0056","ts":"2026-04-20 15:11:00","date":"2026-04-20","time":"15:11:00","tsEpoch":1776697860660.189,"sender":"Drew Kim","text":"monday ramp — going to 25% at 9am pacific. team: keep an eye on the dashboard","channel":"product-launch","isThreadReply":false},{"id":"m_0057","ts":"2026-04-20 15:34:09","date":"2026-04-20","time":"15:34:09","tsEpoch":1776699249619.8088,"sender":"Priya Shah","text":"25% is live. funnel is +0.3pp vs control, holding","channel":"product-launch","isThreadReply":false},{"id":"m_0058","ts":"2026-04-20 18:20:11","date":"2026-04-20","time":"18:20:11","tsEpoch":1776709211938.208,"sender":"Sam Liu","text":"edge case bug — users on safari 16 with a saved card see the legacy sheet, not v2. css selector regression","channel":"product-launch","isThreadReply":false},{"id":"m_0059","ts":"2026-04-20 18:21:00","date":"2026-04-20","time":"18:21:00","tsEpoch":1776709260716.32,"sender":"Drew Kim","text":"what's the impact","channel":"product-launch","isThreadReply":false},{"id":"m_0060","ts":"2026-04-20 18:21:48","date":"2026-04-20","time":"18:21:48","tsEpoch":1776709308344.378,"sender":"Sam Liu","text":"about 3% of mobile traffic. cosmetic, no data loss. we'll patch tomorrow morning","channel":"product-launch","isThreadReply":false},{"id":"m_0061","ts":"2026-04-20 18:22:30","date":"2026-04-20","time":"18:22:30","tsEpoch":1776709350828.762,"sender":"Drew Kim","text":"ok, hold the 100% ramp until that's out. action item: <@U02SAML> ship the safari fix tuesday morning","channel":"product-launch","isThreadReply":false},{"id":"m_0062","ts":"2026-04-21 14:55:08","date":"2026-04-21","time":"14:55:08","tsEpoch":1776783308247.928,"sender":"Sam Liu","text":"PR-2867 up — safari selector fix, qa green on real device","channel":"product-launch","isThreadReply":false},{"id":"m_0063","ts":"2026-04-21 15:10:11","date":"2026-04-21","time":"15:10:11","tsEpoch":1776784211293.51,"sender":"Casey Brooks","text":"approved","channel":"product-launch","isThreadReply":false},{"id":"m_0064","ts":"2026-04-21 15:30:42","date":"2026-04-21","time":"15:30:42","tsEpoch":1776785442838.632,"sender":"Sam Liu","text":"merged + deployed","channel":"product-launch","isThreadReply":false},{"id":"m_0065","ts":"2026-04-21 15:32:00","date":"2026-04-21","time":"15:32:00","tsEpoch":1776785520711.051,"sender":"Drew Kim","text":"going to 100% in 30 min","channel":"product-launch","isThreadReply":false},{"id":"m_0066","ts":"2026-04-21 16:01:18","date":"2026-04-21","time":"16:01:18","tsEpoch":1776787278250.26,"sender":"Priya Shah","text":"100% live. dashboard looks healthy","channel":"product-launch","isThreadReply":false,"reactions":[{"name":"tada","count":5},{"name":"shipit","count":4}],"reactionCount":9},{"id":"m_0067","ts":"2026-04-22 14:00:00","date":"2026-04-22","time":"14:00:00","tsEpoch":1776866400203.3,"sender":"Mira Park","text":"day-after numbers: funnel +0.31pp vs the control window, error rate flat, p95 down 80ms because the v2 path skips an extra render. not bad team","channel":"product-launch","isThreadReply":false},{"id":"m_0068","ts":"2026-04-22 14:00:40","date":"2026-04-22","time":"14:00:40","tsEpoch":1776866440843.035,"sender":"Drew Kim","text":"decision: leaving the rollout at 100% with a 1-week monitoring window before we delete the legacy code paths","channel":"product-launch","isThreadReply":false,"reactions":[{"name":"white_check_mark","count":5}],"reactionCount":5},{"id":"m_0069","ts":"2026-04-23 17:48:12","date":"2026-04-23","time":"17:48:12","tsEpoch":1776966492495.507,"sender":"Jordan Reyes","text":"post-mortem doc is up — please add notes by monday","channel":"product-launch","isThreadReply":false},{"id":"m_0070","ts":"2026-04-24 15:30:00","date":"2026-04-24","time":"15:30:00","tsEpoch":1777044600036.727,"sender":"Mira Park","text":"thanks all — closing out the launch channel for now. follow-ups in #product-followups","channel":"product-launch","isThreadReply":false}],"senders":[{"sender":"Drew Kim","count":15,"firstTs":"2026-04-13 16:43:18","lastTs":"2026-04-22 14:00:40"},{"sender":"Casey Brooks","count":13,"firstTs":"2026-04-13 16:45:06","lastTs":"2026-04-21 15:10:11"},{"sender":"Sam Liu","count":12,"firstTs":"2026-04-13 15:04:30","lastTs":"2026-04-21 15:30:42"},{"sender":"Mira Park","count":11,"firstTs":"2026-04-13 15:02:00","lastTs":"2026-04-24 15:30:00"},{"sender":"Jordan Reyes","count":10,"firstTs":"2026-04-13 16:42:01","lastTs":"2026-04-23 17:48:12"},{"sender":"Priya Shah","count":9,"firstTs":"2026-04-13 15:06:12","lastTs":"2026-04-21 16:01:18"}],"messagesPerSender":{"Drew Kim":15,"Casey Brooks":13,"Sam Liu":12,"Mira Park":11,"Jordan Reyes":10,"Priya Shah":9},"dateRange":"2026-04-13 → 2026-04-24","messageCount":70,"senderCount":6,"reactionCount":51,"threadCount":1,"mediaCount":2,"heatmap":[{"dow":1,"hour":15,"count":6},{"dow":1,"hour":16,"count":3},{"dow":1,"hour":18,"count":6},{"dow":1,"hour":20,"count":5},{"dow":2,"hour":14,"count":1},{"dow":2,"hour":15,"count":6},{"dow":2,"hour":16,"count":1},{"dow":2,"hour":17,"count":5},{"dow":2,"hour":19,"count":5},{"dow":3,"hour":13,"count":3},{"dow":3,"hour":14,"count":2},{"dow":3,"hour":15,"count":2},{"dow":3,"hour":16,"count":1},{"dow":3,"hour":17,"count":6},{"dow":3,"hour":22,"count":1},{"dow":4,"hour":14,"count":4},{"dow":4,"hour":16,"count":2},{"dow":4,"hour":17,"count":2},{"dow":4,"hour":20,"count":2},{"dow":5,"hour":15,"count":1},{"dow":5,"hour":16,"count":4},{"dow":5,"hour":17,"count":2}],"volumeByDay":[{"date":"2026-04-13","count":14},{"date":"2026-04-14","count":13},{"date":"2026-04-15","count":13},{"date":"2026-04-16","count":9},{"date":"2026-04-17","count":6},{"date":"2026-04-20","count":6},{"date":"2026-04-21","count":5},{"date":"2026-04-22","count":2},{"date":"2026-04-23","count":1},{"date":"2026-04-24","count":1}],"threads":[{"id":"1776111600.600189","parentId":"m_0012","parentSender":"Jordan Reyes","parentText":"rest motion is fine — but the dismiss timing is too snappy. can you bump it to 220ms with the standard ease-out","participants":["Jordan Reyes","Casey Brooks"],"messageCount":5,"firstTs":"2026-04-13 20:35:50","lastTs":"2026-04-13 20:37:01","reactionCount":1}],"actionable":[{"id":"m_0006","ts":"2026-04-13 16:43:18","sender":"Drew Kim","text":"I'll be there. quick fyi <!here> we're aiming for a thursday cut, friday rollout — so feedback today/tomorrow only please","signal":"action"},{"id":"m_0009","ts":"2026-04-13 18:13:09","sender":"Drew Kim","text":"lgtm, approving. let's land it today so qa has it for tomorrow","signal":"decision"},{"id":"m_0014","ts":"2026-04-13 20:37:01","sender":"Jordan Reyes","text":"yes ship it","signal":"decision"},{"id":"m_0015","ts":"2026-04-14 15:48:00","sender":"Jordan Reyes","text":"design review notes are in the doc. tldr: empty state is approved, sheet is approved, header lockup needs one more round","signal":"decision"},{"id":"m_0016","ts":"2026-04-14 15:49:11","sender":"Mira Park","text":"sounds good. <@U03JRDN> can you ship the header revision by tomorrow EOD?","signal":"action"},{"id":"m_0017","ts":"2026-04-14 15:49:42","sender":"Jordan Reyes","text":"yes, I'll send it tonight.","signal":"action"},{"id":"m_0018","ts":"2026-04-14 17:22:30","sender":"Priya Shah","text":"data quick check — 3% of accounts will hit the v2 path on day 1 because of the gradual rollout. is that what we want, or are we starting at 100%?","signal":"question"},{"id":"m_0019","ts":"2026-04-14 17:25:08","sender":"Drew Kim","text":"let's start at 3% and ramp. if friday is clean we go to 25 monday, 100 tuesday","signal":"decision"},{"id":"m_0021","ts":"2026-04-14 17:30:12","sender":"Sam Liu","text":"kill-switch is merged. I'll write the runbook for it tomorrow","signal":"action"},{"id":"m_0022","ts":"2026-04-14 17:31:04","sender":"Mira Park","text":"thanks sam. action item: runbook by wednesday EOD","signal":"action"},{"id":"m_0024","ts":"2026-04-14 19:51:06","sender":"Drew Kim","text":"is it a launch blocker?","signal":"question"},{"id":"m_0026","ts":"2026-04-14 19:52:08","sender":"Sam Liu","text":"+1, want to see numbers before we call it. priya can you pull the lcp delta on the staging build?","signal":"action"},{"id":"m_0028","ts":"2026-04-15 13:55:00","sender":"Priya Shah","text":"lcp on staging is +18ms vs prod. flicker is 90ms layout shift, well under our 250ms budget. not a blocker","signal":"decision"},{"id":"m_0029","ts":"2026-04-15 13:56:21","sender":"Drew Kim","text":"good. casey ship the fix in a follow-up if you have time but don't hold the launch on it","signal":"action"},{"id":"m_0033","ts":"2026-04-15 16:00:00","sender":"Drew Kim","text":"approved","signal":"decision"},{"id":"m_0035","ts":"2026-04-15 17:18:20","sender":"Mira Park","text":"going with option B. it reads cleaner at small sizes","signal":"decision"},{"id":"m_0043","ts":"2026-04-16 14:56:05","sender":"Jordan Reyes","text":"blocking. let's fix","signal":"decision"},{"id":"m_0044","ts":"2026-04-16 14:56:38","sender":"Casey Brooks","text":"agreed, on it","signal":"decision"},{"id":"m_0046","ts":"2026-04-16 16:33:07","sender":"Sam Liu","text":"approved. running ci","signal":"decision"},{"id":"m_0048","ts":"2026-04-16 20:44:00","sender":"Priya Shah","text":"dashboard is wired — we'll see the v2 funnel from friday morning. baseline funnel is in the same view for comparison","signal":"decision"},{"id":"m_0049","ts":"2026-04-16 20:45:11","sender":"Mira Park","text":"perfect. I'll lead the rollout call at 9am pacific friday","signal":"action"},{"id":"m_0060","ts":"2026-04-20 18:21:48","sender":"Sam Liu","text":"about 3% of mobile traffic. cosmetic, no data loss. we'll patch tomorrow morning","signal":"decision"},{"id":"m_0061","ts":"2026-04-20 18:22:30","sender":"Drew Kim","text":"ok, hold the 100% ramp until that's out. action item: <@U02SAML> ship the safari fix tuesday morning","signal":"action"},{"id":"m_0063","ts":"2026-04-21 15:10:11","sender":"Casey Brooks","text":"approved","signal":"decision"},{"id":"m_0070","ts":"2026-04-24 15:30:00","sender":"Mira Park","text":"thanks all — closing out the launch channel for now. follow-ups in #product-followups","signal":"action"}],"topReactions":[{"name":"white_check_mark","count":16},{"name":"tada","count":11},{"name":"+1","count":9},{"name":"shipit","count":7},{"name":"rocket","count":4},{"name":"heart","count":4}],"platform":"slack","channel":"product-launch"};
-
-    // Emoji map for reactions
-    const EMOJI_MAP = {
-      'white_check_mark': '✅',
-      'tada': '🎉',
-      '+1': '👍',
-      'shipit': '🚀',
-      'rocket': '🚀',
-      'heart': '❤️',
-      'thinking_face': '🤔',
-      'eyes': '👀'
-    };
-
-    function getEmoji(name) {
-      return EMOJI_MAP[name] || '✨';
-    }
-
-    // ===== HEATMAP =====
-    function renderHeatmap() {
-      const heatmap = DATA.heatmap || [];
-      const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-      
-      const cellSize = 20;
-      const cellGap = 2;
-      const labelWidth = 40;
-      const labelHeight = 20;
-      
-      const svg = document.getElementById('heatmap-svg');
-      const width = labelWidth + (24 * (cellSize + cellGap)) + 40;
-      const height = labelHeight + (7 * (cellSize + cellGap)) + 20;
-      
-      svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
-      
-      // Find max count for scaling
-      const counts = heatmap.map(d => d.count);
-      const maxCount = Math.max(...counts, 1);
-      
-      // Day labels
-      days.forEach((day, i) => {
-        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        text.setAttribute('x', labelWidth - 5);
-        text.setAttribute('y', labelHeight + i * (cellSize + cellGap) + cellSize / 2 + 4);
-        text.setAttribute('font-size', '12');
-        text.setAttribute('font-weight', '500');
-        text.setAttribute('text-anchor', 'end');
-        text.setAttribute('fill', 'var(--fg-muted)');
-        text.textContent = day;
-        svg.appendChild(text);
-      });
-      
-      // Hour markers (every 6 hours)
-      for (let h = 0; h < 24; h += 6) {
-        const x = labelWidth + h * (cellSize + cellGap) + cellSize / 2;
-        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        text.setAttribute('x', x);
-        text.setAttribute('y', labelHeight - 5);
-        text.setAttribute('font-size', '11');
-        text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('fill', 'var(--fg-muted)');
-        text.textContent = h + ':00';
-        svg.appendChild(text);
-      }
-      
-      // Heat cells
-      heatmap.forEach(item => {
-        const intensity = item.count / maxCount;
-        const hue = 10;
-        const sat = 60 + intensity * 30;
-        const light = 85 - intensity * 40;
-        const color = `hsl(${hue}, ${sat}%, ${light}%)`;
-        
-        const x = labelWidth + item.hour * (cellSize + cellGap);
-        const y = labelHeight + item.dow * (cellSize + cellGap);
-        
-        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        rect.setAttribute('x', x);
-        rect.setAttribute('y', y);
-        rect.setAttribute('width', cellSize);
-        rect.setAttribute('height', cellSize);
-        rect.setAttribute('fill', color);
-        rect.setAttribute('stroke', 'var(--border)');
-        rect.setAttribute('stroke-width', '1');
-        rect.setAttribute('rx', '3');
-        
-        const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
-        title.textContent = `${days[item.dow]} ${item.hour}:00 — ${item.count} message${item.count !== 1 ? 's' : ''}`;
-        rect.appendChild(title);
-        
-        svg.appendChild(rect);
-      });
-    }
-
-    // ===== LEADERBOARD =====
-    function renderLeaderboard() {
-      const senders = DATA.senders || [];
-      const total = senders.reduce((sum, s) => sum + s.count, 0);
-      const board = document.getElementById('leaderboard');
-      
-      senders.forEach((sender, idx) => {
-        const pct = ((sender.count / total) * 100).toFixed(1);
-        const isLarge = sender.count / total > 0.25;
-        
-        const div = document.createElement('div');
-        div.className = 'leaderboard-item';
-        div.setAttribute('data-sender', sender.sender);
-        div.onclick = () => filterBySender(sender.sender, div);
-        
-        div.innerHTML = `
-          <div>
-            <div class="leaderboard-name">${sender.sender}</div>
-            <div class="leaderboard-count">${sender.count} messages${isLarge ? ' ⭐' : ''}</div>
-          </div>
-          <div class="leaderboard-pct">${pct}%</div>
-        `;
-        
-        board.appendChild(div);
-      });
-    }
-
-    // ===== REACTIONS =====
-    function renderReactions() {
-      const reactions = DATA.topReactions || [];
-      if (reactions.length === 0) {
-        document.getElementById('reactions-card').classList.add('hidden');
-        return;
-      }
-      
-      const list = document.getElementById('reactions-list');
-      reactions.forEach(r => {
-        const chip = document.createElement('div');
-        chip.className = 'reaction-chip';
-        chip.innerHTML = `<span class="reaction-emoji">${getEmoji(r.name)}</span> <strong>${r.count}</strong>`;
-        list.appendChild(chip);
-      });
-    }
-
-    // ===== VOLUME CHART =====
-    function renderVolumeChart() {
-      const volumeByDay = DATA.volumeByDay || [];
-      if (volumeByDay.length === 0) return;
-      
-      const canvas = document.getElementById('volume-canvas');
-      const ctx = canvas.getContext('2d');
-      
-      // Simple line chart
-      const padding = 40;
-      const width = canvas.width;
-      const height = canvas.height;
-      const chartWidth = width - padding * 2;
-      const chartHeight = height - padding * 2;
-      
-      const maxVolume = Math.max(...volumeByDay.map(d => d.count), 10);
-      
-      // Draw background
-      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--surface-container-low').trim();
-      ctx.fillRect(0, 0, width, height);
-      
-      // Draw grid
-      ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--border').trim();
-      ctx.lineWidth = 1;
-      for (let i = 0; i <= 5; i++) {
-        const y = padding + (i * chartHeight / 5);
-        ctx.beginPath();
-        ctx.moveTo(padding, y);
-        ctx.lineTo(width - padding, y);
-        ctx.stroke();
-      }
-      
-      // Draw line
-      ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
-      ctx.lineWidth = 2;
-      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary-fixed').trim();
-      ctx.beginPath();
-      
-      volumeByDay.forEach((d, idx) => {
-        const x = padding + (idx / Math.max(volumeByDay.length - 1, 1)) * chartWidth;
-        const y = height - padding - (d.count / maxVolume) * chartHeight;
-        
-        if (idx === 0) {
-          ctx.moveTo(x, y);
-        } else {
-          ctx.lineTo(x, y);
+  function renderLanes() {
+    lanesEl.innerHTML = DATA.lanePlayers.map(function (player) {
+      const lines = Array.from({ length: 58 }, function (_, i) {
+        return '<div class="text-line" data-line="' + i + '">' + esc(lineText(player, i)) + '</div>';
+      }).join('');
+      const sweat = (player.fragments || []).slice(0, 5).map(function (word, i) {
+        const x = 18 + ((i * 17 + player.rank * 11) % 58);
+        const y = 19 + ((i * 13 + player.rank * 7) % 52);
+        const rot = ((i * 17) % 42) - 20;
+        return '<span class="sweat-word" style="--x:' + x + '%;--y:' + y + '%;--r:' + rot + 'deg">' + esc(word) + '</span>';
+      }).join('');
+      return '<article class="competitor-lane" tabindex="0" role="button" data-id="' + esc(player.id) + '" style="--lane-accent:' + esc(player.accent) + '">' +
+        '<header class="lane-header">' +
+          '<div class="lane-no">Lane ' + esc(player.lane) + '</div>' +
+          '<div class="lane-name"><h2>' + esc(player.display) + '</h2><p>@' + esc(player.handle) + ' // peak ' + String(player.peakHour).padStart(2, '0') + ':00 UTC</p></div>' +
+          '<div class="lane-rank">Rank #' + player.rank + '</div>' +
+          '<div class="lane-score"><strong data-score="' + player.score + '">0</strong><span>activity score</span></div>' +
+        '</header>' +
+        '<div class="kinetic-body">' +
+          '<span class="fiducial a">+</span><span class="fiducial b">+</span><span class="fiducial c">+</span><span class="fiducial d">+</span>' +
+          '<div class="activity-strips">' + lines + '</div>' +
+          '<div class="barbell-track"></div><div class="kinetic-bar"></div>' +
+          sweat +
+          '<div class="lane-tooltip">Selected insight: ' + player.display + ' carried ' + player.count + ' messages, ' + player.actions + ' action cues, and ' + player.decisions + ' decision calls. Click to filter the evidence pit.</div>' +
+        '</div>' +
+        '<footer class="telemetry-footer"><div>Phase<strong>' + esc(player.phase) + '</strong></div><div>Load<strong>' + esc(player.load) + '</strong></div><div>Pace<strong>' + player.pace + '/day</strong></div></footer>' +
+      '</article>';
+    }).join('');
+    Array.from(lanesEl.querySelectorAll('.competitor-lane')).forEach(function (lane) {
+      lane.addEventListener('click', function () { select(lane.dataset.id); });
+      lane.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          select(lane.dataset.id);
         }
       });
-      ctx.stroke();
-      
-      // Fill area
-      ctx.lineTo(width - padding, height - padding);
-      ctx.lineTo(padding, height - padding);
-      ctx.closePath();
-      ctx.fill();
-      
-      // Labels
-      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--fg-muted').trim();
-      ctx.font = '12px var(--font-body)';
-      ctx.textAlign = 'center';
-      volumeByDay.forEach((d, idx) => {
-        const x = padding + (idx / Math.max(volumeByDay.length - 1, 1)) * chartWidth;
-        ctx.fillText(d.date.split('-')[2], x, height - padding + 20);
-      });
-    }
+    });
+    renderLaneSelection();
+  }
 
-    // ===== DECISIONS & ACTIONS =====
-    function renderActionable() {
-      const actionable = DATA.actionable || [];
-      
-      const decisions = actionable.filter(a => a.signal === 'decision');
-      const actions = actionable.filter(a => a.signal === 'action');
-      const questions = actionable.filter(a => a.signal === 'question');
-      
-      renderSignalList(decisions, 'decisions-list', 'decision');
-      renderSignalList(actions, 'actions-list', 'action');
-      renderSignalList(questions, 'questions-list', 'question');
-      
-      if (decisions.length === 0) {
-        document.getElementById('decisions-list').innerHTML = '<div class="empty-state">No decisions surfaced.</div>';
+  function renderLaneSelection() {
+    Array.from(document.querySelectorAll('.competitor-lane')).forEach(function (lane) {
+      lane.classList.toggle('is-selected', lane.dataset.id === state.selected);
+    });
+  }
+
+  function selectedMessages(list) {
+    const selectedInLanes = DATA.lanePlayers.some(function (player) { return player.id === state.selected; });
+    if (!selectedInLanes) return list;
+    return list.filter(function (msg) { return msg.senderId === state.selected; });
+  }
+
+  function renderHeatmap() {
+    const max = Math.max(1, ...DATA.heat.flatMap(function (row) { return row.hours; }));
+    heatmapEl.innerHTML = DATA.heat.map(function (row) {
+      return '<div class="heat-row"><div class="heat-label">' + esc(row.date.slice(5)) + '</div>' +
+        row.hours.map(function (value, hour) {
+          return '<div class="heat-cell" title="' + esc(row.date + ' ' + hour + ':00 - ' + value + ' messages') + '" style="--v:' + (value / max).toFixed(3) + '"></div>';
+        }).join('') + '</div>';
+    }).join('');
+  }
+
+  function renderTopics() {
+    const max = Math.max(1, ...DATA.topics.map(function (topic) { return topic.count; }));
+    topicsEl.innerHTML = DATA.topics.map(function (topic) {
+      return '<div class="bar-row"><span>' + esc(topic.label) + '</span><div class="bar-track"><div class="bar-fill" style="--v:' + (topic.count / max).toFixed(3) + '"></div></div><b>' + topic.count + '</b></div>';
+    }).join('');
+  }
+
+  function renderList(el, list, emptyText) {
+    const filtered = selectedMessages(list);
+    el.innerHTML = filtered.length ? filtered.map(function (msg) {
+      return '<div class="evidence-item"><b>' + esc(msg.sender) + ' // ' + esc(msg.date) + ' ' + esc(msg.time) + '</b><span>' + esc(msg.text) + '</span></div>';
+    }).join('') : '<div class="empty">' + esc(emptyText) + '</div>';
+  }
+
+  function renderEvidence() {
+    renderHeatmap();
+    renderTopics();
+    renderList(decisionsEl, DATA.decisions, 'No decision calls for this lane.');
+    renderList(actionsEl, DATA.actionItems, 'No action items for this lane.');
+    renderList(threadsEl, DATA.threads, 'No threaded plays for this lane.');
+  }
+
+  function renderRecords() {
+    const query = state.query.trim().toLowerCase();
+    const laneFiltered = selectedMessages(DATA.messages);
+    const filtered = laneFiltered.filter(function (msg) {
+      if (!query) return true;
+      return (msg.text + ' ' + msg.sender + ' ' + msg.date).toLowerCase().includes(query);
+    });
+    recordsEl.innerHTML = filtered.length ? filtered.map(function (msg) {
+      const flags = []
+      if (msg.isDecision) flags.push('decision');
+      if (msg.isAction) flags.push('action');
+      if (msg.reactions) flags.push(msg.reactions + ' rxn');
+      if (msg.files.length) flags.push('file');
+      return '<article class="record ' + (msg.isDecision || msg.isAction ? 'is-hot' : '') + '">' +
+        '<div class="when">' + esc(msg.date) + '<br>' + esc(msg.time) + '</div>' +
+        '<div class="who">' + esc(msg.sender) + '<br>@' + esc(msg.handle) + '</div>' +
+        '<div class="txt">' + esc(msg.text) + '</div>' +
+        '<div class="flags">' + esc(flags.join(' / ')) + '</div>' +
+      '</article>';
+    }).join('') : '<div class="empty">No records match this filter.</div>';
+  }
+
+  function updateMotion() {
+    const p = state.phase;
+    const lift = Math.sin(p * Math.PI * 2) * .5 + .5;
+    Array.from(document.querySelectorAll('.competitor-lane')).forEach(function (lane, laneIndex) {
+      const player = DATA.lanePlayers[laneIndex];
+      const skew = laneIndex * .09;
+      const local = (lift + skew) % 1;
+      const scoreEl = lane.querySelector('[data-score]');
+      if (scoreEl) {
+        const base = Number(scoreEl.dataset.score || 0);
+        scoreEl.textContent = formatScore(base * (.72 + local * .28));
       }
-      if (actions.length === 0) {
-        document.getElementById('actions-list').innerHTML = '<div class="empty-state">No action items tracked.</div>';
+      const bar = lane.querySelector('.kinetic-bar');
+      if (bar) {
+        const y = 72 - local * 44;
+        bar.style.top = y + '%';
+        bar.style.width = (58 + local * 18) + '%';
       }
-      if (questions.length === 0) {
-        document.getElementById('questions-list').innerHTML = '<div class="empty-state">No open questions.</div>';
-      }
-    }
+      Array.from(lane.querySelectorAll('.text-line')).forEach(function (line, i) {
+        const y = i / 57;
+        const shoulders = .34 + .34 * Math.exp(-Math.pow((y - .22) * 7, 2));
+        const torso = .22 + .48 * Math.exp(-Math.pow((y - .47) * 4.4, 2));
+        const legs = .14 + .24 * Math.exp(-Math.pow((y - .75) * 5, 2));
+        const width = clamp(.18, .94, Math.max(shoulders, torso, legs) * (.82 + local * .18));
+        const lean = (local - .5) * 18 * (y - .35);
+        line.style.width = (width * 100) + '%';
+        line.style.marginLeft = ((100 - width * 100) / 2 + lean) + '%';
+        line.style.opacity = String(.46 + local * .36 + (player.rank === 1 ? .08 : 0));
+      });
+    });
+  }
 
-    function renderSignalList(items, containerId, signalType) {
-      const container = document.getElementById(containerId);
-      container.innerHTML = '';
-      
-      items.forEach(item => {
-        const div = document.createElement('div');
-        div.className = `signal-item ${signalType}`;
-        div.innerHTML = `
-          <div class="signal-text">${escapeHtml(item.text)}</div>
-          <div class="signal-meta">
-            <span>${item.sender}</span>
-            <span>${item.ts}</span>
-          </div>
-        `;
-        div.onclick = () => jumpToMessage(item.id);
-        container.appendChild(div);
+  function tick() {
+    if (!state.paused) state.phase = (state.phase + .0042 * state.speed) % 1;
+    updateMotion();
+    window.requestAnimationFrame(tick);
+  }
+
+  searchEl.addEventListener('input', function () {
+    state.query = searchEl.value || '';
+    renderRecords();
+  });
+  copyEl.addEventListener('click', function () {
+    const top = DATA.senders.slice(0, 4).map(function (sender, index) {
+      return (index + 1) + '. ' + sender.display + ' - ' + sender.count + ' messages, score ' + Math.round(sender.score);
+    }).join('\n');
+    const decisions = DATA.decisions.slice(0, 5).map(function (msg) {
+      return '- ' + msg.sender + ': ' + msg.text;
+    }).join('\n');
+    const markdown = '# Slack kinetic championship\n\n' +
+      'Channel: #' + DATA.channel + '\n' +
+      'Range: ' + DATA.dateRange.start + ' to ' + DATA.dateRange.end + '\n' +
+      'Messages: ' + DATA.totalMessages + '\n\n' +
+      '## Leaderboard\n' + top + '\n\n' +
+      '## Decisions\n' + decisions + '\n';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(markdown).then(function () {
+        copyEl.textContent = 'Copied';
+        window.setTimeout(function () { copyEl.textContent = 'Copy as Markdown'; }, 1200);
       });
     }
+  });
+  speedEl.addEventListener('input', function () {
+    state.speed = Number(speedEl.value || .85);
+  });
+  toggleEl.addEventListener('click', function () {
+    state.paused = !state.paused;
+    toggleEl.textContent = state.paused ? 'Resume motion' : 'Pause motion';
+  });
 
-    // ===== THREADS OF NOTE =====
-    function renderThreads() {
-      const threads = DATA.threads || [];
-      if (threads.length === 0) {
-        document.getElementById('threads-card').classList.add('hidden');
-        return;
-      }
-      
-      const list = document.getElementById('threads-list');
-      threads.slice(0, 5).forEach(thread => {
-        const div = document.createElement('div');
-        div.className = 'thread-card';
-        div.innerHTML = `
-          <div class="thread-parent">
-            <span class="thread-parent-sender">${thread.parentSender}</span>: ${escapeHtml(thread.parentText).substring(0, 100)}${thread.parentText.length > 100 ? '...' : ''}
-          </div>
-          <div class="thread-stats">
-            <span>💬 ${thread.messageCount} replies</span>
-            <span>👥 ${thread.participants.length} people</span>
-            <span>⏱️ ${thread.lastTs}</span>
-          </div>
-        `;
-        list.appendChild(div);
-      });
-    }
-
-    // ===== TOPICS =====
-    function renderTopics() {
-      const topicData = generateTopics();
-      const list = document.getElementById('topics-list');
-      
-      topicData.forEach(topic => {
-        const pct = (topic.count / topicData.reduce((s, t) => s + t.count, 0)) * 100;
-        const div = document.createElement('div');
-        div.className = 'topic-bar';
-        div.innerHTML = `
-          <div class="topic-label">${topic.label}</div>
-          <div class="topic-bar-bg" style="width: ${Math.max(pct, 5)}%;">
-            <div class="topic-count">${topic.count}</div>
-          </div>
-        `;
-        list.appendChild(div);
-      });
-    }
-
-    function generateTopics() {
-      const messages = DATA.messages || [];
-      const topics = {
-        'Design & UX': 0,
-        'Engineering': 0,
-        'Testing & QA': 0,
-        'Launch planning': 0,
-        'Performance': 0,
-        'Rollout': 0
-      };
-      
-      messages.forEach(msg => {
-        const text = msg.text.toLowerCase();
-        if (text.includes('design') || text.includes('mobile') || text.includes('sheet') || text.includes('ui')) topics['Design & UX']++;
-        else if (text.includes('pr') || text.includes('code') || text.includes('merge') || text.includes('feature flag')) topics['Engineering']++;
-        else if (text.includes('qa') || text.includes('test') || text.includes('staging')) topics['Testing & QA']++;
-        else if (text.includes('launch') || text.includes('comms') || text.includes('runbook')) topics['Launch planning']++;
-        else if (text.includes('performance') || text.includes('lcp') || text.includes('error')) topics['Performance']++;
-        else if (text.includes('rollout') || text.includes('100%') || text.includes('monitoring')) topics['Rollout']++;
-      });
-      
-      return Object.entries(topics)
-        .map(([label, count]) => ({ label, count }))
-        .filter(t => t.count > 0)
-        .sort((a, b) => b.count - a.count)
-        .slice(0, 6);
-    }
-
-    // ===== MESSAGE LOG =====
-    function renderMessageLog() {
-      const messages = DATA.messages || [];
-      const logContainer = document.getElementById('message-log');
-      
-      let currentDate = null;
-      let html = '';
-      
-      messages.forEach((msg, idx) => {
-        if (msg.date !== currentDate) {
-          if (currentDate !== null) html += '</div>';
-          html += `<div class="message-group"><div class="message-group-date">${formatDate(msg.date)}</div>`;
-          currentDate = msg.date;
-        }
-        
-        const indent = msg.isThreadReply ? ' message-thread-reply' : '';
-        const prefix = msg.isThreadReply ? '↳ ' : '';
-        
-        let reactionsHtml = '';
-        if (msg.reactions && msg.reactions.length > 0) {
-          reactionsHtml = '<div class="message-reactions">';
-          msg.reactions.forEach(r => {
-            reactionsHtml += `<div class="message-badge">${getEmoji(r.name)} <strong>${r.count}</strong></div>`;
-          });
-          reactionsHtml += '</div>';
-        }
-        
-        html += `
-          <div class="message${indent}" id="msg-${msg.id}" data-sender="${msg.sender}">
-            <div class="message-header">
-              <span class="message-sender">${prefix}${msg.sender}</span>
-              <span class="message-time">${msg.time}</span>
-            </div>
-            <div class="message-text">${escapeHtml(msg.text)}</div>
-            ${msg.attachmentCount ? '<div class="message-badge">📎 ' + msg.attachmentCount + ' file' + (msg.attachmentCount > 1 ? 's' : '') + '</div>' : ''}
-            ${reactionsHtml}
-          </div>
-        `;
-      });
-      
-      if (currentDate !== null) html += '</div>';
-      logContainer.innerHTML = html;
-    }
-
-    function formatDate(dateStr) {
-      const date = new Date(dateStr + 'T00:00:00Z');
-      return date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    }
-
-    // ===== SEARCH & FILTER =====
-    function initSearch() {
-      const searchInput = document.getElementById('search-input');
-      const filterChips = document.getElementById('filter-chips');
-      const senders = DATA.senders || [];
-      
-      // Create sender filter chips
-      senders.forEach(sender => {
-        const chip = document.createElement('button');
-        chip.className = 'filter-chip';
-        chip.textContent = sender.sender;
-        chip.dataset.sender = sender.sender;
-        chip.onclick = (e) => {
-          e.stopPropagation();
-          chip.classList.toggle('active');
-          applyFilters();
-        };
-        filterChips.appendChild(chip);
-      });
-      
-      searchInput.addEventListener('input', applyFilters);
-    }
-
-    function applyFilters() {
-      const searchText = document.getElementById('search-input').value.toLowerCase();
-      const activeSenders = Array.from(document.querySelectorAll('.filter-chip.active')).map(c => c.dataset.sender);
-      
-      document.querySelectorAll('.message').forEach(msg => {
-        const sender = msg.dataset.sender;
-        const text = msg.textContent.toLowerCase();
-        
-        const matchesSearch = searchText === '' || text.includes(searchText);
-        const matchesSender = activeSenders.length === 0 || activeSenders.includes(sender);
-        const shouldShow = matchesSearch && matchesSender;
-        
-        msg.classList.toggle('hidden', !shouldShow);
-        msg.classList.toggle('highlight', shouldShow && searchText !== '' && text.includes(searchText));
-      });
-    }
-
-    function filterBySender(sender, element) {
-      element.classList.toggle('active');
-      const chip = document.querySelector(`.filter-chip[data-sender="${sender}"]`);
-      if (chip) chip.classList.toggle('active');
-      applyFilters();
-    }
-
-    function jumpToMessage(msgId) {
-      const msg = document.getElementById(msgId);
-      if (msg) {
-        document.getElementById('drill-toggle').click();
-        setTimeout(() => {
-          msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          msg.classList.add('highlight');
-          setTimeout(() => msg.classList.remove('highlight'), 2000);
-        }, 300);
-      }
-    }
-
-    // ===== DRILL-DOWN TOGGLE =====
-    function initDrillDown() {
-      const toggle = document.getElementById('drill-toggle');
-      const content = document.getElementById('drill-content');
-      
-      toggle.addEventListener('click', () => {
-        toggle.querySelector('.drill-down-toggle').classList.toggle('open');
-        content.classList.toggle('open');
-      });
-    }
-
-    // ===== COPY FUNCTIONALITY =====
-    function copySection(sectionId) {
-      const section = document.getElementById(sectionId);
-      if (!section) return;
-      
-      const text = section.innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        alert('Copied to clipboard!');
-      });
-    }
-
-    // ===== UTILITIES =====
-    function escapeHtml(text) {
-      const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
-      return text.replace(/[&<>"']/g, m => map[m]);
-    }
-
-    // ===== INIT =====
-    function init() {
-      renderHeatmap();
-      renderLeaderboard();
-      renderReactions();
-      renderVolumeChart();
-      renderActionable();
-      renderThreads();
-      renderTopics();
-      renderMessageLog();
-      initSearch();
-      initDrillDown();
-    }
-
-    document.addEventListener('DOMContentLoaded', init);
-  </script>
+  renderLeaderboard();
+  renderLanes();
+  renderEvidence();
+  renderRecords();
+  updateMotion();
+  if (reduceMotion) toggleEl.textContent = 'Resume motion';
+  window.requestAnimationFrame(tick);
+})();
+</script>
 </body>
 </html>

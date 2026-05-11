@@ -46,7 +46,8 @@ Motion grammar:
 Use-case variants:
 
 - **Professional constellation** — LinkedIn connections, vCards, CRM exports.
-- **Community pulse map** — Slack, Discord, Telegram, group chats.
+- **Community pulse map** — Discord, Telegram, group chats when topology,
+  subgroups, or relationship structure matters more than contribution ranking.
 - **Mailbox thread graph** — email senders, open loops, attachments.
 - **Social money graph** — Venmo/PayPal counterparties and recurring loops.
 

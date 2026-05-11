@@ -64,6 +64,7 @@ export type HtmlAnythingStyle =
   | "relationship"
   | "living-essay"
   | "dashboard"
+  | "kinetic-scoreboard"
   | "timeline-story"
   | "map-atlas"
   | "paper-trail"

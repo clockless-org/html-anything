@@ -138,6 +138,9 @@ Avoid defaulting data to dashboard. Pick a system by use case:
   location history.
 - **Paper Trail** for explicitly tactile artifact layouts: itineraries,
   receipts, tickets, hotel folios, reservation bundles, and evidence packets.
+- **Kinetic Championship** for multi-participant activity streams where rank,
+  contribution, bursts, workload, or competitive rhythm is the clearest first
+  read.
 - **Network Map** for people, senders, communities, contacts, payments, email,
   and professional networks.
 - **Learning Studio** for app-like object, system, anatomy, architecture, or
@@ -174,7 +177,8 @@ interaction, not by a generic component form.
 - Put `data-ha-style="<selected-style>"` on the root `<html>` element.
 - Use semantic, style-specific classes such as `.lesson-stage`,
   `.atlas-timeline`, `.ops-command-bar`, `.evidence-workbench`,
-  `.paper-card`, `.dossier-sheet`, not only generic `.hero`, `.card`, `.grid`.
+  `.paper-card`, `.dossier-sheet`, `.kinetic-arena`, not only generic `.hero`,
+  `.card`, `.grid`.
 - The first viewport should visibly reveal the selected system before the user
   scrolls.
 - The primary interaction should be native to the system: a lesson stepper for

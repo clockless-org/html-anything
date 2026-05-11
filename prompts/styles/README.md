@@ -20,6 +20,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `relationship` | 1:1 chats and intimate message exports | Aggregate-first relationship rhythm report with anonymized evidence |
 | `living-essay` | Reflective essays, Kindle highlights, idea notes, and concept-heavy reading archives | Mycelium writing environment with a vertical question capsule, spore words, living SVG threads, and quiet appendix |
 | `dashboard` | Operational, tabular, finance, admin, log, planning data | Dense KPIs, charts, filters, flags, searchable table |
+| `kinetic-scoreboard` | Multi-participant activity streams, team chats, work races, ranked contributors | Full-viewport championship lanes with kinetic bodies, live ranks, telemetry, and linked evidence pits |
 | `timeline-story` | Personal histories — chronological (orders, listening, health) and topical (Notion / Obsidian vaults) | Scroll-driven story with timeline spine, chapters, rhythm strip, drawer |
 | `map-atlas` | Places, routes, trips, rideshare, location/photo geodata | Spatial atlas with map/route stage, place drawer, filters, waypoint browser |
 | `paper-trail` | Explicit tactile/printed-collateral requests: itineraries, hotel folios, receipts, tickets, reservation bundles | Artifact desk with folio tabs, receipt tape, stamp callouts, source drawer |
@@ -38,6 +39,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `relationship` | Rhythm Report |
 | `living-essay` | Mycelium Writing Environment |
 | `dashboard` | Ops Console |
+| `kinetic-scoreboard` | Kinetic Championship |
 | `timeline-story` | Timeline Story |
 | `map-atlas` | Map Atlas |
 | `paper-trail` | Paper Trail |
@@ -70,6 +72,7 @@ override. Borrow archetypes, not brand identities:
 - cinematic lesson stages → `teaching`
 - app-like object/system studios → `interactive-learning`
 - temporal / scrollytelling systems → `timeline-story`
+- kinetic lane / race / scoreboard systems → `kinetic-scoreboard`
 - spatial atlas systems → `map-atlas`
 - tactile printed-artifact systems → `paper-trail`
 - graph / network systems → `network-map`
@@ -87,6 +90,7 @@ override. Borrow archetypes, not brand identities:
 | "Where I went / saved / traveled / rode" | `map-atlas` |
 | "Make it feel like tickets / receipts / a hotel folio / travel papers" | `paper-trail` |
 | "Who I know / talk to / pay / email" | `network-map` |
+| "Who contributed most / which team member drove the channel / rank this activity stream" | `kinetic-scoreboard` |
 | "Operate this queue / ledger / incident / backlog" | `dashboard` |
 | "Teach this idea as a lesson/tutorial" | `teaching` |
 | "Explore this object/system/spec as an interactive app/studio" | `interactive-learning` |
