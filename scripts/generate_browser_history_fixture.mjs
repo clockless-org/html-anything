@@ -7,21 +7,22 @@
  *   url,title,visit_time,visit_count,typed_count,transition
  *
  * The generated file covers:
- *   - 38 fake domains across 11 topic clusters
+ *   - ~40 invented brand domains across 11 topic clusters
  *   - ~420 visits over 6 months
  *   - research sessions: a few afternoons where 8–14 visits cluster
- *     across GitHub / Stack Overflow / docs / a Google search
- *   - rabbit holes: long sessions on Reddit / YouTube / Wikipedia
- *   - returners: a handful of URLs (Notion doc, dashboard, calendar)
+ *     across the fictional code-host / Q&A site / docs / search engine
+ *   - rabbit holes: long sessions on the fake social + video brands
+ *   - returners: a handful of URLs (planning doc, dashboard, inbox)
  *     visited 6+ times
  *   - repeated searches: a few queries that show up 3–5 times
  *   - typed visits: a mix of address-bar typing vs. clicked links
- *   - a couple of late-night spikes (Reddit + YouTube after midnight)
+ *   - a couple of late-night spikes (social + video after midnight)
  *
- * Privacy: every domain, page title, and search query is invented.
- * No real browsing activity is referenced. Order numbers, account
- * IDs, and tokens never appear. URLs avoid logged-in paths and any
- * shape that could resemble a real personal account.
+ * Privacy: every domain uses the IANA-reserved `.example` TLD (RFC 2606),
+ * which is guaranteed never to resolve to a real site. Every page title,
+ * search query, place name, and personal name is invented for this
+ * fixture. No real browsing activity, real brands, real account names,
+ * real personal URLs, or real product names appear in the output.
  *
  * Usage:
  *   node scripts/generate_browser_history_fixture.mjs > examples/browser-history/input.csv
@@ -52,191 +53,192 @@ function chance(p) { return rand() < p }
 function randint(lo, hi) { return Math.floor(rand() * (hi - lo + 1)) + lo }
 
 // ----------------------------------------------------------------------------
-// Fake domains grouped by topic.
+// Synthetic brand domains under the IANA-reserved .example TLD (RFC 2606).
+// No real product names, real services, or real personal URLs are used.
 // ----------------------------------------------------------------------------
 
 const SITES = [
   // work-tools
-  { domain: "github.com",        topic: "work-tools",   pages: [
-    ["/clockless-org/html-anything", "html-anything · clockless-org · GitHub"],
-    ["/clockless-org/html-anything/pull/142", "Add browser-history support · Pull Request #142"],
-    ["/clockless-org/html-anything/issues", "Issues · clockless-org/html-anything"],
-    ["/clockless-org/html-anything/blob/main/SKILL.md", "html-anything/SKILL.md at main"],
-    ["/orgs/clockless-org/repositories", "Repositories · clockless-org"],
+  { domain: "devhub.example",       topic: "work-tools",   pages: [
+    ["/datapack-org/datapack-anything", "datapack-anything · datapack-org — Devhub"],
+    ["/datapack-org/datapack-anything/pull/142", "Add browser-history support · Pull Request #142 — Devhub"],
+    ["/datapack-org/datapack-anything/issues", "Issues · datapack-org/datapack-anything — Devhub"],
+    ["/datapack-org/datapack-anything/blob/main/SKILL.md", "datapack-anything/SKILL.md at main — Devhub"],
+    ["/orgs/datapack-org/repositories", "Repositories · datapack-org — Devhub"],
   ]},
-  { domain: "linear.app",        topic: "work-tools",   pages: [
-    ["/clockless/issue/CLO-109", "CLO-109 — Browser history use case"],
-    ["/clockless/inbox", "Inbox · Linear"],
-    ["/clockless/team/PRO/active", "Active issues · Project"],
+  { domain: "tracklane.example",    topic: "work-tools",   pages: [
+    ["/datapack/issue/DPA-109", "DPA-109 — Browser history use case — Tracklane"],
+    ["/datapack/inbox", "Inbox — Tracklane"],
+    ["/datapack/team/PRO/active", "Active issues · Project — Tracklane"],
   ]},
-  { domain: "notion.so",         topic: "work-tools",   pages: [
-    ["/Q3-launch-plan-abc", "Q3 launch plan"],
-    ["/Engineering-handbook-xyz", "Engineering handbook"],
-    ["/Decision-log-pqr", "Decision log"],
+  { domain: "pagebook.example",     topic: "work-tools",   pages: [
+    ["/Q3-launch-plan-abc", "Q3 launch plan — Pagebook"],
+    ["/Engineering-handbook-xyz", "Engineering handbook — Pagebook"],
+    ["/Decision-log-pqr", "Decision log — Pagebook"],
   ]},
-  { domain: "figma.com",         topic: "work-tools",   pages: [
-    ["/file/abc/Onboarding-flow", "Onboarding flow – Figma"],
-    ["/file/def/Brand-tokens", "Brand tokens – Figma"],
+  { domain: "pixelboard.example",   topic: "work-tools",   pages: [
+    ["/file/abc/Onboarding-flow", "Onboarding flow — Pixelboard"],
+    ["/file/def/Brand-tokens", "Brand tokens — Pixelboard"],
   ]},
-  { domain: "slack.com",         topic: "work-tools",   pages: [
-    ["/client/T0/C1", "#general — Acme"],
-    ["/client/T0/C2", "#engineering — Acme"],
+  { domain: "huddle.example",       topic: "work-tools",   pages: [
+    ["/client/T0/C1", "#general — Acme Workspace — Huddle"],
+    ["/client/T0/C2", "#engineering — Acme Workspace — Huddle"],
   ]},
-  { domain: "vercel.com",        topic: "work-tools",   pages: [
-    ["/clockless/html-anything-preview", "html-anything preview · Vercel"],
-    ["/clockless/html-anything/deployments", "Deployments · html-anything"],
+  { domain: "glidedeploy.example",  topic: "work-tools",   pages: [
+    ["/datapack/datapack-anything-preview", "datapack-anything preview — Glidedeploy"],
+    ["/datapack/datapack-anything/deployments", "Deployments · datapack-anything — Glidedeploy"],
   ]},
-  { domain: "console.cloud.google.com", topic: "work-tools", pages: [
-    ["/run", "Cloud Run · Google Cloud"],
-    ["/billing", "Billing · Google Cloud"],
+  { domain: "cloudbench.example",   topic: "work-tools",   pages: [
+    ["/run", "Container Run — Cloudbench"],
+    ["/billing", "Billing — Cloudbench"],
   ]},
 
   // coding-help
-  { domain: "stackoverflow.com", topic: "coding-help",  pages: [
-    ["/questions/12345/postgres-covering-index", "Postgres covering index — best practice — Stack Overflow"],
-    ["/questions/45678/typescript-conditional-types", "TypeScript conditional type unions — Stack Overflow"],
-    ["/questions/91011/svg-text-rendering", "SVG text rendering off by 1px — Stack Overflow"],
-    ["/questions/22334/regex-multiline", "JavaScript regex multiline matching — Stack Overflow"],
+  { domain: "quokka.example",       topic: "coding-help",  pages: [
+    ["/questions/12345/postgres-covering-index", "Postgres covering index — best practice — Quokka Answers"],
+    ["/questions/45678/conditional-types", "Conditional type unions in a typed language — Quokka Answers"],
+    ["/questions/91011/svg-text-rendering", "SVG text rendering off by 1px — Quokka Answers"],
+    ["/questions/22334/regex-multiline", "Regex multiline matching — Quokka Answers"],
   ]},
-  { domain: "developer.mozilla.org", topic: "coding-help", pages: [
-    ["/en-US/docs/Web/CSS/grid-template-areas", "grid-template-areas — CSS · MDN"],
-    ["/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl", "Intl — JavaScript · MDN"],
-    ["/en-US/docs/Web/API/URL", "URL — Web APIs · MDN"],
+  { domain: "webcodex.example",     topic: "coding-help",  pages: [
+    ["/docs/Web/CSS/grid-template-areas", "grid-template-areas — CSS reference — WebCodex"],
+    ["/docs/Web/JavaScript/Reference/Global_Objects/Intl", "Intl — JavaScript reference — WebCodex"],
+    ["/docs/Web/API/URL", "URL — Web APIs — WebCodex"],
   ]},
-  { domain: "npmjs.com",         topic: "coding-help",  pages: [
-    ["/package/typescript", "typescript — npm"],
-    ["/package/zod", "zod — npm"],
+  { domain: "pkgsmith.example",     topic: "coding-help",  pages: [
+    ["/package/typesafe-lang", "typesafe-lang — Pkgsmith"],
+    ["/package/zoneparse", "zoneparse — Pkgsmith"],
   ]},
-  { domain: "dev.to",            topic: "coding-help",  pages: [
-    ["/posts/svg-text-baseline-tricks", "SVG text-baseline tricks — DEV"],
+  { domain: "buildbits.example",    topic: "coding-help",  pages: [
+    ["/posts/svg-text-baseline-tricks", "SVG text-baseline tricks — Buildbits"],
   ]},
 
   // docs-knowledge
-  { domain: "wikipedia.org",     topic: "docs-knowledge", pages: [
-    ["/wiki/Public_Suffix_List", "Public Suffix List — Wikipedia"],
-    ["/wiki/Sourdough", "Sourdough — Wikipedia"],
-    ["/wiki/Antikythera_mechanism", "Antikythera mechanism — Wikipedia"],
+  { domain: "openpedia.example",    topic: "docs-knowledge", pages: [
+    ["/wiki/Public_Suffix_List", "Public Suffix List — Openpedia"],
+    ["/wiki/Pinegrove_cove",     "Pinegrove cove — Openpedia"],
+    ["/wiki/Bronze_orrery_devices", "Bronze orrery devices — Openpedia"],
   ]},
-  { domain: "readthedocs.io",    topic: "docs-knowledge", pages: [
-    ["/projects/sqlalchemy/en/latest/", "SQLAlchemy documentation"],
+  { domain: "manualbase.example",   topic: "docs-knowledge", pages: [
+    ["/projects/sql-toolkit/en/latest/", "SQL Toolkit documentation — Manualbase"],
   ]},
 
   // search
-  { domain: "google.com",        topic: "search",       searchQueries: [
+  { domain: "findr.example",        topic: "search",       searchQueries: [
     "postgres covering index size",
-    "typescript narrow type from string",
+    "narrow type from string literal",
     "svg text vertical-align baseline",
     "sourdough proof temperature",
     "best portable espresso maker",
-    "next.js app router cache headers",
-    "decode chromium webkit time",
-    "weekend road trip 3 hours from sf",
+    "ssr app router cache headers",
+    "decode webkit epoch microseconds",
+    "weekend road trip 3 hours from town",
   ]},
-  { domain: "duckduckgo.com",    topic: "search",       searchQueries: [
+  { domain: "searchgo.example",     topic: "search",       searchQueries: [
     "postgres covering index size",
     "css grid template-areas examples",
   ]},
-  { domain: "kagi.com",          topic: "search",       searchQueries: [
-    "decode chromium webkit time",
+  { domain: "quietfind.example",    topic: "search",       searchQueries: [
+    "decode webkit epoch microseconds",
   ]},
 
   // social
-  { domain: "reddit.com",        topic: "social",       pages: [
-    ["/r/programming", "/r/programming"],
-    ["/r/coffee/comments/abc/portable_espresso", "What's your favorite portable espresso? : r/coffee"],
-    ["/r/sourdough/comments/def/proofing", "Cold proofing question : r/sourdough"],
-    ["/r/AskHistorians/comments/ghi/antikythera", "Antikythera mechanism — what we know : r/AskHistorians"],
-    ["/r/woodworking", "/r/woodworking"],
+  { domain: "redbox.example",       topic: "social",       pages: [
+    ["/r/programming", "/r/programming — Redbox"],
+    ["/r/coffee/comments/abc/portable_espresso", "Favorite portable espresso? — r/coffee — Redbox"],
+    ["/r/sourdough/comments/def/proofing", "Cold proofing question — r/sourdough — Redbox"],
+    ["/r/local-history/comments/ghi/bronze-orrery", "Bronze orrery devices — what we know — r/local-history — Redbox"],
+    ["/r/woodworking", "/r/woodworking — Redbox"],
   ]},
-  { domain: "news.ycombinator.com", topic: "social",   pages: [
-    ["/", "Hacker News"],
-    ["/item?id=1234567", "A small database in 200 lines | Hacker News"],
-    ["/newest", "New | Hacker News"],
+  { domain: "hackerwire.example",   topic: "social",       pages: [
+    ["/", "Hackerwire"],
+    ["/item?id=1234567", "A small database in 200 lines — Hackerwire"],
+    ["/newest", "New — Hackerwire"],
   ]},
-  { domain: "x.com",             topic: "social",       pages: [
-    ["/home", "Home / X"],
-    ["/i/notifications", "Notifications / X"],
+  { domain: "microblog.example",    topic: "social",       pages: [
+    ["/home", "Home — Microblog"],
+    ["/i/notifications", "Notifications — Microblog"],
   ]},
-  { domain: "linkedin.com",      topic: "social",       pages: [
-    ["/feed/", "Feed | LinkedIn"],
+  { domain: "worknet.example",      topic: "social",       pages: [
+    ["/feed/", "Feed — Worknet"],
   ]},
 
   // media
-  { domain: "youtube.com",       topic: "media",        pages: [
-    ["/watch?v=fakeid001", "How a B-tree pages to disk — Mongoose Garage — YouTube"],
-    ["/watch?v=fakeid002", "Beans and rice, but on purpose — Spice Drawer — YouTube"],
-    ["/watch?v=fakeid003", "Restoring a 1940s woodworking plane — Brick and Mortar — YouTube"],
-    ["/watch?v=fakeid004", "1 hour of soft piano for the late shift — Lofi Buoy — YouTube"],
-    ["/feed/subscriptions", "Subscriptions — YouTube"],
-    ["/results?search_query=fake-query", "Search results — YouTube"],
+  { domain: "streamtube.example",   topic: "media",        pages: [
+    ["/watch?v=fakeid001", "How a B-tree pages to disk — Mongoose Garage — Streamtube"],
+    ["/watch?v=fakeid002", "Beans and rice, but on purpose — Spice Drawer — Streamtube"],
+    ["/watch?v=fakeid003", "Restoring a 1940s woodworking plane — Brick and Mortar — Streamtube"],
+    ["/watch?v=fakeid004", "1 hour of soft piano for the late shift — Lofi Buoy — Streamtube"],
+    ["/feed/subscriptions", "Subscriptions — Streamtube"],
+    ["/results?search_query=fake-query", "Search results — Streamtube"],
   ]},
-  { domain: "open.spotify.com",  topic: "media",        pages: [
-    ["/playlist/abc", "Late shift — Playlist"],
-    ["/album/def", "Forgotten records of 1979"],
+  { domain: "tunestream.example",   topic: "media",        pages: [
+    ["/playlist/abc", "Late shift — Playlist — Tunestream"],
+    ["/album/def", "Forgotten records of 1979 — Tunestream"],
   ]},
-  { domain: "twitch.tv",         topic: "media",        pages: [
-    ["/directory/category/software-and-game-development", "Software and Game Development streams"],
+  { domain: "livecast.example",     topic: "media",        pages: [
+    ["/directory/category/software-and-game-development", "Software and Game Development streams — Livecast"],
   ]},
 
   // shopping
-  { domain: "amazon.com",        topic: "shopping",     pages: [
-    ["/dp/B000FAKE01", "Portable espresso maker — manual lever"],
-    ["/dp/B000FAKE02", "Stainless steel mixing bowl set"],
-    ["/dp/B000FAKE03", "Hand plane no.4 — restoration project"],
-    ["/best-sellers", "Amazon Best Sellers"],
+  { domain: "bigmart.example",      topic: "shopping",     pages: [
+    ["/dp/B000FAKE01", "Portable espresso maker — manual lever — Bigmart"],
+    ["/dp/B000FAKE02", "Stainless steel mixing bowl set — Bigmart"],
+    ["/dp/B000FAKE03", "Hand plane no.4 — restoration project — Bigmart"],
+    ["/best-sellers", "Best Sellers — Bigmart"],
   ]},
-  { domain: "etsy.com",          topic: "shopping",     pages: [
-    ["/listing/abc/handmade-bowl", "Handmade ceramic bowl — Etsy"],
+  { domain: "craftshop.example",    topic: "shopping",     pages: [
+    ["/listing/abc/handmade-bowl", "Handmade ceramic bowl — Craftshop"],
   ]},
-  { domain: "rei.com",           topic: "shopping",     pages: [
-    ["/product/123/headlamp", "Lightweight headlamp — REI"],
+  { domain: "outdoorco.example",    topic: "shopping",     pages: [
+    ["/product/123/headlamp", "Lightweight headlamp — Outdoorco"],
   ]},
 
   // finance-admin
-  { domain: "fidelity.com",      topic: "finance-admin", pages: [
-    ["/accounts/portfolio", "Portfolio summary — Fidelity"],
-    ["/research/news", "Market news — Fidelity"],
+  { domain: "investview.example",   topic: "finance-admin", pages: [
+    ["/accounts/portfolio", "Portfolio summary — Investview"],
+    ["/research/news",      "Market news — Investview"],
   ]},
-  { domain: "ally.com",          topic: "finance-admin", pages: [
-    ["/banking/checking", "Checking account — Ally"],
+  { domain: "friendlybank.example", topic: "finance-admin", pages: [
+    ["/banking/checking", "Checking account — Friendlybank"],
   ]},
-  { domain: "stripe.com",        topic: "finance-admin", pages: [
-    ["/dashboard/payments", "Payments — Stripe Dashboard"],
+  { domain: "paywire.example",      topic: "finance-admin", pages: [
+    ["/dashboard/payments", "Payments — Paywire Dashboard"],
   ]},
-  { domain: "irs.gov",           topic: "finance-admin", pages: [
-    ["/forms-pubs", "Forms and Publications — IRS"],
+  { domain: "taxportal.example",    topic: "finance-admin", pages: [
+    ["/forms-pubs", "Forms and Publications — Taxportal"],
   ]},
 
   // travel
-  { domain: "google.com",        topic: "travel", isMaps: true, pages: [
-    ["/maps/place/Half+Moon+Bay", "Half Moon Bay — Google Maps"],
-    ["/maps/dir/SF/Mendocino", "Directions to Mendocino — Google Maps"],
+  { domain: "mapsguide.example",    topic: "travel", isMaps: true, pages: [
+    ["/maps/place/Cove+Point",                "Cove Point — Mapsguide"],
+    ["/maps/dir/Riverbend/Pinegrove",         "Directions to Pinegrove — Mapsguide"],
   ]},
-  { domain: "airbnb.com",        topic: "travel", pages: [
-    ["/s/Mendocino--CA--United-States/homes", "Mendocino · Airbnb"],
+  { domain: "bookstay.example",     topic: "travel", pages: [
+    ["/s/Pinegrove/homes", "Pinegrove — Bookstay"],
   ]},
-  { domain: "delta.com",         topic: "travel", pages: [
-    ["/flightinfo", "Flight information — Delta"],
+  { domain: "skywings.example",     topic: "travel", pages: [
+    ["/flightinfo", "Flight information — Skywings"],
   ]},
 
   // health
-  { domain: "mychart.org",       topic: "health", pages: [
-    ["/MyChart/Visits", "Upcoming visits — MyChart"],
+  { domain: "caremap.example",      topic: "health", pages: [
+    ["/visits", "Upcoming visits — Caremap"],
   ]},
-  { domain: "healthline.com",    topic: "health", pages: [
-    ["/nutrition/sourdough-bread", "Is sourdough bread healthy? — Healthline"],
+  { domain: "wellnessread.example", topic: "health", pages: [
+    ["/nutrition/sourdough-bread", "Is sourdough bread healthy? — Wellnessread"],
   ]},
 
   // news
-  { domain: "nytimes.com",       topic: "news", pages: [
-    ["/section/world", "World — The New York Times"],
-    ["/section/technology", "Technology — The New York Times"],
+  { domain: "dailyledger.example",  topic: "news", pages: [
+    ["/section/world",      "World — Daily Ledger"],
+    ["/section/technology", "Technology — Daily Ledger"],
   ]},
-  { domain: "bbc.com",           topic: "news", pages: [
-    ["/news", "BBC News"],
+  { domain: "worldwire.example",    topic: "news", pages: [
+    ["/news", "Worldwire News"],
   ]},
-  { domain: "apnews.com",        topic: "news", pages: [
-    ["/", "AP News"],
+  { domain: "pressglobe.example",   topic: "news", pages: [
+    ["/", "Pressglobe"],
   ]},
 ]
 
@@ -254,22 +256,29 @@ function pickHourForTopic(topic) {
 }
 
 function fakeUrl(site, page) {
-  if (site.isMaps) return "https://www.google.com" + page[0]
+  if (site.isMaps) return "https://www.mapsguide.example" + page[0]
   return "https://www." + site.domain + page[0]
 }
 
 function fakeSearchUrl(site, query) {
   const enc = encodeURIComponent(query).replace(/%20/g, "+")
-  if (site.domain === "google.com") return "https://www.google.com/search?q=" + enc + "&hl=en"
-  if (site.domain === "duckduckgo.com") return "https://duckduckgo.com/?q=" + enc + "&t=h_"
-  if (site.domain === "kagi.com") return "https://kagi.com/search?q=" + enc
+  if (site.domain === "findr.example") return "https://www.findr.example/search?q=" + enc + "&hl=en"
+  if (site.domain === "searchgo.example") return "https://searchgo.example/?q=" + enc + "&t=h_"
+  if (site.domain === "quietfind.example") return "https://quietfind.example/search?q=" + enc
   return "https://" + site.domain + "/?q=" + enc
+}
+
+function searchEngineLabel(domain) {
+  if (domain === "findr.example") return "Findr Search"
+  if (domain === "searchgo.example") return "Searchgo"
+  if (domain === "quietfind.example") return "Quietfind"
+  return domain
 }
 
 function pickPage(site) {
   if (site.searchQueries) {
     const q = pick(site.searchQueries)
-    return { url: fakeSearchUrl(site, q), title: q + " — " + (site.domain === "google.com" ? "Google Search" : site.domain === "duckduckgo.com" ? "DuckDuckGo" : "Kagi") }
+    return { url: fakeSearchUrl(site, q), title: q + " — " + searchEngineLabel(site.domain) }
   }
   const p = pick(site.pages)
   return { url: fakeUrl(site, p), title: p[1] }
@@ -294,10 +303,10 @@ for (let i = 0; i < base; i++) {
 // 2) Inject 4 research sessions.
 function addResearchSession(centerDayOffset, hourStart) {
   const search = pick(SITES.filter(s => s.searchQueries))
-  const so = SITES.find(s => s.domain === "stackoverflow.com")
-  const mdn = SITES.find(s => s.domain === "developer.mozilla.org")
-  const gh = SITES.find(s => s.domain === "github.com")
-  const npm = SITES.find(s => s.domain === "npmjs.com")
+  const so = SITES.find(s => s.domain === "quokka.example")
+  const mdn = SITES.find(s => s.domain === "webcodex.example")
+  const gh = SITES.find(s => s.domain === "devhub.example")
+  const npm = SITES.find(s => s.domain === "pkgsmith.example")
   const sequence = [search, so, mdn, search, gh, so, npm, gh, mdn]
   const pages = sequence.map(s => pickPage(s))
   let cursor = END_MS - centerDayOffset * 86_400_000 + hourStart * 3_600_000 + randint(0, 14) * 60_000
@@ -311,7 +320,7 @@ addResearchSession(95,  20)
 addResearchSession(40,  10)
 addResearchSession(7,   16)
 
-// 3) Inject 2 rabbit-hole sessions (Reddit + YouTube).
+// 3) Inject 2 rabbit-hole sessions (social + media).
 function addRabbitHole(centerDayOffset, hourStart, site) {
   const count = randint(8, 14)
   let cursor = END_MS - centerDayOffset * 86_400_000 + hourStart * 3_600_000 + randint(0, 14) * 60_000
@@ -320,16 +329,16 @@ function addRabbitHole(centerDayOffset, hourStart, site) {
     cursor += randint(3, 12) * 60_000
   }
 }
-addRabbitHole(122, 23, SITES.find(s => s.domain === "reddit.com"))
-addRabbitHole(28,  0,  SITES.find(s => s.domain === "youtube.com"))
+addRabbitHole(122, 23, SITES.find(s => s.domain === "redbox.example"))
+addRabbitHole(28,  0,  SITES.find(s => s.domain === "streamtube.example"))
 
 // 4) Inject returners — same URL visited 6+ times.
 const RETURNERS = [
-  { site: SITES.find(s => s.domain === "notion.so"),     page: ["/Q3-launch-plan-abc", "Q3 launch plan"], times: 9 },
-  { site: SITES.find(s => s.domain === "linear.app"),    page: ["/clockless/inbox", "Inbox · Linear"],     times: 8 },
-  { site: SITES.find(s => s.domain === "github.com"),    page: ["/clockless-org/html-anything/pull/142", "Add browser-history support · Pull Request #142"], times: 6 },
-  { site: SITES.find(s => s.domain === "vercel.com"),    page: ["/clockless/html-anything/deployments", "Deployments · html-anything"], times: 7 },
-  { site: SITES.find(s => s.domain === "fidelity.com"),  page: ["/accounts/portfolio", "Portfolio summary — Fidelity"], times: 5 },
+  { site: SITES.find(s => s.domain === "pagebook.example"),    page: ["/Q3-launch-plan-abc", "Q3 launch plan — Pagebook"], times: 9 },
+  { site: SITES.find(s => s.domain === "tracklane.example"),   page: ["/datapack/inbox", "Inbox — Tracklane"],            times: 8 },
+  { site: SITES.find(s => s.domain === "devhub.example"),      page: ["/datapack-org/datapack-anything/pull/142", "Add browser-history support · Pull Request #142 — Devhub"], times: 6 },
+  { site: SITES.find(s => s.domain === "glidedeploy.example"), page: ["/datapack/datapack-anything/deployments", "Deployments · datapack-anything — Glidedeploy"],            times: 7 },
+  { site: SITES.find(s => s.domain === "investview.example"),  page: ["/accounts/portfolio", "Portfolio summary — Investview"], times: 5 },
 ]
 for (const r of RETURNERS) {
   const url = fakeUrl(r.site, r.page)
@@ -337,24 +346,24 @@ for (const r of RETURNERS) {
     const dayOffset = Math.floor(rand() * SPAN_DAYS)
     const hour = pickHourForTopic(r.site.topic)
     const ts = END_MS - dayOffset * 86_400_000 + hour * 3_600_000 + randint(0, 59) * 60_000
-    events.push({ site: r.site, page: { url, title: r.page[1] }, ts, isTyped: r.site.domain === "linear.app" || r.site.domain === "notion.so" })
+    events.push({ site: r.site, page: { url, title: r.page[1] }, ts, isTyped: r.site.domain === "tracklane.example" || r.site.domain === "pagebook.example" })
   }
 }
 
 // 5) Inject repeated searches — same query 3-5 times.
 const REPEATED = [
   { query: "postgres covering index size", times: 4 },
-  { query: "decode chromium webkit time", times: 3 },
+  { query: "decode webkit epoch microseconds", times: 3 },
   { query: "best portable espresso maker", times: 3 },
 ]
-const google = SITES.find(s => s.domain === "google.com" && s.searchQueries)
+const findr = SITES.find(s => s.domain === "findr.example" && s.searchQueries)
 for (const r of REPEATED) {
   for (let i = 0; i < r.times; i++) {
     const dayOffset = Math.floor(rand() * SPAN_DAYS)
     const hour = pickHourForTopic("search")
     const ts = END_MS - dayOffset * 86_400_000 + hour * 3_600_000 + randint(0, 59) * 60_000
-    const url = fakeSearchUrl(google, r.query)
-    events.push({ site: google, page: { url, title: r.query + " — Google Search" }, ts, isTyped: true })
+    const url = fakeSearchUrl(findr, r.query)
+    events.push({ site: findr, page: { url, title: r.query + " — Findr Search" }, ts, isTyped: true })
   }
 }
 

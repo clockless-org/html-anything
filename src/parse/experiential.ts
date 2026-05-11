@@ -2035,6 +2035,21 @@ const BH_TOPIC_DOMAINS: Array<[RegExp, string]> = [
   [/^(en\.wikipedia|wikipedia|wikimedia|wiktionary|notion\.so|confluence|wayback|archive)\.(org|so|com)$/i, "docs-knowledge"],
   [/^(google|bing|duckduckgo|kagi|brave\.com\/search|search\.brave|yandex|baidu|ecosia|qwant|startpage|perplexity|you)\.(com|ai)$/i, "search"],
   [/^(nytimes|bbc|reuters|theguardian|washingtonpost|wsj|ft|economist|apnews|bloomberg|cnbc|cnn|axios|politico|vox|theatlantic|newyorker|aljazeera|npr|abcnews|nbcnews|cbsnews)\.(com|co\.uk)$/i, "news"],
+  // Synthetic demo / fixture brands under the IANA-reserved `.example` TLD
+  // (RFC 2606). These never match real browsing traffic; they exist so the
+  // privacy-safe examples under `examples/browser-history/` classify with the
+  // same precision as real exports.
+  [/^(devhub|tracklane|pagebook|pixelboard|huddle|glidedeploy|cloudbench)\.example$/i, "work-tools"],
+  [/^(quokka|webcodex|pkgsmith|buildbits)\.example$/i, "coding-help"],
+  [/^(openpedia|manualbase)\.example$/i, "docs-knowledge"],
+  [/^(findr|searchgo|quietfind)\.example$/i, "search"],
+  [/^(redbox|hackerwire|microblog|worknet)\.example$/i, "social"],
+  [/^(streamtube|tunestream|livecast)\.example$/i, "media"],
+  [/^(bigmart|craftshop|outdoorco)\.example$/i, "shopping"],
+  [/^(investview|friendlybank|paywire|taxportal)\.example$/i, "finance-admin"],
+  [/^(mapsguide|bookstay|skywings)\.example$/i, "travel"],
+  [/^(caremap|wellnessread)\.example$/i, "health"],
+  [/^(dailyledger|worldwire|pressglobe)\.example$/i, "news"],
 ]
 
 const BH_TOPIC_TITLE: Array<[RegExp, string]> = [
@@ -2155,7 +2170,7 @@ function bhParseTimestamp(raw: string): string | null {
   return null
 }
 
-const BH_SEARCH_HOSTS = /^(www\.)?(google\.[a-z.]+|bing\.com|duckduckgo\.com|kagi\.com|search\.brave\.com|brave\.com|yandex\.[a-z.]+|baidu\.com|ecosia\.org|qwant\.com|startpage\.com|perplexity\.ai|you\.com)$/i
+const BH_SEARCH_HOSTS = /^(www\.)?(google\.[a-z.]+|bing\.com|duckduckgo\.com|kagi\.com|search\.brave\.com|brave\.com|yandex\.[a-z.]+|baidu\.com|ecosia\.org|qwant\.com|startpage\.com|perplexity\.ai|you\.com|findr\.example|searchgo\.example|quietfind\.example)$/i
 
 function bhExtractSearchQuery(host: string, query: string): string | null {
   if (!query) return null
