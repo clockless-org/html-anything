@@ -114,6 +114,93 @@ h2 .emoji { margin-right: 8px; letter-spacing: 0; }
   white-space: pre;
   overflow-x: auto;
 }
+.systems {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 36px;
+}
+.system-card {
+  position: relative;
+  min-height: 134px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  padding: 18px 18px 16px;
+  box-shadow: 0 1px 2px rgba(30, 27, 25, 0.04);
+  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+.system-card:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px rgba(192, 85, 42, 0.09);
+}
+.system-card::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: auto 14px 14px auto;
+  width: 76px;
+  height: 54px;
+  opacity: 0.12;
+  background: var(--accent);
+  pointer-events: none;
+}
+.system-card.timeline::after {
+  width: 3px;
+  height: 92px;
+  border-radius: 999px;
+  box-shadow: -18px 15px 0 -1px var(--accent), 18px -9px 0 -1px var(--accent);
+}
+.system-card.map::after {
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 58% 38%, var(--accent) 0 6px, transparent 7px),
+    linear-gradient(45deg, transparent 47%, var(--accent) 48% 52%, transparent 53%);
+  border: 2px solid var(--accent);
+}
+.system-card.network::after {
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 14px 32px, var(--accent) 0 8px, transparent 9px),
+    radial-gradient(circle at 38px 12px, var(--accent) 0 7px, transparent 8px),
+    radial-gradient(circle at 64px 38px, var(--accent) 0 8px, transparent 9px),
+    linear-gradient(24deg, transparent 0 32%, var(--accent) 33% 38%, transparent 39%),
+    linear-gradient(150deg, transparent 0 44%, var(--accent) 45% 50%, transparent 51%);
+}
+.system-card.console::after {
+  width: 96px;
+  height: 46px;
+  border-radius: 6px;
+  background:
+    linear-gradient(var(--accent) 0 0) 0 0 / 100% 4px no-repeat,
+    repeating-linear-gradient(90deg, var(--accent) 0 10px, transparent 10px 16px);
+}
+.system-card strong {
+  position: relative;
+  z-index: 1;
+  display: block;
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.15;
+  margin: 0 0 4px;
+}
+.system-card code {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  margin-bottom: 10px;
+  color: var(--accent);
+  font-size: 12px;
+}
+.system-card p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--muted);
+  font-size: 13.5px;
+}
 .footer {
   margin-top: 60px;
   font-size: 13px;
@@ -121,6 +208,9 @@ h2 .emoji { margin-right: 8px; letter-spacing: 0; }
   text-align: center;
 }
 .footer a { color: var(--accent); }
+@media (max-width: 640px) {
+  .systems { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -134,6 +224,31 @@ h2 .emoji { margin-right: 8px; letter-spacing: 0; }
 
   <pre class="cmd">Use html-anything to create an interactive teaching site about the solar system
 → output.html  (opens in any browser)</pre>
+
+  <h2><span class="emoji">🧭</span>Auto style systems</h2>
+
+  <div class="systems">
+    <div class="system-card timeline">
+      <strong>Timeline Story</strong>
+      <code>orders · media · reading · health · AI chats</code>
+      <p>Personal histories become scrollytelling pages with a time lens, chapter panels, rhythm strips, and a searchable memory drawer.</p>
+    </div>
+    <div class="system-card map">
+      <strong>Map Atlas</strong>
+      <code>places · trips · routes · rideshare · photo metadata</code>
+      <p>Spatial sources open on an offline SVG/canvas stage with place drawers, period filters, route layers, and linked waypoint browsers.</p>
+    </div>
+    <div class="system-card network">
+      <strong>Network Map</strong>
+      <code>contacts · email · Slack · Discord · LinkedIn · payments</code>
+      <p>People-shaped data becomes a graph, cluster map, or matrix with entity inspectors, bridge cards, privacy masks, and linked records.</p>
+    </div>
+    <div class="system-card console">
+      <strong>Ops Console</strong>
+      <code>finance · logs · queues · spreadsheets · incidents</code>
+      <p>Dashboard layout is reserved for operational work: dense filters, KPI rails, anomaly queues, searchable tables, and copyable handoffs.</p>
+    </div>
+  </div>
 
   <h2><span class="emoji">✨</span>Personal / experiential exports</h2>
 
@@ -165,6 +280,12 @@ h2 .emoji { margin-right: 8px; letter-spacing: 0; }
     <h3><span class="emoji">📦</span>Amazon — order history <span class="arrow">→</span></h3>
     <p class="meta">Retail.OrderHistory CSV (178 items across 3 years, 3 recipients, synthetic) → personal commerce memory</p>
     <p>The skill walked the user through requesting their data, then designed a money-and-memory page: spend by year and month, "reorder DNA" panel with cadence inferred per item, category breakdown, recipient share, returns / refunds / cancellations callouts, and a searchable item drill-down. No product images, no Amazon CDN — completely offline.</p>
+  </a>
+
+  <a class="demo" href="browser-history/output.html">
+    <h3><span class="emoji">🧭</span>Browser — attention history <span class="arrow">→</span></h3>
+    <p class="meta">history_export.csv (6 months, synthetic) → Timeline Story</p>
+    <p>The skill turns raw browser visits into a private attention trail: domain returners, research sessions, repeated searches, late-night share, topic clusters, and a searchable drill-down with URLs kept out of the headline. No favicons, no external calls, no trackers.</p>
   </a>
 
   <a class="demo" href="youtube-watch-history/output.html">

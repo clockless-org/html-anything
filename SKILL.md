@@ -91,8 +91,11 @@ model, density, chart grammar, and voice.
 | `teaching` | Tutorials, lessons, educational briefs, "teach me", interactive explainers, course-like pages | **Lesson Lab**: visual stage, step rail, annotations, try-it control, check-yourself moment, recap |
 | `interactive-studio` | Scientific topics, product/spec objects, anatomy, architecture, "explain this system" briefs, object labs | **Object Studio**: interactive stage, selector, inspector, comparison, generated or procedural visuals |
 | `relationship` | 1:1 chats, couple/friend/family chats, WhatsApp/WeChat/iMessage relationship exports | **Rhythm Report**: aggregate-first pulse calendar, comparison lanes, evidence snippets, no raw appendix by default |
-| `dashboard` | CSVs, finance/admin data, logs, operational data, issue trackers | **Ops Console**: command bar, KPI rail, work surface, flag queue, searchable data grid |
-| `personal-atlas` | Personal exports like Amazon, Spotify, YouTube, Maps, Photos, Health, Kindle, contacts | **Memory Atlas**: memory cover, timeline spine, clusters, rediscovery cards, private browser |
+| `dashboard` | Finance/admin data, logs, operational data, issue trackers, dense tabular queues | **Ops Console**: command bar, KPI rail, work surface, flag queue, searchable data grid |
+| `personal-atlas` | Hybrid personal archives and knowledge collections that mix time, place, people, and themes | **Memory Atlas**: memory cover, timeline spine, clusters, rediscovery cards, private browser |
+| `timeline-story` | Personal histories like Amazon, browser history, Spotify, YouTube, Twitch, Health, Kindle, AI chats | **Timeline Story**: time lens, timeline spine, chapter panels, rhythm strip, memory drawer |
+| `map-atlas` | Places, trips, routes, rideshare, location history, geotagged photo metadata | **Map Atlas**: spatial stage, place drawer, period/place filters, waypoint browser |
+| `network-map` | Contacts, LinkedIn, Slack, Discord, Telegram, email, Venmo/PayPal, people/org graphs | **Network Map**: graph canvas, entity inspector, cluster controls, hub cards, linked records |
 | `editorial` | Essays, articles, reading lists, bookmarks, research collections | **Editorial Desk**: masthead, reader rail, argument body, pull quotes, source/evidence spread |
 | `developer` | Diffs, PR patches, CI logs, stack traces, repos | **Evidence Workbench**: finding bar, hotspots, risk checklist, raw artifact navigator, copyable handoff |
 | `paper` | PDFs, DOCX, legal/medical/lab/academic records | **Review Dossier**: dossier cover, review tabs, document sheet, evidence margin, question panel |
@@ -104,6 +107,9 @@ Honor explicit style direction in natural language:
 - "less academic" → reduce paper/report voice.
 - "more dashboard-like" → increase density, filters, charts.
 - "more editorial" → stronger narrative, scroll story, reading rhythm.
+- "make it a map" / "spatial" → lean `map-atlas`.
+- "show relationships/network" → lean `network-map`.
+- "make it a year-in-review" / "story over time" → lean `timeline-story`.
 - "more playful" → richer visuals, while keeping content accurate.
 - If nothing fits cleanly → use `default`.
 
@@ -244,5 +250,6 @@ content-specific analysis guidance. Use the closest one:
 If no prompt fits, proceed from `default.md` and the user's brief.
 
 Style prompts under [`prompts/styles/`](./prompts/styles/) define reusable page
-shapes such as `default`, `teaching`, `dashboard`, and `personal-atlas`. They
-complement source prompts; they do not replace source-specific analysis.
+systems such as `Timeline Story`, `Map Atlas`, `Network Map`, `Lesson Lab`, and
+`Ops Console`. They complement source prompts; they do not replace
+source-specific analysis.

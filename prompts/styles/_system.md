@@ -1,6 +1,7 @@
 # Structural Style System Contract
 
-Styles in html-anything are **underlying page systems**, not CSS themes.
+Styles in html-anything are **design systems + layout systems**, not CSS
+themes.
 
 The selected style must decide the generated page's:
 
@@ -42,6 +43,67 @@ A real style changes at least five of these:
 
 If two styles would share the same `hero + KPI cards + chart cards + table`
 structure, the implementation is wrong.
+
+## Interaction And Motion Contract
+
+Generated pages should feel alive where interaction improves understanding.
+Every style should include at least two meaningful interactions when the data
+supports them.
+
+Good interaction primitives:
+
+- period scrubber,
+- stepper / lesson state,
+- selector + live inspector,
+- hover/click tooltip,
+- filter chips,
+- linked highlighting across chart + list,
+- compare mode,
+- reveal layer,
+- collapsible evidence,
+- search with highlighted matches,
+- keyboard-accessible tabs,
+- copy/export action,
+- raw-data detail drawer.
+
+Good motion primitives:
+
+- staged first-load reveal,
+- count-up numbers,
+- path drawing,
+- node/cluster focus,
+- timeline cursor,
+- chart bar growth,
+- smooth linked-filter transitions,
+- scroll-triggered section reveal with `IntersectionObserver`,
+- subtle selected-state motion.
+
+Rules:
+
+- Motion must explain state or guide attention, not decorate.
+- Always respect `prefers-reduced-motion`.
+- Keep animations short: 120-280ms for UI state, up to 800ms for chart/stage
+  introduction.
+- Use CSS transitions/keyframes and small vanilla JS only. No animation
+  libraries.
+
+## Layout Diversity Requirement
+
+Avoid defaulting data to dashboard. Pick a system by use case:
+
+- **Ops Console** only for operational monitoring, finance/admin work,
+  issue queues, logs, and dense tabular decision surfaces.
+- **Timeline Story** for personal histories, media histories, purchases,
+  reading/listening/watching, and AI chat archives.
+- **Map Atlas** for places, trips, routes, rideshare, photo geodata, and
+  location history.
+- **Network Map** for people, senders, communities, contacts, payments, email,
+  and professional networks.
+- **Rhythm Report** for intimate 1:1 chats.
+- **Editorial Desk** for arguments, research, bookmarks, reading lists, and
+  article-like sources.
+- **Evidence Workbench** for developer artifacts.
+- **Review Dossier** for long/high-stakes documents.
 
 ## Source Vs Style
 

@@ -166,26 +166,44 @@ export function selectStyleForContent(contentType: string, options: ConverterOpt
   }
 
   if (
-    contentType === "csv-tabular" ||
-    contentType === "json-data" ||
-    contentType === "jsonl-events" ||
-    contentType === "log-events" ||
-    contentType === "email-archive" ||
-    contentType === "transcript" ||
-    contentType === "bank-transactions" ||
-    contentType === "invoices" ||
-    contentType === "quickbooks-report" ||
-    contentType === "venmo-paypal-payments" ||
-    contentType === "ics-calendar" ||
-    contentType === "issue-tracker" ||
-    contentType === "trello-board" ||
     contentType === "slack-chat" ||
     contentType === "discord-chat" ||
     contentType === "telegram-chat" ||
     contentType === "imessage-chat" ||
-    contentType === "multi-sender-chat"
+    contentType === "multi-sender-chat" ||
+    contentType === "email-archive" ||
+    contentType === "venmo-paypal-payments" ||
+    contentType === "vcard-contacts" ||
+    contentType === "linkedin-connections"
   ) {
-    return "dashboard"
+    return "network-map"
+  }
+
+  if (
+    contentType === "google-maps-stars" ||
+    contentType === "google-photos-takeout" ||
+    contentType === "rideshare-history" ||
+    contentType === "gpx-route" ||
+    contentType === "kml-route" ||
+    contentType === "travel-itinerary" ||
+    contentType === "location-history"
+  ) {
+    return "map-atlas"
+  }
+
+  if (
+    contentType === "spotify-history" ||
+    contentType === "youtube-watch-history" ||
+    contentType === "twitch-history" ||
+    contentType === "amazon-orders" ||
+    contentType === "browser-history" ||
+    contentType === "iphone-health" ||
+    contentType === "kindle-highlights" ||
+    contentType === "chatgpt-export" ||
+    contentType === "claude-chat-export" ||
+    contentType === "ai-chat-export"
+  ) {
+    return "timeline-story"
   }
 
   if (
@@ -199,29 +217,27 @@ export function selectStyleForContent(contentType: string, options: ConverterOpt
   }
 
   if (
-    contentType === "spotify-history" ||
-    contentType === "youtube-watch-history" ||
-    contentType === "twitch-history" ||
-    contentType === "google-maps-stars" ||
-    contentType === "google-photos-takeout" ||
-    contentType === "amazon-orders" ||
-    contentType === "linkedin-connections" ||
-    contentType === "iphone-health" ||
-    contentType === "kindle-highlights" ||
-    contentType === "vcard-contacts" ||
-    contentType === "rideshare-history" ||
-    contentType === "chatgpt-export" ||
-    contentType === "claude-chat-export" ||
-    contentType === "ai-chat-export" ||
-    contentType === "gpx-route" ||
-    contentType === "kml-route" ||
-    contentType === "travel-itinerary" ||
-    contentType === "location-history" ||
     contentType === "notion-export" ||
     contentType === "obsidian-vault" ||
     contentType === "markdown-folder"
   ) {
     return "personal-atlas"
+  }
+
+  if (
+    contentType === "csv-tabular" ||
+    contentType === "json-data" ||
+    contentType === "jsonl-events" ||
+    contentType === "log-events" ||
+    contentType === "transcript" ||
+    contentType === "bank-transactions" ||
+    contentType === "invoices" ||
+    contentType === "quickbooks-report" ||
+    contentType === "ics-calendar" ||
+    contentType === "issue-tracker" ||
+    contentType === "trello-board"
+  ) {
+    return "dashboard"
   }
 
   return "default"

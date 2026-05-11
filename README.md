@@ -32,63 +32,66 @@ Each source is routed by `auto` to the page shape that fits it best. These thumb
 <td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/whatsapp/output.html"><img src="./docs/example-previews/whatsapp.jpg" alt="WhatsApp relationship" width="320"></a><br><strong>WhatsApp relationship</strong><br><code>relationship</code></td>
 </tr>
 <tr>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/amazon-orders/output.html"><img src="./docs/example-previews/amazon-orders.jpg" alt="Amazon order history" width="320"></a><br><strong>Amazon order history</strong><br><code>personal-atlas</code></td>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/google-photos-takeout/output.html"><img src="./docs/example-previews/google-photos-takeout.jpg" alt="Google Photos atlas" width="320"></a><br><strong>Google Photos atlas</strong><br><code>personal-atlas</code></td>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/google-maps-stars/output.html"><img src="./docs/example-previews/google-maps-stars.jpg" alt="Saved places atlas" width="320"></a><br><strong>Saved places atlas</strong><br><code>personal-atlas</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/amazon-orders/output.html"><img src="./docs/example-previews/amazon-orders.jpg" alt="Amazon order history" width="320"></a><br><strong>Amazon order history</strong><br><code>timeline-story</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/browser-history/output.html"><img src="./docs/example-previews/browser-history.jpg" alt="Browser history" width="320"></a><br><strong>Browser history</strong><br><code>timeline-story</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/google-photos-takeout/output.html"><img src="./docs/example-previews/google-photos-takeout.jpg" alt="Google Photos atlas" width="320"></a><br><strong>Google Photos atlas</strong><br><code>map-atlas</code></td>
 </tr>
 <tr>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/rideshare-history/output.html"><img src="./docs/example-previews/rideshare-history.jpg" alt="Rideshare history" width="320"></a><br><strong>Rideshare history</strong><br><code>personal-atlas</code></td>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/spotify-history/output.html"><img src="./docs/example-previews/spotify-history.jpg" alt="Spotify history" width="320"></a><br><strong>Spotify history</strong><br><code>personal-atlas</code></td>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/youtube-watch-history/output.html"><img src="./docs/example-previews/youtube-watch-history.jpg" alt="YouTube watch history" width="320"></a><br><strong>YouTube watch history</strong><br><code>personal-atlas</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/google-maps-stars/output.html"><img src="./docs/example-previews/google-maps-stars.jpg" alt="Saved places atlas" width="320"></a><br><strong>Saved places atlas</strong><br><code>map-atlas</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/rideshare-history/output.html"><img src="./docs/example-previews/rideshare-history.jpg" alt="Rideshare history" width="320"></a><br><strong>Rideshare history</strong><br><code>map-atlas</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/spotify-history/output.html"><img src="./docs/example-previews/spotify-history.jpg" alt="Spotify history" width="320"></a><br><strong>Spotify history</strong><br><code>timeline-story</code></td>
 </tr>
 <tr>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/iphone-health/output.html"><img src="./docs/example-previews/iphone-health.jpg" alt="Apple Health story" width="320"></a><br><strong>Apple Health story</strong><br><code>personal-atlas</code></td>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/kindle-highlights/output.html"><img src="./docs/example-previews/kindle-highlights.jpg" alt="Kindle highlights" width="320"></a><br><strong>Kindle highlights</strong><br><code>personal-atlas</code></td>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/twitch-history/output.html"><img src="./docs/example-previews/twitch-history.jpg" alt="Twitch viewing" width="320"></a><br><strong>Twitch viewing</strong><br><code>personal-atlas</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/youtube-watch-history/output.html"><img src="./docs/example-previews/youtube-watch-history.jpg" alt="YouTube watch history" width="320"></a><br><strong>YouTube watch history</strong><br><code>timeline-story</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/iphone-health/output.html"><img src="./docs/example-previews/iphone-health.jpg" alt="Apple Health story" width="320"></a><br><strong>Apple Health story</strong><br><code>timeline-story</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/kindle-highlights/output.html"><img src="./docs/example-previews/kindle-highlights.jpg" alt="Kindle highlights" width="320"></a><br><strong>Kindle highlights</strong><br><code>timeline-story</code></td>
 </tr>
 <tr>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/venmo-paypal-payments/output.html"><img src="./docs/example-previews/venmo-paypal-payments.jpg" alt="Venmo / PayPal payments" width="320"></a><br><strong>Venmo / PayPal payments</strong><br><code>personal-atlas</code></td>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/vcard-contacts/output.html"><img src="./docs/example-previews/vcard-contacts.jpg" alt="Address book audit" width="320"></a><br><strong>Address book audit</strong><br><code>personal-atlas</code></td>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/linkedin-connections/output.html"><img src="./docs/example-previews/linkedin-connections.jpg" alt="LinkedIn network" width="320"></a><br><strong>LinkedIn network</strong><br><code>personal-atlas</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/twitch-history/output.html"><img src="./docs/example-previews/twitch-history.jpg" alt="Twitch viewing" width="320"></a><br><strong>Twitch viewing</strong><br><code>timeline-story</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/venmo-paypal-payments/output.html"><img src="./docs/example-previews/venmo-paypal-payments.jpg" alt="Venmo / PayPal payments" width="320"></a><br><strong>Venmo / PayPal payments</strong><br><code>network-map</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/vcard-contacts/output.html"><img src="./docs/example-previews/vcard-contacts.jpg" alt="Address book audit" width="320"></a><br><strong>Address book audit</strong><br><code>network-map</code></td>
 </tr>
 <tr>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/chatgpt-export/output.html"><img src="./docs/example-previews/chatgpt-export.jpg" alt="ChatGPT export" width="320"></a><br><strong>ChatGPT export</strong><br><code>personal-atlas</code></td>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/ai-chat-log/output.html"><img src="./docs/example-previews/ai-chat-log.jpg" alt="AI chat log" width="320"></a><br><strong>AI chat log</strong><br><code>personal-atlas</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/linkedin-connections/output.html"><img src="./docs/example-previews/linkedin-connections.jpg" alt="LinkedIn network" width="320"></a><br><strong>LinkedIn network</strong><br><code>network-map</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/chatgpt-export/output.html"><img src="./docs/example-previews/chatgpt-export.jpg" alt="ChatGPT export" width="320"></a><br><strong>ChatGPT export</strong><br><code>timeline-story</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/ai-chat-log/output.html"><img src="./docs/example-previews/ai-chat-log.jpg" alt="AI chat log" width="320"></a><br><strong>AI chat log</strong><br><code>timeline-story</code></td>
+</tr>
+<tr>
 <td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/csv/output.html"><img src="./docs/example-previews/csv.jpg" alt="CSV sales dashboard" width="320"></a><br><strong>CSV sales dashboard</strong><br><code>dashboard</code></td>
-</tr>
-<tr>
 <td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/jsonl/output.html"><img src="./docs/example-previews/jsonl.jpg" alt="JSONL event stream" width="320"></a><br><strong>JSONL event stream</strong><br><code>dashboard</code></td>
 <td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/log-access/output.html"><img src="./docs/example-previews/log-access.jpg" alt="Access log" width="320"></a><br><strong>Access log</strong><br><code>dashboard</code></td>
+</tr>
+<tr>
 <td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/log-error/output.html"><img src="./docs/example-previews/log-error.jpg" alt="Error log" width="320"></a><br><strong>Error log</strong><br><code>dashboard</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/slack/output.html"><img src="./docs/example-previews/slack.jpg" alt="Slack channel" width="320"></a><br><strong>Slack channel</strong><br><code>network-map</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/discord/output.html"><img src="./docs/example-previews/discord.jpg" alt="Discord community" width="320"></a><br><strong>Discord community</strong><br><code>network-map</code></td>
 </tr>
 <tr>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/slack/output.html"><img src="./docs/example-previews/slack.jpg" alt="Slack channel" width="320"></a><br><strong>Slack channel</strong><br><code>dashboard</code></td>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/discord/output.html"><img src="./docs/example-previews/discord.jpg" alt="Discord community" width="320"></a><br><strong>Discord community</strong><br><code>dashboard</code></td>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/telegram/output.html"><img src="./docs/example-previews/telegram.jpg" alt="Telegram export" width="320"></a><br><strong>Telegram export</strong><br><code>dashboard</code></td>
-</tr>
-<tr>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/email/output.html"><img src="./docs/example-previews/email.jpg" alt="Email archive" width="320"></a><br><strong>Email archive</strong><br><code>dashboard</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/telegram/output.html"><img src="./docs/example-previews/telegram.jpg" alt="Telegram export" width="320"></a><br><strong>Telegram export</strong><br><code>network-map</code></td>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/email/output.html"><img src="./docs/example-previews/email.jpg" alt="Email archive" width="320"></a><br><strong>Email archive</strong><br><code>network-map</code></td>
 <td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/transcript-sales-call/output.html"><img src="./docs/example-previews/transcript-sales-call.jpg" alt="Sales-call transcript" width="320"></a><br><strong>Sales-call transcript</strong><br><code>dashboard</code></td>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/transcript-product-meeting/output.html"><img src="./docs/example-previews/transcript-product-meeting.jpg" alt="Product-meeting transcript" width="320"></a><br><strong>Product-meeting transcript</strong><br><code>dashboard</code></td>
 </tr>
 <tr>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/transcript-product-meeting/output.html"><img src="./docs/example-previews/transcript-product-meeting.jpg" alt="Product-meeting transcript" width="320"></a><br><strong>Product-meeting transcript</strong><br><code>dashboard</code></td>
 <td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/markdown/output.html"><img src="./docs/example-previews/markdown.jpg" alt="Markdown essay" width="320"></a><br><strong>Markdown essay</strong><br><code>editorial</code></td>
 <td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/bookmarks-market-research/output.html"><img src="./docs/example-previews/bookmarks-market-research.jpg" alt="Market bookmarks" width="320"></a><br><strong>Market bookmarks</strong><br><code>editorial</code></td>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/reading-list-academic/output.html"><img src="./docs/example-previews/reading-list-academic.jpg" alt="Academic reading list" width="320"></a><br><strong>Academic reading list</strong><br><code>editorial</code></td>
 </tr>
 <tr>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/reading-list-academic/output.html"><img src="./docs/example-previews/reading-list-academic.jpg" alt="Academic reading list" width="320"></a><br><strong>Academic reading list</strong><br><code>editorial</code></td>
 <td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/pdf/output.html"><img src="./docs/example-previews/pdf.jpg" alt="PDF report" width="320"></a><br><strong>PDF report</strong><br><code>paper</code></td>
 <td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/docx/output.html"><img src="./docs/example-previews/docx.jpg" alt="DOCX decision memo" width="320"></a><br><strong>DOCX decision memo</strong><br><code>paper</code></td>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/medical-visit/output.html"><img src="./docs/example-previews/medical-visit.jpg" alt="Medical visit note" width="320"></a><br><strong>Medical visit note</strong><br><code>paper</code></td>
 </tr>
 <tr>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/medical-visit/output.html"><img src="./docs/example-previews/medical-visit.jpg" alt="Medical visit note" width="320"></a><br><strong>Medical visit note</strong><br><code>paper</code></td>
 <td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/lab-results/output.html"><img src="./docs/example-previews/lab-results.jpg" alt="Lab results" width="320"></a><br><strong>Lab results</strong><br><code>paper</code></td>
 <td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/legal-chronology/output.html"><img src="./docs/example-previews/legal-chronology.jpg" alt="Legal chronology" width="320"></a><br><strong>Legal chronology</strong><br><code>paper</code></td>
-<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/git-diff/output.html"><img src="./docs/example-previews/git-diff.jpg" alt="Git diff review" width="320"></a><br><strong>Git diff review</strong><br><code>developer</code></td>
 </tr>
 <tr>
+<td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/git-diff/output.html"><img src="./docs/example-previews/git-diff.jpg" alt="Git diff review" width="320"></a><br><strong>Git diff review</strong><br><code>developer</code></td>
 <td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/pr-review/output.html"><img src="./docs/example-previews/pr-review.jpg" alt="PR patch review" width="320"></a><br><strong>PR patch review</strong><br><code>developer</code></td>
 <td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/ci-log/output.html"><img src="./docs/example-previews/ci-log.jpg" alt="CI failure log" width="320"></a><br><strong>CI failure log</strong><br><code>developer</code></td>
+</tr>
+<tr>
 <td width="33%"><a href="https://clockless-org.github.io/html-anything/examples/stack-trace/output.html"><img src="./docs/example-previews/stack-trace.jpg" alt="Stack trace" width="320"></a><br><strong>Stack trace</strong><br><code>developer</code></td>
 </tr>
 </table>
@@ -97,14 +100,13 @@ Additional source fixtures that map cleanly to auto styles but do not yet have c
 
 | Source fixture | Auto style |
 |---|---|
-| Browser history (browser-history) — Chrome / Edge / Brave / Safari / Firefox CSV or JSON history exports. Domain leaderboard, topic clusters, research sessions, returners, repeated searches; URLs only in the drill-down detail. | `personal-atlas` |
 | Product backlog (backlog-product) | `dashboard` |
 | Bank transactions (bank-transactions) | `dashboard` |
 | Founder calendar (calendar-founder) | `dashboard` |
 | Invoices (invoices) | `dashboard` |
 | QuickBooks ledger (quickbooks) | `dashboard` |
-| Travel itinerary (itinerary-trip) | `personal-atlas` |
-| GPX run route (run-route) | `personal-atlas` |
+| Travel itinerary (itinerary-trip) | `map-atlas` |
+| GPX run route (run-route) | `map-atlas` |
 | Markdown notes vault (notes-vault) | `personal-atlas` |
 
 ## Install
@@ -187,8 +189,8 @@ if you need everything in one HTML file.
 
 You do not need to choose a style. The default is `auto`.
 
-Styles are underlying page systems, not CSS skins. The skill picks the
-system from the content, then builds the page inside that system:
+Styles are design systems + layout systems, not CSS skins. The skill picks
+the system from the content, then builds the page inside that system:
 
 | Content | Typical style system |
 |---|---|
@@ -196,8 +198,11 @@ system from the content, then builds the page inside that system:
 | Tutorials, lessons, explainers, "teach me" prompts | Lesson Lab |
 | Objects, scientific topics, product specs, system explainers | Object Studio |
 | Chats and relationship exports | Rhythm Report |
-| Orders, finance, spreadsheets, operational data | Ops Console / Memory Atlas |
-| Essays, reading lists, bookmarks, personal history | Editorial Desk / Memory Atlas |
+| Personal histories: orders, browser history, media, reading, health, AI chats | Timeline Story |
+| Places, trips, routes, rideshare, geotagged photos | Map Atlas |
+| Contacts, LinkedIn, communities, email, social payments | Network Map |
+| Finance, spreadsheets, logs, backlog, operational data | Ops Console |
+| Essays, reading lists, bookmarks, research | Editorial Desk |
 | Logs, diffs, stack traces, CI failures | Evidence Workbench |
 | Medical, legal, papers, long documents | Review Dossier |
 
@@ -208,9 +213,10 @@ app-like", "less academic", "more dashboard-like", "more editorial", or
 Reusable style prompts live in [`prompts/styles/`](./prompts/styles/).
 The shared structural contract is
 [`prompts/styles/_system.md`](./prompts/styles/_system.md). There is a
-fallback `default` style plus eight auto-selected specialized styles:
+fallback `default` style plus specialized auto-selected style systems:
 `teaching`, `interactive-studio`, `relationship`, `dashboard`,
-`personal-atlas`, `editorial`, `developer`, and `paper`.
+`personal-atlas`, `timeline-story`, `map-atlas`, `network-map`,
+`editorial`, `developer`, and `paper`.
 
 ## Source Examples
 
