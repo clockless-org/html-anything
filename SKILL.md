@@ -106,6 +106,7 @@ model, density, chart grammar, and voice.
 | `map-atlas` | Places, trips, routes, rideshare, location history, geotagged photo metadata | **Map Atlas**: spatial stage, place drawer, period/place filters, waypoint browser |
 | `network-map` | Contacts, LinkedIn, Slack, Discord, Telegram, email, Venmo/PayPal, people/org graphs | **Network Map**: graph canvas, entity inspector, cluster controls, hub cards, linked records |
 | `document` | Essays, articles, reading lists, bookmarks, research collections, PDFs, DOCX, legal/medical/lab/academic records | **Document Review**: cover, reading rail, body sheet, evidence margin, drill-down. Tone shifts narrative ↔ formal based on source. |
+| `editorial-carousel` | Brand strategy essays, founder letters, article takeaways, lightweight reports meant to be shared as a sequence | **Editorial Carousel**: issue cover, spread rail, 4-8 argument spreads, evidence drawer, copy actions |
 | `developer` | Diffs, PR patches, CI logs, stack traces, repos | **Evidence Workbench**: finding bar, hotspots, risk checklist, raw artifact navigator, copyable handoff |
 
 Honor explicit style direction in natural language:
@@ -113,8 +114,9 @@ Honor explicit style direction in natural language:
 - "make it a tutorial" / "teach me" → lean `teaching`.
 - "make it more app-like" / "explore this object" → lean `teaching` (object mode).
 - "less academic" → reduce formal `document` voice.
+- "make it a carousel" / "magazine feel" / "social post" → lean `editorial-carousel`.
 - "more dashboard-like" → increase density, filters, charts.
-- "more editorial" / "magazine feel" → narrative `document` voice.
+- "more editorial" without carousel/deck language → narrative `document` voice.
 - "make it a map" / "spatial" → lean `map-atlas`.
 - "show relationships/network" → lean `network-map`.
 - "make it a year-in-review" / "story over time" → lean `timeline-story`.

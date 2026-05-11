@@ -57,6 +57,7 @@ const STYLE_BY_EXAMPLE = {
   "medical-visit": "document",
   "lab-results": "document",
   "legal-chronology": "document",
+  "editorial-carousel": "editorial-carousel",
 
   "git-diff": "developer",
   "pr-review": "developer",
@@ -392,6 +393,41 @@ html[data-ha-style="document"] header.hero::before {
   background: transparent;
   border-top: 4px solid var(--ha-style-accent);
   border-left: 4px solid var(--ha-style-accent);
+}
+
+html[data-ha-style="editorial-carousel"] {
+  --ha-style-accent: #9f3f24;
+  --ha-style-accent-2: #1f6a64;
+  --primary: #9f3f24;
+  --secondary-container: #1f6a64;
+  --bg: #f3efe7;
+  --surface: #f3efe7;
+  --surface-container-lowest: #fbf8f1;
+  --surface-container-low: #eee6d9;
+  --surface-container: #e7ded0;
+  --surface-container-high: #d8cbbb;
+  --fg-1: #161412;
+  --fg-2: #4b4037;
+  --fg-muted: #81746a;
+  --border: rgba(22,20,18,.16);
+  --gradient-hero: linear-gradient(135deg, #9f3f24 0%, #1f6a64 100%);
+  --gradient-text: linear-gradient(135deg, #9f3f24 0%, #1f6a64 100%);
+}
+html[data-ha-style="editorial-carousel"] body {
+  background-color: var(--bg) !important;
+  background-image:
+    linear-gradient(90deg, rgba(22,20,18,.05) 1px, transparent 1px),
+    linear-gradient(rgba(22,20,18,.035) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+html[data-ha-style="editorial-carousel"] body::before { content: "editorial carousel"; }
+html[data-ha-style="editorial-carousel"] .hero::before,
+html[data-ha-style="editorial-carousel"] header.hero::before {
+  width: 78px;
+  height: 12px;
+  border-radius: 0;
+  background:
+    linear-gradient(90deg, var(--ha-style-accent) 0 38%, transparent 38% 48%, var(--ha-style-accent-2) 48% 100%);
 }
 
 html[data-ha-style="developer"] {

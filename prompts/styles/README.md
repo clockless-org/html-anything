@@ -23,6 +23,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `map-atlas` | Places, routes, trips, rideshare, location/photo geodata | Spatial atlas with map/route stage, place drawer, filters, waypoint browser |
 | `network-map` | People, senders, contacts, communities, payments, professional networks | Relationship graph with entity inspector, clusters, hubs, linked records |
 | `document` | Essays, articles, reading lists, research collections, PDFs, DOCX, legal/medical/lab records, policy docs | Document review with cover, reading rail, body sheet, evidence/citations, drill-down |
+| `editorial-carousel` | Brand strategy essays, founder letters, article takeaways, lightweight reports meant to be shared as a sequence | Magazine-like issue with cover, spread rail, 4-8 argument spreads, evidence drawer, copy actions |
 | `developer` | Repos, diffs, PRs, CI logs, traces | Evidence-based technical report with risks, hotspots, raw evidence |
 
 ## System Names
@@ -38,6 +39,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `map-atlas` | Map Atlas |
 | `network-map` | Network Map |
 | `document` | Document Review |
+| `editorial-carousel` | Editorial Carousel |
 | `developer` | Evidence Workbench |
 
 ## Notes From DESIGN.md Libraries
@@ -65,6 +67,7 @@ base. Borrow archetypes, not brand identities:
 - spatial atlas systems → `map-atlas`
 - graph / network systems → `network-map`
 - broadsheet / media systems → `document`
+- premium carousel / manifesto systems → `editorial-carousel`
 - playful canvas systems → `teaching`
 
 ## Use Case Routing
@@ -80,6 +83,7 @@ base. Borrow archetypes, not brand identities:
 | "Teach this idea or explore this object/system/spec" | `teaching` |
 | "Analyze this 1:1 relationship chat" | `relationship` |
 | "Read/synthesize this argument or research set" | `document` |
+| "Turn this essay into a carousel / make it feel like a magazine issue" | `editorial-carousel` |
 | "Review this diff/log/trace/repo" | `developer` |
 | "Review this formal/high-stakes document" | `document` |
 

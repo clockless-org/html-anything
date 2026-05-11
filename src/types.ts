@@ -67,6 +67,7 @@ export type HtmlAnythingStyle =
   | "map-atlas"
   | "network-map"
   | "document"
+  | "editorial-carousel"
   | "developer"
 
 export interface LlmHelper {

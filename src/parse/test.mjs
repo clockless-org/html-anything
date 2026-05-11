@@ -92,6 +92,7 @@ test("htmlize auto style selector routes major source families", async () => {
   assert.equal(selectStyleForContent("plain-text"), "default")
   assert.equal(selectStyleForContent("csv-tabular", { style: "teaching" }), "teaching")
   assert.equal(selectStyleForContent("csv-tabular", { style: "living-essay" }), "living-essay")
+  assert.equal(selectStyleForContent("markdown-document", { style: "editorial-carousel" }), "editorial-carousel")
 })
 
 test("htmlize injects the selected style prompt into the LLM request", async () => {

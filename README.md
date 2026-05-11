@@ -13,7 +13,7 @@ you something you can open, share, or publish.
 
 ## Preview
 
-→ **[Open the curated gallery](https://clockless-org.github.io/html-anything/examples/)** — 20 demos, organized by source and style.
+→ **[Open the curated gallery](https://clockless-org.github.io/html-anything/examples/)** — 21 demos, organized by source and style.
 
 ### Featured
 
@@ -45,11 +45,12 @@ A small selection across the rest of the style catalog. Each links to the live p
 | [Kindle highlights →](https://clockless-org.github.io/html-anything/examples/kindle-highlights/output.html) | Highlights become a mycelium writing field with a living margin question. | `living-essay` |
 | [Apple Health →](https://clockless-org.github.io/html-anything/examples/iphone-health/output.html) | Activity, sleep, and workouts become a personal rhythm story. | `timeline-story` |
 | [LinkedIn connections →](https://clockless-org.github.io/html-anything/examples/linkedin-connections/output.html) | 12 years of connections clustered by company, role, and era. | `network-map` |
+| [Brand positioning carousel →](https://clockless-org.github.io/html-anything/examples/editorial-carousel/output.html) | A strategy essay becomes a 5-spread magazine carousel with source evidence. | `editorial-carousel` |
 | [CSV sales dashboard →](https://clockless-org.github.io/html-anything/examples/csv/output.html) | A small CSV becomes a sortable + summarized ops console. | `dashboard` |
 | [Google Photos atlas →](https://clockless-org.github.io/html-anything/examples/google-photos-takeout/output.html) | Takeout EXIF metadata becomes a place-driven memory map. | `map-atlas` |
 | [PR review →](https://clockless-org.github.io/html-anything/examples/pr-review/output.html) | A patch becomes a risk-annotated review brief with evidence. | `developer` |
 
-→ **[See the curated gallery (20 demos) →](https://clockless-org.github.io/html-anything/examples/)**
+→ **[See the curated gallery (21 demos) →](https://clockless-org.github.io/html-anything/examples/)**
 
 ## Install
 
@@ -151,18 +152,20 @@ every output into the same dashboard/report shape.
 | Contacts, LinkedIn, communities, email, social payments | `network-map` (Network Map) |
 | Finance, spreadsheets, logs, backlog, operational data | `dashboard` (Ops Console) |
 | Essays, articles, reading lists, bookmarks, PDFs, DOCX, legal/medical/lab records | `document` (Document Review) |
+| Brand strategy essays, founder letters, article takeaways, lightweight reports meant to be shared as a sequence | `editorial-carousel` (Editorial Carousel) |
 | Logs, diffs, stack traces, CI failures, repos | `developer` (Evidence Workbench) |
 
 You can still steer it naturally: "make it more tutorial-like", "more
-app-like", "less academic", "more dashboard-like", or "more playful".
+app-like", "less academic", "make it a carousel", "more dashboard-like",
+or "more playful".
 
 Reusable style prompts live in [`prompts/styles/`](./prompts/styles/).
 The shared structural contract is
 [`prompts/styles/_system.md`](./prompts/styles/_system.md). There is a
-fallback `default` style plus 9 auto-selected styles:
+fallback `default` style plus 10 auto-selected styles:
 `teaching`, `relationship`, `living-essay`, `dashboard`,
-`timeline-story`, `map-atlas`, `network-map`, `document`, and
-`developer`.
+`timeline-story`, `map-atlas`, `network-map`, `document`,
+`editorial-carousel`, and `developer`.
 
 ## Source Examples
 

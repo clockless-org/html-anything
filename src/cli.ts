@@ -66,6 +66,7 @@ const STYLES = new Set<HtmlAnythingStyle | "auto">([
   "map-atlas",
   "network-map",
   "document",
+  "editorial-carousel",
   "developer",
 ])
 
@@ -97,8 +98,8 @@ into the output; the LLM only ever sees a representative sample.
 
 Default style is auto. Auto injects one of the built-in style prompts
 (teaching, relationship, living-essay, dashboard, timeline-story, map-atlas,
-network-map, document, developer, or default) based on the parsed
-content type.
+network-map, document, editorial-carousel, developer, or default) based on the
+parsed content type.
 `
 
 async function main() {

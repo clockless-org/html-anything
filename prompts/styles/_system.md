@@ -139,10 +139,10 @@ Avoid defaulting data to dashboard. Pick a system by use case:
 - **Network Map** for people, senders, communities, contacts, payments, email,
   and professional networks.
 - **Rhythm Report** for intimate 1:1 chats.
-- **Editorial Desk** for arguments, research, bookmarks, reading lists, and
-  article-like sources.
+- **Document Review** for long, formal, or evidence-heavy documents.
+- **Editorial Carousel** for arguments, research takeaways, and article-like
+  sources that should become a compact shareable sequence.
 - **Evidence Workbench** for developer artifacts.
-- **Review Dossier** for long/high-stakes documents.
 
 ## Source Vs Style
 
@@ -174,8 +174,8 @@ interaction, not by a generic component form.
   scrolls.
 - The primary interaction should be native to the system: a lesson stepper for
   `teaching`, selector/inspector for `interactive-studio`, filters/table for
-  `dashboard`, margin-spore links for `living-essay`, quote/evidence browser
-  for `editorial`, etc.
+  `dashboard`, margin-spore links for `living-essay`, spread rail / evidence
+  drawer for `editorial-carousel`, etc.
 - Do not include a visible "style badge" in real generated outputs. The style
   should be obvious from the structure.
 
