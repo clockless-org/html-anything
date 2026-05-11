@@ -32,6 +32,9 @@ Interaction model:
 - Hover/click heatmap cells or insights to reveal evidence.
 - Filters should be by period/topic/sender, not raw-message browsing first.
 - Raw appendices are opt-in only.
+- Tooltips must also open by focus/click for touch and keyboard users.
+- Word clouds or sentiment visuals, if used, must be paired with a ranked word
+  list or evidence snippets. Do not rely on word size/color alone.
 
 ## Page Shape
 

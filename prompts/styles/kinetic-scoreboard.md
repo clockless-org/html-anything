@@ -45,6 +45,8 @@ Interaction model:
 - A speed/phase control should affect the kinetic animation.
 - Hovering or focusing a lane reveals a concise tooltip/insight.
 - The log/search below should stay linked to lane selection and source records.
+- Lane selection must also work by keyboard. Lanes need button-like semantics,
+  visible focus states, and selected-state text, not color alone.
 
 Motion grammar:
 
@@ -116,4 +118,6 @@ Poor fits:
   verify it is nonblank.
 - Use source text/labels as fragments in the motion only when privacy-safe.
 - On mobile, stack lanes horizontally scrollable or as a compressed two-column
-  roster, with the selected lane's kinetic body first.
+  roster, with the selected lane's kinetic body first. If lanes scroll
+  horizontally, keep that overflow inside `.competitor-lanes`, show a visible
+  lane rail or selected-lane label, and avoid body-level horizontal scroll.

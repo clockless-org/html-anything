@@ -85,12 +85,16 @@ Match the reference aesthetic closely:
 ## Interaction Model
 
 - Native horizontal scrolling is primary. Add previous/next or dot controls
-  only as small secondary tools.
+  as quiet secondary tools; swipe/trackpad gestures must not be the only way to
+  move through the issue.
 - Arrow keys may move between slides.
 - Search marks matching slides without restructuring them.
 - Evidence links open a compact bottom/side drawer and focus the matching
   source excerpt.
 - Copy actions should copy slide-ready text, not raw HTML.
+- Controls must be keyboard reachable with visible focus states. Dots/buttons
+  need accessible names such as "Go to spread 3".
+- Keep horizontal overflow inside the carousel, not on `body`.
 
 ## Avoid
 

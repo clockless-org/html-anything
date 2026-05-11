@@ -34,6 +34,8 @@ Interaction model:
 - Clicking a point/route/cluster opens the drawer and highlights related rows.
 - Period/category filters update the map and browser together.
 - Route layers can be toggled without layout shift.
+- The map/canvas must not be the only way to read the data. Include a place,
+  route, or waypoint list that can be searched and operated by keyboard.
 
 Motion grammar:
 

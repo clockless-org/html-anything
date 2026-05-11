@@ -123,6 +123,56 @@ Rules:
 - Use CSS transitions/keyframes and small vanilla JS only. No animation
   libraries.
 
+## UI Quality Gate
+
+Apply these UI/UX checks to every style. They come from the UI/UX Pro Max
+quality rubric and are not optional, even when a reference style is highly
+expressive.
+
+Accessibility:
+
+- Normal text must meet at least WCAG AA contrast (4.5:1). Tiny mono labels,
+  captions, axes, and watermark-like metadata must still remain readable or be
+  nonessential.
+- Every interactive element must have an accessible name. Icon-only buttons
+  need `aria-label`; custom clickable regions need a keyboard path.
+- Visible focus states are required. Do not remove focus rings; make them
+  style-native instead.
+- Do not communicate meaning by color alone. Pair color with text, shape,
+  pattern, icon, or numeric labels.
+- Meaningful images and generated media need useful `alt` text. Decorative
+  images should be marked decorative.
+
+Touch and responsive behavior:
+
+- Primary touch targets should be at least 44px where possible, with enough
+  spacing to avoid accidental taps.
+- Pages should not create accidental body-level horizontal overflow. If a
+  style intentionally uses a horizontal stage or carousel, contain it in a
+  visible scroller and provide buttons, dots, rail labels, or keyboard controls
+  so it is not gesture-only.
+- Use mobile-first responsive constraints. Fixed-format surfaces need
+  `max-width`, `aspect-ratio`, wrapping, or contained overflow so text and
+  controls do not break the viewport.
+
+Charts and dense visuals:
+
+- Chart values must not be hover-only. Include visible labels, a legend with
+  ticks, an adjacent summary, or a data/list/table fallback.
+- Word clouds, network graphs, heatmaps, 3D scenes, and map/canvas visuals are
+  supplementary unless paired with a readable list/table/detail view.
+- Heatmaps need scale labels or numeric/tooltips; network maps need an
+  adjacency/entity list; 3D/spatial scenes need a 2D or tabular fallback when
+  the data matters.
+
+Motion:
+
+- Respect `prefers-reduced-motion`.
+- Keep animation work to transform/opacity where practical; avoid layout
+  thrash from animating width/height/top/left in tight loops.
+- Animate only what explains state or guides attention. Avoid motion pile-ups
+  where many unrelated elements move at once.
+
 ## Layout Diversity Requirement
 
 Avoid defaulting data to dashboard. Pick a system by use case:
@@ -198,6 +248,12 @@ Before returning the HTML, verify:
   fallback shell.
 - At least four style-specific class names/components from the style prompt
   appear in the HTML.
+- Text contrast, focus states, keyboard access, and touch targets meet the UI
+  quality gate.
+- Charts and visualizations have visible values or list/table fallbacks and do
+  not rely on color alone.
+- The page has no accidental body-level horizontal overflow. Style-native
+  horizontal stages include explicit controls.
 - Source-required modules are present, but translated into the style's native
   component vocabulary.
 - The primary interaction is style-native and works with the inlined `DATA`.

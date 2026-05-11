@@ -49,6 +49,9 @@ Interaction model:
 - Compact typography and stable grid tracks.
 - Use color semantically and sparingly.
 - Keep charts legible at mobile widths.
+- Values must be readable without hovering. Tooltips can add detail, but main
+  values, legends, and threshold meanings should be visible.
+- Wide tables need contained overflow or a card/list fallback on mobile.
 
 ## Required Modules
 

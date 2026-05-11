@@ -188,6 +188,8 @@ Honor explicit style direction in natural language:
    - page is nonblank,
    - desktop and mobile viewports render cleanly,
    - no obvious horizontal overflow,
+   - contrast is readable and focus states are visible,
+   - keyboard and touch paths exist for core interactions,
    - primary interactions work,
    - generated assets load.
    Also check style fidelity:
@@ -211,6 +213,12 @@ Before final handoff, the HTML must pass this internal checklist:
   appear in the HTML.
 - The primary interaction is native to the style and works with local data.
 - Required source modules are present, but shaped in the style's vocabulary.
+- Text contrast, focus states, keyboard access, and touch targets meet the UI
+  quality gate.
+- Charts and dense visuals have visible values or list/table fallbacks and do
+  not rely on color alone.
+- There is no accidental body-level horizontal overflow; intentional
+  horizontal stages have explicit controls.
 - Motion follows the style's motion grammar and respects
   `prefers-reduced-motion`.
 - The page is complete, offline-capable, and not just a recolored default
@@ -226,6 +234,8 @@ apply them by default.
 General requirements:
 
 - Mobile-first responsive layout.
+- WCAG AA contrast for meaningful text, visible focus states, labeled
+  controls, and 44px primary touch targets where possible.
 - Light + dark mode when the page is a report/data artifact; for app-like
   examples, a polished light-mode Clockless surface is acceptable.
 - Inline CSS and JS in the HTML.

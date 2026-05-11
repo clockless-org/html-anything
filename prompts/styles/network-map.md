@@ -35,6 +35,8 @@ Interaction model:
 - Hovering an edge shows the relationship type/count/last seen.
 - Cluster controls should redraw/recolor the graph and preserve selection
   when possible.
+- Keyboard users must be able to select entities from a list, table, or chip
+  rail even if they cannot operate the graph directly.
 
 Motion grammar:
 
@@ -56,3 +58,6 @@ Use-case variants:
 - Turning people data into a cold KPI dashboard.
 - Revealing private emails/phones/handles by default.
 - Force-directed chaos when a grouped matrix or cluster map would be clearer.
+- Using a network graph as the only representation. Always include an
+  entity/edge list, adjacency table, or linked-record browser with the same
+  information.

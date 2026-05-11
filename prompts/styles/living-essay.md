@@ -44,6 +44,8 @@ Interaction model:
 - Mycelium paths can appear probabilistically over visible spores; they should
   feel alive, not like a static network diagram.
 - Search filters the quote browser while preserving the selected spore.
+- Spore/theme focus must be keyboard accessible. If the visual thread map is
+  hard to operate, provide a quiet list in the appendix with the same themes.
 
 Motion grammar:
 
