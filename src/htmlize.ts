@@ -156,6 +156,12 @@ export function selectStyleForContent(contentType: string, options: ConverterOpt
   }
 
   if (
+    contentType === "kindle-highlights"
+  ) {
+    return "living-essay"
+  }
+
+  if (
     contentType === "pdf-document" ||
     contentType === "docx-document" ||
     contentType === "medical-visit" ||
@@ -203,7 +209,6 @@ export function selectStyleForContent(contentType: string, options: ConverterOpt
     contentType === "amazon-orders" ||
     contentType === "browser-history" ||
     contentType === "iphone-health" ||
-    contentType === "kindle-highlights" ||
     contentType === "chatgpt-export" ||
     contentType === "claude-chat-export" ||
     contentType === "ai-chat-export" ||

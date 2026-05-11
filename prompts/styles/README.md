@@ -17,6 +17,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `default` | The input does not clearly fit a specialized style | Clean live page with strong summary, useful sections, practical drill-down |
 | `teaching` | Tutorial, lesson, "teach me", interactive object/system/spec exploration | Visual stage (or object stage), step rail / entity selector, try-it controls, check-yourself / live inspector |
 | `relationship` | 1:1 chats and intimate message exports | Aggregate-first relationship rhythm report with anonymized evidence |
+| `living-essay` | Reflective essays, Kindle highlights, idea notes, and concept-heavy reading archives | Manuscript stage with sticky question rail, concept weave, highlighted passages, and evidence folio |
 | `dashboard` | Operational, tabular, finance, admin, log, planning data | Dense KPIs, charts, filters, flags, searchable table |
 | `timeline-story` | Personal histories — chronological (orders, listening, health) and topical (Notion / Obsidian vaults) | Scroll-driven story with timeline spine, chapters, rhythm strip, drawer |
 | `map-atlas` | Places, routes, trips, rideshare, location/photo geodata | Spatial atlas with map/route stage, place drawer, filters, waypoint browser |
@@ -31,6 +32,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `default` | Insight Brief |
 | `teaching` | Lesson Lab |
 | `relationship` | Rhythm Report |
+| `living-essay` | Concept Weave |
 | `dashboard` | Ops Console |
 | `timeline-story` | Timeline Story |
 | `map-atlas` | Map Atlas |
@@ -70,6 +72,7 @@ base. Borrow archetypes, not brand identities:
 | Use case | Prefer |
 |---|---|
 | "My listening/watch/browsing/order/reading year" | `timeline-story` |
+| "My Kindle highlights / reflective reading notes / concept essay" | `living-essay` |
 | "My Notion / Obsidian / markdown knowledge base" | `timeline-story` |
 | "Where I went / saved / traveled / rode" | `map-atlas` |
 | "Who I know / talk to / pay / email" | `network-map` |

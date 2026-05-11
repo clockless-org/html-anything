@@ -61,6 +61,7 @@ export type HtmlAnythingStyle =
   | "default"
   | "teaching"
   | "relationship"
+  | "living-essay"
   | "dashboard"
   | "timeline-story"
   | "map-atlas"

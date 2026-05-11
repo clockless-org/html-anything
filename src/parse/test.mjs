@@ -83,6 +83,7 @@ test("htmlize auto style selector routes major source families", async () => {
   assert.equal(selectStyleForContent("rideshare-history"), "map-atlas")
   assert.equal(selectStyleForContent("spotify-history"), "timeline-story")
   assert.equal(selectStyleForContent("browser-history"), "timeline-story")
+  assert.equal(selectStyleForContent("kindle-highlights"), "living-essay")
   assert.equal(selectStyleForContent("linkedin-connections"), "network-map")
   assert.equal(selectStyleForContent("csv-tabular"), "dashboard")
   assert.equal(selectStyleForContent("markdown-document"), "document")
@@ -90,6 +91,7 @@ test("htmlize auto style selector routes major source families", async () => {
   assert.equal(selectStyleForContent("pdf-document"), "document")
   assert.equal(selectStyleForContent("plain-text"), "default")
   assert.equal(selectStyleForContent("csv-tabular", { style: "teaching" }), "teaching")
+  assert.equal(selectStyleForContent("csv-tabular", { style: "living-essay" }), "living-essay")
 })
 
 test("htmlize injects the selected style prompt into the LLM request", async () => {

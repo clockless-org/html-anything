@@ -501,7 +501,7 @@ footer.foot a { color: var(--primary); }
       <div class="hero-stats">
         <div class="hero-stat"><strong>30</strong><span>curated examples</span></div>
         <div class="hero-stat"><strong>8</strong><span>source groups</span></div>
-        <div class="hero-stat"><strong>8</strong><span>auto styles</span></div>
+        <div class="hero-stat"><strong>9</strong><span>auto styles</span></div>
       </div>
     </div>
   </header>
@@ -564,6 +564,7 @@ footer.foot a { color: var(--primary); }
   const styles = [
     ["teaching", "Teaching", "#0f766e"],
     ["relationship", "Relationship", "#be3455"],
+    ["living-essay", "Essay", "#a03b00"],
     ["timeline-story", "Timeline", "#9a4b14"],
     ["map-atlas", "Map", "#17695a"],
     ["network-map", "Network", "#355f91"],
@@ -581,7 +582,7 @@ footer.foot a { color: var(--primary); }
     ["amazon-orders", "Amazon orders", "Orders CSV", "timeline-story", "personal", "Three years of purchases as a commerce-memory timeline."],
     ["spotify-history", "Spotify history", "Streaming export", "timeline-story", "personal", "Listening history as a year-by-year music story."],
     ["iphone-health", "Apple Health", "Health export", "timeline-story", "personal", "Activity, sleep, workouts, and rhythm patterns as a personal timeline."],
-    ["kindle-highlights", "Kindle highlights", "My Clippings.txt", "timeline-story", "personal", "Highlights and notes organized into books, themes, and quote browser."],
+    ["kindle-highlights", "Kindle highlights", "My Clippings.txt", "living-essay", "personal", "Highlights and notes become a slow-reading concept weave with linked passages."],
     ["browser-history", "Browser history", "Browser export", "timeline-story", "personal", "Browsing sessions clustered into topics, returners, and search patterns."],
     ["chatgpt-export", "ChatGPT archive", "conversations.json", "timeline-story", "personal", "AI conversations clustered into topics, projects, and recurring threads."],
     ["notes-vault", "Notes vault", "Markdown folder", "timeline-story", "personal", "A folder of notes becomes topic clusters, backlinks, and last-edited rhythm."],
@@ -608,6 +609,7 @@ footer.foot a { color: var(--primary); }
   const styleNames = new Map([
     ["teaching", "Teaching lab"],
     ["relationship", "Relationship report"],
+    ["living-essay", "Living essay"],
     ["timeline-story", "Timeline story"],
     ["map-atlas", "Map atlas"],
     ["network-map", "Network map"],
@@ -619,6 +621,7 @@ footer.foot a { color: var(--primary); }
   const matrixRows = [
     ["Prompt: teach the solar system", "Teaching lab", "solar-system-studio"],
     ["WeChat / WhatsApp chat export", "Relationship report", "wechat-couple"],
+    ["Kindle highlights / reflective notes", "Living essay", "kindle-highlights"],
     ["Amazon order history CSV", "Timeline story", "amazon-orders"],
     ["Google Photos Takeout", "Map atlas", "google-photos-takeout"],
     ["vCard / LinkedIn contacts", "Network map", "vcard-contacts"],
