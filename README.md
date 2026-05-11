@@ -202,10 +202,10 @@ Each use case can use one or more style systems.
 | Use case | Example sources | Likely styles |
 |---|---|---|
 | Teaching Studios | A short teaching brief, article, lesson outline, concept note, URL | `teaching`, `interactive-learning` |
+| Files & Work Data | CSV / TSV, spreadsheet-style exports, JSON, JSONL, logs, bank transactions, invoices, QuickBooks, calendars, issue trackers, Markdown, PDF, DOCX, bookmarks, URL lists, bibliographies, research records, slide-style carousel outputs | `dashboard`, `document`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
 | Conversation Analysis | WeChat, WhatsApp, iMessage-style CSV, Slack, Discord, Telegram, email-style threads | `relationship`, `kinetic-scoreboard`, `network-map` |
 | Personal Data Recaps | Amazon orders, Apple Health, browser history, YouTube, Spotify, Twitch, Kindle highlights, LinkedIn, Venmo / PayPal, AI chat exports, notes vaults | `timeline-story`, `living-essay`, `network-map` |
 | Places & Trips | Google Photos Takeout, Google Maps saved places, rideshare history, GPX, KML, itinerary CSV, location history | `map-atlas`, `paper-trail` |
-| Files & Work Data | CSV / TSV, spreadsheet-style exports, JSON, JSONL, logs, bank transactions, invoices, QuickBooks, calendars, issue trackers, Markdown, PDF, DOCX, bookmarks, URL lists, bibliographies, research records, slide-style carousel outputs | `dashboard`, `document`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
 | Developer Evidence | Git diff, PR patch, CI log, stack trace, GitHub repo URL | `developer` |
 
 Use case is user-facing; style is internal. A user can simply say "make this

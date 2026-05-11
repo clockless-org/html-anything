@@ -30,6 +30,13 @@
       "examples": ["solar-system-studio"]
     },
     {
+      "id": "files-work",
+      "title": "Files & Work Data",
+      "summary": "Transform spreadsheets, CSV exports, PDFs, DOCX, Markdown, records, logs, calendars, work artifacts, and slide-style carousel outputs into polished live HTML.",
+      "styles": ["dashboard", "document", "digital-eguide", "editorial-carousel", "paper-trail", "living-essay"],
+      "examples": ["csv", "bank-transactions", "pdf", "markdown", "editorial-carousel", "log-error"]
+    },
+    {
       "id": "conversation",
       "title": "Conversation Analysis",
       "summary": "Analyze private chats, relationship threads, team channels, and message exports through rhythm, contribution, and evidence.",
@@ -49,13 +56,6 @@
       "summary": "Make maps, route atlases, travel dossiers, photo-location views, and trip paper trails from location-rich sources.",
       "styles": ["map-atlas", "paper-trail"],
       "examples": ["google-photos-takeout", "rideshare-history", "itinerary-trip"]
-    },
-    {
-      "id": "files-work",
-      "title": "Files & Work Data",
-      "summary": "Transform spreadsheets, CSV exports, PDFs, DOCX, Markdown, records, logs, calendars, work artifacts, and slide-style carousel outputs into polished live HTML.",
-      "styles": ["dashboard", "document", "digital-eguide", "editorial-carousel", "paper-trail", "living-essay"],
-      "examples": ["csv", "bank-transactions", "pdf", "markdown", "editorial-carousel", "log-error"]
     },
     {
       "id": "developer",

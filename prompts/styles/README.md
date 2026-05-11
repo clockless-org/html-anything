@@ -117,10 +117,10 @@ choose from.
 | Use case | Includes | Prefer |
 |---|---|
 | Teaching Studios | Tutorials, explainers, lessons, object/system studios | `teaching`, `interactive-learning` |
+| Files & Work Data | CSV/spreadsheet-style exports, PDFs, DOCX, Markdown, logs, finance, calendars, issue trackers, research records, slide-style carousel outputs | `dashboard`, `document`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
 | Conversation Analysis | Couple/friend chats, WhatsApp/WeChat, team channels, message streams | `relationship`, `kinetic-scoreboard`, `network-map` |
 | Personal Data Recaps | Orders, health, browsing, media history, reading, payments, professional network, notes, AI chats | `timeline-story`, `living-essay`, `network-map` |
 | Places & Trips | Photos with EXIF, saved places, rideshare, GPX/KML, itineraries | `map-atlas`, `paper-trail` |
-| Files & Work Data | CSV/spreadsheet-style exports, PDFs, DOCX, Markdown, logs, finance, calendars, issue trackers, research records, slide-style carousel outputs | `dashboard`, `document`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
 | Developer Evidence | Diffs, PRs, CI logs, stack traces, repos | `developer` |
 
 Do not ask users to pick from these by default. Choose internally unless the

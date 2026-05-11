@@ -93,10 +93,10 @@ the style system. Source prompts can be many; use cases should stay stable.
 | Use case | User means | Likely styles |
 |---|---|---|
 | Teaching Studios | Turn an idea, article, lesson, or concept into an interactive learning surface, not a scrolling article. | `teaching`, `interactive-learning` |
+| Files & Work Data | Transform files and work artifacts: CSV/spreadsheet-style exports, PDFs, DOCX, Markdown, logs, finance, calendars, issue trackers, research records, and slide-style carousel outputs. | `dashboard`, `document`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
 | Conversation Analysis | Analyze private chats, relationship exports, team channels, or message archives. | `relationship`, `kinetic-scoreboard`, `network-map` |
 | Personal Data Recaps | Make a recap/timeline/story from personal exports: orders, health, browsing, media, payments, professional networks, notes, AI chats. | `timeline-story`, `living-essay`, `network-map` |
 | Places & Trips | Make a map, route atlas, travel dossier, photo-location view, or trip paper trail. | `map-atlas`, `paper-trail` |
-| Files & Work Data | Transform files and work artifacts: CSV/spreadsheet-style exports, PDFs, DOCX, Markdown, logs, finance, calendars, issue trackers, research records, and slide-style carousel outputs. | `dashboard`, `document`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
 | Developer Evidence | Review, explain, or debug code artifacts: diffs, PRs, CI logs, stack traces, repos. | `developer` |
 
 Do not expose this as a required choice to the user. Use it internally to make
