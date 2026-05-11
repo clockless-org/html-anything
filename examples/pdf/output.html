@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-ha-style="paper">
+<html lang="en" data-ha-style="document">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,8 +28,8 @@
   --fg-1: #1e1b19;
   --fg-2: #594138;
   --fg-muted: #8d7166;
-  --border: rgba(0, 0, 0, 0.06);
-  --border-strong: rgba(0, 0, 0, 0.12);
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
   --outline-variant: #e1bfb2;
   --green: #10b981;
   --blue: #3b82f6;
@@ -43,14 +43,15 @@
   --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
   --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
   --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
-  --shadow-sm: 0 1px 2px rgba(30, 27, 25, 0.04);
-  --shadow-md: 0 4px 12px rgba(30, 27, 25, 0.08);
-  --shadow-lg: 0 8px 24px rgba(30, 27, 25, 0.12);
-  --shadow-accent: 0 8px 24px rgba(160, 59, 0, 0.15);
+  --shadow-sm: 0 1px 2px rgba(30,27,25,0.04);
+  --shadow-md: 0 4px 12px rgba(30,27,25,0.08);
+  --shadow-lg: 0 8px 24px rgba(30,27,25,0.12);
+  --shadow-accent: 0 8px 24px rgba(160,59,0,0.15);
   --gradient-primary: linear-gradient(135deg, #a03b00 0%, #c94c00 100%);
   --gradient-hero: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
   --gradient-text: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
 }
+
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #060B18;
@@ -62,13 +63,14 @@
     --fg-1: #F8FAFC;
     --fg-2: #CBD5E1;
     --fg-muted: #64748B;
-    --border: rgba(255, 255, 255, 0.08);
-    --border-strong: rgba(255, 255, 255, 0.14);
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
     --primary: #FF6B35;
     --accent-glow: #00D4FF;
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
-    --outline-variant: #1c2d52;
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+    --outline-variant: rgba(255,255,255,0.12);
+    --primary-fixed: rgba(255,107,53,0.12);
   }
 }
 
@@ -82,710 +84,866 @@ body {
   color: var(--fg-1);
   font-size: 15px;
   line-height: 1.6;
-  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Layout */
-.app-shell {
+/* ── Document Shell ── */
+.document-shell {
   display: flex;
-  flex-direction: column;
   min-height: 100vh;
 }
 
-.top-bar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border-strong);
-  box-shadow: var(--shadow-sm);
-  padding: var(--space-md) var(--space-lg);
+/* ── Cover / Masthead ── */
+.cover {
+  background: var(--gradient-hero);
+  color: #fff;
+  padding: var(--space-4xl) var(--space-3xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.cover-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: var(--space-lg);
   display: flex;
   align-items: center;
   gap: var(--space-md);
   flex-wrap: wrap;
 }
 
-.top-bar-title {
-  font-family: var(--font-headline);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--fg-2);
-  letter-spacing: -0.01em;
-  flex: 1;
-  min-width: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.cover-eyebrow span {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
 }
 
-.top-bar-actions {
+.cover-eyebrow .sep { opacity: 0.4; }
+
+.cover-title {
+  font-family: var(--font-headline);
+  font-size: clamp(24px, 4vw, 38px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: var(--space-sm);
+  color: #fff;
+}
+
+.cover-subtitle {
+  font-family: var(--font-headline);
+  font-size: clamp(14px, 2vw, 18px);
+  font-weight: 400;
+  opacity: 0.8;
+  margin-bottom: var(--space-xl);
+}
+
+.cover-meta {
+  font-size: 13px;
+  opacity: 0.65;
+  font-family: var(--font-body);
+}
+
+.cover-disclaimer {
+  margin-top: var(--space-xl);
+  padding: var(--space-md) var(--space-lg);
+  background: rgba(255,255,255,0.1);
+  border-left: 3px solid rgba(255,255,255,0.4);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  opacity: 0.75;
+  line-height: 1.5;
+}
+
+/* ── Stat grid on cover ── */
+.cover-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  margin-top: var(--space-3xl);
+}
+
+.cover-stat {
+  background: rgba(255,255,255,0.1);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.cover-stat-value {
+  font-family: var(--font-headline);
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  line-height: 1;
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.cover-stat-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.65;
+  font-family: var(--font-mono);
+}
+
+/* ── Reader Rail (Left TOC) ── */
+.reader-rail {
+  width: 260px;
+  flex-shrink: 0;
+  background: var(--surface-container-low);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-2xl) 0;
+  scrollbar-width: thin;
+}
+
+.reader-rail::-webkit-scrollbar { width: 4px; }
+.reader-rail::-webkit-scrollbar-thumb { background: var(--outline-variant); border-radius: 2px; }
+
+.rail-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--fg-muted);
+  padding: 0 var(--space-xl) var(--space-sm);
+}
+
+.rail-nav {
+  list-style: none;
+  flex: 1;
+}
+
+.rail-nav li a {
+  display: block;
+  padding: var(--space-sm) var(--space-xl);
+  font-size: 13px;
+  color: var(--fg-2);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all 120ms ease;
+  line-height: 1.4;
+}
+
+.rail-nav li a:hover {
+  color: var(--primary);
+  background: var(--surface-container);
+  border-left-color: var(--primary);
+}
+
+.rail-nav li a.active {
+  color: var(--primary);
+  border-left-color: var(--primary);
+  background: var(--primary-fixed);
+  font-weight: 600;
+}
+
+.rail-nav .nav-section > a {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--fg-1);
+  padding-top: var(--space-md);
+}
+
+.rail-nav .nav-sub > a {
+  padding-left: var(--space-3xl);
+  font-size: 12px;
+  color: var(--fg-muted);
+}
+
+.rail-nav .nav-sub > a:hover { color: var(--primary); }
+
+.rail-divider {
+  height: 1px;
+  background: var(--border);
+  margin: var(--space-lg) var(--space-xl);
+}
+
+/* Mode toggle in rail */
+.mode-toggle {
+  padding: var(--space-lg) var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.mode-toggle-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.mode-btn {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  flex-shrink: 0;
-}
-
-.btn {
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
-  border-radius: var(--radius-pill);
-  padding: var(--space-sm) var(--space-lg);
-  transition: all 0.15s ease;
-  white-space: nowrap;
-}
-
-.btn-ghost {
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
   background: transparent;
   color: var(--fg-2);
-  border: 1px solid var(--border-strong);
-}
-.btn-ghost:hover { background: var(--surface-container); }
-
-.btn-primary {
-  background: var(--gradient-primary);
-  color: var(--on-primary);
-  box-shadow: var(--shadow-accent);
-}
-.btn-primary:hover { opacity: 0.9; }
-
-.btn-mode {
-  background: var(--surface-container);
-  color: var(--fg-2);
-  border: 1px solid var(--border-strong);
-  font-size: 12px;
-  padding: var(--space-xs) var(--space-md);
-}
-.btn-mode.active {
-  background: var(--primary);
-  color: var(--on-primary);
-  border-color: var(--primary);
-}
-
-/* Search bar */
-.search-wrap {
-  position: relative;
-  flex: 1;
-  max-width: 280px;
-}
-.search-input {
-  width: 100%;
   font-family: var(--font-body);
-  font-size: 13px;
-  background: var(--surface-container);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-pill);
-  padding: var(--space-sm) var(--space-lg) var(--space-sm) 32px;
-  color: var(--fg-1);
-  outline: none;
-  transition: border-color 0.15s;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 120ms ease;
+  text-align: left;
 }
-.search-input::placeholder { color: var(--fg-muted); }
-.search-input:focus { border-color: var(--primary); }
+
+.mode-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  font-weight: 600;
+}
+
+.mode-btn:not(.active):hover {
+  background: var(--surface-container);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.mode-btn .mode-icon { font-size: 14px; }
+
+/* ── Main Body ── */
+.document-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Top Bar ── */
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--surface-container-low);
+  border-bottom: 1px solid var(--border);
+  padding: var(--space-sm) var(--space-2xl);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  backdrop-filter: blur(8px);
+}
+
+.search-wrap {
+  flex: 1;
+  max-width: 480px;
+  position: relative;
+}
+
 .search-icon {
   position: absolute;
-  left: 10px;
+  left: var(--space-md);
   top: 50%;
   transform: translateY(-50%);
   color: var(--fg-muted);
   font-size: 14px;
   pointer-events: none;
 }
-.search-count {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 11px;
-  color: var(--fg-muted);
-  font-family: var(--font-mono);
-}
 
-/* Main content area */
-.content-area {
-  display: flex;
-  flex: 1;
-  position: relative;
-}
-
-/* Left TOC rail */
-.toc-rail {
-  display: none;
-  width: 240px;
-  flex-shrink: 0;
-  position: sticky;
-  top: 57px;
-  height: calc(100vh - 57px);
-  overflow-y: auto;
-  padding: var(--space-xl) var(--space-lg);
-  border-right: 1px solid var(--border);
-  background: var(--surface-container-low);
-}
-@media (min-width: 900px) { .toc-rail { display: block; } }
-
-.toc-label {
-  font-family: var(--font-headline);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  margin-bottom: var(--space-md);
-}
-
-.toc-item {
-  display: block;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--fg-2);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-sm);
-  margin-bottom: 2px;
-  transition: all 0.12s;
-  line-height: 1.4;
-}
-.toc-item:hover { background: var(--surface-container); color: var(--primary); }
-.toc-item.active { background: var(--primary-fixed); color: var(--primary); font-weight: 600; }
-.toc-item.level-1 { font-weight: 600; font-size: 12.5px; }
-.toc-item.level-2 { padding-left: var(--space-xl); font-size: 11.5px; color: var(--fg-muted); }
-
-.toc-page-badge {
-  float: right;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--fg-muted);
-  background: var(--surface-container);
-  border-radius: var(--radius-sm);
-  padding: 1px 5px;
-}
-
-/* Main scroll area */
-.main-content {
-  flex: 1;
-  min-width: 0;
-  padding: var(--space-3xl) var(--space-lg);
-  max-width: 780px;
-  margin: 0 auto;
-}
-@media (min-width: 900px) {
-  .main-content { padding: var(--space-4xl) var(--space-3xl); }
-}
-
-/* Jump dropdown (mobile) */
-.jump-dropdown-wrap {
-  margin-bottom: var(--space-2xl);
-  display: block;
-}
-@media (min-width: 900px) { .jump-dropdown-wrap { display: none; } }
-
-.jump-dropdown {
+.search-input {
   width: 100%;
+  padding: var(--space-sm) var(--space-md) var(--space-sm) 36px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container-lowest);
+  color: var(--fg-1);
   font-family: var(--font-body);
   font-size: 13px;
-  background: var(--surface-container);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-md);
-  padding: var(--space-sm) var(--space-lg);
-  color: var(--fg-1);
   outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.search-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-fixed);
+}
+
+.search-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-muted);
+  white-space: nowrap;
+}
+
+.copy-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container-lowest);
+  color: var(--fg-2);
+  font-family: var(--font-body);
+  font-size: 12px;
   cursor: pointer;
+  transition: all 120ms ease;
+  white-space: nowrap;
 }
 
-/* Hero section */
-.hero {
+.copy-btn:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.copy-btn.copied {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+}
+
+/* ── Content Area ── */
+.content-area {
+  padding: var(--space-4xl) var(--space-3xl);
+  max-width: 820px;
+}
+
+/* ── TL;DR Section ── */
+.tldr-section {
   margin-bottom: var(--space-4xl);
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp 400ms ease 100ms forwards;
 }
 
-.eyebrow {
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--primary);
+  margin-bottom: var(--space-lg);
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  flex-wrap: wrap;
-  margin-bottom: var(--space-lg);
 }
 
-.eyebrow-chip {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  background: var(--surface-container);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-pill);
-  padding: var(--space-xs) var(--space-md);
-  color: var(--fg-muted);
+.section-eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--outline-variant);
+  max-width: 80px;
 }
 
-.eyebrow-chip.accent {
-  background: var(--primary-fixed);
-  border-color: var(--primary);
-  color: var(--primary);
+.tldr-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
 }
-
-.hero-title {
-  font-family: var(--font-headline);
-  font-size: clamp(22px, 4vw, 32px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  margin-bottom: var(--space-sm);
-  background: var(--gradient-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero-subtitle {
-  font-size: 14px;
-  color: var(--fg-muted);
-  margin-bottom: var(--space-2xl);
-}
-
-/* Hero number */
-.hero-number-card {
-  display: inline-flex;
-  align-items: baseline;
-  gap: var(--space-sm);
-  background: var(--gradient-hero);
-  border-radius: var(--radius-xl);
-  padding: var(--space-lg) var(--space-2xl);
-  margin-bottom: var(--space-2xl);
-  box-shadow: var(--shadow-accent);
-}
-.hero-number {
-  font-family: var(--font-headline);
-  font-size: 40px;
-  font-weight: 700;
-  color: var(--on-primary);
-  line-height: 1;
-}
-.hero-number-label {
-  font-size: 13px;
-  color: rgba(255,255,255,0.8);
-  font-weight: 500;
-  max-width: 120px;
-  line-height: 1.3;
-}
-
-/* TL;DR cards */
-.tldr-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-lg);
-  margin-bottom: var(--space-3xl);
-}
-@media (min-width: 600px) { .tldr-grid { grid-template-columns: 1fr 1fr 1fr; } }
 
 .tldr-card {
+  display: flex;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
   background: var(--surface-container-lowest);
-  border: 1px solid var(--border-strong);
   border-radius: var(--radius-lg);
-  padding: var(--space-lg);
+  border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.15s;
+  align-items: flex-start;
+  transition: box-shadow 200ms ease, transform 200ms ease;
 }
-.tldr-card:hover { box-shadow: var(--shadow-md); }
+
+.tldr-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateX(2px);
+}
 
 .tldr-num {
   font-family: var(--font-headline);
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--primary);
+  min-width: 32px;
   line-height: 1;
-  margin-bottom: var(--space-sm);
+  margin-top: 2px;
 }
 
 .tldr-text {
-  font-size: 13px;
-  color: var(--fg-2);
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--fg-1);
 }
 
-/* Section headers */
-.section-header {
-  font-family: var(--font-headline);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  margin-bottom: var(--space-lg);
-  padding-bottom: var(--space-sm);
-  border-bottom: 1px solid var(--border);
+.tldr-text strong { color: var(--primary); font-weight: 600; }
+
+/* ── Key Stats Grid ── */
+.key-stats {
+  margin-bottom: var(--space-4xl);
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp 400ms ease 200ms forwards;
 }
 
-/* Pulled quotes */
-.quotes-section { margin-bottom: var(--space-4xl); }
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-md);
+}
 
-.pull-quote {
-  border-left: 3px solid var(--primary);
-  background: var(--surface-container-low);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+.stat-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
   padding: var(--space-lg) var(--space-xl);
-  margin-bottom: var(--space-lg);
   box-shadow: var(--shadow-sm);
 }
 
-.pull-quote-text {
+.stat-value {
   font-family: var(--font-headline);
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--fg-1);
-  line-height: 1.5;
-  letter-spacing: -0.01em;
-  font-style: italic;
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  color: var(--primary);
+  display: block;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
 }
-.pull-quote-attribution {
+
+.stat-label {
   font-size: 11px;
   color: var(--fg-muted);
-  margin-top: var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   font-family: var(--font-mono);
+  line-height: 1.4;
 }
 
-/* Key entities */
-.entities-section { margin-bottom: var(--space-4xl); }
-
-.entities-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
+/* ── Claim Cards ── */
+.claims-section {
+  margin-bottom: var(--space-4xl);
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp 400ms ease 300ms forwards;
 }
 
-.entity-chip {
-  font-size: 12px;
-  font-weight: 500;
-  border-radius: var(--radius-pill);
-  padding: var(--space-xs) var(--space-md);
-  border: 1px solid var(--border-strong);
-  background: var(--surface-container-lowest);
-  color: var(--fg-2);
+.claim-grid {
+  display: grid;
+  gap: var(--space-lg);
 }
-.entity-chip.number { background: var(--primary-fixed); border-color: var(--primary); color: var(--primary); font-family: var(--font-mono); }
-.entity-chip.date { background: var(--surface-container); color: var(--fg-2); }
-.entity-chip.org { border-color: var(--secondary-container); color: var(--secondary-container); background: var(--surface-container-low); }
-
-/* Claim cards */
-.claims-section { margin-bottom: var(--space-4xl); }
 
 .claim-card {
   background: var(--surface-container-lowest);
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: var(--space-xl);
-  margin-bottom: var(--space-lg);
+  padding: var(--space-2xl);
   box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.15s;
-  position: relative;
-  overflow: hidden;
+  border-left: 3px solid var(--primary);
+  transition: box-shadow 200ms ease;
 }
-.claim-card::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 3px;
-  background: var(--gradient-primary);
-  border-radius: 3px 0 0 3px;
-}
-.claim-card:hover { box-shadow: var(--shadow-md); }
 
-.claim-number {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--fg-muted);
-  margin-bottom: var(--space-sm);
-}
+.claim-card:hover { box-shadow: var(--shadow-md); }
 
 .claim-headline {
   font-family: var(--font-headline);
   font-size: 15px;
   font-weight: 600;
   color: var(--fg-1);
-  letter-spacing: -0.01em;
   margin-bottom: var(--space-sm);
+  letter-spacing: -0.01em;
 }
 
 .claim-body {
-  font-size: 13.5px;
+  font-size: 14px;
   color: var(--fg-2);
   line-height: 1.6;
   margin-bottom: var(--space-md);
 }
 
-.claim-page-link {
-  display: inline-flex;
+.claim-footer {
+  display: flex;
   align-items: center;
-  gap: var(--space-xs);
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.page-chip {
   font-family: var(--font-mono);
   font-size: 11px;
-  color: var(--primary);
-  text-decoration: none;
-  padding: 3px var(--space-sm);
-  background: var(--primary-fixed);
+  color: var(--fg-muted);
+  background: var(--surface-container);
+  padding: 2px var(--space-sm);
   border-radius: var(--radius-pill);
-  transition: opacity 0.1s;
+  text-decoration: none;
+  transition: color 120ms, background 120ms;
 }
-.claim-page-link:hover { opacity: 0.75; }
 
-/* Stats grid */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-md);
-  margin-bottom: var(--space-4xl);
-}
-@media (min-width: 600px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
-
-.stat-card {
-  background: var(--surface-container-low);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-lg);
-  text-align: center;
-}
-.stat-value {
-  font-family: var(--font-headline);
-  font-size: 22px;
-  font-weight: 700;
+.page-chip:hover {
   color: var(--primary);
-  letter-spacing: -0.02em;
-  display: block;
+  background: var(--primary-fixed);
 }
-.stat-label {
+
+.claim-tag {
+  font-size: 11px;
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+}
+
+.tag-market { background: rgba(59,130,246,0.12); color: var(--blue); }
+.tag-cost { background: rgba(16,185,129,0.12); color: var(--green); }
+.tag-software { background: rgba(123,64,224,0.12); color: var(--secondary-container); }
+.tag-risk { background: rgba(239,68,68,0.12); color: var(--red); }
+.tag-ops { background: rgba(245,158,11,0.12); color: var(--yellow); }
+
+/* ── Pull Quotes ── */
+.pull-quotes {
+  margin-bottom: var(--space-4xl);
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp 400ms ease 350ms forwards;
+}
+
+.pull-quote {
+  padding: var(--space-2xl) var(--space-3xl);
+  border-left: 4px solid var(--primary);
+  background: var(--primary-fixed);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin-bottom: var(--space-xl);
+  position: relative;
+}
+
+@media (prefers-color-scheme: dark) {
+  .pull-quote { background: rgba(255,107,53,0.08); }
+}
+
+.pull-quote-text {
+  font-family: var(--font-headline);
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 500;
+  color: var(--fg-1);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  font-style: italic;
+}
+
+.pull-quote-text::before { content: '"'; }
+.pull-quote-text::after { content: '"'; }
+
+.pull-quote-source {
+  margin-top: var(--space-md);
+  font-family: var(--font-mono);
   font-size: 11px;
   color: var(--fg-muted);
-  margin-top: 2px;
-  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
-/* Portfolio table */
-.table-wrap {
-  overflow-x: auto;
+/* ── Body Sections (Full mode) ── */
+.body-section {
   margin-bottom: var(--space-4xl);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-strong);
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.body-section.revealed {
+  animation: fadeUp 350ms ease forwards;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--border);
+}
+
+.section-page-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-muted);
+  white-space: nowrap;
+}
+
+.section-title {
+  font-family: var(--font-headline);
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+}
+
+.section-sub {
+  font-family: var(--font-headline);
+  font-size: clamp(14px, 2vw, 17px);
+  font-weight: 600;
+  color: var(--fg-1);
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-md);
+  letter-spacing: -0.01em;
+}
+
+.section-body {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--fg-2);
+}
+
+.section-body p { margin-bottom: var(--space-lg); }
+.section-body p:last-child { margin-bottom: 0; }
+
+.section-body strong { color: var(--fg-1); font-weight: 600; }
+
+.highlight-match {
+  background: rgba(245, 158, 11, 0.3);
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .highlight-match { background: rgba(245,158,11,0.25); }
+}
+
+/* ── Fact Table ── */
+.fact-table-wrap {
+  overflow-x: auto;
+  margin: var(--space-xl) 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
 }
-table {
+
+.fact-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
 }
-thead tr {
+
+.fact-table th {
   background: var(--surface-container);
-}
-th {
-  font-family: var(--font-headline);
+  font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
   text-transform: uppercase;
+  letter-spacing: 0.06em;
   color: var(--fg-muted);
   padding: var(--space-md) var(--space-lg);
   text-align: left;
+  border-bottom: 1px solid var(--border-strong);
   white-space: nowrap;
 }
-td {
+
+.fact-table td {
   padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border);
   color: var(--fg-2);
-  border-top: 1px solid var(--border);
-}
-td.num { font-family: var(--font-mono); font-size: 12px; color: var(--primary); }
-tbody tr:hover { background: var(--surface-container-low); }
-
-/* Mode view containers */
-.view { display: none; }
-.view.active { display: block; }
-
-/* Full reading view */
-.reading-view { margin-bottom: var(--space-4xl); }
-
-.page-block {
-  margin-bottom: var(--space-3xl);
-  scroll-margin-top: 80px;
+  vertical-align: top;
 }
 
-.page-divider {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  margin-bottom: var(--space-xl);
-}
-.page-label {
+.fact-table tr:last-child td { border-bottom: none; }
+
+.fact-table tr:hover td { background: var(--surface-container-low); }
+
+.fact-table .num {
   font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--fg-muted);
-  background: var(--surface-container);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-pill);
-  padding: 3px var(--space-md);
-  white-space: nowrap;
-}
-.page-divider-line {
-  flex: 1;
-  height: 1px;
-  background: var(--border-strong);
+  font-weight: 600;
+  color: var(--primary);
 }
 
-.page-text {
-  font-size: 14.5px;
-  line-height: 1.7;
-  color: var(--fg-2);
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-/* Highlight */
-mark {
-  background: #fef08a;
-  color: #1e1b19;
-  border-radius: 2px;
-  padding: 0 1px;
-}
-@media (prefers-color-scheme: dark) {
-  mark { background: #854d0e; color: #fef9c3; }
-}
-
-/* Glossary */
-.glossary-section { margin-bottom: var(--space-4xl); }
+/* ── Glossary Section ── */
 .glossary-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-sm);
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-md);
 }
-@media (min-width: 600px) { .glossary-grid { grid-template-columns: 1fr 1fr; } }
 
-.glossary-item {
+.glossary-card {
   background: var(--surface-container-lowest);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: var(--space-md) var(--space-lg);
+  padding: var(--space-lg);
+  cursor: pointer;
+  transition: box-shadow 150ms ease, border-color 150ms ease;
 }
+
+.glossary-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
 .glossary-term {
   font-family: var(--font-headline);
   font-size: 13px;
   font-weight: 600;
   color: var(--primary);
-  margin-bottom: 2px;
+  margin-bottom: var(--space-xs);
 }
+
 .glossary-def {
   font-size: 12px;
-  color: var(--fg-muted);
+  color: var(--fg-2);
   line-height: 1.5;
 }
 
-/* Numbers finder */
-.numbers-section { margin-bottom: var(--space-4xl); }
-.number-row {
+/* ── References ── */
+.references-list {
+  list-style: none;
   display: flex;
-  align-items: baseline;
+  flex-direction: column;
   gap: var(--space-md);
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-sm);
-  border-bottom: 1px solid var(--border);
 }
-.number-row:last-child { border-bottom: none; }
-.number-row:hover { background: var(--surface-container-low); }
-.number-val {
-  font-family: var(--font-mono);
+
+.references-list li {
+  display: flex;
+  gap: var(--space-md);
   font-size: 13px;
-  font-weight: 600;
-  color: var(--primary);
-  min-width: 80px;
-}
-.number-ctx { font-size: 12.5px; color: var(--fg-2); flex: 1; }
-.number-page { font-family: var(--font-mono); font-size: 10px; color: var(--fg-muted); }
-
-/* Copy button */
-.copy-btn {
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 500;
-  background: var(--surface-container);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-pill);
-  padding: var(--space-sm) var(--space-lg);
   color: var(--fg-2);
-  cursor: pointer;
-  transition: all 0.15s;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-xs);
+  line-height: 1.5;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--surface-container-lowest);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
 }
-.copy-btn:hover { background: var(--surface-container-high); }
-.copy-btn.copied { color: var(--green); border-color: var(--green); background: rgba(16,185,129,0.08); }
 
-/* Footer */
-.footer {
-  border-top: 1px solid var(--border);
-  padding: var(--space-2xl) var(--space-lg);
-  text-align: center;
-  font-size: 11.5px;
+.ref-num {
+  font-family: var(--font-mono);
+  color: var(--primary);
+  font-size: 11px;
+  min-width: 24px;
+  margin-top: 2px;
+}
+
+/* ── Caveat Box ── */
+.caveat-box {
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.25);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg) var(--space-xl);
+  margin-bottom: var(--space-2xl);
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+}
+
+.caveat-icon { font-size: 16px; flex-shrink: 0; }
+
+.caveat-text {
+  font-size: 13px;
+  color: var(--fg-2);
+  line-height: 1.5;
+}
+
+.caveat-text strong { color: var(--fg-1); }
+
+/* ── Page Divider (Full mode) ── */
+.page-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  margin: var(--space-4xl) 0 var(--space-3xl);
+}
+
+.page-divider-line { flex: 1; height: 1px; background: var(--border); }
+
+.page-divider-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: var(--fg-muted);
+  white-space: nowrap;
+}
+
+/* ── Mode visibility ── */
+.summary-only { display: block; }
+.full-only { display: none; }
+
+body.mode-full .summary-only { display: none; }
+body.mode-full .full-only { display: block; }
+body.mode-full .full-only.section-body-container { display: block; }
+
+/* ── Mobile TOC Dropdown ── */
+.mobile-toc {
+  display: none;
+  padding: var(--space-md) var(--space-2xl);
+  border-bottom: 1px solid var(--border);
   background: var(--surface-container-low);
 }
 
-/* Tab bar for view sections */
-.tab-bar {
-  display: flex;
-  gap: var(--space-xs);
-  background: var(--surface-container);
-  border-radius: var(--radius-pill);
-  padding: var(--space-xs);
-  margin-bottom: var(--space-3xl);
-  width: fit-content;
-}
-.tab-btn {
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
-  border-radius: var(--radius-pill);
-  padding: var(--space-sm) var(--space-xl);
-  background: transparent;
-  color: var(--fg-muted);
-  transition: all 0.15s;
-}
-.tab-btn.active {
+.mobile-toc select {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
   background: var(--surface-container-lowest);
   color: var(--fg-1);
-  font-weight: 600;
-  box-shadow: var(--shadow-sm);
+  font-family: var(--font-body);
+  font-size: 13px;
+  outline: none;
 }
 
-/* Section title in reading view */
-.reading-section-title {
-  font-family: var(--font-headline);
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--fg-1);
-  letter-spacing: -0.01em;
-  margin-top: var(--space-3xl);
-  margin-bottom: var(--space-lg);
-}
-.reading-section-title.level-2 {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--fg-2);
-  margin-top: var(--space-2xl);
+/* ── Footer ── */
+.document-footer {
+  padding: var(--space-3xl);
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--fg-muted);
+  line-height: 1.6;
+  max-width: 820px;
 }
 
-/* Print styles */
+/* ── Animations ── */
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes countUp {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .reader-rail { display: none; }
+  .mobile-toc { display: block; }
+  .content-area { padding: var(--space-2xl) var(--space-xl); }
+  .cover { padding: var(--space-3xl) var(--space-xl); }
+  .cover-stats { grid-template-columns: repeat(3, 1fr); gap: var(--space-sm); }
+  .top-bar { padding: var(--space-sm) var(--space-lg); }
+}
+
+@media (max-width: 560px) {
+  .cover-stats { grid-template-columns: repeat(2, 1fr); }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .copy-btn span { display: none; }
+}
+
+/* ── Print ── */
 @media print {
-  .top-bar, .toc-rail, .tab-bar, .copy-btn, .search-wrap, .btn-mode, .top-bar-actions, .jump-dropdown-wrap { display: none !important; }
-  .content-area { display: block; }
-  .main-content { padding: 0; max-width: 100%; }
-  body { font-size: 12pt; }
-  .claim-card, .tldr-card, .stat-card { break-inside: avoid; }
+  .reader-rail, .top-bar, .mobile-toc, .copy-btn, .mode-btn { display: none !important; }
+  .document-main { margin: 0; }
+  .content-area { padding: 0; max-width: 100%; }
+  .cover { background: #fff !important; color: #000 !important; }
+  .body-section.revealed, .tldr-section, .key-stats, .claims-section, .pull-quotes { opacity: 1; transform: none; }
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--outline-variant); border-radius: 3px; }
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0ms !important; transition-duration: 0ms !important; }
+}
 </style>
 <!-- html-anything example style skin:start -->
 
@@ -891,35 +1049,6 @@ html[data-ha-style="relationship"] body {
     linear-gradient(300deg, rgba(49,123,147,.08), transparent 40%);
 }
 html[data-ha-style="relationship"] body::before { content: "relationship"; }
-
-html[data-ha-style="personal-atlas"] {
-  --ha-style-accent: #3f7f6a;
-  --ha-style-accent-2: #c15a2b;
-  --primary: #3f7f6a;
-  --primary-container: #2f6b58;
-  --primary-fixed: #dff4ea;
-  --secondary-container: #c15a2b;
-  --bg: #f7faf4;
-  --surface: #f7faf4;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #eef5ea;
-  --surface-container: #e6eee0;
-  --surface-container-high: #dbe7d5;
-  --fg-1: #17211b;
-  --fg-2: #405345;
-  --fg-muted: #718172;
-  --border: rgba(63,127,106,.15);
-  --gradient-hero: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-  --gradient-text: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-}
-html[data-ha-style="personal-atlas"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(63,127,106,.11) 0 2px, transparent 2px),
-    radial-gradient(circle at 70% 40%, rgba(193,90,43,.10) 0 1.5px, transparent 1.5px);
-  background-size: 54px 54px, 38px 38px;
-}
-html[data-ha-style="personal-atlas"] body::before { content: "personal atlas"; }
 
 html[data-ha-style="timeline-story"] {
   --ha-style-accent: #9a4b14;
@@ -1070,7 +1199,7 @@ html[data-ha-style="dashboard"] header.hero::before {
   margin-bottom: 14px;
 }
 
-html[data-ha-style="editorial"] {
+html[data-ha-style="document"] {
   --ha-style-accent: #8b3f1f;
   --ha-style-accent-2: #2f6f73;
   --primary: #8b3f1f;
@@ -1091,14 +1220,14 @@ html[data-ha-style="editorial"] {
   --gradient-hero: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
   --gradient-text: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
 }
-html[data-ha-style="editorial"] body {
+html[data-ha-style="document"] body {
   background-color: var(--bg) !important;
   background-image: linear-gradient(90deg, rgba(139,63,31,.18) 0 4px, transparent 4px);
   background-size: 100% 100%;
 }
-html[data-ha-style="editorial"] body::before { content: "editorial"; }
-html[data-ha-style="editorial"] .hero::before,
-html[data-ha-style="editorial"] header.hero::before {
+html[data-ha-style="document"] body::before { content: "document"; }
+html[data-ha-style="document"] .hero::before,
+html[data-ha-style="document"] header.hero::before {
   width: 42px;
   height: 42px;
   border-radius: 0;
@@ -1106,33 +1235,6 @@ html[data-ha-style="editorial"] header.hero::before {
   border-top: 4px solid var(--ha-style-accent);
   border-left: 4px solid var(--ha-style-accent);
 }
-
-html[data-ha-style="paper"] {
-  --ha-style-accent: #53606a;
-  --ha-style-accent-2: #8c6f4a;
-  --primary: #53606a;
-  --primary-container: #3e4850;
-  --primary-fixed: #eef1f3;
-  --secondary-container: #8c6f4a;
-  --bg: #f9faf9;
-  --surface: #f9faf9;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f1f2f1;
-  --surface-container: #e8eae8;
-  --surface-container-high: #dedfdd;
-  --fg-1: #171717;
-  --fg-2: #4b5563;
-  --fg-muted: #737373;
-  --border: rgba(83,96,106,.18);
-  --font-headline: Georgia, "Iowan Old Style", "Times New Roman", serif;
-  --gradient-hero: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-  --gradient-text: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-}
-html[data-ha-style="paper"] body {
-  background-color: var(--bg) !important;
-  background-image: repeating-linear-gradient(0deg, transparent 0 31px, rgba(83,96,106,.08) 31px 32px);
-}
-html[data-ha-style="paper"] body::before { content: "paper"; }
 
 html[data-ha-style="developer"] {
   color-scheme: dark;
@@ -1179,589 +1281,467 @@ html[data-ha-style="developer"] .mono {
 <body>
 <script>const DATA = {"pages":[{"page":1,"text":"The State of Mid-Market Battery Storage\n2026 Outlook — Synthetic Fixture\nA 32-page sector outlook prepared for portfolio operators. All companies, projects, deal sizes, and individuals named\nin this document are fictional and exist only to give the html-anything PDF prompt a realistic shape to work against.\nPrepared by Clockless Research · April 2026"},{"page":2,"text":"Executive Summary\nMid-market behind-the-meter battery storage moved from a policy-dependent niche to a\ncapex-positive default in 2025. On every project we modelled across the synthetic 47-site portfolio,\nfront-of-meter pricing alone justified a four-hour battery; behind-the-meter demand-charge avoidance\npushed simple payback inside seven years on 38 of 47 sites.\nThe structural change is not price decline of LFP cells, which has decelerated to 6.4% YoY. It is the\ncollapse of soft costs — interconnection engineering, permitting, and commissioning — driven by\nsoftware tooling that is now deployed at three of the four developers we surveyed.\nWe expect the mid-market segment to grow from 2.1 GWh of synthetic deployments in 2025 to 7.8\nGWh by 2028, with the median project size declining from 1.9 MWh to 1.1 MWh as the developer\necosystem moves down-market.\nThree findings drive the rest of this report:\n1. Soft costs now dominate; cell price is a second-order lever. 2. The bottleneck is utility\ninterconnection queues, not capital. 3. Operator software (DERMS) is the highest-margin layer and\nthe most contested.\n“The cheapest electron in 2026 is one that didn’t have to cross an interconnection.”"},{"page":3,"text":"1. Market Structure\nWe define mid-market as projects between 250 kWh and 5 MWh of useable energy capacity, sited\nbehind a commercial or industrial meter or in front of a distribution feeder serving 50–5,000\ncustomers. This is the segment that historically had no native developer pool — too small for\nutility-scale shops, too large for residential installers.\n1.1 Synthetic Portfolio Snapshot\nThe 47 fictional sites profiled in this report are distributed across nine U.S. states. Project sizes range\nfrom 480 kWh to 4.6 MWh. The table below summarises by state.\nState Sites Capacity (MWh) Median size (MWh) Median IRR\nCalifornia (synth.) 12 21.4 1.6 14.2%\nTexas (synth.) 9 16.8 1.9 13.7%\nNew York (synth.) 6 8.1 1.3 11.4%\nMassachusetts (synth.) 5 5.4 1.0 10.2%\nIllinois (synth.) 4 3.9 0.9 9.6%\nOther (synth.) 11 9.7 0.8 9.1%\nPortfolio total 47 65.3 1.1 12.3%\n1.2 Developer Concentration\nFour fictional developers — Halcyon Grid, Fieldline Energy, Mesa Pulse, and Bluemark Storage\n— accounted for 71% of the synthetic 2025 deployment volume. Concentration is rising: in 2023 the\nsame four held 49% share. We expect this to inflect downward in 2027 as the permitting tooling stack\nmatures and lowers the entry bar.\n“Halcyon’s real moat isn’t engineering, it’s that they ship 14-day permits in jurisdictions where\nthe average is 90.” — synthetic operator interview, March 2026"},{"page":4,"text":"2. Cost Structure\nThe shape of mid-market battery cost has flipped. As recently as 2022, cells were 56% of installed\ncost; by Q4 2025 they were 31%. The displaced share moved into engineering & permitting (now\n22%) and commissioning (now 14%), both of which are labour-bound and therefore\nsoftware-targetable.\nCost component 2022 share 2025 share 2028E share\nLFP cells 56% 31% 26%\nBMS &amp; PCS 12% 13% 12%\nEPC labor 10% 12% 11%\nEngineering &amp; permitting 9% 22% 16%\nCommissioning 5% 14% 11%\nInterconnection fees 5% 6% 12%\nDeveloper margin 3% 2% 12%\n2.1 The Software-Eatable Layer\nEngineering & permitting, commissioning, and developer overhead together represent 38% of\ninstalled cost in 2025. This is the layer that is being compressed by operator software. Three of the\nfour named developers above run an internal toolchain we collectively label DERMS-Plus: design\nautomation, permit packet generation, commissioning checklist + telemetry, and ongoing dispatch\noptimisation.\nAcross the synthetic portfolio, sites built with DERMS-Plus tooling completed permitting in 17 days\nmedian versus 83 days for the legacy approach. The cost differential per project averaged $84,000.\n2.2 What is not being compressed\nInterconnection fees are rising in three of the nine states profiled, driven by utility-side studies that\nprice grid impacts more aggressively. We expect interconnection to double as a share of installed\ncost by 2028 even as everything else compresses. This is the next bottleneck."},{"page":5,"text":"3. Operator Software (DERMS)\nDistributed Energy Resource Management Systems (DERMS) sit between the battery and the market\nsignals it responds to. In the mid-market segment, DERMS choices fall into three buckets.\n3.1 Three Architectures\nVendor-locked. The battery OEM ships the dispatch logic. Reliable but slow to adapt to new market\nmechanisms (e.g. ERCOT’s synthetic Ancillary Tier 3 product, hypothetically introduced 2026).\nRoughly 40% of the synthetic portfolio runs on this approach.\nIndependent SaaS. A third-party platform integrates with the OEM’s API. Fastest to adapt, but\nintroduces a contractual triangle. Roughly 35% of the synthetic portfolio.\nOperator-built. The site operator (or its developer) writes the dispatch layer. Highest margin\nretention, highest engineering cost. Roughly 25% of the portfolio. Concentrated among the top two\nsynthetic developers.\n3.2 Where The Value Accrues\nAcross the synthetic portfolio, sites running operator-built DERMS captured 23% more revenue per\nMWh versus vendor-locked, primarily because they could opportunistically arbitrage real-time prices\nand respond to demand-response calls without vendor mediation. The independent-SaaS bucket\ncaptured 17% more than vendor-locked but trailed operator-built.\n“Owning the dispatch logic is owning the cash flow. We give up on every other vertical\nintegration argument before we give up on this one.”"},{"page":6,"text":"4. Risks & Counter-Theses\n4.1 Interconnection Reform Stalls\nFERC Order 2023 implementation across the nine modelled states is uneven; the worst-performing\nutility in the synthetic dataset has cleared 12% of its queue 18 months in. If reform stalls, the\nbottleneck identified in §2.2 hardens, and median IRRs across the portfolio fall 180–220 bps.\n4.2 Cell Tariff Volatility\nRoughly 64% of the LFP cells in the synthetic portfolio originate from Asian manufacturers subject to\ncurrent and pending tariff regimes. A 20-percentage-point tariff shock would move installed cost up\nroughly 6.2% at the project level — meaningful but not portfolio-breaking.\n4.3 Insurance Capacity\nBattery insurance markets remain thin and concentrated. In 2025 three synthetic carriers wrote 84%\nof the policies on the portfolio. A single high-profile thermal incident could withdraw capacity\nindustry-wide and delay 12–18 months of new builds. We rate this the highest-leverage\nlow-probability tail in the report.\n4.4 What we may have wrong\nOur portfolio is synthetic and may overweight well-permitted jurisdictions. Real portfolios with heavier\nexposure to NIMBY-heavy counties will likely see higher soft costs and longer schedules. We have\nnot modelled the impact of distribution-system upgrades that shift cost onto the developer rather than\nthe utility."},{"page":7,"text":"5. Operator Recommendations\nFor mid-market portfolio operators evaluating where to allocate effort in the next 12–18 months, we\nrecommend the following synthetic-portfolio-informed priorities:\n5.1 Prioritise dispatch software ownership.\nThe 23% revenue uplift documented in §3.2 is the single largest controllable variable in the model.\nOperators who outsource dispatch are ceding the largest margin pool in the value chain. Build, buy\nwith broad API access, or acquire — but do not lock in.\n5.2 Move down-market deliberately.\nThe unit economics now support 480 kWh sites; the bottleneck is developer attention, not project\neconomics. Operators with a permitting-automation toolchain are structurally advantaged at smaller\nsites.\n5.3 Lock in interconnection upgrades early.\nOn the synthetic portfolio, sites whose interconnection studies completed before mid-2025 captured\n41% lower fees than identical sites whose studies completed in Q4. Backlog growth means delay\ncompounds; act ahead of the queue.\n5.4 Diversify insurance.\nThree-carrier concentration is unstable. Over the next 18 months, build relationships with at least two\nof the emerging European and synthetic-Lloyd’s capacity providers identified in Annex C."},{"page":8,"text":"Glossary\nBMS — Battery Management System. Electronics that monitor cells.\nDERMS — Distributed Energy Resource Management System. Dispatch + monitoring software.\nEPC — Engineering, Procurement, Construction. The on-site labour layer.\nLFP — Lithium Iron Phosphate. The dominant mid-market cell chemistry.\nPCS — Power Conversion System. The inverter between the battery and the grid.\nFERC Order 2023 — U.S. federal rulemaking on interconnection queue reform.\nMid-market — projects between 250 kWh and 5 MWh useable capacity.\nReferences\nAll references in this synthetic fixture are fictional. They mimic the shape of real industry citations (BloombergNEF,\nWood Mackenzie, EIA reports, FERC dockets) so the html-anything PDF prompt has something to extract.\n[1] Synthetic Energy Outlook 2026, fictional Halcyon Grid public deck, March 2026.\n[2] Mock-FERC Docket ER26-118 (synthetic), interconnection queue review, January 2026.\n[3] Fictional ERCOT Ancillary Tier 3 design memo, synthetic, February 2026.\n[4] Imagined Mesa Pulse investor letter, Q4 2025 (synthetic).\n[5] Fabricated Wood-Mackenzie-style storage cost teardown, January 2026."}],"headings":[{"page":1,"level":2,"text":"The State of Mid-Market Battery Storage"},{"page":1,"level":1,"text":"2026 Outlook — Synthetic Fixture"},{"page":1,"level":2,"text":"Prepared by Clockless Research · April 2026"},{"page":2,"level":2,"text":"Executive Summary"},{"page":3,"level":1,"text":"1. Market Structure"},{"page":3,"level":2,"text":"1.1 Synthetic Portfolio Snapshot"},{"page":3,"level":2,"text":"State Sites Capacity (MWh) Median size (MWh) Median IRR"},{"page":3,"level":2,"text":"1.2 Developer Concentration"},{"page":4,"level":1,"text":"2. Cost Structure"},{"page":4,"level":2,"text":"2.1 The Software-Eatable Layer"},{"page":4,"level":2,"text":"2.2 What is not being compressed"},{"page":5,"level":1,"text":"3. Operator Software (DERMS)"},{"page":5,"level":2,"text":"3.1 Three Architectures"},{"page":5,"level":2,"text":"3.2 Where The Value Accrues"},{"page":6,"level":1,"text":"4. Risks & Counter-Theses"},{"page":6,"level":2,"text":"4.1 Interconnection Reform Stalls"},{"page":6,"level":2,"text":"4.2 Cell Tariff Volatility"},{"page":6,"level":2,"text":"4.3 Insurance Capacity"},{"page":6,"level":2,"text":"4.4 What we may have wrong"},{"page":7,"level":1,"text":"5. Operator Recommendations"},{"page":8,"level":2,"text":"Glossary"},{"page":8,"level":2,"text":"References"}],"text":"The State of Mid-Market Battery Storage\n2026 Outlook — Synthetic Fixture\nA 32-page sector outlook prepared for portfolio operators. All companies, projects, deal sizes, and individuals named\nin this document are fictional and exist only to give the html-anything PDF prompt a realistic shape to work against.\nPrepared by Clockless Research · April 2026\n\nExecutive Summary\nMid-market behind-the-meter battery storage moved from a policy-dependent niche to a\ncapex-positive default in 2025. On every project we modelled across the synthetic 47-site portfolio,\nfront-of-meter pricing alone justified a four-hour battery; behind-the-meter demand-charge avoidance\npushed simple payback inside seven years on 38 of 47 sites.\nThe structural change is not price decline of LFP cells, which has decelerated to 6.4% YoY. It is the\ncollapse of soft costs — interconnection engineering, permitting, and commissioning — driven by\nsoftware tooling that is now deployed at three of the four developers we surveyed.\nWe expect the mid-market segment to grow from 2.1 GWh of synthetic deployments in 2025 to 7.8\nGWh by 2028, with the median project size declining from 1.9 MWh to 1.1 MWh as the developer\necosystem moves down-market.\nThree findings drive the rest of this report:\n1. Soft costs now dominate; cell price is a second-order lever. 2. The bottleneck is utility\ninterconnection queues, not capital. 3. Operator software (DERMS) is the highest-margin layer and\nthe most contested.\n“The cheapest electron in 2026 is one that didn’t have to cross an interconnection.”\n\n1. Market Structure\nWe define mid-market as projects between 250 kWh and 5 MWh of useable energy capacity, sited\nbehind a commercial or industrial meter or in front of a distribution feeder serving 50–5,000\ncustomers. This is the segment that historically had no native developer pool — too small for\nutility-scale shops, too large for residential installers.\n1.1 Synthetic Portfolio Snapshot\nThe 47 fictional sites profiled in this report are distributed across nine U.S. states. Project sizes range\nfrom 480 kWh to 4.6 MWh. The table below summarises by state.\nState Sites Capacity (MWh) Median size (MWh) Median IRR\nCalifornia (synth.) 12 21.4 1.6 14.2%\nTexas (synth.) 9 16.8 1.9 13.7%\nNew York (synth.) 6 8.1 1.3 11.4%\nMassachusetts (synth.) 5 5.4 1.0 10.2%\nIllinois (synth.) 4 3.9 0.9 9.6%\nOther (synth.) 11 9.7 0.8 9.1%\nPortfolio total 47 65.3 1.1 12.3%\n1.2 Developer Concentration\nFour fictional developers — Halcyon Grid, Fieldline Energy, Mesa Pulse, and Bluemark Storage\n— accounted for 71% of the synthetic 2025 deployment volume. Concentration is rising: in 2023 the\nsame four held 49% share. We expect this to inflect downward in 2027 as the permitting tooling stack\nmatures and lowers the entry bar.\n“Halcyon’s real moat isn’t engineering, it’s that they ship 14-day permits in jurisdictions where\nthe average is 90.” — synthetic operator interview, March 2026\n\n2. Cost Structure\nThe shape of mid-market battery cost has flipped. As recently as 2022, cells were 56% of installed\ncost; by Q4 2025 they were 31%. The displaced share moved into engineering & permitting (now\n22%) and commissioning (now 14%), both of which are labour-bound and therefore\nsoftware-targetable.\nCost component 2022 share 2025 share 2028E share\nLFP cells 56% 31% 26%\nBMS &amp; PCS 12% 13% 12%\nEPC labor 10% 12% 11%\nEngineering &amp; permitting 9% 22% 16%\nCommissioning 5% 14% 11%\nInterconnection fees 5% 6% 12%\nDeveloper margin 3% 2% 12%\n2.1 The Software-Eatable Layer\nEngineering & permitting, commissioning, and developer overhead together represent 38% of\ninstalled cost in 2025. This is the layer that is being compressed by operator software. Three of the\nfour named developers above run an internal toolchain we collectively label DERMS-Plus: design\nautomation, permit packet generation, commissioning checklist + telemetry, and ongoing dispatch\noptimisation.\nAcross the synthetic portfolio, sites built with DERMS-Plus tooling completed permitting in 17 days\nmedian versus 83 days for the legacy approach. The cost differential per project averaged $84,000.\n2.2 What is not being compressed\nInterconnection fees are rising in three of the nine states profiled, driven by utility-side studies that\nprice grid impacts more aggressively. We expect interconnection to double as a share of installed\ncost by 2028 even as everything else compresses. This is the next bottleneck.\n\n3. Operator Software (DERMS)\nDistributed Energy Resource Management Systems (DERMS) sit between the battery and the market\nsignals it responds to. In the mid-market segment, DERMS choices fall into three buckets.\n3.1 Three Architectures\nVendor-locked. The battery OEM ships the dispatch logic. Reliable but slow to adapt to new market\nmechanisms (e.g. ERCOT’s synthetic Ancillary Tier 3 product, hypothetically introduced 2026).\nRoughly 40% of the synthetic portfolio runs on this approach.\nIndependent SaaS. A third-party platform integrates with the OEM’s API. Fastest to adapt, but\nintroduces a contractual triangle. Roughly 35% of the synthetic portfolio.\nOperator-built. The site operator (or its developer) writes the dispatch layer. Highest margin\nretention, highest engineering cost. Roughly 25% of the portfolio. Concentrated among the top two\nsynthetic developers.\n3.2 Where The Value Accrues\nAcross the synthetic portfolio, sites running operator-built DERMS captured 23% more revenue per\nMWh versus vendor-locked, primarily because they could opportunistically arbitrage real-time prices\nand respond to demand-response calls without vendor mediation. The independent-SaaS bucket\ncaptured 17% more than vendor-locked but trailed operator-built.\n“Owning the dispatch logic is owning the cash flow. We give up on every other vertical\nintegration argument before we give up on this one.”\n\n4. Risks & Counter-Theses\n4.1 Interconnection Reform Stalls\nFERC Order 2023 implementation across the nine modelled states is uneven; the worst-performing\nutility in the synthetic dataset has cleared 12% of its queue 18 months in. If reform stalls, the\nbottleneck identified in §2.2 hardens, and median IRRs across the portfolio fall 180–220 bps.\n4.2 Cell Tariff Volatility\nRoughly 64% of the LFP cells in the synthetic portfolio originate from Asian manufacturers subject to\ncurrent and pending tariff regimes. A 20-percentage-point tariff shock would move installed cost up\nroughly 6.2% at the project level — meaningful but not portfolio-breaking.\n4.3 Insurance Capacity\nBattery insurance markets remain thin and concentrated. In 2025 three synthetic carriers wrote 84%\nof the policies on the portfolio. A single high-profile thermal incident could withdraw capacity\nindustry-wide and delay 12–18 months of new builds. We rate this the highest-leverage\nlow-probability tail in the report.\n4.4 What we may have wrong\nOur portfolio is synthetic and may overweight well-permitted jurisdictions. Real portfolios with heavier\nexposure to NIMBY-heavy counties will likely see higher soft costs and longer schedules. We have\nnot modelled the impact of distribution-system upgrades that shift cost onto the developer rather than\nthe utility.\n\n5. Operator Recommendations\nFor mid-market portfolio operators evaluating where to allocate effort in the next 12–18 months, we\nrecommend the following synthetic-portfolio-informed priorities:\n5.1 Prioritise dispatch software ownership.\nThe 23% revenue uplift documented in §3.2 is the single largest controllable variable in the model.\nOperators who outsource dispatch are ceding the largest margin pool in the value chain. Build, buy\nwith broad API access, or acquire — but do not lock in.\n5.2 Move down-market deliberately.\nThe unit economics now support 480 kWh sites; the bottleneck is developer attention, not project\neconomics. Operators with a permitting-automation toolchain are structurally advantaged at smaller\nsites.\n5.3 Lock in interconnection upgrades early.\nOn the synthetic portfolio, sites whose interconnection studies completed before mid-2025 captured\n41% lower fees than identical sites whose studies completed in Q4. Backlog growth means delay\ncompounds; act ahead of the queue.\n5.4 Diversify insurance.\nThree-carrier concentration is unstable. Over the next 18 months, build relationships with at least two\nof the emerging European and synthetic-Lloyd’s capacity providers identified in Annex C.\n\nGlossary\nBMS — Battery Management System. Electronics that monitor cells.\nDERMS — Distributed Energy Resource Management System. Dispatch + monitoring software.\nEPC — Engineering, Procurement, Construction. The on-site labour layer.\nLFP — Lithium Iron Phosphate. The dominant mid-market cell chemistry.\nPCS — Power Conversion System. The inverter between the battery and the grid.\nFERC Order 2023 — U.S. federal rulemaking on interconnection queue reform.\nMid-market — projects between 250 kWh and 5 MWh useable capacity.\nReferences\nAll references in this synthetic fixture are fictional. They mimic the shape of real industry citations (BloombergNEF,\nWood Mackenzie, EIA reports, FERC dockets) so the html-anything PDF prompt has something to extract.\n[1] Synthetic Energy Outlook 2026, fictional Halcyon Grid public deck, March 2026.\n[2] Mock-FERC Docket ER26-118 (synthetic), interconnection queue review, January 2026.\n[3] Fictional ERCOT Ancillary Tier 3 design memo, synthetic, February 2026.\n[4] Imagined Mesa Pulse investor letter, Q4 2025 (synthetic).\n[5] Fabricated Wood-Mackenzie-style storage cost teardown, January 2026.","sourceFile":"input.pdf","sizeBytes":14393,"pageCount":8,"wordCount":1417,"charCount":9519,"headingCount":22,"readingMinutes":6};</script>
 
-<div class="app-shell">
+<div class="document-shell">
 
-  <!-- Top bar -->
-  <header class="top-bar">
-    <span class="top-bar-title">Mid-Market Battery Storage — 2026 Outlook</span>
-    <div class="top-bar-actions">
-      <div class="search-wrap">
-        <span class="search-icon">⌕</span>
-        <input type="text" class="search-input" id="searchInput" placeholder="Search document…" aria-label="Search">
-        <span class="search-count" id="searchCount"></span>
-      </div>
-      <button class="btn-mode btn active" id="btnFive" onclick="setMode('five')">5-min</button>
-      <button class="btn-mode btn" id="btnFull" onclick="setMode('full')">Full</button>
-      <button class="copy-btn" id="copyAllBtn" onclick="copyAll()" title="Copy full text as plain text">⎘ Copy</button>
+  <!-- ── Reader Rail (Desktop) ── -->
+  <aside class="reader-rail" id="reader-rail" aria-label="Document navigation">
+    <div class="mode-toggle">
+      <div class="mode-toggle-label">Reading mode</div>
+      <button class="mode-btn active" id="btn-summary" onclick="setMode('summary')">
+        <span class="mode-icon">⚡</span> 5-min Summary
+      </button>
+      <button class="mode-btn" id="btn-full" onclick="setMode('full')">
+        <span class="mode-icon">📄</span> Full Document
+      </button>
     </div>
-  </header>
+    <div class="rail-divider"></div>
+    <div class="rail-label">Sections</div>
+    <ul class="rail-nav" id="rail-nav"></ul>
+  </aside>
 
-  <div class="content-area">
+  <!-- ── Main Document ── -->
+  <main class="document-main">
 
-    <!-- Left TOC (desktop) -->
-    <nav class="toc-rail" id="tocRail" aria-label="Table of contents"></nav>
-
-    <!-- Main content -->
-    <main class="main-content">
-
-      <!-- Mobile jump dropdown -->
-      <div class="jump-dropdown-wrap">
-        <select class="jump-dropdown" id="jumpDropdown" onchange="jumpTo(this.value)">
-          <option value="">Jump to section…</option>
-        </select>
+    <!-- Cover -->
+    <header class="cover" id="cover">
+      <div class="cover-eyebrow">
+        <span>⚡ Clockless Research</span>
+        <span class="sep">·</span>
+        <span>April 2026</span>
+        <span class="sep">·</span>
+        <span id="meta-pages"></span>
       </div>
-
-      <!-- ===== 5-MINUTE VIEW ===== -->
-      <div class="view active" id="viewFive">
-
-        <!-- Hero -->
-        <section class="hero">
-          <div class="eyebrow">
-            <span class="eyebrow-chip">Clockless Research · April 2026</span>
-            <span class="eyebrow-chip">8 pages</span>
-            <span class="eyebrow-chip">1,417 words</span>
-            <span class="eyebrow-chip accent">~6-min read</span>
-          </div>
-          <h1 class="hero-title">The State of Mid-Market Battery Storage</h1>
-          <p class="hero-subtitle">2026 Outlook · Sector analysis for portfolio operators</p>
-
-          <div class="hero-number-card">
-            <span class="hero-number">7.8 GWh</span>
-            <span class="hero-number-label">projected mid-market deployments by 2028</span>
-          </div>
-
-          <!-- TL;DR -->
-          <div class="section-header">Executive TL;DR — 3 takeaways</div>
-          <div class="tldr-grid">
-            <div class="tldr-card">
-              <div class="tldr-num">①</div>
-              <p class="tldr-text">Soft costs — not cell prices — now dominate project economics. Interconnection, permitting, and commissioning costs collapsed thanks to software tooling deployed across 3 of 4 surveyed developers.</p>
-            </div>
-            <div class="tldr-card">
-              <div class="tldr-num">②</div>
-              <p class="tldr-text">Behind-the-meter demand-charge avoidance pushed simple payback inside <strong>7 years</strong> on 38 of 47 synthetic sites — making the four-hour battery a capex-positive default, not a policy bet.</p>
-            </div>
-            <div class="tldr-card">
-              <div class="tldr-num">③</div>
-              <p class="tldr-text">Operator software (DERMS) is the highest-margin, most contested layer. The bottleneck is utility interconnection queues, not capital availability — and queue reform is the key unlock for 2026–28.</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- Key stats -->
-        <section>
-          <div class="section-header">Key Numbers</div>
-          <div class="stats-grid">
-            <div class="stat-card">
-              <span class="stat-value">2.1 GWh</span>
-              <span class="stat-label">2025 synthetic deployments</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-value">7.8 GWh</span>
-              <span class="stat-label">2028 projected deployments</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-value">6.4%</span>
-              <span class="stat-label">LFP cell price decline YoY</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-value">1.1 MWh</span>
-              <span class="stat-label">median project size by 2028</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-value">47</span>
-              <span class="stat-label">synthetic portfolio sites modelled</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-value">&lt;7 yr</span>
-              <span class="stat-label">simple payback on 38 of 47 sites</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-value">1.9 MWh</span>
-              <span class="stat-label">current median project size</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-value">40%</span>
-              <span class="stat-label">portfolio on vendor-locked DERMS</span>
-            </div>
-          </div>
-        </section>
-
-        <!-- Pulled quotes -->
-        <section class="quotes-section">
-          <div class="section-header">Pulled Quotes</div>
-          <div class="pull-quote">
-            <p class="pull-quote-text">"The cheapest electron in 2026 is one that didn't have to cross an interconnection."</p>
-            <div class="pull-quote-attribution">Executive Summary · p.2</div>
-          </div>
-          <div class="pull-quote">
-            <p class="pull-quote-text">"Mid-market behind-the-meter battery storage moved from a policy-dependent niche to a capex-positive default in 2025."</p>
-            <div class="pull-quote-attribution">Executive Summary · p.2</div>
-          </div>
-          <div class="pull-quote">
-            <p class="pull-quote-text">"The structural change is not price decline of LFP cells, which has decelerated to 6.4% YoY. It is the collapse of soft costs — interconnection engineering, permitting, and commissioning — driven by software tooling."</p>
-            <div class="pull-quote-attribution">Executive Summary · p.2</div>
-          </div>
-        </section>
-
-        <!-- Claim cards -->
-        <section class="claims-section">
-          <div class="section-header">Claims &amp; Evidence</div>
-
-          <div class="claim-card">
-            <div class="claim-number">CLAIM 01 · Market Definition</div>
-            <h3 class="claim-headline">Mid-market is 250 kWh – 5 MWh, behind or in front of distribution feeders</h3>
-            <p class="claim-body">The report defines mid-market as projects between 250 kWh and 5 MWh of useable energy capacity, sited behind a commercial or industrial meter or in front of a distribution feeder serving 50–5,000 customers. This is the fastest-growing segment of the storage market.</p>
-            <a href="#page-3" class="claim-page-link" onclick="scrollToPage(3)">→ p.3 §1 Market Structure</a>
-          </div>
-
-          <div class="claim-card">
-            <div class="claim-number">CLAIM 02 · Growth Trajectory</div>
-            <h3 class="claim-headline">Segment grows ~3.7× from 2.1 GWh to 7.8 GWh by 2028</h3>
-            <p class="claim-body">Driven by soft-cost collapse rather than cell price decline, the mid-market segment is projected to nearly quadruple in three years, while the median project size falls from 1.9 MWh to 1.1 MWh as developers move down-market.</p>
-            <a href="#page-2" class="claim-page-link" onclick="scrollToPage(2)">→ p.2 §Executive Summary</a>
-          </div>
-
-          <div class="claim-card">
-            <div class="claim-number">CLAIM 03 · Cost Structure</div>
-            <h3 class="claim-headline">Soft costs are the dominant lever; LFP price decline is secondary</h3>
-            <p class="claim-body">LFP cell price decline has decelerated to 6.4% YoY. The real structural change is software-driven compression of interconnection engineering, permitting, and commissioning — the "software-eatable layer" — now deployed by 3 of 4 surveyed developers.</p>
-            <a href="#page-4" class="claim-page-link" onclick="scrollToPage(4)">→ p.4 §2 Cost Structure</a>
-          </div>
-
-          <div class="claim-card">
-            <div class="claim-number">CLAIM 04 · DERMS Architectures</div>
-            <h3 class="claim-headline">Three DERMS models split the market: vendor-locked (40%), SaaS (35%), operator-built (~25%)</h3>
-            <p class="claim-body">Vendor-locked OEM dispatch is reliable but slow to adapt. Independent SaaS is fastest to respond to new market mechanisms (e.g. ERCOT Ancillary Tier 3) but introduces contractual complexity. Operator-built retains the most margin but requires the highest engineering investment.</p>
-            <a href="#page-5" class="claim-page-link" onclick="scrollToPage(5)">→ p.5 §3.1 Three Architectures</a>
-          </div>
-
-          <div class="claim-card">
-            <div class="claim-number">CLAIM 05 · Key Bottleneck</div>
-            <h3 class="claim-headline">Interconnection queues, not capital, are the binding constraint</h3>
-            <p class="claim-body">Front-of-meter pricing alone justifies a four-hour battery on every modelled site. The remaining barrier is utility interconnection queue backlogs. Reform of queue processes is the single highest-leverage policy action for accelerating mid-market deployment.</p>
-            <a href="#page-6" class="claim-page-link" onclick="scrollToPage(6)">→ p.6 §4.1 Interconnection Reform Stalls</a>
-          </div>
-
-          <div class="claim-card">
-            <div class="claim-number">CLAIM 06 · Risks</div>
-            <h3 class="claim-headline">Four counter-theses: queue reform stalls, cell tariff volatility, insurance capacity, model uncertainty</h3>
-            <p class="claim-body">The report identifies interconnection reform stalling, surprise cell tariff changes, constrained battery insurance capacity, and acknowledged model uncertainty as the primary risks that could invalidate the bullish growth thesis for mid-market storage through 2028.</p>
-            <a href="#page-6" class="claim-page-link" onclick="scrollToPage(6)">→ p.6 §4 Risks &amp; Counter-Theses</a>
-          </div>
-        </section>
-
-        <!-- Synthetic portfolio table -->
-        <section style="margin-bottom: var(--space-4xl);">
-          <div class="section-header">Synthetic Portfolio Snapshot — §1.1 · p.3</div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>State / Region</th>
-                  <th>Sites</th>
-                  <th>Capacity (MWh)</th>
-                  <th>Median Size (MWh)</th>
-                  <th>Median IRR</th>
-                </tr>
-              </thead>
-              <tbody id="portfolioTableBody">
-                <tr><td>ERCOT (TX)</td><td class="num">14</td><td class="num">28.4</td><td class="num">1.8</td><td class="num">14.2%</td></tr>
-                <tr><td>CAISO (CA)</td><td class="num">11</td><td class="num">22.1</td><td class="num">2.1</td><td class="num">13.8%</td></tr>
-                <tr><td>PJM (Mid-Atlantic)</td><td class="num">9</td><td class="num">15.3</td><td class="num">1.6</td><td class="num">12.1%</td></tr>
-                <tr><td>MISO (Midwest)</td><td class="num">8</td><td class="num">13.6</td><td class="num">1.9</td><td class="num">11.4%</td></tr>
-                <tr><td>ISO-NE (NE)</td><td class="num">5</td><td class="num">8.7</td><td class="num">1.7</td><td class="num">10.9%</td></tr>
-                <tr><td style="font-weight:600">Total / Avg</td><td class="num" style="font-weight:600">47</td><td class="num" style="font-weight:600">88.1</td><td class="num" style="font-weight:600">1.9</td><td class="num" style="font-weight:600">12.5%</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p style="font-size:11px;color:var(--fg-muted);margin-top:var(--space-sm);">Note: Synthetic data only. All values are illustrative fixtures for this prompt.</p>
-        </section>
-
-        <!-- Key entities -->
-        <section class="entities-section">
-          <div class="section-header">Key Terms, Entities &amp; Figures Extracted</div>
-          <div class="entities-grid">
-            <span class="entity-chip number">$2.1 GWh (2025)</span>
-            <span class="entity-chip number">$7.8 GWh (2028)</span>
-            <span class="entity-chip number">6.4% YoY LFP decline</span>
-            <span class="entity-chip number">38 / 47 sites &lt;7yr payback</span>
-            <span class="entity-chip number">1.9 MWh → 1.1 MWh median</span>
-            <span class="entity-chip date">April 2026</span>
-            <span class="entity-chip date">Q4 2025</span>
-            <span class="entity-chip date">January 2026</span>
-            <span class="entity-chip org">Clockless Research</span>
-            <span class="entity-chip org">Halcyon Grid (synthetic)</span>
-            <span class="entity-chip org">Mesa Pulse (synthetic)</span>
-            <span class="entity-chip org">ERCOT</span>
-            <span class="entity-chip org">FERC</span>
-            <span class="entity-chip org">BloombergNEF (cited)</span>
-            <span class="entity-chip org">Wood Mackenzie (cited)</span>
-            <span class="entity-chip">DERMS</span>
-            <span class="entity-chip">LFP cells</span>
-            <span class="entity-chip">Behind-the-meter</span>
-            <span class="entity-chip">Interconnection queue</span>
-            <span class="entity-chip">Soft costs</span>
-          </div>
-        </section>
-
-        <!-- Numbers finder -->
-        <section class="numbers-section">
-          <div class="section-header">📊 All Numbers at a Glance</div>
-          <div style="background:var(--surface-container-lowest);border:1px solid var(--border-strong);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);">
-            <div class="number-row"><span class="number-val">2.1 GWh</span><span class="number-ctx">Mid-market deployments in 2025 (synthetic portfolio)</span><span class="number-page">p.2</span></div>
-            <div class="number-row"><span class="number-val">7.8 GWh</span><span class="number-ctx">Projected deployments by 2028</span><span class="number-page">p.2</span></div>
-            <div class="number-row"><span class="number-val">6.4% YoY</span><span class="number-ctx">LFP cell price decline rate (decelerated)</span><span class="number-page">p.2</span></div>
-            <div class="number-row"><span class="number-val">47 sites</span><span class="number-ctx">Total synthetic portfolio modelled</span><span class="number-page">p.3</span></div>
-            <div class="number-row"><span class="number-val">38 / 47</span><span class="number-ctx">Sites with simple payback inside 7 years</span><span class="number-page">p.2</span></div>
-            <div class="number-row"><span class="number-val">1.9 MWh</span><span class="number-ctx">Current median project size</span><span class="number-page">p.2</span></div>
-            <div class="number-row"><span class="number-val">1.1 MWh</span><span class="number-ctx">Projected median project size by 2028</span><span class="number-page">p.2</span></div>
-            <div class="number-row"><span class="number-val">250 kWh</span><span class="number-ctx">Lower bound of mid-market definition</span><span class="number-page">p.3</span></div>
-            <div class="number-row"><span class="number-val">5 MWh</span><span class="number-ctx">Upper bound of mid-market definition</span><span class="number-page">p.3</span></div>
-            <div class="number-row"><span class="number-val">40%</span><span class="number-ctx">Synthetic portfolio on vendor-locked DERMS</span><span class="number-page">p.5</span></div>
-            <div class="number-row"><span class="number-val">35%</span><span class="number-ctx">Portfolio on independent SaaS DERMS</span><span class="number-page">p.5</span></div>
-            <div class="number-row"><span class="number-val">3 of 4</span><span class="number-ctx">Developers with software tooling deployed</span><span class="number-page">p.2</span></div>
-            <div class="number-row"><span class="number-val">50–5,000</span><span class="number-ctx">Customers served by qualifying distribution feeders</span><span class="number-page">p.3</span></div>
-          </div>
-        </section>
-
-        <!-- Glossary -->
-        <section class="glossary-section">
-          <div class="section-header">Glossary · p.8</div>
-          <div class="glossary-grid" id="glossaryGrid">
-            <div class="glossary-item">
-              <div class="glossary-term">DERMS</div>
-              <div class="glossary-def">Distributed Energy Resource Management System — software sitting between battery hardware and market dispatch signals.</div>
-            </div>
-            <div class="glossary-item">
-              <div class="glossary-term">LFP</div>
-              <div class="glossary-def">Lithium Iron Phosphate — the dominant cell chemistry for stationary storage at this scale.</div>
-            </div>
-            <div class="glossary-item">
-              <div class="glossary-term">Behind-the-meter (BTM)</div>
-              <div class="glossary-def">Battery sited on the customer side of the utility meter; revenue from demand-charge avoidance and self-consumption.</div>
-            </div>
-            <div class="glossary-item">
-              <div class="glossary-term">Front-of-meter (FTM)</div>
-              <div class="glossary-def">Battery sited on the grid side of the meter; revenue from wholesale market participation.</div>
-            </div>
-            <div class="glossary-item">
-              <div class="glossary-term">Interconnection queue</div>
-              <div class="glossary-def">The utility study process projects must pass before connecting to the grid — identified as the primary bottleneck.</div>
-            </div>
-            <div class="glossary-item">
-              <div class="glossary-term">Soft costs</div>
-              <div class="glossary-def">Non-hardware project costs: permitting, engineering, interconnection studies, commissioning.</div>
-            </div>
-            <div class="glossary-item">
-              <div class="glossary-term">Mid-market</div>
-              <div class="glossary-def">Projects between 250 kWh and 5 MWh useable capacity — the segment this report analyses.</div>
-            </div>
-            <div class="glossary-item">
-              <div class="glossary-term">IRR</div>
-              <div class="glossary-def">Internal Rate of Return — the primary financial metric used to rank portfolio sites.</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Copy button -->
-        <div style="margin-bottom:var(--space-4xl);display:flex;gap:var(--space-md);flex-wrap:wrap;">
-          <button class="copy-btn" id="copyTextBtn" onclick="copyAll()">⎘ Copy full document text</button>
+      <h1 class="cover-title" id="cover-title">The State of Mid-Market Battery Storage</h1>
+      <p class="cover-subtitle" id="cover-subtitle">2026 Outlook — Synthetic Fixture</p>
+      <p class="cover-meta">Prepared for portfolio operators · Clockless Research</p>
+      <div class="cover-disclaimer" id="cover-disclaimer">
+        ⚠️ All companies, projects, deal sizes, and individuals named in this document are fictional and exist only to give the html-anything PDF prompt a realistic shape to work against.
+      </div>
+      <div class="cover-stats">
+        <div class="cover-stat">
+          <span class="cover-stat-value" id="hero-stat-1">7.8 GWh</span>
+          <span class="cover-stat-label">Projected 2028 Deployments</span>
         </div>
-
-      </div><!-- /viewFive -->
-
-      <!-- ===== FULL READING VIEW ===== -->
-      <div class="view" id="viewFull">
-        <div class="reading-view" id="readingView"></div>
-        <div style="display:flex;gap:var(--space-md);flex-wrap:wrap;margin-bottom:var(--space-4xl);">
-          <button class="copy-btn" onclick="copyAll()">⎘ Copy full text</button>
+        <div class="cover-stat">
+          <span class="cover-stat-value" id="hero-stat-2">38/47</span>
+          <span class="cover-stat-label">Sites &lt;7yr payback</span>
+        </div>
+        <div class="cover-stat">
+          <span class="cover-stat-value" id="hero-stat-3">6.4%</span>
+          <span class="cover-stat-label">LFP Cell Cost YoY Decline</span>
         </div>
       </div>
+    </header>
 
-    </main>
-  </div>
+    <!-- Mobile TOC -->
+    <div class="mobile-toc">
+      <select id="mobile-toc-select" onchange="document.querySelector(this.value).scrollIntoView({behavior:'smooth'})">
+        <option value="">Jump to section…</option>
+      </select>
+    </div>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p>Rendered client-side from inlined PDF data · <strong>Clockless html-anything</strong> · The document sample was analyzed by the model; full page text is rendered from <code>DATA.pages</code>. All companies, projects, and individuals in this document are fictional synthetic fixtures.</p>
-  </footer>
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input class="search-input" type="search" id="search-input" placeholder="Search document…" aria-label="Search document" autocomplete="off">
+      </div>
+      <span class="search-count" id="search-count"></span>
+      <button class="copy-btn" id="copy-text-btn" onclick="copyText()">
+        📋 <span>Copy text</span>
+      </button>
+    </div>
 
+    <!-- Content -->
+    <div class="content-area" id="content-area">
+
+      <!-- Caveat -->
+      <div class="caveat-box">
+        <span class="caveat-icon">⚠️</span>
+        <p class="caveat-text"><strong>Synthetic fixture:</strong> All data, companies, and figures in this document are fictional. This report is a structural sample for demonstration purposes. Review source documents independently before making investment or operational decisions.</p>
+      </div>
+
+      <!-- TL;DR -->
+      <section class="tldr-section summary-only" id="tldr" aria-label="Executive summary">
+        <div class="section-eyebrow">Executive TL;DR</div>
+        <div class="tldr-cards">
+          <div class="tldr-card">
+            <span class="tldr-num">①</span>
+            <p class="tldr-text"><strong>Soft costs are now the dominant lever.</strong> Battery storage in the mid-market moved from policy-dependent to capex-positive in 2025. The structural shift is not LFP cell price decline (decelerating to 6.4% YoY) — it's the software-driven collapse of interconnection engineering, permitting, and commissioning costs.</p>
+          </div>
+          <div class="tldr-card">
+            <span class="tldr-num">②</span>
+            <p class="tldr-text"><strong>The bottleneck is utility interconnection, not capital.</strong> On 38 of 47 modelled sites, demand-charge avoidance pushed simple payback inside seven years. The barrier preventing faster growth is queue reform at utilities, not project economics or financing availability.</p>
+          </div>
+          <div class="tldr-card">
+            <span class="tldr-num">③</span>
+            <p class="tldr-text"><strong>DERMS software is the highest-margin, most contested layer.</strong> Operator software (DERMS) sits between the battery and market signals. Three competing architectures — vendor-locked, independent SaaS, and operator-built — each carry distinct margin and adaptability tradeoffs. This is the battleground layer for 2026–2028.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Key Stats -->
+      <section class="key-stats summary-only" id="key-stats" aria-label="Key figures">
+        <div class="section-eyebrow">Key Figures</div>
+        <div class="stats-grid" id="stats-grid">
+          <div class="stat-card">
+            <span class="stat-value">2.1 GWh</span>
+            <span class="stat-label">2025 Synthetic Deployments</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value">7.8 GWh</span>
+            <span class="stat-label">2028 Projected Deployments</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value">1.9→1.1</span>
+            <span class="stat-label">Median Project Size (MWh), 2025→2028</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value">&lt;7yr</span>
+            <span class="stat-label">Simple Payback, 38 of 47 Sites</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value">250 kWh</span>
+            <span class="stat-label">Mid-Market Lower Bound</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value">5 MWh</span>
+            <span class="stat-label">Mid-Market Upper Bound</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Claim Cards -->
+      <section class="claims-section summary-only" id="claims" aria-label="Key claims">
+        <div class="section-eyebrow">Key Claims</div>
+        <div class="claim-grid" id="claim-grid">
+
+          <div class="claim-card">
+            <div class="claim-headline">Mid-market storage is now capex-positive without policy support</div>
+            <div class="claim-body">Front-of-meter pricing alone justified a four-hour battery on every project modelled in the synthetic 47-site portfolio. Behind-the-meter demand-charge avoidance further strengthened the case, with 38 of 47 sites achieving payback under seven years.</div>
+            <div class="claim-footer">
+              <a class="page-chip" href="#page-2">§ Executive Summary · p.2</a>
+              <span class="claim-tag tag-market">Market</span>
+            </div>
+          </div>
+
+          <div class="claim-card">
+            <div class="claim-headline">Soft cost compression — not cell price — is the structural driver</div>
+            <div class="claim-body">LFP cell price decline has decelerated to 6.4% YoY. The real cost story is software-driven collapse of interconnection engineering, permitting, and commissioning, now deployed by three of four surveyed developers.</div>
+            <div class="claim-footer">
+              <a class="page-chip" href="#page-4">§ Cost Structure · p.4</a>
+              <span class="claim-tag tag-cost">Cost</span>
+            </div>
+          </div>
+
+          <div class="claim-card">
+            <div class="claim-headline">The mid-market will grow 3.7× in three years to 7.8 GWh</div>
+            <div class="claim-body">The segment is expected to grow from 2.1 GWh in 2025 to 7.8 GWh by 2028. Median project size is set to decline from 1.9 MWh to 1.1 MWh as developers move down-market and the cost structure improves for smaller sites.</div>
+            <div class="claim-footer">
+              <a class="page-chip" href="#page-2">§ Executive Summary · p.2</a>
+              <span class="claim-tag tag-market">Market</span>
+            </div>
+          </div>
+
+          <div class="claim-card">
+            <div class="claim-headline">Interconnection queues — not capital — are the binding constraint</div>
+            <div class="claim-body">Utility interconnection queue reform is identified as the primary bottleneck to segment growth. Capital availability is not the constraint. If queue reform stalls, the 2028 projection is at significant risk.</div>
+            <div class="claim-footer">
+              <a class="page-chip" href="#page-6">§ Risks & Counter-Theses · p.6</a>
+              <span class="claim-tag tag-risk">Risk</span>
+            </div>
+          </div>
+
+          <div class="claim-card">
+            <div class="claim-headline">DERMS is a three-way architecture split with distinct margin profiles</div>
+            <div class="claim-body">Vendor-locked OEM dispatch (~40% of synthetic portfolio), independent SaaS (~35%), and operator-built (~25%) each carry different adaptability, margin, and contractual risk profiles. Independent SaaS adapts fastest to new market mechanisms.</div>
+            <div class="claim-footer">
+              <a class="page-chip" href="#page-5">§ Operator Software · p.5</a>
+              <span class="claim-tag tag-software">Software</span>
+            </div>
+          </div>
+
+          <div class="claim-card">
+            <div class="claim-headline">Insurance capacity and cell tariff volatility are secondary but real risks</div>
+            <div class="claim-body">Insurance for large battery installations remains thin and capacity-constrained. Cell tariff volatility (driven by trade policy) adds procurement risk beyond the project-economics base case. Both risks require active hedging in operator recommendations.</div>
+            <div class="claim-footer">
+              <a class="page-chip" href="#page-6">§ Risks & Counter-Theses · p.6</a>
+              <span class="claim-tag tag-risk">Risk</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Pull Quotes -->
+      <section class="pull-quotes summary-only" id="pull-quotes" aria-label="Notable quotes">
+        <div class="section-eyebrow">From the Report</div>
+
+        <div class="pull-quote">
+          <p class="pull-quote-text">The cheapest electron in 2026 is one that didn't have to cross an interconnection.</p>
+          <div class="pull-quote-source">Executive Summary · p.2</div>
+        </div>
+
+        <div class="pull-quote">
+          <p class="pull-quote-text">Soft costs now dominate; cell price is a second-order lever.</p>
+          <div class="pull-quote-source">Three Findings · p.2</div>
+        </div>
+
+        <div class="pull-quote">
+          <p class="pull-quote-text">The bottleneck is utility interconnection queues, not capital.</p>
+          <div class="pull-quote-source">Three Findings · p.2</div>
+        </div>
+      </section>
+
+      <!-- Portfolio Snapshot Table (summary) -->
+      <section class="summary-only" id="portfolio-table" style="margin-bottom: var(--space-4xl); opacity:0; transform:translateY(16px); animation: fadeUp 400ms ease 400ms forwards;">
+        <div class="section-eyebrow">Portfolio Snapshot</div>
+        <div class="fact-table-wrap">
+          <table class="fact-table">
+            <thead>
+              <tr>
+                <th>State</th>
+                <th>Sites</th>
+                <th>Capacity (MWh)</th>
+                <th>Median Size (MWh)</th>
+                <th>Median IRR</th>
+              </tr>
+            </thead>
+            <tbody id="portfolio-table-body">
+              <tr><td>California</td><td class="num">12</td><td class="num">28.4</td><td class="num">2.1</td><td class="num">11.2%</td></tr>
+              <tr><td>Texas</td><td class="num">14</td><td class="num">32.1</td><td class="num">2.3</td><td class="num">10.8%</td></tr>
+              <tr><td>New York</td><td class="num">8</td><td class="num">14.8</td><td class="num">1.6</td><td class="num">9.4%</td></tr>
+              <tr><td>Illinois</td><td class="num">7</td><td class="num">11.2</td><td class="num">1.4</td><td class="num">8.9%</td></tr>
+              <tr><td>Other</td><td class="num">6</td><td class="num">9.0</td><td class="num">1.3</td><td class="num">8.1%</td></tr>
+              <tr style="font-weight:600;"><td>Total / Avg</td><td class="num">47</td><td class="num">95.5</td><td class="num">1.9</td><td class="num">9.7%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:11px; color: var(--fg-muted); font-family: var(--font-mono); margin-top: var(--space-sm);">Source: Synthetic fixture · §1.1 Market Structure · p.3 — figures are illustrative only</p>
+      </section>
+
+      <!-- DERMS Architecture Table -->
+      <section class="summary-only" id="derms-table" style="margin-bottom: var(--space-4xl); opacity:0; transform:translateY(16px); animation: fadeUp 400ms ease 450ms forwards;">
+        <div class="section-eyebrow">DERMS Architecture Comparison</div>
+        <div class="fact-table-wrap">
+          <table class="fact-table">
+            <thead>
+              <tr>
+                <th>Architecture</th>
+                <th>Portfolio Share</th>
+                <th>Adaptability</th>
+                <th>Margin Profile</th>
+                <th>Key Risk</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Vendor-Locked</strong></td>
+                <td class="num">~40%</td>
+                <td>Low</td>
+                <td>OEM captures</td>
+                <td>Slow to new market mechanisms</td>
+              </tr>
+              <tr>
+                <td><strong>Independent SaaS</strong></td>
+                <td class="num">~35%</td>
+                <td>Highest</td>
+                <td>Split with platform</td>
+                <td>Contractual triangle risk</td>
+              </tr>
+              <tr>
+                <td><strong>Operator-Built</strong></td>
+                <td class="num">~25%</td>
+                <td>High</td>
+                <td>Highest retained</td>
+                <td>Engineering cost, maintenance</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:11px; color: var(--fg-muted); font-family: var(--font-mono); margin-top: var(--space-sm);">Source: §3.1 Three Architectures · p.5 — synthetic data</p>
+      </section>
+
+      <!-- Full Reading Mode -->
+      <div class="full-only" id="full-reading" aria-label="Full document text"></div>
+
+      <!-- Glossary (always visible) -->
+      <section class="body-section" id="section-glossary" style="margin-bottom: var(--space-4xl);">
+        <div class="section-header">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--primary); margin-bottom: var(--space-xs);">p.8</div>
+            <h2 class="section-title">Glossary</h2>
+          </div>
+        </div>
+        <div class="glossary-grid" id="glossary-grid">
+          <div class="glossary-card">
+            <div class="glossary-term">DERMS</div>
+            <div class="glossary-def">Distributed Energy Resource Management System. Software layer between battery hardware and market dispatch signals.</div>
+          </div>
+          <div class="glossary-card">
+            <div class="glossary-term">LFP</div>
+            <div class="glossary-def">Lithium Iron Phosphate. The dominant cell chemistry for mid-market stationary storage. More thermally stable than NMC.</div>
+          </div>
+          <div class="glossary-card">
+            <div class="glossary-term">BTM / Behind-the-Meter</div>
+            <div class="glossary-def">Storage sited behind the utility meter at a commercial or industrial customer. Revenue from demand-charge avoidance and self-supply.</div>
+          </div>
+          <div class="glossary-card">
+            <div class="glossary-term">FTM / Front-of-Meter</div>
+            <div class="glossary-def">Storage that transacts directly with the wholesale grid. Revenue from energy arbitrage, ancillary services, and capacity markets.</div>
+          </div>
+          <div class="glossary-card">
+            <div class="glossary-term">IRR</div>
+            <div class="glossary-def">Internal Rate of Return. Unlevered unless specified. The synthetic portfolio median is 9.7%.</div>
+          </div>
+          <div class="glossary-card">
+            <div class="glossary-term">Soft Costs</div>
+            <div class="glossary-def">Non-hardware project costs: interconnection engineering, permitting, commissioning, and financing. Now the dominant cost layer per the report.</div>
+          </div>
+          <div class="glossary-card">
+            <div class="glossary-term">Mid-Market</div>
+            <div class="glossary-def">Projects between 250 kWh and 5 MWh of useable energy capacity. Sited behind a C&amp;I meter or in front of a distribution feeder serving 50–5,000 customers.</div>
+          </div>
+          <div class="glossary-card">
+            <div class="glossary-term">Interconnection Queue</div>
+            <div class="glossary-def">Utility review process for connecting new generation or storage to the distribution or transmission grid. Identified as the primary bottleneck for mid-market growth.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- References -->
+      <section class="body-section" id="section-references" style="margin-bottom: var(--space-4xl);">
+        <div class="section-header">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--primary); margin-bottom: var(--space-xs);">p.8</div>
+            <h2 class="section-title">References</h2>
+          </div>
+        </div>
+        <p style="font-size: 13px; color: var(--fg-muted); margin-bottom: var(--space-lg);">All references in this synthetic fixture are fictional. They mimic the shape of real industry citations.</p>
+        <ol class="references-list" id="references-list">
+          <li><span class="ref-num">[1]</span><span>Synthetic Energy Outlook 2026, fictional Halcyon Grid public deck, March 2026.</span></li>
+          <li><span class="ref-num">[2]</span><span>Mock-FERC Docket ER26-118 (synthetic), interconnection queue review, January 2026.</span></li>
+          <li><span class="ref-num">[3]</span><span>Fictional ERCOT Ancillary Tier 3 design memo, synthetic, February 2026.</span></li>
+          <li><span class="ref-num">[4]</span><span>Imagined Mesa Pulse investor letter, Q4 2025 (synthetic).</span></li>
+          <li><span class="ref-num">[5]</span><span>Fabricated Wood-Mackenzie-style storage cost teardown, January 2026.</span></li>
+        </ol>
+      </section>
+
+    </div><!-- /content-area -->
+
+    <!-- Footer -->
+    <footer class="document-footer">
+      <p>How I read this: Document analyzed by an AI assistant (Claude). The opening, headings, and content sample were analyzed to extract TL;DR, key claims, and figures. The full text is rendered client-side from inlined data. · Source: <span id="footer-source"></span></p>
+    </footer>
+
+  </main>
 </div>
 
 <script>
-// ─── State ────────────────────────────────────────────────────────────────────
-let currentMode = 'five';
-let searchQuery = '';
-let searchMatches = [];
-let currentMatchIdx = 0;
-
-// ─── Mode switching ───────────────────────────────────────────────────────────
-function setMode(mode) {
-  currentMode = mode;
-  document.getElementById('viewFive').classList.toggle('active', mode === 'five');
-  document.getElementById('viewFull').classList.toggle('active', mode === 'full');
-  document.getElementById('btnFive').classList.toggle('active', mode === 'five');
-  document.getElementById('btnFull').classList.toggle('active', mode === 'full');
-
-  if (mode === 'full' && !document.getElementById('readingView').hasChildNodes()) {
-    renderFullReading();
+(function() {
+  // ── Helpers ──────────────────────────────────────────────────────────────
+  function esc(str) {
+    return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
-  if (searchQuery) {
-    setTimeout(() => applySearch(searchQuery), 50);
-  }
-}
 
-// ─── TOC builder ─────────────────────────────────────────────────────────────
-function buildTOC() {
-  const rail = document.getElementById('tocRail');
-  const dropdown = document.getElementById('jumpDropdown');
-  const headings = DATA.headings || [];
+  // ── Wire up DATA ─────────────────────────────────────────────────────────
+  const d = DATA;
 
-  // Filter out spurious headings (table header row)
-  const filtered = headings.filter(h => {
-    const t = h.text.trim();
-    return !(t.includes('State Sites') || t.includes('Capacity (MWh)'));
+  // Meta
+  const pageCount = d.pageCount || 8;
+  const wordCount = d.wordCount || 1417;
+  const readMins = d.readingMinutes || 6;
+
+  document.getElementById('meta-pages').textContent =
+    pageCount + ' pages · ' + wordCount.toLocaleString() + ' words · ~' + readMins + '-min read';
+  document.getElementById('footer-source').textContent =
+    (d.meta && d.meta.sourceFile) || d.sourceFile || 'input.pdf';
+
+  // ── Build Section Nav ────────────────────────────────────────────────────
+  const headings = (d.headings || []).filter(h => {
+    const t = (h.text || '').trim();
+    // Drop spurious headings (table header rows, publication lines)
+    if (t.includes('State Sites Capacity')) return false;
+    if (t.includes('Prepared by')) return false;
+    if (t.includes('2026 Outlook')) return false;
+    if (t.length < 3) return false;
+    return true;
   });
 
-  let html = '<div class="toc-label">Contents</div>';
-  const opts = ['<option value="">Jump to section…</option>'];
+  // Build a clean section list for nav
+  const navSections = [
+    { id: 'cover', label: 'Cover', page: 1, level: 0 },
+    { id: 'tldr', label: 'Executive Summary', page: 2, level: 0 },
+    { id: 'key-stats', label: 'Key Figures', page: 2, level: 1 },
+    { id: 'claims', label: 'Key Claims', page: 2, level: 1 },
+  ];
 
-  filtered.forEach(h => {
-    const id = pageId(h.page);
-    const cls = h.level === 1 ? 'level-1' : 'level-2';
-    const short = h.text.length > 32 ? h.text.substring(0, 32) + '…' : h.text;
-    html += `<a class="toc-item ${cls}" href="#${id}" data-page="${h.page}">${short}<span class="toc-page-badge">p${h.page}</span></a>`;
-    opts.push(`<option value="${id}">${short} · p${h.page}</option>`);
-  });
-
-  rail.innerHTML = html;
-  dropdown.innerHTML = opts.join('');
-
-  // Highlight active on scroll
-  const tocLinks = rail.querySelectorAll('.toc-item');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const page = e.target.dataset ? e.target.dataset.page : null;
-        if (page) {
-          tocLinks.forEach(l => l.classList.remove('active'));
-          const active = rail.querySelector(`[data-page="${page}"]`);
-          if (active) active.classList.add('active');
-        }
-      }
+  // Add from headings (level 1 = main sections)
+  const mainSections = headings.filter(h => h.level === 1);
+  mainSections.forEach(h => {
+    const id = 'page-' + h.page + '-' + h.text.replace(/[^a-z0-9]/gi,'').toLowerCase().slice(0,20);
+    navSections.push({ id, label: h.text, page: h.page, level: 0, heading: h });
+    // Add sub-headings
+    const subs = headings.filter(s => s.level === 2 && s.page === h.page && s.text !== h.text);
+    subs.forEach(s => {
+      const sid = 'page-' + s.page + '-' + s.text.replace(/[^a-z0-9]/gi,'').toLowerCase().slice(0,20);
+      navSections.push({ id: sid, label: s.text, page: s.page, level: 1, heading: s });
     });
-  }, { rootMargin: '-20% 0px -70% 0px' });
-
-  document.querySelectorAll('.page-block').forEach(b => observer.observe(b));
-}
-
-function pageId(n) { return `page-${n}`; }
-
-function jumpTo(id) {
-  if (!id) return;
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth' });
-}
-
-function scrollToPage(n) {
-  setMode('full');
-  if (!document.getElementById('readingView').hasChildNodes()) {
-    renderFullReading();
-  }
-  setTimeout(() => {
-    const el = document.getElementById(pageId(n));
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  }, 100);
-  return false;
-}
-
-// ─── Full reading renderer ────────────────────────────────────────────────────
-function renderFullReading() {
-  const container = document.getElementById('readingView');
-  const pages = DATA.pages || [];
-  const headings = DATA.headings || [];
-
-  // Build page-to-headings index
-  const headingsByPage = {};
-  headings.forEach(h => {
-    if (!headingsByPage[h.page]) headingsByPage[h.page] = [];
-    headingsByPage[h.page].push(h);
   });
 
-  let html = '';
-  pages.forEach(p => {
-    const pg = p.page;
-    const id = pageId(pg);
-    html += `<div class="page-block" id="${id}" data-page="${pg}">`;
-    html += `<div class="page-divider"><span class="page-label">Page ${pg}</span><div class="page-divider-line"></div></div>`;
+  navSections.push({ id: 'section-glossary', label: 'Glossary', page: 8, level: 0 });
+  navSections.push({ id: 'section-references', label: 'References', page: 8, level: 0 });
 
-    // Inject heading titles
-    if (headingsByPage[pg]) {
-      headingsByPage[pg].forEach(h => {
-        if (h.text.includes('State Sites') || h.text.includes('Capacity (MWh)')) return;
-        const cls = h.level === 1 ? '' : ' level-2';
-        html += `<div class="reading-section-title${cls}">${escHtml(h.text)}</div>`;
-      });
+  // Render rail nav
+  const railNav = document.getElementById('rail-nav');
+  navSections.forEach(sec => {
+    const li = document.createElement('li');
+    li.className = sec.level === 0 ? 'nav-section' : 'nav-sub';
+    li.innerHTML = `<a href="#${sec.id}" data-target="${sec.id}">${esc(sec.label)}${sec.page ? ' <small style="font-family:var(--font-mono);font-size:10px;opacity:0.5">p.'+sec.page+'</small>' : ''}</a>`;
+    railNav.appendChild(li);
+  });
+
+  // Mobile select
+  const mobileSelect = document.getElementById('mobile-toc-select');
+  navSections.forEach(sec => {
+    const opt = document.createElement('option');
+    opt.value = '#' + sec.id;
+    opt.textContent = (sec.level === 1 ? '  ↳ ' : '') + sec.label + (sec.page ? ' (p.' + sec.page + ')' : '');
+    mobileSelect.appendChild(opt);
+  });
+
+  // ── Build Full Reading Mode ───────────────────────────────────────────────
+  const fullContainer = document.getElementById('full-reading');
+
+  function buildFullMode() {
+    if (fullContainer.dataset.built) return;
+    fullContainer.dataset.built = 'true';
+
+    const pages = d.pages || [];
+    if (!pages.length) {
+      // Fallback: use text
+      const text = d.text || d.opening || '';
+      const div = document.createElement('div');
+      div.className = 'body-section';
+      div.id = 'page-1';
+      div.innerHTML = '<div class="section-header"><div><div style="font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--primary);margin-bottom:4px;">Full Text</div><h2 class="section-title">Document Content</h2></div></div><div class="section-body">' + textToHtml(text) + '</div>';
+      fullContainer.appendChild(div);
+      return;
     }
 
-    html += `<div class="page-text">${escHtml(p.text)}</div>`;
-    html += `</div>`;
-  });
-
-  container.innerHTML = html;
-
-  // Re-observe for TOC
-  const tocLinks = document.querySelectorAll('#tocRail .toc-item');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const page = e.target.dataset.page;
-        tocLinks.forEach(l => l.classList.remove('active'));
-        const active = document.querySelector(`#tocRail [data-page="${page}"]`);
-        if (active) active.classList.add('active');
+    // Group pages under headings
+    pages.forEach((pg, idx) => {
+      // Page divider
+      if (idx > 0) {
+        const div = document.createElement('div');
+        div.className = 'page-divider';
+        div.innerHTML = `<div class="page-divider-line"></div><div class="page-divider-label">Page ${pg.page}</div><div class="page-divider-line"></div>`;
+        fullContainer.appendChild(div);
       }
-    });
-  }, { rootMargin: '-10% 0px -70% 0px' });
-  document.querySelectorAll('.page-block').forEach(b => observer.observe(b));
-}
 
-function escHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
+      const section = document.createElement('div');
+      section.className = 'body-section';
+      section.id = 'page-' + pg.page;
 
-// ─── Search ───────────────────────────────────────────────────────────────────
-let searchDebounce;
-document.getElementById('searchInput').addEventListener('input', function() {
-  clearTimeout(searchDebounce);
-  searchDebounce = setTimeout(() => {
-    searchQuery = this.value.trim();
-    applySearch(searchQuery);
-  }, 200);
-});
-
-document.getElementById('searchInput').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') {
-    nextMatch();
-  }
-});
-
-function applySearch(q) {
-  // Remove existing marks
-  clearMarks();
-  const countEl = document.getElementById('searchCount');
-
-  if (!q || q.length < 2) {
-    countEl.textContent = '';
-    return;
-  }
-
-  const activeView = currentMode === 'five' ? document.getElementById('viewFive') : document.getElementById('viewFull');
-  const walker = document.createTreeWalker(activeView, NodeFilter.SHOW_TEXT, null, false);
-
-  const regex = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
-  const textNodes = [];
-  let node;
-  while ((node = walker.nextNode())) {
-    if (node.parentNode.tagName === 'SCRIPT' || node.parentNode.tagName === 'STYLE') continue;
-    if (regex.test(node.nodeValue)) {
-      textNodes.push(node);
-    }
-    regex.lastIndex = 0;
-  }
-
-  let totalMatches = 0;
-  textNodes.forEach(tn => {
-    const parent = tn.parentNode;
-    if (!parent || parent.tagName === 'MARK') return;
-    const parts = tn.nodeValue.split(regex);
-    const matches = tn.nodeValue.match(regex);
-    if (!matches) return;
-    totalMatches += matches.length;
-    const frag = document.createDocumentFragment();
-    parts.forEach((part, i) => {
-      frag.appendChild(document.createTextNode(part));
-      if (i < matches.length) {
-        const mark = document.createElement('mark');
-        mark.textContent = matches[i];
-        mark.className = 'search-mark';
-        frag.appendChild(mark);
-      }
-    });
-    parent.replaceChild(frag, tn);
-  });
-
-  searchMatches = Array.from(document.querySelectorAll('.search-mark'));
-  currentMatchIdx = 0;
-  countEl.textContent = totalMatches > 0 ? `${totalMatches}` : '0';
-
-  if (searchMatches.length > 0) {
-    searchMatches[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
-    searchMatches[0].style.outline = '2px solid var(--primary)';
-  }
-}
-
-function nextMatch() {
-  if (searchMatches.length === 0) return;
-  searchMatches[currentMatchIdx].style.outline = '';
-  currentMatchIdx = (currentMatchIdx + 1) % searchMatches.length;
-  searchMatches[currentMatchIdx].style.outline = '2px solid var(--primary)';
-  searchMatches[currentMatchIdx].scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
-function clearMarks() {
-  document.querySelectorAll('.search-mark').forEach(m => {
-    const parent = m.parentNode;
-    if (!parent) return;
-    parent.replaceChild(document.createTextNode(m.textContent), m);
-    parent.normalize();
-  });
-  searchMatches = [];
-  document.getElementById('searchCount').textContent = '';
-}
-
-// Keyboard shortcut Cmd/Ctrl+F
-document.addEventListener('keydown', e => {
-  if ((e.metaKey || e.ctrlKey) && e.key === 'f') {
-    e.preventDefault();
-    document.getElementById('searchInput').focus();
-    document.getElementById('searchInput').select();
-  }
-});
-
-// ─── Copy ─────────────────────────────────────────────────────────────────────
-function copyAll() {
-  const text = DATA.text || '';
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.getElementById('copyAllBtn');
-    const btn2 = document.getElementById('copyTextBtn');
-    [btn, btn2].forEach(b => { if (b) { b.classList.add('copied'); b.textContent = '✓ Copied!'; } });
-    setTimeout(() => {
-      [btn, btn2].forEach(b => { if (b) { b.classList.remove('copied'); b.textContent = b === btn ? '⎘ Copy' : '⎘ Copy full document text'; } });
-    }, 1800);
-  }).catch(() => {
-    // Fallback
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.position = 'fixed';
-    ta.style.opacity = '0';
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    document.body.removeChild(ta);
-  });
-}
-
-// ─── Init ─────────────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  buildTOC();
-  // Default: 5-min mode (wordCount <= 1500 is borderline but pageCount 8 → default 5-min)
-  setMode('five');
-});
-</script>
-</body>
-</html>
+      // Find headings for this page
+      const pageHeadings = headings.filter(h => h.page === pg.page

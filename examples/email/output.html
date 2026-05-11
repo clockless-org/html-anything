@@ -49,6 +49,7 @@
   --shadow-accent: 0 8px 24px rgba(160,59,0,0.15);
   --gradient-primary: linear-gradient(135deg, #a03b00 0%, #c94c00 100%);
   --gradient-hero: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
+  --gradient-text: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -67,1152 +68,1071 @@
     --accent-glow: #00D4FF;
     --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
     --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
-    --outline-variant: #2a3a5a;
-    --primary-fixed: rgba(255,107,53,0.12);
-    --primary-fixed-dim: rgba(255,107,53,0.2);
   }
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+html { font-size: 15px; -webkit-text-size-adjust: 100%; }
+
 body {
   font-family: var(--font-body);
   background: var(--bg);
   color: var(--fg-1);
-  font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.55;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* ── Layout ── */
-.app {
+/* === NETWORK SHELL === */
+.network-shell {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto 1fr;
+  grid-template-rows: auto 1fr;
   min-height: 100vh;
 }
 
-@media (min-width: 768px) {
-  .app {
-    grid-template-columns: 300px 1fr;
-    grid-template-rows: auto 1fr;
-  }
-}
-
-/* ── Header ── */
-.header {
-  background: var(--surface-container-lowest);
+/* === TOP BAR === */
+.network-topbar {
+  background: var(--surface-container-low);
   border-bottom: 1px solid var(--border-strong);
-  padding: var(--space-lg) var(--space-2xl);
+  padding: var(--space-md) var(--space-2xl);
   display: flex;
   align-items: center;
   gap: var(--space-lg);
   flex-wrap: wrap;
-  grid-column: 1 / -1;
+  position: sticky;
+  top: 0;
+  z-index: 100;
   box-shadow: var(--shadow-sm);
 }
 
-.header-brand {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  flex: 1;
-  min-width: 200px;
-}
-
-.brand-dot {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-md);
-  background: var(--gradient-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  box-shadow: var(--shadow-accent);
-}
-
-.brand-dot svg {
-  width: 20px;
-  height: 20px;
-  fill: white;
-}
-
-.header-title {
-  font-family: var(--font-headline);
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--fg-1);
-  line-height: 1.2;
-}
-
-.header-sub {
-  font-size: 11.5px;
-  color: var(--fg-muted);
-  font-family: var(--font-mono);
-  margin-top: 1px;
-}
-
-.header-actions {
+.topbar-brand {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  flex-wrap: wrap;
+  flex-shrink: 0;
 }
 
-.search-wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
+.topbar-logo {
+  width: 28px; height: 28px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 13px;
+  color: #fff;
+  letter-spacing: -0.02em;
 }
 
-.search-icon {
-  position: absolute;
-  left: var(--space-md);
+.topbar-title {
+  font-family: var(--font-headline);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--fg-1);
+  letter-spacing: -0.01em;
+}
+
+.topbar-meta {
+  font-size: 12px;
   color: var(--fg-muted);
-  pointer-events: none;
+  font-family: var(--font-mono);
 }
 
-.search-input {
+.topbar-search {
+  flex: 1;
+  min-width: 180px;
+  max-width: 320px;
+  position: relative;
+}
+
+.topbar-search input {
+  width: 100%;
   background: var(--surface-container);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-pill);
   padding: var(--space-sm) var(--space-lg) var(--space-sm) 36px;
   font-family: var(--font-body);
-  font-size: 13.5px;
+  font-size: 13px;
   color: var(--fg-1);
   outline: none;
-  width: 220px;
-  transition: border-color 0.2s, box-shadow 0.2s, width 0.2s;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-.search-input:focus {
+.topbar-search input::placeholder { color: var(--fg-muted); }
+.topbar-search input:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px var(--primary-fixed);
-  width: 260px;
+  box-shadow: 0 0 0 3px rgba(160,59,0,0.12);
 }
 
-.search-input::placeholder { color: var(--fg-muted); }
+.topbar-search .search-icon {
+  position: absolute;
+  left: 12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--fg-muted);
+  pointer-events: none;
+  font-size: 14px;
+}
 
-.btn {
-  display: inline-flex;
+.topbar-actions {
+  display: flex;
   align-items: center;
-  gap: var(--space-xs);
-  padding: var(--space-sm) var(--space-lg);
-  border-radius: var(--radius-pill);
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  border: none;
-  transition: all 0.15s;
-  text-decoration: none;
-  white-space: nowrap;
+  gap: var(--space-sm);
+  flex-shrink: 0;
 }
 
-.btn-outline {
+.btn-ghost {
   background: transparent;
   border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  padding: var(--space-xs) var(--space-md);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
   color: var(--fg-2);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  display: flex; align-items: center; gap: var(--space-xs);
 }
 
-.btn-outline:hover {
+.btn-ghost:hover {
   background: var(--surface-container);
-  border-color: var(--primary);
-  color: var(--primary);
+  color: var(--fg-1);
 }
 
-.btn-primary {
-  background: var(--gradient-primary);
-  color: white;
-  box-shadow: var(--shadow-accent);
+/* === MAIN LAYOUT === */
+.network-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
 }
 
-.btn-primary:hover { filter: brightness(1.1); }
+@media (min-width: 900px) {
+  .network-main {
+    grid-template-columns: 340px 1fr;
+    min-height: calc(100vh - 56px);
+  }
+}
 
-/* ── Sidebar ── */
-.sidebar {
-  background: var(--surface-container-lowest);
+@media (min-width: 1200px) {
+  .network-main {
+    grid-template-columns: 360px 1fr 320px;
+  }
+}
+
+/* === LEFT PANEL === */
+.network-left {
   border-right: 1px solid var(--border);
-  overflow-y: auto;
-  padding: var(--space-lg) 0 var(--space-4xl);
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-container-low);
+  overflow: hidden;
 }
 
-.sidebar-section {
-  padding: var(--space-xl) var(--space-lg) var(--space-md);
+/* === CANVAS AREA === */
+.network-canvas-wrap {
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-container-lowest);
+  position: relative;
 }
 
-.sidebar-label {
-  font-size: 10px;
-  font-weight: 700;
+.canvas-label {
+  font-family: var(--font-headline);
+  font-size: 11px;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--fg-muted);
-  margin-bottom: var(--space-md);
-  padding: 0 var(--space-sm);
-}
-
-.stat-row {
+  margin-bottom: var(--space-sm);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: var(--space-sm) var(--space-sm);
-  border-radius: var(--radius-sm);
+  gap: var(--space-sm);
 }
 
-.stat-row:hover { background: var(--surface-container); }
+.canvas-label span.dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  animation: pulse-dot 2s infinite;
+}
 
-.stat-label { font-size: 13px; color: var(--fg-2); }
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
 
-.stat-val {
-  font-family: var(--font-mono);
-  font-size: 13px;
+#networkSvg {
+  width: 100%;
+  height: 260px;
+  display: block;
+  border-radius: var(--radius-md);
+  background: var(--surface-container);
+  overflow: visible;
+}
+
+/* === CLUSTER CONTROLS === */
+.cluster-controls {
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.cluster-controls-label {
+  font-family: var(--font-headline);
+  font-size: 11px;
   font-weight: 600;
-  color: var(--primary);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
 }
 
-.thread-nav-item {
+.cluster-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.cluster-chip {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container);
+  color: var(--fg-2);
+  transition: all 0.15s;
+  user-select: none;
+}
+
+.cluster-chip:hover {
+  background: var(--surface-container-high);
+  color: var(--fg-1);
+}
+
+.cluster-chip.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* === HUB CARDS === */
+.hub-cards {
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.hub-cards-label {
+  font-family: var(--font-headline);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.hub-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.12s;
   display: flex;
   align-items: flex-start;
-  gap: var(--space-sm);
-  padding: var(--space-md) var(--space-lg);
-  cursor: pointer;
-  border-left: 3px solid transparent;
-  transition: all 0.15s;
-  margin: 0 var(--space-xs);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  gap: var(--space-md);
+  animation: fadeSlideIn 0.3s ease both;
 }
 
-.thread-nav-item:hover {
-  background: var(--surface-container);
+.hub-card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
-.thread-nav-item.active {
-  border-left-color: var(--primary);
+.hub-card.selected {
+  border-color: var(--primary);
   background: var(--primary-fixed);
+  box-shadow: var(--shadow-accent);
 }
 
-.thread-icon {
-  width: 28px;
-  height: 28px;
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
-  flex-shrink: 0;
-  margin-top: 1px;
-  color: white;
+@media (prefers-color-scheme: dark) {
+  .hub-card.selected {
+    background: rgba(255,107,53,0.12);
+  }
 }
 
-.thread-nav-info { flex: 1; min-width: 0; }
-
-.thread-nav-subject {
+.hub-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-headline);
   font-size: 13px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.hub-info { flex: 1; min-width: 0; }
+
+.hub-name {
+  font-family: var(--font-headline);
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--fg-1);
+  letter-spacing: -0.01em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.3;
 }
 
-.thread-nav-meta {
+.hub-email {
   font-size: 11px;
   color: var(--fg-muted);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-top: 2px;
 }
 
-.badge {
-  display: inline-flex;
+.hub-stats {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.hub-stat {
+  font-size: 11px;
+  color: var(--fg-muted);
+  display: flex;
   align-items: center;
-  justify-content: center;
-  min-width: 20px;
-  height: 20px;
-  padding: 0 6px;
+  gap: 3px;
+}
+
+.hub-stat strong {
+  font-weight: 600;
+  color: var(--fg-2);
+}
+
+.hub-badge {
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-pill);
+  font-size: 10px;
+  font-weight: 600;
+  font-family: var(--font-headline);
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+/* === CENTER: ENTITY INSPECTOR + THREADS === */
+.network-center {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.entity-inspector {
+  background: var(--surface-container-lowest);
+  border-bottom: 1px solid var(--border);
+  padding: var(--space-xl) var(--space-2xl);
+  animation: fadeSlideIn 0.25s ease both;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.inspector-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-lg);
+}
+
+.inspector-avatar {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-headline);
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-accent);
+}
+
+.inspector-meta { flex: 1; min-width: 0; }
+
+.inspector-name {
+  font-family: var(--font-headline);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--fg-1);
+  line-height: 1.2;
+}
+
+.inspector-role {
+  font-size: 13px;
+  color: var(--fg-muted);
+  margin-top: var(--space-xs);
+  font-family: var(--font-mono);
+}
+
+.inspector-domain-tag {
+  display: inline-block;
+  padding: 2px var(--space-sm);
+  background: var(--surface-container);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius-pill);
   font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-headline);
+  color: var(--fg-2);
+  margin-top: var(--space-sm);
+}
+
+.inspector-kpis {
+  display: flex;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.inspector-kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.inspector-kpi-val {
+  font-family: var(--font-headline);
+  font-size: 22px;
   font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+}
+
+.inspector-kpi-label {
+  font-size: 11px;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+
+.inspector-connections {
+  margin-top: var(--space-md);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.inspector-connections-label {
+  font-size: 11px;
+  color: var(--fg-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.connection-pill {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 500;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.12s;
+}
+.connection-pill:hover { opacity: 0.85; transform: translateY(-1px); }
+
+/* === LINKED RECORDS === */
+.linked-records {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-lg) var(--space-2xl);
+}
+
+.linked-records-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.linked-records-title {
+  font-family: var(--font-headline);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.record-count-badge {
+  background: var(--surface-container);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  padding: 2px var(--space-sm);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--fg-2);
+  font-family: var(--font-mono);
+}
+
+.thread-group {
+  margin-bottom: var(--space-2xl);
+  animation: fadeSlideIn 0.3s ease both;
+}
+
+.thread-group-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--surface-container-low);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.thread-group-header:hover { background: var(--surface-container); }
+
+.thread-subject {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fg-1);
+  letter-spacing: -0.01em;
+  flex: 1;
+}
+
+.thread-meta {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-xs);
+}
+
+.thread-meta span {
+  font-size: 11px;
+  color: var(--fg-muted);
+  font-family: var(--font-mono);
+}
+
+.thread-toggle {
+  font-size: 14px;
+  color: var(--fg-muted);
+  transition: transform 0.2s;
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
-/* sender bars */
-.sender-bar-wrap {
-  padding: 0 var(--space-lg) var(--space-xl);
+.thread-toggle.open { transform: rotate(180deg); }
+
+.thread-messages {
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  overflow: hidden;
 }
 
-.sender-row {
+.message-row {
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.12s;
+  position: relative;
+}
+
+.message-row:last-child { border-bottom: none; }
+
+.message-row:hover { background: var(--surface-container-low); }
+
+.message-row.highlighted { background: rgba(160,59,0,0.06); }
+
+@media (prefers-color-scheme: dark) {
+  .message-row.highlighted { background: rgba(255,107,53,0.08); }
+}
+
+.message-header {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-xs);
 }
 
-.sender-avatar {
-  width: 26px;
-  height: 26px;
-  border-radius: var(--radius-pill);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.message-from-avatar {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
   font-size: 10px;
   font-weight: 700;
   color: white;
   flex-shrink: 0;
-}
-
-.sender-info { flex: 1; min-width: 0; }
-
-.sender-name {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--fg-2);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.bar-track {
-  height: 4px;
-  background: var(--surface-container-high);
-  border-radius: var(--radius-pill);
-  margin-top: 3px;
-  overflow: hidden;
-}
-
-.bar-fill {
-  height: 100%;
-  border-radius: var(--radius-pill);
-  transition: width 0.4s ease;
-}
-
-.sender-count {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--fg-muted);
-  flex-shrink: 0;
-}
-
-/* ── Main content ── */
-.main {
-  overflow-y: auto;
-  padding: var(--space-2xl) var(--space-lg);
-  max-height: 100vh;
-}
-
-@media (min-width: 768px) {
-  .main { padding: var(--space-3xl) var(--space-3xl); }
-}
-
-/* ── Thread view ── */
-.thread-view { display: none; }
-.thread-view.active { display: block; }
-
-.thread-header {
-  margin-bottom: var(--space-2xl);
-}
-
-.thread-subject {
   font-family: var(--font-headline);
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--fg-1);
-  line-height: 1.25;
-  margin-bottom: var(--space-md);
 }
 
-.thread-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-  align-items: center;
-}
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px var(--space-sm);
-  border-radius: var(--radius-pill);
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.chip-surface {
-  background: var(--surface-container);
-  color: var(--fg-2);
-  border: 1px solid var(--border);
-}
-
-.chip-primary {
-  background: var(--primary-fixed);
-  color: var(--primary);
-  border: 1px solid var(--primary-fixed-dim);
-}
-
-/* ── Message card ── */
-.message-list { display: flex; flex-direction: column; gap: var(--space-lg); }
-
-.message-card {
-  background: var(--surface-container-lowest);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-  transition: box-shadow 0.2s;
-}
-
-.message-card:hover { box-shadow: var(--shadow-md); }
-
-.message-card.highlight-match {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 2px var(--primary-fixed);
-}
-
-.msg-header {
-  padding: var(--space-lg) var(--space-xl);
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-md);
-  cursor: pointer;
-  user-select: none;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface-container-low);
-}
-
-.msg-header:hover { background: var(--surface-container); }
-
-.msg-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-pill);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 700;
-  color: white;
-  flex-shrink: 0;
-  box-shadow: var(--shadow-sm);
-}
-
-.msg-header-info { flex: 1; min-width: 0; }
-
-.msg-from-row {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  flex-wrap: wrap;
-}
-
-.msg-from-name {
+.message-from {
+  font-size: 13px;
   font-weight: 600;
-  font-size: 14px;
   color: var(--fg-1);
+  font-family: var(--font-headline);
 }
 
-.msg-from-email {
+.message-time {
+  font-size: 11px;
+  color: var(--fg-muted);
   font-family: var(--font-mono);
+  margin-left: auto;
+}
+
+.message-to-line {
   font-size: 11.5px;
   color: var(--fg-muted);
+  margin-bottom: var(--space-xs);
 }
 
-.msg-to-row {
-  font-size: 12px;
-  color: var(--fg-muted);
-  margin-top: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.msg-header-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: var(--space-xs);
-  flex-shrink: 0;
-}
-
-.msg-date {
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  color: var(--fg-muted);
-  white-space: nowrap;
-}
-
-.msg-indicators {
-  display: flex;
-  gap: var(--space-xs);
-  align-items: center;
-}
-
-.indicator {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-}
-
-.indicator-question { background: var(--yellow); }
-.indicator-attachment { background: var(--blue); }
-
-.msg-body {
-  padding: var(--space-xl);
-  display: none;
-}
-
-.msg-body.open { display: block; }
-
-.msg-body-text {
-  font-size: 14.5px;
-  line-height: 1.65;
+.message-body {
+  font-size: 13px;
   color: var(--fg-2);
+  line-height: 1.55;
   white-space: pre-wrap;
   word-break: break-word;
 }
 
-mark.search-hl {
-  background: var(--primary-fixed-dim);
-  color: var(--fg-1);
+.message-body .search-highlight {
+  background: rgba(160,59,0,0.2);
+  color: var(--primary);
   border-radius: 2px;
-  padding: 0 1px;
-}
-
-.msg-attachments {
-  margin-top: var(--space-lg);
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-}
-
-.attachment-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-sm) var(--space-md);
-  background: var(--surface-container);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm);
-  font-size: 12.5px;
-  color: var(--fg-2);
-  font-weight: 500;
-}
-
-.attachment-chip svg { color: var(--primary); flex-shrink: 0; }
-
-.msg-footer {
-  padding: var(--space-sm) var(--space-xl);
-  display: none;
-  justify-content: flex-end;
-  gap: var(--space-sm);
-  border-top: 1px solid var(--border);
-  background: var(--surface-container-low);
-}
-
-.msg-footer.open { display: flex; }
-
-.copy-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 5px var(--space-md);
-  border-radius: var(--radius-pill);
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  border: 1px solid var(--border-strong);
-  background: transparent;
-  color: var(--fg-muted);
-  font-family: var(--font-body);
-  transition: all 0.15s;
-}
-
-.copy-btn:hover {
-  background: var(--surface-container);
-  color: var(--primary);
-  border-color: var(--primary);
-}
-
-.copy-btn.copied {
-  background: var(--primary-fixed);
-  color: var(--primary);
-  border-color: var(--primary-fixed-dim);
-}
-
-/* ── Divider between messages ── */
-.thread-connector {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  padding: 0 var(--space-xl);
-  color: var(--fg-muted);
-  font-size: 11px;
-}
-
-.connector-line {
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-
-/* ── No results ── */
-.no-results {
-  text-align: center;
-  padding: var(--space-5xl) var(--space-2xl);
-  color: var(--fg-muted);
-}
-
-.no-results-icon { font-size: 48px; margin-bottom: var(--space-lg); }
-.no-results-title { font-family: var(--font-headline); font-size: 18px; color: var(--fg-2); margin-bottom: var(--space-sm); }
-
-/* ── All threads summary ── */
-.overview-view { display: none; }
-.overview-view.active { display: block; }
-
-.overview-hero {
-  background: var(--gradient-hero);
-  border-radius: var(--radius-2xl);
-  padding: var(--space-3xl);
-  color: white;
-  margin-bottom: var(--space-3xl);
-  position: relative;
-  overflow: hidden;
-}
-
-.overview-hero::before {
-  content: '';
-  position: absolute;
-  top: -40px;
-  right: -40px;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.06);
-}
-
-.overview-hero::after {
-  content: '';
-  position: absolute;
-  bottom: -60px;
-  right: 40px;
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.04);
-}
-
-.hero-eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  opacity: 0.8;
-  margin-bottom: var(--space-md);
-}
-
-.hero-title {
-  font-family: var(--font-headline);
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  margin-bottom: var(--space-xl);
-}
-
-.hero-stats {
-  display: flex;
-  gap: var(--space-3xl);
-  flex-wrap: wrap;
-}
-
-.hero-stat-val {
-  font-family: var(--font-mono);
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-
-.hero-stat-label {
-  font-size: 12px;
-  opacity: 0.75;
-  font-weight: 500;
-}
-
-.threads-grid {
-  display: grid;
-  gap: var(--space-lg);
-  margin-bottom: var(--space-3xl);
-}
-
-.thread-summary-card {
-  background: var(--surface-container-lowest);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: var(--space-xl);
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: var(--shadow-sm);
-}
-
-.thread-summary-card:hover {
-  border-color: var(--primary);
-  box-shadow: var(--shadow-accent);
-  transform: translateY(-1px);
-}
-
-.tscard-head {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-md);
-  margin-bottom: var(--space-lg);
-}
-
-.tscard-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  flex-shrink: 0;
-}
-
-.tscard-title {
-  font-family: var(--font-headline);
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--fg-1);
-  line-height: 1.3;
-  margin-bottom: 4px;
-}
-
-.tscard-date {
-  font-size: 12px;
-  color: var(--fg-muted);
-  font-family: var(--font-mono);
-}
-
-.tscard-stats {
-  display: flex;
-  gap: var(--space-lg);
-  margin-bottom: var(--space-md);
-}
-
-.tscard-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.tscard-stat-val {
-  font-family: var(--font-mono);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--primary);
-}
-
-.tscard-stat-label {
-  font-size: 10.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--fg-muted);
+  padding: 0 2px;
   font-weight: 600;
 }
 
-.tscard-participants {
-  display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
-}
-
-.participant-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 2px var(--space-sm);
-  background: var(--surface-container);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-  font-size: 11.5px;
-  color: var(--fg-2);
-  font-weight: 500;
-}
-
-.participant-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-.tscard-preview {
-  margin-top: var(--space-md);
-  font-size: 13px;
-  color: var(--fg-muted);
-  line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.tscard-open-btn {
-  margin-top: var(--space-lg);
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-sm);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--primary);
-  text-decoration: none;
-}
-
-/* ── Domain pills ── */
-.domain-distribution {
-  display: flex;
-  gap: var(--space-sm);
-  flex-wrap: wrap;
-  margin-top: var(--space-lg);
-}
-
-.domain-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-pill);
-  font-size: 12.5px;
-  font-weight: 600;
-  border: 1px solid var(--border-strong);
-}
-
-/* ── Mobile sidebar toggle ── */
-.mobile-thread-list {
-  display: none;
-}
-
-@media (max-width: 767px) {
-  .sidebar { display: none; }
-  .sidebar.mobile-open { display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; overflow-y: auto; }
-  .mobile-thread-list { display: flex; }
-  .main { max-height: none; }
-  .app {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr;
+@media (prefers-color-scheme: dark) {
+  .message-body .search-highlight {
+    background: rgba(255,107,53,0.25);
+    color: #FF6B35;
   }
 }
 
-/* ── Scrollbar ── */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--outline-variant); border-radius: var(--radius-pill); }
-::-webkit-scrollbar-thumb:hover { background: var(--primary); }
-
-/* ── Transition helpers ── */
-.fade-in {
-  animation: fadeIn 0.2s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ── Expand toggle ── */
-.expand-toggle {
-  width: 28px;
-  height: 28px;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border-strong);
-  background: transparent;
-  cursor: pointer;
+.message-attachments {
+  margin-top: var(--space-sm);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--fg-muted);
-  transition: all 0.15s;
-  flex-shrink: 0;
-  margin-top: 2px;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
 }
 
-.expand-toggle:hover {
+.attachment-chip {
+  padding: var(--space-xs) var(--space-md);
   background: var(--surface-container);
-  color: var(--primary);
-  border-color: var(--primary);
-}
-
-.expand-toggle.open { color: var(--primary); border-color: var(--primary); }
-
-.expand-toggle svg {
-  transition: transform 0.2s;
-}
-
-.expand-toggle.open svg { transform: rotate(180deg); }
-
-/* ── Overlay ── */
-.overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 99;
-}
-
-.overlay.active { display: block; }
-
-/* ── Collapsed message preview ── */
-.msg-collapsed-preview {
-  padding: var(--space-sm) var(--space-xl) var(--space-md);
-  font-size: 13px;
-  color: var(--fg-muted);
-  line-height: 1.4;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  cursor: pointer;
-}
-
-.msg-collapsed-preview:hover { color: var(--fg-2); }
-
-/* ── Panels (open loops / timeline / sender filter) ── */
-.panel {
-  background: var(--surface-container-lowest);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: var(--space-xl);
-  margin-bottom: var(--space-xl);
-  box-shadow: var(--shadow-sm);
-}
-
-.panel-callout {
-  background: linear-gradient(135deg, var(--primary-fixed) 0%, var(--surface-container-lowest) 70%);
-  border-left: 3px solid var(--primary);
-}
-
-.panel-header {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--fg-2);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-md);
-  margin-bottom: var(--space-lg);
+  gap: var(--space-xs);
+}
+
+.msg-expand-btn {
+  background: none;
+  border: none;
+  font-size: 11px;
+  color: var(--primary);
+  cursor: pointer;
+  font-weight: 600;
+  font-family: var(--font-body);
+  padding: var(--space-xs) 0;
+  margin-top: var(--space-xs);
+  display: block;
+}
+
+.message-tags {
+  display: flex;
+  gap: var(--space-xs);
+  margin-top: var(--space-xs);
   flex-wrap: wrap;
 }
 
-.panel-title-row {
+.msg-tag {
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  font-size: 10px;
+  font-weight: 600;
+  font-family: var(--font-headline);
+  letter-spacing: 0.04em;
+}
+
+.msg-tag.question { background: rgba(245,158,11,0.15); color: #b45309; }
+.msg-tag.reply { background: rgba(59,130,246,0.12); color: #1d4ed8; }
+.msg-tag.attachment { background: rgba(123,64,224,0.12); color: #7b40e0; }
+
+@media (prefers-color-scheme: dark) {
+  .msg-tag.question { color: var(--yellow); }
+  .msg-tag.reply { color: #93c5fd; }
+  .msg-tag.attachment { color: #d5baff; }
+}
+
+/* === RIGHT PANEL === */
+.network-right {
+  border-left: 1px solid var(--border);
+  background: var(--surface-container-low);
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  overflow: hidden;
 }
 
-.panel-title {
+.right-section {
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--border);
+}
+
+.right-section-title {
   font-family: var(--font-headline);
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--fg-1);
-}
-
-.panel-sub {
-  font-size: 12px;
-  color: var(--fg-muted);
-}
-
-.filter-clear {
-  background: transparent;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-pill);
-  padding: 4px 12px;
   font-size: 11px;
   font-weight: 600;
-  color: var(--fg-2);
-  cursor: pointer;
-  font-family: inherit;
-}
-.filter-clear:hover { border-color: var(--primary); color: var(--primary); }
-
-/* Open loops list */
-.open-loops-list {
-  display: grid;
-  gap: var(--space-md);
-}
-
-.open-loop-row {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: var(--space-md);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-md);
+  display: flex;
   align-items: center;
-  padding: var(--space-md);
-  background: var(--surface-container-lowest);
+  gap: var(--space-sm);
+}
+
+/* Edge detail */
+.edge-detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  animation: fadeSlideIn 0.25s ease both;
+}
+
+.edge-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--surface-container);
+  border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.open-loop-row:hover {
-  border-color: var(--primary);
-  transform: translateX(2px);
+  transition: border-color 0.15s;
 }
 
-.open-loop-dot {
-  width: 8px;
-  height: 8px;
+.edge-row:hover { border-color: var(--primary); }
+
+.edge-avatars {
+  display: flex;
+  align-items: center;
+}
+
+.edge-avatar {
+  width: 22px; height: 22px;
   border-radius: 50%;
-  background: var(--primary);
-  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  color: white;
+  font-family: var(--font-headline);
+  border: 2px solid var(--surface-container-low);
 }
 
-.open-loop-info {
+.edge-avatar:nth-child(2) { margin-left: -6px; }
+
+.edge-names {
+  flex: 1;
+  font-size: 11.5px;
+  color: var(--fg-2);
   min-width: 0;
 }
 
-.open-loop-subject {
+.edge-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
   font-weight: 600;
-  font-size: 13px;
-  color: var(--fg-1);
-  margin-bottom: 2px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: var(--fg-muted);
   white-space: nowrap;
 }
 
-.open-loop-question {
+/* Domain bar chart */
+.domain-bars {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.domain-bar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.domain-bar-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.domain-bar-name {
   font-size: 12px;
+  font-weight: 600;
   color: var(--fg-2);
-  font-style: italic;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-family: var(--font-mono);
 }
 
-.open-loop-meta {
+.domain-bar-val {
   font-size: 11px;
   color: var(--fg-muted);
   font-family: var(--font-mono);
-  text-align: right;
-  flex-shrink: 0;
 }
 
-.open-loops-empty {
-  color: var(--fg-muted);
-  font-size: 13px;
-  padding: var(--space-md) 0;
+.domain-bar-track {
+  height: 6px;
+  background: var(--surface-container);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.domain-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 0;
 }
 
 /* Timeline */
-.timeline-wrap {
-  display: grid;
+.timeline-mini {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  overflow-y: auto;
+  max-height: 220px;
+}
+
+.timeline-dot-row {
+  display: flex;
+  align-items: flex-start;
   gap: var(--space-sm);
-}
-
-.timeline-row {
-  display: grid;
-  grid-template-columns: 140px 1fr 60px;
-  align-items: center;
-  gap: var(--space-md);
-  font-size: 12px;
-  cursor: pointer;
-}
-.timeline-row:hover .timeline-bar { filter: brightness(1.08); }
-
-.timeline-label {
+  font-size: 11.5px;
   color: var(--fg-2);
-  overflow: hidden;
-  text-overflow: ellipsis;
+  cursor: pointer;
+  padding: 2px var(--space-xs);
+  border-radius: var(--radius-sm);
+  transition: background 0.12s;
+}
+
+.timeline-dot-row:hover { background: var(--surface-container); }
+
+.timeline-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.timeline-dot-date {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--fg-muted);
   white-space: nowrap;
 }
 
-.timeline-track {
-  position: relative;
-  height: 14px;
-  background: var(--surface-container);
-  border-radius: var(--radius-sm);
+.timeline-dot-subject {
+  flex: 1;
+  font-size: 11.5px;
+  color: var(--fg-2);
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.timeline-bar {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  border-radius: var(--radius-sm);
-  background: var(--primary);
-  min-width: 4px;
-  transition: filter 0.15s;
-}
-
-.timeline-count {
-  font-family: var(--font-mono);
-  color: var(--fg-muted);
-  text-align: right;
-}
-
-.timeline-axis {
+/* === STATS ROW === */
+.stats-strip {
   display: flex;
-  justify-content: space-between;
+  gap: var(--space-lg);
+  padding: var(--space-md) var(--space-2xl);
+  background: var(--surface-container-low);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+
+.stat-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 2px;
+}
+
+.stat-chip-val {
+  font-family: var(--font-headline);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.stat-chip-label {
   font-size: 10px;
   color: var(--fg-muted);
-  font-family: var(--font-mono);
-  margin-top: var(--space-xs);
-  padding-left: 152px;
-  padding-right: 72px;
-}
-
-@media (max-width: 640px) {
-  .timeline-row { grid-template-columns: 1fr; gap: 4px; }
-  .timeline-label { font-weight: 600; color: var(--fg-1); }
-  .timeline-axis { display: none; }
-}
-
-/* Sender filter chips */
-.filter-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-}
-
-.filter-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border-strong);
-  background: var(--surface-container-lowest);
-  color: var(--fg-2);
-  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
   font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.filter-chip:hover { border-color: var(--primary); color: var(--primary); }
-.filter-chip.active {
-  background: var(--primary);
-  color: var(--on-primary);
-  border-color: var(--primary);
-}
-.filter-chip.active .filter-chip-dot { background: var(--on-primary); }
-
-.filter-chip-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--primary);
+  white-space: nowrap;
 }
 
-.filter-chip-count {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  opacity: 0.7;
+.stat-divider {
+  width: 1px;
+  background: var(--border-strong);
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: var(--space-xs) 0;
 }
 
-.thread-summary-card.filter-hidden { display: none; }
+/* === MOBILE: stacked layout === */
+@media (max-width: 899px) {
+  .network-main {
+    grid-template-columns: 1fr;
+  }
+  .network-right {
+    border-left: none;
+    border-top: 1px solid var(--border);
+  }
+  .network-left {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  #networkSvg { height: 200px; }
+  .entity-inspector { padding: var(--space-lg); }
+  .linked-records { padding: var(--space-md) var(--space-lg); }
+}
 
+/* === SCROLLBARS === */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--outline-variant); border-radius: 3px; }
+
+/* === EMPTY STATE === */
+.empty-state {
+  padding: var(--space-4xl) var(--space-2xl);
+  text-align: center;
+  color: var(--fg-muted);
+  font-size: 13px;
+}
+
+.empty-state-icon { font-size: 28px; margin-bottom: var(--space-sm); }
+
+/* === COPY TOAST === */
+.copy-toast {
+  position: fixed;
+  bottom: var(--space-2xl);
+  right: var(--space-2xl);
+  background: var(--fg-1);
+  color: var(--bg);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  z-index: 999;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+
+.copy-toast.show { opacity: 1; transform: translateY(0); }
+
+/* === SELECTED NODE PULSE === */
+@keyframes nodeSelect {
+  0% { r: 14; opacity: 0.8; }
+  50% { r: 18; opacity: 0.4; }
+  100% { r: 14; opacity: 0.8; }
+}
+
+.node-halo { animation: nodeSelect 1.5s ease-in-out infinite; }
+
+/* === MOBILE TAB BAR === */
+.mobile-tabs {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .mobile-tabs {
+    display: flex;
+    background: var(--surface-container-low);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 56px;
+    z-index: 90;
+  }
+
+  .mobile-tab {
+    flex: 1;
+    padding: var(--space-sm) var(--space-xs);
+    font-size: 12px;
+    font-weight: 600;
+    font-family: var(--font-headline);
+    color: var(--fg-muted);
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .mobile-tab.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+
+  .mobile-panel { display: none; }
+  .mobile-panel.active { display: flex; flex-direction: column; }
+}
+
+@media (min-width: 900px) {
+  .mobile-panel { display: flex !important; flex-direction: column; }
+  .network-left, .network-center, .network-right { display: flex !important; }
+}
+
+/* === THREAD COLLAPSED === */
+.thread-messages.collapsed { display: none; }
+
+/* === SEARCH NO RESULTS === */
+.no-results {
+  padding: var(--space-3xl) var(--space-2xl);
+  text-align: center;
+  color: var(--fg-muted);
+  font-size: 13px;
+}
 </style>
 <!-- html-anything example style skin:start -->
 
@@ -1318,35 +1238,6 @@ html[data-ha-style="relationship"] body {
     linear-gradient(300deg, rgba(49,123,147,.08), transparent 40%);
 }
 html[data-ha-style="relationship"] body::before { content: "relationship"; }
-
-html[data-ha-style="personal-atlas"] {
-  --ha-style-accent: #3f7f6a;
-  --ha-style-accent-2: #c15a2b;
-  --primary: #3f7f6a;
-  --primary-container: #2f6b58;
-  --primary-fixed: #dff4ea;
-  --secondary-container: #c15a2b;
-  --bg: #f7faf4;
-  --surface: #f7faf4;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #eef5ea;
-  --surface-container: #e6eee0;
-  --surface-container-high: #dbe7d5;
-  --fg-1: #17211b;
-  --fg-2: #405345;
-  --fg-muted: #718172;
-  --border: rgba(63,127,106,.15);
-  --gradient-hero: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-  --gradient-text: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-}
-html[data-ha-style="personal-atlas"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(63,127,106,.11) 0 2px, transparent 2px),
-    radial-gradient(circle at 70% 40%, rgba(193,90,43,.10) 0 1.5px, transparent 1.5px);
-  background-size: 54px 54px, 38px 38px;
-}
-html[data-ha-style="personal-atlas"] body::before { content: "personal atlas"; }
 
 html[data-ha-style="timeline-story"] {
   --ha-style-accent: #9a4b14;
@@ -1497,7 +1388,7 @@ html[data-ha-style="dashboard"] header.hero::before {
   margin-bottom: 14px;
 }
 
-html[data-ha-style="editorial"] {
+html[data-ha-style="document"] {
   --ha-style-accent: #8b3f1f;
   --ha-style-accent-2: #2f6f73;
   --primary: #8b3f1f;
@@ -1518,14 +1409,14 @@ html[data-ha-style="editorial"] {
   --gradient-hero: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
   --gradient-text: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
 }
-html[data-ha-style="editorial"] body {
+html[data-ha-style="document"] body {
   background-color: var(--bg) !important;
   background-image: linear-gradient(90deg, rgba(139,63,31,.18) 0 4px, transparent 4px);
   background-size: 100% 100%;
 }
-html[data-ha-style="editorial"] body::before { content: "editorial"; }
-html[data-ha-style="editorial"] .hero::before,
-html[data-ha-style="editorial"] header.hero::before {
+html[data-ha-style="document"] body::before { content: "document"; }
+html[data-ha-style="document"] .hero::before,
+html[data-ha-style="document"] header.hero::before {
   width: 42px;
   height: 42px;
   border-radius: 0;
@@ -1533,33 +1424,6 @@ html[data-ha-style="editorial"] header.hero::before {
   border-top: 4px solid var(--ha-style-accent);
   border-left: 4px solid var(--ha-style-accent);
 }
-
-html[data-ha-style="paper"] {
-  --ha-style-accent: #53606a;
-  --ha-style-accent-2: #8c6f4a;
-  --primary: #53606a;
-  --primary-container: #3e4850;
-  --primary-fixed: #eef1f3;
-  --secondary-container: #8c6f4a;
-  --bg: #f9faf9;
-  --surface: #f9faf9;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f1f2f1;
-  --surface-container: #e8eae8;
-  --surface-container-high: #dedfdd;
-  --fg-1: #171717;
-  --fg-2: #4b5563;
-  --fg-muted: #737373;
-  --border: rgba(83,96,106,.18);
-  --font-headline: Georgia, "Iowan Old Style", "Times New Roman", serif;
-  --gradient-hero: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-  --gradient-text: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-}
-html[data-ha-style="paper"] body {
-  background-color: var(--bg) !important;
-  background-image: repeating-linear-gradient(0deg, transparent 0 31px, rgba(83,96,106,.08) 31px 32px);
-}
-html[data-ha-style="paper"] body::before { content: "paper"; }
 
 html[data-ha-style="developer"] {
   color-scheme: dark;
@@ -1604,747 +1468,530 @@ html[data-ha-style="developer"] .mono {
 <!-- html-anything example style skin:end -->
 </head>
 <body>
-<div class="overlay" id="overlay" onclick="closeMobileSidebar()"></div>
+<script>const DATA = {"messages":[{"id":"m_0001","ts":"2026-01-27 14:14:21","date":"2026-01-27","time":"14:14:21","tsEpoch":1769523261000,"messageId":"<ns-1701@northstack.dev>","inReplyTo":null,"references":[],"threadId":"t_0001","from":{"name":"Casey Liu","email":"casey@northstack.dev"},"to":[{"name":"Clockless Support","email":"support@clockless.ai"}],"cc":[],"subject":"Webhook signatures failing after rotation","subjectKey":"webhook signatures failing after rotation","body":"Hey team,\n\nSince we rotated our signing key on Sunday afternoon, every webhook\nfrom your ingest endpoint is coming back with a bad signature. We're\nseeing about 300 401s an hour against /api/v2/ingest.\n\nWe followed the rotation guide step by step (paste new key into the\nSettings → Keys panel, then revoke the old one). Anything we missed\nin the rollover? Happy to send sample failing payloads.\n\nCasey\nNorthstack Engineering","bodyPreview":"Hey team, Since we rotated our signing key on Sunday afternoon, every webhook from your ingest endpoint is coming back with a bad signature. We're seeing about 300 401s an hour against /api/v2/ingest. We followed the rotation guide step by ","attachments":[],"isReply":false,"isForward":false,"hasQuestion":true},{"id":"m_0002","ts":"2026-01-27 14:48:02","date":"2026-01-27","time":"14:48:02","tsEpoch":1769525282000,"messageId":"<cl-2201@clockless.ai>","inReplyTo":"<ns-1701@northstack.dev>","references":["<ns-1701@northstack.dev>"],"threadId":"t_0001","from":{"name":"Mira Park","email":"mira@clockless.ai"},"to":[{"name":"Casey Liu","email":"casey@northstack.dev"}],"cc":[{"name":"Clockless Support","email":"support@clockless.ai"}],"subject":"Re: Webhook signatures failing after rotation","subjectKey":"webhook signatures failing after rotation","body":"Hi Casey,\n\nSorry about the noise. Two things would help me narrow it down:\n\n1. Paste the X-Clockless-Signature header from one failing call.\n2. Confirm whether you also flipped the \"active key id\" radio on the\n   settings page after pasting the new key. There's a known foot-gun\n   where the panel saves the new secret but keeps the old key id as\n   active, so signatures keep getting computed against the previous\n   secret.\n\nIf (2) is the issue we can swap it for you in seconds.\n\nMira","bodyPreview":"Hi Casey, Sorry about the noise. Two things would help me narrow it down: 1. Paste the X-Clockless-Signature header from one failing call. 2. Confirm whether you also flipped the \"active key id\" radio on the settings page after pasting the ","attachments":[],"isReply":true,"isForward":false,"hasQuestion":false},{"id":"m_0003","ts":"2026-01-27 15:11:55","date":"2026-01-27","time":"15:11:55","tsEpoch":1769526715000,"messageId":"<ns-1702@northstack.dev>","inReplyTo":"<cl-2201@clockless.ai>","references":["<ns-1701@northstack.dev>","<cl-2201@clockless.ai>"],"threadId":"t_0001","from":{"name":"Casey Liu","email":"casey@northstack.dev"},"to":[{"name":"Mira Park","email":"mira@clockless.ai"}],"cc":[{"name":"Clockless Support","email":"support@clockless.ai"}],"subject":"Re: Webhook signatures failing after rotation","subjectKey":"webhook signatures failing after rotation","body":"You called it. The active key id radio was still pointing at\nkey_2024Q4_b. Just flipped to key_2026Q1_a and the signatures\nvalidate again — 401 rate dropped to zero.\n\nThank you for the fast turnaround. Two follow-up asks:\n\n  - Could you add an alert / inline warning when the active key id\n    differs from the most-recently-saved secret? This would have\n    saved us about three hours.\n  - Is there a programmatic key-rotation endpoint we could call from\n    our deploy pipeline so we never touch the UI for this?\n\nCasey","bodyPreview":"You called it. The active key id radio was still pointing at key_2024Q4_b. Just flipped to key_2026Q1_a and the signatures validate again — 401 rate dropped to zero. Thank you for the fast turnaround. Two follow-up asks: - Could you add an ","attachments":[],"isReply":true,"isForward":false,"hasQuestion":true},{"id":"m_0004","ts":"2026-01-27 16:02:31","date":"2026-01-27","time":"16:02:31","tsEpoch":1769529751000,"messageId":"<cl-2202@clockless.ai>","inReplyTo":"<ns-1702@northstack.dev>","references":["<ns-1701@northstack.dev>","<cl-2201@clockless.ai>","<ns-1702@northstack.dev>"],"threadId":"t_0001","from":{"name":"Mira Park","email":"mira@clockless.ai"},"to":[{"name":"Casey Liu","email":"casey@northstack.dev"}],"cc":[],"subject":"Re: Webhook signatures failing after rotation","subjectKey":"webhook signatures failing after rotation","body":"Glad it's fixed.\n\nOn your asks:\n\n1. Inline warning — filed as CL-4117. We agree this is the right fix\n   and it's on next sprint's plate. I'll post the PR link here when\n   it lands.\n2. Rotation endpoint — already exists, just under-documented. POST\n   /api/v2/keys/rotate with {\"label\": \"...\"} returns the new secret\n   and atomically flips the active key id. I'll add a section to the\n   webhooks docs by Friday.\n\nClosing the ticket — reopen anytime if anything else looks off.\n\nMira","bodyPreview":"Glad it's fixed. On your asks: 1. Inline warning — filed as CL-4117. We agree this is the right fix and it's on next sprint's plate. I'll post the PR link here when it lands. 2. Rotation endpoint — already exists, just under-documented. POS","attachments":[],"isReply":true,"isForward":false,"hasQuestion":false},{"id":"m_0005","ts":"2026-01-27 16:09:48","date":"2026-01-27","time":"16:09:48","tsEpoch":1769530188000,"messageId":"<ns-1703@northstack.dev>","inReplyTo":"<cl-2202@clockless.ai>","references":["<ns-1701@northstack.dev>","<cl-2201@clockless.ai>","<ns-1702@northstack.dev>","<cl-2202@clockless.ai>"],"threadId":"t_0001","from":{"name":"Casey Liu","email":"casey@northstack.dev"},"to":[{"name":"Mira Park","email":"mira@clockless.ai"}],"cc":[],"subject":"Re: Webhook signatures failing after rotation","subjectKey":"webhook signatures failing after rotation","body":"Perfect. Watching for the PR link.\n\nCasey","bodyPreview":"Perfect. Watching for the PR link. Casey","attachments":[],"isReply":true,"isForward":false,"hasQuestion":false},{"id":"m_0006","ts":"2026-01-28 19:45:00","date":"2026-01-28","time":"19:45:00","tsEpoch":1769629500000,"messageId":"<cl-2210@clockless.ai>","inReplyTo":null,"references":[],"threadId":"t_0002","from":{"name":"Mira Park","email":"mira@clockless.ai"},"to":[{"name":"Jordan Reyes","email":"jordan@clockless.ai"}],"cc":[],"subject":"Can we move standup to 10am?","subjectKey":"can we move standup to 10am?","body":"Hey Jordan — moving deploys to first thing in the morning is killing\nme on 9am standup. Could we slide it to 10am starting next week?\n\nMira","bodyPreview":"Hey Jordan — moving deploys to first thing in the morning is killing me on 9am standup. Could we slide it to 10am starting next week? Mira","attachments":[],"isReply":false,"isForward":false,"hasQuestion":true},{"id":"m_0007","ts":"2026-01-28 20:02:14","date":"2026-01-28","time":"20:02:14","tsEpoch":1769630534000,"messageId":"<cl-2211@clockless.ai>","inReplyTo":"<cl-2210@clockless.ai>","references":["<cl-2210@clockless.ai>"],"threadId":"t_0002","from":{"name":"Jordan Reyes","email":"jordan@clockless.ai"},"to":[{"name":"Mira Park","email":"mira@clockless.ai"}],"cc":[],"subject":"Re: Can we move standup to 10am?","subjectKey":"can we move standup to 10am?","body":"Works for me. I'll update the calendar invite this evening.\n\nJordan","bodyPreview":"Works for me. I'll update the calendar invite this evening. Jordan","attachments":[],"isReply":true,"isForward":false,"hasQuestion":false},{"id":"m_0008","ts":"2026-02-02 13:30:11","date":"2026-02-02","time":"13:30:11","tsEpoch":1770039011000,"messageId":"<cl-2301@clockless.ai>","inReplyTo":null,"references":[],"threadId":"t_0003","from":{"name":"Jordan Reyes","email":"jordan@clockless.ai"},"to":[{"name":"Alex Chen","email":"alex@acme.co"}],"cc":[{"name":"Sam Patel","email":"sam@acme.co"},{"name":"Mira Park","email":"mira@clockless.ai"}],"subject":"Pilot kickoff next steps","subjectKey":"pilot kickoff next steps","body":"Hi Alex, Sam,\n\nGreat call on Friday. Per our notes, here's the plan we landed on\nfor the 6-week pilot:\n\n  - Scope: ingest pipeline + dashboards for Acme's North-1 region.\n  - Pricing: flat /mo for the pilot, credited toward year 1 if\n    you sign by April 15.\n  - Success criteria: P95 ingest latency under 200ms, alerting\n    integrated with your PagerDuty service \"acme-platform\".\n  - Kickoff target: Wed Feb 11.\n\nCould you confirm the kickoff date works for both teams, and forward\nthe legal redlines you mentioned? Once those are in we'll\ncounter-sign and start provisioning the sandbox.\n\nJordan","bodyPreview":"Hi Alex, Sam, Great call on Friday. Per our notes, here's the plan we landed on for the 6-week pilot: - Scope: ingest pipeline + dashboards for Acme's North-1 region. - Pricing: flat /mo for the pilot, credited toward year 1 if you sign by ","attachments":[],"isReply":false,"isForward":false,"hasQuestion":true},{"id":"m_0009","ts":"2026-02-02 16:44:20","date":"2026-02-02","time":"16:44:20","tsEpoch":1770050660000,"messageId":"<ac-9001@acme.co>","inReplyTo":"<cl-2301@clockless.ai>","references":["<cl-2301@clockless.ai>"],"threadId":"t_0003","from":{"name":"Alex Chen","email":"alex@acme.co"},"to":[{"name":"Jordan Reyes","email":"jordan@clockless.ai"}],"cc":[{"name":"Sam Patel","email":"sam@acme.co"},{"name":"Mira Park","email":"mira@clockless.ai"}],"subject":"Re: Pilot kickoff next steps","subjectKey":"pilot kickoff next steps","body":"Jordan,\n\nFeb 11 works for us. Sam will run the technical kickoff; he's looped\nin on this thread.\n\nTwo redlines from our legal team (attached):\n\n  - Section 7.2 — they want the data-residency commitment to\n    explicitly call out us-east-2.\n  - Section 11 — 30-day termination notice instead of 60.\n\nOtherwise the redline copy is mostly OK. Could you confirm the\nus-east-2 commitment is fine on your side? That's the longer pole\nof the two.\n\nAlex","bodyPreview":"Jordan, Feb 11 works for us. Sam will run the technical kickoff; he's looped in on this thread. Two redlines from our legal team (attached): - Section 7.2 — they want the data-residency commitment to explicitly call out us-east-2. - Section","attachments":[{"filename":"acme-clockless-pilot-redline-v3.pdf","contentType":"application/pdf","sizeEstimate":171}],"isReply":true,"isForward":false,"hasQuestion":true},{"id":"m_0010","ts":"2026-02-02 21:18:55","date":"2026-02-02","time":"21:18:55","tsEpoch":1770067135000,"messageId":"<cl-2302@clockless.ai>","inReplyTo":"<ac-9001@acme.co>","references":["<cl-2301@clockless.ai>","<ac-9001@acme.co>"],"threadId":"t_0003","from":{"name":"Jordan Reyes","email":"jordan@clockless.ai"},"to":[{"name":"Alex Chen","email":"alex@acme.co"}],"cc":[{"name":"Sam Patel","email":"sam@acme.co"},{"name":"Mira Park","email":"mira@clockless.ai"}],"subject":"Re: Pilot kickoff next steps","subjectKey":"pilot kickoff next steps","body":"Alex,\n\nGot the redline — thanks. Spoke with our infra lead and us-east-2 is\nfine; we already have the residency posture in place there. I'll\nhave legal counter-sign tomorrow and send the executed copy back.\n\nMira will reach out this week with credentials for the sandbox so\nSam can start wiring up the ingest endpoint ahead of the Feb 11\nkickoff.\n\nJordan","bodyPreview":"Alex, Got the redline — thanks. Spoke with our infra lead and us-east-2 is fine; we already have the residency posture in place there. I'll have legal counter-sign tomorrow and send the executed copy back. Mira will reach out this week with","attachments":[],"isReply":true,"isForward":false,"hasQuestion":false},{"id":"m_0011","ts":"2026-02-03 14:50:00","date":"2026-02-03","time":"14:50:00","tsEpoch":1770130200000,"messageId":"<cl-2303@clockless.ai>","inReplyTo":"<cl-2302@clockless.ai>","references":["<cl-2301@clockless.ai>","<ac-9001@acme.co>","<cl-2302@clockless.ai>"],"threadId":"t_0003","from":{"name":"Mira Park","email":"mira@clockless.ai"},"to":[{"name":"Sam Patel","email":"sam@acme.co"}],"cc":[{"name":"Alex Chen","email":"alex@acme.co"},{"name":"Jordan Reyes","email":"jordan@clockless.ai"}],"subject":"Re: Pilot kickoff next steps","subjectKey":"pilot kickoff next steps","body":"Hi Sam,\n\nSandbox is provisioned. Credentials and the runbook are attached as\na single PDF — ingest endpoint, signing key, and the PagerDuty\nintegration walkthrough.\n\nTwo things to look out for:\n\n  - The sandbox region is us-east-2 (per Alex's redline).\n  - We provisioned a separate signing key for the pilot so you can\n    rotate independently of any production setup.\n\nPing me here once the first event lands and I'll verify on our side.\n\nMira","bodyPreview":"Hi Sam, Sandbox is provisioned. Credentials and the runbook are attached as a single PDF — ingest endpoint, signing key, and the PagerDuty integration walkthrough. Two things to look out for: - The sandbox region is us-east-2 (per Alex's re","attachments":[{"filename":"pilot-sandbox-runbook.pdf","contentType":"application/pdf","sizeEstimate":15}],"isReply":true,"isForward":false,"hasQuestion":false},{"id":"m_0012","ts":"2026-02-04 22:22:08","date":"2026-02-04","time":"22:22:08","tsEpoch":1770243728000,"messageId":"<ac-9010@acme.co>","inReplyTo":"<cl-2303@clockless.ai>","references":["<cl-2301@clockless.ai>","<ac-9001@acme.co>","<cl-2302@clockless.ai>","<cl-2303@clockless.ai>"],"threadId":"t_0003","from":{"name":"Sam Patel","email":"sam@acme.co"},"to":[{"name":"Mira Park","email":"mira@clockless.ai"}],"cc":[{"name":"Alex Chen","email":"alex@acme.co"},{"name":"Jordan Reyes","email":"jordan@clockless.ai"}],"subject":"Re: Pilot kickoff next steps","subjectKey":"pilot kickoff next steps","body":"First event landed at 17:18 ET — verified end-to-end on our side.\nRates and signature both look healthy.\n\nWe're going to load-test for an hour tomorrow morning around 9 ET,\nramping from 100 to 5000 events/sec. Anything we should warn your\nside about, or are we good to push ahead?\n\nSam","bodyPreview":"First event landed at 17:18 ET — verified end-to-end on our side. Rates and signature both look healthy. We're going to load-test for an hour tomorrow morning around 9 ET, ramping from 100 to 5000 events/sec. Anything we should warn your si","attachments":[],"isReply":true,"isForward":false,"hasQuestion":true},{"id":"m_0013","ts":"2026-02-06 13:15:42","date":"2026-02-06","time":"13:15:42","tsEpoch":1770383742000,"messageId":"<ac-9020@acme.co>","inReplyTo":"<ac-9010@acme.co>","references":["<cl-2301@clockless.ai>","<ac-9001@acme.co>","<cl-2302@clockless.ai>","<cl-2303@clockless.ai>","<ac-9010@acme.co>"],"threadId":"t_0003","from":{"name":"Alex Chen","email":"alex@acme.co"},"to":[{"name":"Jordan Reyes","email":"jordan@clockless.ai"}],"cc":[{"name":"Sam Patel","email":"sam@acme.co"},{"name":"Mira Park","email":"mira@clockless.ai"}],"subject":"Re: Pilot kickoff next steps","subjectKey":"pilot kickoff next steps","body":"Quick scheduling question on the kickoff itself — Sam's flight got\nmoved and he'd like to push the Feb 11 call by two hours, from 10am\nET to 12pm ET. Does that still work on your end?\n\nAlex","bodyPreview":"Quick scheduling question on the kickoff itself — Sam's flight got moved and he'd like to push the Feb 11 call by two hours, from 10am ET to 12pm ET. Does that still work on your end? Alex","attachments":[],"isReply":true,"isForward":false,"hasQuestion":true}],"threads":[{"id":"t_0003","subject":"Pilot kickoff next steps","participants":["Jordan Reyes <jordan@clockless.ai>","Alex Chen <alex@acme.co>","Sam Patel <sam@acme.co>","Mira Park <mira@clockless.ai>"],"messageIds":["m_0008","m_0009","m_0010","m_0011","m_0012","m_0013"],"firstTs":"2026-02-02 13:30:11","lastTs":"2026-02-06 13:15:42","messageCount":6,"lastSender":"Alex Chen <alex@acme.co>","lastEndsInQuestion":true},{"id":"t_0002","subject":"Can we move standup to 10am?","participants":["Mira Park <mira@clockless.ai>","Jordan Reyes <jordan@clockless.ai>"],"messageIds":["m_0006","m_0007"],"firstTs":"2026-01-28 19:45:00","lastTs":"2026-01-28 20:02:14","messageCount":2,"lastSender":"Jordan Reyes <jordan@clockless.ai>","lastEndsInQuestion":false},{"id":"t_0001","subject":"Webhook signatures failing after rotation","participants":["Casey Liu <casey@northstack.dev>","Clockless Support <support@clockless.ai>","Mira Park <mira@clockless.ai>"],"messageIds":["m_0001","m_0002","m_0003","m_0004","m_0005"],"firstTs":"2026-01-27 14:14:21","lastTs":"2026-01-27 16:09:48","messageCount":5,"lastSender":"Casey Liu <casey@northstack.dev>","lastEndsInQuestion":false}],"senders":[{"email":"mira@clockless.ai","name":"Mira Park","count":4,"domain":"clockless.ai"},{"email":"casey@northstack.dev","name":"Casey Liu","count":3,"domain":"northstack.dev"},{"email":"jordan@clockless.ai","name":"Jordan Reyes","count":3,"domain":"clockless.ai"},{"email":"alex@acme.co","name":"Alex Chen","count":2,"domain":"acme.co"},{"email":"sam@acme.co","name":"Sam Patel","count":1,"domain":"acme.co"}],"domains":[{"domain":"clockless.ai","count":7},{"domain":"northstack.dev","count":3},{"domain":"acme.co","count":3}],"attachments":[{"filename":"acme-clockless-pilot-redline-v3.pdf","contentType":"application/pdf","sizeEstimate":171,"threadId":"t_0003","ts":"2026-02-02 16:44:20","fromEmail":"alex@acme.co"},{"filename":"pilot-sandbox-runbook.pdf","contentType":"application/pdf","sizeEstimate":15,"threadId":"t_0003","ts":"2026-02-03 14:50:00","fromEmail":"mira@clockless.ai"}],"sourceFile":"input.mbox","sizeBytes":10528,"format":"mbox","messageCount":13,"threadCount":3,"senderCount":5,"domainCount":3,"attachmentCount":2,"dateRange":"2026-01-27 → 2026-02-06","topSenders":[{"email":"mira@clockless.ai","name":"Mira Park","count":4,"domain":"clockless.ai"},{"email":"casey@northstack.dev","name":"Casey Liu","count":3,"domain":"northstack.dev"},{"email":"jordan@clockless.ai","name":"Jordan Reyes","count":3,"domain":"clockless.ai"},{"email":"alex@acme.co","name":"Alex Chen","count":2,"domain":"acme.co"},{"email":"sam@acme.co","name":"Sam Patel","count":1,"domain":"acme.co"}],"topDomains":[{"domain":"clockless.ai","count":7},{"domain":"northstack.dev","count":3},{"domain":"acme.co","count":3}]};</script>
 
-<div class="app">
-  <!-- Header -->
-  <header class="header">
-    <div class="header-brand">
-      <div class="brand-dot">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-        </svg>
-      </div>
+<div class="network-shell">
+
+  <!-- TOP BAR -->
+  <header class="network-topbar">
+    <div class="topbar-brand">
+      <div class="topbar-logo">CL</div>
       <div>
-        <div class="header-title">Acme × Clockless</div>
-        <div class="header-sub">Mailbox Snapshot · input.mbox · 13 messages</div>
+        <div class="topbar-title">Acme × Clockless</div>
+        <div class="topbar-meta">Mailbox Snapshot</div>
       </div>
     </div>
 
-    <div class="header-actions">
-      <button class="btn btn-outline mobile-thread-list" onclick="openMobileSidebar()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        Threads
-      </button>
-      <div class="search-wrap">
-        <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" class="search-input" id="searchInput" placeholder="Search messages…" oninput="handleSearch(this.value)" autocomplete="off">
-      </div>
-      <button class="btn btn-outline" onclick="copyAllMarkdown()" id="copyAllBtn">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        Copy MD
-      </button>
+    <div class="topbar-search">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search messages, senders…" autocomplete="off" spellcheck="false">
+    </div>
+
+    <div class="topbar-actions">
+      <button class="btn-ghost" id="copyAllBtn">⎘ Copy All</button>
     </div>
   </header>
 
-  <!-- Sidebar -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-section">
-      <div class="sidebar-label">Overview</div>
-      <div class="stat-row" style="cursor:pointer" onclick="showOverview()">
-        <span class="stat-label">📊 All threads</span>
-        <span class="stat-val">↗</span>
+  <!-- STATS STRIP -->
+  <div class="stats-strip" id="statsStrip"></div>
+
+  <!-- MOBILE TABS -->
+  <div class="mobile-tabs">
+    <button class="mobile-tab active" data-panel="left">Network</button>
+    <button class="mobile-tab" data-panel="center">Threads</button>
+    <button class="mobile-tab" data-panel="right">Details</button>
+  </div>
+
+  <!-- MAIN -->
+  <div class="network-main">
+
+    <!-- LEFT: Network + Hub Cards -->
+    <div class="network-left mobile-panel active" id="panelLeft">
+
+      <div class="network-canvas-wrap">
+        <div class="canvas-label"><span class="dot"></span> Sender Network</div>
+        <svg id="networkSvg" viewBox="0 0 300 240" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+
+      <div class="cluster-controls">
+        <div class="cluster-controls-label">Group By</div>
+        <div class="cluster-chips">
+          <button class="cluster-chip active" data-group="all">All</button>
+          <button class="cluster-chip" data-group="domain">Domain</button>
+          <button class="cluster-chip" data-group="thread">Thread</button>
+        </div>
+      </div>
+
+      <div class="hub-cards">
+        <div class="hub-cards-label">Senders — Hub View</div>
+        <div id="hubCardsList"></div>
       </div>
     </div>
 
-    <div class="sidebar-section">
-      <div class="sidebar-label">Stats</div>
-      <div class="stat-row"><span class="stat-label">Messages</span><span class="stat-val" id="sb-msg-count">–</span></div>
-      <div class="stat-row"><span class="stat-label">Threads</span><span class="stat-val" id="sb-thread-count">–</span></div>
-      <div class="stat-row"><span class="stat-label">Senders</span><span class="stat-val" id="sb-sender-count">–</span></div>
-      <div class="stat-row"><span class="stat-label">Attachments</span><span class="stat-val" id="sb-attach-count">–</span></div>
-      <div class="stat-row"><span class="stat-label">Date range</span><span class="stat-val" id="sb-date-range" style="font-size:10px">–</span></div>
+    <!-- CENTER: Inspector + Linked Records -->
+    <div class="network-center mobile-panel" id="panelCenter">
+
+      <div id="entityInspector" class="entity-inspector"></div>
+
+      <div class="linked-records">
+        <div class="linked-records-header">
+          <div class="linked-records-title">Linked Threads</div>
+          <div class="record-count-badge" id="recordCount">—</div>
+        </div>
+        <div id="threadList"></div>
+      </div>
     </div>
 
-    <div class="sidebar-section">
-      <div class="sidebar-label">Threads</div>
-      <div id="thread-nav"></div>
-    </div>
+    <!-- RIGHT: Edge Details + Domain + Timeline -->
+    <div class="network-right mobile-panel" id="panelRight">
 
-    <div class="sidebar-section">
-      <div class="sidebar-label">Top Senders</div>
-      <div class="sender-bar-wrap" id="sender-bars"></div>
-    </div>
-  </aside>
-
-  <!-- Main -->
-  <main class="main" id="main">
-    <!-- Overview -->
-    <div class="overview-view active fade-in" id="overview-view">
-      <div class="overview-hero">
-        <div class="hero-eyebrow">Email Archive · 2026</div>
-        <div class="hero-title">Acme × Clockless<br>Mailbox Snapshot</div>
-        <div class="hero-stats" id="hero-stats"></div>
+      <div class="right-section">
+        <div class="right-section-title">📨 Top Connections</div>
+        <div class="edge-detail" id="edgeDetail"></div>
       </div>
 
-      <!-- Open loops callout (threads waiting on a reply) -->
-      <section class="panel panel-callout" id="open-loops-section" aria-labelledby="open-loops-title">
-        <div class="panel-header">
-          <div class="panel-title-row">
-            <h2 class="panel-title" id="open-loops-title">Open loops</h2>
-            <span class="panel-sub">Threads where the last message ends in a question or ask</span>
-          </div>
-        </div>
-        <div class="open-loops-list" id="open-loops-list"></div>
-      </section>
+      <div class="right-section">
+        <div class="right-section-title">🏠 Domain Volume</div>
+        <div class="domain-bars" id="domainBars"></div>
+      </div>
 
-      <!-- Timeline -->
-      <section class="panel" id="timeline-section" aria-labelledby="timeline-title">
-        <div class="panel-header">
-          <div class="panel-title-row">
-            <h2 class="panel-title" id="timeline-title">Timeline</h2>
-            <span class="panel-sub">Chronological activity per thread</span>
-          </div>
-        </div>
-        <div class="timeline-wrap" id="timeline-wrap"></div>
-      </section>
-
-      <!-- Sender filter -->
-      <section class="panel" id="sender-filter-section" aria-labelledby="sender-filter-title">
-        <div class="panel-header">
-          <div class="panel-title-row">
-            <h2 class="panel-title" id="sender-filter-title">Sender filter</h2>
-            <span class="panel-sub">Click a chip to constrain visible threads</span>
-          </div>
-          <button class="filter-clear" id="filter-clear-btn" type="button" onclick="clearSenderFilter()" hidden>Clear</button>
-        </div>
-        <div class="filter-chips" id="sender-filter-chips" role="group" aria-label="Sender filter chips"></div>
-      </section>
-
-      <div class="threads-grid" id="threads-grid"></div>
+      <div class="right-section" style="flex:1;overflow:hidden;display:flex;flex-direction:column;">
+        <div class="right-section-title">⏱ Message Timeline</div>
+        <div class="timeline-mini" id="timelineMini"></div>
+      </div>
     </div>
 
-    <!-- Thread views (generated) -->
-    <div id="thread-views"></div>
-  </main>
+  </div>
 </div>
 
-<script>const DATA = {"messages":[{"id":"m_0001","ts":"2026-01-27 14:14:21","date":"2026-01-27","time":"14:14:21","tsEpoch":1769523261000,"messageId":"<ns-1701@northstack.dev>","inReplyTo":null,"references":[],"threadId":"t_0001","from":{"name":"Casey Liu","email":"casey@northstack.dev"},"to":[{"name":"Clockless Support","email":"support@clockless.ai"}],"cc":[],"subject":"Webhook signatures failing after rotation","subjectKey":"webhook signatures failing after rotation","body":"Hey team,\n\nSince we rotated our signing key on Sunday afternoon, every webhook\nfrom your ingest endpoint is coming back with a bad signature. We're\nseeing about 300 401s an hour against /api/v2/ingest.\n\nWe followed the rotation guide step by step (paste new key into the\nSettings → Keys panel, then revoke the old one). Anything we missed\nin the rollover? Happy to send sample failing payloads.\n\nCasey\nNorthstack Engineering","bodyPreview":"Hey team, Since we rotated our signing key on Sunday afternoon, every webhook from your ingest endpoint is coming back with a bad signature. We're seeing about 300 401s an hour against /api/v2/ingest. We followed the rotation guide step by ","attachments":[],"isReply":false,"isForward":false,"hasQuestion":true},{"id":"m_0002","ts":"2026-01-27 14:48:02","date":"2026-01-27","time":"14:48:02","tsEpoch":1769525282000,"messageId":"<cl-2201@clockless.ai>","inReplyTo":"<ns-1701@northstack.dev>","references":["<ns-1701@northstack.dev>"],"threadId":"t_0001","from":{"name":"Mira Park","email":"mira@clockless.ai"},"to":[{"name":"Casey Liu","email":"casey@northstack.dev"}],"cc":[{"name":"Clockless Support","email":"support@clockless.ai"}],"subject":"Re: Webhook signatures failing after rotation","subjectKey":"webhook signatures failing after rotation","body":"Hi Casey,\n\nSorry about the noise. Two things would help me narrow it down:\n\n1. Paste the X-Clockless-Signature header from one failing call.\n2. Confirm whether you also flipped the \"active key id\" radio on the\n   settings page after pasting the new key. There's a known foot-gun\n   where the panel saves the new secret but keeps the old key id as\n   active, so signatures keep getting computed against the previous\n   secret.\n\nIf (2) is the issue we can swap it for you in seconds.\n\nMira","bodyPreview":"Hi Casey, Sorry about the noise. Two things would help me narrow it down: 1. Paste the X-Clockless-Signature header from one failing call. 2. Confirm whether you also flipped the \"active key id\" radio on the settings page after pasting the ","attachments":[],"isReply":true,"isForward":false,"hasQuestion":false},{"id":"m_0003","ts":"2026-01-27 15:11:55","date":"2026-01-27","time":"15:11:55","tsEpoch":1769526715000,"messageId":"<ns-1702@northstack.dev>","inReplyTo":"<cl-2201@clockless.ai>","references":["<ns-1701@northstack.dev>","<cl-2201@clockless.ai>"],"threadId":"t_0001","from":{"name":"Casey Liu","email":"casey@northstack.dev"},"to":[{"name":"Mira Park","email":"mira@clockless.ai"}],"cc":[{"name":"Clockless Support","email":"support@clockless.ai"}],"subject":"Re: Webhook signatures failing after rotation","subjectKey":"webhook signatures failing after rotation","body":"You called it. The active key id radio was still pointing at\nkey_2024Q4_b. Just flipped to key_2026Q1_a and the signatures\nvalidate again — 401 rate dropped to zero.\n\nThank you for the fast turnaround. Two follow-up asks:\n\n  - Could you add an alert / inline warning when the active key id\n    differs from the most-recently-saved secret? This would have\n    saved us about three hours.\n  - Is there a programmatic key-rotation endpoint we could call from\n    our deploy pipeline so we never touch the UI for this?\n\nCasey","bodyPreview":"You called it. The active key id radio was still pointing at key_2024Q4_b. Just flipped to key_2026Q1_a and the signatures validate again — 401 rate dropped to zero. Thank you for the fast turnaround. Two follow-up asks: - Could you add an ","attachments":[],"isReply":true,"isForward":false,"hasQuestion":true},{"id":"m_0004","ts":"2026-01-27 16:02:31","date":"2026-01-27","time":"16:02:31","tsEpoch":1769529751000,"messageId":"<cl-2202@clockless.ai>","inReplyTo":"<ns-1702@northstack.dev>","references":["<ns-1701@northstack.dev>","<cl-2201@clockless.ai>","<ns-1702@northstack.dev>"],"threadId":"t_0001","from":{"name":"Mira Park","email":"mira@clockless.ai"},"to":[{"name":"Casey Liu","email":"casey@northstack.dev"}],"cc":[],"subject":"Re: Webhook signatures failing after rotation","subjectKey":"webhook signatures failing after rotation","body":"Glad it's fixed.\n\nOn your asks:\n\n1. Inline warning — filed as CL-4117. We agree this is the right fix\n   and it's on next sprint's plate. I'll post the PR link here when\n   it lands.\n2. Rotation endpoint — already exists, just under-documented. POST\n   /api/v2/keys/rotate with {\"label\": \"...\"} returns the new secret\n   and atomically flips the active key id. I'll add a section to the\n   webhooks docs by Friday.\n\nClosing the ticket — reopen anytime if anything else looks off.\n\nMira","bodyPreview":"Glad it's fixed. On your asks: 1. Inline warning — filed as CL-4117. We agree this is the right fix and it's on next sprint's plate. I'll post the PR link here when it lands. 2. Rotation endpoint — already exists, just under-documented. POS","attachments":[],"isReply":true,"isForward":false,"hasQuestion":false},{"id":"m_0005","ts":"2026-01-27 16:09:48","date":"2026-01-27","time":"16:09:48","tsEpoch":1769530188000,"messageId":"<ns-1703@northstack.dev>","inReplyTo":"<cl-2202@clockless.ai>","references":["<ns-1701@northstack.dev>","<cl-2201@clockless.ai>","<ns-1702@northstack.dev>","<cl-2202@clockless.ai>"],"threadId":"t_0001","from":{"name":"Casey Liu","email":"casey@northstack.dev"},"to":[{"name":"Mira Park","email":"mira@clockless.ai"}],"cc":[],"subject":"Re: Webhook signatures failing after rotation","subjectKey":"webhook signatures failing after rotation","body":"Perfect. Watching for the PR link.\n\nCasey","bodyPreview":"Perfect. Watching for the PR link. Casey","attachments":[],"isReply":true,"isForward":false,"hasQuestion":false},{"id":"m_0006","ts":"2026-01-28 19:45:00","date":"2026-01-28","time":"19:45:00","tsEpoch":1769629500000,"messageId":"<cl-2210@clockless.ai>","inReplyTo":null,"references":[],"threadId":"t_0002","from":{"name":"Mira Park","email":"mira@clockless.ai"},"to":[{"name":"Jordan Reyes","email":"jordan@clockless.ai"}],"cc":[],"subject":"Can we move standup to 10am?","subjectKey":"can we move standup to 10am?","body":"Hey Jordan — moving deploys to first thing in the morning is killing\nme on 9am standup. Could we slide it to 10am starting next week?\n\nMira","bodyPreview":"Hey Jordan — moving deploys to first thing in the morning is killing me on 9am standup. Could we slide it to 10am starting next week? Mira","attachments":[],"isReply":false,"isForward":false,"hasQuestion":true},{"id":"m_0007","ts":"2026-01-28 20:02:14","date":"2026-01-28","time":"20:02:14","tsEpoch":1769630534000,"messageId":"<cl-2211@clockless.ai>","inReplyTo":"<cl-2210@clockless.ai>","references":["<cl-2210@clockless.ai>"],"threadId":"t_0002","from":{"name":"Jordan Reyes","email":"jordan@clockless.ai"},"to":[{"name":"Mira Park","email":"mira@clockless.ai"}],"cc":[],"subject":"Re: Can we move standup to 10am?","subjectKey":"can we move standup to 10am?","body":"Works for me. I'll update the calendar invite this evening.\n\nJordan","bodyPreview":"Works for me. I'll update the calendar invite this evening. Jordan","attachments":[],"isReply":true,"isForward":false,"hasQuestion":false},{"id":"m_0008","ts":"2026-02-02 13:30:11","date":"2026-02-02","time":"13:30:11","tsEpoch":1770039011000,"messageId":"<cl-2301@clockless.ai>","inReplyTo":null,"references":[],"threadId":"t_0003","from":{"name":"Jordan Reyes","email":"jordan@clockless.ai"},"to":[{"name":"Alex Chen","email":"alex@acme.co"}],"cc":[{"name":"Sam Patel","email":"sam@acme.co"},{"name":"Mira Park","email":"mira@clockless.ai"}],"subject":"Pilot kickoff next steps","subjectKey":"pilot kickoff next steps","body":"Hi Alex, Sam,\n\nGreat call on Friday. Per our notes, here's the plan we landed on\nfor the 6-week pilot:\n\n  - Scope: ingest pipeline + dashboards for Acme's North-1 region.\n  - Pricing: flat /mo for the pilot, credited toward year 1 if\n    you sign by April 15.\n  - Success criteria: P95 ingest latency under 200ms, alerting\n    integrated with your PagerDuty service \"acme-platform\".\n  - Kickoff target: Wed Feb 11.\n\nCould you confirm the kickoff date works for both teams, and forward\nthe legal redlines you mentioned? Once those are in we'll\ncounter-sign and start provisioning the sandbox.\n\nJordan","bodyPreview":"Hi Alex, Sam, Great call on Friday. Per our notes, here's the plan we landed on for the 6-week pilot: - Scope: ingest pipeline + dashboards for Acme's North-1 region. - Pricing: flat /mo for the pilot, credited toward year 1 if you sign by ","attachments":[],"isReply":false,"isForward":false,"hasQuestion":true},{"id":"m_0009","ts":"2026-02-02 16:44:20","date":"2026-02-02","time":"16:44:20","tsEpoch":1770050660000,"messageId":"<ac-9001@acme.co>","inReplyTo":"<cl-2301@clockless.ai>","references":["<cl-2301@clockless.ai>"],"threadId":"t_0003","from":{"name":"Alex Chen","email":"alex@acme.co"},"to":[{"name":"Jordan Reyes","email":"jordan@clockless.ai"}],"cc":[{"name":"Sam Patel","email":"sam@acme.co"},{"name":"Mira Park","email":"mira@clockless.ai"}],"subject":"Re: Pilot kickoff next steps","subjectKey":"pilot kickoff next steps","body":"Jordan,\n\nFeb 11 works for us. Sam will run the technical kickoff; he's looped\nin on this thread.\n\nTwo redlines from our legal team (attached):\n\n  - Section 7.2 — they want the data-residency commitment to\n    explicitly call out us-east-2.\n  - Section 11 — 30-day termination notice instead of 60.\n\nOtherwise the redline copy is mostly OK. Could you confirm the\nus-east-2 commitment is fine on your side? That's the longer pole\nof the two.\n\nAlex","bodyPreview":"Jordan, Feb 11 works for us. Sam will run the technical kickoff; he's looped in on this thread. Two redlines from our legal team (attached): - Section 7.2 — they want the data-residency commitment to explicitly call out us-east-2. - Section","attachments":[{"filename":"acme-clockless-pilot-redline-v3.pdf","contentType":"application/pdf","sizeEstimate":171}],"isReply":true,"isForward":false,"hasQuestion":true},{"id":"m_0010","ts":"2026-02-02 21:18:55","date":"2026-02-02","time":"21:18:55","tsEpoch":1770067135000,"messageId":"<cl-2302@clockless.ai>","inReplyTo":"<ac-9001@acme.co>","references":["<cl-2301@clockless.ai>","<ac-9001@acme.co>"],"threadId":"t_0003","from":{"name":"Jordan Reyes","email":"jordan@clockless.ai"},"to":[{"name":"Alex Chen","email":"alex@acme.co"}],"cc":[{"name":"Sam Patel","email":"sam@acme.co"},{"name":"Mira Park","email":"mira@clockless.ai"}],"subject":"Re: Pilot kickoff next steps","subjectKey":"pilot kickoff next steps","body":"Alex,\n\nGot the redline — thanks. Spoke with our infra lead and us-east-2 is\nfine; we already have the residency posture in place there. I'll\nhave legal counter-sign tomorrow and send the executed copy back.\n\nMira will reach out this week with credentials for the sandbox so\nSam can start wiring up the ingest endpoint ahead of the Feb 11\nkickoff.\n\nJordan","bodyPreview":"Alex, Got the redline — thanks. Spoke with our infra lead and us-east-2 is fine; we already have the residency posture in place there. I'll have legal counter-sign tomorrow and send the executed copy back. Mira will reach out this week with","attachments":[],"isReply":true,"isForward":false,"hasQuestion":false},{"id":"m_0011","ts":"2026-02-03 14:50:00","date":"2026-02-03","time":"14:50:00","tsEpoch":1770130200000,"messageId":"<cl-2303@clockless.ai>","inReplyTo":"<cl-2302@clockless.ai>","references":["<cl-2301@clockless.ai>","<ac-9001@acme.co>","<cl-2302@clockless.ai>"],"threadId":"t_0003","from":{"name":"Mira Park","email":"mira@clockless.ai"},"to":[{"name":"Sam Patel","email":"sam@acme.co"}],"cc":[{"name":"Alex Chen","email":"alex@acme.co"},{"name":"Jordan Reyes","email":"jordan@clockless.ai"}],"subject":"Re: Pilot kickoff next steps","subjectKey":"pilot kickoff next steps","body":"Hi Sam,\n\nSandbox is provisioned. Credentials and the runbook are attached as\na single PDF — ingest endpoint, signing key, and the PagerDuty\nintegration walkthrough.\n\nTwo things to look out for:\n\n  - The sandbox region is us-east-2 (per Alex's redline).\n  - We provisioned a separate signing key for the pilot so you can\n    rotate independently of any production setup.\n\nPing me here once the first event lands and I'll verify on our side.\n\nMira","bodyPreview":"Hi Sam, Sandbox is provisioned. Credentials and the runbook are attached as a single PDF — ingest endpoint, signing key, and the PagerDuty integration walkthrough. Two things to look out for: - The sandbox region is us-east-2 (per Alex's re","attachments":[{"filename":"pilot-sandbox-runbook.pdf","contentType":"application/pdf","sizeEstimate":15}],"isReply":true,"isForward":false,"hasQuestion":false},{"id":"m_0012","ts":"2026-02-04 22:22:08","date":"2026-02-04","time":"22:22:08","tsEpoch":1770243728000,"messageId":"<ac-9010@acme.co>","inReplyTo":"<cl-2303@clockless.ai>","references":["<cl-2301@clockless.ai>","<ac-9001@acme.co>","<cl-2302@clockless.ai>","<cl-2303@clockless.ai>"],"threadId":"t_0003","from":{"name":"Sam Patel","email":"sam@acme.co"},"to":[{"name":"Mira Park","email":"mira@clockless.ai"}],"cc":[{"name":"Alex Chen","email":"alex@acme.co"},{"name":"Jordan Reyes","email":"jordan@clockless.ai"}],"subject":"Re: Pilot kickoff next steps","subjectKey":"pilot kickoff next steps","body":"First event landed at 17:18 ET — verified end-to-end on our side.\nRates and signature both look healthy.\n\nWe're going to load-test for an hour tomorrow morning around 9 ET,\nramping from 100 to 5000 events/sec. Anything we should warn your\nside about, or are we good to push ahead?\n\nSam","bodyPreview":"First event landed at 17:18 ET — verified end-to-end on our side. Rates and signature both look healthy. We're going to load-test for an hour tomorrow morning around 9 ET, ramping from 100 to 5000 events/sec. Anything we should warn your si","attachments":[],"isReply":true,"isForward":false,"hasQuestion":true},{"id":"m_0013","ts":"2026-02-06 13:15:42","date":"2026-02-06","time":"13:15:42","tsEpoch":1770383742000,"messageId":"<ac-9020@acme.co>","inReplyTo":"<ac-9010@acme.co>","references":["<cl-2301@clockless.ai>","<ac-9001@acme.co>","<cl-2302@clockless.ai>","<cl-2303@clockless.ai>","<ac-9010@acme.co>"],"threadId":"t_0003","from":{"name":"Alex Chen","email":"alex@acme.co"},"to":[{"name":"Jordan Reyes","email":"jordan@clockless.ai"}],"cc":[{"name":"Sam Patel","email":"sam@acme.co"},{"name":"Mira Park","email":"mira@clockless.ai"}],"subject":"Re: Pilot kickoff next steps","subjectKey":"pilot kickoff next steps","body":"Quick scheduling question on the kickoff itself — Sam's flight got\nmoved and he'd like to push the Feb 11 call by two hours, from 10am\nET to 12pm ET. Does that still work on your end?\n\nAlex","bodyPreview":"Quick scheduling question on the kickoff itself — Sam's flight got moved and he'd like to push the Feb 11 call by two hours, from 10am ET to 12pm ET. Does that still work on your end? Alex","attachments":[],"isReply":true,"isForward":false,"hasQuestion":true}],"threads":[{"id":"t_0003","subject":"Pilot kickoff next steps","participants":["Jordan Reyes <jordan@clockless.ai>","Alex Chen <alex@acme.co>","Sam Patel <sam@acme.co>","Mira Park <mira@clockless.ai>"],"messageIds":["m_0008","m_0009","m_0010","m_0011","m_0012","m_0013"],"firstTs":"2026-02-02 13:30:11","lastTs":"2026-02-06 13:15:42","messageCount":6,"lastSender":"Alex Chen <alex@acme.co>","lastEndsInQuestion":true},{"id":"t_0002","subject":"Can we move standup to 10am?","participants":["Mira Park <mira@clockless.ai>","Jordan Reyes <jordan@clockless.ai>"],"messageIds":["m_0006","m_0007"],"firstTs":"2026-01-28 19:45:00","lastTs":"2026-01-28 20:02:14","messageCount":2,"lastSender":"Jordan Reyes <jordan@clockless.ai>","lastEndsInQuestion":false},{"id":"t_0001","subject":"Webhook signatures failing after rotation","participants":["Casey Liu <casey@northstack.dev>","Clockless Support <support@clockless.ai>","Mira Park <mira@clockless.ai>"],"messageIds":["m_0001","m_0002","m_0003","m_0004","m_0005"],"firstTs":"2026-01-27 14:14:21","lastTs":"2026-01-27 16:09:48","messageCount":5,"lastSender":"Casey Liu <casey@northstack.dev>","lastEndsInQuestion":false}],"senders":[{"email":"mira@clockless.ai","name":"Mira Park","count":4,"domain":"clockless.ai"},{"email":"casey@northstack.dev","name":"Casey Liu","count":3,"domain":"northstack.dev"},{"email":"jordan@clockless.ai","name":"Jordan Reyes","count":3,"domain":"clockless.ai"},{"email":"alex@acme.co","name":"Alex Chen","count":2,"domain":"acme.co"},{"email":"sam@acme.co","name":"Sam Patel","count":1,"domain":"acme.co"}],"domains":[{"domain":"clockless.ai","count":7},{"domain":"northstack.dev","count":3},{"domain":"acme.co","count":3}],"attachments":[{"filename":"acme-clockless-pilot-redline-v3.pdf","contentType":"application/pdf","sizeEstimate":171,"threadId":"t_0003","ts":"2026-02-02 16:44:20","fromEmail":"alex@acme.co"},{"filename":"pilot-sandbox-runbook.pdf","contentType":"application/pdf","sizeEstimate":15,"threadId":"t_0003","ts":"2026-02-03 14:50:00","fromEmail":"mira@clockless.ai"}],"sourceFile":"input.mbox","sizeBytes":10528,"format":"mbox","messageCount":13,"threadCount":3,"senderCount":5,"domainCount":3,"attachmentCount":2,"dateRange":"2026-01-27 → 2026-02-06","topSenders":[{"email":"mira@clockless.ai","name":"Mira Park","count":4,"domain":"clockless.ai"},{"email":"casey@northstack.dev","name":"Casey Liu","count":3,"domain":"northstack.dev"},{"email":"jordan@clockless.ai","name":"Jordan Reyes","count":3,"domain":"clockless.ai"},{"email":"alex@acme.co","name":"Alex Chen","count":2,"domain":"acme.co"},{"email":"sam@acme.co","name":"Sam Patel","count":1,"domain":"acme.co"}],"topDomains":[{"domain":"clockless.ai","count":7},{"domain":"northstack.dev","count":3},{"domain":"acme.co","count":3}]};</script>
+<div class="copy-toast" id="copyToast">Copied to clipboard ✓</div>
+
 <script>
-// ── Color palette for avatars / threads ──────────────────────────────────────
-const PALETTE = [
-  '#a03b00','#7b40e0','#4d44e3','#10b981','#3b82f6','#f59e0b','#e84393','#00b4a0'
-];
+(function() {
+  // ============================================================
+  // DATA HELPERS
+  // ============================================================
+  const meta = DATA;
+  const senders = meta.topSenders || [];
+  const domains = meta.topDomains || [];
 
-const DOMAIN_COLORS = {
-  'clockless.ai': '#a03b00',
-  'northstack.dev': '#4d44e3',
-  'acme.co': '#10b981'
-};
-
-function getColor(key) {
-  let hash = 0;
-  for (let c of String(key)) hash = (hash * 31 + c.charCodeAt(0)) & 0xffffffff;
-  return PALETTE[Math.abs(hash) % PALETTE.length];
-}
-
-function initials(name) {
-  if (!name) return '?';
-  const parts = name.trim().split(/\s+/);
-  return (parts[0][0] + (parts[1] ? parts[1][0] : '')).toUpperCase();
-}
-
-function formatDate(ts) {
-  if (!ts) return '';
-  const d = new Date(ts.replace(' ', 'T'));
-  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-}
-
-function formatTime(ts) {
-  if (!ts) return '';
-  const d = new Date(ts.replace(' ', 'T'));
-  return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
-}
-
-function formatDateTime(ts) {
-  return formatDate(ts) + ' · ' + formatTime(ts);
-}
-
-function escHtml(str) {
-  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-// ── Build full thread map from DATA ─────────────────────────────────────────
-let allMessages = [];
-let threadMap = {}; // threadId → { subject, messages[], ... }
-
-function buildData() {
-  // Collect messages: first, last, longestThread
-  const seen = new Set();
-
-  function addMsg(m) {
-    if (!m || seen.has(m.id)) return;
-    seen.add(m.id);
-    allMessages.push(m);
+  // Gather all messages from first + last + longestThread.sample
+  function gatherMessages() {
+    const seen = new Set();
+    const msgs = [];
+    const addMsg = m => {
+      if (!seen.has(m.id)) { seen.add(m.id); msgs.push(m); }
+    };
+    (meta.first || []).forEach(addMsg);
+    (meta.last || []).forEach(addMsg);
+    if (meta.longestThread && meta.longestThread.sample) {
+      meta.longestThread.sample.forEach(addMsg);
+    }
+    return msgs.sort((a, b) => a.tsEpoch - b.tsEpoch);
   }
 
-  if (Array.isArray(DATA.messages)) DATA.messages.forEach(addMsg);
-  if (DATA.first) DATA.first.forEach(addMsg);
-  if (DATA.last) DATA.last.forEach(addMsg);
-  if (DATA.longestThread && DATA.longestThread.sample) DATA.longestThread.sample.forEach(addMsg);
+  // Gather all threads
+  function buildThreads(msgs) {
+    const map = {};
+    msgs.forEach(m => {
+      if (!map[m.threadId]) {
+        map[m.threadId] = { id: m.threadId, subject: m.subject, messages: [], participants: new Set() };
+      }
+      map[m.threadId].messages.push(m);
+      map[m.threadId].participants.add(m.from.email);
+      (m.to || []).forEach(p => map[m.threadId].participants.add(p.email));
+      (m.cc || []).forEach(p => map[m.threadId].participants.add(p.email));
+    });
+    Object.values(map).forEach(t => {
+      t.participants = Array.from(t.participants);
+      t.messages.sort((a, b) => a.tsEpoch - b.tsEpoch);
+    });
+    return Object.values(map).sort((a, b) => a.messages[0].tsEpoch - b.messages[0].tsEpoch);
+  }
 
-  // Sort by epoch
-  allMessages.sort((a, b) => (a.tsEpoch || 0) - (b.tsEpoch || 0));
+  const allMessages = gatherMessages();
+  const allThreads = buildThreads(allMessages);
 
-  // Group by thread
-  allMessages.forEach(m => {
-    if (!threadMap[m.threadId]) {
-      threadMap[m.threadId] = {
-        id: m.threadId,
-        subject: m.subject.replace(/^(Re:|Fwd:)\s*/i, ''),
-        messages: [],
-        firstTs: m.ts,
-        lastTs: m.ts
-      };
-    }
-    threadMap[m.threadId].messages.push(m);
-    if (m.ts > threadMap[m.threadId].lastTs) threadMap[m.threadId].lastTs = m.ts;
+  // ============================================================
+  // COLORS
+  // ============================================================
+  const PALETTE = [
+    '#a03b00', '#7b40e0', '#4d44e3', '#10b981', '#3b82f6',
+    '#f59e0b', '#ef4444', '#00D4FF', '#e8400d', '#c94c00'
+  ];
+
+  const senderColorMap = {};
+  senders.forEach((s, i) => {
+    senderColorMap[s.email] = PALETTE[i % PALETTE.length];
   });
 
-  // Assign participant lists
-  Object.values(threadMap).forEach(t => {
-    const pMap = {};
-    t.messages.forEach(m => {
-      pMap[m.from.email] = m.from.name || m.from.email;
-      [...(m.to||[]), ...(m.cc||[])].forEach(r => {
-        if (r.email) pMap[r.email] = r.name || r.email;
+  function emailColor(email) {
+    return senderColorMap[email] || PALETTE[senders.length % PALETTE.length];
+  }
+
+  function initials(name) {
+    if (!name) return '?';
+    const parts = name.trim().split(' ');
+    if (parts.length >= 2) return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
+    return parts[0].slice(0, 2).toUpperCase();
+  }
+
+  function nameByEmail(email) {
+    const s = senders.find(x => x.email === email);
+    if (s) return s.name;
+    // search messages
+    for (const m of allMessages) {
+      if (m.from.email === email) return m.from.name;
+      for (const r of [...(m.to||[]), ...(m.cc||[])]) {
+        if (r.email === email) return r.name;
+      }
+    }
+    return email.split('@')[0];
+  }
+
+  const domainColors = { 'clockless.ai': '#a03b00', 'northstack.dev': '#7b40e0', 'acme.co': '#10b981' };
+
+  function domainColor(d) {
+    return domainColors[d] || '#3b82f6';
+  }
+
+  // ============================================================
+  // STATS STRIP
+  // ============================================================
+  function renderStats() {
+    const strip = document.getElementById('statsStrip');
+    const stats = [
+      { val: meta.messageCount, label: 'Messages' },
+      { val: meta.threadCount, label: 'Threads' },
+      { val: meta.senderCount, label: 'Senders' },
+      { val: meta.domainCount, label: 'Domains' },
+      { val: meta.attachmentCount, label: 'Attachments' },
+      { val: meta.dateRange, label: 'Date Range', mono: true },
+    ];
+    strip.innerHTML = stats.map((s, i) => `
+      ${i > 0 ? '<div class="stat-divider"></div>' : ''}
+      <div class="stat-chip">
+        <div class="stat-chip-val${s.mono ? '" style="font-size:12px;font-family:var(--font-mono)' : ''}">${s.val}</div>
+        <div class="stat-chip-label">${s.label}</div>
+      </div>
+    `).join('');
+  }
+
+  // ============================================================
+  // NETWORK SVG
+  // ============================================================
+  let selectedNode = null;
+  let currentGroup = 'all';
+
+  function buildGraphData(groupMode) {
+    // Nodes: senders (with count), optionally domains
+    // Edges: co-participation in threads
+    const nodes = senders.map(s => ({
+      id: s.email, name: s.name, email: s.email, count: s.count,
+      domain: s.domain, color: emailColor(s.email),
+      group: groupMode === 'domain' ? s.domain : (groupMode === 'thread' ? getMainThread(s.email) : 'all')
+    }));
+
+    // Build edges from thread co-participation
+    const edgeMap = {};
+    allThreads.forEach(t => {
+      const ps = t.participants.filter(e => senders.some(s => s.email === e));
+      for (let i = 0; i < ps.length; i++) {
+        for (let j = i+1; j < ps.length; j++) {
+          const key = [ps[i], ps[j]].sort().join('||');
+          edgeMap[key] = (edgeMap[key] || 0) + 1;
+        }
+      }
+    });
+
+    const edges = Object.entries(edgeMap).map(([key, count]) => {
+      const [a, b] = key.split('||');
+      return { source: a, target: b, count };
+    });
+
+    return { nodes, edges };
+  }
+
+  function getMainThread(email) {
+    for (const t of allThreads) {
+      if (t.participants.includes(email)) return t.id;
+    }
+    return 'none';
+  }
+
+  function layoutNodes(nodes, groupMode, w, h) {
+    const pad = 40;
+    if (groupMode === 'domain') {
+      const domGroups = {};
+      nodes.forEach(n => {
+        if (!domGroups[n.domain]) domGroups[n.domain] = [];
+        domGroups[n.domain].push(n);
+      });
+      const dkeys = Object.keys(domGroups);
+      const cols = dkeys.length;
+      dkeys.forEach((dk, di) => {
+        const cx = pad + (di + 0.5) * ((w - 2*pad) / cols);
+        domGroups[dk].forEach((n, ni) => {
+          const total = domGroups[dk].length;
+          const angle = (ni / total) * 2 * Math.PI - Math.PI/2;
+          const r = total === 1 ? 0 : 28;
+          n.x = cx + r * Math.cos(angle);
+          n.y = h/2 + r * Math.sin(angle) * 0.7;
+        });
+      });
+    } else if (groupMode === 'thread') {
+      const tGroups = {};
+      nodes.forEach(n => {
+        const tg = getMainThread(n.email);
+        if (!tGroups[tg]) tGroups[tg] = [];
+        tGroups[tg].push(n);
+      });
+      const tkeys = Object.keys(tGroups);
+      tkeys.forEach((tk, ti) => {
+        const cx = pad + (ti + 0.5) * ((w - 2*pad) / tkeys.length);
+        tGroups[tk].forEach((n, ni) => {
+          const total = tGroups[tk].length;
+          const angle = (ni / total) * 2 * Math.PI - Math.PI/2;
+          const r = total === 1 ? 0 : 30;
+          n.x = cx + r * Math.cos(angle);
+          n.y = h/2 + r * Math.sin(angle) * 0.7;
+        });
+      });
+    } else {
+      // Circular with central hub = most messages
+      const sorted = [...nodes].sort((a, b) => b.count - a.count);
+      const cx = w / 2, cy = h / 2;
+      sorted[0].x = cx; sorted[0].y = cy;
+      const rest = sorted.slice(1);
+      rest.forEach((n, i) => {
+        const angle = (i / rest.length) * 2 * Math.PI - Math.PI/2;
+        const r = Math.min(w, h) * 0.33;
+        n.x = cx + r * Math.cos(angle);
+        n.y = cy + r * Math.sin(angle);
+      });
+    }
+    return nodes;
+  }
+
+  function renderNetwork(groupMode) {
+    const svg = document.getElementById('networkSvg');
+    const vb = svg.viewBox.baseVal;
+    const W = vb.width || 300, H = vb.height || 240;
+
+    const { nodes, edges } = buildGraphData(groupMode);
+    layoutNodes(nodes, groupMode, W, H);
+
+    const nodeById = {};
+    nodes.forEach(n => nodeById[n.id] = n);
+
+    let html = '';
+
+    // Group rings (domain mode)
+    if (groupMode === 'domain') {
+      const domGroups = {};
+      nodes.forEach(n => {
+        if (!domGroups[n.domain]) domGroups[n.domain] = [];
+        domGroups[n.domain].push(n);
+      });
+      Object.entries(domGroups).forEach(([dk, dns]) => {
+        if (dns.length <= 1) return;
+        const cx = dns.reduce((s, n) => s + n.x, 0) / dns.length;
+        const cy = dns.reduce((s, n) => s + n.y, 0) / dns.length;
+        const maxR = Math.max(...dns.map(n => Math.hypot(n.x - cx, n.y - cy))) + 22;
+        html += `<ellipse cx="${cx}" cy="${cy}" rx="${maxR}" ry="${maxR * 0.75}"
+          fill="${domainColor(dk)}14" stroke="${domainColor(dk)}30" stroke-width="1"
+          stroke-dasharray="4,3" rx="${maxR}" />`;
+      });
+    }
+
+    // Edges
+    edges.forEach(e => {
+      const a = nodeById[e.source], b = nodeById[e.target];
+      if (!a || !b) return;
+      const isActive = !selectedNode || selectedNode === e.source || selectedNode === e.target;
+      const opacity = isActive ? 0.45 : 0.1;
+      const w = 1 + e.count * 0.5;
+      html += `<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}"
+        stroke="${a.color}" stroke-width="${w}" stroke-opacity="${opacity}"
+        class="svg-edge" data-source="${e.source}" data-target="${e.target}" data-count="${e.count}"
+        style="cursor:pointer;" />`;
+    });
+
+    // Nodes
+    nodes.forEach(n => {
+      const isSelected = selectedNode === n.id;
+      const isConnected = !selectedNode || selectedNode === n.id ||
+        edges.some(e => (e.source === n.id || e.target === n.id) && (e.source === selectedNode || e.target === selectedNode));
+      const r = 10 + n.count * 2.5;
+      const opacity = isConnected ? 1 : 0.3;
+      const labelY = n.y + r + 12;
+
+      if (isSelected) {
+        html += `<circle cx="${n.x}" cy="${n.y}" r="${r + 6}" fill="${n.color}" fill-opacity="0.18" class="node-halo" />`;
+      }
+
+      html += `<circle cx="${n.x}" cy="${n.y}" r="${r}"
+        fill="${n.color}" fill-opacity="${opacity}"
+        stroke="${isSelected ? '#fff' : n.color}" stroke-width="${isSelected ? 2.5 : 1.5}"
+        stroke-opacity="${opacity}"
+        class="svg-node" data-email="${n.id}"
+        style="cursor:pointer;filter:${isSelected ? 'drop-shadow(0 2px 6px ' + n.color + '60)' : 'none'}" />`;
+
+      html += `<text x="${n.x}" y="${n.y + 4}"
+        text-anchor="middle" font-family="Space Grotesk, sans-serif"
+        font-size="9" font-weight="700" fill="white" fill-opacity="${opacity}"
+        style="pointer-events:none;user-select:none;">${initials(n.name)}</text>`;
+
+      html += `<text x="${n.x}" y="${labelY}"
+        text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif"
+        font-size="8.5" fill="${isSelected ? n.color : 'var(--fg-muted)'}"
+        fill-opacity="${isConnected ? 1 : 0.4}"
+        style="pointer-events:none;user-select:none;">${n.name.split(' ')[0]}</text>`;
+    });
+
+    svg.innerHTML = html;
+
+    // Bind events
+    svg.querySelectorAll('.svg-node').forEach(el => {
+      el.addEventListener('click', (e) => {
+        const email = el.dataset.email;
+        selectNode(email === selectedNode ? null : email);
       });
     });
-    t.participants = Object.entries(pMap).map(([email, name]) => ({ email, name }));
-    t.messageCount = t.messages.length;
-  });
-}
 
-// ── Sidebar ──────────────────────────────────────────────────────────────────
-function renderSidebar() {
-  // Stats
-  document.getElementById('sb-msg-count').textContent = DATA.messageCount || allMessages.length;
-  document.getElementById('sb-thread-count').textContent = DATA.threadCount || Object.keys(threadMap).length;
-  document.getElementById('sb-sender-count').textContent = DATA.senderCount || '–';
-  document.getElementById('sb-attach-count').textContent = DATA.attachmentCount || '–';
-  document.getElementById('sb-date-range').textContent = DATA.dateRange || '–';
+    svg.querySelectorAll('.svg-edge').forEach(el => {
+      el.addEventListener('mouseenter', function() {
+        const s = nameByEmail(this.dataset.source);
+        const t = nameByEmail(this.dataset.target);
+        this.setAttribute('stroke-opacity', '0.85');
+        this.setAttribute('stroke-width', parseFloat(this.getAttribute('stroke-width')) + 1);
+      });
+      el.addEventListener('mouseleave', function() {
+        renderNetwork(currentGroup);
+      });
+    });
+  }
 
-  // Thread nav
-  const nav = document.getElementById('thread-nav');
-  nav.innerHTML = '';
-  Object.values(threadMap).forEach((t, i) => {
-    const color = PALETTE[i % PALETTE.length];
-    const el = document.createElement('div');
-    el.className = 'thread-nav-item';
-    el.dataset.threadId = t.id;
-    el.onclick = () => { showThread(t.id); closeMobileSidebar(); };
-    el.innerHTML = `
-      <div class="thread-icon" style="background:${color}">${i+1}</div>
-      <div class="thread-nav-info">
-        <div class="thread-nav-subject">${escHtml(t.subject)}</div>
-        <div class="thread-nav-meta">${t.messageCount} msgs · ${formatDate(t.firstTs)}</div>
-      </div>
-      <span class="badge chip-surface" style="background:${color}22;color:${color};border:1px solid ${color}44">${t.messageCount}</span>
-    `;
-    nav.appendChild(el);
-  });
+  // ============================================================
+  // HUB CARDS
+  // ============================================================
+  function renderHubCards(filter) {
+    const list = document.getElementById('hubCardsList');
+    const filteredSenders = filter ?
+      senders.filter(s => s.email.includes(filter) || s.name.toLowerCase().includes(filter.toLowerCase())) :
+      senders;
 
-  // Sender bars
-  const maxCount = DATA.topSenders ? Math.max(...DATA.topSenders.map(s => s.count)) : 1;
-  const barsEl = document.getElementById('sender-bars');
-  barsEl.innerHTML = '';
-  (DATA.topSenders || []).forEach((s, i) => {
-    const color = DOMAIN_COLORS[s.domain] || getColor(s.email);
-    const pct = Math.round((s.count / maxCount) * 100);
-    barsEl.innerHTML += `
-      <div class="sender-row">
-        <div class="sender-avatar" style="background:${color}">${initials(s.name)}</div>
-        <div class="sender-info">
-          <div class="sender-name">${escHtml(s.name)}</div>
-          <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color}"></div></div>
-        </div>
-        <span class="sender-count">${s.count}</span>
-      </div>
-    `;
-  });
-}
+    if (filteredSenders.length === 0) {
+      list.innerHTML = '<div class="empty-state"><div>No matching senders</div></div>';
+      return;
+    }
 
-// ── Overview ─────────────────────────────────────────────────────────────────
-function renderOverview() {
-  // Hero stats
-  const heroStats = document.getElementById('hero-stats');
-  const stats = [
-    { val: DATA.messageCount || allMessages.length, label: 'Messages' },
-    { val: DATA.threadCount || Object.keys(threadMap).length, label: 'Threads' },
-    { val: DATA.senderCount || '5', label: 'Senders' },
-    { val: DATA.attachmentCount || '0', label: 'Attachments' }
-  ];
-  heroStats.innerHTML = stats.map(s => `
-    <div>
-      <div class="hero-stat-val">${s.val}</div>
-      <div class="hero-stat-label">${s.label}</div>
-    </div>
-  `).join('');
+    list.innerHTML = filteredSenders.map((s, i) => {
+      const isSelected = selectedNode === s.email;
+      const threadCount = allThreads.filter(t => t.participants.includes(s.email)).length;
+      const domainTag = getDomainTagHtml(s.domain);
 
-  // Thread cards
-  const grid = document.getElementById('threads-grid');
-  grid.innerHTML = '';
-  Object.values(threadMap).forEach((t, i) => {
-    const color = PALETTE[i % PALETTE.length];
-    const lastMsg = t.messages[t.messages.length - 1];
-    const preview = lastMsg ? lastMsg.bodyPreview || lastMsg.body?.substring(0, 120) : '';
-    const attachCount = t.messages.reduce((n,m) => n + (m.attachments?.length||0), 0);
-    const card = document.createElement('div');
-    card.className = 'thread-summary-card';
-    card.onclick = () => showThread(t.id);
-    card.innerHTML = `
-      <div class="tscard-head">
-        <div class="tscard-icon" style="background:${color}22;color:${color};border:1px solid ${color}33">${['📬','🔧','🚀'][i % 3]}</div>
-        <div style="flex:1;min-width:0">
-          <div class="tscard-title">${escHtml(t.subject)}</div>
-          <div class="tscard-date">${formatDate(t.firstTs)} → ${formatDate(t.lastTs)}</div>
-        </div>
-      </div>
-      <div class="tscard-stats">
-        <div class="tscard-stat"><div class="tscard-stat-val" style="color:${color}">${t.messageCount}</div><div class="tscard-stat-label">Messages</div></div>
-        <div class="tscard-stat"><div class="tscard-stat-val" style="color:${color}">${t.participants.length}</div><div class="tscard-stat-label">People</div></div>
-        ${attachCount ? `<div class="tscard-stat"><div class="tscard-stat-val" style="color:${color}">${attachCount}</div><div class="tscard-stat-label">Files</div></div>` : ''}
-      </div>
-      <div class="tscard-participants">${t.participants.map(p => {
-        const dc = DOMAIN_COLORS[p.email.split('@')[1]] || getColor(p.email);
-        return `<span class="participant-pill"><span class="participant-dot" style="background:${dc}"></span>${escHtml(p.name || p.email)}</span>`;
-      }).join('')}</div>
-      <div class="tscard-preview">${escHtml(preview)}</div>
-      <div class="tscard-open-btn">Open thread →</div>
-    `;
-    grid.appendChild(card);
-  });
-}
-
-// ── Thread view ───────────────────────────────────────────────────────────────
-function renderThreadViews() {
-  const container = document.getElementById('thread-views');
-  container.innerHTML = '';
-
-  Object.values(threadMap).forEach((t, ti) => {
-    const color = PALETTE[ti % PALETTE.length];
-    const div = document.createElement('div');
-    div.className = 'thread-view';
-    div.id = `thread-${t.id}`;
-
-    // Collect all participants
-    const allParticipants = t.participants;
-    const attachCount = t.messages.reduce((n, m) => n + (m.attachments?.length || 0), 0);
-
-    let html = `
-      <div class="thread-header fade-in">
-        <div class="thread-subject">${escHtml(t.subject)}</div>
-        <div class="thread-chips">
-          <span class="chip chip-surface">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            ${t.messageCount} messages
-          </span>
-          <span class="chip chip-surface">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            ${formatDate(t.firstTs)} → ${formatDate(t.lastTs)}
-          </span>
-          ${attachCount ? `<span class="chip chip-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg> ${attachCount} attachment${attachCount>1?'s':''}</span>` : ''}
-        </div>
-      </div>
-      <div class="message-list" id="msglist-${t.id}">
-    `;
-
-    t.messages.forEach((m, mi) => {
-      const fromColor = DOMAIN_COLORS[m.from.email?.split('@')[1]] || getColor(m.from.email);
-      const toList = [...(m.to||[]), ...(m.cc||[])].map(r => r.name || r.email).join(', ');
-      html += `
-        <div class="message-card" id="msg-${m.id}" data-msgid="${m.id}">
-          <div class="msg-header" onclick="toggleMessage('${m.id}')">
-            <div class="msg-avatar" style="background:${fromColor}">${initials(m.from.name || m.from.email)}</div>
-            <div class="msg-header-info">
-              <div class="msg-from-row">
-                <span class="msg-from-name">${escHtml(m.from.name || m.from.email)}</span>
-                <span class="msg-from-email">&lt;${escHtml(m.from.email)}&gt;</span>
-              </div>
-              <div class="msg-to-row">To: ${escHtml(toList || '—')}</div>
-            </div>
-            <div class="msg-header-right">
-              <span class="msg-date">${formatDateTime(m.ts)}</span>
-              <div class="msg-indicators">
-                ${m.hasQuestion ? '<span class="indicator indicator-question" title="Contains question"></span>' : ''}
-                ${m.attachments?.length ? '<span class="indicator indicator-attachment" title="Has attachment"></span>' : ''}
-              </div>
-              <button class="expand-toggle" id="toggle-${m.id}" onclick="event.stopPropagation();toggleMessage('${m.id}')">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"/></svg>
-              </button>
-            </div>
+      return `<div class="hub-card ${isSelected ? 'selected' : ''}"
+        data-email="${s.email}"
+        style="animation-delay:${i * 60}ms">
+        <div class="hub-avatar" style="background:${emailColor(s.email)}">${initials(s.name)}</div>
+        <div class="hub-info">
+          <div class="hub-name">${s.name}</div>
+          <div class="hub-email">${s.email}</div>
+          <div class="hub-stats">
+            <div class="hub-stat"><strong>${s.count}</strong> msgs</div>
+            <div class="hub-stat"><strong>${threadCount}</strong> threads</div>
           </div>
-          <div class="msg-collapsed-preview" onclick="toggleMessage('${m.id}')">${escHtml((m.bodyPreview || m.body?.substring(0,120) || '').replace(/\n/g,' '))}</div>
-          <div class="msg-body" id="body-${m.id}">
-            <div class="msg-body-text" id="bodytext-${m.id}">${escHtml(m.body || '')}</div>
-            ${m.attachments?.length ? `
-              <div class="msg-attachments">
-                ${m.attachments.map(a => `
-                  <div class="attachment-chip">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
-                    ${escHtml(a.filename)}${a.sizeEstimate ? ` · ${a.sizeEstimate}KB` : ''}
-                  </div>
-                `).join('')}
-              </div>
-            ` : ''}
+        </div>
+        ${domainTag}
+      </div>`;
+    }).join('');
+
+    list.querySelectorAll('.hub-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const email = card.dataset.email;
+        selectNode(email === selectedNode ? null : email);
+        if (window.innerWidth <= 899) switchPanel('center');
+      });
+    });
+  }
+
+  function getDomainTagHtml(domain) {
+    const color = domainColor(domain);
+    const label = domain.split('.')[0];
+    const bg = color + '22';
+    return `<div class="hub-badge" style="background:${bg};color:${color};border:1px solid ${color}40">${label}</div>`;
+  }
+
+  // ============================================================
+  // ENTITY INSPECTOR
+  // ============================================================
+  function renderInspector(email) {
+    const insp = document.getElementById('entityInspector');
+    if (!email) {
+      insp.innerHTML = `
+        <div class="inspector-header">
+          <div class="inspector-avatar" style="background:var(--gradient-hero)">✉</div>
+          <div class="inspector-meta">
+            <div class="inspector-name">All Senders</div>
+            <div class="inspector-role">Mailbox overview — click a node to inspect</div>
           </div>
-          <div class="msg-footer" id="footer-${m.id}">
-            <button class="copy-btn" onclick="copyMessage('${m.id}', this)">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              Copy message
-            </button>
+        </div>
+        <div class="inspector-kpis">
+          <div class="inspector-kpi">
+            <div class="inspector-kpi-val">${meta.messageCount}</div>
+            <div class="inspector-kpi-label">Messages</div>
+          </div>
+          <div class="inspector-kpi">
+            <div class="inspector-kpi-val">${meta.threadCount}</div>
+            <div class="inspector-kpi-label">Threads</div>
+          </div>
+          <div class="inspector-kpi">
+            <div class="inspector-kpi-val">${meta.senderCount}</div>
+            <div class="inspector-kpi-label">Senders</div>
+          </div>
+          <div class="inspector-kpi">
+            <div class="inspector-kpi-val">${meta.attachmentCount}</div>
+            <div class="inspector-kpi-label">Attachments</div>
           </div>
         </div>
       `;
-    });
-
-    html += '</div>';
-    div.innerHTML = html;
-    container.appendChild(div);
-  });
-}
-
-// ── Navigation ────────────────────────────────────────────────────────────────
-let currentView = 'overview';
-
-function showOverview() {
-  currentView = 'overview';
-  document.getElementById('overview-view').classList.add('active');
-  document.querySelectorAll('.thread-view').forEach(v => v.classList.remove('active'));
-  document.querySelectorAll('.thread-nav-item').forEach(n => n.classList.remove('active'));
-}
-
-function showThread(threadId) {
-  currentView = threadId;
-  document.getElementById('overview-view').classList.remove('active');
-  document.querySelectorAll('.thread-view').forEach(v => v.classList.remove('active'));
-  const tv = document.getElementById(`thread-${threadId}`);
-  if (tv) { tv.classList.add('active'); tv.classList.add('fade-in'); }
-  document.querySelectorAll('.thread-nav-item').forEach(n => {
-    n.classList.toggle('active', n.dataset.threadId === threadId);
-  });
-  // Expand first message if none open
-  const thread = threadMap[threadId];
-  if (thread && thread.messages.length > 0) {
-    const firstId = thread.messages[0].id;
-    const bodyEl = document.getElementById(`body-${firstId}`);
-    if (bodyEl && !bodyEl.classList.contains('open')) {
-      toggleMessage(firstId);
-    }
-  }
-}
-
-function toggleMessage(msgId) {
-  const body = document.getElementById(`body-${msgId}`);
-  const footer = document.getElementById(`footer-${msgId}`);
-  const toggle = document.getElementById(`toggle-${msgId}`);
-  const preview = document.querySelector(`#msg-${msgId} .msg-collapsed-preview`);
-  const isOpen = body.classList.contains('open');
-  body.classList.toggle('open', !isOpen);
-  footer.classList.toggle('open', !isOpen);
-  toggle.classList.toggle('open', !isOpen);
-  if (preview) preview.style.display = isOpen ? '' : 'none';
-}
-
-// ── Search ────────────────────────────────────────────────────────────────────
-let searchQuery = '';
-
-function handleSearch(q) {
-  searchQuery = q.trim().toLowerCase();
-  if (!searchQuery) {
-    clearSearch();
-    return;
-  }
-  // Search across all threads
-  let found = false;
-  Object.values(threadMap).forEach(t => {
-    let threadHasMatch = false;
-    t.messages.forEach(m => {
-      const card = document.getElementById(`msg-${m.id}`);
-      if (!card) return;
-      const text = ((m.from.name || '') + ' ' + (m.from.email || '') + ' ' + (m.subject || '') + ' ' + (m.body || '')).toLowerCase();
-      const match = text.includes(searchQuery);
-      card.style.display = match ? '' : 'none';
-      if (match) {
-        threadHasMatch = true;
-        found = true;
-        card.classList.add('highlight-match');
-        // Highlight body text
-        const bodyEl = document.getElementById(`bodytext-${m.id}`);
-        if (bodyEl) {
-          const original = m.body || '';
-          bodyEl.innerHTML = highlightText(escHtml(original), searchQuery);
-        }
-        // Auto-open matched messages
-        const body = document.getElementById(`body-${m.id}`);
-        if (body && !body.classList.contains('open')) toggleMessage(m.id);
-      } else {
-        card.classList.remove('highlight-match');
-        restoreBody(m.id);
-      }
-    });
-    // Show thread if has match
-    if (threadHasMatch && !document.getElementById(`thread-${t.id}`).classList.contains('active')) {
-      // Don't auto-switch, just show in sidebar
-    }
-  });
-}
-
-function clearSearch() {
-  searchQuery = '';
-  document.querySelectorAll('.message-card').forEach(c => {
-    c.style.display = '';
-    c.classList.remove('highlight-match');
-  });
-  allMessages.forEach(m => restoreBody(m.id));
-}
-
-function restoreBody(msgId) {
-  const bodyEl = document.getElementById(`bodytext-${msgId}`);
-  const m = allMessages.find(x => x.id === msgId);
-  if (bodyEl && m) bodyEl.innerHTML = escHtml(m.body || '');
-}
-
-function highlightText(html, q) {
-  if (!q) return html;
-  const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return html.replace(new RegExp(`(${escaped})`, 'gi'), '<mark class="search-hl">$1</mark>');
-}
-
-// ── Copy helpers ──────────────────────────────────────────────────────────────
-function copyMessage(msgId, btn) {
-  const m = allMessages.find(x => x.id === msgId);
-  if (!m) return;
-  const md = `**From:** ${m.from.name} <${m.from.email}>\n**Date:** ${m.ts}\n**Subject:** ${m.subject}\n\n${m.body}`;
-  navigator.clipboard.writeText(md).then(() => {
-    btn.classList.add('copied');
-    btn.textContent = '✓ Copied';
-    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy message'; }, 2000);
-  });
-}
-
-function copyAllMarkdown() {
-  const btn = document.getElementById('copyAllBtn');
-  let md = `# Acme × Clockless — Mailbox Snapshot\n\n`;
-  md += `**Date range:** ${DATA.dateRange}\n**Messages:** ${DATA.messageCount}\n**Threads:** ${DATA.threadCount}\n\n---\n\n`;
-  Object.values(threadMap).forEach((t, i) => {
-    md += `## Thread ${i+1}: ${t.subject}\n\n`;
-    t.messages.forEach(m => {
-      md += `### ${m.from.name} — ${m.ts}\n`;
-      md += `**From:** ${m.from.email}  \n`;
-      md += `**To:** ${(m.to||[]).map(r=>r.email).join(', ')}  \n`;
-      if (m.cc?.length) md += `**CC:** ${m.cc.map(r=>r.email).join(', ')}  \n`;
-      md += `\n${m.body}\n\n`;
-      if (m.attachments?.length) md += `*Attachments: ${m.attachments.map(a=>a.filename).join(', ')}*\n\n`;
-      md += `---\n\n`;
-    });
-  });
-  navigator.clipboard.writeText(md).then(() => {
-    btn.textContent = '✓ Copied!';
-    setTimeout(() => { btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy MD'; }, 2000);
-  });
-}
-
-// ── Mobile sidebar ────────────────────────────────────────────────────────────
-function openMobileSidebar() {
-  document.getElementById('sidebar').classList.add('mobile-open');
-  document.getElementById('overlay').classList.add('active');
-}
-
-function closeMobileSidebar() {
-  document.getElementById('sidebar').classList.remove('mobile-open');
-  document.getElementById('overlay').classList.remove('active');
-}
-
-// ── Open loops ────────────────────────────────────────────────────────────────
-function renderOpenLoops() {
-  const list = document.getElementById('open-loops-list');
-  if (!list) return;
-  list.innerHTML = '';
-
-  const threads = Object.values(threadMap);
-  const open = [];
-  threads.forEach(t => {
-    const meta = (DATA.threads || []).find(x => x.id === t.id);
-    const lastMsg = t.messages[t.messages.length - 1];
-    if (!lastMsg) return;
-    const lastEndsInQuestion = meta ? !!meta.lastEndsInQuestion : !!lastMsg.hasQuestion;
-    if (!lastEndsInQuestion) return;
-    open.push({ thread: t, lastMsg });
-  });
-
-  if (open.length === 0) {
-    list.innerHTML = '<div class="open-loops-empty">No open loops — everyone has replied.</div>';
-    return;
-  }
-
-  const now = Date.now();
-  open.sort((a, b) => (b.lastMsg.tsEpoch || 0) - (a.lastMsg.tsEpoch || 0));
-  open.forEach(({ thread, lastMsg }) => {
-    const sentence = extractAskSentence(lastMsg.body || lastMsg.bodyPreview || '');
-    const senderName = lastMsg.from.name || lastMsg.from.email;
-    const waitedDays = lastMsg.tsEpoch ? Math.max(0, Math.round((now - lastMsg.tsEpoch) / 86400000)) : null;
-    const meta = waitedDays === null ? formatDate(lastMsg.ts) :
-      (waitedDays === 0 ? 'today' : `${waitedDays}d waiting`);
-    const row = document.createElement('div');
-    row.className = 'open-loop-row';
-    row.onclick = () => showThread(thread.id);
-    row.innerHTML = `
-      <div class="open-loop-dot"></div>
-      <div class="open-loop-info">
-        <div class="open-loop-subject">${escHtml(thread.subject)} · ${escHtml(senderName)}</div>
-        <div class="open-loop-question">${escHtml(sentence)}</div>
-      </div>
-      <div class="open-loop-meta">${escHtml(meta)}<br><span style="opacity:0.6">${escHtml(formatDate(lastMsg.ts))}</span></div>
-    `;
-    list.appendChild(row);
-  });
-}
-
-function extractAskSentence(body) {
-  if (!body) return 'Awaiting reply.';
-  const trimmed = body.trim();
-  // Find the last sentence that ends with ? — that's typically the ask.
-  const questionMatch = trimmed.match(/([^?.\n!]{6,200}\?)\s*[^?]*$/m);
-  if (questionMatch) return questionMatch[1].trim().replace(/\s+/g, ' ');
-  // Otherwise, take the last non-empty line.
-  const lines = trimmed.split(/\n+/).map(s => s.trim()).filter(Boolean);
-  const last = lines[lines.length - 1] || trimmed;
-  return last.length > 200 ? last.slice(0, 200) + '…' : last;
-}
-
-// ── Timeline ──────────────────────────────────────────────────────────────────
-function renderTimeline() {
-  const wrap = document.getElementById('timeline-wrap');
-  if (!wrap) return;
-  wrap.innerHTML = '';
-
-  const threads = Object.values(threadMap);
-  if (threads.length === 0) {
-    wrap.innerHTML = '<div class="open-loops-empty">No threads to chart.</div>';
-    return;
-  }
-
-  let minTs = Infinity, maxTs = -Infinity;
-  threads.forEach(t => {
-    t.messages.forEach(m => {
-      if (m.tsEpoch) {
-        if (m.tsEpoch < minTs) minTs = m.tsEpoch;
-        if (m.tsEpoch > maxTs) maxTs = m.tsEpoch;
-      }
-    });
-  });
-  if (minTs === Infinity) {
-    wrap.innerHTML = '<div class="open-loops-empty">No timestamps to chart.</div>';
-    return;
-  }
-  const span = Math.max(1, maxTs - minTs);
-
-  const sorted = threads.slice().sort((a, b) => {
-    const aFirst = a.messages[0]?.tsEpoch || 0;
-    const bFirst = b.messages[0]?.tsEpoch || 0;
-    return aFirst - bFirst;
-  });
-
-  sorted.forEach((t, i) => {
-    const color = PALETTE[i % PALETTE.length];
-    const firstE = t.messages[0]?.tsEpoch || minTs;
-    const lastE = t.messages[t.messages.length - 1]?.tsEpoch || firstE;
-    const left = ((firstE - minTs) / span) * 100;
-    const width = Math.max(1, ((lastE - firstE) / span) * 100);
-    const row = document.createElement('div');
-    row.className = 'timeline-row';
-    row.onclick = () => showThread(t.id);
-    row.innerHTML = `
-      <div class="timeline-label" title="${escHtml(t.subject)}">${escHtml(t.subject)}</div>
-      <div class="timeline-track" aria-label="Activity from ${escHtml(formatDate(t.firstTs))} to ${escHtml(formatDate(t.lastTs))}">
-        <div class="timeline-bar" style="left:${left}%;width:${width}%;background:${color}"></div>
-      </div>
-      <div class="timeline-count">${t.messageCount}</div>
-    `;
-    wrap.appendChild(row);
-  });
-
-  const axis = document.createElement('div');
-  axis.className = 'timeline-axis';
-  axis.innerHTML = `<span>${escHtml(formatDate(new Date(minTs).toISOString().slice(0, 19).replace('T', ' ')))}</span><span>${escHtml(formatDate(new Date(maxTs).toISOString().slice(0, 19).replace('T', ' ')))}</span>`;
-  wrap.appendChild(axis);
-}
-
-// ── Sender filter ─────────────────────────────────────────────────────────────
-let activeSenderFilter = new Set();
-
-function renderSenderFilter() {
-  const chipsEl = document.getElementById('sender-filter-chips');
-  if (!chipsEl) return;
-  chipsEl.innerHTML = '';
-  const senders = (DATA.topSenders || DATA.senders || []).slice(0, 10);
-  if (senders.length === 0) {
-    chipsEl.innerHTML = '<div class="open-loops-empty">No senders detected.</div>';
-    return;
-  }
-  senders.forEach(s => {
-    const color = DOMAIN_COLORS[s.domain] || getColor(s.email);
-    const chip = document.createElement('button');
-    chip.type = 'button';
-    chip.className = 'filter-chip';
-    chip.dataset.email = s.email;
-    chip.innerHTML = `
-      <span class="filter-chip-dot" style="background:${color}"></span>
-      <span>${escHtml(s.name || s.email)}</span>
-      <span class="filter-chip-count">${s.count}</span>
-    `;
-    chip.onclick = () => toggleSenderFilter(s.email);
-    chipsEl.appendChild(chip);
-  });
-}
-
-function toggleSenderFilter(email) {
-  if (activeSenderFilter.has(email)) activeSenderFilter.delete(email);
-  else activeSenderFilter.add(email);
-  applySenderFilter();
-}
-
-function clearSenderFilter() {
-  activeSenderFilter.clear();
-  applySenderFilter();
-}
-
-function applySenderFilter() {
-  document.querySelectorAll('#sender-filter-chips .filter-chip').forEach(c => {
-    c.classList.toggle('active', activeSenderFilter.has(c.dataset.email));
-  });
-  const clearBtn = document.getElementById('filter-clear-btn');
-  if (clearBtn) clearBtn.hidden = activeSenderFilter.size === 0;
-
-  const cards = document.querySelectorAll('#threads-grid .thread-summary-card');
-  const threads = Object.values(threadMap);
-  cards.forEach((card, i) => {
-    const t = threads[i];
-    if (!t) return;
-    if (activeSenderFilter.size === 0) {
-      card.classList.remove('filter-hidden');
       return;
     }
-    const senderEmails = new Set(t.messages.map(m => m.from.email));
-    let match = false;
-    activeSenderFilter.forEach(e => { if (senderEmails.has(e)) match = true; });
-    card.classList.toggle('filter-hidden', !match);
-  });
-}
 
-// ── Init ──────────────────────────────────────────────────────────────────────
-function init() {
-  buildData();
-  renderSidebar();
-  renderOpenLoops();
-  renderTimeline();
-  renderSenderFilter();
-  renderOverview();
-  renderThreadViews();
-}
+    const s = senders.find(x => x.email === email) || { email, name: nameByEmail(email), count: 0, domain: email.split('@')[1] };
+    const color = emailColor(email);
+    const threads = allThreads.filter(t => t.participants.includes(email));
+    const threadCount = threads.length;
+    const sentCount = allMessages.filter(m => m.from.email === email).length;
+    const receivedCount = allMessages.filter(m =>
+      (m.to || []).some(r => r.email === email) || (m.cc || []).some(r => r.email === email)
+    ).length;
 
-document.addEventListener('DOMContentLoaded', init);
-</script>
-</body>
-</html>
+    // Connections: who does this sender interact with?
+    const connSet = new Set();
+    allThreads.forEach(t => {
+      if (t.participants.includes(email)) {
+        t.participants.forEach(p => { if (p !== email && senders.some(s => s.email === p)) connSet.add(p); });
+      }
+    });
+    const connections = Array.from(connSet);
+
+    insp.innerHTML = `
+      <div class="inspector-header">
+        <div class="inspector-avatar" style="background:${color}">${initials(s.name)}</div>
+        <div class="inspector-meta">
+          <div class="inspector-name">${s.name}</div>
+          <div class="inspector-role">${s.email}</div>
+          <div class="inspector-domain-tag">${s.domain || email.split('@')[1]}</div>
+        </div>
+      </div>
+      <div class="inspector-kpis">
+        <div class="inspector-kpi">
+          <div class="inspector-kpi-val">${s.count || sentCount}</div>
+          <div class="inspector-kpi-label">Sent</div>
+        </div>
+        <div class="inspector-kpi">
+          <div class="inspector-kpi-val">${receivedCount}</div>
+          <div class="inspector-kpi-label">Received</div>
+        </div>

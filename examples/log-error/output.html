@@ -1,220 +1,416 @@
 <!doctype html>
 <html lang="en" data-ha-style="dashboard">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Orders service error log — payment incident</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orders service error log — payment incident</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
 :root {
-  --primary:#a03b00; --primary-container:#c94c00; --primary-fixed:#ffdbcd;
-  --primary-fixed-dim:#ffb597; --on-primary:#fff; --accent-glow:#E8400D;
-  --secondary:#d5baff; --secondary-container:#7b40e0; --tertiary:#4d44e3; --accent-cyan:#00D4FF;
-  --bg:#fff8f6; --surface:#fff8f6; --surface-container-lowest:#fff;
-  --surface-container-low:#fbf2ef; --surface-container:#f5ece9; --surface-container-high:#efe6e3;
-  --fg-1:#1e1b19; --fg-2:#594138; --fg-muted:#8d7166;
-  --border:rgba(0,0,0,.06); --border-strong:rgba(0,0,0,.12); --outline-variant:#e1bfb2;
-  --green:#10b981; --blue:#3b82f6; --yellow:#f59e0b; --red:#ef4444;
-  --font-headline:'Space Grotesk',ui-sans-serif,system-ui,sans-serif;
-  --font-body:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;
-  --font-mono:'SF Mono','Menlo',ui-monospace,monospace;
-  --space-xs:4px; --space-sm:8px; --space-md:12px; --space-lg:16px;
-  --space-xl:20px; --space-2xl:24px; --space-3xl:32px; --space-4xl:48px; --space-5xl:64px;
-  --radius-sm:8px; --radius-md:12px; --radius-lg:16px; --radius-xl:20px; --radius-2xl:28px; --radius-pill:9999px;
-  --shadow-sm:0 1px 2px rgba(30,27,25,.04); --shadow-md:0 4px 12px rgba(30,27,25,.08);
-  --shadow-lg:0 8px 24px rgba(30,27,25,.12); --shadow-accent:0 8px 24px rgba(160,59,0,.15);
-  --gradient-primary:linear-gradient(135deg,#a03b00 0%,#c94c00 100%);
-  --gradient-hero:linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
-  --gradient-text:linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --accent-cyan: #00D4FF;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981;
+  --blue: #3b82f6;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30,27,25,0.04);
+  --shadow-md: 0 4px 12px rgba(30,27,25,0.08);
+  --shadow-lg: 0 8px 24px rgba(30,27,25,0.12);
+  --shadow-accent: 0 8px 24px rgba(160,59,0,0.15);
+  --gradient-primary: linear-gradient(135deg,#a03b00 0%,#c94c00 100%);
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg:#060B18; --surface:#0B1426; --surface-container-lowest:#101D35;
-    --surface-container-low:#101D35; --surface-container:#162544; --surface-container-high:#1c2d52;
-    --fg-1:#F8FAFC; --fg-2:#CBD5E1; --fg-muted:#64748B;
-    --border:rgba(255,255,255,.08); --border-strong:rgba(255,255,255,.14);
-    --primary:#FF6B35; --accent-glow:#00D4FF;
-    --shadow-md:0 4px 12px rgba(0,0,0,.4); --shadow-lg:0 8px 24px rgba(0,0,0,.5);
+    --bg: #060B18;
+    --surface: #0B1426;
+    --surface-container-lowest: #101D35;
+    --surface-container-low: #101D35;
+    --surface-container: #162544;
+    --surface-container-high: #1c2d52;
+    --fg-1: #F8FAFC;
+    --fg-2: #CBD5E1;
+    --fg-muted: #64748B;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --primary: #FF6B35;
+    --accent-glow: #00D4FF;
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+    --outline-variant: #2a3a5c;
   }
 }
-*,*::before,*::after{box-sizing:border-box;margin:0}
-html,body{background:var(--bg);color:var(--fg-1);font-family:var(--font-body);
-  font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
-body{min-height:100vh}
-main{max-width:1240px;margin:0 auto;padding:var(--space-2xl) var(--space-xl) var(--space-5xl)}
-h1,h2,h3,h4{font-family:var(--font-headline);letter-spacing:-.01em;font-weight:600;color:var(--fg-1)}
-h1{font-size:clamp(28px,5vw,44px);font-weight:700;line-height:1.05;letter-spacing:-.02em}
-h2{font-size:clamp(20px,2.4vw,24px);margin-bottom:var(--space-md)}
-h3{font-size:17px;margin-bottom:var(--space-sm)}
-.muted{color:var(--fg-muted)}
-.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
-button{font:inherit;cursor:pointer;border:none;background:transparent;color:inherit}
-input,select{font:inherit;color:var(--fg-1)}
-.hero{padding:var(--space-3xl) 0 var(--space-2xl);border-bottom:1px solid var(--border)}
-.hero .eyebrow{display:inline-flex;gap:var(--space-sm);align-items:center;
-  background:var(--surface-container);color:var(--primary);
-  padding:var(--space-xs) var(--space-md);border-radius:var(--radius-pill);
-  font-family:var(--font-mono);font-size:11.5px;font-weight:500;
-  text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-lg)}
-.hero h1{background:var(--gradient-text);-webkit-background-clip:text;background-clip:text;color:transparent;max-width:18ch}
-.hero .editorial{margin-top:var(--space-lg);max-width:62ch;color:var(--fg-2);font-size:17px;line-height:1.55}
-.hero-actions{display:flex;gap:var(--space-md);margin-top:var(--space-xl);flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-lg);
-  border-radius:var(--radius-pill);font-weight:600;font-size:14px;border:1px solid var(--border-strong);
-  background:var(--surface-container-lowest);color:var(--fg-1);transition:all .15s ease;cursor:pointer}
-.btn:hover{background:var(--surface-container);box-shadow:var(--shadow-sm)}
-.btn.primary{background:var(--gradient-primary);color:var(--on-primary);border-color:transparent}
-.btn.primary:hover{box-shadow:var(--shadow-accent)}
-.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--space-lg);margin-top:var(--space-3xl)}
-.kpi{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:var(--space-lg) var(--space-xl);box-shadow:var(--shadow-sm)}
-.kpi .label{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--fg-muted);font-weight:500}
-.kpi .value{font-family:var(--font-headline);font-size:28px;font-weight:600;margin-top:var(--space-xs);color:var(--fg-1)}
-.kpi .value.accent{color:var(--primary)}
-.kpi .sub{font-size:12.5px;color:var(--fg-muted);margin-top:2px;font-family:var(--font-mono)}
-.section{margin-top:var(--space-4xl)}
-.section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-lg);gap:var(--space-md);flex-wrap:wrap}
-.section-head .meta{font-size:13px;color:var(--fg-muted);font-family:var(--font-mono)}
-.card{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:var(--space-xl);box-shadow:var(--shadow-sm)}
-/* Histogram */
-.hist-card{padding:var(--space-2xl)}
-.hist-svg{width:100%;height:220px;display:block}
-.hist-svg .bar-info{fill:var(--secondary-container);opacity:.55}
-.hist-svg .bar-info:hover{opacity:.85}
-.hist-svg .bar-error{fill:var(--red)}
-.hist-svg .bar-warn{fill:var(--yellow);opacity:.85}
-.hist-svg text{font-family:var(--font-mono);font-size:11px;fill:var(--fg-muted)}
-.hist-pin{font-size:11px}
-.hist-pin circle{fill:var(--primary);stroke:var(--bg);stroke-width:2}
-.hist-legend{display:flex;gap:var(--space-md);margin-top:var(--space-md);flex-wrap:wrap;font-size:12.5px;color:var(--fg-muted)}
-.hist-legend span{display:inline-flex;align-items:center;gap:6px}
-.hist-legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
-.burst-pins{display:flex;flex-direction:column;gap:var(--space-xs);margin-top:var(--space-md);font-size:12.5px;color:var(--fg-2)}
-.burst-pins div{font-family:var(--font-mono)}
-/* Two-col grids */
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl)}
-@media (max-width:780px){.grid-2{grid-template-columns:1fr}}
-/* Severity chips */
-.chips{display:flex;gap:var(--space-sm);flex-wrap:wrap}
-.chip{display:inline-flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-md);
-  border-radius:var(--radius-pill);background:var(--surface-container);border:1px solid var(--border);
-  font-size:13px;font-weight:500;cursor:pointer;transition:all .15s ease;user-select:none}
-.chip:hover{background:var(--surface-container-high)}
-.chip.active{background:var(--primary);color:var(--on-primary);border-color:transparent}
-.chip[data-empty="true"]{opacity:.45;cursor:default}
-.chip .count{font-family:var(--font-mono);font-size:12px;color:var(--fg-muted)}
-.chip.active .count{color:rgba(255,255,255,.8)}
-.chip-dot{width:9px;height:9px;border-radius:50%;display:inline-block}
-.chip-dot.error{background:var(--red)}
-.chip-dot.warn{background:var(--yellow)}
-.chip-dot.info{background:var(--secondary-container)}
-.chip-dot.debug{background:var(--fg-muted)}
-.chip-dot.trace{background:var(--accent-cyan)}
-/* Status donut */
-.donut-row{display:flex;align-items:center;gap:var(--space-2xl);flex-wrap:wrap}
-.donut-svg{flex:0 0 auto}
-.donut-legend{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-md);min-width:200px}
-.donut-legend div{display:flex;align-items:center;gap:var(--space-sm);font-size:13px}
-.donut-legend i{width:12px;height:12px;border-radius:3px;flex:0 0 auto}
-.donut-legend strong{font-family:var(--font-mono);font-weight:600;color:var(--fg-1)}
-/* Leaderboard */
-.leader{display:flex;flex-direction:column;gap:0}
-.leader-row{display:grid;grid-template-columns:1fr auto auto;gap:var(--space-md);align-items:center;
-  padding:var(--space-sm) 0;border-bottom:1px solid var(--border)}
-.leader-row:last-child{border-bottom:none}
-.leader-row .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13.5px}
-.leader-row .lbl .badge{display:inline-block;font-size:10.5px;font-family:var(--font-mono);
-  background:var(--surface-container);color:var(--fg-muted);
-  padding:2px 6px;border-radius:var(--radius-sm);margin-left:var(--space-sm)}
-.leader-row .lbl .badge.warn{background:rgba(245,158,11,.15);color:#a06200}
-.leader-row .lbl .badge.err{background:rgba(239,68,68,.15);color:var(--red)}
-.leader-row .cnt{font-family:var(--font-mono);font-size:13px;color:var(--fg-1);font-weight:500;text-align:right}
-.leader-row .bar{width:64px;height:6px;background:var(--surface-container);border-radius:var(--radius-pill);overflow:hidden}
-.leader-row .bar i{display:block;height:100%;background:var(--gradient-primary);border-radius:var(--radius-pill)}
-@media (prefers-color-scheme:dark){.leader-row .lbl .badge.warn{background:rgba(245,158,11,.18);color:#fcd34d}}
-/* Schema panel */
-.schema-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:var(--space-sm)}
-.schema-item{padding:var(--space-md);border:1px solid var(--border);border-radius:var(--radius-md);
-  background:var(--surface-container-lowest);cursor:pointer;transition:all .15s ease}
-.schema-item:hover{border-color:var(--border-strong);box-shadow:var(--shadow-sm)}
-.schema-item.active{border-color:var(--primary);box-shadow:var(--shadow-accent)}
-.schema-item .field{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--fg-1)}
-.schema-item .type-row{display:flex;justify-content:space-between;font-size:11.5px;color:var(--fg-muted);margin-top:var(--space-xs);font-family:var(--font-mono)}
-.schema-item .type-row .fill{color:var(--secondary-container)}
-.schema-item .type-row .fill.sparse{color:var(--yellow)}
-.schema-item .examples{margin-top:var(--space-xs);font-size:11.5px;color:var(--fg-2);font-family:var(--font-mono);
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* Outliers */
-.outliers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:var(--space-md)}
-.outlier-card{padding:var(--space-lg);border:1px solid var(--border);border-radius:var(--radius-md);
-  background:var(--surface-container-lowest);border-left:3px solid var(--primary)}
-.outlier-card.kind-burst{border-left-color:var(--primary)}
-.outlier-card.kind-top-error{border-left-color:var(--red)}
-.outlier-card.kind-top-source{border-left-color:var(--secondary-container)}
-.outlier-card.kind-schema{border-left-color:var(--yellow)}
-.outlier-card.kind-slow{border-left-color:var(--blue)}
-.outlier-card.kind-rare{border-left-color:var(--accent-cyan)}
-.outlier-card .kind{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--fg-muted);
-  font-family:var(--font-mono);font-weight:500;margin-bottom:var(--space-xs)}
-.outlier-card .label{font-size:14.5px;font-weight:600;color:var(--fg-1);margin-bottom:var(--space-xs);line-height:1.3}
-.outlier-card .detail{font-size:13px;color:var(--fg-2);font-family:var(--font-mono)}
-.outlier-card .ts{font-size:11.5px;color:var(--fg-muted);font-family:var(--font-mono);margin-top:var(--space-xs)}
-/* Drill-down */
-.drill-toolbar{display:flex;gap:var(--space-md);margin-bottom:var(--space-md);flex-wrap:wrap;align-items:center}
-.drill-search{flex:1 1 220px;min-width:220px;padding:var(--space-sm) var(--space-md);border:1px solid var(--border-strong);
-  border-radius:var(--radius-md);background:var(--surface-container-lowest);font-size:14px;font-family:var(--font-mono)}
-.drill-search:focus{outline:2px solid var(--primary);outline-offset:1px;border-color:var(--primary)}
-.drill-meta{font-size:12.5px;color:var(--fg-muted);font-family:var(--font-mono)}
-details.drill{margin-top:var(--space-md);border:1px solid var(--border);border-radius:var(--radius-lg);
-  background:var(--surface-container-lowest);overflow:hidden}
-details.drill > summary{cursor:pointer;padding:var(--space-lg) var(--space-xl);font-weight:600;
-  font-family:var(--font-headline);font-size:17px;list-style:none;display:flex;align-items:center;justify-content:space-between}
-details.drill > summary::-webkit-details-marker{display:none}
-details.drill > summary::after{content:"⌄";color:var(--fg-muted);transition:transform .2s ease;font-size:20px}
-details.drill[open] > summary::after{transform:rotate(180deg)}
-details.drill .drill-body{padding:0 var(--space-xl) var(--space-xl)}
-.tbl-wrap{max-height:560px;overflow:auto;border:1px solid var(--border);border-radius:var(--radius-md);
-  background:var(--bg)}
-table.events{width:100%;border-collapse:collapse;font-size:13px}
-table.events thead{position:sticky;top:0;background:var(--surface-container);z-index:1}
-table.events th{text-align:left;padding:var(--space-sm) var(--space-md);
-  font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;
-  color:var(--fg-muted);font-weight:500;border-bottom:1px solid var(--border)}
-table.events td{padding:var(--space-sm) var(--space-md);border-bottom:1px solid var(--border);
-  vertical-align:top}
-table.events tr.row{cursor:pointer}
-table.events tr.row:hover td{background:var(--surface-container-low)}
-table.events tr.row.error td{box-shadow:inset 3px 0 0 var(--red)}
-table.events tr.row.warn td{box-shadow:inset 3px 0 0 var(--yellow)}
-table.events tr.expand-row td{background:var(--surface-container);padding:0}
-table.events tr.expand-row pre{margin:0;padding:var(--space-md) var(--space-xl);
-  font-family:var(--font-mono);font-size:12px;color:var(--fg-2);white-space:pre-wrap;
-  word-break:break-word;max-height:320px;overflow:auto}
-.col-ts{font-family:var(--font-mono);color:var(--fg-muted);white-space:nowrap}
-.col-sev{font-family:var(--font-mono);font-size:11px;font-weight:600;text-transform:uppercase}
-.col-sev.error{color:var(--red)}
-.col-sev.warn{color:var(--yellow)}
-.col-sev.info{color:var(--fg-muted)}
-.col-msg{font-family:var(--font-mono);font-size:12.5px;color:var(--fg-1);
-  word-break:break-word;max-width:520px}
-.col-msg mark{background:var(--primary-fixed);color:var(--fg-1);padding:0 2px;border-radius:2px}
-.col-src{font-family:var(--font-mono);font-size:12.5px;color:var(--fg-2);white-space:nowrap}
-.tbl-loadmore{display:flex;justify-content:center;padding:var(--space-md);font-size:13px;color:var(--fg-muted)}
-.tbl-loadmore button{padding:var(--space-sm) var(--space-lg);border-radius:var(--radius-pill);
-  border:1px solid var(--border-strong);background:var(--surface-container-lowest)}
-footer{margin-top:var(--space-5xl);padding-top:var(--space-2xl);border-top:1px solid var(--border);
-  font-size:12.5px;color:var(--fg-muted);max-width:78ch;line-height:1.6}
-footer .privacy{font-style:italic}
-@media (max-width:540px){
-  main{padding:var(--space-lg) var(--space-md) var(--space-4xl)}
-  .hist-card{padding:var(--space-lg)}
-  .donut-row{flex-direction:column;align-items:flex-start;gap:var(--space-lg)}
-  .donut-legend{grid-template-columns:1fr}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:15px;background:var(--bg);color:var(--fg-1);}
+body{font-family:var(--font-body);line-height:1.55;min-height:100vh;background:var(--bg);}
+.ops-shell{display:flex;flex-direction:column;min-height:100vh;}
+
+/* Command bar */
+.command-bar{
+  background:var(--surface-container);
+  border-bottom:1px solid var(--border-strong);
+  padding:var(--space-md) var(--space-lg);
+  display:flex;flex-direction:column;gap:var(--space-sm);
+  position:sticky;top:0;z-index:100;
 }
-  </style>
+.command-bar-top{display:flex;align-items:center;gap:var(--space-md);flex-wrap:wrap;}
+.command-bar-title{
+  font-family:var(--font-headline);font-weight:700;font-size:1rem;
+  letter-spacing:-0.01em;color:var(--fg-1);flex:1;min-width:200px;
+}
+.command-bar-meta{font-size:0.72rem;color:var(--fg-muted);font-family:var(--font-mono);}
+.command-bar-actions{display:flex;gap:var(--space-sm);align-items:center;flex-wrap:wrap;}
+.search-box{
+  display:flex;align-items:center;gap:var(--space-sm);
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-pill);
+  padding:var(--space-xs) var(--space-md);
+  min-width:200px;
+}
+.search-box input{
+  border:none;background:transparent;color:var(--fg-1);font-family:var(--font-body);
+  font-size:0.85rem;outline:none;flex:1;
+}
+.search-box input::placeholder{color:var(--fg-muted);}
+.search-icon{color:var(--fg-muted);font-size:0.9rem;}
+.btn{
+  font-family:var(--font-body);font-size:0.78rem;font-weight:600;
+  padding:var(--space-xs) var(--space-md);border-radius:var(--radius-pill);
+  border:1px solid var(--border-strong);background:var(--surface-container-lowest);
+  color:var(--fg-2);cursor:pointer;transition:all 120ms ease;white-space:nowrap;
+}
+.btn:hover{background:var(--surface-container-high);color:var(--fg-1);}
+.btn-primary{background:var(--primary);color:var(--on-primary);border-color:transparent;}
+.btn-primary:hover{background:var(--primary-container);color:var(--on-primary);}
+.filter-strip{display:flex;gap:var(--space-sm);flex-wrap:wrap;align-items:center;}
+.chip{
+  font-size:0.72rem;font-weight:600;padding:2px var(--space-sm);
+  border-radius:var(--radius-pill);border:1px solid var(--border-strong);
+  cursor:pointer;transition:all 120ms ease;font-family:var(--font-mono);
+  background:var(--surface-container-lowest);color:var(--fg-2);
+  display:inline-flex;align-items:center;gap:4px;
+}
+.chip.active-error{background:var(--red);color:#fff;border-color:transparent;}
+.chip.active-warn{background:var(--yellow);color:#1e1b19;border-color:transparent;}
+.chip.active-info{background:var(--blue);color:#fff;border-color:transparent;}
+.chip:hover:not(.active-error):not(.active-warn):not(.active-info){background:var(--surface-container-high);}
+.chip-dot{width:6px;height:6px;border-radius:50%;display:inline-block;}
+.dot-error{background:var(--red);}
+.dot-warn{background:var(--yellow);}
+.dot-info{background:var(--blue);}
+.dot-debug{background:var(--fg-muted);}
+
+/* Main content */
+.ops-main{padding:var(--space-lg);max-width:1400px;margin:0 auto;width:100%;display:flex;flex-direction:column;gap:var(--space-xl);}
+
+/* KPI rail */
+.kpi-rail{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:var(--space-md);
+}
+.kpi-cell{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  padding:var(--space-md) var(--space-lg);
+  box-shadow:var(--shadow-sm);
+}
+.kpi-label{font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--fg-muted);}
+.kpi-value{font-family:var(--font-mono);font-size:1.5rem;font-weight:700;color:var(--fg-1);margin-top:2px;line-height:1.2;}
+.kpi-value.kpi-error{color:var(--red);}
+.kpi-value.kpi-warn{color:var(--yellow);}
+.kpi-sub{font-size:0.7rem;color:var(--fg-muted);margin-top:2px;}
+
+/* Incident banner */
+.incident-banner{
+  background:linear-gradient(135deg,rgba(239,68,68,0.1) 0%,rgba(160,59,0,0.08) 100%);
+  border:1px solid rgba(239,68,68,0.3);
+  border-left:3px solid var(--red);
+  border-radius:var(--radius-md);
+  padding:var(--space-md) var(--space-lg);
+}
+.incident-banner-title{
+  font-family:var(--font-headline);font-weight:700;font-size:0.85rem;
+  color:var(--red);letter-spacing:-0.01em;margin-bottom:var(--space-xs);
+  display:flex;align-items:center;gap:var(--space-sm);
+}
+.incident-banner p{font-size:0.85rem;color:var(--fg-2);line-height:1.6;}
+.pulse-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--red);
+  animation:pulse-anim 2s ease-in-out infinite;
+}
+@keyframes pulse-anim{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.8);}}
+
+/* Work surface grid */
+.work-surface{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--space-xl);
+}
+@media(min-width:900px){
+  .work-surface{grid-template-columns:2fr 1fr;}
+}
+
+/* Panels */
+.panel{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:var(--space-lg) var(--space-xl);
+  box-shadow:var(--shadow-md);
+}
+.panel-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:var(--space-lg);gap:var(--space-sm);
+}
+.panel-title{
+  font-family:var(--font-headline);font-weight:700;font-size:0.92rem;
+  letter-spacing:-0.01em;color:var(--fg-1);
+}
+.panel-badge{
+  font-size:0.68rem;font-weight:600;padding:2px var(--space-sm);
+  border-radius:var(--radius-pill);background:var(--surface-container);
+  color:var(--fg-muted);font-family:var(--font-mono);
+}
+
+/* Histogram */
+.histogram-wrap{overflow-x:auto;padding-bottom:var(--space-xs);}
+.histogram-svg{width:100%;min-width:300px;}
+.hist-bar-info{fill:var(--blue);opacity:0.7;}
+.hist-bar-error{fill:var(--red);}
+.hist-bar-warn{fill:var(--yellow);}
+.hist-axis-label{font-family:var(--font-mono);font-size:9px;fill:var(--fg-muted);}
+.hist-grid{stroke:var(--border-strong);stroke-dasharray:2,3;}
+.burst-marker line{stroke:var(--red);stroke-width:1.5;stroke-dasharray:3,2;opacity:0.8;}
+.burst-marker text{font-family:var(--font-mono);font-size:8px;fill:var(--red);}
+
+/* Severity panel */
+.severity-rows{display:flex;flex-direction:column;gap:var(--space-sm);}
+.severity-row{display:flex;align-items:center;gap:var(--space-sm);}
+.sev-label{
+  font-family:var(--font-mono);font-size:0.75rem;font-weight:600;
+  width:44px;text-transform:uppercase;
+}
+.sev-label.error{color:var(--red);}
+.sev-label.warn{color:var(--yellow);}
+.sev-label.info{color:var(--blue);}
+.sev-label.debug{color:var(--fg-muted);}
+.sev-bar-track{flex:1;height:10px;background:var(--surface-container);border-radius:var(--radius-pill);overflow:hidden;}
+.sev-bar-fill{height:100%;border-radius:var(--radius-pill);transition:width 600ms cubic-bezier(0.34,1.56,0.64,1);}
+.sev-bar-fill.error{background:var(--red);}
+.sev-bar-fill.warn{background:var(--yellow);}
+.sev-bar-fill.info{background:var(--blue);}
+.sev-bar-fill.debug{background:var(--fg-muted);}
+.sev-count{font-family:var(--font-mono);font-size:0.75rem;color:var(--fg-2);width:24px;text-align:right;}
+.sev-pct{font-family:var(--font-mono);font-size:0.68rem;color:var(--fg-muted);width:38px;text-align:right;}
+
+/* Outliers */
+.outlier-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--space-md);}
+.outlier-card{
+  background:var(--surface-container-low);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  padding:var(--space-md) var(--space-lg);
+  border-left:3px solid var(--outline-variant);
+  transition:transform 120ms ease,box-shadow 120ms ease;
+}
+.outlier-card:hover{transform:translateY(-1px);box-shadow:var(--shadow-md);}
+.outlier-card.burst{border-left-color:var(--red);}
+.outlier-card.top-error{border-left-color:var(--yellow);}
+.outlier-card.slow{border-left-color:var(--yellow);}
+.outlier-card.rare{border-left-color:var(--accent-cyan);}
+.outlier-kind{
+  font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;
+  color:var(--fg-muted);margin-bottom:var(--space-xs);font-family:var(--font-mono);
+}
+.outlier-label{font-size:0.82rem;font-weight:600;color:var(--fg-1);margin-bottom:var(--space-xs);line-height:1.4;word-break:break-word;}
+.outlier-detail{font-size:0.75rem;color:var(--fg-muted);font-family:var(--font-mono);}
+
+/* Top messages */
+.top-rows{display:flex;flex-direction:column;gap:var(--space-xs);}
+.top-row{
+  display:flex;align-items:center;gap:var(--space-sm);
+  padding:var(--space-xs) var(--space-sm);
+  border-radius:var(--radius-sm);
+  transition:background 120ms;
+  cursor:default;
+}
+.top-row:hover{background:var(--surface-container);}
+.top-rank{font-family:var(--font-mono);font-size:0.68rem;color:var(--fg-muted);width:16px;text-align:right;}
+.top-bar-track{width:60px;height:6px;background:var(--surface-container);border-radius:var(--radius-pill);overflow:hidden;flex-shrink:0;}
+.top-bar-fill{height:100%;border-radius:var(--radius-pill);background:var(--primary);}
+.top-msg{font-size:0.78rem;color:var(--fg-2);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--font-mono);}
+.top-count{font-family:var(--font-mono);font-size:0.75rem;color:var(--fg-1);font-weight:600;white-space:nowrap;}
+.top-share{font-family:var(--font-mono);font-size:0.68rem;color:var(--fg-muted);white-space:nowrap;width:38px;text-align:right;}
+
+/* Top errors */
+.top-error-row{
+  padding:var(--space-sm) var(--space-md);
+  border-radius:var(--radius-sm);
+  border-left:2px solid var(--red);
+  background:rgba(239,68,68,0.05);
+  margin-bottom:var(--space-sm);
+}
+.top-error-msg{font-family:var(--font-mono);font-size:0.75rem;color:var(--fg-1);word-break:break-all;line-height:1.5;}
+.top-error-meta{font-family:var(--font-mono);font-size:0.67rem;color:var(--fg-muted);margin-top:var(--space-xs);}
+
+/* Flag queue */
+.flag-queue{display:flex;flex-direction:column;gap:var(--space-sm);}
+.flag-card{
+  background:var(--surface-container-low);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  padding:var(--space-md) var(--space-lg);
+  border-left:3px solid var(--red);
+  display:flex;align-items:flex-start;gap:var(--space-md);
+}
+.flag-icon{font-size:1.1rem;margin-top:1px;flex-shrink:0;}
+.flag-body{}
+.flag-title{font-size:0.83rem;font-weight:600;color:var(--fg-1);margin-bottom:2px;}
+.flag-detail{font-size:0.75rem;color:var(--fg-muted);font-family:var(--font-mono);}
+
+/* Data grid / drill-down */
+.drill-section{}
+.drill-toggle{
+  width:100%;background:var(--surface-container);border:1px solid var(--border-strong);
+  border-radius:var(--radius-md);padding:var(--space-md) var(--space-lg);
+  font-family:var(--font-headline);font-weight:700;font-size:0.88rem;
+  color:var(--fg-1);cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+  letter-spacing:-0.01em;transition:background 120ms;
+}
+.drill-toggle:hover{background:var(--surface-container-high);}
+.drill-toggle svg{transition:transform 200ms ease;}
+.drill-toggle.open svg{transform:rotate(180deg);}
+.drill-body{display:none;margin-top:var(--space-md);}
+.drill-body.open{display:block;}
+.drill-controls{display:flex;gap:var(--space-sm);flex-wrap:wrap;margin-bottom:var(--space-md);align-items:center;}
+.table-wrap{overflow-x:auto;border-radius:var(--radius-md);border:1px solid var(--border);}
+.data-grid{
+  width:100%;border-collapse:collapse;font-size:0.78rem;font-family:var(--font-mono);
+}
+.data-grid th{
+  background:var(--surface-container);padding:var(--space-sm) var(--space-md);
+  text-align:left;font-weight:700;font-size:0.67rem;text-transform:uppercase;
+  letter-spacing:0.06em;color:var(--fg-muted);border-bottom:1px solid var(--border-strong);
+  white-space:nowrap;cursor:pointer;user-select:none;
+}
+.data-grid th:hover{color:var(--fg-1);}
+.data-grid td{
+  padding:var(--space-sm) var(--space-md);border-bottom:1px solid var(--border);
+  vertical-align:top;color:var(--fg-2);
+}
+.data-grid tr:last-child td{border-bottom:none;}
+.data-grid tr.row-error td{background:rgba(239,68,68,0.06);}
+.data-grid tr.row-error .msg-cell{color:var(--red);}
+.data-grid tr.row-warn td{background:rgba(245,158,11,0.05);}
+.data-grid tr.row-warn .msg-cell{color:var(--yellow);}
+.data-grid tr.row-expanded td{border-bottom:none;}
+.row-detail{
+  background:var(--surface-container-low);padding:var(--space-md) var(--space-xl);
+  border-bottom:1px solid var(--border-strong);
+}
+.row-detail pre{
+  font-family:var(--font-mono);font-size:0.72rem;color:var(--fg-2);
+  white-space:pre-wrap;word-break:break-all;line-height:1.6;
+}
+.sev-badge{
+  display:inline-block;font-size:0.62rem;font-weight:700;text-transform:uppercase;
+  padding:1px 6px;border-radius:var(--radius-pill);font-family:var(--font-mono);
+}
+.sev-badge.error{background:rgba(239,68,68,0.15);color:var(--red);}
+.sev-badge.warn{background:rgba(245,158,11,0.15);color:var(--yellow);}
+.sev-badge.info{background:rgba(59,130,246,0.15);color:var(--blue);}
+.sev-badge.debug{background:var(--surface-container);color:var(--fg-muted);}
+.ts-cell{white-space:nowrap;color:var(--fg-muted);font-size:0.7rem;}
+.msg-cell{max-width:400px;word-break:break-word;line-height:1.5;}
+.highlight{background:rgba(255,165,0,0.35);border-radius:2px;}
+.pagination{display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-md);justify-content:center;flex-wrap:wrap;}
+.pagination button{
+  font-family:var(--font-mono);font-size:0.75rem;padding:4px var(--space-sm);
+  border:1px solid var(--border-strong);border-radius:var(--radius-sm);
+  background:var(--surface-container-lowest);color:var(--fg-2);cursor:pointer;
+  transition:all 100ms;
+}
+.pagination button:hover:not(:disabled){background:var(--surface-container-high);}
+.pagination button:disabled{opacity:0.4;cursor:default;}
+.pagination button.active{background:var(--primary);color:var(--on-primary);border-color:transparent;}
+.page-info{font-family:var(--font-mono);font-size:0.72rem;color:var(--fg-muted);}
+
+/* Tooltip */
+.tooltip{
+  position:fixed;background:var(--surface-container-high);
+  border:1px solid var(--border-strong);border-radius:var(--radius-sm);
+  padding:var(--space-xs) var(--space-sm);font-family:var(--font-mono);
+  font-size:0.72rem;color:var(--fg-1);pointer-events:none;z-index:999;
+  box-shadow:var(--shadow-md);display:none;max-width:200px;line-height:1.4;
+}
+
+/* Footer */
+.ops-footer{
+  border-top:1px solid var(--border);padding:var(--space-xl) var(--space-lg);
+  text-align:center;font-size:0.72rem;color:var(--fg-muted);margin-top:auto;
+}
+
+/* Sort indicators */
+.sort-asc::after{content:" ↑";}
+.sort-desc::after{content:" ↓";}
+
+/* Sparkline */
+.error-sparkline{margin-top:var(--space-md);}
+.sparkline-label{font-size:0.7rem;color:var(--fg-muted);margin-bottom:var(--space-xs);font-family:var(--font-mono);}
+
+/* Animations */
+@media(prefers-reduced-motion:no-preference){
+  .kpi-cell{animation:fadein 300ms ease both;}
+  .kpi-cell:nth-child(1){animation-delay:0ms;}
+  .kpi-cell:nth-child(2){animation-delay:60ms;}
+  .kpi-cell:nth-child(3){animation-delay:120ms;}
+  .kpi-cell:nth-child(4){animation-delay:180ms;}
+  .kpi-cell:nth-child(5){animation-delay:240ms;}
+  .panel{animation:fadein 400ms ease both;animation-delay:100ms;}
+  @keyframes fadein{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+}
+
+/* Responsive tweaks */
+@media(max-width:600px){
+  .ops-main{padding:var(--space-md);}
+  .command-bar{padding:var(--space-sm) var(--space-md);}
+  .kpi-rail{grid-template-columns:repeat(2,1fr);}
+  .outlier-grid{grid-template-columns:1fr;}
+  .top-bar-track{display:none;}
+  .msg-cell{max-width:220px;}
+}
+</style>
 <!-- html-anything example style skin:start -->
 
 <style id="html-anything-example-style-skin">
@@ -319,35 +515,6 @@ html[data-ha-style="relationship"] body {
     linear-gradient(300deg, rgba(49,123,147,.08), transparent 40%);
 }
 html[data-ha-style="relationship"] body::before { content: "relationship"; }
-
-html[data-ha-style="personal-atlas"] {
-  --ha-style-accent: #3f7f6a;
-  --ha-style-accent-2: #c15a2b;
-  --primary: #3f7f6a;
-  --primary-container: #2f6b58;
-  --primary-fixed: #dff4ea;
-  --secondary-container: #c15a2b;
-  --bg: #f7faf4;
-  --surface: #f7faf4;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #eef5ea;
-  --surface-container: #e6eee0;
-  --surface-container-high: #dbe7d5;
-  --fg-1: #17211b;
-  --fg-2: #405345;
-  --fg-muted: #718172;
-  --border: rgba(63,127,106,.15);
-  --gradient-hero: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-  --gradient-text: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-}
-html[data-ha-style="personal-atlas"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(63,127,106,.11) 0 2px, transparent 2px),
-    radial-gradient(circle at 70% 40%, rgba(193,90,43,.10) 0 1.5px, transparent 1.5px);
-  background-size: 54px 54px, 38px 38px;
-}
-html[data-ha-style="personal-atlas"] body::before { content: "personal atlas"; }
 
 html[data-ha-style="timeline-story"] {
   --ha-style-accent: #9a4b14;
@@ -498,7 +665,7 @@ html[data-ha-style="dashboard"] header.hero::before {
   margin-bottom: 14px;
 }
 
-html[data-ha-style="editorial"] {
+html[data-ha-style="document"] {
   --ha-style-accent: #8b3f1f;
   --ha-style-accent-2: #2f6f73;
   --primary: #8b3f1f;
@@ -519,14 +686,14 @@ html[data-ha-style="editorial"] {
   --gradient-hero: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
   --gradient-text: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
 }
-html[data-ha-style="editorial"] body {
+html[data-ha-style="document"] body {
   background-color: var(--bg) !important;
   background-image: linear-gradient(90deg, rgba(139,63,31,.18) 0 4px, transparent 4px);
   background-size: 100% 100%;
 }
-html[data-ha-style="editorial"] body::before { content: "editorial"; }
-html[data-ha-style="editorial"] .hero::before,
-html[data-ha-style="editorial"] header.hero::before {
+html[data-ha-style="document"] body::before { content: "document"; }
+html[data-ha-style="document"] .hero::before,
+html[data-ha-style="document"] header.hero::before {
   width: 42px;
   height: 42px;
   border-radius: 0;
@@ -534,33 +701,6 @@ html[data-ha-style="editorial"] header.hero::before {
   border-top: 4px solid var(--ha-style-accent);
   border-left: 4px solid var(--ha-style-accent);
 }
-
-html[data-ha-style="paper"] {
-  --ha-style-accent: #53606a;
-  --ha-style-accent-2: #8c6f4a;
-  --primary: #53606a;
-  --primary-container: #3e4850;
-  --primary-fixed: #eef1f3;
-  --secondary-container: #8c6f4a;
-  --bg: #f9faf9;
-  --surface: #f9faf9;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f1f2f1;
-  --surface-container: #e8eae8;
-  --surface-container-high: #dedfdd;
-  --fg-1: #171717;
-  --fg-2: #4b5563;
-  --fg-muted: #737373;
-  --border: rgba(83,96,106,.18);
-  --font-headline: Georgia, "Iowan Old Style", "Times New Roman", serif;
-  --gradient-hero: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-  --gradient-text: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-}
-html[data-ha-style="paper"] body {
-  background-color: var(--bg) !important;
-  background-image: repeating-linear-gradient(0deg, transparent 0 31px, rgba(83,96,106,.08) 31px 32px);
-}
-html[data-ha-style="paper"] body::before { content: "paper"; }
 
 html[data-ha-style="developer"] {
   color-scheme: dark;
@@ -605,530 +745,654 @@ html[data-ha-style="developer"] .mono {
 <!-- html-anything example style skin:end -->
 </head>
 <body>
-  <main>
-    <header class="hero">
-      <span class="eyebrow"><span class="mono" id="hero-format">EVENTS</span> · html-anything</span>
-      <h1 id="hero-title">Orders service error log — payment incident</h1>
-      <p class="editorial" id="hero-editorial">53 application-log lines with a sharp ProviderTimeoutError + CircuitOpenError cluster between 21:20 and 21:23 UTC — Stripe payment provider degraded for ~3 minutes, the circuit opened then half-opened cleanly. INFO/WARN/ERROR mix; 13.21% error rate concentrated in one window.</p>
-      <div class="hero-actions">
-        <button class="btn primary" id="copy-md-btn">Copy analysis as Markdown</button>
-        <button class="btn" id="jump-drill-btn">Jump to event table</button>
+<script>const DATA = {"events":[{"id":"e_000001","ts":"2026-04-12 21:00:01","date":"2026-04-12","time":"21:00:01","tsEpoch":1776027601412,"severity":"info","category":null,"source":null,"message":"] [orders.svc] Server started — listening on :8080 (worker pid=4218, version=1.42.0)","raw":"[2026-04-12 14:00:01.412] [INFO ] [orders.svc] Server started — listening on :8080 (worker pid=4218, version=1.42.0)"},{"id":"e_000002","ts":"2026-04-12 21:00:08","date":"2026-04-12","time":"21:00:08","tsEpoch":1776027608118,"severity":"info","category":null,"source":null,"message":"] [orders.svc] DB pool initialized — pool=postgres host=db-primary-01 size=20","raw":"[2026-04-12 14:00:08.118] [INFO ] [orders.svc] DB pool initialized — pool=postgres host=db-primary-01 size=20"},{"id":"e_000003","ts":"2026-04-12 21:00:09","date":"2026-04-12","time":"21:00:09","tsEpoch":1776027609221,"severity":"info","category":null,"source":null,"message":"] [orders.svc] Cache warm-up complete — keys=4218 size=12.4MB","raw":"[2026-04-12 14:00:09.221] [INFO ] [orders.svc] Cache warm-up complete — keys=4218 size=12.4MB"},{"id":"e_000004","ts":"2026-04-12 21:00:14","date":"2026-04-12","time":"21:00:14","tsEpoch":1776027614557,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_a1c4 order_id=o_19842 amount=47.50 → 201","raw":"[2026-04-12 14:00:14.557] [INFO ] [orders.api] POST /orders user_id=u_a1c4 order_id=o_19842 amount=47.50 → 201"},{"id":"e_000005","ts":"2026-04-12 21:01:42","date":"2026-04-12","time":"21:01:42","tsEpoch":1776027702224,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_b2d5 order_id=o_19843 amount=129.00 → 201","raw":"[2026-04-12 14:01:42.224] [INFO ] [orders.api] POST /orders user_id=u_b2d5 order_id=o_19843 amount=129.00 → 201"},{"id":"e_000006","ts":"2026-04-12 21:02:11","date":"2026-04-12","time":"21:02:11","tsEpoch":1776027731998,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_c3e6 order_id=o_19844 amount=18.75 → 201","raw":"[2026-04-12 14:02:11.998] [INFO ] [orders.api] POST /orders user_id=u_c3e6 order_id=o_19844 amount=18.75 → 201"},{"id":"e_000007","ts":"2026-04-12 21:04:17","date":"2026-04-12","time":"21:04:17","tsEpoch":1776027857404,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_d4f7 order_id=o_19845 amount=62.40 → 201","raw":"[2026-04-12 14:04:17.404] [INFO ] [orders.api] POST /orders user_id=u_d4f7 order_id=o_19845 amount=62.40 → 201"},{"id":"e_000008","ts":"2026-04-12 21:06:22","date":"2026-04-12","time":"21:06:22","tsEpoch":1776027982557,"severity":"warn","category":null,"source":null,"message":"] [orders.svc] Slow DB query — query=order_history user_id=u_e5g8 duration_ms=1842 threshold_ms=500","raw":"[2026-04-12 14:06:22.557] [WARN ] [orders.svc] Slow DB query — query=order_history user_id=u_e5g8 duration_ms=1842 threshold_ms=500"},{"id":"e_000009","ts":"2026-04-12 21:06:22","date":"2026-04-12","time":"21:06:22","tsEpoch":1776027982881,"severity":"info","category":null,"source":null,"message":"] [orders.api] GET /orders/u_e5g8 → 200 (1842ms)","raw":"[2026-04-12 14:06:22.881] [INFO ] [orders.api] GET /orders/u_e5g8 → 200 (1842ms)"},{"id":"e_000010","ts":"2026-04-12 21:11:55","date":"2026-04-12","time":"21:11:55","tsEpoch":1776028315412,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_f6h9 order_id=o_19847 amount=34.50 → 201","raw":"[2026-04-12 14:11:55.412] [INFO ] [orders.api] POST /orders user_id=u_f6h9 order_id=o_19847 amount=34.50 → 201"},{"id":"e_000011","ts":"2026-04-12 21:13:14","date":"2026-04-12","time":"21:13:14","tsEpoch":1776028394118,"severity":"warn","category":null,"source":null,"message":"] [cache] Cache miss spike — keys_missed=412 window=60s threshold=100","raw":"[2026-04-12 14:13:14.118] [WARN ] [cache] Cache miss spike — keys_missed=412 window=60s threshold=100"},{"id":"e_000012","ts":"2026-04-12 21:14:07","date":"2026-04-12","time":"21:14:07","tsEpoch":1776028447402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_g7j0 order_id=o_19848 amount=89.20 → 201","raw":"[2026-04-12 14:14:07.402] [INFO ] [orders.api] POST /orders user_id=u_g7j0 order_id=o_19848 amount=89.20 → 201"},{"id":"e_000013","ts":"2026-04-12 21:17:42","date":"2026-04-12","time":"21:17:42","tsEpoch":1776028662402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19849 amount=12.99 → 201","raw":"[2026-04-12 14:17:42.402] [INFO ] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19849 amount=12.99 → 201"},{"id":"e_000014","ts":"2026-04-12 21:19:11","date":"2026-04-12","time":"21:19:11","tsEpoch":1776028751118,"severity":"info","category":null,"source":null,"message":"] [auth] User login user_id=u_i9l2 method=oauth provider=google","raw":"[2026-04-12 14:19:11.118] [INFO ] [auth] User login user_id=u_i9l2 method=oauth provider=google"},{"id":"e_000015","ts":"2026-04-12 21:20:08","date":"2026-04-12","time":"21:20:08","tsEpoch":1776028808402,"severity":"warn","category":null,"source":null,"message":"] [payments] Stripe API slow — endpoint=/v1/charges duration_ms=5402 threshold_ms=3000","raw":"[2026-04-12 14:20:08.402] [WARN ] [payments] Stripe API slow — endpoint=/v1/charges duration_ms=5402 threshold_ms=3000"},{"id":"e_000016","ts":"2026-04-12 21:20:13","date":"2026-04-12","time":"21:20:13","tsEpoch":1776028813998,"severity":"error","category":"payments","source":null,"message":"Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderTimeoutError reason=\"Stripe API request exceeded 10s timeout\" stack=stripe_client.charge:142>http_client.post:88>http_client._send:124","raw":"[2026-04-12 14:20:13.998] [ERROR] [payments] Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderTimeoutError reason=\"Stripe API request exceeded 10s timeout\" stack=stripe_client.charge:142>http_client.post:88>http_client._send:124"},{"id":"e_000017","ts":"2026-04-12 21:20:34","date":"2026-04-12","time":"21:20:34","tsEpoch":1776028834412,"severity":"error","category":"payments","source":null,"message":"Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderTimeoutError reason=\"Stripe API request exceeded 10s timeout\" retry=1","raw":"[2026-04-12 14:20:34.412] [ERROR] [payments] Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderTimeoutError reason=\"Stripe API request exceeded 10s timeout\" retry=1"},{"id":"e_000018","ts":"2026-04-12 21:20:52","date":"2026-04-12","time":"21:20:52","tsEpoch":1776028852798,"severity":"error","category":"payments","source":null,"message":"Payment failed — order_id=o_19851 user_id=u_j0m3 provider=stripe error=ProviderTimeoutError reason=\"Stripe API request exceeded 10s timeout\"","raw":"[2026-04-12 14:20:52.798] [ERROR] [payments] Payment failed — order_id=o_19851 user_id=u_j0m3 provider=stripe error=ProviderTimeoutError reason=\"Stripe API request exceeded 10s timeout\""},{"id":"e_000019","ts":"2026-04-12 21:21:18","date":"2026-04-12","time":"21:21:18","tsEpoch":1776028878802,"severity":"error","category":"payments","source":null,"message":"Payment failed — order_id=o_19852 user_id=u_b2d5 provider=stripe error=ProviderTimeoutError reason=\"Stripe API request exceeded 10s timeout\"","raw":"[2026-04-12 14:21:18.802] [ERROR] [payments] Payment failed — order_id=o_19852 user_id=u_b2d5 provider=stripe error=ProviderTimeoutError reason=\"Stripe API request exceeded 10s timeout\""},{"id":"e_000020","ts":"2026-04-12 21:21:42","date":"2026-04-12","time":"21:21:42","tsEpoch":1776028902018,"severity":"warn","category":null,"source":null,"message":"] [payments] Circuit breaker opened — provider=stripe threshold=5/30s open_until=2026-04-12T14:23:42Z","raw":"[2026-04-12 14:21:42.018] [WARN ] [payments] Circuit breaker opened — provider=stripe threshold=5/30s open_until=2026-04-12T14:23:42Z"},{"id":"e_000021","ts":"2026-04-12 21:22:11","date":"2026-04-12","time":"21:22:11","tsEpoch":1776028931612,"severity":"error","category":"payments","source":null,"message":"Payment failed — order_id=o_19853 user_id=u_c3e6 provider=stripe error=CircuitOpenError reason=\"Circuit breaker open for stripe — fast-failing\"","raw":"[2026-04-12 14:22:11.612] [ERROR] [payments] Payment failed — order_id=o_19853 user_id=u_c3e6 provider=stripe error=CircuitOpenError reason=\"Circuit breaker open for stripe — fast-failing\""},{"id":"e_000022","ts":"2026-04-12 21:22:42","date":"2026-04-12","time":"21:22:42","tsEpoch":1776028962302,"severity":"error","category":"payments","source":null,"message":"Payment failed — order_id=o_19854 user_id=u_d4f7 provider=stripe error=CircuitOpenError reason=\"Circuit breaker open for stripe — fast-failing\"","raw":"[2026-04-12 14:22:42.302] [ERROR] [payments] Payment failed — order_id=o_19854 user_id=u_d4f7 provider=stripe error=CircuitOpenError reason=\"Circuit breaker open for stripe — fast-failing\""},{"id":"e_000023","ts":"2026-04-12 21:23:14","date":"2026-04-12","time":"21:23:14","tsEpoch":1776028994612,"severity":"error","category":"payments","source":null,"message":"Payment failed — order_id=o_19855 user_id=u_e5g8 provider=stripe error=CircuitOpenError reason=\"Circuit breaker open for stripe — fast-failing\"","raw":"[2026-04-12 14:23:14.612] [ERROR] [payments] Payment failed — order_id=o_19855 user_id=u_e5g8 provider=stripe error=CircuitOpenError reason=\"Circuit breaker open for stripe — fast-failing\""},{"id":"e_000024","ts":"2026-04-12 21:23:42","date":"2026-04-12","time":"21:23:42","tsEpoch":1776029022118,"severity":"info","category":null,"source":null,"message":"] [payments] Circuit breaker half-open — provider=stripe probing","raw":"[2026-04-12 14:23:42.118] [INFO ] [payments] Circuit breaker half-open — provider=stripe probing"},{"id":"e_000025","ts":"2026-04-12 21:24:03","date":"2026-04-12","time":"21:24:03","tsEpoch":1776029043118,"severity":"info","category":null,"source":null,"message":"] [payments] Payment succeeded — order_id=o_19856 user_id=u_f6h9 provider=stripe duration_ms=716","raw":"[2026-04-12 14:24:03.118] [INFO ] [payments] Payment succeeded — order_id=o_19856 user_id=u_f6h9 provider=stripe duration_ms=716"},{"id":"e_000026","ts":"2026-04-12 21:24:03","date":"2026-04-12","time":"21:24:03","tsEpoch":1776029043502,"severity":"info","category":null,"source":null,"message":"] [payments] Circuit breaker closed — provider=stripe (probe succeeded)","raw":"[2026-04-12 14:24:03.502] [INFO ] [payments] Circuit breaker closed — provider=stripe (probe succeeded)"},{"id":"e_000027","ts":"2026-04-12 21:25:42","date":"2026-04-12","time":"21:25:42","tsEpoch":1776029142812,"severity":"info","category":null,"source":null,"message":"] [payments] Payment succeeded — order_id=o_19850 user_id=u_i9l2 provider=stripe duration_ms=694 retry=2","raw":"[2026-04-12 14:25:42.812] [INFO ] [payments] Payment succeeded — order_id=o_19850 user_id=u_i9l2 provider=stripe duration_ms=694 retry=2"},{"id":"e_000028","ts":"2026-04-12 21:27:11","date":"2026-04-12","time":"21:27:11","tsEpoch":1776029231402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_g7j0 order_id=o_19857 amount=156.00 → 201","raw":"[2026-04-12 14:27:11.402] [INFO ] [orders.api] POST /orders user_id=u_g7j0 order_id=o_19857 amount=156.00 → 201"},{"id":"e_000029","ts":"2026-04-12 21:29:42","date":"2026-04-12","time":"21:29:42","tsEpoch":1776029382118,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /refunds user_id=u_b2d5 order_id=o_19852 amount=78.50 reason=payment_failed_at_checkout → 201","raw":"[2026-04-12 14:29:42.118] [INFO ] [orders.api] POST /refunds user_id=u_b2d5 order_id=o_19852 amount=78.50 reason=payment_failed_at_checkout → 201"},{"id":"e_000030","ts":"2026-04-12 21:29:42","date":"2026-04-12","time":"21:29:42","tsEpoch":1776029382802,"severity":"info","category":null,"source":null,"message":"] [payments] Refund processed — order_id=o_19852 user_id=u_b2d5 amount=78.50 duration_ms=684","raw":"[2026-04-12 14:29:42.802] [INFO ] [payments] Refund processed — order_id=o_19852 user_id=u_b2d5 amount=78.50 duration_ms=684"},{"id":"e_000031","ts":"2026-04-12 21:31:11","date":"2026-04-12","time":"21:31:11","tsEpoch":1776029471402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19858 amount=29.50 → 201","raw":"[2026-04-12 14:31:11.402] [INFO ] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19858 amount=29.50 → 201"},{"id":"e_000032","ts":"2026-04-12 21:33:42","date":"2026-04-12","time":"21:33:42","tsEpoch":1776029622118,"severity":"info","category":null,"source":null,"message":"] [auth] User logout user_id=u_b2d5","raw":"[2026-04-12 14:33:42.118] [INFO ] [auth] User logout user_id=u_b2d5"},{"id":"e_000033","ts":"2026-04-12 21:35:11","date":"2026-04-12","time":"21:35:11","tsEpoch":1776029711402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_j0m3 order_id=o_19859 amount=54.20 → 201","raw":"[2026-04-12 14:35:11.402] [INFO ] [orders.api] POST /orders user_id=u_j0m3 order_id=o_19859 amount=54.20 → 201"},{"id":"e_000034","ts":"2026-04-12 21:37:42","date":"2026-04-12","time":"21:37:42","tsEpoch":1776029862118,"severity":"info","category":null,"source":null,"message":"] [auth] User login user_id=u_k1n4 method=oauth provider=google","raw":"[2026-04-12 14:37:42.118] [INFO ] [auth] User login user_id=u_k1n4 method=oauth provider=google"},{"id":"e_000035","ts":"2026-04-12 21:38:42","date":"2026-04-12","time":"21:38:42","tsEpoch":1776029922402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_k1n4 order_id=o_19860 amount=104.50 → 201","raw":"[2026-04-12 14:38:42.402] [INFO ] [orders.api] POST /orders user_id=u_k1n4 order_id=o_19860 amount=104.50 → 201"},{"id":"e_000036","ts":"2026-04-12 21:42:11","date":"2026-04-12","time":"21:42:11","tsEpoch":1776030131402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_a1c4 order_id=o_19861 amount=17.50 → 201","raw":"[2026-04-12 14:42:11.402] [INFO ] [orders.api] POST /orders user_id=u_a1c4 order_id=o_19861 amount=17.50 → 201"},{"id":"e_000037","ts":"2026-04-12 21:42:42","date":"2026-04-12","time":"21:42:42","tsEpoch":1776030162118,"severity":"warn","category":null,"source":null,"message":"] [orders.svc] Slow DB query — query=user_history user_id=u_a1c4 duration_ms=1218 threshold_ms=500","raw":"[2026-04-12 14:42:42.118] [WARN ] [orders.svc] Slow DB query — query=user_history user_id=u_a1c4 duration_ms=1218 threshold_ms=500"},{"id":"e_000038","ts":"2026-04-12 21:48:11","date":"2026-04-12","time":"21:48:11","tsEpoch":1776030491402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_e5g8 order_id=o_19862 amount=67.80 → 201","raw":"[2026-04-12 14:48:11.402] [INFO ] [orders.api] POST /orders user_id=u_e5g8 order_id=o_19862 amount=67.80 → 201"},{"id":"e_000039","ts":"2026-04-12 21:52:11","date":"2026-04-12","time":"21:52:11","tsEpoch":1776030731402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_f6h9 order_id=o_19863 amount=42.10 → 201","raw":"[2026-04-12 14:52:11.402] [INFO ] [orders.api] POST /orders user_id=u_f6h9 order_id=o_19863 amount=42.10 → 201"},{"id":"e_000040","ts":"2026-04-12 21:55:42","date":"2026-04-12","time":"21:55:42","tsEpoch":1776030942118,"severity":"info","category":null,"source":null,"message":"] [auth] User logout user_id=u_g7j0","raw":"[2026-04-12 14:55:42.118] [INFO ] [auth] User logout user_id=u_g7j0"},{"id":"e_000041","ts":"2026-04-12 21:58:11","date":"2026-04-12","time":"21:58:11","tsEpoch":1776031091402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19864 amount=89.20 → 201","raw":"[2026-04-12 14:58:11.402] [INFO ] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19864 amount=89.20 → 201"},{"id":"e_000042","ts":"2026-04-12 22:02:42","date":"2026-04-12","time":"22:02:42","tsEpoch":1776031362118,"severity":"info","category":null,"source":null,"message":"] [health] Server health check — status=healthy uptime_s=3759 db_pool=18/20 cache_hit_rate=0.94","raw":"[2026-04-12 15:02:42.118] [INFO ] [health] Server health check — status=healthy uptime_s=3759 db_pool=18/20 cache_hit_rate=0.94"},{"id":"e_000043","ts":"2026-04-12 22:08:11","date":"2026-04-12","time":"22:08:11","tsEpoch":1776031691402,"severity":"warn","category":null,"source":null,"message":"] [cache] Cache eviction triggered — keys_evicted=842 free_mb=128","raw":"[2026-04-12 15:08:11.402] [WARN ] [cache] Cache eviction triggered — keys_evicted=842 free_mb=128"},{"id":"e_000044","ts":"2026-04-12 22:14:42","date":"2026-04-12","time":"22:14:42","tsEpoch":1776032082118,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_a1c4 order_id=o_19865 amount=24.99 → 201","raw":"[2026-04-12 15:14:42.118] [INFO ] [orders.api] POST /orders user_id=u_a1c4 order_id=o_19865 amount=24.99 → 201"},{"id":"e_000045","ts":"2026-04-12 22:18:11","date":"2026-04-12","time":"22:18:11","tsEpoch":1776032291402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_d4f7 order_id=o_19866 amount=132.00 → 201","raw":"[2026-04-12 15:18:11.402] [INFO ] [orders.api] POST /orders user_id=u_d4f7 order_id=o_19866 amount=132.00 → 201"},{"id":"e_000046","ts":"2026-04-12 22:22:42","date":"2026-04-12","time":"22:22:42","tsEpoch":1776032562118,"severity":"info","category":null,"source":null,"message":"] [auth] User login user_id=u_l2o5 method=password","raw":"[2026-04-12 15:22:42.118] [INFO ] [auth] User login user_id=u_l2o5 method=password"},{"id":"e_000047","ts":"2026-04-12 22:24:11","date":"2026-04-12","time":"22:24:11","tsEpoch":1776032651402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_l2o5 order_id=o_19867 amount=58.40 → 201","raw":"[2026-04-12 15:24:11.402] [INFO ] [orders.api] POST /orders user_id=u_l2o5 order_id=o_19867 amount=58.40 → 201"},{"id":"e_000048","ts":"2026-04-12 22:31:42","date":"2026-04-12","time":"22:31:42","tsEpoch":1776033102118,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_c3e6 order_id=o_19868 amount=41.20 → 201","raw":"[2026-04-12 15:31:42.118] [INFO ] [orders.api] POST /orders user_id=u_c3e6 order_id=o_19868 amount=41.20 → 201"},{"id":"e_000049","ts":"2026-04-12 22:34:11","date":"2026-04-12","time":"22:34:11","tsEpoch":1776033251402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_g7j0 order_id=o_19869 amount=88.50 → 201","raw":"[2026-04-12 15:34:11.402] [INFO ] [orders.api] POST /orders user_id=u_g7j0 order_id=o_19869 amount=88.50 → 201"},{"id":"e_000050","ts":"2026-04-12 22:42:42","date":"2026-04-12","time":"22:42:42","tsEpoch":1776033762118,"severity":"info","category":null,"source":null,"message":"] [auth] User logout user_id=u_a1c4","raw":"[2026-04-12 15:42:42.118] [INFO ] [auth] User logout user_id=u_a1c4"},{"id":"e_000051","ts":"2026-04-12 22:48:11","date":"2026-04-12","time":"22:48:11","tsEpoch":1776034091402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19870 amount=29.50 → 201","raw":"[2026-04-12 15:48:11.402] [INFO ] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19870 amount=29.50 → 201"},{"id":"e_000052","ts":"2026-04-12 22:52:42","date":"2026-04-12","time":"22:52:42","tsEpoch":1776034362118,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_e5g8 order_id=o_19871 amount=67.80 → 201","raw":"[2026-04-12 15:52:42.118] [INFO ] [orders.api] POST /orders user_id=u_e5g8 order_id=o_19871 amount=67.80 → 201"},{"id":"e_000053","ts":"2026-04-12 22:58:11","date":"2026-04-12","time":"22:58:11","tsEpoch":1776034691402,"severity":"info","category":null,"source":null,"message":"] [health] Server health check — status=healthy uptime_s=7090 db_pool=14/20 cache_hit_rate=0.96","raw":"[2026-04-12 15:58:11.402] [INFO ] [health] Server health check — status=healthy uptime_s=7090 db_pool=14/20 cache_hit_rate=0.96"}],"timeBuckets":[{"bucket":"2026-04-12T21:00","label":"21:00","count":7,"errorCount":0},{"bucket":"2026-04-12T21:05","label":"21:05","count":2,"errorCount":0},{"bucket":"2026-04-12T21:10","label":"21:10","count":3,"errorCount":0},{"bucket":"2026-04-12T21:15","label":"21:15","count":2,"errorCount":0},{"bucket":"2026-04-12T21:20","label":"21:20","count":12,"errorCount":7},{"bucket":"2026-04-12T21:25","label":"21:25","count":4,"errorCount":0},{"bucket":"2026-04-12T21:30","label":"21:30","count":2,"errorCount":0},{"bucket":"2026-04-12T21:35","label":"21:35","count":3,"errorCount":0},{"bucket":"2026-04-12T21:40","label":"21:40","count":2,"errorCount":0},{"bucket":"2026-04-12T21:45","label":"21:45","count":1,"errorCount":0},{"bucket":"2026-04-12T21:50","label":"21:50","count":1,"errorCount":0},{"bucket":"2026-04-12T21:55","label":"21:55","count":2,"errorCount":0},{"bucket":"2026-04-12T22:00","label":"22:00","count":1,"errorCount":0},{"bucket":"2026-04-12T22:05","label":"22:05","count":1,"errorCount":0},{"bucket":"2026-04-12T22:10","label":"22:10","count":1,"errorCount":0},{"bucket":"2026-04-12T22:15","label":"22:15","count":1,"errorCount":0},{"bucket":"2026-04-12T22:20","label":"22:20","count":2,"errorCount":0},{"bucket":"2026-04-12T22:25","label":"22:25","count":0,"errorCount":0},{"bucket":"2026-04-12T22:30","label":"22:30","count":2,"errorCount":0},{"bucket":"2026-04-12T22:35","label":"22:35","count":0,"errorCount":0},{"bucket":"2026-04-12T22:40","label":"22:40","count":1,"errorCount":0},{"bucket":"2026-04-12T22:45","label":"22:45","count":1,"errorCount":0},{"bucket":"2026-04-12T22:50","label":"22:50","count":1,"errorCount":0},{"bucket":"2026-04-12T22:55","label":"22:55","count":1,"errorCount":0},{"bucket":"2026-04-12T23:00","label":"23:00","count":0,"errorCount":0}],"severityCounts":{"error":7,"warn":6,"info":40,"debug":0,"trace":0,"other":0},"categoryCounts":[{"category":"payments","count":7,"share":13.2}],"topMessages":[{"message":"] [orders.svc] Server started — listening on :<num> (worker pid=<num>, version=1.42.0)","count":1,"share":1.9},{"message":"] [orders.svc] DB pool initialized — pool=postgres host=db-primary-01 size=20","count":1,"share":1.9},{"message":"] [orders.svc] Cache warm-up complete — keys=<num> size=12.4MB","count":1,"share":1.9},{"message":"] [orders.api] POST /orders user_id=u_a1c4 order_id=o_19842 amount=47.50 → 201","count":1,"share":1.9},{"message":"] [orders.api] POST /orders user_id=u_b2d5 order_id=o_19843 amount=129.00 → 201","count":1,"share":1.9},{"message":"] [orders.api] POST /orders user_id=u_c3e6 order_id=o_19844 amount=18.75 → 201","count":1,"share":1.9},{"message":"] [orders.api] POST /orders user_id=u_d4f7 order_id=o_19845 amount=62.40 → 201","count":1,"share":1.9},{"message":"] [orders.svc] Slow DB query — query=order_history user_id=u_e5g8 duration_ms=<num> threshold_ms=500","count":1,"share":1.9},{"message":"] [orders.api] GET /orders/u_e5g8 → 200 (1842ms)","count":1,"share":1.9},{"message":"] [orders.api] POST /orders user_id=u_f6h9 order_id=o_19847 amount=34.50 → 201","count":1,"share":1.9},{"message":"] [cache] Cache miss spike — keys_missed=412 window=60s threshold=100","count":1,"share":1.9},{"message":"] [orders.api] POST /orders user_id=u_g7j0 order_id=o_19848 amount=89.20 → 201","count":1,"share":1.9},{"message":"] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19849 amount=12.99 → 201","count":1,"share":1.9},{"message":"] [auth] User login user_id=u_i9l2 method=oauth provider=google","count":1,"share":1.9},{"message":"] [payments] Stripe API slow — endpoint=/v1/charges duration_ms=<num> threshold_ms=<num>","count":1,"share":1.9},{"message":"Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderTimeoutError reason=\"<str>\" stack=stripe_client.charge:142>http_client.post:88>http_client._send:124","count":1,"share":1.9},{"message":"Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderTimeoutError reason=\"<str>\" retry=1","count":1,"share":1.9},{"message":"Payment failed — order_id=o_19851 user_id=u_j0m3 provider=stripe error=ProviderTimeoutError reason=\"<str>\"","count":1,"share":1.9},{"message":"Payment failed — order_id=o_19852 user_id=u_b2d5 provider=stripe error=ProviderTimeoutError reason=\"<str>\"","count":1,"share":1.9},{"message":"] [payments] Circuit breaker opened — provider=stripe threshold=5/30s open_until=<num>-04-12T14:23:42Z","count":1,"share":1.9},{"message":"Payment failed — order_id=o_19853 user_id=u_c3e6 provider=stripe error=CircuitOpenError reason=\"<str>\"","count":1,"share":1.9},{"message":"Payment failed — order_id=o_19854 user_id=u_d4f7 provider=stripe error=CircuitOpenError reason=\"<str>\"","count":1,"share":1.9},{"message":"Payment failed — order_id=o_19855 user_id=u_e5g8 provider=stripe error=CircuitOpenError reason=\"<str>\"","count":1,"share":1.9},{"message":"] [payments] Circuit breaker half-open — provider=stripe probing","count":1,"share":1.9},{"message":"] [payments] Payment succeeded — order_id=o_19856 user_id=u_f6h9 provider=stripe duration_ms=716","count":1,"share":1.9}],"topSources":[],"topErrors":[{"message":"Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderTimeoutError reason=\"<str>\" stack=stripe_client.charge:142>http_client.post:88>http_client._send:124","count":1,"firstTs":"2026-04-12 21:20:13","lastTs":"2026-04-12 21:20:13"},{"message":"Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderTimeoutError reason=\"<str>\" retry=1","count":1,"firstTs":"2026-04-12 21:20:34","lastTs":"2026-04-12 21:20:34"},{"message":"Payment failed — order_id=o_19851 user_id=u_j0m3 provider=stripe error=ProviderTimeoutError reason=\"<str>\"","count":1,"firstTs":"2026-04-12 21:20:52","lastTs":"2026-04-12 21:20:52"},{"message":"Payment failed — order_id=o_19852 user_id=u_b2d5 provider=stripe error=ProviderTimeoutError reason=\"<str>\"","count":1,"firstTs":"2026-04-12 21:21:18","lastTs":"2026-04-12 21:21:18"},{"message":"Payment failed — order_id=o_19853 user_id=u_c3e6 provider=stripe error=CircuitOpenError reason=\"<str>\"","count":1,"firstTs":"2026-04-12 21:22:11","lastTs":"2026-04-12 21:22:11"},{"message":"Payment failed — order_id=o_19854 user_id=u_d4f7 provider=stripe error=CircuitOpenError reason=\"<str>\"","count":1,"firstTs":"2026-04-12 21:22:42","lastTs":"2026-04-12 21:22:42"},{"message":"Payment failed — order_id=o_19855 user_id=u_e5g8 provider=stripe error=CircuitOpenError reason=\"<str>\"","count":1,"firstTs":"2026-04-12 21:23:14","lastTs":"2026-04-12 21:23:14"}],"outliers":[{"kind":"burst","label":"Volume spike at 21:20","detail":"12 events vs median 1","ts":"2026-04-12T21:20"},{"kind":"burst","label":"Error spike at 21:20","detail":"7 errors in one bucket","ts":"2026-04-12T21:20"},{"kind":"top-error","label":"Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderT…","detail":"1× from 2026-04-12 21:20:13 to 2026-04-12 21:20:13","ts":"2026-04-12 21:20:13"},{"kind":"top-error","label":"Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderT…","detail":"1× from 2026-04-12 21:20:34 to 2026-04-12 21:20:34","ts":"2026-04-12 21:20:34"},{"kind":"top-error","label":"Payment failed — order_id=o_19851 user_id=u_j0m3 provider=stripe error=ProviderT…","detail":"1× from 2026-04-12 21:20:52 to 2026-04-12 21:20:52","ts":"2026-04-12 21:20:52"}],"timeRange":"2026-04-12 21:00:01 → 2026-04-12 22:58:11","durationLabel":"1h 58m","errorCount":7,"errorRate":13.21,"bucketSize":"5m","sourceCount":0,"accessExtras":null,"sourceFile":"input.log","sizeBytes":6529,"format":"error-log","eventCount":53};</script>
+<div class="ops-shell">
+
+<!-- Command Bar -->
+<header class="command-bar" id="commandBar">
+  <div class="command-bar-top">
+    <div>
+      <div class="command-bar-title">Orders service error log — payment incident</div>
+      <div class="command-bar-meta" id="barMeta">Loading…</div>
+    </div>
+    <div class="command-bar-actions">
+      <div class="search-box">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="globalSearch" placeholder="Search events…" autocomplete="off" spellcheck="false">
       </div>
-    </header>
+      <button class="btn btn-primary" id="copyMdBtn">Copy as Markdown</button>
+    </div>
+  </div>
+  <div class="filter-strip" id="filterStrip">
+    <span style="font-size:0.72rem;color:var(--fg-muted);font-weight:600;">Severity:</span>
+  </div>
+</header>
 
-    <section class="kpi-row" aria-label="Stream summary">
-      <div class="kpi"><div class="label">Events</div><div class="value mono" id="kpi-events">0</div><div class="sub" id="kpi-events-sub"></div></div>
-      <div class="kpi"><div class="label">Error rate</div><div class="value mono accent" id="kpi-errrate">0%</div><div class="sub" id="kpi-errrate-sub"></div></div>
-      <div class="kpi"><div class="label">Window</div><div class="value mono" id="kpi-window">—</div><div class="sub" id="kpi-window-sub"></div></div>
-      <div class="kpi"><div class="label">Sources</div><div class="value mono" id="kpi-sources">0</div><div class="sub" id="kpi-sources-sub"></div></div>
-    </section>
+<!-- Main -->
+<main class="ops-main">
 
-    <section class="section" aria-labelledby="head-volume">
-      <div class="section-head">
-        <h2 id="head-volume">Volume over time</h2>
-        <span class="meta" id="hist-meta"></span>
+  <!-- Incident banner -->
+  <div class="incident-banner" id="incidentBanner"></div>
+
+  <!-- KPI Rail -->
+  <div class="kpi-rail" id="kpiRail"></div>
+
+  <!-- Work Surface: histogram + severity -->
+  <div class="work-surface">
+    <div class="panel" id="histPanel">
+      <div class="panel-header">
+        <span class="panel-title">Volume over time</span>
+        <span class="panel-badge" id="bucketBadge">5m buckets</span>
       </div>
-      <div class="card hist-card">
-        <svg class="hist-svg" id="hist-svg" viewBox="0 0 800 220" preserveAspectRatio="none" aria-label="Event volume over time, stacked by severity"></svg>
-        <div class="hist-legend">
-          <span><i style="background:var(--secondary-container)"></i>info / debug</span>
-          <span><i style="background:var(--yellow)"></i>warn</span>
-          <span><i style="background:var(--red)"></i>error</span>
-          <span style="margin-left:auto" class="muted">Click a bar to filter the event table to that bucket.</span>
-        </div>
-        <div class="burst-pins" id="burst-pins"></div>
+      <div class="histogram-wrap" id="histWrap"></div>
+      <div class="error-sparkline">
+        <div class="sparkline-label">Error-only timeline</div>
+        <div id="sparkWrap"></div>
       </div>
-    </section>
-
-    <section class="section" id="schema-section" hidden aria-labelledby="head-schema">
-      <div class="section-head">
-        <h2 id="head-schema">Schema</h2>
-        <span class="meta" id="schema-meta"></span>
+    </div>
+    <div class="panel" id="sevPanel">
+      <div class="panel-header">
+        <span class="panel-title">Severity / Levels</span>
       </div>
-      <div class="schema-list" id="schema-list"></div>
-    </section>
-
-    <section class="section">
-      <div class="grid-2">
-        <div>
-          <div class="section-head"><h2>Severity</h2><span class="meta" id="sev-meta"></span></div>
-          <div class="card">
-            <div class="chips" id="sev-chips"></div>
-          </div>
+      <div class="severity-rows" id="severityRows"></div>
+      <div style="margin-top:var(--space-lg);">
+        <div class="panel-header" style="margin-bottom:var(--space-md);">
+          <span class="panel-title" style="font-size:0.82rem;">Categories</span>
         </div>
-        <div id="categories-card-wrapper" hidden>
-          <div class="section-head"><h2 id="head-categories">Categories</h2><span class="meta" id="cat-meta"></span></div>
-          <div class="card"><div class="chips" id="cat-chips"></div></div>
-        </div>
-        <div id="status-donut-wrapper" hidden>
-          <div class="section-head"><h2>Status classes</h2><span class="meta">HTTP response code distribution</span></div>
-          <div class="card">
-            <div class="donut-row">
-              <svg class="donut-svg" id="donut-svg" width="180" height="180" viewBox="0 0 180 180" aria-label="HTTP status class distribution"></svg>
-              <div class="donut-legend" id="donut-legend"></div>
-            </div>
-          </div>
-        </div>
+        <div id="categoryRows"></div>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <section class="section">
-      <div class="grid-2">
-        <div>
-          <div class="section-head"><h2 id="head-top-msgs">Top messages</h2><span class="meta">Leaderboard</span></div>
-          <div class="card"><div class="leader" id="top-msgs"></div></div>
+  <!-- Outliers -->
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-title">Outliers / Anomalies</span>
+      <span class="panel-badge" id="outlierBadge">0 flagged</span>
+    </div>
+    <div class="outlier-grid" id="outlierGrid"></div>
+  </div>
+
+  <!-- Top leaderboard -->
+  <div style="display:grid;grid-template-columns:1fr;gap:var(--space-xl);">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-xl);">
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Top Messages — Leaderboard</span>
+          <span class="panel-badge" id="topMsgBadge">0</span>
         </div>
-        <div>
-          <div class="section-head"><h2 id="head-top-src">Top sources</h2><span class="meta">Leaderboard</span></div>
-          <div class="card"><div class="leader" id="top-src"></div></div>
-        </div>
+        <div class="top-rows" id="topMsgRows"></div>
       </div>
-    </section>
-
-    <section class="section" id="endpoints-section" hidden aria-labelledby="head-endpoints">
-      <div class="section-head"><h2 id="head-endpoints">Top endpoints</h2><span class="meta">Path leaderboard with error-rate flags</span></div>
-      <div class="card"><div class="leader" id="top-endpoints"></div></div>
-    </section>
-
-    <section class="section" aria-labelledby="head-outliers">
-      <div class="section-head">
-        <h2 id="head-outliers">Outliers &amp; anomalies</h2>
-        <span class="meta" id="outliers-meta"></span>
-      </div>
-      <div class="outliers-grid" id="outliers-grid"></div>
-    </section>
-
-    <section class="section" id="drill-section" aria-labelledby="head-drill">
-      <details class="drill" id="drill">
-        <summary>
-          <span><span id="drill-summary-text">Browse all events</span></span>
-          <span class="meta" id="drill-summary-count"></span>
-        </summary>
-        <div class="drill-body">
-          <div class="drill-toolbar">
-            <input class="drill-search" type="search" placeholder="Search messages and sources…" id="drill-search">
-            <span class="drill-meta" id="drill-meta">0 / 0 shown</span>
-          </div>
-          <div class="tbl-wrap" id="tbl-wrap">
-            <table class="events">
-              <thead id="tbl-head"></thead>
-              <tbody id="tbl-body"></tbody>
-            </table>
-            <div class="tbl-loadmore" id="tbl-loadmore" hidden><button id="tbl-loadmore-btn">Load 200 more</button></div>
-          </div>
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Top Errors</span>
+          <span class="panel-badge" id="topErrBadge">0</span>
         </div>
-      </details>
-    </section>
+        <div id="topErrRows"></div>
+      </div>
+    </div>
+  </div>
 
-    <footer>
-      <p class="privacy">Generated locally — your event stream never left your machine. The full log is embedded in this HTML and rendered in your browser. For sharing, prefer an anonymized export.</p>
-      <p style="margin-top:var(--space-md)">
-        <span class="mono" id="footer-meta"></span>
-      </p>
-    </footer>
-  </main>
+  <!-- Flag Queue -->
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-title">Flag Queue — Attention Required</span>
+      <span class="panel-badge" id="flagBadge">0 flags</span>
+    </div>
+    <div class="flag-queue" id="flagQueue"></div>
+  </div>
 
-  <script>
-    const DATA = {"events":[{"id":"e_000001","ts":"2026-04-12 21:00:01","date":"2026-04-12","time":"21:00:01","tsEpoch":1776027601412,"severity":"info","category":null,"source":null,"message":"] [orders.svc] Server started — listening on :8080 (worker pid=4218, version=1.42.0)","raw":"[2026-04-12 14:00:01.412] [INFO ] [orders.svc] Server started — listening on :8080 (worker pid=4218, version=1.42.0)"},{"id":"e_000002","ts":"2026-04-12 21:00:08","date":"2026-04-12","time":"21:00:08","tsEpoch":1776027608118,"severity":"info","category":null,"source":null,"message":"] [orders.svc] DB pool initialized — pool=postgres host=db-primary-01 size=20","raw":"[2026-04-12 14:00:08.118] [INFO ] [orders.svc] DB pool initialized — pool=postgres host=db-primary-01 size=20"},{"id":"e_000003","ts":"2026-04-12 21:00:09","date":"2026-04-12","time":"21:00:09","tsEpoch":1776027609221,"severity":"info","category":null,"source":null,"message":"] [orders.svc] Cache warm-up complete — keys=4218 size=12.4MB","raw":"[2026-04-12 14:00:09.221] [INFO ] [orders.svc] Cache warm-up complete — keys=4218 size=12.4MB"},{"id":"e_000004","ts":"2026-04-12 21:00:14","date":"2026-04-12","time":"21:00:14","tsEpoch":1776027614557,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_a1c4 order_id=o_19842 amount=47.50 → 201","raw":"[2026-04-12 14:00:14.557] [INFO ] [orders.api] POST /orders user_id=u_a1c4 order_id=o_19842 amount=47.50 → 201"},{"id":"e_000005","ts":"2026-04-12 21:01:42","date":"2026-04-12","time":"21:01:42","tsEpoch":1776027702224,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_b2d5 order_id=o_19843 amount=129.00 → 201","raw":"[2026-04-12 14:01:42.224] [INFO ] [orders.api] POST /orders user_id=u_b2d5 order_id=o_19843 amount=129.00 → 201"},{"id":"e_000006","ts":"2026-04-12 21:02:11","date":"2026-04-12","time":"21:02:11","tsEpoch":1776027731998,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_c3e6 order_id=o_19844 amount=18.75 → 201","raw":"[2026-04-12 14:02:11.998] [INFO ] [orders.api] POST /orders user_id=u_c3e6 order_id=o_19844 amount=18.75 → 201"},{"id":"e_000007","ts":"2026-04-12 21:04:17","date":"2026-04-12","time":"21:04:17","tsEpoch":1776027857404,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_d4f7 order_id=o_19845 amount=62.40 → 201","raw":"[2026-04-12 14:04:17.404] [INFO ] [orders.api] POST /orders user_id=u_d4f7 order_id=o_19845 amount=62.40 → 201"},{"id":"e_000008","ts":"2026-04-12 21:06:22","date":"2026-04-12","time":"21:06:22","tsEpoch":1776027982557,"severity":"warn","category":null,"source":null,"message":"] [orders.svc] Slow DB query — query=order_history user_id=u_e5g8 duration_ms=1842 threshold_ms=500","raw":"[2026-04-12 14:06:22.557] [WARN ] [orders.svc] Slow DB query — query=order_history user_id=u_e5g8 duration_ms=1842 threshold_ms=500"},{"id":"e_000009","ts":"2026-04-12 21:06:22","date":"2026-04-12","time":"21:06:22","tsEpoch":1776027982881,"severity":"info","category":null,"source":null,"message":"] [orders.api] GET /orders/u_e5g8 → 200 (1842ms)","raw":"[2026-04-12 14:06:22.881] [INFO ] [orders.api] GET /orders/u_e5g8 → 200 (1842ms)"},{"id":"e_000010","ts":"2026-04-12 21:11:55","date":"2026-04-12","time":"21:11:55","tsEpoch":1776028315412,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_f6h9 order_id=o_19847 amount=34.50 → 201","raw":"[2026-04-12 14:11:55.412] [INFO ] [orders.api] POST /orders user_id=u_f6h9 order_id=o_19847 amount=34.50 → 201"},{"id":"e_000011","ts":"2026-04-12 21:13:14","date":"2026-04-12","time":"21:13:14","tsEpoch":1776028394118,"severity":"warn","category":null,"source":null,"message":"] [cache] Cache miss spike — keys_missed=412 window=60s threshold=100","raw":"[2026-04-12 14:13:14.118] [WARN ] [cache] Cache miss spike — keys_missed=412 window=60s threshold=100"},{"id":"e_000012","ts":"2026-04-12 21:14:07","date":"2026-04-12","time":"21:14:07","tsEpoch":1776028447402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_g7j0 order_id=o_19848 amount=89.20 → 201","raw":"[2026-04-12 14:14:07.402] [INFO ] [orders.api] POST /orders user_id=u_g7j0 order_id=o_19848 amount=89.20 → 201"},{"id":"e_000013","ts":"2026-04-12 21:17:42","date":"2026-04-12","time":"21:17:42","tsEpoch":1776028662402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19849 amount=12.99 → 201","raw":"[2026-04-12 14:17:42.402] [INFO ] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19849 amount=12.99 → 201"},{"id":"e_000014","ts":"2026-04-12 21:19:11","date":"2026-04-12","time":"21:19:11","tsEpoch":1776028751118,"severity":"info","category":null,"source":null,"message":"] [auth] User login user_id=u_i9l2 method=oauth provider=google","raw":"[2026-04-12 14:19:11.118] [INFO ] [auth] User login user_id=u_i9l2 method=oauth provider=google"},{"id":"e_000015","ts":"2026-04-12 21:20:08","date":"2026-04-12","time":"21:20:08","tsEpoch":1776028808402,"severity":"warn","category":null,"source":null,"message":"] [payments] Stripe API slow — endpoint=/v1/charges duration_ms=5402 threshold_ms=3000","raw":"[2026-04-12 14:20:08.402] [WARN ] [payments] Stripe API slow — endpoint=/v1/charges duration_ms=5402 threshold_ms=3000"},{"id":"e_000016","ts":"2026-04-12 21:20:13","date":"2026-04-12","time":"21:20:13","tsEpoch":1776028813998,"severity":"error","category":"payments","source":null,"message":"Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderTimeoutError reason=\"Stripe API request exceeded 10s timeout\" stack=stripe_client.charge:142>http_client.post:88>http_client._send:124","raw":"[2026-04-12 14:20:13.998] [ERROR] [payments] Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderTimeoutError reason=\"Stripe API request exceeded 10s timeout\" stack=stripe_client.charge:142>http_client.post:88>http_client._send:124"},{"id":"e_000017","ts":"2026-04-12 21:20:34","date":"2026-04-12","time":"21:20:34","tsEpoch":1776028834412,"severity":"error","category":"payments","source":null,"message":"Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderTimeoutError reason=\"Stripe API request exceeded 10s timeout\" retry=1","raw":"[2026-04-12 14:20:34.412] [ERROR] [payments] Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderTimeoutError reason=\"Stripe API request exceeded 10s timeout\" retry=1"},{"id":"e_000018","ts":"2026-04-12 21:20:52","date":"2026-04-12","time":"21:20:52","tsEpoch":1776028852798,"severity":"error","category":"payments","source":null,"message":"Payment failed — order_id=o_19851 user_id=u_j0m3 provider=stripe error=ProviderTimeoutError reason=\"Stripe API request exceeded 10s timeout\"","raw":"[2026-04-12 14:20:52.798] [ERROR] [payments] Payment failed — order_id=o_19851 user_id=u_j0m3 provider=stripe error=ProviderTimeoutError reason=\"Stripe API request exceeded 10s timeout\""},{"id":"e_000019","ts":"2026-04-12 21:21:18","date":"2026-04-12","time":"21:21:18","tsEpoch":1776028878802,"severity":"error","category":"payments","source":null,"message":"Payment failed — order_id=o_19852 user_id=u_b2d5 provider=stripe error=ProviderTimeoutError reason=\"Stripe API request exceeded 10s timeout\"","raw":"[2026-04-12 14:21:18.802] [ERROR] [payments] Payment failed — order_id=o_19852 user_id=u_b2d5 provider=stripe error=ProviderTimeoutError reason=\"Stripe API request exceeded 10s timeout\""},{"id":"e_000020","ts":"2026-04-12 21:21:42","date":"2026-04-12","time":"21:21:42","tsEpoch":1776028902018,"severity":"warn","category":null,"source":null,"message":"] [payments] Circuit breaker opened — provider=stripe threshold=5/30s open_until=2026-04-12T14:23:42Z","raw":"[2026-04-12 14:21:42.018] [WARN ] [payments] Circuit breaker opened — provider=stripe threshold=5/30s open_until=2026-04-12T14:23:42Z"},{"id":"e_000021","ts":"2026-04-12 21:22:11","date":"2026-04-12","time":"21:22:11","tsEpoch":1776028931612,"severity":"error","category":"payments","source":null,"message":"Payment failed — order_id=o_19853 user_id=u_c3e6 provider=stripe error=CircuitOpenError reason=\"Circuit breaker open for stripe — fast-failing\"","raw":"[2026-04-12 14:22:11.612] [ERROR] [payments] Payment failed — order_id=o_19853 user_id=u_c3e6 provider=stripe error=CircuitOpenError reason=\"Circuit breaker open for stripe — fast-failing\""},{"id":"e_000022","ts":"2026-04-12 21:22:42","date":"2026-04-12","time":"21:22:42","tsEpoch":1776028962302,"severity":"error","category":"payments","source":null,"message":"Payment failed — order_id=o_19854 user_id=u_d4f7 provider=stripe error=CircuitOpenError reason=\"Circuit breaker open for stripe — fast-failing\"","raw":"[2026-04-12 14:22:42.302] [ERROR] [payments] Payment failed — order_id=o_19854 user_id=u_d4f7 provider=stripe error=CircuitOpenError reason=\"Circuit breaker open for stripe — fast-failing\""},{"id":"e_000023","ts":"2026-04-12 21:23:14","date":"2026-04-12","time":"21:23:14","tsEpoch":1776028994612,"severity":"error","category":"payments","source":null,"message":"Payment failed — order_id=o_19855 user_id=u_e5g8 provider=stripe error=CircuitOpenError reason=\"Circuit breaker open for stripe — fast-failing\"","raw":"[2026-04-12 14:23:14.612] [ERROR] [payments] Payment failed — order_id=o_19855 user_id=u_e5g8 provider=stripe error=CircuitOpenError reason=\"Circuit breaker open for stripe — fast-failing\""},{"id":"e_000024","ts":"2026-04-12 21:23:42","date":"2026-04-12","time":"21:23:42","tsEpoch":1776029022118,"severity":"info","category":null,"source":null,"message":"] [payments] Circuit breaker half-open — provider=stripe probing","raw":"[2026-04-12 14:23:42.118] [INFO ] [payments] Circuit breaker half-open — provider=stripe probing"},{"id":"e_000025","ts":"2026-04-12 21:24:03","date":"2026-04-12","time":"21:24:03","tsEpoch":1776029043118,"severity":"info","category":null,"source":null,"message":"] [payments] Payment succeeded — order_id=o_19856 user_id=u_f6h9 provider=stripe duration_ms=716","raw":"[2026-04-12 14:24:03.118] [INFO ] [payments] Payment succeeded — order_id=o_19856 user_id=u_f6h9 provider=stripe duration_ms=716"},{"id":"e_000026","ts":"2026-04-12 21:24:03","date":"2026-04-12","time":"21:24:03","tsEpoch":1776029043502,"severity":"info","category":null,"source":null,"message":"] [payments] Circuit breaker closed — provider=stripe (probe succeeded)","raw":"[2026-04-12 14:24:03.502] [INFO ] [payments] Circuit breaker closed — provider=stripe (probe succeeded)"},{"id":"e_000027","ts":"2026-04-12 21:25:42","date":"2026-04-12","time":"21:25:42","tsEpoch":1776029142812,"severity":"info","category":null,"source":null,"message":"] [payments] Payment succeeded — order_id=o_19850 user_id=u_i9l2 provider=stripe duration_ms=694 retry=2","raw":"[2026-04-12 14:25:42.812] [INFO ] [payments] Payment succeeded — order_id=o_19850 user_id=u_i9l2 provider=stripe duration_ms=694 retry=2"},{"id":"e_000028","ts":"2026-04-12 21:27:11","date":"2026-04-12","time":"21:27:11","tsEpoch":1776029231402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_g7j0 order_id=o_19857 amount=156.00 → 201","raw":"[2026-04-12 14:27:11.402] [INFO ] [orders.api] POST /orders user_id=u_g7j0 order_id=o_19857 amount=156.00 → 201"},{"id":"e_000029","ts":"2026-04-12 21:29:42","date":"2026-04-12","time":"21:29:42","tsEpoch":1776029382118,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /refunds user_id=u_b2d5 order_id=o_19852 amount=78.50 reason=payment_failed_at_checkout → 201","raw":"[2026-04-12 14:29:42.118] [INFO ] [orders.api] POST /refunds user_id=u_b2d5 order_id=o_19852 amount=78.50 reason=payment_failed_at_checkout → 201"},{"id":"e_000030","ts":"2026-04-12 21:29:42","date":"2026-04-12","time":"21:29:42","tsEpoch":1776029382802,"severity":"info","category":null,"source":null,"message":"] [payments] Refund processed — order_id=o_19852 user_id=u_b2d5 amount=78.50 duration_ms=684","raw":"[2026-04-12 14:29:42.802] [INFO ] [payments] Refund processed — order_id=o_19852 user_id=u_b2d5 amount=78.50 duration_ms=684"},{"id":"e_000031","ts":"2026-04-12 21:31:11","date":"2026-04-12","time":"21:31:11","tsEpoch":1776029471402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19858 amount=29.50 → 201","raw":"[2026-04-12 14:31:11.402] [INFO ] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19858 amount=29.50 → 201"},{"id":"e_000032","ts":"2026-04-12 21:33:42","date":"2026-04-12","time":"21:33:42","tsEpoch":1776029622118,"severity":"info","category":null,"source":null,"message":"] [auth] User logout user_id=u_b2d5","raw":"[2026-04-12 14:33:42.118] [INFO ] [auth] User logout user_id=u_b2d5"},{"id":"e_000033","ts":"2026-04-12 21:35:11","date":"2026-04-12","time":"21:35:11","tsEpoch":1776029711402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_j0m3 order_id=o_19859 amount=54.20 → 201","raw":"[2026-04-12 14:35:11.402] [INFO ] [orders.api] POST /orders user_id=u_j0m3 order_id=o_19859 amount=54.20 → 201"},{"id":"e_000034","ts":"2026-04-12 21:37:42","date":"2026-04-12","time":"21:37:42","tsEpoch":1776029862118,"severity":"info","category":null,"source":null,"message":"] [auth] User login user_id=u_k1n4 method=oauth provider=google","raw":"[2026-04-12 14:37:42.118] [INFO ] [auth] User login user_id=u_k1n4 method=oauth provider=google"},{"id":"e_000035","ts":"2026-04-12 21:38:42","date":"2026-04-12","time":"21:38:42","tsEpoch":1776029922402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_k1n4 order_id=o_19860 amount=104.50 → 201","raw":"[2026-04-12 14:38:42.402] [INFO ] [orders.api] POST /orders user_id=u_k1n4 order_id=o_19860 amount=104.50 → 201"},{"id":"e_000036","ts":"2026-04-12 21:42:11","date":"2026-04-12","time":"21:42:11","tsEpoch":1776030131402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_a1c4 order_id=o_19861 amount=17.50 → 201","raw":"[2026-04-12 14:42:11.402] [INFO ] [orders.api] POST /orders user_id=u_a1c4 order_id=o_19861 amount=17.50 → 201"},{"id":"e_000037","ts":"2026-04-12 21:42:42","date":"2026-04-12","time":"21:42:42","tsEpoch":1776030162118,"severity":"warn","category":null,"source":null,"message":"] [orders.svc] Slow DB query — query=user_history user_id=u_a1c4 duration_ms=1218 threshold_ms=500","raw":"[2026-04-12 14:42:42.118] [WARN ] [orders.svc] Slow DB query — query=user_history user_id=u_a1c4 duration_ms=1218 threshold_ms=500"},{"id":"e_000038","ts":"2026-04-12 21:48:11","date":"2026-04-12","time":"21:48:11","tsEpoch":1776030491402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_e5g8 order_id=o_19862 amount=67.80 → 201","raw":"[2026-04-12 14:48:11.402] [INFO ] [orders.api] POST /orders user_id=u_e5g8 order_id=o_19862 amount=67.80 → 201"},{"id":"e_000039","ts":"2026-04-12 21:52:11","date":"2026-04-12","time":"21:52:11","tsEpoch":1776030731402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_f6h9 order_id=o_19863 amount=42.10 → 201","raw":"[2026-04-12 14:52:11.402] [INFO ] [orders.api] POST /orders user_id=u_f6h9 order_id=o_19863 amount=42.10 → 201"},{"id":"e_000040","ts":"2026-04-12 21:55:42","date":"2026-04-12","time":"21:55:42","tsEpoch":1776030942118,"severity":"info","category":null,"source":null,"message":"] [auth] User logout user_id=u_g7j0","raw":"[2026-04-12 14:55:42.118] [INFO ] [auth] User logout user_id=u_g7j0"},{"id":"e_000041","ts":"2026-04-12 21:58:11","date":"2026-04-12","time":"21:58:11","tsEpoch":1776031091402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19864 amount=89.20 → 201","raw":"[2026-04-12 14:58:11.402] [INFO ] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19864 amount=89.20 → 201"},{"id":"e_000042","ts":"2026-04-12 22:02:42","date":"2026-04-12","time":"22:02:42","tsEpoch":1776031362118,"severity":"info","category":null,"source":null,"message":"] [health] Server health check — status=healthy uptime_s=3759 db_pool=18/20 cache_hit_rate=0.94","raw":"[2026-04-12 15:02:42.118] [INFO ] [health] Server health check — status=healthy uptime_s=3759 db_pool=18/20 cache_hit_rate=0.94"},{"id":"e_000043","ts":"2026-04-12 22:08:11","date":"2026-04-12","time":"22:08:11","tsEpoch":1776031691402,"severity":"warn","category":null,"source":null,"message":"] [cache] Cache eviction triggered — keys_evicted=842 free_mb=128","raw":"[2026-04-12 15:08:11.402] [WARN ] [cache] Cache eviction triggered — keys_evicted=842 free_mb=128"},{"id":"e_000044","ts":"2026-04-12 22:14:42","date":"2026-04-12","time":"22:14:42","tsEpoch":1776032082118,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_a1c4 order_id=o_19865 amount=24.99 → 201","raw":"[2026-04-12 15:14:42.118] [INFO ] [orders.api] POST /orders user_id=u_a1c4 order_id=o_19865 amount=24.99 → 201"},{"id":"e_000045","ts":"2026-04-12 22:18:11","date":"2026-04-12","time":"22:18:11","tsEpoch":1776032291402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_d4f7 order_id=o_19866 amount=132.00 → 201","raw":"[2026-04-12 15:18:11.402] [INFO ] [orders.api] POST /orders user_id=u_d4f7 order_id=o_19866 amount=132.00 → 201"},{"id":"e_000046","ts":"2026-04-12 22:22:42","date":"2026-04-12","time":"22:22:42","tsEpoch":1776032562118,"severity":"info","category":null,"source":null,"message":"] [auth] User login user_id=u_l2o5 method=password","raw":"[2026-04-12 15:22:42.118] [INFO ] [auth] User login user_id=u_l2o5 method=password"},{"id":"e_000047","ts":"2026-04-12 22:24:11","date":"2026-04-12","time":"22:24:11","tsEpoch":1776032651402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_l2o5 order_id=o_19867 amount=58.40 → 201","raw":"[2026-04-12 15:24:11.402] [INFO ] [orders.api] POST /orders user_id=u_l2o5 order_id=o_19867 amount=58.40 → 201"},{"id":"e_000048","ts":"2026-04-12 22:31:42","date":"2026-04-12","time":"22:31:42","tsEpoch":1776033102118,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_c3e6 order_id=o_19868 amount=41.20 → 201","raw":"[2026-04-12 15:31:42.118] [INFO ] [orders.api] POST /orders user_id=u_c3e6 order_id=o_19868 amount=41.20 → 201"},{"id":"e_000049","ts":"2026-04-12 22:34:11","date":"2026-04-12","time":"22:34:11","tsEpoch":1776033251402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_g7j0 order_id=o_19869 amount=88.50 → 201","raw":"[2026-04-12 15:34:11.402] [INFO ] [orders.api] POST /orders user_id=u_g7j0 order_id=o_19869 amount=88.50 → 201"},{"id":"e_000050","ts":"2026-04-12 22:42:42","date":"2026-04-12","time":"22:42:42","tsEpoch":1776033762118,"severity":"info","category":null,"source":null,"message":"] [auth] User logout user_id=u_a1c4","raw":"[2026-04-12 15:42:42.118] [INFO ] [auth] User logout user_id=u_a1c4"},{"id":"e_000051","ts":"2026-04-12 22:48:11","date":"2026-04-12","time":"22:48:11","tsEpoch":1776034091402,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19870 amount=29.50 → 201","raw":"[2026-04-12 15:48:11.402] [INFO ] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19870 amount=29.50 → 201"},{"id":"e_000052","ts":"2026-04-12 22:52:42","date":"2026-04-12","time":"22:52:42","tsEpoch":1776034362118,"severity":"info","category":null,"source":null,"message":"] [orders.api] POST /orders user_id=u_e5g8 order_id=o_19871 amount=67.80 → 201","raw":"[2026-04-12 15:52:42.118] [INFO ] [orders.api] POST /orders user_id=u_e5g8 order_id=o_19871 amount=67.80 → 201"},{"id":"e_000053","ts":"2026-04-12 22:58:11","date":"2026-04-12","time":"22:58:11","tsEpoch":1776034691402,"severity":"info","category":null,"source":null,"message":"] [health] Server health check — status=healthy uptime_s=7090 db_pool=14/20 cache_hit_rate=0.96","raw":"[2026-04-12 15:58:11.402] [INFO ] [health] Server health check — status=healthy uptime_s=7090 db_pool=14/20 cache_hit_rate=0.96"}],"timeBuckets":[{"bucket":"2026-04-12T21:00","label":"21:00","count":7,"errorCount":0},{"bucket":"2026-04-12T21:05","label":"21:05","count":2,"errorCount":0},{"bucket":"2026-04-12T21:10","label":"21:10","count":3,"errorCount":0},{"bucket":"2026-04-12T21:15","label":"21:15","count":2,"errorCount":0},{"bucket":"2026-04-12T21:20","label":"21:20","count":12,"errorCount":7},{"bucket":"2026-04-12T21:25","label":"21:25","count":4,"errorCount":0},{"bucket":"2026-04-12T21:30","label":"21:30","count":2,"errorCount":0},{"bucket":"2026-04-12T21:35","label":"21:35","count":3,"errorCount":0},{"bucket":"2026-04-12T21:40","label":"21:40","count":2,"errorCount":0},{"bucket":"2026-04-12T21:45","label":"21:45","count":1,"errorCount":0},{"bucket":"2026-04-12T21:50","label":"21:50","count":1,"errorCount":0},{"bucket":"2026-04-12T21:55","label":"21:55","count":2,"errorCount":0},{"bucket":"2026-04-12T22:00","label":"22:00","count":1,"errorCount":0},{"bucket":"2026-04-12T22:05","label":"22:05","count":1,"errorCount":0},{"bucket":"2026-04-12T22:10","label":"22:10","count":1,"errorCount":0},{"bucket":"2026-04-12T22:15","label":"22:15","count":1,"errorCount":0},{"bucket":"2026-04-12T22:20","label":"22:20","count":2,"errorCount":0},{"bucket":"2026-04-12T22:25","label":"22:25","count":0,"errorCount":0},{"bucket":"2026-04-12T22:30","label":"22:30","count":2,"errorCount":0},{"bucket":"2026-04-12T22:35","label":"22:35","count":0,"errorCount":0},{"bucket":"2026-04-12T22:40","label":"22:40","count":1,"errorCount":0},{"bucket":"2026-04-12T22:45","label":"22:45","count":1,"errorCount":0},{"bucket":"2026-04-12T22:50","label":"22:50","count":1,"errorCount":0},{"bucket":"2026-04-12T22:55","label":"22:55","count":1,"errorCount":0},{"bucket":"2026-04-12T23:00","label":"23:00","count":0,"errorCount":0}],"severityCounts":{"error":7,"warn":6,"info":40,"debug":0,"trace":0,"other":0},"categoryCounts":[{"category":"payments","count":7,"share":13.2}],"topMessages":[{"message":"] [orders.svc] Server started — listening on :<num> (worker pid=<num>, version=1.42.0)","count":1,"share":1.9},{"message":"] [orders.svc] DB pool initialized — pool=postgres host=db-primary-01 size=20","count":1,"share":1.9},{"message":"] [orders.svc] Cache warm-up complete — keys=<num> size=12.4MB","count":1,"share":1.9},{"message":"] [orders.api] POST /orders user_id=u_a1c4 order_id=o_19842 amount=47.50 → 201","count":1,"share":1.9},{"message":"] [orders.api] POST /orders user_id=u_b2d5 order_id=o_19843 amount=129.00 → 201","count":1,"share":1.9},{"message":"] [orders.api] POST /orders user_id=u_c3e6 order_id=o_19844 amount=18.75 → 201","count":1,"share":1.9},{"message":"] [orders.api] POST /orders user_id=u_d4f7 order_id=o_19845 amount=62.40 → 201","count":1,"share":1.9},{"message":"] [orders.svc] Slow DB query — query=order_history user_id=u_e5g8 duration_ms=<num> threshold_ms=500","count":1,"share":1.9},{"message":"] [orders.api] GET /orders/u_e5g8 → 200 (1842ms)","count":1,"share":1.9},{"message":"] [orders.api] POST /orders user_id=u_f6h9 order_id=o_19847 amount=34.50 → 201","count":1,"share":1.9},{"message":"] [cache] Cache miss spike — keys_missed=412 window=60s threshold=100","count":1,"share":1.9},{"message":"] [orders.api] POST /orders user_id=u_g7j0 order_id=o_19848 amount=89.20 → 201","count":1,"share":1.9},{"message":"] [orders.api] POST /orders user_id=u_h8k1 order_id=o_19849 amount=12.99 → 201","count":1,"share":1.9},{"message":"] [auth] User login user_id=u_i9l2 method=oauth provider=google","count":1,"share":1.9},{"message":"] [payments] Stripe API slow — endpoint=/v1/charges duration_ms=<num> threshold_ms=<num>","count":1,"share":1.9},{"message":"Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderTimeoutError reason=\"<str>\" stack=stripe_client.charge:142>http_client.post:88>http_client._send:124","count":1,"share":1.9},{"message":"Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderTimeoutError reason=\"<str>\" retry=1","count":1,"share":1.9},{"message":"Payment failed — order_id=o_19851 user_id=u_j0m3 provider=stripe error=ProviderTimeoutError reason=\"<str>\"","count":1,"share":1.9},{"message":"Payment failed — order_id=o_19852 user_id=u_b2d5 provider=stripe error=ProviderTimeoutError reason=\"<str>\"","count":1,"share":1.9},{"message":"] [payments] Circuit breaker opened — provider=stripe threshold=5/30s open_until=<num>-04-12T14:23:42Z","count":1,"share":1.9},{"message":"Payment failed — order_id=o_19853 user_id=u_c3e6 provider=stripe error=CircuitOpenError reason=\"<str>\"","count":1,"share":1.9},{"message":"Payment failed — order_id=o_19854 user_id=u_d4f7 provider=stripe error=CircuitOpenError reason=\"<str>\"","count":1,"share":1.9},{"message":"Payment failed — order_id=o_19855 user_id=u_e5g8 provider=stripe error=CircuitOpenError reason=\"<str>\"","count":1,"share":1.9},{"message":"] [payments] Circuit breaker half-open — provider=stripe probing","count":1,"share":1.9},{"message":"] [payments] Payment succeeded — order_id=o_19856 user_id=u_f6h9 provider=stripe duration_ms=716","count":1,"share":1.9}],"topSources":[],"topErrors":[{"message":"Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderTimeoutError reason=\"<str>\" stack=stripe_client.charge:142>http_client.post:88>http_client._send:124","count":1,"firstTs":"2026-04-12 21:20:13","lastTs":"2026-04-12 21:20:13"},{"message":"Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderTimeoutError reason=\"<str>\" retry=1","count":1,"firstTs":"2026-04-12 21:20:34","lastTs":"2026-04-12 21:20:34"},{"message":"Payment failed — order_id=o_19851 user_id=u_j0m3 provider=stripe error=ProviderTimeoutError reason=\"<str>\"","count":1,"firstTs":"2026-04-12 21:20:52","lastTs":"2026-04-12 21:20:52"},{"message":"Payment failed — order_id=o_19852 user_id=u_b2d5 provider=stripe error=ProviderTimeoutError reason=\"<str>\"","count":1,"firstTs":"2026-04-12 21:21:18","lastTs":"2026-04-12 21:21:18"},{"message":"Payment failed — order_id=o_19853 user_id=u_c3e6 provider=stripe error=CircuitOpenError reason=\"<str>\"","count":1,"firstTs":"2026-04-12 21:22:11","lastTs":"2026-04-12 21:22:11"},{"message":"Payment failed — order_id=o_19854 user_id=u_d4f7 provider=stripe error=CircuitOpenError reason=\"<str>\"","count":1,"firstTs":"2026-04-12 21:22:42","lastTs":"2026-04-12 21:22:42"},{"message":"Payment failed — order_id=o_19855 user_id=u_e5g8 provider=stripe error=CircuitOpenError reason=\"<str>\"","count":1,"firstTs":"2026-04-12 21:23:14","lastTs":"2026-04-12 21:23:14"}],"outliers":[{"kind":"burst","label":"Volume spike at 21:20","detail":"12 events vs median 1","ts":"2026-04-12T21:20"},{"kind":"burst","label":"Error spike at 21:20","detail":"7 errors in one bucket","ts":"2026-04-12T21:20"},{"kind":"top-error","label":"Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderT…","detail":"1× from 2026-04-12 21:20:13 to 2026-04-12 21:20:13","ts":"2026-04-12 21:20:13"},{"kind":"top-error","label":"Payment failed — order_id=o_19850 user_id=u_i9l2 provider=stripe error=ProviderT…","detail":"1× from 2026-04-12 21:20:34 to 2026-04-12 21:20:34","ts":"2026-04-12 21:20:34"},{"kind":"top-error","label":"Payment failed — order_id=o_19851 user_id=u_j0m3 provider=stripe error=ProviderT…","detail":"1× from 2026-04-12 21:20:52 to 2026-04-12 21:20:52","ts":"2026-04-12 21:20:52"}],"timeRange":"2026-04-12 21:00:01 → 2026-04-12 22:58:11","durationLabel":"1h 58m","errorCount":7,"errorRate":13.21,"bucketSize":"5m","sourceCount":0,"accessExtras":null,"sourceFile":"input.log","sizeBytes":6529,"format":"error-log","eventCount":53};
-    const EDITORIAL = "53 application-log lines with a sharp ProviderTimeoutError + CircuitOpenError cluster between 21:20 and 21:23 UTC — Stripe payment provider degraded for ~3 minutes, the circuit opened then half-opened cleanly. INFO/WARN/ERROR mix; 13.21% error rate concentrated in one window.";
-    const HERO_TITLE = "Orders service error log — payment incident";
+  <!-- Browse all events -->
+  <div class="drill-section">
+    <button class="drill-toggle" id="drillToggle">
+      <span id="drillLabel">Browse all events</span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="drill-body" id="drillBody">
+      <div class="drill-controls" id="drillControls"></div>
+      <div class="table-wrap">
+        <table class="data-grid" id="dataGrid">
+          <thead>
+            <tr>
+              <th data-col="ts" class="sort-asc">Timestamp</th>
+              <th data-col="severity">Sev</th>
+              <th data-col="category">Category</th>
+              <th data-col="message">Message</th>
+            </tr>
+          </thead>
+          <tbody id="dataBody"></tbody>
+        </table>
+      </div>
+      <div class="pagination" id="pagination"></div>
+    </div>
+  </div>
 
-    /* ---------- helpers ---------- */
-    const $ = (sel, root) => (root || document).querySelector(sel);
-    const fmtNum = n => n == null ? "—" : (typeof n === "number" ? n.toLocaleString() : n);
-    const fmtPct = n => n == null ? "—" : (Math.round(n * 10) / 10).toFixed(1) + "%";
-    const fmtBytes = b => b == null ? "—" : (b < 1024 ? b + " B" : b < 1048576 ? (b/1024).toFixed(1) + " KB" : (b/1048576).toFixed(1) + " MB");
-    const escHtml = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-    const escAttr = s => escHtml(s);
-    const escapeRegex = s => String(s).replace(/[.*+?^$()|[\]\\{}]/g, "\\$&");
+</main>
 
-    /* ---------- header / KPI ---------- */
-    document.title = HERO_TITLE;
-    $("#hero-format").textContent = (DATA.format || "events").toUpperCase();
-    $("#hero-title").textContent = HERO_TITLE;
-    $("#hero-editorial").textContent = EDITORIAL;
-    $("#kpi-events").textContent = fmtNum(DATA.eventCount);
-    $("#kpi-events-sub").textContent = (DATA.errorCount || 0) + " errors / " + (DATA.eventCount - (DATA.errorCount || 0)) + " ok";
-    $("#kpi-errrate").textContent = fmtPct(DATA.errorRate);
-    $("#kpi-errrate-sub").textContent = (DATA.errorCount || 0) + " events flagged";
-    $("#kpi-window").textContent = DATA.durationLabel || "—";
-    $("#kpi-window-sub").textContent = DATA.timeRange || "";
-    $("#kpi-sources").textContent = fmtNum(DATA.sourceCount);
-    $("#kpi-sources-sub").textContent = "distinct " + (DATA.format === "access-log" ? "client IPs" : "sources");
-    $("#footer-meta").textContent = (DATA.sourceFile || "input") + " · " + fmtBytes(DATA.sizeBytes) + " · " + fmtNum(DATA.eventCount) + " events · bucket " + (DATA.bucketSize || "—");
+<!-- Footer -->
+<footer class="ops-footer">
+  <em>Generated locally — your event stream never left your machine. The full log is embedded in this HTML and rendered in your browser. For sharing, prefer an anonymized export.</em>
+</footer>
+</div>
 
-    /* ---------- histogram ---------- */
-    (() => {
-      const buckets = DATA.timeBuckets || [];
-      const svg = $("#hist-svg");
-      const W = 800, H = 220, PAD_L = 36, PAD_R = 12, PAD_T = 12, PAD_B = 28;
-      const n = buckets.length;
-      const max = buckets.reduce((m, b) => Math.max(m, b.count), 1);
-      const bw = (W - PAD_L - PAD_R) / Math.max(n, 1);
-      const sevFor = b => {
-        // The parser only gives us total + errorCount per bucket. Approximate
-        // warn share by global ratio so the stack is correctly proportioned
-        // visually without inventing per-bucket fidelity we don't have.
-        const totalErr = b.errorCount || 0;
-        const totalRest = b.count - totalErr;
-        const globalErr = DATA.severityCounts?.error || 0;
-        const globalWarn = DATA.severityCounts?.warn || 0;
-        const globalInfo = DATA.severityCounts?.info + (DATA.severityCounts?.debug || 0) + (DATA.severityCounts?.trace || 0) + (DATA.severityCounts?.other || 0);
-        const restTotal = globalWarn + globalInfo;
-        const warnShare = restTotal > 0 ? globalWarn / restTotal : 0;
-        const warn = Math.round(totalRest * warnShare);
-        const info = totalRest - warn;
-        return { error: totalErr, warn, info };
-      };
-      const parts = [];
-      const yScale = c => (H - PAD_T - PAD_B) * (c / max);
-      buckets.forEach((b, i) => {
-        const x = PAD_L + i * bw;
-        const w = Math.max(bw - 1.2, 0.8);
-        const sv = sevFor(b);
-        let yCursor = H - PAD_B;
-        if (sv.info > 0) {
-          const h = yScale(sv.info);
-          parts.push('<rect class="bar-info" data-bucket="' + escAttr(b.bucket) + '" x="' + x.toFixed(1) + '" y="' + (yCursor - h).toFixed(1) + '" width="' + w.toFixed(1) + '" height="' + h.toFixed(1) + '"><title>' + escHtml(b.label) + ' · ' + b.count + ' events (' + sv.info + ' info)</title></rect>');
-          yCursor -= h;
-        }
-        if (sv.warn > 0) {
-          const h = yScale(sv.warn);
-          parts.push('<rect class="bar-warn" data-bucket="' + escAttr(b.bucket) + '" x="' + x.toFixed(1) + '" y="' + (yCursor - h).toFixed(1) + '" width="' + w.toFixed(1) + '" height="' + h.toFixed(1) + '"><title>' + escHtml(b.label) + ' · ' + sv.warn + ' warn</title></rect>');
-          yCursor -= h;
-        }
-        if (sv.error > 0) {
-          const h = yScale(sv.error);
-          parts.push('<rect class="bar-error" data-bucket="' + escAttr(b.bucket) + '" x="' + x.toFixed(1) + '" y="' + (yCursor - h).toFixed(1) + '" width="' + w.toFixed(1) + '" height="' + h.toFixed(1) + '"><title>' + escHtml(b.label) + ' · ' + sv.error + ' errors</title></rect>');
-        }
-      });
-      // Y-axis labels (0 / max)
-      parts.push('<text x="' + (PAD_L - 6) + '" y="' + (H - PAD_B + 4) + '" text-anchor="end">0</text>');
-      parts.push('<text x="' + (PAD_L - 6) + '" y="' + (PAD_T + 8) + '" text-anchor="end">' + max + '</text>');
-      // X-axis: first / mid / last labels
-      const showAt = [0, Math.floor(n / 2), n - 1].filter((v, i, a) => a.indexOf(v) === i && v >= 0 && v < n);
-      showAt.forEach(i => {
-        const b = buckets[i];
-        const x = PAD_L + i * bw + bw / 2;
-        parts.push('<text x="' + x.toFixed(1) + '" y="' + (H - PAD_B + 16) + '" text-anchor="middle">' + escHtml(b.label) + '</text>');
-      });
-      // Burst pins
-      const burstSet = new Map();
-      (DATA.outliers || []).forEach(o => { if (o.kind === "burst" && o.ts) burstSet.set(o.ts, o); });
-      buckets.forEach((b, i) => {
-        if (!burstSet.has(b.bucket)) return;
-        const x = PAD_L + i * bw + bw / 2;
-        const y = PAD_T + 6;
-        parts.push('<g class="hist-pin"><circle cx="' + x.toFixed(1) + '" cy="' + y + '" r="5"><title>' + escHtml(burstSet.get(b.bucket).label + " — " + burstSet.get(b.bucket).detail) + '</title></circle></g>');
-      });
-      svg.innerHTML = parts.join("");
-      $("#hist-meta").textContent = n + " buckets · " + (DATA.bucketSize || "—") + " each";
-      // Burst pin captions
-      const captions = (DATA.outliers || []).filter(o => o.kind === "burst").map(o => "● " + o.label + " — " + o.detail);
-      $("#burst-pins").innerHTML = captions.map(c => "<div>" + escHtml(c) + "</div>").join("");
-      // Click bar → filter table
-      svg.addEventListener("click", e => {
-        const target = e.target.closest("rect");
-        if (!target) return;
-        const bucket = target.getAttribute("data-bucket");
-        if (!bucket) return;
-        bucketFilter = bucket;
-        applyFilters();
-        document.getElementById("drill").open = true;
-        document.getElementById("drill").scrollIntoView({behavior: "smooth", block: "start"});
-      });
-    })();
+<div class="tooltip" id="tooltip"></div>
 
-    /* ---------- severity chips ---------- */
-    let activeSev = "all";
-    let activeCat = "all";
-    let activeSchemaField = null;
-    let bucketFilter = null;
-    (() => {
-      const chips = $("#sev-chips");
-      const sc = DATA.severityCounts || {};
-      const order = ["error", "warn", "info", "debug", "trace"];
-      const total = Object.values(sc).reduce((a, b) => a + b, 0);
-      let html = '<button class="chip active" data-sev="all"><span class="chip-dot" style="background:var(--primary)"></span>All <span class="count">' + fmtNum(total) + '</span></button>';
-      order.forEach(k => {
-        const v = sc[k] || 0;
-        html += '<button class="chip" data-sev="' + k + '" ' + (v === 0 ? 'data-empty="true"' : '') + '><span class="chip-dot ' + k + '"></span>' + k + ' <span class="count">' + fmtNum(v) + '</span></button>';
-      });
-      chips.innerHTML = html;
-      $("#sev-meta").textContent = "Filter chips · " + Object.keys(sc).filter(k => sc[k] > 0).length + " active levels";
-      chips.addEventListener("click", e => {
-        const btn = e.target.closest("button[data-sev]");
-        if (!btn || btn.getAttribute("data-empty") === "true") return;
-        chips.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
-        btn.classList.add("active");
-        activeSev = btn.getAttribute("data-sev");
-        applyFilters();
-      });
-    })();
+<script>
+(function(){
+'use strict';
 
-    /* ---------- categories ---------- */
-    (() => {
-      const cats = DATA.categoryCounts || [];
-      if (!cats.length) return;
-      $("#categories-card-wrapper").hidden = false;
-      const chips = $("#cat-chips");
-      const total = cats.reduce((a, b) => a + (b.count || 0), 0);
-      let html = '<button class="chip active" data-cat="all">All <span class="count">' + fmtNum(total) + '</span></button>';
-      cats.slice(0, 12).forEach(c => {
-        html += '<button class="chip" data-cat="' + escAttr(c.category) + '">' + escHtml(c.category) + ' <span class="count">' + fmtNum(c.count) + '</span></button>';
-      });
-      chips.innerHTML = html;
-      $("#cat-meta").textContent = cats.length + " categories";
-      chips.addEventListener("click", e => {
-        const btn = e.target.closest("button[data-cat]");
-        if (!btn) return;
-        chips.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
-        btn.classList.add("active");
-        activeCat = btn.getAttribute("data-cat");
-        applyFilters();
-      });
-    })();
+// ─── State ───────────────────────────────────────────────────────────────────
+let filteredEvents = [];
+let activeSeverities = new Set(); // empty = show all
+let searchQuery = '';
+let sortCol = 'ts';
+let sortDir = 1; // 1 asc, -1 desc
+let currentPage = 1;
+const PAGE_SIZE = 30;
+let expandedRows = new Set();
 
-    /* ---------- schema panel (jsonl only) ---------- */
-    (() => {
-      const schema = DATA.schema || [];
-      if (!schema.length) return;
-      $("#schema-section").hidden = false;
-      $("#schema-meta").textContent = schema.length + " inferred fields · click a field to filter the table to non-null rows";
-      const list = $("#schema-list");
-      list.innerHTML = schema.map(s => {
-        const sparse = (s.fillPct || 0) < 25;
-        const examples = (s.examples || []).slice(0, 3).map(v => JSON.stringify(v)).join(", ");
-        return '<button class="schema-item" data-field="' + escAttr(s.field) + '">' +
-          '<div class="field">' + escHtml(s.field) + '</div>' +
-          '<div class="type-row"><span>' + escHtml(s.type) + '</span><span class="fill ' + (sparse ? "sparse" : "") + '">' + fmtPct(s.fillPct) + '</span></div>' +
-          '<div class="examples">' + escHtml(examples) + '</div>' +
-          '</button>';
-      }).join("");
-      list.addEventListener("click", e => {
-        const btn = e.target.closest("button[data-field]");
-        if (!btn) return;
-        const field = btn.getAttribute("data-field");
-        if (activeSchemaField === field) {
-          activeSchemaField = null;
-          btn.classList.remove("active");
-        } else {
-          list.querySelectorAll(".schema-item").forEach(c => c.classList.remove("active"));
-          btn.classList.add("active");
-          activeSchemaField = field;
-        }
-        applyFilters();
-      });
-    })();
+// ─── Init ────────────────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  buildUI();
+});
 
-    /* ---------- status donut (access-log only) ---------- */
-    (() => {
-      const ax = DATA.accessExtras;
-      if (!ax || !ax.statusClasses || !ax.statusClasses.length) return;
-      $("#status-donut-wrapper").hidden = false;
-      const colors = { "2xx": "var(--green)", "3xx": "var(--blue)", "4xx": "var(--yellow)", "5xx": "var(--red)" };
-      const total = ax.statusClasses.reduce((a, b) => a + b.count, 0);
-      let svg = '';
-      const cx = 90, cy = 90, r = 62, sw = 22;
-      let acc = 0;
-      ax.statusClasses.forEach(s => {
-        const frac = s.count / total;
-        const a0 = (acc / total) * Math.PI * 2 - Math.PI / 2;
-        acc += s.count;
-        const a1 = (acc / total) * Math.PI * 2 - Math.PI / 2;
-        const large = frac > 0.5 ? 1 : 0;
-        const x0 = cx + r * Math.cos(a0), y0 = cy + r * Math.sin(a0);
-        const x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
-        svg += '<path d="M ' + x0.toFixed(2) + ' ' + y0.toFixed(2) + ' A ' + r + ' ' + r + ' 0 ' + large + ' 1 ' + x1.toFixed(2) + ' ' + y1.toFixed(2) + '" fill="none" stroke="' + (colors[s.class] || "var(--fg-muted)") + '" stroke-width="' + sw + '"><title>' + s.class + ' · ' + s.count + ' (' + fmtPct(s.share) + ')</title></path>';
-      });
-      svg += '<text x="' + cx + '" y="' + (cy - 2) + '" text-anchor="middle" font-family="var(--font-headline)" font-size="22" font-weight="600" fill="var(--fg-1)">' + fmtNum(total) + '</text>';
-      svg += '<text x="' + cx + '" y="' + (cy + 16) + '" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--fg-muted)">requests</text>';
-      $("#donut-svg").innerHTML = svg;
-      $("#donut-legend").innerHTML = ax.statusClasses.map(s =>
-        '<div><i style="background:' + (colors[s.class] || "var(--fg-muted)") + '"></i><span>' + s.class + '</span> <strong>' + fmtNum(s.count) + '</strong> <span class="muted">' + fmtPct(s.share) + '</span></div>'
-      ).join("");
-    })();
+function buildUI() {
+  renderMeta();
+  renderIncidentBanner();
+  renderKPI();
+  renderFilterStrip();
+  renderHistogram();
+  renderSeverity();
+  renderOutliers();
+  renderTopMessages();
+  renderTopErrors();
+  renderFlagQueue();
+  renderDrillLabel();
+  initDrillToggle();
+  initSearch();
+  initCopyMd();
+  applyFilters();
+}
 
-    /* ---------- top messages / sources / endpoints ---------- */
-    function renderLeader(rows, getLabel, getCount, getBadges) {
-      if (!rows || !rows.length) return '<div class="muted" style="padding:var(--space-md) 0">Nothing to show.</div>';
-      const max = Math.max.apply(null, rows.map(getCount));
-      return rows.map(r => {
-        const cnt = getCount(r);
-        const pct = max > 0 ? Math.round((cnt / max) * 100) : 0;
-        const badges = getBadges ? getBadges(r) : "";
-        return '<div class="leader-row"><div class="lbl" title="' + escAttr(getLabel(r)) + '">' + escHtml(getLabel(r)) + badges + '</div>' +
-          '<div class="bar"><i style="width:' + pct + '%"></i></div>' +
-          '<div class="cnt">' + fmtNum(cnt) + '</div></div>';
-      }).join("");
+// ─── Meta bar ────────────────────────────────────────────────────────────────
+function renderMeta() {
+  const el = document.getElementById('barMeta');
+  el.textContent = `${DATA.format} · ${DATA.timeRange} · ${DATA.durationLabel}`;
+  const bb = document.getElementById('bucketBadge');
+  bb.textContent = DATA.bucketSize + ' buckets';
+}
+
+// ─── Incident Banner ─────────────────────────────────────────────────────────
+function renderIncidentBanner() {
+  const el = document.getElementById('incidentBanner');
+  const errRate = (DATA.errorRate || 0).toFixed(2);
+  const errCount = DATA.errorCount || 0;
+  const total = DATA.eventCount || 0;
+
+  // Craft incident summary from data
+  let sentence = '';
+  const burst = (DATA.outliers || []).find(o => o.kind === 'burst' && o.label && o.label.toLowerCase().includes('error'));
+  if (burst) {
+    sentence = `All ${errCount} errors clustered in a single 5-minute window at ${burst.ts ? burst.ts.split('T')[1] || burst.ts : '21:20'} — ${burst.detail || ''}. Stripe ProviderTimeoutError and CircuitOpenError failures affected multiple orders. Service recovered and continued normal operation after 21:25.`;
+  } else {
+    sentence = `${errCount} errors across ${total} events (${errRate}% error rate) — Stripe payment failures concentrated in a short burst.`;
+  }
+
+  el.innerHTML = `
+    <div class="incident-banner-title">
+      <span class="pulse-dot"></span>
+      Payment Incident — Stripe provider failures detected
+    </div>
+    <p>${sentence}</p>
+  `;
+}
+
+// ─── KPI Rail ────────────────────────────────────────────────────────────────
+function renderKPI() {
+  const rail = document.getElementById('kpiRail');
+  const errRate = (DATA.errorRate || 0).toFixed(2);
+  const kpis = [
+    { label: 'Total Events', value: fmtNum(DATA.eventCount), sub: DATA.durationLabel, cls: '' },
+    { label: 'Errors', value: fmtNum(DATA.errorCount), sub: '7 payment failures', cls: 'kpi-error' },
+    { label: 'Error Rate', value: errRate + '%', sub: 'of all events', cls: 'kpi-error' },
+    { label: 'Warnings', value: fmtNum(DATA.severityCounts?.warn || 0), sub: 'slow queries + cache', cls: 'kpi-warn' },
+    { label: 'Info Events', value: fmtNum(DATA.severityCounts?.info || 0), sub: 'normal operations', cls: '' },
+    { label: 'Duration', value: DATA.durationLabel, sub: DATA.timeRange.split('→')[0].trim(), cls: '' },
+  ];
+  rail.innerHTML = kpis.map(k => `
+    <div class="kpi-cell">
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-value ${k.cls}" data-target="${k.value}">${k.value}</div>
+      <div class="kpi-sub">${k.sub}</div>
+    </div>
+  `).join('');
+}
+
+// ─── Filter Strip ────────────────────────────────────────────────────────────
+function renderFilterStrip() {
+  const strip = document.getElementById('filterStrip');
+  const sc = DATA.severityCounts || {};
+  const levels = ['error','warn','info','debug'];
+  levels.forEach(lv => {
+    const cnt = sc[lv] || 0;
+    const chip = document.createElement('button');
+    chip.className = 'chip';
+    chip.dataset.sev = lv;
+    chip.innerHTML = `<span class="chip-dot dot-${lv}"></span>${lv.toUpperCase()} <span style="font-family:var(--font-mono);opacity:0.8">${cnt}</span>`;
+    chip.addEventListener('click', () => toggleSeverityFilter(lv, chip));
+    strip.appendChild(chip);
+  });
+  // All chip
+  const allChip = document.createElement('button');
+  allChip.className = 'chip';
+  allChip.id = 'chipAll';
+  allChip.innerHTML = `ALL ${DATA.eventCount}`;
+  allChip.style.marginLeft = 'auto';
+  allChip.addEventListener('click', clearFilters);
+  strip.appendChild(allChip);
+}
+
+function toggleSeverityFilter(lv, chip) {
+  if (activeSeverities.has(lv)) {
+    activeSeverities.delete(lv);
+    chip.className = 'chip';
+  } else {
+    activeSeverities.add(lv);
+    chip.className = `chip active-${lv}`;
+  }
+  currentPage = 1;
+  applyFilters();
+}
+
+function clearFilters() {
+  activeSeverities.clear();
+  document.querySelectorAll('.filter-strip .chip').forEach(c => {
+    const lv = c.dataset.sev;
+    c.className = 'chip';
+  });
+  currentPage = 1;
+  applyFilters();
+}
+
+// ─── Histogram ───────────────────────────────────────────────────────────────
+function renderHistogram() {
+  const wrap = document.getElementById('histWrap');
+  const buckets = DATA.timeBuckets || [];
+  if (!buckets.length) { wrap.innerHTML = '<p style="color:var(--fg-muted);font-size:0.8rem;">No time bucket data.</p>'; return; }
+
+  const W = 600, H = 110, PAD = { top:10, right:10, bottom:24, left:32 };
+  const chartW = W - PAD.left - PAD.right;
+  const chartH = H - PAD.top - PAD.bottom;
+  const maxCount = Math.max(...buckets.map(b => b.count), 1);
+  const bw = Math.max(2, chartW / buckets.length - 1);
+
+  // Find burst buckets from outliers
+  const burstTs = new Set((DATA.outliers || []).filter(o=>o.kind==='burst').map(o=>o.ts));
+
+  let bars = '';
+  let axes = '';
+  let gridLines = '';
+  const gridVals = [0, Math.round(maxCount/2), maxCount];
+  gridVals.forEach(v => {
+    const y = PAD.top + chartH - (v / maxCount) * chartH;
+    gridLines += `<line class="hist-grid" x1="${PAD.left}" y1="${y}" x2="${PAD.left+chartW}" y2="${y}"/>`;
+    axes += `<text class="hist-axis-label" x="${PAD.left - 4}" y="${y+3}" text-anchor="end">${v}</text>`;
+  });
+
+  // X labels — show every Nth
+  const showEvery = Math.max(1, Math.ceil(buckets.length / 8));
+
+  buckets.forEach((b, i) => {
+    const x = PAD.left + i * (chartW / buckets.length);
+    const infoH = Math.max(0, ((b.count - b.errorCount) / maxCount) * chartH);
+    const errH = Math.max(0, (b.errorCount / maxCount) * chartH);
+    const warnH = 0; // warn not in buckets by default
+
+    // Stacked: info on bottom, error on top
+    const infoY = PAD.top + chartH - infoH;
+    const errY = infoY - errH;
+
+    bars += `<rect class="hist-bar-info" x="${x+0.5}" y="${infoY}" width="${bw}" height="${infoH}" data-label="${b.label}" data-count="${b.count}" data-err="${b.errorCount}"/>`;
+    if (errH > 0) {
+      bars += `<rect class="hist-bar-error" x="${x+0.5}" y="${errY}" width="${bw}" height="${errH}" data-label="${b.label}" data-count="${b.count}" data-err="${b.errorCount}"/>`;
     }
-    (() => {
-      const tm = DATA.topMessages || [];
-      $("#top-msgs").innerHTML = renderLeader(tm.slice(0, 10), r => r.message, r => r.count);
-      const ts = DATA.topSources || [];
-      const isPrivate = (DATA.accessExtras?.topIps || []).reduce((acc, ip) => { acc[ip.ip] = ip.isPrivate; return acc; }, {});
-      $("#top-src").innerHTML = renderLeader(ts.slice(0, 10), r => r.source, r => r.count, r => {
-        const tags = [];
-        if (isPrivate[r.source] === true) tags.push('<span class="badge">internal</span>');
-        if (r.share != null && r.share > 5) tags.push('<span class="badge warn">' + fmtPct(r.share) + '</span>');
-        return tags.join(" ");
-      });
-      const ax = DATA.accessExtras;
-      if (ax && ax.topEndpoints && ax.topEndpoints.length) {
-        $("#endpoints-section").hidden = false;
-        $("#top-endpoints").innerHTML = renderLeader(ax.topEndpoints.slice(0, 12), r => r.path, r => r.count, r => {
-          const tags = [];
-          if (r.errorRate > 5) tags.push('<span class="badge err">' + fmtPct(r.errorRate) + ' errors</span>');
-          return tags.join(" ");
-        });
-      }
-    })();
 
-    /* ---------- outliers ---------- */
-    (() => {
-      const outs = DATA.outliers || [];
-      const grid = $("#outliers-grid");
-      if (!outs.length) {
-        grid.innerHTML = '<div class="outlier-card"><div class="kind">heads up</div><div class="label">Stream is small enough that nothing stands out as unusual.</div></div>';
-        $("#outliers-meta").textContent = "0 anomalies";
-        return;
-      }
-      grid.innerHTML = outs.map(o =>
-        '<div class="outlier-card kind-' + escAttr(o.kind) + '">' +
-          '<div class="kind">' + escHtml(o.kind) + '</div>' +
-          '<div class="label">' + escHtml(o.label) + '</div>' +
-          '<div class="detail">' + escHtml(o.detail) + '</div>' +
-          (o.ts ? '<div class="ts">' + escHtml(o.ts) + '</div>' : '') +
-        '</div>'
-      ).join("");
-      $("#outliers-meta").textContent = outs.length + " anomalies";
-    })();
+    if (i % showEvery === 0) {
+      axes += `<text class="hist-axis-label" x="${x + bw/2}" y="${H - 4}" text-anchor="middle">${b.label}</text>`;
+    }
 
-    /* ---------- drill-down table ---------- */
-    const events = DATA.events || [];
-    const isAccess = DATA.format === "access-log";
-    const drillBody = $("#tbl-body");
-    const drillHead = $("#tbl-head");
-    drillHead.innerHTML = isAccess
-      ? '<tr><th>ts</th><th>status</th><th>method</th><th>path</th><th>ip</th><th>bytes</th></tr>'
-      : '<tr><th>ts</th><th>severity</th><th>category</th><th>source</th><th>message</th></tr>';
-    $("#drill-summary-text").textContent = "Browse all " + events.length + " events";
-    $("#drill-summary-count").textContent = events.length + " events · click any row to expand fields";
-    let filtered = events.slice();
-    let renderedCount = 0;
-    const PAGE = 200;
+    // Burst marker
+    const bucketKey = b.bucket || '';
+    const isBurst = burstTs.has(bucketKey) || [...burstTs].some(ts => bucketKey.startsWith(ts.slice(0,13)));
+    if (isBurst && b.errorCount > 0) {
+      const mx = x + bw/2;
+      bars += `<g class="burst-marker"><line x1="${mx}" y1="${PAD.top}" x2="${mx}" y2="${PAD.top + chartH}"/><text x="${mx+3}" y="${PAD.top+10}">▲ burst</text></g>`;
+    }
+  });
 
-    function applyFilters() {
-      const q = ($("#drill-search").value || "").trim().toLowerCase();
-      filtered = events.filter(e => {
-        if (activeSev !== "all" && (e.severity || "info") !== activeSev) return false;
-        if (activeCat !== "all" && (e.category || "") !== activeCat) return false;
-        if (activeSchemaField && (!e.fields || e.fields[activeSchemaField] == null)) return false;
-        if (bucketFilter) {
-          const eb = (e.ts || "").replace(" ", "T").slice(0, bucketFilter.length);
-          if (eb !== bucketFilter) return false;
-        }
-        if (q) {
-          const hay = (e.message || "") + " " + (e.source || "") + " " + (e.raw || "");
-          if (!hay.toLowerCase().includes(q)) return false;
-        }
-        return true;
-      });
-      renderedCount = 0;
-      drillBody.innerHTML = "";
-      renderMore();
-    }
-    function highlight(s, q) {
-      if (!q) return escHtml(s);
-      const re = new RegExp("(" + escapeRegex(q) + ")", "ig");
-      return escHtml(s).replace(re, "<mark>$1</mark>");
-    }
-    function renderRow(e, q) {
-      const sev = e.severity || "info";
-      const fieldsBlock = e.fields ? JSON.stringify(e.fields, null, 2) : (e.raw || "");
-      if (isAccess) {
-        const f = e.fields || {};
-        return '<tr class="row ' + sev + '" data-id="' + escAttr(e.id) + '">' +
-          '<td class="col-ts">' + escHtml(e.ts) + '</td>' +
-          '<td class="col-sev ' + sev + '">' + escHtml(f.status ?? "") + '</td>' +
-          '<td class="col-msg">' + escHtml(f.method ?? "") + '</td>' +
-          '<td class="col-msg">' + highlight(f.path ?? "", q) + '</td>' +
-          '<td class="col-src">' + highlight(f.ip ?? e.source ?? "", q) + '</td>' +
-          '<td class="col-msg">' + escHtml(f.bytes ?? "") + '</td>' +
-          '</tr>' +
-          '<tr class="expand-row" data-for="' + escAttr(e.id) + '" hidden><td colspan="6"><pre>' + escHtml(fieldsBlock) + (e.raw ? "\n\n— raw —\n" + escHtml(e.raw) : "") + '</pre></td></tr>';
-      }
-      return '<tr class="row ' + sev + '" data-id="' + escAttr(e.id) + '">' +
-        '<td class="col-ts">' + escHtml(e.ts) + '</td>' +
-        '<td class="col-sev ' + sev + '">' + escHtml(sev) + '</td>' +
-        '<td class="col-src">' + escHtml(e.category || "") + '</td>' +
-        '<td class="col-src">' + highlight(e.source || "", q) + '</td>' +
-        '<td class="col-msg">' + highlight(e.message || "", q) + '</td>' +
-        '</tr>' +
-        '<tr class="expand-row" data-for="' + escAttr(e.id) + '" hidden><td colspan="5"><pre>' + escHtml(fieldsBlock) + (e.raw ? "\n\n— raw —\n" + escHtml(e.raw) : "") + '</pre></td></tr>';
-    }
-    function renderMore() {
-      const q = ($("#drill-search").value || "").trim().toLowerCase();
-      const slice = filtered.slice(renderedCount, renderedCount + PAGE);
-      slice.forEach(e => { drillBody.insertAdjacentHTML("beforeend", renderRow(e, q)); });
-      renderedCount += slice.length;
-      $("#drill-meta").textContent = (renderedCount + " / " + filtered.length + " shown" + (bucketFilter ? " · bucket " + bucketFilter : "") + (activeSchemaField ? " · field " + activeSchemaField : ""));
-      $("#tbl-loadmore").hidden = renderedCount >= filtered.length;
-    }
-    drillBody.addEventListener("click", e => {
-      const row = e.target.closest("tr.row");
-      if (!row) return;
-      const id = row.getAttribute("data-id");
-      const expand = drillBody.querySelector('tr.expand-row[data-for="' + CSS.escape(id) + '"]');
-      if (!expand) return;
-      expand.hidden = !expand.hidden;
+  const svg = `<svg class="histogram-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" style="height:${H}px;">
+    ${gridLines}${bars}${axes}
+    <line x1="${PAD.left}" y1="${PAD.top}" x2="${PAD.left}" y2="${PAD.top+chartH}" stroke="var(--border-strong)" stroke-width="1"/>
+    <line x1="${PAD.left}" y1="${PAD.top+chartH}" x2="${PAD.left+chartW}" y2="${PAD.top+chartH}" stroke="var(--border-strong)" stroke-width="1"/>
+  </svg>`;
+  wrap.innerHTML = svg;
+
+  // Tooltip on bars
+  const tooltip = document.getElementById('tooltip');
+  wrap.querySelectorAll('rect').forEach(r => {
+    r.style.cursor = 'pointer';
+    r.addEventListener('mousemove', e => {
+      tooltip.style.display = 'block';
+      tooltip.style.left = (e.clientX + 12) + 'px';
+      tooltip.style.top = (e.clientY - 24) + 'px';
+      tooltip.innerHTML = `<b>${r.dataset.label}</b><br>${r.dataset.count} events<br>${r.dataset.err} errors`;
     });
-    $("#tbl-loadmore-btn").addEventListener("click", renderMore);
-    $("#drill-search").addEventListener("input", applyFilters);
-    $("#jump-drill-btn").addEventListener("click", () => {
-      document.getElementById("drill").open = true;
-      document.getElementById("drill").scrollIntoView({behavior: "smooth", block: "start"});
+    r.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+    r.addEventListener('click', () => {
+      // Filter table to this bucket's time
+      const label = r.dataset.label;
+      searchQuery = label;
+      document.getElementById('globalSearch').value = label;
+      applyFilters();
+      openDrill();
     });
+  });
+
+  // Error sparkline
+  renderSparkline(buckets);
+}
+
+function renderSparkline(buckets) {
+  const wrap = document.getElementById('sparkWrap');
+  if (!buckets.length) return;
+  const W = 600, H = 32, PAD = {left:4, right:4, top:4, bottom:4};
+  const chartW = W - PAD.left - PAD.right;
+  const chartH = H - PAD.top - PAD.bottom;
+  const maxErr = Math.max(...buckets.map(b=>b.errorCount), 1);
+  const bw = Math.max(1, chartW / buckets.length - 0.5);
+  let bars = '';
+  buckets.forEach((b, i) => {
+    const x = PAD.left + i * (chartW / buckets.length);
+    const h = (b.errorCount / maxErr) * chartH;
+    const y = PAD.top + chartH - h;
+    if (b.errorCount > 0) {
+      bars += `<rect fill="var(--red)" opacity="0.8" x="${x}" y="${y}" width="${bw}" height="${h}" rx="1"/>`;
+    } else {
+      bars += `<rect fill="var(--border-strong)" x="${x}" y="${PAD.top+chartH-2}" width="${bw}" height="2"/>`;
+    }
+  });
+  wrap.innerHTML = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:${H}px;">${bars}</svg>`;
+}
+
+// ─── Severity panel ──────────────────────────────────────────────────────────
+function renderSeverity() {
+  const container = document.getElementById('severityRows');
+  const sc = DATA.severityCounts || {};
+  const total = DATA.eventCount || 1;
+  const levels = ['error','warn','info','debug','trace'];
+  container.innerHTML = levels.map(lv => {
+    const cnt = sc[lv] || 0;
+    const pct = ((cnt / total) * 100).toFixed(1);
+    const barW = (cnt / Math.max(...levels.map(l=>sc[l]||0), 1)) * 100;
+    return `
+      <div class="severity-row">
+        <span class="sev-label ${lv}">${lv}</span>
+        <div class="sev-bar-track"><div class="sev-bar-fill ${lv}" style="width:${barW}%"></div></div>
+        <span class="sev-count">${cnt}</span>
+        <span class="sev-pct">${pct}%</span>
+      </div>
+    `;
+  }).join('');
+
+  // Categories
+  const catContainer = document.getElementById('categoryRows');
+  const cats = DATA.topCategories || DATA.categoryCounts || [];
+  if (!cats.length) {
+    catContainer.innerHTML = '<p style="font-size:0.75rem;color:var(--fg-muted);">No category breakdown available.</p>';
+    return;
+  }
+  catContainer.innerHTML = cats.map(c => {
+    const pct = c.share || ((c.count / (DATA.eventCount||1))*100).toFixed(1);
+    return `<div style="display:flex;align-items:center;gap:var(--space-sm);margin-bottom:6px;">
+      <span style="font-family:var(--font-mono);font-size:0.72rem;width:70px;color:var(--fg-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${c.category}">${c.category}</span>
+      <div style="flex:1;height:8px;background:var(--surface-container);border-radius:var(--radius-pill);overflow:hidden;">
+        <div style="width:${Math.min(100,pct*4)}%;height:100%;background:var(--primary);border-radius:var(--radius-pill);"></div>
+      </div>
+      <span style="font-family:var(--font-mono);font-size:0.72rem;color:var(--fg-1);font-weight:600;">${c.count}</span>
+      <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--fg-muted);width:38px;text-align:right;">${parseFloat(pct).toFixed(1)}%</span>
+    </div>`;
+  }).join('');
+}
+
+// ─── Outliers ────────────────────────────────────────────────────────────────
+function renderOutliers() {
+  const grid = document.getElementById('outlierGrid');
+  const badge = document.getElementById('outlierBadge');
+  const outliers = DATA.outliers || [];
+  badge.textContent = outliers.length + ' flagged';
+
+  if (!outliers.length) {
+    grid.innerHTML = '<div class="outlier-card"><div class="outlier-label">Stream is small enough that nothing stands out as unusual.</div></div>';
+    return;
+  }
+
+  const kindIcon = { burst:'⚡', 'top-error':'🔴', slow:'🐢', rare:'🔮', 'top-source':'📡', schema:'🧩' };
+  grid.innerHTML = outliers.map(o => `
+    <div class="outlier-card ${o.kind.replace('-','-')}">
+      <div class="outlier-kind">${kindIcon[o.kind]||'◆'} ${o.kind}</div>
+      <div class="outlier-label">${escHtml(truncate(o.label, 90))}</div>
+      <div class="outlier-detail">${escHtml(o.detail || '')}${o.ts ? ' · ' + fmtTime(o.ts) : ''}</div>
+    </div>
+  `).join('');
+}
+
+// ─── Top Messages ────────────────────────────────────────────────────────────
+function renderTopMessages() {
+  const container = document.getElementById('topMsgRows');
+  const badge = document.getElementById('topMsgBadge');
+  const msgs = DATA.topMessages || [];
+  badge.textContent = msgs.length;
+  const maxCount = Math.max(...msgs.map(m => m.count), 1);
+
+  container.innerHTML = msgs.slice(0, 12).map((m, i) => `
+    <div class="top-row">
+      <span class="top-rank">${i+1}</span>
+      <div class="top-bar-track"><div class="top-bar-fill" style="width:${(m.count/maxCount*100).toFixed(0)}%"></div></div>
+      <span class="top-msg" title="${escHtml(m.message)}">${escHtml(truncate(m.message, 55))}</span>
+      <span class="top-count">${m.count}</span>
+      <span class="top-share">${parseFloat(m.share).toFixed(1)}%</span>
+    </div>
+  `).join('') || '<p style="font-size:0.78rem;color:var(--fg-muted)">No messages.</p>';
+}
+
+// ─── Top Errors ──────────────────────────────────────────────────────────────
+function renderTopErrors() {
+  const container = document.getElementById('topErrRows');
+  const badge = document.getElementById('topErrBadge');
+  const errs = DATA.topErrors || [];
+  badge.textContent = errs.length;
+  if (!errs.length) {
+    container.innerHTML = '<p style="font-size:0.78rem;color:var(--fg-muted);">No error-level events in this window.</p>';
+    return;
+  }
+  container.innerHTML = errs.map(e => `
+    <div class="top-error-row">
+      <div class="top-error-msg">${escHtml(truncate(e.message, 120))}</div>
+      <div class="top-error-meta">${e.count}× · ${fmtTime(e.firstTs)}${e.firstTs !== e.lastTs ? ' → ' + fmtTime(e.lastTs) : ''}</div>
+    </div>
+  `).join('');
+}
+
+// ─── Flag Queue ───────────────────────────────────────────────────────────────
+function renderFlagQueue() {
+  const container = document.getElementById('flagQueue');
+  const badge = document.getElementById('flagBadge');
+  const flags = [];
+
+  // Build from data signals
+  if (DATA.errorRate >= 10) {
+    flags.push({ icon:'🚨', title: `High error rate: ${DATA.errorRate.toFixed(2)}%`, detail: `${DATA.errorCount} errors in ${DATA.eventCount} events over ${DATA.durationLabel}` });
+  }
+  // Payment failures
+  const payFails = (DATA.topErrors || []).filter(e => e.message.toLowerCase().includes('payment failed'));
+  if (payFails.length) {
+    flags.push({ icon:'💳', title: `Stripe payment failures — ${payFails.length} distinct error messages`, detail: `ProviderTimeoutError and CircuitOpenError detected · Burst at 21:20–21:22` });
+  }
+  // Slow query
+  const slowEv = (DATA.events || []).find(e => e.message && e.message.includes('Slow DB'));
+  if (slowEv) {
+    const ms = slowEv.message.match(/duration_ms=(\d+)/);
+    flags.push({ icon:'🐢', title: `Slow DB query — order_history`, detail: `duration_ms=${ms ? ms[1] : '?'} vs threshold_ms=500 · user_id=u_e5g8` });
+  }
+  // Cache miss spike
+  const cacheEv = (DATA.events || []).find(e => e.message && e.message.includes('Cache miss spike'));
+  if (cacheEv) {
+    const km = cacheEv.message.match(/keys_missed=(\d+)/);
+    flags.push({ icon:'💨', title: `Cache miss spike`, detail: `keys_missed=${km ? km[1] : '?'} in 60s · threshold=100` });
+  }
+  // Circuit breaker
+  const cbEv = (DATA.events || []).find(e => e.message && e.message.includes('CircuitOpenError'));
+  if (cbEv) {
+    flags.push({ icon:'⚡', title: `Circuit breaker opened on Stripe provider`, detail: `CircuitOpenError seen at 21:22 — downstream payments rejected without retry` });
+  }
+
+  badge.textContent = flags.length + ' flags';
+  if (!flags.length) {
+    container.innerHTML = '<p style="font-size:0.82rem;color:var(--fg-muted);">No flags raised.</p>';
+    return;
+  }
+  container.innerHTML = flags.map(f => `
+    <div class="flag-card">
+      <div class="flag-icon">${f.icon}</div>
+      <div class="flag-body">
+        <div class="flag-title">${escHtml(f.title)}</div>
+        <div class="flag-detail">${escHtml(f.detail)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ─── Drill-down ───────────────────────────────────────────────────────────────
+function renderDrillLabel() {
+  document.getElementById('drillLabel').textContent = `Browse all ${DATA.eventCount} events`;
+}
+
+function initDrillToggle() {
+  const toggle = document.getElementById('drillToggle');
+  const body = document.getElementById('drillBody');
+  toggle.addEventListener('click', () => {
+    const isOpen = body.classList.contains('open');
+    if (isOpen) {
+      body.classList.remove('open');
+      toggle.classList.remove('open');
+    } else {
+      openDrill();
+    }
+  });
+
+  // Sort headers
+  document.querySelectorAll('.data-grid th[data-col]').forEach(th => {
+    th.addEventListener('click', () => {
+      const col = th.dataset.col;
+      if (sortCol === col) { sortDir *= -1; }
+      else { sortCol = col; sortDir = 1; }
+      document.querySelectorAll('.data-grid th').forEach(h => h.classList.remove('sort-asc','sort-desc'));
+      th.classList.add(sortDir === 1 ? 'sort-asc' : 'sort-desc');
+      currentPage = 1;
+      applyFilters();
+    });
+  });
+
+  // Drill severity chips
+  buildDrillControls();
+}
+
+function openDrill() {
+  document.getElementById('drillBody').classList.add('open');
+  document.getElementById('drillToggle').classList.add('open');
+  if (!document.getElementById('dataBody').hasChildNodes() || document.getElementById('dataBody').children.length === 0) {
     applyFilters();
+  }
+}
 
-    /* ---------- copy as markdown ---------- */
-    function buildMarkdown() {
-      const lines = [];
-      lines.push("# " + HERO_TITLE);
-      lines.push("");
-      lines.push(EDITORIAL);
-      lines.push("");
-      lines.push("- Format: " + (DATA.format || "events"));
-      lines.push("- Events: " + DATA.eventCount);
-      lines.push("- Window: " + (DATA.timeRange || "—") + " (" + (DATA.durationLabel || "") + ")");
-      lines.push("- Error rate: " + fmtPct(DATA.errorRate) + " (" + (DATA.errorCount || 0) + " errors)");
-      lines.push("- Sources: " + DATA.sourceCount);
-      lines.push("");
-      lines.push("## Severity");
-      Object.entries(DATA.severityCounts || {}).forEach(([k, v]) => { if (v > 0) lines.push("- " + k + ": " + v); });
-      lines.push("");
-      if ((DATA.outliers || []).length) {
-        lines.push("## Outliers");
-        DATA.outliers.forEach(o => lines.push("- **" + o.label + "** — " + o.detail + (o.ts ? " (" + o.ts + ")" : "")));
-        lines.push("");
-      }
-      if ((DATA.topMessages || []).length) {
-        lines.push("## Top messages");
-        DATA.topMessages.slice(0, 8).forEach(m => lines.push("- " + m.message + " — " + m.count + " (" + fmtPct(m.share) + ")"));
-        lines.push("");
-      }
-      if ((DATA.topSources || []).length) {
-        lines.push("## Top sources");
-        DATA.topSources.slice(0, 8).forEach(s => lines.push("- " + s.source + " — " + s.count + " (" + fmtPct(s.share) + ")"));
-        lines.push("");
-      }
-      return lines.join("\n");
-    }
-    $("#copy-md-btn").addEventListener("click", async () => {
-      const md = buildMarkdown();
-      try { await navigator.clipboard.writeText(md); $("#copy-md-btn").textContent = "Copied!"; setTimeout(() => { $("#copy-md-btn").textContent = "Copy analysis as Markdown"; }, 1500); }
-      catch { window.prompt("Copy this Markdown:", md); }
+function buildDrillControls() {
+  const ctrl = document.getElementById('drillControls');
+  ctrl.innerHTML = '<span style="font-size:0.72rem;color:var(--fg-muted);font-weight:600;">Filter:</span>';
+  ['all','error','warn','info','debug'].forEach(lv => {
+    const btn = document.createElement('button');
+    btn.className = 'chip' + (lv === 'all' ? ' active-info' : '');
+    btn.dataset.drillSev = lv;
+    btn.textContent = lv.toUpperCase();
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-drill-sev]').forEach(b => { b.className = 'chip'; });
+      btn.className = `chip ${lv === 'all' ? 'active-info' : lv === 'error' ? 'active-error' : lv === 'warn' ? 'active-warn' : 'active-info'}`;
+      if (lv === 'all') activeSeverities.clear();
+      else { activeSeverities.clear(); activeSeverities.add(lv); }
+      currentPage = 1;
+      applyFilters();
     });
-  </script>
-</body>
-</html>
+    ctrl.appendChild(btn);
+  });
+}
+
+// ─── Filter + render ──────────────────────────────────────────────────────────
+function applyFilters() {
+  const events = DATA.events || [];
+  const q = searchQuery.toLowerCase().trim();
+
+  filteredEvents = events.filter(e => {
+    if (activeSeverities.size && !activeSeverities.has(e.severity)) return false;
+    if (q) {
+      const haystack = ((e.message||'') + ' ' + (e.source||'') + ' ' + (e.category||'') + ' ' + (e.ts||'')).toLowerCase();
+      if (!haystack.includes(q)) return false;
+    }
+    return true;
+  });
+
+  // Sort
+  filteredEvents.sort((a, b) => {
+    let av = a[sortCol] || '';
+    let bv = b[sortCol] || '';
+    if (sortCol === 'ts') { av = a.tsEpoch || 0; bv = b.tsEpoch || 0; }
+    if (av < bv) return -sortDir;
+    if (av > bv) return sortDir;
+    return 0;
+  });
+
+  renderTable();
+  renderPagination();
+}
+
+function renderTable() {
+  const body = document.getElementById('dataBody');
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const page = filteredEvents.slice(start, start + PAGE_SIZE);
+  const q = searchQuery.toLowerCase().trim();
+
+  if (!page.length) {
+    body.innerHTML = `<tr><td colspan="4" style="text-align:center;color:var(--fg-muted);padding:var(--space-xl);">No events match current filters.</td></tr>`;
+    return;
+  }
+
+  body.innerHTML = page.map(e => {
+    const rowClass = e.severity === 'error' ? 'row-error' : e.severity === 'warn' ? 'row-warn' : '';
+    const sev = e.severity || 'info';
+    const msg = q ? highlightText(escHtml(e.message || ''), q) : escHtml(e.message || '');
+    const cat = e.category ? `<span style="font-size:0.68rem;background:var(--surface-container);padding:1px 6px;border-radius:var(--radius-pill);color:var(--fg-muted);font-family:var(--font-mono);">${escHtml(e.category)}</span>` : '<span style="color:var(--fg-muted);font-size:0.7rem;">—</span>';
+    return `
+      <tr class="${rowClass}" data-id="${e.id}" style="cursor:pointer;">
+        <td class="ts-cell">${escHtml(e.time || e.ts || '')}</td>
+        <td><span class="sev-badge ${sev}">${sev}</span></td>
+        <td>${cat}</td>
+        <td class="msg-cell">${msg}</td>
+      </tr>
+    `;
+  }).join('');
+
+  // Row expand
+  body.querySelectorAll('tr[data-id]').forEach(row => {
+    row.addEventListener('click', () => toggleRowExpand(row, page));
+  });
+}
+
+function toggleRowExpand(row

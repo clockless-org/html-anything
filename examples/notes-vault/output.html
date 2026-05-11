@@ -1,0 +1,1097 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sam Reyes — founder vault</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --accent-cyan: #00D4FF;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981;
+  --blue: #3b82f6;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono','Menlo',ui-monospace,monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30,27,25,0.04);
+  --shadow-md: 0 4px 12px rgba(30,27,25,0.08);
+  --shadow-lg: 0 8px 24px rgba(30,27,25,0.12);
+  --shadow-accent: 0 8px 24px rgba(160,59,0,0.15);
+  --gradient-primary: linear-gradient(135deg,#a03b00 0%,#c94c00 100%);
+  --gradient-hero: linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #060B18; --surface: #0B1426;
+    --surface-container-lowest: #101D35; --surface-container-low: #101D35;
+    --surface-container: #162544; --surface-container-high: #1c2d52;
+    --fg-1: #F8FAFC; --fg-2: #CBD5E1; --fg-muted: #64748B;
+    --border: rgba(255,255,255,0.08); --border-strong: rgba(255,255,255,0.14);
+    --primary: #FF6B35; --accent-glow: #00D4FF;
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4); --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+    --outline-variant: #2a3a5c;
+  }
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:15px}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--fg-1);
+  line-height:1.6;
+  min-height:100vh;
+}
+/* STORY SHELL */
+.story-shell{display:flex;flex-direction:column;min-height:100vh}
+
+/* HEADER / TIME LENS */
+.time-lens{
+  background:var(--gradient-hero);
+  color:#fff;
+  padding:var(--space-3xl) var(--space-xl) var(--space-2xl);
+  position:relative;
+  overflow:hidden;
+}
+.time-lens::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 80% 20%,rgba(255,255,255,0.08) 0%,transparent 60%);
+  pointer-events:none;
+}
+.time-lens-inner{max-width:900px;margin:0 auto;position:relative}
+.vault-label{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;
+  text-transform:uppercase;opacity:0.7;margin-bottom:var(--space-sm);
+  display:flex;align-items:center;gap:var(--space-sm);
+}
+.vault-label::before{content:'◈';font-size:14px}
+.time-lens h1{
+  font-family:var(--font-headline);font-size:clamp(1.6rem,4vw,2.4rem);
+  font-weight:700;letter-spacing:-0.02em;margin-bottom:var(--space-md);
+  line-height:1.15;
+}
+.time-lens-hook{font-size:1rem;opacity:0.88;max-width:600px;line-height:1.55}
+.lens-stats{
+  display:flex;flex-wrap:wrap;gap:var(--space-lg);
+  margin-top:var(--space-2xl);
+}
+.lens-stat{
+  display:flex;flex-direction:column;
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.18);
+  border-radius:var(--radius-md);
+  padding:var(--space-md) var(--space-lg);
+  min-width:80px;
+}
+.lens-stat-val{
+  font-family:var(--font-mono);font-size:1.5rem;font-weight:700;
+  line-height:1;
+}
+.lens-stat-label{font-size:11px;opacity:0.72;margin-top:var(--space-xs);letter-spacing:0.04em}
+
+/* NAV TABS */
+.story-nav{
+  background:var(--surface-container-low);
+  border-bottom:1px solid var(--border-strong);
+  position:sticky;top:0;z-index:100;
+}
+.story-nav-inner{
+  max-width:900px;margin:0 auto;
+  display:flex;gap:0;overflow-x:auto;scrollbar-width:none;
+}
+.story-nav-inner::-webkit-scrollbar{display:none}
+.nav-tab{
+  font-family:var(--font-headline);font-size:13px;font-weight:500;
+  color:var(--fg-muted);padding:var(--space-md) var(--space-lg);
+  border:none;background:none;cursor:pointer;
+  border-bottom:2px solid transparent;
+  white-space:nowrap;transition:all 0.18s ease;letter-spacing:-0.01em;
+}
+.nav-tab:hover{color:var(--fg-1)}
+.nav-tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* MAIN CONTENT */
+.story-main{max-width:900px;margin:0 auto;padding:var(--space-3xl) var(--space-xl);}
+section{margin-bottom:var(--space-5xl)}
+.section-heading{
+  font-family:var(--font-headline);font-size:1.15rem;font-weight:700;
+  letter-spacing:-0.01em;color:var(--fg-1);
+  margin-bottom:var(--space-xl);
+  display:flex;align-items:center;gap:var(--space-sm);
+}
+.section-heading-icon{
+  width:28px;height:28px;border-radius:var(--radius-sm);
+  background:var(--primary-fixed);
+  color:var(--primary);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;flex-shrink:0;
+}
+@media (prefers-color-scheme:dark){
+  .section-heading-icon{background:rgba(255,107,53,0.15);color:var(--primary)}
+}
+
+/* SEARCH */
+.search-bar{
+  display:flex;align-items:center;gap:var(--space-sm);
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-pill);
+  padding:var(--space-sm) var(--space-lg);
+  margin-bottom:var(--space-2xl);
+  box-shadow:var(--shadow-sm);
+}
+.search-bar input{
+  flex:1;border:none;background:none;font-family:var(--font-body);
+  font-size:14px;color:var(--fg-1);outline:none;
+}
+.search-bar input::placeholder{color:var(--fg-muted)}
+.search-icon{color:var(--fg-muted);font-size:14px;flex-shrink:0}
+
+/* CONCEPT MAP */
+#concept-map-section .graph-container{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-xl);
+  overflow:hidden;
+  box-shadow:var(--shadow-md);
+}
+#concept-map-svg{display:block;width:100%;height:420px}
+@media(max-width:600px){#concept-map-svg{height:280px}}
+
+/* HUB LEADERBOARD */
+.hub-list{display:flex;flex-direction:column;gap:var(--space-md)}
+.hub-row{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:var(--space-lg);
+  display:grid;grid-template-columns:1fr auto;gap:var(--space-md);
+  align-items:start;
+  cursor:pointer;
+  transition:box-shadow 0.15s,border-color 0.15s;
+  box-shadow:var(--shadow-sm);
+}
+.hub-row:hover{box-shadow:var(--shadow-md);border-color:var(--outline-variant)}
+.hub-row-title{
+  font-family:var(--font-headline);font-size:0.95rem;font-weight:600;
+  color:var(--primary);letter-spacing:-0.01em;margin-bottom:var(--space-xs);
+}
+.hub-row-path{font-size:12px;color:var(--fg-muted);font-family:var(--font-mono)}
+.hub-row-excerpt{font-size:13px;color:var(--fg-2);margin-top:var(--space-sm);line-height:1.5}
+.hub-badges{display:flex;flex-direction:column;align-items:flex-end;gap:var(--space-xs);flex-shrink:0}
+.hub-badge{
+  font-family:var(--font-mono);font-size:11px;font-weight:600;
+  padding:2px var(--space-sm);border-radius:var(--radius-pill);
+  white-space:nowrap;
+}
+.badge-in{background:rgba(160,59,0,0.1);color:var(--primary)}
+.badge-out{background:rgba(123,64,224,0.1);color:var(--secondary-container)}
+@media(prefers-color-scheme:dark){
+  .badge-in{background:rgba(255,107,53,0.15);color:var(--primary)}
+  .badge-out{background:rgba(123,64,224,0.2);color:var(--secondary)}
+}
+
+/* THEME CLUSTERS */
+.theme-grid{display:flex;flex-wrap:wrap;gap:var(--space-md)}
+.theme-chip{
+  display:flex;align-items:center;gap:var(--space-sm);
+  padding:var(--space-sm) var(--space-lg);
+  border-radius:var(--radius-pill);
+  border:1.5px solid var(--outline-variant);
+  background:var(--surface-container-lowest);
+  cursor:pointer;transition:all 0.15s;
+  font-size:13px;font-weight:500;color:var(--fg-2);
+  box-shadow:var(--shadow-sm);
+}
+.theme-chip:hover,.theme-chip.active{
+  background:var(--primary);color:#fff;border-color:var(--primary);
+  box-shadow:var(--shadow-accent);
+}
+.theme-chip-count{
+  font-family:var(--font-mono);font-size:11px;font-weight:700;
+  background:rgba(0,0,0,0.1);border-radius:var(--radius-pill);
+  padding:1px 6px;
+}
+.theme-chip.active .theme-chip-count{background:rgba(255,255,255,0.25)}
+
+/* CALLOUT CARDS */
+.callout-grid{display:grid;grid-template-columns:1fr;gap:var(--space-lg)}
+@media(min-width:640px){.callout-grid{grid-template-columns:1fr 1fr 1fr}}
+.callout-card{
+  background:var(--surface-container-lowest);
+  border-radius:var(--radius-lg);
+  border:1px solid var(--border-strong);
+  overflow:hidden;box-shadow:var(--shadow-sm);
+}
+.callout-header{
+  padding:var(--space-md) var(--space-lg);
+  display:flex;align-items:center;gap:var(--space-sm);
+  border-bottom:1px solid var(--border);
+}
+.callout-badge{
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;
+}
+.callout-badge.todo{background:var(--yellow)}
+.callout-badge.stale{background:var(--red)}
+.callout-badge.orphan{background:var(--fg-muted)}
+.callout-title{font-family:var(--font-headline);font-size:13px;font-weight:700;letter-spacing:-0.01em}
+.callout-count{
+  margin-left:auto;font-family:var(--font-mono);font-size:13px;
+  font-weight:700;color:var(--primary);
+}
+.callout-body{padding:var(--space-md) var(--space-lg)}
+.callout-item{
+  font-size:13px;color:var(--fg-2);padding:var(--space-xs) 0;
+  border-bottom:1px solid var(--border);line-height:1.5;
+  cursor:pointer;transition:color 0.12s;
+}
+.callout-item:last-child{border-bottom:none}
+.callout-item:hover{color:var(--primary)}
+.callout-item-note{
+  font-size:11px;color:var(--fg-muted);font-family:var(--font-mono);
+  display:block;margin-top:1px;
+}
+.callout-empty{font-size:13px;color:var(--fg-muted);font-style:italic;padding:var(--space-sm) 0}
+
+/* RHYTHM STRIP */
+.rhythm-strip{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-xl);
+  padding:var(--space-2xl);
+  box-shadow:var(--shadow-md);
+}
+.rhythm-label{font-size:12px;color:var(--fg-muted);font-family:var(--font-mono);margin-bottom:var(--space-lg)}
+.rhythm-dots{display:flex;flex-wrap:wrap;gap:4px}
+.rhythm-dot{
+  width:14px;height:14px;border-radius:3px;
+  transition:transform 0.12s;cursor:default;
+  position:relative;
+}
+.rhythm-dot:hover{transform:scale(1.5);z-index:10}
+.rhythm-dot-empty{background:var(--surface-container)}
+.rhythm-dot-low{background:var(--primary-fixed)}
+.rhythm-dot-mid{background:var(--primary-fixed-dim)}
+.rhythm-dot-high{background:var(--primary)}
+@media(prefers-color-scheme:dark){
+  .rhythm-dot-empty{background:var(--surface-container-high)}
+  .rhythm-dot-low{background:rgba(255,107,53,0.2)}
+  .rhythm-dot-mid{background:rgba(255,107,53,0.5)}
+  .rhythm-dot-high{background:var(--primary)}
+}
+
+/* KNOWLEDGE ATLAS */
+.atlas-controls{
+  display:flex;flex-wrap:wrap;gap:var(--space-sm);
+  margin-bottom:var(--space-lg);
+  align-items:center;
+}
+.filter-chip{
+  font-size:12px;font-weight:500;
+  padding:var(--space-xs) var(--space-md);
+  border-radius:var(--radius-pill);
+  border:1px solid var(--border-strong);
+  background:var(--surface-container);
+  color:var(--fg-2);cursor:pointer;transition:all 0.15s;
+}
+.filter-chip:hover{border-color:var(--primary);color:var(--primary)}
+.filter-chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.atlas-toggle{
+  margin-left:auto;
+  font-size:13px;font-weight:600;font-family:var(--font-headline);
+  padding:var(--space-sm) var(--space-lg);
+  border-radius:var(--radius-pill);
+  background:var(--surface-container);
+  border:1px solid var(--border-strong);
+  color:var(--fg-1);cursor:pointer;transition:all 0.15s;
+}
+.atlas-toggle:hover{background:var(--surface-container-high)}
+.atlas-body{display:none}
+.atlas-body.open{display:block}
+.note-cards{display:flex;flex-direction:column;gap:var(--space-md)}
+.note-card{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  overflow:hidden;box-shadow:var(--shadow-sm);
+  transition:box-shadow 0.15s;
+}
+.note-card:hover{box-shadow:var(--shadow-md)}
+.note-card.highlight{border-color:var(--primary);box-shadow:0 0 0 2px rgba(160,59,0,0.15)}
+.note-card-header{
+  padding:var(--space-md) var(--space-lg);
+  display:flex;align-items:flex-start;gap:var(--space-md);
+  cursor:pointer;
+}
+.note-card-main{flex:1;min-width:0}
+.note-card-title{
+  font-family:var(--font-headline);font-size:0.9rem;font-weight:600;
+  color:var(--fg-1);letter-spacing:-0.01em;
+  display:flex;align-items:center;gap:var(--space-sm);flex-wrap:wrap;
+}
+.note-card-path{font-size:11px;color:var(--fg-muted);font-family:var(--font-mono);margin-top:2px}
+.note-tag-chips{display:flex;flex-wrap:wrap;gap:var(--space-xs);margin-top:var(--space-sm)}
+.tag-chip{
+  font-size:11px;font-weight:500;
+  padding:1px var(--space-sm);
+  border-radius:var(--radius-pill);
+  background:var(--surface-container);
+  color:var(--fg-muted);border:1px solid var(--border);
+}
+.note-card-meta{
+  display:flex;align-items:center;gap:var(--space-md);
+  flex-shrink:0;
+}
+.meta-pill{
+  font-family:var(--font-mono);font-size:11px;color:var(--fg-muted);
+  background:var(--surface-container);
+  padding:2px var(--space-sm);border-radius:var(--radius-pill);
+  white-space:nowrap;
+}
+.meta-pill.warn{background:rgba(239,68,68,0.1);color:var(--red)}
+.meta-pill.todo{background:rgba(245,158,11,0.1);color:var(--yellow)}
+.note-card-body{
+  display:none;
+  padding:var(--space-md) var(--space-lg) var(--space-lg);
+  border-top:1px solid var(--border);
+}
+.note-card-body.open{display:block}
+.note-links{display:flex;flex-wrap:wrap;gap:var(--space-xs);margin-bottom:var(--space-md)}
+.note-link-chip{
+  font-size:12px;font-weight:500;
+  padding:3px var(--space-md);
+  border-radius:var(--radius-pill);
+  border:1px solid var(--outline-variant);
+  color:var(--primary);cursor:pointer;
+  background:var(--surface-container-lowest);
+  transition:all 0.12s;
+}
+.note-link-chip:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+.note-links-label{font-size:11px;color:var(--fg-muted);margin-bottom:var(--space-xs);font-weight:600;letter-spacing:0.04em;text-transform:uppercase}
+.note-rendered{
+  font-size:14px;line-height:1.6;color:var(--fg-2);
+  padding-top:var(--space-md);
+}
+.note-rendered h1,.note-rendered h2,.note-rendered h3{
+  font-family:var(--font-headline);font-weight:600;color:var(--fg-1);
+  margin:var(--space-lg) 0 var(--space-sm);letter-spacing:-0.01em;
+}
+.note-rendered h1{font-size:1.1rem}
+.note-rendered h2{font-size:0.95rem}
+.note-rendered h3{font-size:0.88rem;color:var(--fg-2)}
+.note-rendered p{margin-bottom:var(--space-md)}
+.note-rendered ul,.note-rendered ol{padding-left:var(--space-xl);margin-bottom:var(--space-md)}
+.note-rendered li{margin-bottom:var(--space-xs)}
+.note-rendered blockquote{
+  border-left:3px solid var(--outline-variant);
+  padding:var(--space-sm) var(--space-lg);
+  color:var(--fg-muted);margin:var(--space-md) 0;
+  font-style:italic;
+}
+.note-rendered code{
+  font-family:var(--font-mono);font-size:12px;
+  background:var(--surface-container);
+  padding:1px 5px;border-radius:4px;
+}
+.note-rendered pre{
+  background:var(--surface-container);
+  border-radius:var(--radius-sm);
+  padding:var(--space-md);overflow-x:auto;
+  margin-bottom:var(--space-md);
+}
+.note-rendered pre code{background:none;padding:0}
+.wikilink-pill{
+  display:inline-flex;align-items:center;
+  font-size:12px;font-weight:500;
+  padding:1px var(--space-sm);
+  border-radius:var(--radius-pill);
+  background:var(--primary-fixed);
+  color:var(--primary);border:1px solid var(--primary-fixed-dim);
+  cursor:pointer;transition:all 0.12s;vertical-align:baseline;
+  line-height:1.4;
+}
+.wikilink-pill:hover{background:var(--primary);color:#fff}
+@media(prefers-color-scheme:dark){
+  .wikilink-pill{background:rgba(255,107,53,0.15);color:var(--primary);border-color:rgba(255,107,53,0.3)}
+  .wikilink-pill:hover{background:var(--primary);color:#fff}
+}
+.todo-item{
+  display:flex;align-items:flex-start;gap:var(--space-sm);
+  font-size:13px;color:var(--fg-2);padding:2px 0;
+}
+.todo-checkbox{
+  width:14px;height:14px;border:1.5px solid var(--outline-variant);
+  border-radius:3px;flex-shrink:0;margin-top:3px;
+}
+.todo-done .todo-checkbox{background:var(--green);border-color:var(--green)}
+.no-results{
+  text-align:center;padding:var(--space-4xl);
+  color:var(--fg-muted);font-size:14px;
+}
+mark{background:rgba(245,158,11,0.3);border-radius:3px;padding:0 2px}
+
+/* COPY BUTTON */
+.copy-btn{
+  display:inline-flex;align-items:center;gap:var(--space-xs);
+  font-size:12px;font-weight:500;font-family:var(--font-body);
+  padding:var(--space-xs) var(--space-md);
+  border-radius:var(--radius-pill);
+  border:1px solid var(--border-strong);
+  background:var(--surface-container);
+  color:var(--fg-muted);cursor:pointer;transition:all 0.15s;
+}
+.copy-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+/* STATUS TAGS */
+.status-orphan{background:rgba(141,113,102,0.12);color:var(--fg-muted);font-size:10px;padding:1px 6px;border-radius:var(--radius-pill);border:1px solid var(--border)}
+.status-stale{background:rgba(239,68,68,0.1);color:var(--red);font-size:10px;padding:1px 6px;border-radius:var(--radius-pill);border:1px solid rgba(239,68,68,0.2)}
+
+/* FOLDER BREAKDOWN */
+.folder-grid{display:flex;flex-direction:column;gap:var(--space-sm)}
+.folder-row{
+  display:flex;align-items:center;gap:var(--space-md);
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  padding:var(--space-md) var(--space-lg);
+}
+.folder-name{font-family:var(--font-mono);font-size:13px;color:var(--fg-2);flex:1}
+.folder-bar-wrap{flex:2;background:var(--surface-container);border-radius:var(--radius-pill);height:6px;overflow:hidden}
+.folder-bar{height:100%;border-radius:var(--radius-pill);background:var(--gradient-primary);transition:width 0.6s ease}
+.folder-stat{font-family:var(--font-mono);font-size:12px;color:var(--fg-muted);min-width:60px;text-align:right}
+
+/* FOOTER */
+.story-footer{
+  border-top:1px solid var(--border);
+  padding:var(--space-3xl) var(--space-xl);
+  text-align:center;
+  font-size:12px;color:var(--fg-muted);line-height:1.7;
+  max-width:900px;margin:0 auto;
+}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.4s ease,transform 0.4s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+/* TOOLTIP */
+.graph-tooltip{
+  position:fixed;pointer-events:none;
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-md);
+  padding:var(--space-sm) var(--space-md);
+  font-size:12px;color:var(--fg-1);
+  box-shadow:var(--shadow-lg);
+  z-index:9999;display:none;max-width:200px;
+}
+</style>
+</head>
+<body>
+<script>const DATA = {"kind":"obsidian-vault","notes":[{"id":"areas/engineering","path":"Areas/Engineering.md","filename":"Engineering.md","title":"Engineering","tags":["area","engineering","runbook"],"wordCount":171,"headingCount":6,"headings":[{"level":1,"text":"Engineering"},{"level":2,"text":"Architecture (high level)"},{"level":2,"text":"On-call"},{"level":2,"text":"Active runbooks"},{"level":2,"text":"Open problems"},{"level":2,"text":"Linked notes"}],"outboundLinks":["people/mira chen","projects/pricing v2","projects/onboarding 2.0","areas/hiring","projects/series a"],"inboundLinks":["areas/hiring","daily/2026-04-15","inbox","index","people/mira chen","projects/onboarding 2.0","projects/pricing v2","projects/series a"],"outboundCount":5,"inboundCount":8,"todoOpenCount":4,"todoTotalCount":4,"todos":[{"line":"Auth refactor — blocks [[Pricing V2]] and [[Onboarding 2.0]]","done":false},{"line":"Activation telemetry pipeline — owner [[Mira Chen]]","done":false},{"line":"Cycle-time numbers for the [[Series A]] data room","done":false},{"line":"Database failover runbook needs a re-test","done":false}],"updatedFromFrontmatter":"2026-04-30","updatedEpoch":1777507200000,"isStale":false,"isOrphan":false,"excerpt":"Everything engineering-org-wide that doesn't fit a project. Owned by [[Mira Chen]] day-to-day; I (Sam) keep this updated as a hub. - Frontend: Next.js + React, deployed on Cloudflare Pages - Backend: Node + TypeScript, Cloud Run, Cloud SQL Postgres - Auth: home-grown today, repla","raw":"---\ntitle: Engineering\ntags: [area, engineering, runbook]\nupdated: 2026-04-30\n---\n\n# Engineering\n\nEverything engineering-org-wide that doesn't fit a project. Owned\nby [[Mira Chen]] day-to-day; I (Sam) keep this updated as a hub.\n\n## Architecture (high level)\n\n- Frontend: Next.js + React, deployed on Cloudflare Pages\n- Backend: Node + TypeScript, Cloud Run, Cloud SQL Postgres\n- Auth: home-grown today, replacing in [[Pricing V2]] / [[Onboarding 2.0]]\n  refactor\n\n## On-call\n\n- Rotation: weekly, [[Mira Chen]] + 2 senior engineers (one is on\n  hiring loop — see [[Hiring]])\n- Pager: Grafana + PagerDuty\n- Escalation: page Mira, then Sam\n\n## Active runbooks\n\n- Checkout-service rollback (last verified 2026-04-12)\n- Cloudflare cache purge (last verified 2026-03-28)\n- Database failover (last verified 2026-02-14)\n\n## Open problems\n\n- [ ] Auth refactor — blocks [[Pricing V2]] and [[Onboarding 2.0]]\n- [ ] Activation telemetry pipeline — owner [[Mira Chen]]\n- [ ] Cycle-time numbers for the [[Series A]] data room\n- [ ] Database failover runbook needs a re-test\n\n## Linked notes\n\n- [[Mira Chen]]\n- [[Pricing V2]]\n- [[Onboarding 2.0]]\n- [[Hiring]]\n- [[Series A]]\n","ageDays":11},{"id":"areas/hiring","path":"Areas/Hiring.md","filename":"Hiring.md","title":"Hiring","tags":["area","hiring","recruiting"],"wordCount":202,"headingCount":6,"headings":[{"level":1,"text":"Hiring"},{"level":2,"text":"Open roles"},{"level":2,"text":"Interview loop"},{"level":2,"text":"Compensation philosophy"},{"level":2,"text":"Open threads"},{"level":2,"text":"Linked notes"}],"outboundLinks":["projects/series a","people/mira chen","people/alex rivera","people/sarah kim","daily/2026-05-01","projects/pricing v2","areas/engineering"],"inboundLinks":["areas/engineering","daily/2026-04-15","daily/2026-05-01","inbox","index","people/alex rivera","people/mira chen","projects/series a"],"outboundCount":7,"inboundCount":8,"todoOpenCount":4,"todoTotalCount":4,"todos":[{"line":"Decide: do we hire CS Lead or contract out for 6 months?","done":false},{"line":"Comp band review for Sr. Backend role — see [[Mira Chen]]","done":false},{"line":"Referral from [[Alex Rivera]] mentioned in [[2026-05-01]]","done":false},{"line":"Update the careers page after [[Pricing V2]] launch","done":false}],"updatedFromFrontmatter":"2026-05-02","updatedEpoch":1777680000000,"isStale":false,"isOrphan":false,"excerpt":"Currently hiring for 4 roles. Plan is to close 2 by end of Q2 and the other 2 by Q3. [[Series A]] cash informs the rest. - **Sr. Backend Engineer** — owner [[Mira Chen]]. Pipeline: 8 candidates. - **Sr. Product Designer** — owner [[Alex Rivera]]. Pipeline: 5 candidates, 1 strong.","raw":"---\ntitle: Hiring\ntags: [area, hiring, recruiting]\nupdated: 2026-05-02\n---\n\n# Hiring\n\nCurrently hiring for 4 roles. Plan is to close 2 by end of Q2 and the\nother 2 by Q3. [[Series A]] cash informs the rest.\n\n## Open roles\n\n- **Sr. Backend Engineer** — owner [[Mira Chen]]. Pipeline: 8 candidates.\n- **Sr. Product Designer** — owner [[Alex Rivera]]. Pipeline: 5\n  candidates, 1 strong.\n- **Customer Success Lead** — no owner yet, I'm sourcing.\n- **Growth PM** — backfill for [[Sarah Kim]]'s second-in-command.\n\n## Interview loop\n\n- Phone screen → tech screen → on-site (4 panels) → offer\n- Average loop length: 18 days\n- Offer-accept rate: 70% (we lose to comp 50% of the rejects)\n\n## Compensation philosophy\n\n- 50th percentile cash, 75th percentile equity\n- Refresh grants every 2 years\n- See [[Series A]] note on the dilution model\n\n## Open threads\n\n- [ ] Decide: do we hire CS Lead or contract out for 6 months?\n- [ ] Comp band review for Sr. Backend role — see [[Mira Chen]]\n- [ ] Referral from [[Alex Rivera]] mentioned in [[2026-05-01]]\n- [ ] Update the careers page after [[Pricing V2]] launch\n\n## Linked notes\n\n- [[Mira Chen]]\n- [[Alex Rivera]]\n- [[Sarah Kim]]\n- [[Series A]]\n- [[Engineering]]\n","ageDays":9},{"id":"daily/2026-04-15","path":"Daily/2026-04-15.md","filename":"2026-04-15.md","title":"2026-04-15","tags":["daily"],"wordCount":154,"headingCount":4,"headings":[{"level":1,"text":"2026-04-15 — Wednesday"},{"level":2,"text":"What got decided"},{"level":2,"text":"Open threads"},{"level":2,"text":"Notes"}],"outboundLinks":["projects/onboarding 2.0","people/sarah kim","people/mira chen","projects/pricing v2","areas/hiring","areas/engineering","projects/series a"],"inboundLinks":["index","people/mira chen","people/sarah kim","projects/onboarding 2.0"],"outboundCount":7,"inboundCount":4,"todoOpenCount":3,"todoTotalCount":3,"todos":[{"line":"Leveling rubric for [[Mira Chen]]","done":false},{"line":"Forward the funnel teardown deck to [[Engineering]] team","done":false},{"line":"Reschedule [[Series A]] partner intro that got bumped","done":false}],"updatedFromFrontmatter":"2026-04-15","updatedEpoch":1776211200000,"isStale":false,"isOrphan":false,"excerpt":"Quarterly planning offsite. Long day. - **[[Onboarding 2.0]] gets the company-info form cut from 12 fields to 3.** Owner: [[Sarah Kim]]. She presented the funnel teardown showing the form was the #1 drop-off. - **Promotion conversation with [[Mira Chen]]** went well. Agreed to sh","raw":"---\ntitle: 2026-04-15\ntags: [daily]\ndate: 2026-04-15\n---\n\n# 2026-04-15 — Wednesday\n\nQuarterly planning offsite. Long day.\n\n## What got decided\n\n- **[[Onboarding 2.0]] gets the company-info form cut from 12 fields to 3.**\n  Owner: [[Sarah Kim]]. She presented the funnel teardown showing the\n  form was the #1 drop-off.\n- **Promotion conversation with [[Mira Chen]]** went well. Agreed to\n  ship a leveling rubric by end of month so the staff/principal\n  question becomes data-driven, not vibes-driven.\n- **Quarterly OKRs frozen.** [[Pricing V2]], [[Onboarding 2.0]], and\n  [[Hiring]] are the top three.\n\n## Open threads\n\n- [ ] Leveling rubric for [[Mira Chen]]\n- [ ] Forward the funnel teardown deck to [[Engineering]] team\n- [ ] Reschedule [[Series A]] partner intro that got bumped\n\n## Notes\n\n- [[Sarah Kim]] is sharper on funnel math than I gave her credit for.\n- Need to schedule the Q3 planning week for late June.\n\n> \"If three things are top-three, no one thing is top priority. Pick.\"\n","ageDays":26},{"id":"daily/2026-04-22","path":"Daily/2026-04-22.md","filename":"2026-04-22.md","title":"2026-04-22","tags":["daily"],"wordCount":174,"headingCount":4,"headings":[{"level":1,"text":"2026-04-22 — Wednesday"},{"level":2,"text":"What got decided"},{"level":2,"text":"Open threads"},{"level":2,"text":"Notes"}],"outboundLinks":["people/sarah kim","people/alex rivera","people/mira chen","projects/pricing v2","projects/onboarding 2.0","projects/series a"],"inboundLinks":["index","people/alex rivera","people/mira chen","people/sarah kim","projects/pricing v2"],"outboundCount":6,"inboundCount":5,"todoOpenCount":3,"todoTotalCount":3,"todos":[{"line":"Grandfathering policy for existing Pro plan customers","done":false},{"line":"Annual-toggle default — followup needed","done":false},{"line":"Update the [[Series A]] deck with the new tier structure","done":false}],"updatedFromFrontmatter":"2026-04-22","updatedEpoch":1776816000000,"isStale":false,"isOrphan":false,"excerpt":"Half-day pricing offsite with [[Sarah Kim]], [[Alex Rivera]], and [[Mira Chen]]. - **[[Pricing V2]] tier names: Solo / Team / Scale.** [[Sarah Kim]] argued Starter > Solo; lost on the basis that Solo signals \"actually useful for one person\", Starter signals \"limited demo\". - **Dr","raw":"---\ntitle: 2026-04-22\ntags: [daily]\ndate: 2026-04-22\n---\n\n# 2026-04-22 — Wednesday\n\nHalf-day pricing offsite with [[Sarah Kim]], [[Alex Rivera]], and [[Mira Chen]].\n\n## What got decided\n\n- **[[Pricing V2]] tier names: Solo / Team / Scale.** [[Sarah Kim]]\n  argued Starter > Solo; lost on the basis that Solo signals\n  \"actually useful for one person\", Starter signals \"limited demo\".\n- **Drop the Free tier.** Replace with a 14-day trial. Decided\n  jointly; everyone aligned.\n- **Ship pricing migration and auth refactor together.** [[Mira Chen]]\n  flagged the dependency; we agreed not to split.\n- **Design system v2 rollout** for [[Pricing V2]] only first, then\n  spreads to [[Onboarding 2.0]].\n\n## Open threads\n\n- [ ] Grandfathering policy for existing Pro plan customers\n- [ ] Annual-toggle default — followup needed\n- [ ] Update the [[Series A]] deck with the new tier structure\n\n## Notes\n\n- The \"compare features\" page debate could have been an email.\n- [[Alex Rivera]] design system v2 looks great.\n\n> \"When the tier name debate goes longer than 30 minutes, the names\n> are fine and the founders are tired.\"\n","ageDays":19},{"id":"daily/2026-05-01","path":"Daily/2026-05-01.md","filename":"2026-05-01.md","title":"2026-05-01","tags":["daily"],"wordCount":158,"headingCount":4,"headings":[{"level":1,"text":"2026-05-01 — Friday"},{"level":2,"text":"What got decided"},{"level":2,"text":"Open threads"},{"level":2,"text":"Notes"}],"outboundLinks":["projects/onboarding 2.0","projects/pricing v2","people/mira chen","people/sarah kim","people/alex rivera","projects/series a","areas/hiring"],"inboundLinks":["areas/hiring","inbox","index","people/alex rivera","people/mira chen","people/sarah kim","projects/onboarding 2.0","projects/pricing v2","projects/series a"],"outboundCount":7,"inboundCount":9,"todoOpenCount":3,"todoTotalCount":3,"todos":[{"line":"Activation cohort dashboard — owner [[Mira Chen]]","done":false},{"line":"Empty-state copy review with [[Alex Rivera]] next week","done":false},{"line":"[[Series A]] partner meeting prep for 2026-05-12","done":false}],"updatedFromFrontmatter":"2026-05-01","updatedEpoch":1777593600000,"isStale":false,"isOrphan":false,"excerpt":"Wireframe critique for [[Onboarding 2.0]] this morning, then [[Pricing V2]] A/B kickoff in the afternoon. - **[[Onboarding 2.0]] deferred-invite ships to 5% first, then 25% after a week.** [[Mira Chen]] pushed back on 5%, [[Sarah Kim]] agreed to the staged rollout. - **Company-in","raw":"---\ntitle: 2026-05-01\ntags: [daily]\ndate: 2026-05-01\n---\n\n# 2026-05-01 — Friday\n\nWireframe critique for [[Onboarding 2.0]] this morning, then\n[[Pricing V2]] A/B kickoff in the afternoon.\n\n## What got decided\n\n- **[[Onboarding 2.0]] deferred-invite ships to 5% first, then 25%\n  after a week.** [[Mira Chen]] pushed back on 5%, [[Sarah Kim]]\n  agreed to the staged rollout.\n- **Company-info form: 3 fields, exactly.** No \"team size\" range\n  picker. Just text input. [[Alex Rivera]] won that argument.\n- **[[Pricing V2]] A/B started at 50/50.** Deadline 2026-05-20 for the\n  call.\n\n## Open threads\n\n- [ ] Activation cohort dashboard — owner [[Mira Chen]]\n- [ ] Empty-state copy review with [[Alex Rivera]] next week\n- [ ] [[Series A]] partner meeting prep for 2026-05-12\n\n## Notes\n\n- The \"do something first, ask later\" framing is stronger than I\n  thought it would be on the [[Onboarding 2.0]] critique.\n- Kept the morning meeting-free until 11am. Worth doing every day.\n- [[Alex Rivera]] mentioned a hiring referral — see [[Hiring]].\n","ageDays":10},{"id":"inbox","path":"Inbox.md","filename":"Inbox.md","title":"Inbox","tags":["hub","inbox"],"wordCount":194,"headingCount":3,"headings":[{"level":1,"text":"Inbox"},{"level":2,"text":"Open TODOs"},{"level":2,"text":"Random notes"}],"outboundLinks":["projects/pricing v2","people/alex rivera","daily/2026-05-01","resources/reading list","people/mira chen","projects/series a","areas/engineering","people/sarah kim","areas/hiring"],"inboundLinks":["index"],"outboundCount":9,"inboundCount":1,"todoOpenCount":12,"todoTotalCount":12,"todos":[{"line":"Schedule the Q3 planning week — June 22-26","done":false},{"line":"Email Cardinal partner with the [[Pricing V2]] preview link","done":false},{"line":"Followup on the design referral [[Alex Rivera]] mentioned in","done":false},{"line":"Read the new Sarah-recommended marketplace book (in [[Reading List]])","done":false},{"line":"Send the leveling rubric I owe [[Mira Chen]] from 2026-04-15","done":false},{"line":"Write the [[Series A]] deck v7 update post-2026-05-20","done":false},{"line":"Update the [[Engineering]] runbook for database failover","done":false},{"line":"Followup with [[Sarah Kim]] on her two promotion cases","done":false},{"line":"Decide: contract CS or hire (see [[Hiring]])","done":false},{"line":"Reschedule the [[Series A]] partner intro that got bumped on","done":false},{"line":"FIXME: my linking convention is inconsistent — sometimes","done":false},{"line":"- TODO: figure out a way to surface stale notes automatically.","done":false}],"updatedFromFrontmatter":"2026-05-08","updatedEpoch":1778198400000,"isStale":false,"isOrphan":false,"excerpt":"Loose thoughts. I triage this weekly. - [ ] Schedule the Q3 planning week — June 22-26 - [ ] Email Cardinal partner with the [[Pricing V2]] preview link - [ ] Followup on the design referral [[Alex Rivera]] mentioned in [[2026-05-01]] - [ ] Read the new Sarah-recommended marketpl","raw":"---\ntitle: Inbox\ntags: [hub, inbox]\nupdated: 2026-05-08\n---\n\n# Inbox\n\nLoose thoughts. I triage this weekly.\n\n## Open TODOs\n\n- [ ] Schedule the Q3 planning week — June 22-26\n- [ ] Email Cardinal partner with the [[Pricing V2]] preview link\n- [ ] Followup on the design referral [[Alex Rivera]] mentioned in\n      [[2026-05-01]]\n- [ ] Read the new Sarah-recommended marketplace book (in [[Reading List]])\n- [ ] Send the leveling rubric I owe [[Mira Chen]] from 2026-04-15\n- [ ] Write the [[Series A]] deck v7 update post-2026-05-20\n- [ ] Update the [[Engineering]] runbook for database failover\n- [ ] Followup with [[Sarah Kim]] on her two promotion cases\n- [ ] Decide: contract CS or hire (see [[Hiring]])\n- [ ] Reschedule the [[Series A]] partner intro that got bumped on\n      2026-04-15\n- [ ] FIXME: my linking convention is inconsistent — sometimes\n      `[[2026-05-01]]`, sometimes `[[Daily/2026-05-01]]`. Pick one.\n\n## Random notes\n\n- Idea: a \"what changed this week\" rollup of all daily notes —\n  feeds the Friday investor updates.\n- The [[Reading List]] is getting long. Cut things older than 6\n  months that haven't been re-referenced.\n- TODO: figure out a way to surface stale notes automatically.\n","ageDays":3},{"id":"index","path":"Index.md","filename":"Index.md","title":"Index","tags":["hub","dashboard"],"wordCount":111,"headingCount":7,"headings":[{"level":1,"text":"Index"},{"level":2,"text":"Active projects"},{"level":2,"text":"Areas"},{"level":2,"text":"People"},{"level":2,"text":"Recent dailies"},{"level":2,"text":"Inbox"},{"level":2,"text":"Resources"}],"outboundLinks":["projects/pricing v2","projects/onboarding 2.0","projects/series a","areas/engineering","areas/hiring","people/mira chen","people/alex rivera","people/sarah kim","daily/2026-05-01","daily/2026-04-22","daily/2026-04-15","inbox","resources/reading list"],"inboundLinks":[],"outboundCount":13,"inboundCount":0,"todoOpenCount":0,"todoTotalCount":0,"todos":[],"updatedFromFrontmatter":"2026-05-08","updatedEpoch":1778198400000,"isStale":false,"isOrphan":true,"excerpt":"The map of everything. Updated weekly. - [[Pricing V2]] — live A/B, decision by 2026-05-20. - [[Onboarding 2.0]] — design review Friday. - [[Series A]] — pre-empt term sheet outstanding. - [[Engineering]] — runbooks, on-call, architecture. - [[Hiring]] — open roles, interview loo","raw":"---\ntitle: Index\ntags: [hub, dashboard]\nupdated: 2026-05-08\n---\n\n# Index\n\nThe map of everything. Updated weekly.\n\n## Active projects\n\n- [[Pricing V2]] — live A/B, decision by 2026-05-20.\n- [[Onboarding 2.0]] — design review Friday.\n- [[Series A]] — pre-empt term sheet outstanding.\n\n## Areas\n\n- [[Engineering]] — runbooks, on-call, architecture.\n- [[Hiring]] — open roles, interview loop.\n\n## People\n\n- [[Mira Chen]] (eng lead)\n- [[Alex Rivera]] (design)\n- [[Sarah Kim]] (PM)\n\n## Recent dailies\n\n- [[2026-05-01]]\n- [[2026-04-22]]\n- [[2026-04-15]]\n\n## Inbox\n\n- [[Inbox]] — every loose thought lands here first.\n\n## Resources\n\n- [[Reading List]]\n\n> \"If you can't see the whole vault from here, the vault is too big or this page is too small.\"\n","ageDays":3},{"id":"people/alex rivera","path":"People/Alex Rivera.md","filename":"Alex Rivera.md","title":"Alex Rivera","tags":["person","design"],"wordCount":136,"headingCount":5,"headings":[{"level":1,"text":"Alex Rivera"},{"level":2,"text":"Active work"},{"level":2,"text":"Recent 1:1 notes"},{"level":2,"text":"What I want to talk about next"},{"level":2,"text":"TODO (from me)"}],"outboundLinks":["projects/pricing v2","projects/onboarding 2.0","daily/2026-05-01","daily/2026-04-22","areas/hiring","resources/reading list"],"inboundLinks":["areas/hiring","daily/2026-04-22","daily/2026-05-01","inbox","index","people/sarah kim","projects/onboarding 2.0","projects/pricing v2","resources/reading list"],"outboundCount":6,"inboundCount":9,"todoOpenCount":2,"todoTotalCount":2,"todos":[{"line":"Review his hiring rubric for the design role","done":false},{"line":"Send the example pricing pages I bookmarked in [[Reading List]]","done":false}],"updatedFromFrontmatter":"2026-05-06","updatedEpoch":1778025600000,"isStale":false,"isOrphan":false,"excerpt":"Head of design. Owns the design system, [[Pricing V2]] page, and [[Onboarding 2.0]] flow. Came from a design-systems-first background; likes to ship the system before the screens. - [[Pricing V2]] — final copy + visual pass - [[Onboarding 2.0]] — wireframes, empty-state copy - 20","raw":"---\ntitle: Alex Rivera\ntags: [person, design]\nrole: Head of Design\njoined: 2025-01-15\nupdated: 2026-05-06\n---\n\n# Alex Rivera\n\nHead of design. Owns the design system, [[Pricing V2]] page, and\n[[Onboarding 2.0]] flow. Came from a design-systems-first background;\nlikes to ship the system before the screens.\n\n## Active work\n\n- [[Pricing V2]] — final copy + visual pass\n- [[Onboarding 2.0]] — wireframes, empty-state copy\n\n## Recent 1:1 notes\n\n- 2026-05-01 — wireframe walkthrough for [[Onboarding 2.0]]; we\n  argued about the company-info form. He won. See [[2026-05-01]].\n- 2026-04-22 — design system v2 rollout discussion. Source: [[2026-04-22]].\n\n## What I want to talk about next\n\n- Design hire — see [[Hiring]]\n- How much time to invest in [[Pricing V2]] iterations vs. moving on\n\n## TODO (from me)\n\n- [ ] Review his hiring rubric for the design role\n- [ ] Send the example pricing pages I bookmarked in [[Reading List]]\n","ageDays":5},{"id":"people/mira chen","path":"People/Mira Chen.md","filename":"Mira Chen.md","title":"Mira Chen","tags":["person","eng","leadership"],"wordCount":175,"headingCount":5,"headings":[{"level":1,"text":"Mira Chen"},{"level":2,"text":"What she's working on"},{"level":2,"text":"Recent 1:1 notes"},{"level":2,"text":"What I want to talk about next"},{"level":2,"text":"TODO (from me)"}],"outboundLinks":["projects/pricing v2","projects/onboarding 2.0","areas/engineering","daily/2026-05-01","daily/2026-04-22","daily/2026-04-15","areas/hiring","projects/series a"],"inboundLinks":["areas/engineering","areas/hiring","daily/2026-04-15","daily/2026-04-22","daily/2026-05-01","inbox","index","projects/onboarding 2.0","projects/pricing v2","resources/reading list"],"outboundCount":8,"inboundCount":10,"todoOpenCount":2,"todoTotalCount":2,"todos":[{"line":"Send the leveling rubric I promised on 2026-04-15","done":false},{"line":"Connect her with the Cardinal partner from [[Series A]]","done":false}],"updatedFromFrontmatter":"2026-05-04","updatedEpoch":1777852800000,"isStale":false,"isOrphan":false,"excerpt":"Engineering lead. Owns checkout-service, auth, and the activation pipeline. Started at Stripe, then a year at a YC seed-stage that folded. - [[Pricing V2]] — checkout-service migration - [[Onboarding 2.0]] — activation telemetry, auth flow - [[Engineering]] — runbook ownership - ","raw":"---\ntitle: Mira Chen\ntags: [person, eng, leadership]\nrole: Engineering Lead\njoined: 2024-09-01\nupdated: 2026-05-04\n---\n\n# Mira Chen\n\nEngineering lead. Owns checkout-service, auth, and the activation\npipeline. Started at Stripe, then a year at a YC seed-stage that\nfolded.\n\n## What she's working on\n\n- [[Pricing V2]] — checkout-service migration\n- [[Onboarding 2.0]] — activation telemetry, auth flow\n- [[Engineering]] — runbook ownership\n\n## Recent 1:1 notes\n\n- 2026-05-01 — pushed back on the [[Onboarding 2.0]] deferred-invite\n  timeline; thinks 5% rollout is too slow. Counter: we agreed 5% for\n  one week, then 25%. See [[2026-05-01]].\n- 2026-04-22 — flagged that [[Pricing V2]] checkout migration would\n  block on the auth refactor; we agreed to ship them together. See\n  [[2026-04-22]].\n- 2026-04-15 — promotion conversation, leveling discussion. See\n  [[2026-04-15]].\n\n## What I want to talk about next\n\n- Career conversation — staff vs. principal track\n- Hiring backfill for [[Hiring]] (we agreed she'd own one Sr. role)\n- How [[Series A]] timing affects her roadmap\n\n## TODO (from me)\n\n- [ ] Send the leveling rubric I promised on 2026-04-15\n- [ ] Connect her with the Cardinal partner from [[Series A]]\n","ageDays":7},{"id":"people/sarah kim","path":"People/Sarah Kim.md","filename":"Sarah Kim.md","title":"Sarah Kim","tags":["person","pm","growth"],"wordCount":155,"headingCount":5,"headings":[{"level":1,"text":"Sarah Kim"},{"level":2,"text":"Active work"},{"level":2,"text":"Recent 1:1 notes"},{"level":2,"text":"What I want to talk about next"},{"level":2,"text":"TODO (from me)"}],"outboundLinks":["projects/pricing v2","projects/onboarding 2.0","people/alex rivera","daily/2026-05-01","daily/2026-04-22","daily/2026-04-15","projects/series a","resources/reading list"],"inboundLinks":["areas/hiring","daily/2026-04-15","daily/2026-04-22","daily/2026-05-01","inbox","index","projects/onboarding 2.0","projects/pricing v2","projects/series a","resources/reading list"],"outboundCount":8,"inboundCount":10,"todoOpenCount":2,"todoTotalCount":2,"todos":[{"line":"Forward the Lenny pricing-tier piece from [[Reading List]]","done":false},{"line":"Review her promotion cases for two reports","done":false}],"updatedFromFrontmatter":"2026-05-03","updatedEpoch":1777766400000,"isStale":false,"isOrphan":false,"excerpt":"Head of product. Owns [[Pricing V2]] and [[Onboarding 2.0]] in close partnership with [[Alex Rivera]]. Came from a growth PM background at a marketplace; obsessed with funnel math. - [[Pricing V2]] — A/B experiment owner - [[Onboarding 2.0]] — funnel ownership - 2026-05-01 — agre","raw":"---\ntitle: Sarah Kim\ntags: [person, pm, growth]\nrole: Head of Product\njoined: 2024-11-01\nupdated: 2026-05-03\n---\n\n# Sarah Kim\n\nHead of product. Owns [[Pricing V2]] and [[Onboarding 2.0]] in close\npartnership with [[Alex Rivera]]. Came from a growth PM background at\na marketplace; obsessed with funnel math.\n\n## Active work\n\n- [[Pricing V2]] — A/B experiment owner\n- [[Onboarding 2.0]] — funnel ownership\n\n## Recent 1:1 notes\n\n- 2026-05-01 — agreed that the [[Onboarding 2.0]] deferred-invite ships\n  to 5% first, then 25%. See [[2026-05-01]].\n- 2026-04-22 — pricing tier names debate, we landed on Solo / Team /\n  Scale. See [[2026-04-22]].\n- 2026-04-15 — quarterly planning, she presented the funnel teardown\n  that motivated [[Onboarding 2.0]]. See [[2026-04-15]].\n\n## What I want to talk about next\n\n- Career conversation — VP track\n- Promotion case for two reports\n- [[Series A]] data room — what she owns\n\n## TODO (from me)\n\n- [ ] Forward the Lenny pricing-tier piece from [[Reading List]]\n- [ ] Review her promotion cases for two reports\n","ageDays":8},{"id":"projects/onboarding 2.0","path":"Projects/Onboarding 2.0.md","filename":"Onboarding 2.0.md","title":"Onboarding 2.0","tags":["project","onboarding","growth"],"wordCount":237,"headingCount":7,"headings":[{"level":1,"text":"Onboarding 2.0"},{"level":2,"text":"The hypothesis"},{"level":2,"text":"Owners"},{"level":2,"text":"Decisions made"},{"level":2,"text":"Open questions"},{"level":2,"text":"Linked notes"},{"level":2,"text":"TODO"}],"outboundLinks":["daily/2026-05-01","people/alex rivera","people/mira chen","people/sarah kim","daily/2026-04-15","projects/pricing v2","areas/engineering"],"inboundLinks":["areas/engineering","daily/2026-04-15","daily/2026-04-22","daily/2026-05-01","index","people/alex rivera","people/mira chen","people/sarah kim","projects/pricing v2","projects/series a","resources/old idea — voice ui","resources/reading list"],"outboundCount":7,"inboundCount":12,"todoOpenCount":6,"todoTotalCount":6,"todos":[{"line":"What \"first successful workflow\" means for self-serve vs sales-led","done":false},{"line":"Empty-state copy for the \"do something first\" screen","done":false},{"line":"How to handle accounts that signed up via [[Pricing V2]] but","done":false},{"line":"Ship the v0.1 of the new flow to 5% of signups by 2026-05-15","done":false},{"line":"Activation cohort dashboard, owner [[Mira Chen]]","done":false},{"line":"Empty-state copy review with [[Alex Rivera]]","done":false}],"updatedFromFrontmatter":"2026-05-05","updatedEpoch":1777939200000,"isStale":false,"isOrphan":false,"excerpt":"The first 60 seconds are everything. Today: 41% of signups never reach the second screen. Three friction points kill activation: 1. The team-invite step before the user has seen any value 2. The 12-field \"tell us about your company\" form 3. The \"connect your data\" step that requi","raw":"---\ntitle: Onboarding 2.0\ntags: [project, onboarding, growth]\nstatus: in-progress\nowner: Alex Rivera\nupdated: 2026-05-05\n---\n\n# Onboarding 2.0\n\nThe first 60 seconds are everything. Today: 41% of signups never reach\nthe second screen.\n\n## The hypothesis\n\nThree friction points kill activation:\n\n1. The team-invite step before the user has seen any value\n2. The 12-field \"tell us about your company\" form\n3. The \"connect your data\" step that requires admin permissions\n\nWe're testing a \"do the thing first, ask later\" reordering. See the\n[[2026-05-01]] daily for the wireframe critique.\n\n## Owners\n\n- Design: [[Alex Rivera]]\n- Eng: [[Mira Chen]]\n- PM: [[Sarah Kim]]\n\n## Decisions made\n\n- 2026-05-01 — Defer team-invite to after first successful workflow.\n  Owner [[Alex Rivera]]. Source: [[2026-05-01]].\n- 2026-04-15 — Cut the company-info form to 3 fields (name, role,\n  team size). Owner [[Sarah Kim]]. Source: [[2026-04-15]].\n\n## Open questions\n\n- [ ] What \"first successful workflow\" means for self-serve vs sales-led\n      signups (different funnels)\n- [ ] Empty-state copy for the \"do something first\" screen\n- [ ] How to handle accounts that signed up via [[Pricing V2]] but\n      haven't activated\n\n## Linked notes\n\n- [[Pricing V2]] — pricing → checkout → onboarding handoff\n- [[Engineering]] — auth and provisioning touch points\n- [[Mira Chen]] — owns the activation telemetry\n- [[2026-05-01]]\n\n## TODO\n\n- [ ] Ship the v0.1 of the new flow to 5% of signups by 2026-05-15\n- [ ] Activation cohort dashboard, owner [[Mira Chen]]\n- [ ] Empty-state copy review with [[Alex Rivera]]\n","ageDays":6},{"id":"projects/pricing v2","path":"Projects/Pricing V2.md","filename":"Pricing V2.md","title":"Pricing V2","tags":["project","pricing","growth"],"wordCount":321,"headingCount":9,"headings":[{"level":1,"text":"Pricing V2"},{"level":2,"text":"Why now"},{"level":2,"text":"The bet"},{"level":2,"text":"Owners"},{"level":2,"text":"Open questions"},{"level":2,"text":"Decisions made"},{"level":2,"text":"Risk hotspots"},{"level":2,"text":"Linked notes"},{"level":2,"text":"TODO"}],"outboundLinks":["resources/reading list","daily/2026-04-22","people/sarah kim","people/mira chen","people/alex rivera","projects/onboarding 2.0","areas/engineering","daily/2026-05-01","projects/series a"],"inboundLinks":["areas/engineering","areas/hiring","daily/2026-04-15","daily/2026-04-22","daily/2026-05-01","inbox","index","people/alex rivera","people/mira chen","people/sarah kim","projects/onboarding 2.0","projects/series a","resources/old idea — voice ui","resources/reading list"],"outboundCount":9,"inboundCount":14,"todoOpenCount":8,"todoTotalCount":8,"todos":[{"line":"Do we hide the \"compare features\" link entirely or fold it under","done":false},{"line":"Annual toggle — default monthly or annual?","done":false},{"line":"Migration story for existing Pro plan customers (~340 accounts).","done":false},{"line":"Naming: \"Solo\" vs \"Starter\" — see [[Sarah Kim]] for rationale.","done":false},{"line":"Final copy pass with [[Alex Rivera]] by Friday","done":false},{"line":"A/B experiment summary write-up — owner [[Sarah Kim]]","done":false},{"line":"Decide on grandfathering policy","done":false},{"line":"Update [[Reading List]] with the post-launch teardown","done":false}],"updatedFromFrontmatter":"2026-05-07","updatedEpoch":1778112000000,"isStale":false,"isOrphan":false,"excerpt":"Replacing the legacy three-tier page. Live A/B running since 2026-04-30. Conversion on the current pricing page sits at 1.8%. Competitor data ([[Reading List]] notes from the Lenny Rachitsky deep-dive) suggests we should see 3.2–4.0% at our brand strength and ACV. Decision deadli","raw":"---\ntitle: Pricing V2\ntags: [project, pricing, growth]\nstatus: in-progress\nowner: Sarah Kim\nupdated: 2026-05-07\n---\n\n# Pricing V2\n\nReplacing the legacy three-tier page. Live A/B running since 2026-04-30.\n\n## Why now\n\nConversion on the current pricing page sits at 1.8%. Competitor data\n([[Reading List]] notes from the Lenny Rachitsky deep-dive) suggests we\nshould see 3.2–4.0% at our brand strength and ACV. Decision deadline:\n**2026-05-20**.\n\n## The bet\n\nMove from feature-list rows to **three jobs-to-be-done framings**:\n\n1. \"Replace your spreadsheet\" → Solo plan, $39/mo\n2. \"Run your team's ops\" → Team plan, $129/mo\n3. \"Replace your ops team\" → Scale plan, custom\n\nSee [[2026-04-22]] for the offsite where this got framed.\n\n## Owners\n\n- Product: [[Sarah Kim]]\n- Eng: [[Mira Chen]]\n- Design: [[Alex Rivera]]\n\n## Open questions\n\n- [ ] Do we hide the \"compare features\" link entirely or fold it under\n      the Scale plan?\n- [ ] Annual toggle — default monthly or annual?\n- [ ] Migration story for existing Pro plan customers (~340 accounts).\n- [ ] Naming: \"Solo\" vs \"Starter\" — see [[Sarah Kim]] for rationale.\n\n## Decisions made\n\n- 2026-04-22 — Drop the \"Free\" tier; replace with 14-day trial. Owner\n  [[Sarah Kim]], approved by founders. Source: [[2026-04-22]].\n- 2026-04-29 — Hold the comparison page for a separate \"compare plans\"\n  modal; not on the headline page. Source: [[Pricing V2]] working doc.\n\n## Risk hotspots\n\n- **Existing customers on the Pro plan** see Solo as a downgrade.\n  Mitigation: keep grandfathered pricing, surface only on direct ask.\n- **Annual-only customers** complain about toggle UX. See\n  [[Onboarding 2.0]] for the toggle pattern we landed on.\n\n## Linked notes\n\n- [[Onboarding 2.0]] — pricing-page handoff to onboarding flow\n- [[Engineering]] — checkout-service touch points\n- [[2026-05-01]]\n- [[Series A]] — pricing data feeds the deck\n\n## TODO\n\n- [ ] Final copy pass with [[Alex Rivera]] by Friday\n- [ ] A/B experiment summary write-up — owner [[Sarah Kim]]\n- [ ] Decide on grandfathering policy\n- [ ] Update [[Reading List]] with the post-launch teardown\n","ageDays":4},{"id":"projects/series a","path":"Projects/Series A.md","filename":"Series A.md","title":"Series A","tags":["project","fundraising","board"],"wordCount":161,"headingCount":5,"headings":[{"level":1,"text":"Series A"},{"level":2,"text":"The state of things"},{"level":2,"text":"What needs to be true"},{"level":2,"text":"Linked notes"},{"level":2,"text":"TODO"}],"outboundLinks":["projects/pricing v2","projects/onboarding 2.0","areas/hiring","daily/2026-05-01","areas/engineering","people/sarah kim"],"inboundLinks":["areas/engineering","areas/hiring","daily/2026-04-15","daily/2026-04-22","daily/2026-05-01","inbox","index","people/mira chen","people/sarah kim","projects/pricing v2","resources/reading list"],"outboundCount":6,"inboundCount":11,"todoOpenCount":4,"todoTotalCount":4,"todos":[{"line":"Refresh the deck v7 with Pricing V2 numbers post-2026-05-20","done":false},{"line":"References list (5 customers willing to take a call)","done":false},{"line":"Data room cleanup — see [[Engineering]] for which dashboards link","done":false},{"line":"FYI [[Sarah Kim]] on the Cardinal meeting prep","done":false}],"updatedFromFrontmatter":"2026-05-08","updatedEpoch":1778198400000,"isStale":false,"isOrphan":false,"excerpt":"Pre-empting; not opening a formal process. Three funds engaged. - Cardinal Capital — partner meeting 2026-05-12. Strong signal. - Hightower — second meeting done, modeling our LTV/CAC. - Marquee — passed (too early stage for them). - Octopus Ventures — early-stage, exploring. - P","raw":"---\ntitle: Series A\ntags: [project, fundraising, board]\nstatus: in-progress\nowner: Sam Reyes\nupdated: 2026-05-08\n---\n\n# Series A\n\nPre-empting; not opening a formal process. Three funds engaged.\n\n## The state of things\n\n- Cardinal Capital — partner meeting 2026-05-12. Strong signal.\n- Hightower — second meeting done, modeling our LTV/CAC.\n- Marquee — passed (too early stage for them).\n- Octopus Ventures — early-stage, exploring.\n\n## What needs to be true\n\n- Pricing V2 results in by 2026-05-20 — see [[Pricing V2]]\n- Onboarding activation lift demonstrated — see [[Onboarding 2.0]]\n- Hiring plan articulated for next 18 months — see [[Hiring]]\n\n## Linked notes\n\n- [[Pricing V2]]\n- [[Onboarding 2.0]]\n- [[Hiring]]\n- [[2026-05-01]]\n\n## TODO\n\n- [ ] Refresh the deck v7 with Pricing V2 numbers post-2026-05-20\n- [ ] References list (5 customers willing to take a call)\n- [ ] Data room cleanup — see [[Engineering]] for which dashboards link\n- [ ] FYI [[Sarah Kim]] on the Cardinal meeting prep\n\n> \"Don't open a process you don't need. Pre-empt or pass.\"\n","ageDays":3},{"id":"resources/old idea — voice ui","path":"Resources/Old Idea — Voice UI.md","filename":"Old Idea — Voice UI.md","title":"Old Idea — Voice UI","tags":["resource","idea","archive"],"wordCount":209,"headingCount":5,"headings":[{"level":1,"text":"Old Idea — Voice UI"},{"level":2,"text":"The pitch (as I wrote it then)"},{"level":2,"text":"Why we shelved it"},{"level":2,"text":"What changed my mind"},{"level":2,"text":"Worth revisiting?"}],"outboundLinks":["projects/pricing v2","projects/onboarding 2.0"],"inboundLinks":[],"outboundCount":2,"inboundCount":0,"todoOpenCount":0,"todoTotalCount":0,"todos":[],"updatedFromFrontmatter":"2025-11-10","updatedEpoch":1762732800000,"isStale":true,"isOrphan":true,"excerpt":"A note from late 2025 when I was excited about a voice-first interface for the product. Leaving it here as an archive; the team considered it and shelved it. What if the entire product had a voice frontend? You could just say \"set up the standard onboarding for a new SaaS team\" a","raw":"---\ntitle: Old Idea — Voice UI\ntags: [resource, idea, archive]\nupdated: 2025-11-10\n---\n\n# Old Idea — Voice UI\n\nA note from late 2025 when I was excited about a voice-first\ninterface for the product. Leaving it here as an archive; the team\nconsidered it and shelved it.\n\n## The pitch (as I wrote it then)\n\nWhat if the entire product had a voice frontend? You could just say\n\"set up the standard onboarding for a new SaaS team\" and the system\nwould do it. We'd be the first ops tool with this.\n\n## Why we shelved it\n\n- Voice has terrible recoverability when the parse goes wrong.\n- Our customers are in noisy environments (open offices, coffee shops).\n- Latency budget for the round-trip kills the \"oh wow\" moment.\n- We had higher-conviction bets on [[Pricing V2]] and [[Onboarding 2.0]].\n\n## What changed my mind\n\nA two-week internal demo where we tried using it ourselves. Three of\nfive people gave up by day 3. The two who stuck with it were\npower-users on quiet days; the rest were saying \"I'd just type this\".\n\n## Worth revisiting?\n\nMaybe in 2027 if the latency floor drops below 200ms round-trip and\nstreaming partial-parse becomes the norm. Until then, archive.\n\n> \"If you can't ship it after a two-week demo, the demo was the answer.\"\n","ageDays":182},{"id":"resources/reading list","path":"Resources/Reading List.md","filename":"Reading List.md","title":"Reading List","tags":["resource","reading"],"wordCount":142,"headingCount":5,"headings":[{"level":1,"text":"Reading List"},{"level":2,"text":"Pricing & growth"},{"level":2,"text":"Engineering / org"},{"level":2,"text":"Fundraising"},{"level":2,"text":"Open"}],"outboundLinks":["projects/pricing v2","projects/onboarding 2.0","people/mira chen","people/alex rivera","people/sarah kim","projects/series a"],"inboundLinks":["inbox","index","people/alex rivera","people/sarah kim","projects/pricing v2"],"outboundCount":6,"inboundCount":5,"todoOpenCount":2,"todoTotalCount":2,"todos":[{"line":"The new Marketplace book Sarah recommended","done":false},{"line":"Rauch's design-system essay (relevant for [[Alex Rivera]])","done":false}],"updatedFromFrontmatter":"2026-04-25","updatedEpoch":1777075200000,"isStale":false,"isOrphan":false,"excerpt":"Things I've actually read, with a one-line takeaway. Pruning quarterly. - **Lenny Rachitsky — pricing tiers deep-dive (2026-03)** — three-tier framings beat feature-list rows for self-serve SaaS at our price point. Direct input into [[Pricing V2]]. - **First Round Review — onboar","raw":"---\ntitle: Reading List\ntags: [resource, reading]\nupdated: 2026-04-25\n---\n\n# Reading List\n\nThings I've actually read, with a one-line takeaway. Pruning\nquarterly.\n\n## Pricing & growth\n\n- **Lenny Rachitsky — pricing tiers deep-dive (2026-03)** — three-tier\n  framings beat feature-list rows for self-serve SaaS at our price\n  point. Direct input into [[Pricing V2]].\n- **First Round Review — onboarding patterns (2025-11)** — \"do\n  something first, ask later\" framing. Direct input into\n  [[Onboarding 2.0]].\n\n## Engineering / org\n\n- **High Output Management (Andy Grove)** — re-read pre-Series-A.\n  Influences how I run 1:1s with [[Mira Chen]] / [[Alex Rivera]] /\n  [[Sarah Kim]].\n- **Staff Engineer (Will Larson)** — feeds the leveling rubric I owe\n  [[Mira Chen]].\n\n## Fundraising\n\n- **Why fundraise — YC essays** — re-read before the [[Series A]]\n  process kicked off.\n\n## Open\n\n- [ ] The new Marketplace book Sarah recommended\n- [ ] Rauch's design-system essay (relevant for [[Alex Rivera]])\n","ageDays":16}],"topHubs":[{"id":"projects/pricing v2","title":"Pricing V2","path":"Projects/Pricing V2.md","inboundCount":14,"outboundCount":9},{"id":"projects/onboarding 2.0","title":"Onboarding 2.0","path":"Projects/Onboarding 2.0.md","inboundCount":12,"outboundCount":7},{"id":"projects/series a","title":"Series A","path":"Projects/Series A.md","inboundCount":11,"outboundCount":6},{"id":"people/mira chen","title":"Mira Chen","path":"People/Mira Chen.md","inboundCount":10,"outboundCount":8},{"id":"people/sarah kim","title":"Sarah Kim","path":"People/Sarah Kim.md","inboundCount":10,"outboundCount":8},{"id":"daily/2026-05-01","title":"2026-05-01","path":"Daily/2026-05-01.md","inboundCount":9,"outboundCount":7},{"id":"people/alex rivera","title":"Alex Rivera","path":"People/Alex Rivera.md","inboundCount":9,"outboundCount":6},{"id":"areas/hiring","title":"Hiring","path":"Areas/Hiring.md","inboundCount":8,"outboundCount":7}],"orphans":[{"id":"resources/old idea — voice ui","title":"Old Idea — Voice UI","path":"Resources/Old Idea — Voice UI.md","updatedFromFrontmatter":"2025-11-10","ageDays":182},{"id":"index","title":"Index","path":"Index.md","updatedFromFrontmatter":"2026-05-08","ageDays":3}],"stale":[{"id":"resources/old idea — voice ui","title":"Old Idea — Voice UI","path":"Resources/Old Idea — Voice UI.md","ageDays":182,"updatedFromFrontmatter":"2025-11-10"}],"todoStats":{"openCount":55,"totalCount":55,"topNotesByOpenTodos":[{"id":"inbox","title":"Inbox","path":"Inbox.md","openCount":12},{"id":"projects/pricing v2","title":"Pricing V2","path":"Projects/Pricing V2.md","openCount":8},{"id":"projects/onboarding 2.0","title":"Onboarding 2.0","path":"Projects/Onboarding 2.0.md","openCount":6},{"id":"areas/engineering","title":"Engineering","path":"Areas/Engineering.md","openCount":4},{"id":"areas/hiring","title":"Hiring","path":"Areas/Hiring.md","openCount":4},{"id":"projects/series a","title":"Series A","path":"Projects/Series A.md","openCount":4},{"id":"daily/2026-04-15","title":"2026-04-15","path":"Daily/2026-04-15.md","openCount":3},{"id":"daily/2026-04-22","title":"2026-04-22","path":"Daily/2026-04-22.md","openCount":3}]},"topTodos":[{"noteId":"areas/engineering","noteTitle":"Engineering","line":"Auth refactor — blocks [[Pricing V2]] and [[Onboarding 2.0]]"},{"noteId":"areas/engineering","noteTitle":"Engineering","line":"Activation telemetry pipeline — owner [[Mira Chen]]"},{"noteId":"areas/engineering","noteTitle":"Engineering","line":"Cycle-time numbers for the [[Series A]] data room"},{"noteId":"areas/engineering","noteTitle":"Engineering","line":"Database failover runbook needs a re-test"},{"noteId":"areas/hiring","noteTitle":"Hiring","line":"Decide: do we hire CS Lead or contract out for 6 months?"},{"noteId":"areas/hiring","noteTitle":"Hiring","line":"Comp band review for Sr. Backend role — see [[Mira Chen]]"},{"noteId":"areas/hiring","noteTitle":"Hiring","line":"Referral from [[Alex Rivera]] mentioned in [[2026-05-01]]"},{"noteId":"areas/hiring","noteTitle":"Hiring","line":"Update the careers page after [[Pricing V2]] launch"},{"noteId":"daily/2026-04-15","noteTitle":"2026-04-15","line":"Leveling rubric for [[Mira Chen]]"},{"noteId":"daily/2026-04-15","noteTitle":"2026-04-15","line":"Forward the funnel teardown deck to [[Engineering]] team"},{"noteId":"daily/2026-04-15","noteTitle":"2026-04-15","line":"Reschedule [[Series A]] partner intro that got bumped"},{"noteId":"daily/2026-04-22","noteTitle":"2026-04-22","line":"Grandfathering policy for existing Pro plan customers"},{"noteId":"daily/2026-04-22","noteTitle":"2026-04-22","line":"Annual-toggle default — followup needed"},{"noteId":"daily/2026-04-22","noteTitle":"2026-04-22","line":"Update the [[Series A]] deck with the new tier structure"},{"noteId":"daily/2026-05-01","noteTitle":"2026-05-01","line":"Activation cohort dashboard — owner [[Mira Chen]]"},{"noteId":"daily/2026-05-01","noteTitle":"2026-05-01","line":"Empty-state copy review with [[Alex Rivera]] next week"},{"noteId":"daily/2026-05-01","noteTitle":"2026-05-01","line":"[[Series A]] partner meeting prep for 2026-05-12"},{"noteId":"inbox","noteTitle":"Inbox","line":"Schedule the Q3 planning week — June 22-26"},{"noteId":"inbox","noteTitle":"Inbox","line":"Email Cardinal partner with the [[Pricing V2]] preview link"},{"noteId":"inbox","noteTitle":"Inbox","line":"Followup on the design referral [[Alex Rivera]] mentioned in"},{"noteId":"inbox","noteTitle":"Inbox","line":"Read the new Sarah-recommended marketplace book (in [[Reading List]])"},{"noteId":"inbox","noteTitle":"Inbox","line":"Send the leveling rubric I owe [[Mira Chen]] from 2026-04-15"},{"noteId":"inbox","noteTitle":"Inbox","line":"Write the [[Series A]] deck v7 update post-2026-05-20"},{"noteId":"inbox","noteTitle":"Inbox","line":"Update the [[Engineering]] runbook for database failover"},{"noteId":"inbox","noteTitle":"Inbox","line":"Followup with [[Sarah Kim]] on her two promotion cases"},{"noteId":"inbox","noteTitle":"Inbox","line":"Decide: contract CS or hire (see [[Hiring]])"},{"noteId":"inbox","noteTitle":"Inbox","line":"Reschedule the [[Series A]] partner intro that got bumped on"},{"noteId":"inbox","noteTitle":"Inbox","line":"FIXME: my linking convention is inconsistent — sometimes"},{"noteId":"inbox","noteTitle":"Inbox","line":"- TODO: figure out a way to surface stale notes automatically."},{"noteId":"people/alex rivera","noteTitle":"Alex Rivera","line":"Review his hiring rubric for the design role"}],"topTags":[{"tag":"daily","count":3,"notes":["daily/2026-04-15","daily/2026-04-22","daily/2026-05-01"]},{"tag":"person","count":3,"notes":["people/alex rivera","people/mira chen","people/sarah kim"]},{"tag":"growth","count":3,"notes":["people/sarah kim","projects/onboarding 2.0","projects/pricing v2"]},{"tag":"project","count":3,"notes":["projects/onboarding 2.0","projects/pricing v2","projects/series a"]},{"tag":"area","count":2,"notes":["areas/engineering","areas/hiring"]},{"tag":"hub","count":2,"notes":["inbox","index"]},{"tag":"resource","count":2,"notes":["resources/old idea — voice ui","resources/reading list"]},{"tag":"engineering","count":1,"notes":["areas/engineering"]},{"tag":"runbook","count":1,"notes":["areas/engineering"]},{"tag":"hiring","count":1,"notes":["areas/hiring"]},{"tag":"recruiting","count":1,"notes":["areas/hiring"]},{"tag":"inbox","count":1,"notes":["inbox"]},{"tag":"dashboard","count":1,"notes":["index"]},{"tag":"design","count":1,"notes":["people/alex rivera"]},{"tag":"eng","count":1,"notes":["people/mira chen"]},{"tag":"leadership","count":1,"notes":["people/mira chen"]}],"themeClusters":[{"name":"daily","tag":"daily","noteIds":["daily/2026-04-15","daily/2026-04-22","daily/2026-05-01"],"size":3},{"name":"person","tag":"person","noteIds":["people/alex rivera","people/mira chen","people/sarah kim"],"size":3},{"name":"growth","tag":"growth","noteIds":["people/sarah kim","projects/onboarding 2.0","projects/pricing v2"],"size":3},{"name":"project","tag":"project","noteIds":["projects/onboarding 2.0","projects/pricing v2","projects/series a"],"size":3},{"name":"area","tag":"area","noteIds":["areas/engineering","areas/hiring"],"size":2},{"name":"hub","tag":"hub","noteIds":["inbox","index"],"size":2},{"name":"resource","tag":"resource","noteIds":["resources/old idea — voice ui","resources/reading list"],"size":2}],"longestNotes":[{"id":"projects/pricing v2","title":"Pricing V2","path":"Projects/Pricing V2.md","wordCount":321},{"id":"projects/onboarding 2.0","title":"Onboarding 2.0","path":"Projects/Onboarding 2.0.md","wordCount":237},{"id":"resources/old idea — voice ui","title":"Old Idea — Voice UI","path":"Resources/Old Idea — Voice UI.md","wordCount":209},{"id":"areas/hiring","title":"Hiring","path":"Areas/Hiring.md","wordCount":202},{"id":"inbox","title":"Inbox","path":"Inbox.md","wordCount":194},{"id":"people/mira chen","title":"Mira Chen","path":"People/Mira Chen.md","wordCount":175}],"graph":{"nodes":[{"id":"areas/engineering","title":"Engineering","size":11},{"id":"areas/hiring","title":"Hiring","size":12},{"id":"daily/2026-04-15","title":"2026-04-15","size":8},{"id":"daily/2026-04-22","title":"2026-04-22","size":8},{"id":"daily/2026-05-01","title":"2026-05-01","size":13},{"id":"inbox","title":"Inbox","size":6},{"id":"index","title":"Index","size":7},{"id":"people/alex rivera","title":"Alex Rivera","size":12},{"id":"people/mira chen","title":"Mira Chen","size":14},{"id":"people/sarah kim","title":"Sarah Kim","size":14},{"id":"projects/onboarding 2.0","title":"Onboarding 2.0","size":16},{"id":"projects/pricing v2","title":"Pricing V2","size":19},{"id":"projects/series a","title":"Series A","size":14},{"id":"resources/old idea — voice ui","title":"Old Idea — Voice UI","size":4},{"id":"resources/reading list","title":"Reading List","size":8}],"edges":[{"from":"areas/engineering","to":"people/mira chen"},{"from":"areas/engineering","to":"projects/pricing v2"},{"from":"areas/engineering","to":"projects/onboarding 2.0"},{"from":"areas/engineering","to":"areas/hiring"},{"from":"areas/engineering","to":"projects/series a"},{"from":"areas/hiring","to":"projects/series a"},{"from":"areas/hiring","to":"people/mira chen"},{"from":"areas/hiring","to":"people/alex rivera"},{"from":"areas/hiring","to":"people/sarah kim"},{"from":"areas/hiring","to":"daily/2026-05-01"},{"from":"areas/hiring","to":"projects/pricing v2"},{"from":"areas/hiring","to":"areas/engineering"},{"from":"daily/2026-04-15","to":"projects/onboarding 2.0"},{"from":"daily/2026-04-15","to":"people/sarah kim"},{"from":"daily/2026-04-15","to":"people/mira chen"},{"from":"daily/2026-04-15","to":"projects/pricing v2"},{"from":"daily/2026-04-15","to":"areas/hiring"},{"from":"daily/2026-04-15","to":"areas/engineering"},{"from":"daily/2026-04-15","to":"projects/series a"},{"from":"daily/2026-04-22","to":"people/sarah kim"},{"from":"daily/2026-04-22","to":"people/alex rivera"},{"from":"daily/2026-04-22","to":"people/mira chen"},{"from":"daily/2026-04-22","to":"projects/pricing v2"},{"from":"daily/2026-04-22","to":"projects/onboarding 2.0"},{"from":"daily/2026-04-22","to":"projects/series a"},{"from":"daily/2026-05-01","to":"projects/onboarding 2.0"},{"from":"daily/2026-05-01","to":"projects/pricing v2"},{"from":"daily/2026-05-01","to":"people/mira chen"},{"from":"daily/2026-05-01","to":"people/sarah kim"},{"from":"daily/2026-05-01","to":"people/alex rivera"},{"from":"daily/2026-05-01","to":"projects/series a"},{"from":"daily/2026-05-01","to":"areas/hiring"},{"from":"inbox","to":"projects/pricing v2"},{"from":"inbox","to":"people/alex rivera"},{"from":"inbox","to":"daily/2026-05-01"},{"from":"inbox","to":"resources/reading list"},{"from":"inbox","to":"people/mira chen"},{"from":"inbox","to":"projects/series a"},{"from":"inbox","to":"areas/engineering"},{"from":"inbox","to":"people/sarah kim"},{"from":"inbox","to":"areas/hiring"},{"from":"index","to":"projects/pricing v2"},{"from":"index","to":"projects/onboarding 2.0"},{"from":"index","to":"projects/series a"},{"from":"index","to":"areas/engineering"},{"from":"index","to":"areas/hiring"},{"from":"index","to":"people/mira chen"},{"from":"index","to":"people/alex rivera"},{"from":"index","to":"people/sarah kim"},{"from":"index","to":"daily/2026-05-01"},{"from":"index","to":"daily/2026-04-22"},{"from":"index","to":"daily/2026-04-15"},{"from":"index","to":"inbox"},{"from":"index","to":"resources/reading list"},{"from":"people/alex rivera","to":"projects/pricing v2"},{"from":"people/alex rivera","to":"projects/onboarding 2.0"},{"from":"people/alex rivera","to":"daily/2026-05-01"},{"from":"people/alex rivera","to":"daily/2026-04-22"},{"from":"people/alex rivera","to":"areas/hiring"},{"from":"people/alex rivera","to":"resources/reading list"},{"from":"people/mira chen","to":"projects/pricing v2"},{"from":"people/mira chen","to":"projects/onboarding 2.0"},{"from":"people/mira chen","to":"areas/engineering"},{"from":"people/mira chen","to":"daily/2026-05-01"},{"from":"people/mira chen","to":"daily/2026-04-22"},{"from":"people/mira chen","to":"daily/2026-04-15"},{"from":"people/mira chen","to":"areas/hiring"},{"from":"people/mira chen","to":"projects/series a"},{"from":"people/sarah kim","to":"projects/pricing v2"},{"from":"people/sarah kim","to":"projects/onboarding 2.0"},{"from":"people/sarah kim","to":"people/alex rivera"},{"from":"people/sarah kim","to":"daily/2026-05-01"},{"from":"people/sarah kim","to":"daily/2026-04-22"},{"from":"people/sarah kim","to":"daily/2026-04-15"},{"from":"people/sarah kim","to":"projects/series a"},{"from":"people/sarah kim","to":"resources/reading list"},{"from":"projects/onboarding 2.0","to":"daily/2026-05-01"},{"from":"projects/onboarding 2.0","to":"people/alex rivera"},{"from":"projects/onboarding 2.0","to":"people/mira chen"},{"from":"projects/onboarding 2.0","to":"people/sarah kim"},{"from":"projects/onboarding 2.0","to":"daily/2026-04-15"},{"from":"projects/onboarding 2.0","to":"projects/pricing v2"},{"from":"projects/onboarding 2.0","to":"areas/engineering"},{"from":"projects/pricing v2","to":"resources/reading list"},{"from":"projects/pricing v2","to":"daily/2026-04-22"},{"from":"projects/pricing v2","to":"people/sarah kim"},{"from":"projects/pricing v2","to":"people/mira chen"},{"from":"projects/pricing v2","to":"people/alex rivera"},{"from":"projects/pricing v2","to":"projects/onboarding 2.0"},{"from":"projects/pricing v2","to":"areas/engineering"},{"from":"projects/pricing v2","to":"daily/2026-05-01"},{"from":"projects/pricing v2","to":"projects/series a"},{"from":"projects/series a","to":"projects/pricing v2"},{"from":"projects/series a","to":"projects/onboarding 2.0"},{"from":"projects/series a","to":"areas/hiring"},{"from":"projects/series a","to":"daily/2026-05-01"},{"from":"projects/series a","to":"areas/engineering"},{"from":"projects/series a","to":"people/sarah kim"},{"from":"resources/old idea — voice ui","to":"projects/pricing v2"},{"from":"resources/old idea — voice ui","to":"projects/onboarding 2.0"},{"from":"resources/reading list","to":"projects/pricing v2"},{"from":"resources/reading list","to":"projects/onboarding 2.0"},{"from":"resources/reading list","to":"people/mira chen"},{"from":"resources/reading list","to":"people/alex rivera"},{"from":"resources/reading list","to":"people/sarah kim"},{"from":"resources/reading list","to":"projects/series a"}]},"totalOutboundLinks":106,"totalInboundLinks":106,"totalNotes":15,"totalTags":24,"meta":{"sourceFile":"notes-vault","sizeBytes":17765,"kind":"obsidian-vault","noteCount":15,"orphanCount":2,"staleCount":1,"todoOpenCount":55,"todoTotalCount":55,"uniqueTagCount":16,"uniqueOutboundLinks":106,"hubNote":"Pricing V2"}};</script>
+<div class="story-shell">
+
+<!-- TIME LENS HERO -->
+<header class="time-lens">
+  <div class="time-lens-inner">
+    <div class="vault-label">Obsidian Vault — Sam Reyes</div>
+    <h1 id="hero-title">Founder Vault — Second-Brain Audit</h1>
+    <p class="time-lens-hook" id="hero-hook">Loading vault analysis…</p>
+    <div class="lens-stats" id="lens-stats"></div>
+  </div>
+</header>
+
+<!-- STICKY NAV -->
+<nav class="story-nav">
+  <div class="story-nav-inner">
+    <button class="nav-tab active" data-section="concept-map-section">Concept Map</button>
+    <button class="nav-tab" data-section="hubs-section">Hubs</button>
+    <button class="nav-tab" data-section="themes-section">Themes</button>
+    <button class="nav-tab" data-section="callouts-section">Health</button>
+    <button class="nav-tab" data-section="rhythm-section">Rhythm</button>
+    <button class="nav-tab" data-section="atlas-section">Browse Notes</button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="story-main">
+
+  <!-- GLOBAL SEARCH -->
+  <div class="search-bar reveal">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="global-search" placeholder="Search notes, tags, paths…" autocomplete="off">
+    <button class="copy-btn" id="copy-analysis-btn">⎘ Copy analysis</button>
+  </div>
+
+  <!-- 1. CONCEPT MAP -->
+  <section id="concept-map-section" class="reveal">
+    <div class="section-heading">
+      <div class="section-heading-icon">◈</div>
+      Concept Map — Backlink Graph
+    </div>
+    <div id="concept-map-section-inner">
+      <div class="graph-container">
+        <svg id="concept-map-svg" viewBox="0 0 800 420" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. HUB LEADERBOARD -->
+  <section id="hubs-section" class="reveal">
+    <div class="section-heading">
+      <div class="section-heading-icon">★</div>
+      Most-linked Notes — Hub Leaderboard
+    </div>
+    <div class="hub-list" id="hub-list"></div>
+  </section>
+
+  <!-- 3. THEMES -->
+  <section id="themes-section" class="reveal">
+    <div class="section-heading">
+      <div class="section-heading-icon">◆</div>
+      Themes &amp; Tags
+    </div>
+    <div class="theme-grid" id="theme-grid"></div>
+    <div style="margin-top:var(--space-xl)" id="folder-section">
+      <div style="font-family:var(--font-headline);font-size:0.9rem;font-weight:600;margin-bottom:var(--space-md);color:var(--fg-2)">Folder breakdown</div>
+      <div class="folder-grid" id="folder-grid"></div>
+    </div>
+  </section>
+
+  <!-- 4. CALLOUTS: TODO / STALE / ORPHAN -->
+  <section id="callouts-section" class="reveal">
+    <div class="section-heading">
+      <div class="section-heading-icon">⚑</div>
+      Vault Health — Open TODOs · Stale · Orphan
+    </div>
+    <div class="callout-grid" id="callout-grid"></div>
+  </section>
+
+  <!-- 5. RHYTHM STRIP -->
+  <section id="rhythm-section" class="reveal">
+    <div class="section-heading">
+      <div class="section-heading-icon">⏱</div>
+      Activity Rhythm — Last-edited cadence
+    </div>
+    <div class="rhythm-strip">
+      <div class="rhythm-label" id="rhythm-label">Note activity by last-edited date</div>
+      <div class="rhythm-dots" id="rhythm-dots"></div>
+    </div>
+  </section>
+
+  <!-- 6. KNOWLEDGE ATLAS -->
+  <section id="atlas-section" class="reveal">
+    <div class="section-heading">
+      <div class="section-heading-icon">📖</div>
+      Knowledge Atlas — Browse All Notes
+    </div>
+    <div class="atlas-controls" id="atlas-controls">
+      <span style="font-size:12px;color:var(--fg-muted);font-family:var(--font-mono)">Filter:</span>
+    </div>
+    <button class="atlas-toggle" id="atlas-toggle">Show all notes ↓</button>
+    <div class="atlas-body" id="atlas-body">
+      <div class="note-cards" id="note-cards"></div>
+      <div class="no-results" id="no-results" style="display:none">No notes match your search.</div>
+    </div>
+  </section>
+
+</main>
+
+<div class="story-footer">
+  <em>Generated locally — your vault never left your machine. The full note bodies are embedded in this HTML and rendered in your browser. For sharing, prefer an anonymized export.</em>
+</div>
+</div>
+
+<!-- TOOLTIP -->
+<div class="graph-tooltip" id="graph-tooltip"></div>
+
+<script>
+// ─── BOOT ──────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  try { boot(); } catch(e) { console.error('Vault render error:', e); }
+});
+
+function boot() {
+  const D = DATA;
+  const notes = D.notes || [];
+  const topHubs = D.topHubs || [];
+  const orphans = D.orphans || [];
+  const stale = D.stale || [];
+  const topTodos = D.topTodos || [];
+  const topTags = D.topTags || [];
+  const themeClusters = D.themeClusters || [];
+  const graph = D.graph || { nodes: [], edges: [] };
+  const todoStats = D.todoStats || {};
+  const longestNotes = D.longestNotes || [];
+
+  // ── HERO ──────────────────────────────────────────────────────────────────
+  const hubNote = topHubs[0];
+  const heroHook = `${notes.length} notes · ${D.totalOutboundLinks||0} cross-note links · ${D.totalTags||0} tags · ${todoStats.openCount||0} open TODOs. ${
+    hubNote ? `${hubNote.title} is the densest hub with ${hubNote.inboundCount} incoming links.` : ''
+  } ${stale.length} stale note${stale.length!==1?'s':''} · ${orphans.length} orphan${orphans.length!==1?'s':''} need attention.`;
+  document.getElementById('hero-hook').textContent = heroHook;
+
+  const statsEl = document.getElementById('lens-stats');
+  const statsDef = [
+    {val: notes.length, label:'Notes'},
+    {val: D.totalOutboundLinks||0, label:'Links'},
+    {val: D.totalTags||0, label:'Tags'},
+    {val: todoStats.openCount||0, label:'Open TODOs'},
+    {val: orphans.length, label:'Orphans'},
+    {val: stale.length, label:'Stale'},
+  ];
+  statsEl.innerHTML = statsDef.map(s=>`
+    <div class="lens-stat">
+      <span class="lens-stat-val">${s.val}</span>
+      <span class="lens-stat-label">${s.label}</span>
+    </div>`).join('');
+
+  // ── NAV TABS ──────────────────────────────────────────────────────────────
+  document.querySelectorAll('.nav-tab').forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      const sec = document.getElementById(tab.dataset.section);
+      if(sec) sec.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+
+  // ── CONCEPT MAP (SVG force-ish) ───────────────────────────────────────────
+  renderGraph(graph, topHubs, notes);
+
+  // ── HUB LEADERBOARD ───────────────────────────────────────────────────────
+  const hubList = document.getElementById('hub-list');
+  const hubsToShow = topHubs.length ? topHubs : notes.sort((a,b)=>(b.inboundCount||0)-(a.inboundCount||0)).slice(0,8);
+  hubList.innerHTML = hubsToShow.map(h=>{
+    const note = notes.find(n=>n.id===h.id)||h;
+    const excerpt = note.excerpt||'';
+    return `<div class="hub-row" data-noteid="${h.id}" onclick="openNote('${escId(h.id)}')">
+      <div>
+        <div class="hub-row-title">${esc(h.title)}</div>
+        <div class="hub-row-path">${esc(h.path)}</div>
+        ${excerpt?`<div class="hub-row-excerpt">${esc(excerpt.slice(0,120))}…</div>`:''}
+      </div>
+      <div class="hub-badges">
+        <span class="hub-badge badge-in">↙ ${h.inboundCount} in</span>
+        <span class="hub-badge badge-out">↗ ${h.outboundCount} out</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  // ── THEMES / TAGS ─────────────────────────────────────────────────────────
+  const tagsSource = topTags.length ? topTags : themeClusters.map(c=>({tag:c.name||c.tag,count:c.size||c.noteIds?.length||0,notes:c.noteIds||[]}));
+  const themeGrid = document.getElementById('theme-grid');
+  let activeTag = null;
+  function renderThemes() {
+    themeGrid.innerHTML = tagsSource.map(t=>`
+      <div class="theme-chip${activeTag===t.tag?' active':''}" data-tag="${esc(t.tag)}" onclick="toggleTag('${escId(t.tag)}')">
+        #${esc(t.tag)} <span class="theme-chip-count">${t.count}</span>
+      </div>`).join('');
+  }
+  renderThemes();
+  window.toggleTag = function(tag) {
+    activeTag = activeTag===tag ? null : tag;
+    renderThemes();
+    applyFilters();
+  };
+
+  // ── FOLDER BREAKDOWN ──────────────────────────────────────────────────────
+  const folders = {};
+  notes.forEach(n=>{
+    const parts = n.path.split('/');
+    const folder = parts.length>1 ? parts[0] : 'Root';
+    if(!folders[folder]) folders[folder]={count:0,todos:0};
+    folders[folder].count++;
+    folders[folder].todos += (n.todoOpenCount||0);
+  });
+  const maxFolderCount = Math.max(...Object.values(folders).map(f=>f.count));
+  document.getElementById('folder-grid').innerHTML = Object.entries(folders).sort((a,b)=>b[1].count-a[1].count).map(([name,f])=>`
+    <div class="folder-row">
+      <div class="folder-name">📁 ${esc(name)}</div>
+      <div class="folder-bar-wrap"><div class="folder-bar" style="width:${(f.count/maxFolderCount*100).toFixed(1)}%"></div></div>
+      <div class="folder-stat">${f.count} note${f.count!==1?'s':''} · ${f.todos} TODO${f.todos!==1?'s':''}</div>
+    </div>`).join('');
+
+  // ── CALLOUTS ──────────────────────────────────────────────────────────────
+  const calloutGrid = document.getElementById('callout-grid');
+
+  // TODO card
+  const todosHtml = topTodos.length ? topTodos.slice(0,8).map(t=>`
+    <div class="callout-item" onclick="openNote('${escId(t.noteId)}')">
+      ${esc(t.line.slice(0,80))}${t.line.length>80?'…':''}
+      <span class="callout-item-note">← ${esc(t.noteTitle)}</span>
+    </div>`).join('') : `<div class="callout-empty">No open TODOs in this vault.</div>`;
+
+  // Stale card
+  const staleHtml = stale.length ? stale.map(s=>`
+    <div class="callout-item" onclick="openNote('${escId(s.id)}')">
+      ${esc(s.title)}
+      <span class="callout-item-note">${esc(s.path)} · ${s.ageDays}d ago</span>
+    </div>`).join('') : `<div class="callout-empty">No stale notes (all touched within 60 days).</div>`;
+
+  // Orphan card
+  const orphanHtml = orphans.length ? orphans.map(o=>`
+    <div class="callout-item" onclick="openNote('${escId(o.id)}')">
+      ${esc(o.title)}
+      <span class="callout-item-note">${esc(o.path)} · ${o.ageDays!=null?o.ageDays+'d ago':'unknown age'}</span>
+    </div>`).join('') : `<div class="callout-empty">No orphan notes — everything is linked.</div>`;
+
+  calloutGrid.innerHTML = `
+    <div class="callout-card">
+      <div class="callout-header">
+        <div class="callout-badge todo"></div>
+        <div class="callout-title">Open TODOs</div>
+        <div class="callout-count">${todoStats.openCount||0}</div>
+      </div>
+      <div class="callout-body">${todosHtml}</div>
+    </div>
+    <div class="callout-card">
+      <div class="callout-header">
+        <div class="callout-badge stale"></div>
+        <div class="callout-title">Stale Notes</div>
+        <div class="callout-count">${stale.length}</div>
+      </div>
+      <div class="callout-body">${staleHtml}</div>
+    </div>
+    <div class="callout-card">
+      <div class="callout-header">
+        <div class="callout-badge orphan"></div>
+        <div class="callout-title">Orphan Notes</div>
+        <div class="callout-count">${orphans.length}</div>
+      </div>
+      <div class="callout-body">${orphanHtml}</div>
+    </div>`;
+
+  // ── RHYTHM STRIP ──────────────────────────────────────────────────────────
+  renderRhythm(notes);
+
+  // ── KNOWLEDGE ATLAS ───────────────────────────────────────────────────────
+  renderAtlasControls();
+  renderNoteCards(notes);
+
+  // Atlas toggle
+  const atlasToggle = document.getElementById('atlas-toggle');
+  const atlasBody = document.getElementById('atlas-body');
+  atlasToggle.addEventListener('click',()=>{
+    const open = atlasBody.classList.toggle('open');
+    atlasToggle.textContent = open ? 'Hide notes ↑' : 'Show all notes ↓';
+    if(open) atlasBody.scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+
+  // ── SEARCH ────────────────────────────────────────────────────────────────
+  document.getElementById('global-search').addEventListener('input', e=>{
+    searchQuery = e.target.value.toLowerCase().trim();
+    applyFilters();
+    if(searchQuery && !atlasBody.classList.contains('open')) {
+      atlasBody.classList.add('open');
+      atlasToggle.textContent = 'Hide notes ↑';
+    }
+  });
+
+  // ── COPY ANALYSIS ─────────────────────────────────────────────────────────
+  document.getElementById('copy-analysis-btn').addEventListener('click',()=>{
+    const md = buildAnalysisMd(notes, topHubs, orphans, stale, topTodos, todoStats);
+    navigator.clipboard.writeText(md).then(()=>{
+      const btn = document.getElementById('copy-analysis-btn');
+      btn.textContent = '✓ Copied!';
+      setTimeout(()=>btn.textContent='⎘ Copy analysis',1800);
+    });
+  });
+
+  // ── SCROLL REVEAL ─────────────────────────────────────────────────────────
+  const revealObserver = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+
+  // ── SECTION NAV HIGHLIGHT ─────────────────────────────────────────────────
+  const sections = ['concept-map-section','hubs-section','themes-section','callouts-section','rhythm-section','atlas-section'];
+  const sectionObserver = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        document.querySelectorAll('.nav-tab').forEach(t=>{
+          t.classList.toggle('active', t.dataset.section===e.target.id);
+        });
+      }
+    });
+  },{rootMargin:'-40% 0px -50% 0px'});
+  sections.forEach(id=>{ const el=document.getElementById(id); if(el) sectionObserver.observe(el); });
+
+  // ── STATE ─────────────────────────────────────────────────────────────────
+  let searchQuery = '';
+  let activeFilters = new Set();
+
+  function renderAtlasControls() {
+    const ctrl = document.getElementById('atlas-controls');
+    const filterDefs = [
+      {key:'orphan',label:'Orphan'},
+      {key:'stale',label:'Stale'},
+      {key:'has-todos',label:'Has TODOs'},
+    ];
+    ctrl.innerHTML = `<span style="font-size:12px;color:var(--fg-muted);font-family:var(--font-mono)">Filter:</span>` +
+      filterDefs.map(f=>`<button class="filter-chip" data-key="${f.key}" onclick="toggleFilter('${f.key}')">${f.label}</button>`).join('');
+  }
+
+  window.toggleFilter = function(key) {
+    if(activeFilters.has(key)) activeFilters.delete(key);
+    else activeFilters.add(key);
+    document.querySelectorAll('.filter-chip').forEach(c=>{
+      c.classList.toggle('active', activeFilters.has(c.dataset.key));
+    });
+    applyFilters();
+  };
+
+  function applyFilters() {
+    const cards = document.querySelectorAll('.note-card');
+    let visible = 0;
+    cards.forEach(card=>{
+      const nid = card.dataset.noteid;
+      const note = notes.find(n=>n.id===nid);
+      if(!note) return;
+      let show = true;
+      if(searchQuery) {
+        const hay = [note.title,note.path,(note.tags||[]).join(' '),note.excerpt||''].join(' ').toLowerCase();
+        show = hay.includes(searchQuery);
+      }
+      if(show && activeTag) {
+        show = (note.tags||[]).includes(activeTag);
+      }
+      if(show && activeFilters.has('orphan')) show = note.isOrphan;
+      if(show && activeFilters.has('stale')) show = note.isStale;
+      if(show && activeFilters.has('has-todos')) show = (note.todoOpenCount||0)>0;
+
+      card.style.display = show ? '' : 'none';
+      if(show) {
+        visible++;
+        // Highlight search matches
+        if(searchQuery) highlightCard(card, searchQuery);
+        else clearHighlight(card);
+      }
+    });
+    document.getElementById('no-results').style.display = visible===0 ? '' : 'none';
+  }
+
+  function highlightCard(card, q) {
+    const titleEl = card.querySelector('.note-card-title-text');
+    if(titleEl) titleEl.innerHTML = highlightText(titleEl.dataset.raw||titleEl.textContent, q);
+  }
+  function clearHighlight(card) {
+    const titleEl = card.querySelector('.note-card-title-text');
+    if(titleEl) titleEl.innerHTML = esc(titleEl.dataset.raw||'');
+  }
+  function highlightText(text, q) {
+    if(!q) return esc(text);
+    const idx = text.toLowerCase().indexOf(q);
+    if(idx<0) return esc(text);
+    return esc(text.slice(0,idx))+'<mark>'+esc(text.slice(idx,idx+q.length))+'</mark>'+highlightText(text.slice(idx+q.length),q);
+  }
+
+  // Expose openNote globally
+  window.openNote = function(noteId) {
+    const decoded = noteId.replace(/__SLASH__/g,'/').replace(/__SPACE__/g,' ').replace(/__DASH__/g,'—');
+    // Try fuzzy match
+    const note = notes.find(n=>n.id===decoded || escId(n.id)===noteId);
+    if(!note) return;
+    if(!atlasBody.classList.contains('open')) {
+      atlasBody.classList.add('open');
+      atlasToggle.textContent = 'Hide notes ↑';
+    }
+    const card = document.querySelector(`.note-card[data-noteid="${escId(note.id)}"]`);
+    if(card) {
+      card.scrollIntoView({behavior:'smooth',block:'center'});
+      card.classList.add('highlight');
+      setTimeout(()=>card.classList.remove('highlight'),2000);
+      // Open it
+      const body = card.querySelector('.note-card-body');
+      if(body && !body.classList.contains('open')) body.classList.add('open');
+    }
+  };
+}
+
+// ─── RENDER NOTE CARDS ──────────────────────────────────────────────────────
+function renderNoteCards(notes) {
+  const container = document.getElementById('note-cards');
+  container.innerHTML = notes.map(note=>{
+    const tags = (note.tags||[]).map(t=>`<span class="tag-chip">#${esc(t)}</span>`).join('');
+    const staleTag = note.isStale ? `<span class="status-stale">stale</span>` : '';
+    const orphanTag = note.isOrphan ? `<span class="status-orphan">orphan</span>` : '';
+    const todoPill = note.todoOpenCount ? `<span class="meta-pill todo">☑ ${note.todoOpenCount} TODO</span>` : '';
+    const agePill = `<span class="meta-pill">${note.ageDays}d ago</span>`;
+    const wcPill = `<span class="meta-pill">${note.wordCount||0}w</span>`;
+
+    const inLinks = (note.inboundLinks||[]).slice(0,6);
+    const outLinks = (note.outboundLinks||[]).slice(0,6);
+
+    return `<div class="note-card" data-noteid="${escId(note.id)}" id="notecard-${escId(note.id)}">
+      <div class="note-card-header" onclick="toggleCard('${escId(note.id)}')">
+        <div class="note-card-main">
+          <div class="note-card-title">
+            <span class="note-card-title-text" data-raw="${escAttr(note.title)}">${esc(note.title)}</span>
+            ${staleTag}${orphanTag}
+          </div>
+          <div class="note-card-path">${esc(note.path)}</div>
+          <div class="note-tag-chips">${tags}</div>
+        </div>
+        <div class="note-card-meta">
+          ${wcPill}${agePill}${todoPill}
+          <span style="color:var(--fg-muted);font-size:18px;padding-left:4px" class="expand-arrow">›</span>
+        </div>
+      </div>
+      <div class="note-card-body" id="body-${escId(note.id)}">
+        ${inLinks.length?`<div class="note-links-label">Inbound links</div><div class="note-links">${inLinks.map(l=>`<span class="note-link-chip" onclick="openNote('${escId(l)}')" title="${esc(l)}">← ${esc(l.split('/').pop())}</span>`).join('')}</div>`:''}
+        ${outLinks.length?`<div class="note-links-label">Outbound links</div><div class="note-links">${outLinks.map(l=>`<span class="note-link-chip" onclick="openNote('${escId(l)}')" title="${esc(l)}">→ ${esc(l.split('/').pop())}</span>`).join('')}</div>`:''}
+        <div class="note-rendered">${renderMarkdown(note.raw||note.excerpt||'')}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+window.toggleCard = function(noteId) {
+  const body = document.getElementById('body-'+noteId);
+  if(!body) return;
+  body.classList.toggle('open');
+  const card = document.querySelector(`.note-card[data-noteid="${noteId}"]`);
+  const arrow = card?.querySelector('.expand-arrow');
+  if(arrow) arrow.style.transform = body.classList.contains('open') ? 'rotate(90deg)' : '';
+};
+
+// ─── MARKDOWN RENDERER ───────────────────────────────────────────────────────
+function renderMarkdown(raw) {
+  if(!raw) return '';
+  let html = '';
+  const lines = raw.replace(/\r\n/g,'\n').split('\n');
+  let inCode = false, codeLang = '', codeLines = [];
+  let inList = false;
+
+  function closeList() {
+    if(inList) { html += '</ul>'; inList = false; }
+  }
+
+  for(let i=0;i<lines.length;i++) {
+    let line = lines[i];
+    // Code fence
+    if(line.startsWith('```')) {
+      if(!inCode) {
+        closeList();
+        inCode=true; codeLang=line.slice(3).trim(); codeLines=[];
+      } else {
+        html+=`<pre><code>${esc(codeLines.join('\n'))}</code></pre>`;
+        inCode=false; codeLines=[];
+      }
+      continue;
+    }
+    if(inCode){codeLines.push(line);continue;}
+    // Skip frontmatter
+    if(line==='---' && i<3) { let j=i+1; while(j<lines.length&&lines[j]!=='---') j++; i=j; continue; }
+    // Headings
+    const hm = line.match(/^(#{1,3})\s+(.+)/);
+    if(hm){closeList();html+=`<h${hm[1].length}>${inline(hm[2])}</h${hm[1].length}>`;continue;}
+    // Blockquote
+    if(line.startsWith('>')){closeList();html+=`<blockquote>${inline(line.slice(1).trim())}</blockquote>`;continue;}
+    // List item
+    const li = line.match(/^[-*]\s+(.+)/);
+    if(li){
+      if(!inList){html+='<ul>';inList=true;}
+      html+=`<li>${inline(li[1])}</li>`;continue;
+    }
+    const oli = line.match(/^\d+\.\s+(.+)/);
+    if(oli){
+      if(!inList){html+='<ul>';inList=true;}
+      html+=`<li>${inline(oli[1])}</li>`;continue;
+    }
+    closeList();
+    if(line.trim()===''){continue;}
+    html+=`<p>${inline(line)}</p>`;
+  }
+  closeList();
+  if(inCode) html+=`<pre><code>${esc(codeLines.join('\n'))}</code></pre>`;
+  return html;
+}
+
+function inline(text) {
+  // Wikilinks
+  text = text.replace(/\[\[([^\]]+)\]\]/g,(m,inner)=>{
+    const parts = inner.split('|');
+    const target = parts[0].trim();
+    const label = (parts[1]||target).trim();
+    return `<span class="wikilink-pill" onclick="openNote('${escId(target.toLowerCase())}')" title="${escAttr(target)}">[[${esc(label)}]]</span>`;
+  });
+  // Bold
+  text = text.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  // Italic
+  text = text.replace(/\*(.+?)\*/g,'<em>$1</em>');
+  // Inline code
+  text = text.replace(/`([^`]+)`/g,'<code>$1</code>');
+  // TODO checkbox
+  text = text.replace(/\[ \] /g,'<span class="todo-item"><span class="todo-checkbox"></span> </span>');
+  text = text.replace(/\[x\] /gi,'<span class="todo-item todo-done"><span class="todo-checkbox"></span> </span>');
+  // Markdown links
+  text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+  return text;
+}
+
+// ─── RHYTHM STRIP ────────────────────────────────────────────────────────────
+function renderRhythm(notes) {
+  // Build a map of dates to note counts
+  const dateCounts = {};
+  notes.forEach(n=>{
+    if(n.updatedFromFrontmatter) {
+      const d = n.updatedFromFrontmatter.slice(0,10);
+      dateCounts[d] = (dateCounts[d]||0)+1;
+    }
+  });
+  if(Object.keys(dateCounts).length===0) {
+    document.getElementById('rhythm-dots').innerHTML='<span style="color:var(--fg-muted);font-size:13px">No date metadata found.</span>';
+    return;
+  }
+  const dates = Object.keys(dateCounts).sort();
+  const earliest = new Date(dates[0]);
+  const latest = new Date(dates[dates.length-1]);
+  const maxCount = Math.max(...Object.values(dateCounts));
+  // Fill in all days between
+  const all = [];
+  for(let d=new Date(earliest);d<=latest;d.setDate(d.getDate()+1)) {
+    const key = d.toISOString().slice(0,10);
+    all.push({date:key, count:dateCounts[key]||0});
+  }
+  const cls = c=>c===0?'rhythm-dot-empty':c===1?'rhythm-dot-low':c<maxCount?'rhythm-dot-mid':'rhythm-dot-high';
+  document.getElementById('rhythm-dots').innerHTML = all.map(d=>
+    `<div class="rhythm-dot ${cls(d.count)}" title="${d.date}${d.count?' · '+d.count+' note'+(d.count>1?'s':''):' · no activity'}"></div>`
+  ).join('');
+  document.getElementById('rhythm-label').textContent = `${earliest.toDateString()} → ${latest.toDateString()} · ${all.length} days tracked`;
+}
+
+// ─── GRAPH ───────────────────────────────────────────────────────────────────
+function renderGraph(graph, topHubs, notes) {
+  const svg = document.getElementById('concept-map-svg');
+  const W = 800, H = 420;
+  const nodes = graph.nodes||

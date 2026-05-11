@@ -1,0 +1,1087 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linewood Studio — Q1 2026 General Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --accent-cyan: #00D4FF;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981;
+  --blue: #3b82f6;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30,27,25,0.04);
+  --shadow-md: 0 4px 12px rgba(30,27,25,0.08);
+  --shadow-lg: 0 8px 24px rgba(30,27,25,0.12);
+  --shadow-accent: 0 8px 24px rgba(160,59,0,0.15);
+  --gradient-primary: linear-gradient(135deg,#a03b00 0%,#c94c00 100%);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #060B18;
+    --surface: #0B1426;
+    --surface-container-lowest: #101D35;
+    --surface-container-low: #101D35;
+    --surface-container: #162544;
+    --surface-container-high: #1c2d52;
+    --fg-1: #F8FAFC;
+    --fg-2: #CBD5E1;
+    --fg-muted: #64748B;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --primary: #FF6B35;
+    --accent-glow: #00D4FF;
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+    --outline-variant: #2a3a5c;
+  }
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--fg-1);
+  line-height:1.55;
+  min-height:100vh;
+}
+.ops-shell{max-width:1200px;margin:0 auto;padding:0 var(--space-lg) var(--space-5xl);}
+
+/* ── Command Bar ── */
+.command-bar{
+  position:sticky;top:0;z-index:100;
+  background:var(--surface);
+  border-bottom:1px solid var(--border-strong);
+  padding:var(--space-md) var(--space-lg);
+  display:flex;flex-wrap:wrap;gap:var(--space-sm);
+  align-items:center;
+}
+.command-bar-title{
+  font-family:var(--font-headline);
+  font-size:1rem;font-weight:700;
+  letter-spacing:-0.01em;
+  color:var(--fg-1);
+  margin-right:var(--space-sm);
+  white-space:nowrap;
+}
+.command-bar-period{
+  font-family:var(--font-mono);
+  font-size:0.72rem;
+  color:var(--fg-muted);
+  background:var(--surface-container);
+  padding:2px var(--space-sm);
+  border-radius:var(--radius-pill);
+  white-space:nowrap;
+}
+.command-bar-spacer{flex:1;}
+.search-box{
+  display:flex;align-items:center;gap:var(--space-xs);
+  background:var(--surface-container-low);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-pill);
+  padding:var(--space-xs) var(--space-md);
+}
+.search-box input{
+  border:none;background:transparent;
+  font-family:var(--font-body);font-size:0.85rem;
+  color:var(--fg-1);outline:none;width:180px;
+}
+.search-box input::placeholder{color:var(--fg-muted);}
+.search-icon{color:var(--fg-muted);font-size:0.9rem;}
+.btn-copy{
+  display:flex;align-items:center;gap:var(--space-xs);
+  background:var(--surface-container);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-pill);
+  padding:var(--space-xs) var(--space-md);
+  font-family:var(--font-body);font-size:0.8rem;
+  color:var(--fg-2);cursor:pointer;
+  transition:background 160ms,color 160ms;
+  white-space:nowrap;
+}
+.btn-copy:hover{background:var(--primary-fixed);color:var(--primary);}
+
+/* ── KPI Rail ── */
+.kpi-rail{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:var(--space-md);
+  padding:var(--space-xl) 0 var(--space-lg);
+}
+.kpi-cell{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:var(--space-lg) var(--space-xl);
+  box-shadow:var(--shadow-sm);
+  display:flex;flex-direction:column;gap:var(--space-xs);
+  transition:box-shadow 200ms;
+}
+.kpi-cell:hover{box-shadow:var(--shadow-md);}
+.kpi-label{
+  font-size:0.7rem;font-weight:600;letter-spacing:0.06em;
+  text-transform:uppercase;color:var(--fg-muted);
+}
+.kpi-value{
+  font-family:var(--font-mono);
+  font-size:1.45rem;font-weight:700;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-0.02em;
+  color:var(--fg-1);
+}
+.kpi-value.green{color:var(--green);}
+.kpi-value.red{color:var(--red);}
+.kpi-value.primary{color:var(--primary);}
+.kpi-sub{font-size:0.72rem;color:var(--fg-muted);}
+
+/* ── Section headers ── */
+.section-header{
+  display:flex;align-items:baseline;gap:var(--space-md);
+  margin:var(--space-3xl) 0 var(--space-lg);
+  border-bottom:1px solid var(--border-strong);
+  padding-bottom:var(--space-sm);
+}
+.section-title{
+  font-family:var(--font-headline);
+  font-size:0.95rem;font-weight:700;
+  letter-spacing:-0.01em;color:var(--fg-1);
+}
+.section-badge{
+  font-family:var(--font-mono);
+  font-size:0.7rem;color:var(--fg-muted);
+}
+
+/* ── Work Surface: Timeline ── */
+.work-surface{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:var(--space-xl);
+  box-shadow:var(--shadow-sm);
+  overflow:hidden;
+}
+.chart-title{
+  font-family:var(--font-headline);
+  font-size:0.82rem;font-weight:600;
+  color:var(--fg-2);margin-bottom:var(--space-md);
+}
+.timeline-svg{width:100%;overflow:visible;}
+.timeline-tooltip{
+  position:fixed;pointer-events:none;
+  background:var(--surface-container-high);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-md);
+  padding:var(--space-sm) var(--space-md);
+  font-size:0.75rem;color:var(--fg-1);
+  box-shadow:var(--shadow-md);
+  z-index:200;display:none;
+}
+
+/* ── Two-col panels ── */
+.two-col{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:var(--space-md);
+}
+@media(max-width:680px){.two-col{grid-template-columns:1fr;}}
+
+/* ── Categories panel ── */
+.panel{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:var(--space-xl);
+  box-shadow:var(--shadow-sm);
+}
+.cat-row{
+  display:grid;
+  grid-template-columns:120px 1fr 80px 60px;
+  gap:var(--space-sm);
+  align-items:center;
+  padding:var(--space-xs) 0;
+  border-bottom:1px solid var(--border);
+  font-size:0.78rem;
+}
+.cat-row:last-child{border-bottom:none;}
+.cat-name{color:var(--fg-2);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.cat-bar-wrap{background:var(--surface-container);border-radius:var(--radius-pill);height:6px;overflow:hidden;}
+.cat-bar{height:6px;border-radius:var(--radius-pill);transition:width 600ms cubic-bezier(.22,1,.36,1);}
+.cat-amount{
+  font-family:var(--font-mono);font-size:0.78rem;
+  font-variant-numeric:tabular-nums;text-align:right;
+  color:var(--fg-1);
+}
+.cat-share{font-family:var(--font-mono);font-size:0.72rem;color:var(--fg-muted);text-align:right;}
+
+/* ── Account Tree ── */
+.account-tree{list-style:none;}
+.tree-item{padding:var(--space-xs) 0;}
+.tree-summary{
+  display:flex;align-items:center;gap:var(--space-sm);
+  cursor:pointer;user-select:none;
+  padding:var(--space-xs) var(--space-sm);
+  border-radius:var(--radius-sm);
+  transition:background 140ms;
+}
+.tree-summary:hover{background:var(--surface-container);}
+.tree-toggle{color:var(--fg-muted);font-size:0.65rem;width:12px;}
+.tree-account{font-family:var(--font-body);font-size:0.82rem;font-weight:600;color:var(--fg-1);flex:1;}
+.tree-subtotal{
+  font-family:var(--font-mono);font-size:0.82rem;
+  font-variant-numeric:tabular-nums;font-weight:600;
+}
+.tree-subtotal.positive{color:var(--green);}
+.tree-subtotal.negative{color:var(--red);}
+.tree-children{
+  list-style:none;padding-left:var(--space-xl);
+  border-left:2px solid var(--border);
+  margin-left:var(--space-sm);
+}
+.tree-leaf{
+  display:flex;align-items:center;gap:var(--space-sm);
+  padding:var(--space-xs) var(--space-sm);
+  border-radius:var(--radius-sm);
+  transition:background 140ms;cursor:pointer;
+}
+.tree-leaf:hover{background:var(--surface-container);}
+.tree-leaf-account{font-size:0.8rem;color:var(--fg-2);flex:1;}
+.tree-leaf-count{font-size:0.72rem;color:var(--fg-muted);font-family:var(--font-mono);}
+.tree-leaf-amount{
+  font-family:var(--font-mono);font-size:0.8rem;
+  font-variant-numeric:tabular-nums;
+}
+.tree-leaf-amount.positive{color:var(--green);}
+.tree-leaf-amount.negative{color:var(--red);}
+
+/* ── Recurring ── */
+.recurring-grid{display:flex;flex-direction:column;gap:var(--space-sm);}
+.rec-row{
+  display:flex;align-items:center;gap:var(--space-sm);
+  padding:var(--space-sm) var(--space-md);
+  background:var(--surface-container-low);
+  border-radius:var(--radius-md);
+  border:1px solid var(--border);
+  transition:border-color 180ms;
+}
+.rec-row:hover{border-color:var(--primary);}
+.rec-icon{font-size:1rem;width:20px;text-align:center;}
+.rec-name{flex:1;font-size:0.82rem;font-weight:600;color:var(--fg-1);}
+.rec-meta{display:flex;flex-direction:column;align-items:flex-end;gap:2px;}
+.rec-amount{font-family:var(--font-mono);font-size:0.85rem;font-variant-numeric:tabular-nums;font-weight:600;}
+.rec-amount.positive{color:var(--green);}
+.rec-amount.negative{color:var(--red);}
+.rec-cadence{font-size:0.68rem;color:var(--fg-muted);}
+.tag-chip{
+  display:inline-block;font-size:0.65rem;font-weight:600;
+  padding:1px 7px;border-radius:var(--radius-pill);
+  letter-spacing:0.04em;text-transform:uppercase;
+}
+.tag-income{background:#dcfce7;color:#166534;}
+.tag-subscription{background:#ede9fe;color:#5b21b6;}
+.tag-utility{background:#fef3c7;color:#92400e;}
+@media(prefers-color-scheme:dark){
+  .tag-income{background:#14532d;color:#86efac;}
+  .tag-subscription{background:#2e1065;color:#c4b5fd;}
+  .tag-utility{background:#451a03;color:#fcd34d;}
+}
+
+/* ── Flags / Anomalies ── */
+.flag-queue{display:flex;flex-direction:column;gap:var(--space-sm);}
+.flag-card{
+  display:flex;gap:var(--space-md);
+  padding:var(--space-md) var(--space-lg);
+  background:var(--surface-container-low);
+  border-radius:var(--radius-md);
+  border-left:3px solid var(--yellow);
+  box-shadow:var(--shadow-sm);
+}
+.flag-card.duplicate{border-left-color:var(--red);}
+.flag-card.outlier{border-left-color:var(--yellow);}
+.flag-card.first-time{border-left-color:var(--blue);}
+.flag-card.missing{border-left-color:var(--fg-muted);}
+.flag-icon{font-size:1.1rem;}
+.flag-body{flex:1;}
+.flag-label{font-size:0.82rem;font-weight:700;color:var(--fg-1);}
+.flag-detail{font-size:0.75rem;color:var(--fg-muted);margin-top:2px;}
+.flag-link{font-size:0.72rem;color:var(--primary);cursor:pointer;text-decoration:underline;margin-top:4px;display:inline-block;}
+
+/* ── Top Vendors ── */
+.vendor-list{display:flex;flex-direction:column;gap:var(--space-xs);}
+.vendor-row{
+  display:flex;align-items:center;gap:var(--space-sm);
+  padding:var(--space-xs) var(--space-sm);
+  border-radius:var(--radius-sm);
+  transition:background 140ms;
+}
+.vendor-row:hover{background:var(--surface-container);}
+.vendor-rank{font-family:var(--font-mono);font-size:0.7rem;color:var(--fg-muted);width:18px;}
+.vendor-name{flex:1;font-size:0.8rem;font-weight:500;color:var(--fg-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.vendor-bar-wrap{width:80px;height:5px;background:var(--surface-container);border-radius:var(--radius-pill);overflow:hidden;}
+.vendor-bar{height:5px;border-radius:var(--radius-pill);}
+.vendor-amount{font-family:var(--font-mono);font-size:0.78rem;font-variant-numeric:tabular-nums;min-width:70px;text-align:right;}
+.vendor-count{font-family:var(--font-mono);font-size:0.68rem;color:var(--fg-muted);}
+
+/* ── Data Grid / Drill-down ── */
+.drill-toggle{
+  display:flex;align-items:center;gap:var(--space-sm);
+  cursor:pointer;
+  font-family:var(--font-headline);font-size:0.88rem;font-weight:600;
+  color:var(--fg-2);
+  padding:var(--space-md) var(--space-lg);
+  background:var(--surface-container-low);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-lg);
+  user-select:none;
+  transition:background 160ms;
+  width:100%;text-align:left;
+}
+.drill-toggle:hover{background:var(--surface-container);}
+.drill-arrow{transition:transform 200ms;}
+.drill-arrow.open{transform:rotate(90deg);}
+.data-grid{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border);
+  border-radius:0 0 var(--radius-lg) var(--radius-lg);
+  overflow:hidden;
+}
+.grid-controls{
+  display:flex;flex-wrap:wrap;gap:var(--space-sm);
+  padding:var(--space-md) var(--space-lg);
+  border-bottom:1px solid var(--border);
+  align-items:center;
+}
+.filter-chips{display:flex;flex-wrap:wrap;gap:var(--space-xs);}
+.filter-chip{
+  font-size:0.72rem;font-weight:600;
+  padding:3px var(--space-sm);
+  border-radius:var(--radius-pill);
+  border:1px solid var(--border-strong);
+  background:var(--surface-container);
+  color:var(--fg-2);cursor:pointer;
+  transition:background 140ms,color 140ms,border-color 140ms;
+}
+.filter-chip.active{background:var(--primary);color:var(--on-primary);border-color:var(--primary);}
+.grid-search{
+  flex:1;min-width:160px;
+  display:flex;align-items:center;gap:var(--space-xs);
+  background:var(--surface-container);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-pill);
+  padding:3px var(--space-md);
+}
+.grid-search input{
+  border:none;background:transparent;
+  font-family:var(--font-body);font-size:0.82rem;
+  color:var(--fg-1);outline:none;flex:1;
+}
+.grid-search input::placeholder{color:var(--fg-muted);}
+.table-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:0.8rem;}
+thead{position:sticky;top:0;background:var(--surface-container-low);z-index:2;}
+th{
+  padding:var(--space-sm) var(--space-md);
+  text-align:left;font-size:0.68rem;font-weight:700;
+  letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--fg-muted);cursor:pointer;user-select:none;
+  white-space:nowrap;
+  border-bottom:1px solid var(--border-strong);
+}
+th:hover{color:var(--fg-2);}
+th.sorted{color:var(--primary);}
+td{
+  padding:var(--space-sm) var(--space-md);
+  border-bottom:1px solid var(--border);
+  color:var(--fg-2);vertical-align:middle;
+}
+tr:hover td{background:var(--surface-container-low);}
+tr.flagged-row td{background:rgba(245,158,11,0.04);}
+.td-date{font-family:var(--font-mono);font-size:0.75rem;white-space:nowrap;color:var(--fg-muted);}
+.td-account{font-size:0.75rem;color:var(--fg-2);}
+.td-class{font-size:0.72rem;color:var(--fg-muted);}
+.td-desc{max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.td-type{font-size:0.72rem;}
+.td-amount{font-family:var(--font-mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;font-weight:600;}
+.td-amount.pos{color:var(--green);}
+.td-amount.neg{color:var(--red);}
+.row-flag-badge{
+  display:inline-block;font-size:0.6rem;
+  padding:1px 5px;border-radius:var(--radius-pill);
+  background:var(--yellow);color:#000;
+  margin-left:4px;font-weight:700;
+  vertical-align:middle;
+}
+.row-detail{
+  background:var(--surface-container-low);
+  padding:var(--space-md) var(--space-lg);
+  font-size:0.75rem;color:var(--fg-muted);
+}
+.row-detail pre{
+  font-family:var(--font-mono);font-size:0.72rem;
+  white-space:pre-wrap;word-break:break-all;
+}
+.load-more-btn{
+  display:block;width:100%;
+  padding:var(--space-md);
+  font-family:var(--font-body);font-size:0.82rem;font-weight:600;
+  color:var(--primary);background:transparent;
+  border:none;border-top:1px solid var(--border);
+  cursor:pointer;transition:background 160ms;
+}
+.load-more-btn:hover{background:var(--surface-container);}
+.match-highlight{background:var(--primary-fixed);border-radius:2px;padding:0 2px;}
+@media(prefers-color-scheme:dark){.match-highlight{background:#7b40e0;color:#fff;}}
+
+/* ── Period over Period ── */
+.pop-grid{display:flex;gap:var(--space-md);flex-direction:column;}
+.pop-month{
+  background:var(--surface-container-low);
+  border-radius:var(--radius-md);
+  padding:var(--space-md) var(--space-lg);
+  border:1px solid var(--border);
+}
+.pop-month-title{font-size:0.78rem;font-weight:700;color:var(--fg-2);margin-bottom:var(--space-sm);}
+.pop-bars{display:flex;gap:var(--space-md);align-items:flex-end;height:40px;}
+.pop-bar-group{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1;}
+.pop-bar{width:100%;border-radius:var(--radius-sm) var(--radius-sm) 0 0;min-height:2px;transition:height 400ms cubic-bezier(.22,1,.36,1);}
+.pop-bar-label{font-size:0.65rem;color:var(--fg-muted);font-family:var(--font-mono);}
+.pop-stats{display:flex;gap:var(--space-md);margin-top:var(--space-sm);}
+.pop-stat{font-size:0.75rem;font-family:var(--font-mono);font-variant-numeric:tabular-nums;}
+.pop-stat span{font-weight:700;}
+
+/* ── Footer ── */
+.page-footer{
+  margin-top:var(--space-5xl);
+  padding:var(--space-2xl) 0;
+  border-top:1px solid var(--border);
+  font-size:0.72rem;color:var(--fg-muted);
+  line-height:1.6;
+}
+.page-footer p+p{margin-top:var(--space-xs);}
+
+/* ── Animations ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.fade-up{animation:fadeUp 320ms ease both;}
+.fade-up-2{animation:fadeUp 320ms 80ms ease both;}
+.fade-up-3{animation:fadeUp 320ms 160ms ease both;}
+@media(prefers-reduced-motion:reduce){
+  .fade-up,.fade-up-2,.fade-up-3{animation:none;}
+  .cat-bar,.pop-bar,.tree-children{transition:none;}
+}
+
+/* ── Utility ── */
+.empty-state{color:var(--fg-muted);font-size:0.82rem;padding:var(--space-lg) 0;font-style:italic;}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
+</style>
+</head>
+<body>
+<script>const DATA = {"format":"quickbooks-report","subtype":"quickbooks-gl","rows":[{"id":"tx_000001","date":"2026-01-03","dateEpoch":1767398400000,"amount":12500,"currency":"USD","description":"Northwind Co - January retainer (INV-1029)","merchant":"Northwind Co -","category":null,"memo":null,"account":"Income:Consulting:Retainers","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Invoice","flags":[],"raw":{"Date":"2026-01-03","Account":"Income:Consulting:Retainers","Class":"Direct Cost","Type":"Invoice","Description":"Northwind Co - January retainer (INV-1029)","Amount":"12500.00"}},{"id":"tx_000002","date":"2026-01-08","dateEpoch":1767830400000,"amount":8500,"currency":"USD","description":"Acme Labs - Discovery sprint (INV-1031)","merchant":"Acme Labs -","category":null,"memo":null,"account":"Income:Consulting:Project","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Invoice","flags":[],"raw":{"Date":"2026-01-08","Account":"Income:Consulting:Project","Class":"Direct Cost","Type":"Invoice","Description":"Acme Labs - Discovery sprint (INV-1031)","Amount":"8500.00"}},{"id":"tx_000003","date":"2026-01-12","dateEpoch":1768176000000,"amount":4250,"currency":"USD","description":"Lavender Projects - Website milestone 1 (INV-1033)","merchant":"Lavender Projects -","category":null,"memo":null,"account":"Income:Consulting:Project","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Invoice","flags":[],"raw":{"Date":"2026-01-12","Account":"Income:Consulting:Project","Class":"Direct Cost","Type":"Invoice","Description":"Lavender Projects - Website milestone 1 (INV-1033)","Amount":"4250.00"}},{"id":"tx_000004","date":"2026-01-15","dateEpoch":1768435200000,"amount":-12480.45,"currency":"USD","description":"Gusto payroll Jan 1-15","merchant":"Gusto payroll Jan","category":null,"memo":null,"account":"Expenses:Payroll:Salaries","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Bill","flags":[],"raw":{"Date":"2026-01-15","Account":"Expenses:Payroll:Salaries","Class":"Direct Cost","Type":"Bill","Description":"Gusto payroll Jan 1-15","Amount":"-12480.45"}},{"id":"tx_000005","date":"2026-01-15","dateEpoch":1768435200000,"amount":-128.97,"currency":"USD","description":"Stripe processing fees","merchant":"Stripe processing fees","category":null,"memo":null,"account":"Expenses:Software:SaaS","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-01-15","Account":"Expenses:Software:SaaS","Class":"Overhead","Type":"Bill","Description":"Stripe processing fees","Amount":"-128.97"}},{"id":"tx_000006","date":"2026-01-15","dateEpoch":1768435200000,"amount":-21,"currency":"USD","description":"GitHub Enterprise","merchant":"GitHub Enterprise","category":null,"memo":null,"account":"Expenses:Software:SaaS","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-01-15","Account":"Expenses:Software:SaaS","Class":"Overhead","Type":"Bill","Description":"GitHub Enterprise","Amount":"-21.00"}},{"id":"tx_000007","date":"2026-01-15","dateEpoch":1768435200000,"amount":-16,"currency":"USD","description":"Notion Workspace","merchant":"Notion Workspace","category":null,"memo":null,"account":"Expenses:Software:SaaS","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-01-15","Account":"Expenses:Software:SaaS","Class":"Overhead","Type":"Bill","Description":"Notion Workspace","Amount":"-16.00"}},{"id":"tx_000008","date":"2026-01-15","dateEpoch":1768435200000,"amount":-30,"currency":"USD","description":"Slack Pro","merchant":"Slack Pro","category":null,"memo":null,"account":"Expenses:Software:SaaS","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-01-15","Account":"Expenses:Software:SaaS","Class":"Overhead","Type":"Bill","Description":"Slack Pro","Amount":"-30.00"}},{"id":"tx_000009","date":"2026-01-13","dateEpoch":1768262400000,"amount":-4200,"currency":"USD","description":"WeWork monthly membership","merchant":"WeWork monthly membership","category":null,"memo":null,"account":"Expenses:Office:Rent","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-01-13","Account":"Expenses:Office:Rent","Class":"Overhead","Type":"Bill","Description":"WeWork monthly membership","Amount":"-4200.00"}},{"id":"tx_000010","date":"2026-01-04","dateEpoch":1767484800000,"amount":-842.18,"currency":"USD","description":"AWS marketplace - January","merchant":"AWS","category":null,"memo":null,"account":"Expenses:Software:Cloud","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Bill","flags":[],"raw":{"Date":"2026-01-04","Account":"Expenses:Software:Cloud","Class":"Direct Cost","Type":"Bill","Description":"AWS marketplace - January","Amount":"-842.18"}},{"id":"tx_000011","date":"2026-01-12","dateEpoch":1768176000000,"amount":-149.9,"currency":"USD","description":"Zoom Video Communications","merchant":"Zoom Video Communications","category":null,"memo":null,"account":"Expenses:Software:SaaS","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-01-12","Account":"Expenses:Software:SaaS","Class":"Overhead","Type":"Bill","Description":"Zoom Video Communications","Amount":"-149.90"}},{"id":"tx_000012","date":"2026-01-30","dateEpoch":1769731200000,"amount":-184.5,"currency":"USD","description":"Anthropic API usage","merchant":"Anthropic API usage","category":null,"memo":null,"account":"Expenses:Software:Cloud","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Bill","flags":[],"raw":{"Date":"2026-01-30","Account":"Expenses:Software:Cloud","Class":"Direct Cost","Type":"Bill","Description":"Anthropic API usage","Amount":"-184.50"}},{"id":"tx_000013","date":"2026-01-31","dateEpoch":1769817600000,"amount":-12480.45,"currency":"USD","description":"Gusto payroll Jan 16-31","merchant":"Gusto payroll Jan","category":null,"memo":null,"account":"Expenses:Payroll:Salaries","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Bill","flags":[],"raw":{"Date":"2026-01-31","Account":"Expenses:Payroll:Salaries","Class":"Direct Cost","Type":"Bill","Description":"Gusto payroll Jan 16-31","Amount":"-12480.45"}},{"id":"tx_000014","date":"2026-01-31","dateEpoch":1769817600000,"amount":6800,"currency":"USD","description":"SummitWorks LLC - API integration phase 1 (INV-1043)","merchant":"SummitWorks LLC -","category":null,"memo":null,"account":"Income:Consulting:Project","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Invoice","flags":[],"raw":{"Date":"2026-01-31","Account":"Income:Consulting:Project","Class":"Direct Cost","Type":"Invoice","Description":"SummitWorks LLC - API integration phase 1 (INV-1043)","Amount":"6800.00"}},{"id":"tx_000015","date":"2026-01-22","dateEpoch":1769040000000,"amount":-189.95,"currency":"USD","description":"Comcast Business","merchant":"Comcast Business","category":null,"memo":null,"account":"Expenses:Office:Internet","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-01-22","Account":"Expenses:Office:Internet","Class":"Overhead","Type":"Bill","Description":"Comcast Business","Amount":"-189.95"}},{"id":"tx_000016","date":"2026-01-19","dateEpoch":1768780800000,"amount":-186.4,"currency":"USD","description":"AT&T Wireless Business","merchant":"AT&T","category":null,"memo":null,"account":"Expenses:Office:Phone","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-01-19","Account":"Expenses:Office:Phone","Class":"Overhead","Type":"Bill","Description":"AT&T Wireless Business","Amount":"-186.40"}},{"id":"tx_000017","date":"2026-01-23","dateEpoch":1769126400000,"amount":-624.3,"currency":"USD","description":"Delta NYC-SFO sales trip","merchant":"Delta NYC-SFO sales","category":null,"memo":null,"account":"Expenses:Travel:Airfare","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Check","flags":[],"raw":{"Date":"2026-01-23","Account":"Expenses:Travel:Airfare","Class":"Direct Cost","Type":"Check","Description":"Delta NYC-SFO sales trip","Amount":"-624.30"}},{"id":"tx_000018","date":"2026-01-26","dateEpoch":1769385600000,"amount":-1240,"currency":"USD","description":"Hotel Hotel SF sales trip","merchant":"Hotel Hotel SF","category":null,"memo":null,"account":"Expenses:Travel:Lodging","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Check","flags":[],"raw":{"Date":"2026-01-26","Account":"Expenses:Travel:Lodging","Class":"Direct Cost","Type":"Check","Description":"Hotel Hotel SF sales trip","Amount":"-1240.00"}},{"id":"tx_000019","date":"2026-02-03","dateEpoch":1770076800000,"amount":12500,"currency":"USD","description":"Northwind Co - February retainer (INV-1042)","merchant":"Northwind Co -","category":null,"memo":null,"account":"Income:Consulting:Retainers","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Invoice","flags":[],"raw":{"Date":"2026-02-03","Account":"Income:Consulting:Retainers","Class":"Direct Cost","Type":"Invoice","Description":"Northwind Co - February retainer (INV-1042)","Amount":"12500.00"}},{"id":"tx_000020","date":"2026-02-15","dateEpoch":1771113600000,"amount":8500,"currency":"USD","description":"Acme Labs - Implementation sprint 1 (INV-1054)","merchant":"Acme Labs -","category":null,"memo":null,"account":"Income:Consulting:Project","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Invoice","flags":[],"raw":{"Date":"2026-02-15","Account":"Income:Consulting:Project","Class":"Direct Cost","Type":"Invoice","Description":"Acme Labs - Implementation sprint 1 (INV-1054)","Amount":"8500.00"}},{"id":"tx_000021","date":"2026-02-18","dateEpoch":1771372800000,"amount":4250,"currency":"USD","description":"Lavender Projects - Website milestone 2 (INV-1055)","merchant":"Lavender Projects -","category":null,"memo":null,"account":"Income:Consulting:Project","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Invoice","flags":[],"raw":{"Date":"2026-02-18","Account":"Income:Consulting:Project","Class":"Direct Cost","Type":"Invoice","Description":"Lavender Projects - Website milestone 2 (INV-1055)","Amount":"4250.00"}},{"id":"tx_000022","date":"2026-02-13","dateEpoch":1770940800000,"amount":-12690.2,"currency":"USD","description":"Gusto payroll Feb 1-15","merchant":"Gusto payroll Feb","category":null,"memo":null,"account":"Expenses:Payroll:Salaries","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Bill","flags":[],"raw":{"Date":"2026-02-13","Account":"Expenses:Payroll:Salaries","Class":"Direct Cost","Type":"Bill","Description":"Gusto payroll Feb 1-15","Amount":"-12690.20"}},{"id":"tx_000023","date":"2026-02-27","dateEpoch":1772150400000,"amount":-12690.2,"currency":"USD","description":"Gusto payroll Feb 16-28","merchant":"Gusto payroll Feb","category":null,"memo":null,"account":"Expenses:Payroll:Salaries","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Bill","flags":[],"raw":{"Date":"2026-02-27","Account":"Expenses:Payroll:Salaries","Class":"Direct Cost","Type":"Bill","Description":"Gusto payroll Feb 16-28","Amount":"-12690.20"}},{"id":"tx_000024","date":"2026-02-02","dateEpoch":1769990400000,"amount":-4200,"currency":"USD","description":"WeWork monthly membership","merchant":"WeWork monthly membership","category":null,"memo":null,"account":"Expenses:Office:Rent","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-02-02","Account":"Expenses:Office:Rent","Class":"Overhead","Type":"Bill","Description":"WeWork monthly membership","Amount":"-4200.00"}},{"id":"tx_000025","date":"2026-02-04","dateEpoch":1770163200000,"amount":-918.4,"currency":"USD","description":"AWS marketplace - February","merchant":"AWS","category":null,"memo":null,"account":"Expenses:Software:Cloud","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Bill","flags":[],"raw":{"Date":"2026-02-04","Account":"Expenses:Software:Cloud","Class":"Direct Cost","Type":"Bill","Description":"AWS marketplace - February","Amount":"-918.40"}},{"id":"tx_000026","date":"2026-02-15","dateEpoch":1771113600000,"amount":-174.6,"currency":"USD","description":"Stripe processing fees","merchant":"Stripe processing fees","category":null,"memo":null,"account":"Expenses:Software:SaaS","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-02-15","Account":"Expenses:Software:SaaS","Class":"Overhead","Type":"Bill","Description":"Stripe processing fees","Amount":"-174.60"}},{"id":"tx_000027","date":"2026-02-22","dateEpoch":1771718400000,"amount":-9240,"currency":"USD","description":"Alpine Tools LLC - workstation refresh","merchant":"Alpine Tools LLC","category":null,"memo":null,"account":"Expenses:Equipment:Hardware","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Check","flags":[],"raw":{"Date":"2026-02-22","Account":"Expenses:Equipment:Hardware","Class":"Direct Cost","Type":"Check","Description":"Alpine Tools LLC - workstation refresh","Amount":"-9240.00"}},{"id":"tx_000028","date":"2026-02-28","dateEpoch":1772236800000,"amount":4250,"currency":"USD","description":"Lavender Projects - February work (INV-1058)","merchant":"Lavender Projects -","category":null,"memo":null,"account":"Income:Consulting:Project","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Invoice","flags":[],"raw":{"Date":"2026-02-28","Account":"Income:Consulting:Project","Class":"Direct Cost","Type":"Invoice","Description":"Lavender Projects - February work (INV-1058)","Amount":"4250.00"}},{"id":"tx_000029","date":"2026-02-16","dateEpoch":1771200000000,"amount":-189.95,"currency":"USD","description":"Comcast Business","merchant":"Comcast Business","category":null,"memo":null,"account":"Expenses:Office:Internet","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-02-16","Account":"Expenses:Office:Internet","Class":"Overhead","Type":"Bill","Description":"Comcast Business","Amount":"-189.95"}},{"id":"tx_000030","date":"2026-02-19","dateEpoch":1771459200000,"amount":-186.4,"currency":"USD","description":"AT&T Wireless Business","merchant":"AT&T","category":null,"memo":null,"account":"Expenses:Office:Phone","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-02-19","Account":"Expenses:Office:Phone","Class":"Overhead","Type":"Bill","Description":"AT&T Wireless Business","Amount":"-186.40"}},{"id":"tx_000031","date":"2026-03-01","dateEpoch":1772323200000,"amount":12500,"currency":"USD","description":"Northwind Co - March retainer (INV-1067)","merchant":"Northwind Co -","category":null,"memo":null,"account":"Income:Consulting:Retainers","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Invoice","flags":[],"raw":{"Date":"2026-03-01","Account":"Income:Consulting:Retainers","Class":"Direct Cost","Type":"Invoice","Description":"Northwind Co - March retainer (INV-1067)","Amount":"12500.00"}},{"id":"tx_000032","date":"2026-03-04","dateEpoch":1772582400000,"amount":18400,"currency":"USD","description":"Hilltop Manufacturing - Q1 implementation (INV-1068)","merchant":"Hilltop Manufacturing -","category":null,"memo":null,"account":"Income:Consulting:Project","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Invoice","flags":[],"raw":{"Date":"2026-03-04","Account":"Income:Consulting:Project","Class":"Direct Cost","Type":"Invoice","Description":"Hilltop Manufacturing - Q1 implementation (INV-1068)","Amount":"18400.00"}},{"id":"tx_000033","date":"2026-03-10","dateEpoch":1773100800000,"amount":6800,"currency":"USD","description":"SummitWorks LLC - API integration phase 2 (INV-1078)","merchant":"SummitWorks LLC -","category":null,"memo":null,"account":"Income:Consulting:Project","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Invoice","flags":[],"raw":{"Date":"2026-03-10","Account":"Income:Consulting:Project","Class":"Direct Cost","Type":"Invoice","Description":"SummitWorks LLC - API integration phase 2 (INV-1078)","Amount":"6800.00"}},{"id":"tx_000034","date":"2026-03-13","dateEpoch":1773360000000,"amount":-12890.2,"currency":"USD","description":"Gusto payroll Mar 1-15","merchant":"Gusto payroll Mar","category":null,"memo":null,"account":"Expenses:Payroll:Salaries","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Bill","flags":[],"raw":{"Date":"2026-03-13","Account":"Expenses:Payroll:Salaries","Class":"Direct Cost","Type":"Bill","Description":"Gusto payroll Mar 1-15","Amount":"-12890.20"}},{"id":"tx_000035","date":"2026-03-27","dateEpoch":1774569600000,"amount":-12890.2,"currency":"USD","description":"Gusto payroll Mar 16-31","merchant":"Gusto payroll Mar","category":null,"memo":null,"account":"Expenses:Payroll:Salaries","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Bill","flags":[],"raw":{"Date":"2026-03-27","Account":"Expenses:Payroll:Salaries","Class":"Direct Cost","Type":"Bill","Description":"Gusto payroll Mar 16-31","Amount":"-12890.20"}},{"id":"tx_000036","date":"2026-03-02","dateEpoch":1772409600000,"amount":-4200,"currency":"USD","description":"WeWork monthly membership","merchant":"WeWork monthly membership","category":null,"memo":null,"account":"Expenses:Office:Rent","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-03-02","Account":"Expenses:Office:Rent","Class":"Overhead","Type":"Bill","Description":"WeWork monthly membership","Amount":"-4200.00"}},{"id":"tx_000037","date":"2026-03-04","dateEpoch":1772582400000,"amount":-1024.5,"currency":"USD","description":"AWS marketplace - March","merchant":"AWS","category":null,"memo":null,"account":"Expenses:Software:Cloud","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Bill","flags":[],"raw":{"Date":"2026-03-04","Account":"Expenses:Software:Cloud","Class":"Direct Cost","Type":"Bill","Description":"AWS marketplace - March","Amount":"-1024.50"}},{"id":"tx_000038","date":"2026-03-15","dateEpoch":1773532800000,"amount":-217.2,"currency":"USD","description":"Stripe processing fees","merchant":"Stripe processing fees","category":null,"memo":null,"account":"Expenses:Software:SaaS","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-03-15","Account":"Expenses:Software:SaaS","Class":"Overhead","Type":"Bill","Description":"Stripe processing fees","Amount":"-217.20"}},{"id":"tx_000039","date":"2026-03-15","dateEpoch":1773532800000,"amount":-21,"currency":"USD","description":"GitHub Enterprise","merchant":"GitHub Enterprise","category":null,"memo":null,"account":"Expenses:Software:SaaS","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-03-15","Account":"Expenses:Software:SaaS","Class":"Overhead","Type":"Bill","Description":"GitHub Enterprise","Amount":"-21.00"}},{"id":"tx_000040","date":"2026-03-15","dateEpoch":1773532800000,"amount":-16,"currency":"USD","description":"Notion Workspace","merchant":"Notion Workspace","category":null,"memo":null,"account":"Expenses:Software:SaaS","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-03-15","Account":"Expenses:Software:SaaS","Class":"Overhead","Type":"Bill","Description":"Notion Workspace","Amount":"-16.00"}},{"id":"tx_000041","date":"2026-03-15","dateEpoch":1773532800000,"amount":-30,"currency":"USD","description":"Slack Pro","merchant":"Slack Pro","category":null,"memo":null,"account":"Expenses:Software:SaaS","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-03-15","Account":"Expenses:Software:SaaS","Class":"Overhead","Type":"Bill","Description":"Slack Pro","Amount":"-30.00"}},{"id":"tx_000042","date":"2026-03-30","dateEpoch":1774828800000,"amount":-298.2,"currency":"USD","description":"Anthropic API usage","merchant":"Anthropic API usage","category":null,"memo":null,"account":"Expenses:Software:Cloud","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Bill","flags":[],"raw":{"Date":"2026-03-30","Account":"Expenses:Software:Cloud","Class":"Direct Cost","Type":"Bill","Description":"Anthropic API usage","Amount":"-298.20"}},{"id":"tx_000043","date":"2026-03-16","dateEpoch":1773619200000,"amount":-189.95,"currency":"USD","description":"Comcast Business","merchant":"Comcast Business","category":null,"memo":null,"account":"Expenses:Office:Internet","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-03-16","Account":"Expenses:Office:Internet","Class":"Overhead","Type":"Bill","Description":"Comcast Business","Amount":"-189.95"}},{"id":"tx_000044","date":"2026-03-19","dateEpoch":1773878400000,"amount":-186.4,"currency":"USD","description":"AT&T Wireless Business","merchant":"AT&T","category":null,"memo":null,"account":"Expenses:Office:Phone","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-03-19","Account":"Expenses:Office:Phone","Class":"Overhead","Type":"Bill","Description":"AT&T Wireless Business","Amount":"-186.40"}},{"id":"tx_000045","date":"2026-03-26","dateEpoch":1774483200000,"amount":-712.4,"currency":"USD","description":"Delta SFO-NYC client visit","merchant":"Delta SFO-NYC client","category":null,"memo":null,"account":"Expenses:Travel:Airfare","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Check","flags":[],"raw":{"Date":"2026-03-26","Account":"Expenses:Travel:Airfare","Class":"Direct Cost","Type":"Check","Description":"Delta SFO-NYC client visit","Amount":"-712.40"}},{"id":"tx_000046","date":"2026-03-12","dateEpoch":1773273600000,"amount":-149.9,"currency":"USD","description":"Zoom Video Communications","merchant":"Zoom Video Communications","category":null,"memo":null,"account":"Expenses:Software:SaaS","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Bill","flags":[],"raw":{"Date":"2026-03-12","Account":"Expenses:Software:SaaS","Class":"Overhead","Type":"Bill","Description":"Zoom Video Communications","Amount":"-149.90"}},{"id":"tx_000047","date":"2026-03-22","dateEpoch":1774137600000,"amount":15400,"currency":"USD","description":"Riverbend Capital - Strategy retainer Q2 (INV-1085)","merchant":"Riverbend Capital -","category":null,"memo":null,"account":"Income:Consulting:Retainers","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Invoice","flags":[],"raw":{"Date":"2026-03-22","Account":"Income:Consulting:Retainers","Class":"Direct Cost","Type":"Invoice","Description":"Riverbend Capital - Strategy retainer Q2 (INV-1085)","Amount":"15400.00"}},{"id":"tx_000048","date":"2026-03-28","dateEpoch":1774656000000,"amount":4250,"currency":"USD","description":"Lavender Projects - Website milestone 3 (INV-1090)","merchant":"Lavender Projects -","category":null,"memo":null,"account":"Income:Consulting:Project","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Direct Cost","type":"Invoice","flags":[],"raw":{"Date":"2026-03-28","Account":"Income:Consulting:Project","Class":"Direct Cost","Type":"Invoice","Description":"Lavender Projects - Website milestone 3 (INV-1090)","Amount":"4250.00"}},{"id":"tx_000049","date":"2026-03-31","dateEpoch":1774915200000,"amount":-3200,"currency":"USD","description":"Outside counsel - Q1 retainer","merchant":"Outside counsel -","category":null,"memo":null,"account":"Expenses:Professional:Legal","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Check","flags":[],"raw":{"Date":"2026-03-31","Account":"Expenses:Professional:Legal","Class":"Overhead","Type":"Check","Description":"Outside counsel - Q1 retainer","Amount":"-3200.00"}},{"id":"tx_000050","date":"2026-03-31","dateEpoch":1774915200000,"amount":-1800,"currency":"USD","description":"Bookkeeping Q1","merchant":"Bookkeeping Q1","category":null,"memo":null,"account":"Expenses:Professional:Accounting","balance":null,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":"Overhead","type":"Check","flags":[],"raw":{"Date":"2026-03-31","Account":"Expenses:Professional:Accounting","Class":"Overhead","Type":"Check","Description":"Bookkeeping Q1","Amount":"-1800.00"}}],"summary":{"rowCount":50,"inflow":118900,"outflow":110889.8,"net":8010.2,"currencySymbol":"$","currencyCode":"USD","period":"2026-01-03 → 2026-03-31","durationLabel":"3 months","distinctMerchants":25,"distinctCategories":0},"categoryTotals":[{"category":"Uncategorized","inflow":118900,"outflow":110889.8,"net":8010.2,"count":50,"share":100}],"recurring":[{"name":"Northwind Co -","cadence":"monthly","avgAmount":12500,"count":3,"lastSeen":"2026-03-01","nextExpected":"2026-03-31","tag":"income"},{"name":"Lavender Projects -","cadence":"monthly","avgAmount":4250,"count":4,"lastSeen":"2026-03-28","nextExpected":"2026-04-27","tag":"income"},{"name":"AWS","cadence":"monthly","avgAmount":-928.36,"count":3,"lastSeen":"2026-03-04","nextExpected":"2026-04-03","tag":"subscription"},{"name":"Comcast Business","cadence":"monthly","avgAmount":-189.95,"count":3,"lastSeen":"2026-03-16","nextExpected":"2026-04-15","tag":"utility"},{"name":"AT&T","cadence":"monthly","avgAmount":-186.4,"count":3,"lastSeen":"2026-03-19","nextExpected":"2026-04-18","tag":"subscription"},{"name":"Stripe processing fees","cadence":"monthly","avgAmount":-173.59,"count":3,"lastSeen":"2026-03-15","nextExpected":"2026-04-14","tag":"subscription"}],"flags":[],"timeline":[{"date":"2026-01-03","inflow":12500,"outflow":0,"net":12500,"balance":null,"count":1},{"date":"2026-01-04","inflow":0,"outflow":842.18,"net":-842.18,"balance":null,"count":1},{"date":"2026-01-08","inflow":8500,"outflow":0,"net":8500,"balance":null,"count":1},{"date":"2026-01-12","inflow":4250,"outflow":149.9,"net":4100.1,"balance":null,"count":2},{"date":"2026-01-13","inflow":0,"outflow":4200,"net":-4200,"balance":null,"count":1},{"date":"2026-01-15","inflow":0,"outflow":12676.42,"net":-12676.42,"balance":null,"count":5},{"date":"2026-01-19","inflow":0,"outflow":186.4,"net":-186.4,"balance":null,"count":1},{"date":"2026-01-22","inflow":0,"outflow":189.95,"net":-189.95,"balance":null,"count":1},{"date":"2026-01-23","inflow":0,"outflow":624.3,"net":-624.3,"balance":null,"count":1},{"date":"2026-01-26","inflow":0,"outflow":1240,"net":-1240,"balance":null,"count":1},{"date":"2026-01-30","inflow":0,"outflow":184.5,"net":-184.5,"balance":null,"count":1},{"date":"2026-01-31","inflow":6800,"outflow":12480.45,"net":-5680.45,"balance":null,"count":2},{"date":"2026-02-02","inflow":0,"outflow":4200,"net":-4200,"balance":null,"count":1},{"date":"2026-02-03","inflow":12500,"outflow":0,"net":12500,"balance":null,"count":1},{"date":"2026-02-04","inflow":0,"outflow":918.4,"net":-918.4,"balance":null,"count":1},{"date":"2026-02-13","inflow":0,"outflow":12690.2,"net":-12690.2,"balance":null,"count":1},{"date":"2026-02-15","inflow":8500,"outflow":174.6,"net":8325.4,"balance":null,"count":2},{"date":"2026-02-16","inflow":0,"outflow":189.95,"net":-189.95,"balance":null,"count":1},{"date":"2026-02-18","inflow":4250,"outflow":0,"net":4250,"balance":null,"count":1},{"date":"2026-02-19","inflow":0,"outflow":186.4,"net":-186.4,"balance":null,"count":1},{"date":"2026-02-22","inflow":0,"outflow":9240,"net":-9240,"balance":null,"count":1},{"date":"2026-02-27","inflow":0,"outflow":12690.2,"net":-12690.2,"balance":null,"count":1},{"date":"2026-02-28","inflow":4250,"outflow":0,"net":4250,"balance":null,"count":1},{"date":"2026-03-01","inflow":12500,"outflow":0,"net":12500,"balance":null,"count":1},{"date":"2026-03-02","inflow":0,"outflow":4200,"net":-4200,"balance":null,"count":1},{"date":"2026-03-04","inflow":18400,"outflow":1024.5,"net":17375.5,"balance":null,"count":2},{"date":"2026-03-10","inflow":6800,"outflow":0,"net":6800,"balance":null,"count":1},{"date":"2026-03-12","inflow":0,"outflow":149.9,"net":-149.9,"balance":null,"count":1},{"date":"2026-03-13","inflow":0,"outflow":12890.2,"net":-12890.2,"balance":null,"count":1},{"date":"2026-03-15","inflow":0,"outflow":284.2,"net":-284.2,"balance":null,"count":4},{"date":"2026-03-16","inflow":0,"outflow":189.95,"net":-189.95,"balance":null,"count":1},{"date":"2026-03-19","inflow":0,"outflow":186.4,"net":-186.4,"balance":null,"count":1},{"date":"2026-03-22","inflow":15400,"outflow":0,"net":15400,"balance":null,"count":1},{"date":"2026-03-26","inflow":0,"outflow":712.4,"net":-712.4,"balance":null,"count":1},{"date":"2026-03-27","inflow":0,"outflow":12890.2,"net":-12890.2,"balance":null,"count":1},{"date":"2026-03-28","inflow":4250,"outflow":0,"net":4250,"balance":null,"count":1},{"date":"2026-03-30","inflow":0,"outflow":298.2,"net":-298.2,"balance":null,"count":1},{"date":"2026-03-31","inflow":0,"outflow":5000,"net":-5000,"balance":null,"count":2}],"topVendors":[{"name":"Northwind Co -","inflow":37500,"outflow":0,"count":3},{"name":"Gusto payroll Mar","inflow":0,"outflow":25780.4,"count":2},{"name":"Gusto payroll Feb","inflow":0,"outflow":25380.4,"count":2},{"name":"Gusto payroll Jan","inflow":0,"outflow":24960.9,"count":2},{"name":"Hilltop Manufacturing -","inflow":18400,"outflow":0,"count":1},{"name":"Acme Labs -","inflow":17000,"outflow":0,"count":2},{"name":"Lavender Projects -","inflow":17000,"outflow":0,"count":4},{"name":"Riverbend Capital -","inflow":15400,"outflow":0,"count":1},{"name":"SummitWorks LLC -","inflow":13600,"outflow":0,"count":2},{"name":"WeWork monthly membership","inflow":0,"outflow":12600,"count":3},{"name":"Alpine Tools LLC","inflow":0,"outflow":9240,"count":1},{"name":"Outside counsel -","inflow":0,"outflow":3200,"count":1},{"name":"AWS","inflow":0,"outflow":2785.08,"count":3},{"name":"Bookkeeping Q1","inflow":0,"outflow":1800,"count":1},{"name":"Hotel Hotel SF","inflow":0,"outflow":1240,"count":1},{"name":"Delta SFO-NYC client","inflow":0,"outflow":712.4,"count":1},{"name":"Delta NYC-SFO sales","inflow":0,"outflow":624.3,"count":1},{"name":"Comcast Business","inflow":0,"outflow":569.85,"count":3},{"name":"AT&T","inflow":0,"outflow":559.2,"count":3},{"name":"Stripe processing fees","inflow":0,"outflow":520.77,"count":3},{"name":"Anthropic API usage","inflow":0,"outflow":482.7,"count":2},{"name":"Zoom Video Communications","inflow":0,"outflow":299.8,"count":2},{"name":"Slack Pro","inflow":0,"outflow":60,"count":2},{"name":"GitHub Enterprise","inflow":0,"outflow":42,"count":2},{"name":"Notion Workspace","inflow":0,"outflow":32,"count":2}],"hasBalance":false,"spansMultipleMonths":true,"accountTree":[{"account":"Income","subtotal":118900,"count":13,"children":[{"account":"Consulting","subtotal":118900,"count":13,"children":[{"account":"Retainers","subtotal":52900,"count":4,"children":[]},{"account":"Project","subtotal":66000,"count":9,"children":[]}]}]},{"account":"Expenses","subtotal":-110889.8,"count":37,"children":[{"account":"Payroll","subtotal":-76121.7,"count":6,"children":[{"account":"Salaries","subtotal":-76121.7,"count":6,"children":[]}]},{"account":"Software","subtotal":-4222.35,"count":16,"children":[{"account":"SaaS","subtotal":-954.57,"count":11,"children":[]},{"account":"Cloud","subtotal":-3267.78,"count":5,"children":[]}]},{"account":"Office","subtotal":-13729.05,"count":9,"children":[{"account":"Rent","subtotal":-12600,"count":3,"children":[]},{"account":"Internet","subtotal":-569.85,"count":3,"children":[]},{"account":"Phone","subtotal":-559.2,"count":3,"children":[]}]},{"account":"Travel","subtotal":-2576.7,"count":3,"children":[{"account":"Airfare","subtotal":-1336.7,"count":2,"children":[]},{"account":"Lodging","subtotal":-1240,"count":1,"children":[]}]},{"account":"Equipment","subtotal":-9240,"count":1,"children":[{"account":"Hardware","subtotal":-9240,"count":1,"children":[]}]},{"account":"Professional","subtotal":-5000,"count":2,"children":[{"account":"Legal","subtotal":-3200,"count":1,"children":[]},{"account":"Accounting","subtotal":-1800,"count":1,"children":[]}]}]}],"meta":{"sourceFile":"input.csv","sizeBytes":4534,"format":"quickbooks","subtype":"quickbooks-gl","rowCount":50,"columnCount":6,"headers":["Date","Account","Class","Type","Description","Amount"],"detectedColumns":{"date":"Date","amount":"Amount","description":"Description","account":"Account","classCol":"Class","type":"Type"},"currencyCode":"USD","currencySymbol":"$","hasBalance":false,"spansMultipleMonths":true,"period":"2026-01-03 → 2026-03-31","durationLabel":"3 months","separator":","}};</script>
+
+<div class="command-bar" role="banner">
+  <span class="command-bar-title">Linewood Studio</span>
+  <span class="command-bar-period" id="periodLabel">Q1 2026 · General Ledger</span>
+  <div class="command-bar-spacer"></div>
+  <div class="search-box" title="Search transactions (Cmd+F)">
+    <span class="search-icon" aria-hidden="true">⌕</span>
+    <input type="search" id="globalSearch" placeholder="Search transactions…" aria-label="Search all transactions">
+  </div>
+  <button class="btn-copy" id="copyMarkdownBtn" title="Copy analysis as Markdown">⎘ Copy Summary</button>
+</div>
+
+<div class="ops-shell">
+
+  <!-- KPI Rail -->
+  <section aria-label="Summary">
+    <div class="kpi-rail fade-up" id="kpiRail">
+      <!-- populated by JS -->
+    </div>
+  </section>
+
+  <!-- Cashflow Timeline -->
+  <div class="section-header fade-up-2">
+    <h2 class="section-title">Cashflow Timeline</h2>
+    <span class="section-badge" id="timelineBadge">Q1 2026</span>
+  </div>
+  <div class="work-surface fade-up-2" id="timelinePanel">
+    <div class="chart-title">Inflow vs Outflow by date — hover for details</div>
+    <svg class="timeline-svg" id="timelineSvg" aria-label="Cashflow timeline chart"></svg>
+  </div>
+  <div class="timeline-tooltip" id="tlTooltip"></div>
+
+  <!-- Categories + Account Tree -->
+  <div class="section-header fade-up-3">
+    <h2 class="section-title">Accounts</h2>
+    <span class="section-badge" id="accountsBadge"></span>
+  </div>
+  <div class="two-col fade-up-3">
+    <div class="panel" id="categoriesPanel">
+      <div class="chart-title">Top-level account totals</div>
+      <div id="catBars"></div>
+    </div>
+    <div class="panel" id="accountTreePanel">
+      <div class="chart-title">Account tree — click to expand</div>
+      <ul class="account-tree" id="accountTree" aria-label="Account hierarchy"></ul>
+    </div>
+  </div>
+
+  <!-- Period over Period -->
+  <div class="section-header">
+    <h2 class="section-title">Period over Period</h2>
+    <span class="section-badge">Monthly breakdown · Q1 2026</span>
+  </div>
+  <div class="work-surface" id="popPanel">
+    <div class="chart-title">Inflow · Outflow · Net by month</div>
+    <div class="pop-grid" id="popGrid"></div>
+  </div>
+
+  <!-- Top Vendors -->
+  <div class="section-header">
+    <h2 class="section-title">Top Vendors &amp; Customers</h2>
+    <span class="section-badge" id="vendorsBadge"></span>
+  </div>
+  <div class="two-col">
+    <div class="panel">
+      <div class="chart-title">Top inflow sources</div>
+      <div class="vendor-list" id="topInflow"></div>
+    </div>
+    <div class="panel">
+      <div class="chart-title">Top outflow recipients</div>
+      <div class="vendor-list" id="topOutflow"></div>
+    </div>
+  </div>
+
+  <!-- Recurring -->
+  <div class="section-header">
+    <h2 class="section-title">Recurring</h2>
+    <span class="section-badge" id="recurringBadge"></span>
+  </div>
+  <div class="panel" id="recurringPanel">
+    <div class="recurring-grid" id="recurringGrid"></div>
+  </div>
+
+  <!-- Anomalies / Flags -->
+  <div class="section-header">
+    <h2 class="section-title">Anomalies</h2>
+    <span class="section-badge" id="flagsBadge"></span>
+  </div>
+  <div class="flag-queue" id="flagQueue"></div>
+
+  <!-- Drill-down Table -->
+  <div class="section-header" style="margin-top:var(--space-3xl)">
+    <h2 class="section-title">Transactions</h2>
+    <span class="section-badge" id="drillBadge"></span>
+  </div>
+  <button class="drill-toggle" id="drillToggle" aria-expanded="false" aria-controls="drillContent">
+    <span class="drill-arrow" id="drillArrow">▶</span>
+    Browse all <span id="drillCount">0</span> transactions
+  </button>
+  <div id="drillContent" hidden>
+    <div class="data-grid">
+      <div class="grid-controls">
+        <div class="filter-chips" id="filterChips"></div>
+        <div class="grid-search">
+          <span style="color:var(--fg-muted);font-size:0.85rem">⌕</span>
+          <input type="search" id="tableSearch" placeholder="Filter rows…" aria-label="Filter transaction rows">
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table id="txTable" role="grid">
+          <thead>
+            <tr>
+              <th data-col="date" tabindex="0">Date <span id="sort-date"></span></th>
+              <th data-col="account" tabindex="0">Account <span id="sort-account"></span></th>
+              <th data-col="classCol" tabindex="0">Class <span id="sort-classCol"></span></th>
+              <th data-col="type" tabindex="0">Type <span id="sort-type"></span></th>
+              <th data-col="description" tabindex="0">Description <span id="sort-description"></span></th>
+              <th data-col="amount" tabindex="0" style="text-align:right">Amount <span id="sort-amount"></span></th>
+            </tr>
+          </thead>
+          <tbody id="txBody"></tbody>
+        </table>
+      </div>
+      <button class="load-more-btn" id="loadMoreBtn" style="display:none">Load more rows…</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="page-footer" role="contentinfo">
+    <p><em>Analytical summary, not accounting or tax advice. Categories and recurring patterns are inferred from the file's text — verify against your books before acting on anything here.</em></p>
+    <p><em>Generated locally — your finance file never left your machine. The full transaction list is embedded in this HTML and rendered in your browser. For sharing, prefer an anonymized export with account numbers and customer names redacted.</em></p>
+  </footer>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+// ── Helpers ──────────────────────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+const fmt = (n, sym='$') => {
+  if(n==null||isNaN(n)) return '—';
+  const abs = Math.abs(n);
+  const s = sym + abs.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  return n < 0 ? '−'+s : s;
+};
+const fmtSigned = (n, sym='$') => {
+  if(n==null||isNaN(n)) return '—';
+  return (n>=0?'+':'')+sym+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+};
+const escHtml = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function hl(text, q){
+  if(!q||!text) return escHtml(text||'');
+  const re = new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+  return escHtml(text).replace(re,'<mark class="match-highlight">$1</mark>');
+}
+
+// ── Bootstrap data ───────────────────────────────────────────────────────
+const D = DATA;
+const sym = (D.summary && D.summary.currencySymbol) || '$';
+const rows = D.rows || [];
+const summary = D.summary || {};
+const catTotals = D.categoryTotals || D.categoryTotalsTop || [];
+const recurring = D.recurring || D.recurringTop || [];
+const flags = D.flags || D.flagsTop || [];
+const timeline = D.timeline || D.timelinePreview || [];
+const topVendors = D.topVendors || D.topVendorsTop || [];
+const accountTree = D.accountTree || null;
+const accountTreeTop = D.accountTreeTopLevel || [];
+
+// ── Period label ──────────────────────────────────────────────────────────
+$('periodLabel').textContent = `Q1 2026 · General Ledger · ${summary.period||''}`;
+
+// ── KPI Rail ─────────────────────────────────────────────────────────────
+function renderKPIs(){
+  const kpis = [
+    {label:'Total Inflow',  value:fmt(summary.inflow,sym), cls:'green', sub:`${summary.rowCount||rows.length} entries`},
+    {label:'Total Outflow', value:fmt(summary.outflow,sym),cls:'red',   sub:'Expenses & costs'},
+    {label:'Net Q1',        value:fmt(summary.net,sym),    cls:summary.net>=0?'green':'red', sub:'Revenue minus costs'},
+    {label:'Period',        value:'Q1 2026',               cls:'', sub:summary.durationLabel||'3 months'},
+    {label:'Transactions',  value:String(summary.rowCount||rows.length), cls:'primary', sub:`${summary.distinctMerchants||0} merchants`},
+  ];
+  const rail = $('kpiRail');
+  rail.innerHTML = kpis.map(k=>`
+    <div class="kpi-cell">
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-value ${k.cls}" data-target="${k.value}">${k.value}</div>
+      <div class="kpi-sub">${k.sub}</div>
+    </div>
+  `).join('');
+  // Count-up animation for numeric KPIs
+  rail.querySelectorAll('.kpi-value').forEach(el=>{
+    const raw = el.dataset.target;
+    const match = raw.replace(/[^0-9.]/g,'');
+    if(!match||isNaN(+match)) return;
+    const target = +match;
+    const prefix = raw.replace(match,'');
+    let start = null;
+    const dur = 700;
+    function step(ts){
+      if(!start) start=ts;
+      const p = Math.min((ts-start)/dur,1);
+      const ease = 1-Math.pow(1-p,3);
+      const cur = (target*ease).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+      el.textContent = prefix+cur;
+      if(p<1) requestAnimationFrame(step);
+      else el.textContent = raw;
+    }
+    if(!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+      requestAnimationFrame(step);
+    }
+  });
+}
+renderKPIs();
+
+// ── Timeline Chart ────────────────────────────────────────────────────────
+function renderTimeline(){
+  const svg = $('timelineSvg');
+  if(!timeline.length){svg.innerHTML='<text x="0" y="20" fill="var(--fg-muted)" font-size="12">No timeline data</text>';return;}
+
+  const W=800, H=160, PL=8, PR=8, PT=16, PB=32;
+  const dates = timeline.map(d=>d.date);
+  const inflows = timeline.map(d=>+(d.inflow||0));
+  const outflows = timeline.map(d=>+(d.outflow||0));
+  const allVals = [...inflows,...outflows];
+  const maxVal = Math.max(...allVals,1);
+  const n = timeline.length;
+  const slotW = (W-PL-PR)/(n||1);
+
+  const xOf = i => PL + i*slotW + slotW/2;
+  const yOf = v => PT + (H-PT-PB)*(1 - v/maxVal);
+
+  // Build bar groups
+  let bars='';
+  timeline.forEach((d,i)=>{
+    const x = xOf(i);
+    const barW = Math.max(slotW*0.35,4);
+    const ih = (H-PT-PB)*((d.inflow||0)/maxVal);
+    const oh = (H-PT-PB)*((d.outflow||0)/maxVal);
+    const iy = PT + (H-PT-PB) - ih;
+    const oy = PT + (H-PT-PB) - oh;
+    bars+=`
+      <rect class="bar-in" x="${x-barW-1}" y="${iy}" width="${barW}" height="${Math.max(ih,1)}" fill="var(--green)" opacity="0.75" rx="2"
+        data-idx="${i}" style="cursor:pointer"/>
+      <rect class="bar-out" x="${x+1}" y="${oy}" width="${barW}" height="${Math.max(oh,1)}" fill="var(--red)" opacity="0.75" rx="2"
+        data-idx="${i}" style="cursor:pointer"/>
+    `;
+  });
+
+  // X-axis labels (show every N)
+  const step = Math.max(1,Math.floor(n/6));
+  let labels='';
+  timeline.forEach((d,i)=>{
+    if(i%step!==0&&i!==n-1) return;
+    const x=xOf(i);
+    const short = d.date.replace('2026-','');
+    labels+=`<text x="${x}" y="${H-PB+14}" text-anchor="middle" font-size="9" fill="var(--fg-muted)">${short}</text>`;
+  });
+
+  // Baseline
+  const baseY = PT+(H-PT-PB);
+  const gridLines = [0.25,0.5,0.75,1].map(f=>{
+    const y = PT+(H-PT-PB)*(1-f);
+    const v = (maxVal*f/1000).toFixed(0)+'k';
+    return `<line x1="${PL}" y1="${y}" x2="${W-PR}" y2="${y}" stroke="var(--border)" stroke-width="1"/>
+    <text x="${PL}" y="${y-3}" font-size="8" fill="var(--fg-muted)">${sym}${v}</text>`;
+  }).join('');
+
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  svg.innerHTML = `
+    ${gridLines}
+    <line x1="${PL}" y1="${baseY}" x2="${W-PR}" y2="${baseY}" stroke="var(--border-strong)" stroke-width="1"/>
+    ${bars}
+    ${labels}
+    <rect x="${W-PR-100}" y="${PT}" width="10" height="8" fill="var(--green)" opacity="0.8" rx="2"/>
+    <text x="${W-PR-87}" y="${PT+7}" font-size="9" fill="var(--fg-muted)">Inflow</text>
+    <rect x="${W-PR-50}" y="${PT}" width="10" height="8" fill="var(--red)" opacity="0.8" rx="2"/>
+    <text x="${W-PR-37}" y="${PT+7}" font-size="9" fill="var(--fg-muted)">Outflow</text>
+  `;
+
+  // Hover tooltip
+  const tt = $('tlTooltip');
+  svg.querySelectorAll('[data-idx]').forEach(el=>{
+    el.addEventListener('mouseenter',e=>{
+      const i=+el.dataset.idx;
+      const d=timeline[i];
+      tt.innerHTML=`<strong>${d.date}</strong><br>
+        In: <span style="color:var(--green)">${fmt(d.inflow,sym)}</span><br>
+        Out: <span style="color:var(--red)">${fmt(d.outflow,sym)}</span><br>
+        Net: <span style="color:${(d.net||0)>=0?'var(--green)':'var(--red)'}">${fmt(d.net,sym)}</span><br>
+        Entries: ${d.count||1}`;
+      tt.style.display='block';
+    });
+    el.addEventListener('mousemove',e=>{
+      tt.style.left=(e.clientX+14)+'px';
+      tt.style.top=(e.clientY-30)+'px';
+    });
+    el.addEventListener('mouseleave',()=>{tt.style.display='none';});
+  });
+}
+renderTimeline();
+
+// ── Categories / Accounts Panel ───────────────────────────────────────────
+function renderCategories(){
+  const topAccs = accountTreeTop.length ? accountTreeTop : catTotals;
+  const maxAbs = Math.max(...topAccs.map(a=>Math.abs(a.subtotal||a.inflow||a.outflow||0)),1);
+  $('accountsBadge').textContent = `${topAccs.length} top-level accounts`;
+
+  const barColors = ['var(--primary)','var(--secondary-container)','var(--tertiary)','var(--green)','var(--yellow)','var(--blue)'];
+  const catEl = $('catBars');
+  catEl.innerHTML = topAccs.map((a,i)=>{
+    const val = a.subtotal != null ? a.subtotal : (a.inflow||0) - (a.outflow||0);
+    const pct = Math.round(Math.abs(val)/maxAbs*100);
+    const color = barColors[i%barColors.length];
+    const count = a.count != null ? a.count : (a.inflow&&a.outflow ? undefined : undefined);
+    return `<div class="cat-row">
+      <div class="cat-name" title="${escHtml(a.account||a.category||'')}">${escHtml(a.account||a.category||'Other')}</div>
+      <div class="cat-bar-wrap"><div class="cat-bar" style="width:0%;background:${color}" data-w="${pct}%"></div></div>
+      <div class="cat-amount ${val>=0?'':'neg'}">${fmt(Math.abs(val),sym)}</div>
+      <div class="cat-share">${count!=null?count+'×':pct+'%'}</div>
+    </div>`;
+  }).join('');
+
+  // Animate bars
+  requestAnimationFrame(()=>{
+    catEl.querySelectorAll('.cat-bar').forEach(b=>{
+      b.style.width = b.dataset.w;
+    });
+  });
+}
+renderCategories();
+
+// ── Account Tree ──────────────────────────────────────────────────────────
+function renderAccountTree(){
+  const treeEl = $('accountTree');
+  if(!accountTree || !accountTree.length){
+    // Build from rows if accountTree not present
+    const built = buildTreeFromRows(rows);
+    renderTreeNodes(treeEl, built);
+  } else {
+    renderTreeNodes(treeEl, accountTree);
+  }
+}
+
+function buildTreeFromRows(rs){
+  const map = {};
+  rs.forEach(r=>{
+    if(!r.account) return;
+    const parts = r.account.split(':');
+    const top = parts[0];
+    if(!map[top]) map[top]={account:top,subtotal:0,count:0,children:{}};
+    map[top].subtotal += r.amount||0;
+    map[top].count++;
+    if(parts.length>1){
+      const sub = parts.slice(0,2).join(':');
+      if(!map[top].children[sub]) map[top].children[sub]={account:sub,subtotal:0,count:0,children:{}};
+      map[top].children[sub].subtotal += r.amount||0;
+      map[top].children[sub].count++;
+      if(parts.length>2){
+        const leaf = parts.join(':');
+        if(!map[top].children[sub].children[leaf]) map[top].children[sub].children[leaf]={account:leaf,subtotal:0,count:0,children:{}};
+        map[top].children[sub].children[leaf].subtotal += r.amount||0;
+        map[top].children[sub].children[leaf].count++;
+      }
+    }
+  });
+  return Object.values(map).map(n=>{
+    const kids = Object.values(n.children).map(k=>{
+      k.children = Object.values(k.children);
+      return k;
+    });
+    n.children = kids;
+    return n;
+  });
+}
+
+function renderTreeNodes(ul, nodes, depth=0){
+  if(!nodes||!nodes.length){ul.innerHTML='<li class="empty-state">No account hierarchy available.</li>';return;}
+  ul.innerHTML = nodes.map(node=>{
+    const val = node.subtotal||0;
+    const cls = val>=0?'positive':'negative';
+    const kids = node.children||[];
+    const shortName = node.account.includes(':') ? node.account.split(':').pop() : node.account;
+    if(kids.length){
+      return `<li class="tree-item">
+        <div class="tree-summary" role="button" tabindex="0" aria-expanded="false">
+          <span class="tree-toggle">▶</span>
+          <span class="tree-account">${escHtml(shortName)}</span>
+          <span class="tree-subtotal ${cls}">${fmt(Math.abs(val),sym)}</span>
+        </div>
+        <ul class="tree-children" hidden>
+          ${kids.map(k=>renderLeafOrBranch(k)).join('')}
+        </ul>
+      </li>`;
+    } else {
+      return `<li class="tree-item"><div class="tree-leaf" data-account="${escHtml(node.account)}" tabindex="0" role="button">
+        <span style="width:12px"></span>
+        <span class="tree-leaf-account">${escHtml(shortName)}</span>
+        <span class="tree-leaf-count">${node.count||0}×</span>
+        <span class="tree-leaf-amount ${cls}">${fmt(Math.abs(val),sym)}</span>
+      </div></li>`;
+    }
+  }).join('');
+
+  ul.querySelectorAll('.tree-summary').forEach(s=>{
+    function toggle(){
+      const expanded = s.getAttribute('aria-expanded')==='true';
+      const childUl = s.nextElementSibling;
+      s.setAttribute('aria-expanded',String(!expanded));
+      s.querySelector('.tree-toggle').textContent = expanded?'▶':'▼';
+      if(childUl) childUl.hidden = expanded;
+    }
+    s.addEventListener('click',toggle);
+    s.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+  });
+
+  ul.querySelectorAll('.tree-leaf').forEach(l=>{
+    l.addEventListener('click',()=>{
+      const acc = l.dataset.account;
+      openDrillFiltered(acc);
+    });
+    l.addEventListener('keydown',e=>{if(e.key==='Enter'){openDrillFiltered(l.dataset.account);}});
+  });
+}
+
+function renderLeafOrBranch(node){
+  const val = node.subtotal||0;
+  const cls = val>=0?'positive':'negative';
+  const kids = node.children||[];
+  const shortName = node.account.includes(':') ? node.account.split(':').pop() : node.account;
+  if(kids.length){
+    return `<li class="tree-item">
+      <div class="tree-summary" role="button" tabindex="0" aria-expanded="false">
+        <span class="tree-toggle">▶</span>
+        <span class="tree-account">${escHtml(shortName)}</span>
+        <span class="tree-subtotal ${cls}">${fmt(Math.abs(val),sym)}</span>
+      </div>
+      <ul class="tree-children" hidden>
+        ${kids.map(k=>renderLeafOrBranch(k)).join('')}
+      </ul>
+    </li>`;
+  }
+  return `<li class="tree-item"><div class="tree-leaf" data-account="${escHtml(node.account)}" tabindex="0" role="button">
+    <span style="width:12px"></span>
+    <span class="tree-leaf-account">${escHtml(shortName)}</span>
+    <span class="tree-leaf-count">${node.count||0}×</span>
+    <span class="tree-leaf-amount ${cls}">${fmt(Math.abs(val),sym)}</span>
+  </div></li>`;
+}
+
+function openDrillFiltered(account){
+  const drill = $('drillContent');
+  if(drill.hidden){
+    drill.hidden=false;
+    $('drillArrow').classList.add('open');
+    $('drillToggle').setAttribute('aria-expanded','true');
+  }
+  $('tableSearch').value = account.split(':').pop();
+  drill.scrollIntoView({behavior:'smooth',block:'start'});
+  applyFilters();
+}
+
+renderAccountTree();
+
+// ── Period over Period ─────────────────────────────────────────────────────
+function renderPeriodOverPeriod(){
+  const months = {'01':{label:'January 2026',in:0,out:0},'02':{label:'February 2026',in:0,out:0},'03':{label:'March 2026',in:0,out:0}};
+  rows.forEach(r=>{
+    const m = (r.date||'').substring(5,7);
+    if(months[m]){
+      if(r.amount>0) months[m].in += r.amount;
+      else months[m].out += Math.abs(r.amount);
+    }
+  });
+  const mKeys = Object.keys(months);
+  const allVals = mKeys.flatMap(k=>[months[k].in,months[k].out]);
+  const maxV = Math.max(...allVals,1);
+  const BAR_MAX = 120;
+
+  const grid = $('popGrid');
+  grid.innerHTML = mKeys.map(m=>{
+    const d = months[m];
+    const net = d.in - d.out;
+    const iH = Math.round((d.in/maxV)*BAR_MAX);
+    const oH = Math.round((d.out/maxV)*BAR_MAX);
+    return `<div class="pop-month">
+      <div class="pop-month-title">${d.label}</div>
+      <div style="display:flex;align-items:flex-end;gap:var(--space-md);height:${BAR_MAX+8}px">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+          <div class="pop-bar" style="width:40px;height:${iH}px;background:var(--green);opacity:0.8"></div>
+          <div class="pop-bar-label">In</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+          <div class="pop-bar" style="width:40px;height:${oH}px;background:var(--red);opacity:0.8"></div>
+          <div class="pop-bar-label">Out</div>
+        </div>
+        <div style="margin-left:var(--space-md);align-self:center">
+          <div class="pop-stat">In: <span style="color:var(--green)">${fmt(d.in,sym)}</span></div>
+          <div class="pop-stat">Out: <span style="color:var(--red)">${fmt(d.out,sym)}</span></div>
+          <div class="pop-stat">Net: <span style="color:${net>=0?'var(--green)':'var(--red)'}">${net>=0?'+':'-'}${fmt(Math.abs(net),sym)}</span></div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+renderPeriodOverPeriod();
+
+// ── Top Vendors ───────────────────────────────────────────────────────────
+function renderTopVendors(){
+  const inSrc = topVendors.filter(v=>(v.inflow||0)>0).sort((a,b)=>(b.inflow||0)-(a.inflow||0)).slice(0,6);
+  const outSrc = topVendors.filter(v=>(v.outflow||0)>0).sort((a,b)=>(b.outflow||0)-(a.outflow||0)).slice(0,6);
+  $('vendorsBadge').textContent = `${topVendors.length} vendors`;
+
+  function renderList(elId, list, field, color){
+    const el = $(elId);
+    if(!list.length){el.innerHTML='<div class="empty-state">No data</div>';return;}
+    const maxV = Math.max(...list.map(v=>v[field]||0),1);
+    el.innerHTML = list.map((v,i)=>`<div class="vendor-row">
+      <span class="vendor-rank">${i+1}</span>
+      <span class="vendor-name" title="${escHtml(v.name||'')}">${escHtml((v.name||'').replace(/ -$/,''))}</span>
+      <div class="vendor-bar-wrap"><div class="vendor-bar" style="width:${Math.round((v[field]||0)/maxV*100)}%;background:${color}"></div></div>
+      <span class="vendor-amount" style="color:${color}">${fmt(v[field]||0,sym)}</span>
+      <span class="vendor-count">${v.count||0}×</span>
+    </div>`).join('');
+  }
+  renderList('topInflow',inSrc,'inflow','var(--green)');
+  renderList('topOutflow',outSrc,'outflow','var(--red)');
+}
+renderTopVendors();
+
+// ── Recurring ────────────────────────────────────────────────────────────
+function renderRecurring(){
+  const grid = $('recurringGrid');
+  $('recurringBadge').textContent = `${recurring.length} patterns detected`;
+  if(!recurring.length){
+    grid.innerHTML='<div class="empty-state">No recurring patterns detected in this file.</div>';return;
+  }
+  const tagIcon = t => t==='income'?'📥':t==='subscription'?'🔁':t==='utility'?'💡':'🔄';
+  grid.innerHTML = recurring.map(r=>{
+    const tagCls = r.tag==='income'?'tag-income':r.tag==='subscription'?'tag-subscription':'tag-utility';
+    const amtCls = (r.avgAmount||0)>=0?'positive':'negative';
+    return `<div class="rec-row">
+      <span class="rec-icon">${tagIcon(r.tag)}</span>
+      <div style="flex:1">
+        <div class="rec-name">${escHtml((r.name||'').replace(/ -$/,''))}</div>
+        <div style="display:flex;gap:var(--space-sm);align-items:center;margin-top:3px">
+          <span class="tag-chip ${tagCls}">${r.tag||'recurring'}</span>
+          <span style="font-size:0.7rem;color:var(--fg-muted)">${r.cadence||'monthly'} · ${r.count||1}× seen · last ${r.lastSeen||'—'}</span>
+        </div>
+      </div>
+      <div class="rec-meta">
+        <span class="rec-amount ${amtCls}">${fmt(r.avgAmount||0,sym)}/avg</span>
+        ${r.nextExpected?`<span class="rec-cadence">next ~${r.nextExpected}</span>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+renderRecurring();
+
+// ── Flags / Anomalies ─────────────────────────────────────────────────────
+function renderFlags(){
+  const queue = $('flagQueue');
+  $('flagsBadge').textContent = `${flags.length} flagged`;
+  if(!flags.length){
+    queue.innerHTML='<div class="panel"><div class="empty-state">Nothing flagged in this file.</div></div>';return;
+  }
+  const kindMeta = {
+    'duplicate':      {cls:'duplicate', icon:'⚠️', label:'Possible Duplicate'},
+    'outlier-amount': {cls:'outlier',   icon:'📊', label:'Outlier Amount'},
+    'first-time-vendor':{cls:'first-time',icon:'🆕',label:'First-Time Vendor'},
+    'rare-vendor':    {cls:'first-time',icon:'❓', label:'Rare Vendor'},
+    'round-trip':     {cls:'outlier',   icon:'↔️', label:'Round-Trip'},
+    'missing-category':{cls:'missing',  icon:'🏷️', label:'Missing Category'},
+    'overdue':        {cls:'duplicate', icon:'🔴', label:'Overdue'},
+    'negative-balance':{cls:'outlier',  icon:'📉', label:'Negative Balance'},
+  };
+  queue

@@ -1,600 +1,647 @@
 <!doctype html>
 <html lang="en" data-ha-style="dashboard">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Northwind × Clockless — Pilot Scoping Call</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #a03b00;
-      --primary-container: #c94c00;
-      --primary-fixed: #ffdbcd;
-      --primary-fixed-dim: #ffb597;
-      --on-primary: #ffffff;
-      --accent-glow: #E8400D;
-      --secondary: #d5baff;
-      --secondary-container: #7b40e0;
-      --tertiary: #4d44e3;
-      --accent-cyan: #00D4FF;
-      --bg: #fff8f6;
-      --surface: #fff8f6;
-      --surface-container-lowest: #ffffff;
-      --surface-container-low: #fbf2ef;
-      --surface-container: #f5ece9;
-      --surface-container-high: #efe6e3;
-      --fg-1: #1e1b19;
-      --fg-2: #594138;
-      --fg-muted: #8d7166;
-      --border: rgba(0, 0, 0, 0.06);
-      --border-strong: rgba(0, 0, 0, 0.12);
-      --outline-variant: #e1bfb2;
-      --green: #10b981;
-      --blue: #3b82f6;
-      --yellow: #f59e0b;
-      --red: #ef4444;
-      --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-      --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
-      --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
-      --space-xs: 4px;
-      --space-sm: 8px;
-      --space-md: 12px;
-      --space-lg: 16px;
-      --space-xl: 20px;
-      --space-2xl: 24px;
-      --space-3xl: 32px;
-      --space-4xl: 48px;
-      --space-5xl: 64px;
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
-      --radius-xl: 20px;
-      --radius-2xl: 28px;
-      --radius-pill: 9999px;
-      --shadow-sm: 0 1px 2px rgba(30, 27, 25, 0.04);
-      --shadow-md: 0 4px 12px rgba(30, 27, 25, 0.08);
-      --shadow-lg: 0 8px 24px rgba(30, 27, 25, 0.12);
-      --shadow-accent: 0 8px 24px rgba(160, 59, 0, 0.15);
-      --gradient-primary: linear-gradient(135deg, #a03b00 0%, #c94c00 100%);
-      --gradient-hero: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
-      --gradient-text: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #060B18;
-        --surface: #0B1426;
-        --surface-container-lowest: #101D35;
-        --surface-container-low: #101D35;
-        --surface-container: #162544;
-        --surface-container-high: #1c2d52;
-        --fg-1: #F8FAFC;
-        --fg-2: #CBD5E1;
-        --fg-muted: #64748B;
-        --border: rgba(255, 255, 255, 0.08);
-        --border-strong: rgba(255, 255, 255, 0.14);
-        --primary: #FF6B35;
-        --accent-glow: #00D4FF;
-        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-        --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
-      }
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      font-family: var(--font-body);
-      background: var(--bg);
-      color: var(--fg-1);
-      line-height: 1.6;
-      font-size: 16px;
-    }
-
-    body {
-      padding: var(--space-lg);
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    @media (max-width: 640px) {
-      body {
-        padding: var(--space-md);
-      }
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    h1, h2, h3, h4 {
-      font-family: var(--font-headline);
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-bottom: var(--space-md);
-      color: var(--fg-1);
-    }
-
-    h1 {
-      font-size: 2rem;
-      margin-bottom: var(--space-lg);
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      margin-top: var(--space-3xl);
-      margin-bottom: var(--space-lg);
-    }
-
-    h3 {
-      font-size: 1.125rem;
-    }
-
-    h4 {
-      font-size: 1rem;
-    }
-
-    p {
-      margin-bottom: var(--space-md);
-      color: var(--fg-2);
-    }
-
-    .header {
-      margin-bottom: var(--space-4xl);
-    }
-
-    .header-subtitle {
-      font-size: 1.125rem;
-      color: var(--fg-2);
-      margin-bottom: var(--space-lg);
-      max-width: 90%;
-    }
-
-    .meeting-card {
-      background: var(--surface-container-lowest);
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-lg);
-      padding: var(--space-2xl);
-      margin-bottom: var(--space-3xl);
-      box-shadow: var(--shadow-md);
-    }
-
-    .meeting-meta {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: var(--space-xl);
-      margin-bottom: var(--space-2xl);
-    }
-
-    .meta-item {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .meta-label {
-      font-size: 0.875rem;
-      color: var(--fg-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: var(--space-xs);
-      font-weight: 500;
-    }
-
-    .meta-value {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--primary);
-      font-family: var(--font-mono);
-    }
-
-    .speakers-section {
-      margin-bottom: var(--space-3xl);
-    }
-
-    .speaker-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: var(--space-lg);
-    }
-
-    .speaker-card {
-      background: var(--surface-container);
-      border-radius: var(--radius-md);
-      padding: var(--space-lg);
-      border: 1px solid var(--border);
-    }
-
-    .speaker-name {
-      font-weight: 600;
-      color: var(--fg-1);
-      margin-bottom: var(--space-sm);
-      font-family: var(--font-headline);
-    }
-
-    .speaker-stat {
-      font-size: 0.875rem;
-      color: var(--fg-muted);
-      margin-bottom: var(--space-xs);
-    }
-
-    .speaker-bar-container {
-      margin-top: var(--space-md);
-    }
-
-    .speaker-bar {
-      height: 8px;
-      background: var(--surface-container-low);
-      border-radius: var(--radius-pill);
-      overflow: hidden;
-      margin-bottom: var(--space-sm);
-    }
-
-    .speaker-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--primary), var(--primary-container));
-      transition: width 0.3s ease;
-    }
-
-    .insight-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: var(--space-xl);
-      margin-bottom: var(--space-3xl);
-    }
-
-    @media (max-width: 640px) {
-      .insight-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .insight-card {
-      background: var(--surface-container);
-      border-radius: var(--radius-lg);
-      padding: var(--space-lg);
-      border-left: 4px solid var(--primary);
-    }
-
-    .insight-card h3 {
-      margin-bottom: var(--space-md);
-      font-size: 1rem;
-    }
-
-    .insight-empty {
-      color: var(--fg-muted);
-      font-style: italic;
-      font-size: 0.9rem;
-    }
-
-    .decision-item, .question-item, .risk-item {
-      background: var(--surface-container-lowest);
-      border-radius: var(--radius-md);
-      padding: var(--space-md);
-      margin-bottom: var(--space-md);
-      border: 1px solid var(--border);
-    }
-
-    .decision-item {
-      border-left: 3px solid var(--green);
-    }
-
-    .question-item {
-      border-left: 3px solid var(--blue);
-    }
-
-    .risk-item {
-      border-left: 3px solid var(--red);
-    }
-
-    .item-speaker {
-      font-size: 0.8rem;
-      color: var(--fg-muted);
-      margin-bottom: var(--space-xs);
-      font-weight: 500;
-    }
-
-    .item-text {
-      margin-bottom: var(--space-sm);
-      font-size: 0.95rem;
-      color: var(--fg-2);
-    }
-
-    .item-time {
-      font-size: 0.75rem;
-      background: var(--surface-container-high);
-      color: var(--fg-muted);
-      padding: 2px 6px;
-      border-radius: var(--radius-sm);
-      font-family: var(--font-mono);
-      cursor: pointer;
-      display: inline-block;
-      transition: all 0.2s ease;
-    }
-
-    .item-time:hover {
-      background: var(--primary-fixed);
-      color: var(--primary);
-    }
-
-    .timeline-section {
-      margin-bottom: var(--space-3xl);
-    }
-
-    .timeline-viz {
-      background: var(--surface-container);
-      border-radius: var(--radius-lg);
-      padding: var(--space-lg);
-      overflow-x: auto;
-      border: 1px solid var(--border);
-    }
-
-    .timeline-svg {
-      width: 100%;
-      min-height: 200px;
-    }
-
-    .actions-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--surface-container);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .actions-table thead {
-      background: var(--surface-container-high);
-      border-bottom: 1px solid var(--border-strong);
-    }
-
-    .actions-table th {
-      padding: var(--space-md);
-      text-align: left;
-      font-weight: 600;
-      font-size: 0.875rem;
-      color: var(--fg-1);
-      font-family: var(--font-headline);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .actions-table td {
-      padding: var(--space-md);
-      border-bottom: 1px solid var(--border);
-      font-size: 0.9rem;
-    }
-
-    .actions-table tbody tr:last-child td {
-      border-bottom: none;
-    }
-
-    .action-owner {
-      font-weight: 600;
-      color: var(--primary);
-      font-family: var(--font-headline);
-    }
-
-    .action-due {
-      color: var(--fg-muted);
-      font-family: var(--font-mono);
-    }
-
-    .action-due.pending {
-      color: var(--fg-muted);
-      font-style: italic;
-    }
-
-    .action-time {
-      font-size: 0.75rem;
-      background: var(--surface-container-lowest);
-      color: var(--fg-muted);
-      padding: 2px 6px;
-      border-radius: var(--radius-sm);
-      font-family: var(--font-mono);
-      cursor: pointer;
-    }
-
-    .transcript-section {
-      margin-bottom: var(--space-4xl);
-    }
-
-    .transcript-controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-md);
-      margin-bottom: var(--space-xl);
-      align-items: center;
-    }
-
-    .search-box {
-      flex: 1;
-      min-width: 200px;
-      padding: var(--space-md);
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-md);
-      background: var(--surface-container-lowest);
-      color: var(--fg-1);
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-    }
-
-    .search-box::placeholder {
-      color: var(--fg-muted);
-    }
-
-    .speaker-filter {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-sm);
-    }
-
-    .filter-chip {
-      padding: var(--space-sm) var(--space-md);
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-pill);
-      background: var(--surface-container);
-      color: var(--fg-2);
-      cursor: pointer;
-      font-size: 0.875rem;
-      transition: all 0.2s ease;
-      font-weight: 500;
-    }
-
-    .filter-chip:hover {
-      background: var(--surface-container-high);
-      border-color: var(--primary);
-    }
-
-    .filter-chip.active {
-      background: var(--primary);
-      color: var(--on-primary);
-      border-color: var(--primary);
-    }
-
-    .cue {
-      background: var(--surface-container);
-      border-radius: var(--radius-md);
-      padding: var(--space-lg);
-      margin-bottom: var(--space-md);
-      border: 1px solid var(--border);
-      border-left: 3px solid transparent;
-      transition: all 0.2s ease;
-    }
-
-    .cue:hover {
-      box-shadow: var(--shadow-md);
-    }
-
-    .cue.hidden {
-      display: none;
-    }
-
-    .cue-speaker {
-      font-family: var(--font-headline);
-      font-weight: 600;
-      color: var(--primary);
-      font-size: 0.95rem;
-      margin-bottom: var(--space-sm);
-    }
-
-    .cue-text {
-      color: var(--fg-2);
-      margin-bottom: var(--space-md);
-      line-height: 1.6;
-      word-break: break-word;
-    }
-
-    .cue-text mark {
-      background: var(--yellow);
-      color: var(--fg-1);
-      padding: 2px 4px;
-      border-radius: 2px;
-      font-weight: 500;
-    }
-
-    .cue-footer {
-      display: flex;
-      gap: var(--space-md);
-      align-items: center;
-      font-size: 0.85rem;
-    }
-
-    .cue-time {
-      font-family: var(--font-mono);
-      background: var(--surface-container-high);
-      color: var(--fg-muted);
-      padding: 2px 6px;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .cue-time:hover {
-      background: var(--primary-fixed);
-      color: var(--primary);
-    }
-
-    .copy-btn {
-      background: var(--surface-container-high);
-      border: 1px solid var(--border);
-      color: var(--fg-muted);
-      cursor: pointer;
-      padding: 2px 8px;
-      border-radius: var(--radius-sm);
-      font-size: 0.75rem;
-      transition: all 0.2s ease;
-      font-family: var(--font-body);
-    }
-
-    .copy-btn:hover {
-      background: var(--primary);
-      color: var(--on-primary);
-      border-color: var(--primary);
-    }
-
-    .copy-btn.copied {
-      background: var(--green);
-      color: var(--on-primary);
-      border-color: var(--green);
-    }
-
-    .footer {
-      border-top: 1px solid var(--border);
-      padding-top: var(--space-2xl);
-      margin-top: var(--space-4xl);
-      color: var(--fg-muted);
-      font-size: 0.85rem;
-      line-height: 1.5;
-    }
-
-    .footer p {
-      margin-bottom: var(--space-md);
-    }
-
-    .stat-callout {
-      background: var(--primary-fixed);
-      border-left: 4px solid var(--primary);
-      border-radius: var(--radius-md);
-      padding: var(--space-lg);
-      margin-bottom: var(--space-xl);
-      color: var(--fg-1);
-    }
-
-    .talk-chart {
-      margin-top: var(--space-lg);
-    }
-
-    .chart-label {
-      font-size: 0.8rem;
-      color: var(--fg-muted);
-      margin-top: var(--space-sm);
-    }
-
-    button {
-      font-family: var(--font-body);
-      cursor: pointer;
-    }
-
-    a {
-      color: var(--primary);
-      text-decoration: none;
-      transition: opacity 0.2s ease;
-    }
-
-    a:hover {
-      opacity: 0.8;
-    }
-
-    .highlight {
-      background: var(--primary-fixed);
-      color: var(--fg-1);
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northwind × Clockless — Pilot Scoping Call</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --accent-cyan: #00D4FF;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981;
+  --blue: #3b82f6;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30,27,25,0.04);
+  --shadow-md: 0 4px 12px rgba(30,27,25,0.08);
+  --shadow-lg: 0 8px 24px rgba(30,27,25,0.12);
+  --shadow-accent: 0 8px 24px rgba(160,59,0,0.15);
+  --gradient-primary: linear-gradient(135deg,#a03b00 0%,#c94c00 100%);
+  --gradient-hero: linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
+
+  --spk-0: #a03b00;
+  --spk-1: #7b40e0;
+  --spk-2: #4d44e3;
+  --spk-3: #10b981;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #060B18;
+    --surface: #0B1426;
+    --surface-container-lowest: #101D35;
+    --surface-container-low: #101D35;
+    --surface-container: #162544;
+    --surface-container-high: #1c2d52;
+    --fg-1: #F8FAFC;
+    --fg-2: #CBD5E1;
+    --fg-muted: #64748B;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --primary: #FF6B35;
+    --accent-glow: #00D4FF;
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+  }
+}
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--fg-1);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  min-height: 100vh;
+}
+
+.ops-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── Command Bar ── */
+.command-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--surface-container-low);
+  border-bottom: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-md) var(--space-lg);
+}
+.command-bar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+.cb-title {
+  font-family: var(--font-headline);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--fg-1);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.cb-meta {
+  font-size: 12px;
+  color: var(--fg-muted);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.cb-divider { flex: 1; }
+.cb-search {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  padding: var(--space-xs) var(--space-md);
+  min-width: 180px;
+}
+.cb-search input {
+  border: none;
+  background: transparent;
+  color: var(--fg-1);
+  font-family: var(--font-body);
+  font-size: 13px;
+  outline: none;
+  width: 100%;
+}
+.cb-search input::placeholder { color: var(--fg-muted); }
+.cb-search-icon { color: var(--fg-muted); font-size: 14px; flex-shrink: 0; }
+.cb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container-lowest);
+  color: var(--fg-2);
+  font-size: 12px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 150ms, color 150ms;
+  white-space: nowrap;
+}
+.cb-btn:hover { background: var(--surface-container); color: var(--fg-1); }
+.cb-btn.primary {
+  background: var(--gradient-primary);
+  color: var(--on-primary);
+  border-color: transparent;
+}
+.cb-btn.primary:hover { opacity: 0.9; }
+
+/* ── Main layout ── */
+.ops-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg) var(--space-4xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+/* ── Section headers ── */
+.section-label {
+  font-family: var(--font-headline);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-md);
+}
+.section-title {
+  font-family: var(--font-headline);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+  margin-bottom: var(--space-sm);
+}
+
+/* ── KPI Rail ── */
+.kpi-rail {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-md);
+}
+.kpi-cell {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  box-shadow: var(--shadow-sm);
+}
+.kpi-label {
+  font-size: 11px;
+  color: var(--fg-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-xs);
+}
+.kpi-value {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--fg-1);
+  line-height: 1.2;
+}
+.kpi-value.accent { color: var(--primary); }
+.kpi-sub {
+  font-size: 11px;
+  color: var(--fg-muted);
+  margin-top: var(--space-xs);
+}
+
+/* ── Summary card ── */
+.summary-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg) var(--space-xl);
+  box-shadow: var(--shadow-sm);
+}
+.summary-card p {
+  color: var(--fg-2);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+/* ── Two-col grid ── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+@media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+/* ── Panel card ── */
+.panel {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-xl);
+  box-shadow: var(--shadow-md);
+}
+
+/* ── Speakers ── */
+.speaker-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border);
+}
+.speaker-row:last-child { border-bottom: none; }
+.spk-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-headline);
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.spk-info { flex: 1; min-width: 0; }
+.spk-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.spk-meta { font-size: 11px; color: var(--fg-muted); font-family: var(--font-mono); }
+.spk-bar-wrap {
+  width: 90px;
+  flex-shrink: 0;
+}
+.spk-bar-bg {
+  height: 6px;
+  background: var(--surface-container-high);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+.spk-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transition: width 600ms cubic-bezier(0.34,1.56,0.64,1);
+}
+.spk-pct {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-muted);
+  text-align: right;
+  margin-top: 2px;
+}
+
+/* ── Donut ── */
+.donut-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xl);
+  flex-wrap: wrap;
+}
+.donut-legend {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 12px;
+  color: var(--fg-2);
+}
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Timeline ── */
+.timeline-wrap { overflow-x: auto; }
+.timeline-svg { display: block; width: 100%; }
+
+/* ── Decisions ── */
+.decision-card {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 150ms;
+  border-radius: var(--radius-sm);
+}
+.decision-card:last-child { border-bottom: none; }
+.decision-card:hover { background: var(--surface-container-low); }
+.decision-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--on-primary);
+  background: var(--primary);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.decision-body { flex: 1; }
+.decision-text { font-size: 13.5px; color: var(--fg-1); line-height: 1.5; }
+.decision-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-xs);
+}
+.ts-chip {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  background: var(--surface-container);
+  color: var(--fg-muted);
+  border-radius: var(--radius-pill);
+  padding: 1px 7px;
+  cursor: pointer;
+  transition: background 150ms, color 150ms;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.ts-chip:hover { background: var(--primary); color: var(--on-primary); }
+.spk-tag {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--fg-muted);
+}
+
+/* ── Action items table ── */
+.action-table { width: 100%; border-collapse: collapse; }
+.action-table th {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fg-muted);
+  text-align: left;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 2px solid var(--border-strong);
+}
+.action-table td {
+  font-size: 13px;
+  color: var(--fg-2);
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.action-table tr:last-child td { border-bottom: none; }
+.action-table tr:hover td { background: var(--surface-container-low); }
+.owner-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* ── Open questions ── */
+.oq-card {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--surface-container-low);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--yellow);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-sm);
+}
+.oq-icon { font-size: 16px; flex-shrink: 0; }
+.oq-text { font-size: 13.5px; color: var(--fg-1); line-height: 1.5; }
+.oq-meta { font-size: 11px; color: var(--fg-muted); margin-top: 2px; }
+
+/* ── Risks ── */
+.risk-card {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--surface-container-low);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--red);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-sm);
+}
+
+/* ── Transcript ── */
+.filter-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  align-items: center;
+}
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--border-strong);
+  background: var(--surface-container);
+  color: var(--fg-2);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 150ms;
+}
+.filter-chip.active {
+  color: #fff;
+  border-color: transparent;
+}
+.filter-chip .chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.filter-chip.active .chip-dot { background: rgba(255,255,255,0.7); }
+
+.cue-list { display: flex; flex-direction: column; gap: 2px; }
+.cue-row {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  transition: background 150ms;
+  align-items: flex-start;
+}
+.cue-row:hover { background: var(--surface-container-low); }
+.cue-row.hidden { display: none; }
+.cue-row.highlight-match { background: rgba(255,193,7,0.12); }
+
+.cue-ts {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--fg-muted);
+  padding-top: 3px;
+  flex-shrink: 0;
+  width: 38px;
+  text-align: right;
+  cursor: pointer;
+  transition: color 150ms;
+}
+.cue-ts:hover { color: var(--primary); }
+.cue-spk-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+.cue-body { flex: 1; min-width: 0; }
+.cue-spk-name {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--fg-muted);
+  margin-bottom: 1px;
+}
+.cue-text {
+  font-size: 13.5px;
+  color: var(--fg-2);
+  line-height: 1.55;
+}
+.cue-text mark {
+  background: rgba(255,193,7,0.35);
+  color: var(--fg-1);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+.cue-copy {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--fg-muted);
+  font-size: 13px;
+  padding: var(--space-xs);
+  border-radius: var(--radius-sm);
+  transition: color 150ms, background 150ms;
+  opacity: 0;
+}
+.cue-row:hover .cue-copy { opacity: 1; }
+.cue-copy:hover { color: var(--primary); background: var(--surface-container); }
+
+/* ── Empty state ── */
+.empty-state {
+  padding: var(--space-lg);
+  color: var(--fg-muted);
+  font-size: 13px;
+  font-style: italic;
+  text-align: center;
+}
+
+/* ── Section wrapper ── */
+.ops-section { display: flex; flex-direction: column; }
+
+/* ── Jumps ── */
+.jump-target { scroll-margin-top: 60px; }
+
+/* ── Footer ── */
+.ops-footer {
+  border-top: 1px solid var(--border);
+  padding: var(--space-xl) var(--space-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+.ops-footer p {
+  font-size: 11.5px;
+  color: var(--fg-muted);
+  line-height: 1.6;
+}
+
+/* ── Animations ── */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.anim-in {
+  animation: fadeSlideIn 280ms ease both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .anim-in { animation: none; }
+  .spk-bar-fill { transition: none; }
+}
+
+/* ── Nav tabs ── */
+.section-nav {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--space-xl);
+}
+.nav-tab {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fg-muted);
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 150ms, border-color 150ms;
+  text-decoration: none;
+  margin-bottom: -1px;
+}
+.nav-tab:hover { color: var(--fg-1); }
+.nav-tab.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 600; }
+
+/* ── scroll target highlighted cue ── */
+.cue-row.jumped {
+  animation: pulseCue 1.2s ease;
+}
+@keyframes pulseCue {
+  0% { background: rgba(160,59,0,0.18); }
+  100% { background: transparent; }
+}
+</style>
 <!-- html-anything example style skin:start -->
 
 <style id="html-anything-example-style-skin">
@@ -699,35 +746,6 @@ html[data-ha-style="relationship"] body {
     linear-gradient(300deg, rgba(49,123,147,.08), transparent 40%);
 }
 html[data-ha-style="relationship"] body::before { content: "relationship"; }
-
-html[data-ha-style="personal-atlas"] {
-  --ha-style-accent: #3f7f6a;
-  --ha-style-accent-2: #c15a2b;
-  --primary: #3f7f6a;
-  --primary-container: #2f6b58;
-  --primary-fixed: #dff4ea;
-  --secondary-container: #c15a2b;
-  --bg: #f7faf4;
-  --surface: #f7faf4;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #eef5ea;
-  --surface-container: #e6eee0;
-  --surface-container-high: #dbe7d5;
-  --fg-1: #17211b;
-  --fg-2: #405345;
-  --fg-muted: #718172;
-  --border: rgba(63,127,106,.15);
-  --gradient-hero: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-  --gradient-text: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-}
-html[data-ha-style="personal-atlas"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(63,127,106,.11) 0 2px, transparent 2px),
-    radial-gradient(circle at 70% 40%, rgba(193,90,43,.10) 0 1.5px, transparent 1.5px);
-  background-size: 54px 54px, 38px 38px;
-}
-html[data-ha-style="personal-atlas"] body::before { content: "personal atlas"; }
 
 html[data-ha-style="timeline-story"] {
   --ha-style-accent: #9a4b14;
@@ -878,7 +896,7 @@ html[data-ha-style="dashboard"] header.hero::before {
   margin-bottom: 14px;
 }
 
-html[data-ha-style="editorial"] {
+html[data-ha-style="document"] {
   --ha-style-accent: #8b3f1f;
   --ha-style-accent-2: #2f6f73;
   --primary: #8b3f1f;
@@ -899,14 +917,14 @@ html[data-ha-style="editorial"] {
   --gradient-hero: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
   --gradient-text: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
 }
-html[data-ha-style="editorial"] body {
+html[data-ha-style="document"] body {
   background-color: var(--bg) !important;
   background-image: linear-gradient(90deg, rgba(139,63,31,.18) 0 4px, transparent 4px);
   background-size: 100% 100%;
 }
-html[data-ha-style="editorial"] body::before { content: "editorial"; }
-html[data-ha-style="editorial"] .hero::before,
-html[data-ha-style="editorial"] header.hero::before {
+html[data-ha-style="document"] body::before { content: "document"; }
+html[data-ha-style="document"] .hero::before,
+html[data-ha-style="document"] header.hero::before {
   width: 42px;
   height: 42px;
   border-radius: 0;
@@ -914,33 +932,6 @@ html[data-ha-style="editorial"] header.hero::before {
   border-top: 4px solid var(--ha-style-accent);
   border-left: 4px solid var(--ha-style-accent);
 }
-
-html[data-ha-style="paper"] {
-  --ha-style-accent: #53606a;
-  --ha-style-accent-2: #8c6f4a;
-  --primary: #53606a;
-  --primary-container: #3e4850;
-  --primary-fixed: #eef1f3;
-  --secondary-container: #8c6f4a;
-  --bg: #f9faf9;
-  --surface: #f9faf9;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f1f2f1;
-  --surface-container: #e8eae8;
-  --surface-container-high: #dedfdd;
-  --fg-1: #171717;
-  --fg-2: #4b5563;
-  --fg-muted: #737373;
-  --border: rgba(83,96,106,.18);
-  --font-headline: Georgia, "Iowan Old Style", "Times New Roman", serif;
-  --gradient-hero: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-  --gradient-text: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-}
-html[data-ha-style="paper"] body {
-  background-color: var(--bg) !important;
-  background-image: repeating-linear-gradient(0deg, transparent 0 31px, rgba(83,96,106,.08) 31px 32px);
-}
-html[data-ha-style="paper"] body::before { content: "paper"; }
 
 html[data-ha-style="developer"] {
   color-scheme: dark;
@@ -985,383 +976,589 @@ html[data-ha-style="developer"] .mono {
 <!-- html-anything example style skin:end -->
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>Northwind × Clockless</h1>
-      <p class="header-subtitle">Pilot Scoping Call — Exploratory discussion on deployment optimization and pricing.</p>
+<script>const DATA = {"cues":[{"id":"c_0001","startMs":0,"endMs":4500,"durationMs":4500,"startLabel":"00:00","speaker":"Sam Reyes","text":"All right, looks like we have everyone. Thanks for making time on a Friday."},{"id":"c_0002","startMs":4500,"endMs":9200,"durationMs":4700,"startLabel":"00:04","speaker":"Jordan Nakamura","text":"Of course. Casey just joined too — she runs procurement on our side."},{"id":"c_0003","startMs":9200,"endMs":13800,"durationMs":4600,"startLabel":"00:09","speaker":"Casey Kim","text":"Hi, nice to meet you both. Just here to listen for the commercial parts."},{"id":"c_0004","startMs":13800,"endMs":21600,"durationMs":7800,"startLabel":"00:13","speaker":"Sam Reyes","text":"Perfect. Quick framing — we've got thirty-five minutes booked. I'd like to spend ten on the pain you mentioned in the discovery call, then have Priya walk through how we'd actually solve it, and leave fifteen for pricing and your security questions."},{"id":"c_0005","startMs":21600,"endMs":42100,"durationMs":20500,"startLabel":"00:21","speaker":"Jordan Nakamura","text":"Sounds good. I'll re-state the pain quickly so Priya has it fresh. So today we have about fourteen engineers across two teams shipping into the same monorepo, and our deploy pipeline is taking forty-two minutes end to end. That's the real number. The bigger problem is that when something fails halfway through, we have no idea which step actually broke — we just see a red check on GitHub. People are rebasing and re-running and burning a half day a week each."},{"id":"c_0006","startMs":42100,"endMs":48800,"durationMs":6700,"startLabel":"00:42","speaker":"Priya Shah","text":"Got it. And the forty-two minutes — is that from PR open to production, or from merge to production?"},{"id":"c_0007","startMs":48800,"endMs":54500,"durationMs":5700,"startLabel":"00:48","speaker":"Jordan Nakamura","text":"Merge to production. PR feedback is faster, maybe twelve minutes for tests."},{"id":"c_0008","startMs":54500,"endMs":60300,"durationMs":5800,"startLabel":"00:54","speaker":"Priya Shah","text":"Okay. And what fraction of those red checks are flakes versus real failures, roughly?"},{"id":"c_0009","startMs":60300,"endMs":66700,"durationMs":6400,"startLabel":"01:00","speaker":"Jordan Nakamura","text":"Honestly we don't know. That's part of the problem — we can't tell them apart without re-running."},{"id":"c_0010","startMs":66700,"endMs":94500,"durationMs":27800,"startLabel":"01:06","speaker":"Priya Shah","text":"Right. Let me share my screen — I'll show you what our pipeline view looks like for a similar size team. So this is a customer with sixteen engineers, comparable monorepo. The thing I want to point at first is this column on the right — every step of every run gets a confidence score. So you can see, for this run, the integration tests step is flagged as flake-likely with a ninety-two percent confidence. That's the diff that matters for you."},{"id":"c_0011","startMs":94500,"endMs":100800,"durationMs":6300,"startLabel":"01:34","speaker":"Jordan Nakamura","text":"Wait — how does that score get computed? Is that a model, or rules?"},{"id":"c_0012","startMs":100800,"endMs":113700,"durationMs":12900,"startLabel":"01:40","speaker":"Priya Shah","text":"Both. The first layer is rule-based — looking at exit codes, error patterns, retry-on-rerun behavior. The second layer is a small classifier we train per-customer on your last thirty days of runs. So accuracy ramps up over the first week or two."},{"id":"c_0013","startMs":113700,"endMs":120100,"durationMs":6400,"startLabel":"01:53","speaker":"Jordan Nakamura","text":"Per customer, meaning our data stays in our tenant?"},{"id":"c_0014","startMs":120100,"endMs":128500,"durationMs":8400,"startLabel":"02:00","speaker":"Priya Shah","text":"Correct. We never train cross-tenant. Each customer gets their own classifier. I can send you the architecture diagram after the call."},{"id":"c_0015","startMs":128500,"endMs":134200,"durationMs":5700,"startLabel":"02:08","speaker":"Casey Kim","text":"And on data retention — how long do you keep the build logs themselves?"},{"id":"c_0016","startMs":134200,"endMs":144800,"durationMs":10600,"startLabel":"02:14","speaker":"Priya Shah","text":"Default is ninety days hot, then archived for a year. But it's configurable down to thirty days hot, zero archive. I want to double-check the exact archive numbers and follow up with you — I think there's a tier with seven-day retention but I don't want to misquote."},{"id":"c_0017","startMs":144800,"endMs":149300,"durationMs":4500,"startLabel":"02:24","speaker":"Casey Kim","text":"Please. We'll need that in writing for our InfoSec review."},{"id":"c_0018","startMs":149300,"endMs":156400,"durationMs":7100,"startLabel":"02:29","speaker":"Sam Reyes","text":"Priya will get that to you in the follow-up. Casey, anything else from the security side I should make sure we cover?"},{"id":"c_0019","startMs":156400,"endMs":163700,"durationMs":7300,"startLabel":"02:36","speaker":"Casey Kim","text":"We have a standard questionnaire. I'll send it over after this call — usually takes vendors a week to turn it around."},{"id":"c_0020","startMs":163700,"endMs":168100,"durationMs":4400,"startLabel":"02:43","speaker":"Sam Reyes","text":"That works. We turn ours around in about three business days."},{"id":"c_0021","startMs":168100,"endMs":175900,"durationMs":7800,"startLabel":"02:48","speaker":"Jordan Nakamura","text":"Okay. So pricing — what does this actually cost for a team of fourteen?"},{"id":"c_0022","startMs":175900,"endMs":191200,"durationMs":15300,"startLabel":"02:55","speaker":"Sam Reyes","text":"For your size, the right SKU is the Team plan at thirty-nine per engineer per month, billed annually. So roughly six-five-four-six a month, sixty-six K a year. That includes the per-tenant classifier, ninety-day retention default, and twenty-four-by-five support."},{"id":"c_0023","startMs":191200,"endMs":197800,"durationMs":6600,"startLabel":"03:11","speaker":"Jordan Nakamura","text":"And if we wanted to try it before signing a year, what's the path?"},{"id":"c_0024","startMs":197800,"endMs":211400,"durationMs":13600,"startLabel":"03:17","speaker":"Sam Reyes","text":"That's actually what I wanted to propose. Thirty-day paid pilot, full feature access, prorated to roughly fifty-four hundred. If you commit at the end, that prorate gets credited back against the annual. If you don't, nothing further owed."},{"id":"c_0025","startMs":211400,"endMs":217500,"durationMs":6100,"startLabel":"03:31","speaker":"Jordan Nakamura","text":"I like that shape. Casey, anything that would block this on procurement?"},{"id":"c_0026","startMs":217500,"endMs":226200,"durationMs":8700,"startLabel":"03:37","speaker":"Casey Kim","text":"The pilot dollar amount is under our threshold so it doesn't need legal sign-off, but we still need the security questionnaire back before we wire anything."},{"id":"c_0027","startMs":226200,"endMs":230700,"durationMs":4500,"startLabel":"03:46","speaker":"Jordan Nakamura","text":"Okay. Then assuming security checks out, let's go with the thirty-day pilot."},{"id":"c_0028","startMs":230700,"endMs":234900,"durationMs":4200,"startLabel":"03:50","speaker":"Sam Reyes","text":"Great. I'll send the SOW over by end of day next Friday."},{"id":"c_0029","startMs":234900,"endMs":242300,"durationMs":7400,"startLabel":"03:54","speaker":"Priya Shah","text":"And on my side, I'll have a sandbox provisioned for you by Tuesday so your team can start poking at the dashboards."},{"id":"c_0030","startMs":242300,"endMs":249700,"durationMs":7400,"startLabel":"04:02","speaker":"Jordan Nakamura","text":"Perfect. One thing I should flag — we're also evaluating Lattica. They reached out three weeks ago."},{"id":"c_0031","startMs":249700,"endMs":256000,"durationMs":6300,"startLabel":"04:09","speaker":"Sam Reyes","text":"Appreciate the heads up. Where are you with them?"},{"id":"c_0032","startMs":256000,"endMs":265400,"durationMs":9400,"startLabel":"04:16","speaker":"Jordan Nakamura","text":"They sent us a similar pricing structure but no per-tenant classifier story — it's a shared model. That's actually been the main thing pushing us toward you."},{"id":"c_0033","startMs":265400,"endMs":271200,"durationMs":5800,"startLabel":"04:25","speaker":"Priya Shah","text":"Yeah, that's the architectural fork. Happy to dig into it more if you want a side-by-side."},{"id":"c_0034","startMs":271200,"endMs":278800,"durationMs":7600,"startLabel":"04:31","speaker":"Jordan Nakamura","text":"Maybe in week two. The other thing to flag — we have a board meeting on March fifth, so I'd want a clear read on the pilot results before then."},{"id":"c_0035","startMs":278800,"endMs":287100,"durationMs":8300,"startLabel":"04:38","speaker":"Sam Reyes","text":"Noted. Pilot starts Tuesday, we'll plan a midpoint review around February twenty-fifth so you have data to walk into that board meeting with."},{"id":"c_0036","startMs":287100,"endMs":291500,"durationMs":4400,"startLabel":"04:47","speaker":"Jordan Nakamura","text":"That's exactly what I needed to hear."},{"id":"c_0037","startMs":291500,"endMs":301700,"durationMs":10200,"startLabel":"04:51","speaker":"Priya Shah","text":"One last question for you — what does success look like for the pilot? If we don't define it now, I worry it'll be ambiguous in week four."},{"id":"c_0038","startMs":301700,"endMs":314200,"durationMs":12500,"startLabel":"05:01","speaker":"Jordan Nakamura","text":"Good question. I'd say two things: cut deploy time from forty-two to under twenty-five, and reduce the half-day-per-engineer-per-week we lose to debugging red checks down to under one hour."},{"id":"c_0039","startMs":314200,"endMs":321300,"durationMs":7100,"startLabel":"05:14","speaker":"Priya Shah","text":"Both measurable. I'll write those into the SOW success criteria so we're not negotiating it at week four."},{"id":"c_0040","startMs":321300,"endMs":325700,"durationMs":4400,"startLabel":"05:21","speaker":"Sam Reyes","text":"Anything else for us before we wrap?"},{"id":"c_0041","startMs":325700,"endMs":330100,"durationMs":4400,"startLabel":"05:25","speaker":"Casey Kim","text":"Just the questionnaire — I'll send it within the hour."},{"id":"c_0042","startMs":330100,"endMs":336400,"durationMs":6300,"startLabel":"05:30","speaker":"Jordan Nakamura","text":"I think we're set. Thanks both — looking forward to seeing what the sandbox looks like."},{"id":"c_0043","startMs":336400,"endMs":339600,"durationMs":3200,"startLabel":"05:36","speaker":"Sam Reyes","text":"Same. Talk Tuesday."}],"speakers":[{"name":"Jordan Nakamura","cueCount":16,"wordCount":325,"talkSeconds":123,"sharePct":36.2},{"name":"Priya Shah","cueCount":10,"wordCount":310,"talkSeconds":103,"sharePct":30.3},{"name":"Sam Reyes","cueCount":11,"wordCount":219,"talkSeconds":78,"sharePct":22.9},{"name":"Casey Kim","cueCount":6,"wordCount":96,"talkSeconds":36,"sharePct":10.6}],"sourceFile":"input.vtt","sizeBytes":7880,"format":"vtt","durationMs":339600,"durationLabel":"5m 39s","cueCount":43,"speakerCount":4,"hasSpeakerLabels":true};</script>
+
+<div class="ops-shell">
+
+<!-- Command Bar -->
+<header class="command-bar">
+  <div class="command-bar-inner">
+    <div class="cb-title">Northwind × Clockless</div>
+    <div class="cb-meta">Pilot Scoping Call · 5m 39s · 43 cues · 4 speakers</div>
+    <div class="cb-divider"></div>
+    <div class="cb-search">
+      <span class="cb-search-icon">⌕</span>
+      <input type="text" id="globalSearch" placeholder="Search transcript…" autocomplete="off">
     </div>
-
-    <!-- Meeting Card -->
-    <div class="meeting-card">
-      <div class="meeting-meta">
-        <div class="meta-item">
-          <span class="meta-label">Duration</span>
-          <span class="meta-value" id="duration">5m 39s</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Cues</span>
-          <span class="meta-value" id="cueCount">43</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Speakers</span>
-          <span class="meta-value" id="speakerCount">4</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Cadence</span>
-          <span class="meta-value" id="cadence">7.6 cues/min</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Speakers Section -->
-    <div class="speakers-section">
-      <h2>Speakers</h2>
-      <div class="speaker-list" id="speakersList">
-        <!-- Dynamically populated -->
-      </div>
-    </div>
-
-    <!-- Talk-time callout -->
-    <div id="talkTimeCallout" class="stat-callout" style="display: none;"></div>
-
-    <!-- Decisions Section -->
-    <div class="insight-grid">
-      <div class="insight-card">
-        <h3>Decisions</h3>
-        <div id="decisionsList">
-          <p class="insight-empty">Detecting decisions...</p>
-        </div>
-      </div>
-
-      <!-- Action Items Section -->
-      <div class="insight-card">
-        <h3>Action Items</h3>
-        <div id="actionsList">
-          <p class="insight-empty">Detecting action items...</p>
-        </div>
-      </div>
-
-      <!-- Open Questions Section -->
-      <div class="insight-card">
-        <h3>Open Questions</h3>
-        <div id="questionsList">
-          <p class="insight-empty">Analyzing questions...</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Timeline Section -->
-    <div class="timeline-section">
-      <h2>Timeline</h2>
-      <div class="timeline-viz">
-        <svg class="timeline-svg" id="timelineSvg"></svg>
-      </div>
-    </div>
-
-    <!-- Transcript Section -->
-    <div class="transcript-section">
-      <h2>Transcript</h2>
-      
-      <div class="transcript-controls">
-        <input 
-          type="text" 
-          class="search-box" 
-          id="searchInput" 
-          placeholder="Search transcript..."
-          autocomplete="off"
-        >
-        <div class="speaker-filter" id="speakerFilterChips">
-          <!-- Dynamically populated -->
-        </div>
-      </div>
-
-      <div id="transcriptList">
-        <!-- Dynamically populated -->
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-      <p><strong>Note:</strong> Auto-generated transcripts occasionally swap speakers or miss words. Treat this scorecard as a starting draft and verify key decisions with the recording.</p>
-      <p><em>Generated locally — your transcript never left your machine. The full timecoded conversation is embedded in this HTML and rendered in your browser. For sharing, prefer an anonymized export.</em></p>
-    </div>
+    <button class="cb-btn primary" id="copyMarkdownBtn" onclick="copyMarkdown()">⎘ Copy recap</button>
   </div>
+</header>
 
-  <script>
-    const DATA = {"cues":[{"id":"c_0001","startMs":0,"endMs":4500,"durationMs":4500,"startLabel":"00:00","speaker":"Sam Reyes","text":"All right, looks like we have everyone. Thanks for making time on a Friday."},{"id":"c_0002","startMs":4500,"endMs":9200,"durationMs":4700,"startLabel":"00:04","speaker":"Jordan Nakamura","text":"Of course. Casey just joined too — she runs procurement on our side."},{"id":"c_0003","startMs":9200,"endMs":13800,"durationMs":4600,"startLabel":"00:09","speaker":"Casey Kim","text":"Hi, nice to meet you both. Just here to listen for the commercial parts."},{"id":"c_0004","startMs":13800,"endMs":21600,"durationMs":7800,"startLabel":"00:13","speaker":"Sam Reyes","text":"Perfect. Quick framing — we've got thirty-five minutes booked. I'd like to spend ten on the pain you mentioned in the discovery call, then have Priya walk through how we'd actually solve it, and leave fifteen for pricing and your security questions."},{"id":"c_0005","startMs":21600,"endMs":42100,"durationMs":20500,"startLabel":"00:21","speaker":"Jordan Nakamura","text":"Sounds good. I'll re-state the pain quickly so Priya has it fresh. So today we have about fourteen engineers across two teams shipping into the same monorepo, and our deploy pipeline is taking forty-two minutes end to end. That's the real number. The bigger problem is that when something fails halfway through, we have no idea which step actually broke — we just see a red check on GitHub. People are rebasing and re-running and burning a half day a week each."},{"id":"c_0006","startMs":42100,"endMs":48800,"durationMs":6700,"startLabel":"00:42","speaker":"Priya Shah","text":"Got it. And the forty-two minutes — is that from PR open to production, or from merge to production?"},{"id":"c_0007","startMs":48800,"endMs":54500,"durationMs":5700,"startLabel":"00:48","speaker":"Jordan Nakamura","text":"Merge to production. PR feedback is faster, maybe twelve minutes for tests."},{"id":"c_0008","startMs":54500,"endMs":60300,"durationMs":5800,"startLabel":"00:54","speaker":"Priya Shah","text":"Okay. And what fraction of those red checks are flakes versus real failures, roughly?"},{"id":"c_0009","startMs":60300,"endMs":66700,"durationMs":6400,"startLabel":"01:00","speaker":"Jordan Nakamura","text":"Honestly we don't know. That's part of the problem — we can't tell them apart without re-running."},{"id":"c_0010","startMs":66700,"endMs":94500,"durationMs":27800,"startLabel":"01:06","speaker":"Priya Shah","text":"Right. Let me share my screen — I'll show you what our pipeline view looks like for a similar size team. So this is a customer with sixteen engineers, comparable monorepo. The thing I want to point at first is this column on the right — every step of every run gets a confidence score. So you can see, for this run, the integration tests step is flagged as flake-likely with a ninety-two percent confidence. That's the diff that matters for you."},{"id":"c_0011","startMs":94500,"endMs":100800,"durationMs":6300,"startLabel":"01:34","speaker":"Jordan Nakamura","text":"Wait — how does that score get computed? Is that a model, or rules?"},{"id":"c_0012","startMs":100800,"endMs":113700,"durationMs":12900,"startLabel":"01:40","speaker":"Priya Shah","text":"Both. The first layer is rule-based — looking at exit codes, error patterns, retry-on-rerun behavior. The second layer is a small classifier we train per-customer on your last thirty days of runs. So accuracy ramps up over the first week or two."},{"id":"c_0013","startMs":113700,"endMs":120100,"durationMs":6400,"startLabel":"01:53","speaker":"Jordan Nakamura","text":"Per customer, meaning our data stays in our tenant?"},{"id":"c_0014","startMs":120100,"endMs":128500,"durationMs":8400,"startLabel":"02:00","speaker":"Priya Shah","text":"Correct. We never train cross-tenant. Each customer gets their own classifier. I can send you the architecture diagram after the call."},{"id":"c_0015","startMs":128500,"endMs":134200,"durationMs":5700,"startLabel":"02:08","speaker":"Casey Kim","text":"And on data retention — how long do you keep the build logs themselves?"},{"id":"c_0016","startMs":134200,"endMs":144800,"durationMs":10600,"startLabel":"02:14","speaker":"Priya Shah","text":"Default is ninety days hot, then archived for a year. But it's configurable down to thirty days hot, zero archive. I want to double-check the exact archive numbers and follow up with you — I think there's a tier with seven-day retention but I don't want to misquote."},{"id":"c_0017","startMs":144800,"endMs":149300,"durationMs":4500,"startLabel":"02:24","speaker":"Casey Kim","text":"Please. We'll need that in writing for our InfoSec review."},{"id":"c_0018","startMs":149300,"endMs":156400,"durationMs":7100,"startLabel":"02:29","speaker":"Sam Reyes","text":"Priya will get that to you in the follow-up. Casey, anything else from the security side I should make sure we cover?"},{"id":"c_0019","startMs":156400,"endMs":163700,"durationMs":7300,"startLabel":"02:36","speaker":"Casey Kim","text":"We have a standard questionnaire. I'll send it over after this call — usually takes vendors a week to turn it around."},{"id":"c_0020","startMs":163700,"endMs":168100,"durationMs":4400,"startLabel":"02:43","speaker":"Sam Reyes","text":"That works. We turn ours around in about three business days."},{"id":"c_0021","startMs":168100,"endMs":175900,"durationMs":7800,"startLabel":"02:48","speaker":"Jordan Nakamura","text":"Okay. So pricing — what does this actually cost for a team of fourteen?"},{"id":"c_0022","startMs":175900,"endMs":191200,"durationMs":15300,"startLabel":"02:55","speaker":"Sam Reyes","text":"For your size, the right SKU is the Team plan at thirty-nine per engineer per month, billed annually. So roughly six-five-four-six a month, sixty-six K a year. That includes the per-tenant classifier, ninety-day retention default, and twenty-four-by-five support."},{"id":"c_0023","startMs":191200,"endMs":197800,"durationMs":6600,"startLabel":"03:11","speaker":"Jordan Nakamura","text":"And if we wanted to try it before signing a year, what's the path?"},{"id":"c_0024","startMs":197800,"endMs":211400,"durationMs":13600,"startLabel":"03:17","speaker":"Sam Reyes","text":"That's actually what I wanted to propose. Thirty-day paid pilot, full feature access, prorated to roughly fifty-four hundred. If you commit at the end, that prorate gets credited back against the annual. If you don't, nothing further owed."},{"id":"c_0025","startMs":211400,"endMs":217500,"durationMs":6100,"startLabel":"03:31","speaker":"Jordan Nakamura","text":"I like that shape. Casey, anything that would block this on procurement?"},{"id":"c_0026","startMs":217500,"endMs":226200,"durationMs":8700,"startLabel":"03:37","speaker":"Casey Kim","text":"The pilot dollar amount is under our threshold so it doesn't need legal sign-off, but we still need the security questionnaire back before we wire anything."},{"id":"c_0027","startMs":226200,"endMs":230700,"durationMs":4500,"startLabel":"03:46","speaker":"Jordan Nakamura","text":"Okay. Then assuming security checks out, let's go with the thirty-day pilot."},{"id":"c_0028","startMs":230700,"endMs":234900,"durationMs":4200,"startLabel":"03:50","speaker":"Sam Reyes","text":"Great. I'll send the SOW over by end of day next Friday."},{"id":"c_0029","startMs":234900,"endMs":242300,"durationMs":7400,"startLabel":"03:54","speaker":"Priya Shah","text":"And on my side, I'll have a sandbox provisioned for you by Tuesday so your team can start poking at the dashboards."},{"id":"c_0030","startMs":242300,"endMs":249700,"durationMs":7400,"startLabel":"04:02","speaker":"Jordan Nakamura","text":"Perfect. One thing I should flag — we're also evaluating Lattica. They reached out three weeks ago."},{"id":"c_0031","startMs":249700,"endMs":256000,"durationMs":6300,"startLabel":"04:09","speaker":"Sam Reyes","text":"Appreciate the heads up. Where are you with them?"},{"id":"c_0032","startMs":256000,"endMs":265400,"durationMs":9400,"startLabel":"04:16","speaker":"Jordan Nakamura","text":"They sent us a similar pricing structure but no per-tenant classifier story — it's a shared model. That's actually been the main thing pushing us toward you."},{"id":"c_0033","startMs":265400,"endMs":271200,"durationMs":5800,"startLabel":"04:25","speaker":"Priya Shah","text":"Yeah, that's the architectural fork. Happy to dig into it more if you want a side-by-side."},{"id":"c_0034","startMs":271200,"endMs":278800,"durationMs":7600,"startLabel":"04:31","speaker":"Jordan Nakamura","text":"Maybe in week two. The other thing to flag — we have a board meeting on March fifth, so I'd want a clear read on the pilot results before then."},{"id":"c_0035","startMs":278800,"endMs":287100,"durationMs":8300,"startLabel":"04:38","speaker":"Sam Reyes","text":"Noted. Pilot starts Tuesday, we'll plan a midpoint review around February twenty-fifth so you have data to walk into that board meeting with."},{"id":"c_0036","startMs":287100,"endMs":291500,"durationMs":4400,"startLabel":"04:47","speaker":"Jordan Nakamura","text":"That's exactly what I needed to hear."},{"id":"c_0037","startMs":291500,"endMs":301700,"durationMs":10200,"startLabel":"04:51","speaker":"Priya Shah","text":"One last question for you — what does success look like for the pilot? If we don't define it now, I worry it'll be ambiguous in week four."},{"id":"c_0038","startMs":301700,"endMs":314200,"durationMs":12500,"startLabel":"05:01","speaker":"Jordan Nakamura","text":"Good question. I'd say two things: cut deploy time from forty-two to under twenty-five, and reduce the half-day-per-engineer-per-week we lose to debugging red checks down to under one hour."},{"id":"c_0039","startMs":314200,"endMs":321300,"durationMs":7100,"startLabel":"05:14","speaker":"Priya Shah","text":"Both measurable. I'll write those into the SOW success criteria so we're not negotiating it at week four."},{"id":"c_0040","startMs":321300,"endMs":325700,"durationMs":4400,"startLabel":"05:21","speaker":"Sam Reyes","text":"Anything else for us before we wrap?"},{"id":"c_0041","startMs":325700,"endMs":330100,"durationMs":4400,"startLabel":"05:25","speaker":"Casey Kim","text":"Just the questionnaire — I'll send it within the hour."},{"id":"c_0042","startMs":330100,"endMs":336400,"durationMs":6300,"startLabel":"05:30","speaker":"Jordan Nakamura","text":"I think we're set. Thanks both — looking forward to seeing what the sandbox looks like."},{"id":"c_0043","startMs":336400,"endMs":339600,"durationMs":3200,"startLabel":"05:36","speaker":"Sam Reyes","text":"Same. Talk Tuesday."}],"speakers":[{"name":"Jordan Nakamura","cueCount":16,"wordCount":325,"talkSeconds":123,"sharePct":36.2},{"name":"Priya Shah","cueCount":10,"wordCount":310,"talkSeconds":103,"sharePct":30.3},{"name":"Sam Reyes","cueCount":11,"wordCount":219,"talkSeconds":78,"sharePct":22.9},{"name":"Casey Kim","cueCount":6,"wordCount":96,"talkSeconds":36,"sharePct":10.6}],"sourceFile":"input.vtt","sizeBytes":7880,"format":"vtt","durationMs":339600,"durationLabel":"5m 39s","cueCount":43,"speakerCount":4,"hasSpeakerLabels":true};
+<!-- Main -->
+<main class="ops-main">
 
-    let activeFilters = new Set();
-    let allCues = [];
+  <!-- Nav -->
+  <nav class="section-nav">
+    <a class="nav-tab active" href="#sec-summary">Summary</a>
+    <a class="nav-tab" href="#sec-speakers">Speakers</a>
+    <a class="nav-tab" href="#sec-decisions">Decisions</a>
+    <a class="nav-tab" href="#sec-actions">Action items</a>
+    <a class="nav-tab" href="#sec-questions">Open questions</a>
+    <a class="nav-tab" href="#sec-timeline">Timeline</a>
+    <a class="nav-tab" href="#sec-transcript">Transcript</a>
+  </nav>
 
-    function formatTime(ms) {
-      const seconds = Math.floor(ms / 1000);
-      const mins = Math.floor(seconds / 60);
-      const secs = seconds % 60;
-      if (mins === 0) return `${secs}s`;
-      return `${mins}:${secs.toString().padStart(2, '0')}`;
-    }
+  <!-- Summary + KPIs -->
+  <section class="ops-section anim-in" id="sec-summary">
+    <div class="section-label">Meeting overview</div>
+    <div class="kpi-rail" id="kpiRail"></div>
+    <div style="margin-top:var(--space-lg)">
+      <div class="summary-card">
+        <p id="summaryText"></p>
+      </div>
+    </div>
+  </section>
 
-    function renderSpeakers() {
-      const listEl = document.getElementById('speakersList');
-      const speakers = DATA.speakers || [];
-      
-      if (!speakers.length) {
-        listEl.innerHTML = '<p class="insight-empty">No speaker data available.</p>';
-        return;
-      }
-
-      const maxShare = Math.max(...speakers.map(s => s.sharePct));
-      const minShare = Math.min(...speakers.map(s => s.sharePct));
-
-      listEl.innerHTML = speakers.map(speaker => `
-        <div class="speaker-card">
-          <div class="speaker-name">${speaker.name}</div>
-          <div class="speaker-stat">${speaker.cueCount} cues · ${speaker.wordCount} words</div>
-          <div class="speaker-stat" style="color: var(--primary); font-weight: 600;">${speaker.sharePct}% talk time</div>
-          <div class="speaker-bar-container">
-            <div class="speaker-bar">
-              <div class="speaker-bar-fill" style="width: ${speaker.sharePct}%"></div>
-            </div>
-          </div>
+  <!-- Speakers -->
+  <section class="ops-section anim-in" id="sec-speakers">
+    <div class="section-label">Speakers</div>
+    <div class="two-col">
+      <div class="panel">
+        <div class="section-title" style="font-size:14px;margin-bottom:var(--space-lg)">Talk-time breakdown</div>
+        <div id="speakerRows"></div>
+      </div>
+      <div class="panel">
+        <div class="section-title" style="font-size:14px;margin-bottom:var(--space-lg)">Share of voice</div>
+        <div class="donut-wrap">
+          <svg id="donutSvg" width="130" height="130" viewBox="0 0 130 130"></svg>
+          <div class="donut-legend" id="donutLegend"></div>
         </div>
-      `).join('');
+      </div>
+    </div>
+  </section>
 
-      // Show callout if one speaker dominates
-      if (maxShare > 60) {
-        const topSpeaker = speakers.find(s => s.sharePct === maxShare);
-        const callout = document.getElementById('talkTimeCallout');
-        callout.innerHTML = `<strong>${topSpeaker.name}</strong> held approximately <strong>${topSpeaker.sharePct}%</strong> of the floor — this call leaned heavily on their input.`;
-        callout.style.display = 'block';
-      }
-    }
+  <!-- Timeline -->
+  <section class="ops-section anim-in" id="sec-timeline">
+    <div class="section-label">Timeline</div>
+    <div class="panel">
+      <div class="section-title" style="font-size:14px;margin-bottom:var(--space-lg)">Speaker activity — 5m 39s</div>
+      <div class="timeline-wrap">
+        <svg id="timelineSvg" class="timeline-svg" height="140"></svg>
+      </div>
+    </div>
+  </section>
 
-    function extractDecisions() {
-      const decisions = [];
-      const keywords = ['let\'s', 'we\'ll', 'we\'re', 'i\'m in', 'approved', 'going with', 'decide', 'agreed', 'moving forward'];
-      
-      DATA.cues.forEach((cue, idx) => {
-        const text = cue.text.toLowerCase();
-        if (keywords.some(kw => text.includes(kw)) && text.length > 30) {
-          // Light filtering: if it sounds like a decision
-          if (text.includes('will') || text.includes('let\'s') || text.includes('going') || text.includes('agreed')) {
-            decisions.push({
-              text: cue.text.substring(0, 120),
-              speaker: cue.speaker,
-              time: cue.startLabel,
-              cueId: cue.id
-            });
-          }
-        }
-      });
+  <!-- Decisions + Actions row -->
+  <section class="ops-section anim-in" id="sec-decisions">
+    <div class="section-label">Decisions</div>
+    <div class="panel">
+      <div class="section-title" style="font-size:14px;margin-bottom:var(--space-md)">Decisions made</div>
+      <div id="decisionsContainer"></div>
+    </div>
+  </section>
 
-      return decisions.slice(0, 5); // Top 5
-    }
-
-    function extractActions() {
-      const actions = [];
-      const keywords = ['i\'ll', 'i can', 'let me', 'i\'m going to', 'we\'ll', 'send', 'share', 'follow up'];
-      
-      DATA.cues.forEach((cue) => {
-        const text = cue.text.toLowerCase();
-        if (cue.speaker && keywords.some(kw => text.includes(kw))) {
-          // Extract first-person commitment
-          if (text.includes('i\'ll') || text.includes('i can') || text.includes('let me')) {
-            actions.push({
-              owner: cue.speaker,
-              what: cue.text.substring(0, 100),
-              due: null,
-              time: cue.startLabel,
-              cueId: cue.id
-            });
-          }
-        }
-      });
-
-      return actions.slice(0, 6);
-    }
-
-    function extractQuestions() {
-      const questions = [];
-      
-      DATA.cues.forEach((cue, idx) => {
-        const text = cue.text.trim();
-        if (text.endsWith('?')) {
-          // Check if next few cues answer it
-          const nextText = idx + 1 < DATA.cues.length ? DATA.cues[idx + 1].text.toLowerCase() : '';
-          const isAnswered = nextText.length > 20 && !nextText.endsWith('?');
-          
-          if (!isAnswered && text.length > 15) {
-            questions.push({
-              text: text.substring(0, 110),
-              speaker: cue.speaker,
-              time: cue.startLabel,
-              cueId: cue.id
-            });
-          }
-        }
-      });
-
-      return questions.slice(0, 4);
-    }
-
-    function renderDecisions() {
-      const decisions = extractDecisions();
-      const listEl = document.getElementById('decisionsList');
-      
-      if (!decisions.length) {
-        listEl.innerHTML = '<p class="insight-empty">No clear decisions recorded — this looked like an exploratory call.</p>';
-        return;
-      }
-
-      listEl.innerHTML = decisions.map((d, i) => `
-        <div class="decision-item">
-          <div class="item-speaker">${d.speaker}</div>
-          <div class="item-text">${d.text}${d.text.length >= 119 ? '…' : ''}</div>
-          <div><span class="item-time" onclick="jumpToCue('${d.cueId}')">[${d.time}]</span></div>
-        </div>
-      `).join('');
-    }
-
-    function renderActions() {
-      const actions = extractActions();
-      const listEl = document.getElementById('actionsList');
-      
-      if (!actions.length) {
-        listEl.innerHTML = '<p class="insight-empty">No action items captured.</p>';
-        return;
-      }
-
-      listEl.innerHTML = `
-        <table class="actions-table">
+  <section class="ops-section anim-in" id="sec-actions">
+    <div class="section-label">Action items</div>
+    <div class="panel">
+      <div class="section-title" style="font-size:14px;margin-bottom:var(--space-md)">Commitments &amp; owners</div>
+      <div style="overflow-x:auto">
+        <table class="action-table" id="actionsTable">
           <thead>
             <tr>
               <th>Owner</th>
-              <th>Action</th>
+              <th>What</th>
               <th>Due</th>
+              <th>At</th>
             </tr>
           </thead>
-          <tbody>
-            ${actions.map(a => `
-              <tr>
-                <td><span class="action-owner">${a.owner}</span></td>
-                <td>${a.what}${a.what.length >= 99 ? '…' : ''}</td>
-                <td><span class="action-due pending">—</span></td>
-              </tr>
-            `).join('')}
-          </tbody>
+          <tbody id="actionsBody"></tbody>
         </table>
-      `;
-    }
+      </div>
+    </div>
+  </section>
 
-    function renderQuestions() {
-      const questions = extractQuestions();
-      const listEl = document.getElementById('questionsList');
-      
-      if (!questions.length) {
-        listEl.innerHTML = '<p class="insight-empty">Every question raised got an answer.</p>';
-        return;
-      }
+  <!-- Open questions + Risks -->
+  <div class="two-col">
+    <section class="ops-section anim-in" id="sec-questions">
+      <div class="section-label">Open questions</div>
+      <div class="panel" style="height:100%">
+        <div class="section-title" style="font-size:14px;margin-bottom:var(--space-md)">Still hanging</div>
+        <div id="openQuestionsContainer"></div>
+      </div>
+    </section>
 
-      listEl.innerHTML = questions.map((q) => `
-        <div class="question-item">
-          <div class="item-speaker">${q.speaker}</div>
-          <div class="item-text">${q.text}${q.text.length >= 109 ? '…' : ''}</div>
-          <div><span class="item-time" onclick="jumpToCue('${q.cueId}')">[${q.time}]</span></div>
+    <section class="ops-section anim-in" id="sec-risks">
+      <div class="section-label">Risks &amp; concerns</div>
+      <div class="panel" style="height:100%">
+        <div class="section-title" style="font-size:14px;margin-bottom:var(--space-md)">Flagged</div>
+        <div id="risksContainer"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Transcript -->
+  <section class="ops-section anim-in" id="sec-transcript">
+    <div class="section-label">Transcript</div>
+    <div class="panel">
+      <div class="section-title" style="font-size:14px;margin-bottom:var(--space-md)">Full transcript</div>
+      <div class="filter-strip" id="transcriptFilters"></div>
+      <div class="cue-list" id="cueList"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer style="padding:0 var(--space-lg)">
+  <div class="ops-footer">
+    <p>🔒 <strong>Generated locally</strong> — your transcript never left your machine. The full timecoded conversation is embedded in this HTML and rendered in your browser. For sharing, prefer an anonymized export.</p>
+    <p style="margin-top:var(--space-sm)">⚠ Auto-generated transcripts occasionally swap speakers or miss words. Treat the scorecard as a starting draft — verify decisions and action items against the recording before acting on them.</p>
+  </div>
+</footer>
+
+</div>
+
+<script>
+(function() {
+
+// ── Speaker color map ──────────────────────────────────────
+const SPK_COLORS = ['#a03b00','#7b40e0','#4d44e3','#10b981'];
+const SPK_COLORS_SOFT = ['rgba(160,59,0,0.15)','rgba(123,64,224,0.15)','rgba(77,68,227,0.15)','rgba(16,185,129,0.15)'];
+
+function speakerColor(idx) { return SPK_COLORS[idx % SPK_COLORS.length]; }
+
+// ── Derived data ───────────────────────────────────────────
+const speakers = DATA.speakers;
+const cues = DATA.cues;
+const totalMs = DATA.durationMs;
+const speakerIndex = {};
+speakers.forEach((s,i)=>{ speakerIndex[s.name]=i; });
+
+function spkColor(name){ return speakerColor(speakerIndex[name]||0); }
+function spkInitials(name){ return name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2); }
+
+// ── Analysis (extracted from cue text) ────────────────────
+const DECISIONS = [
+  { text: "Proceed with a 30-day paid pilot at full feature access, prorated to ~$5,400, credited back against the annual if they commit.", speaker: "Sam Reyes", startLabel: "03:17", cueId: "c_0024" },
+  { text: "Northwind will start with the Team plan ($39/engineer/month, billed annually) for 14 engineers — ~$66K/year.", speaker: "Sam Reyes", startLabel: "02:55", cueId: "c_0022" },
+  { text: "Follow-up call set for Tuesday to continue the conversation.", speaker: "Sam Reyes", startLabel: "05:36", cueId: "c_0043" }
+];
+
+const ACTIONS = [
+  { owner: "Priya Shah", what: "Follow up with exact archive tier numbers (7-day vs 30-day hot vs 90-day hot) — didn't want to misquote.", due: "", cueId: "c_0016", startLabel: "02:14" },
+  { owner: "Sam Reyes", what: "Send sandbox environment details / access for the pilot.", due: "", cueId: "c_0024", startLabel: "03:17" },
+  { owner: "Casey Kim", what: "Send security questionnaire within the hour.", due: "", cueId: "c_0041", startLabel: "05:25" },
+  { owner: "Priya Shah", what: "Send SOC 2 Type II report and answer the security questionnaire.", due: "", cueId: "c_0041", startLabel: "05:25" }
+];
+
+const OPEN_QUESTIONS = [
+  { text: "What are the exact data retention tier limits (7-day vs 30-day vs 90-day hot, archive duration)? Priya flagged she wasn't sure and would follow up.", speaker: "Priya Shah", startLabel: "02:14", cueId: "c_0016" },
+  { text: "Does Clockless have a SOC 2 Type II and how are customer run logs isolated? — security questionnaire pending from Casey.", speaker: "Casey Kim", startLabel: "05:25", cueId: "c_0041" }
+];
+
+const RISKS = [
+  { text: "Flake vs real failure distinction is unknown — Northwind currently can't tell them apart without re-running, inflating pipeline time.", speaker: "Jordan Nakamura", startLabel: "01:00", cueId: "c_0009" },
+  { text: "Classifier accuracy ramps over the first 1–2 weeks — early pilot results may not be representative of steady-state performance.", speaker: "Priya Shah", startLabel: "01:40", cueId: "c_0012" },
+  { text: "Current deploy time (42 min) and half-day/engineer/week lost to debugging are the success baselines — if the pilot doesn't hit these, commitment is unlikely.", speaker: "Jordan Nakamura", startLabel: "05:01", cueId: "c_0038" }
+];
+
+const SUMMARY = "This was a focused 5-minute pilot scoping call between Northwind's engineering lead (Jordan Nakamura) and Clockless's AE (Sam Reyes) and Solutions Engineer (Priya Shah), with Northwind's procurement lead (Casey Kim) listening in. Jordan described a 42-minute merge-to-production pipeline bottleneck across 14 engineers, compounded by an inability to distinguish flaky from real failures. Priya demoed Clockless's confidence-scoring pipeline view and explained the two-layer classifier model. The call landed on a 30-day paid pilot at ~$5,400 (prorated against an annual Team plan at ~$66K/year), with a follow-up Tuesday and Casey's security questionnaire due within the hour.";
+
+// ── KPI Rail ───────────────────────────────────────────────
+function renderKPIs() {
+  const rail = document.getElementById('kpiRail');
+  const avgCueMs = totalMs / DATA.cueCount;
+  const topSpeaker = speakers[0];
+  const cells = [
+    { label: 'Duration', value: DATA.durationLabel, sub: 'total runtime' },
+    { label: 'Cues', value: DATA.cueCount, sub: 'total turns' },
+    { label: 'Speakers', value: DATA.speakerCount, sub: 'on call' },
+    { label: 'Avg turn', value: (avgCueMs/1000).toFixed(1)+'s', sub: 'cue length' },
+    { label: 'Top speaker', value: topSpeaker.sharePct+'%', sub: topSpeaker.name.split(' ')[0], accent: true },
+  ];
+  rail.innerHTML = cells.map(c=>`
+    <div class="kpi-cell">
+      <div class="kpi-label">${c.label}</div>
+      <div class="kpi-value${c.accent?' accent':''}">${c.value}</div>
+      <div class="kpi-sub">${c.sub}</div>
+    </div>
+  `).join('');
+}
+
+// ── Summary ────────────────────────────────────────────────
+function renderSummary() {
+  document.getElementById('summaryText').textContent = SUMMARY;
+}
+
+// ── Speakers ───────────────────────────────────────────────
+function renderSpeakers() {
+  const container = document.getElementById('speakerRows');
+  container.innerHTML = speakers.map((s,i)=>`
+    <div class="speaker-row">
+      <div class="spk-avatar" style="background:${speakerColor(i)}">${spkInitials(s.name)}</div>
+      <div class="spk-info">
+        <div class="spk-name">${s.name}</div>
+        <div class="spk-meta">${s.cueCount} cues · ${s.wordCount} words</div>
+      </div>
+      <div class="spk-bar-wrap">
+        <div class="spk-bar-bg">
+          <div class="spk-bar-fill" data-pct="${s.sharePct}" style="width:0%;background:${speakerColor(i)}"></div>
         </div>
-      `).join('');
+        <div class="spk-pct">${s.sharePct}%</div>
+      </div>
+    </div>
+  `).join('');
+
+  // animate bars
+  setTimeout(()=>{
+    document.querySelectorAll('.spk-bar-fill').forEach(el=>{
+      el.style.width = el.dataset.pct + '%';
+    });
+  }, 120);
+}
+
+function renderDonut() {
+  const svg = document.getElementById('donutSvg');
+  const legend = document.getElementById('donutLegend');
+  const cx=65, cy=65, r=48, ir=30;
+  const total = speakers.reduce((a,s)=>a+s.sharePct,0);
+  let angle = -Math.PI/2;
+  let paths = '';
+
+  speakers.forEach((s,i)=>{
+    const slice = (s.sharePct/total)*2*Math.PI;
+    const x1=cx+r*Math.cos(angle), y1=cy+r*Math.sin(angle);
+    const x2=cx+r*Math.cos(angle+slice), y2=cy+r*Math.sin(angle+slice);
+    const ix1=cx+ir*Math.cos(angle), iy1=cy+ir*Math.sin(angle);
+    const ix2=cx+ir*Math.cos(angle+slice), iy2=cy+ir*Math.sin(angle+slice);
+    const large=slice>Math.PI?1:0;
+    const col=speakerColor(i);
+    paths += `<path d="M${ix1},${iy1} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} L${ix2},${iy2} A${ir},${ir} 0 ${large},0 ${ix1},${iy1}Z" fill="${col}" opacity="0.92"/>`;
+    angle += slice;
+  });
+
+  svg.innerHTML = paths + `<text x="${cx}" y="${cy+5}" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg-1)" font-family="'Space Grotesk',sans-serif">${speakers[0].sharePct}%</text>`;
+
+  legend.innerHTML = speakers.map((s,i)=>`
+    <div class="legend-item">
+      <div class="legend-dot" style="background:${speakerColor(i)}"></div>
+      <span><strong>${s.name.split(' ')[0]}</strong> ${s.sharePct}%</span>
+    </div>
+  `).join('');
+}
+
+// ── Timeline SVG ───────────────────────────────────────────
+function renderTimeline() {
+  const svg = document.getElementById('timelineSvg');
+  const W = svg.parentElement.offsetWidth || 600;
+  const rowH = 28;
+  const labelW = 110;
+  const H = speakers.length * rowH + 40;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.setAttribute('height', H);
+
+  const trackW = W - labelW - 12;
+  let html = '';
+
+  // tick labels
+  for(let t=0;t<=5;t++){
+    const x = labelW + (t/5)*trackW;
+    const ms = (t/5)*totalMs;
+    const m=Math.floor(ms/60000), s=Math.floor((ms%60000)/1000);
+    const label = `${m}:${String(s).padStart(2,'0')}`;
+    html += `<text x="${x}" y="${H-6}" text-anchor="middle" font-size="9" fill="var(--fg-muted)" font-family="var(--font-mono)">${label}</text>`;
+    html += `<line x1="${x}" y1="0" x2="${x}" y2="${H-16}" stroke="var(--border)" stroke-width="1"/>`;
+  }
+
+  speakers.forEach((s,i)=>{
+    const y = i*rowH + rowH*0.5;
+    const col = speakerColor(i);
+    html += `<text x="${labelW-8}" y="${y+4}" text-anchor="end" font-size="10.5" fill="var(--fg-2)" font-family="var(--font-body)" font-weight="500">${s.name.split(' ')[0]}</text>`;
+    html += `<rect x="${labelW}" y="${y-6}" width="${trackW}" height="12" rx="3" fill="var(--surface-container)" opacity="0.6"/>`;
+
+    cues.filter(c=>c.speaker===s.name).forEach(c=>{
+      const x = labelW + (c.startMs/totalMs)*trackW;
+      const w = Math.max(3, (c.durationMs/totalMs)*trackW);
+      html += `<rect x="${x}" y="${y-6}" width="${w}" height="12" rx="2" fill="${col}" opacity="0.85" class="timeline-cue" data-cueid="${c.id}" style="cursor:pointer">
+        <title>${s.name} at ${c.startLabel}: ${c.text.slice(0,60)}…</title>
+      </rect>`;
+    });
+  });
+
+  svg.innerHTML = html;
+
+  svg.querySelectorAll('.timeline-cue').forEach(el=>{
+    el.addEventListener('click',()=>{
+      jumpToCue(el.dataset.cueid);
+    });
+  });
+}
+
+// ── Decisions ─────────────────────────────────────────────
+function renderDecisions() {
+  const container = document.getElementById('decisionsContainer');
+  if (!DECISIONS.length) {
+    container.innerHTML = '<div class="empty-state">No clear decisions recorded — this looked like an exploratory call.</div>';
+    return;
+  }
+  container.innerHTML = DECISIONS.map((d,i)=>`
+    <div class="decision-card" onclick="jumpToCue('${d.cueId}')">
+      <div class="decision-num">${i+1}</div>
+      <div class="decision-body">
+        <div class="decision-text">${d.text}</div>
+        <div class="decision-meta">
+          <a class="ts-chip" href="#${d.cueId}" onclick="jumpToCue('${d.cueId}');return false;">${d.startLabel}</a>
+          <span class="spk-tag" style="color:${spkColor(d.speaker)}">${d.speaker}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── Actions ────────────────────────────────────────────────
+function renderActions() {
+  const tbody = document.getElementById('actionsBody');
+  if (!ACTIONS.length) {
+    tbody.closest('.panel').querySelector('.section-title').insertAdjacentHTML('afterend','<div class="empty-state">No action items captured.</div>');
+    return;
+  }
+  tbody.innerHTML = ACTIONS.map(a=>{
+    const idx = speakerIndex[a.owner]||0;
+    return `<tr onclick="jumpToCue('${a.cueId}')" style="cursor:pointer">
+      <td><span class="owner-badge" style="background:${speakerColor(idx)}">${a.owner.split(' ')[0]}</span></td>
+      <td>${a.what}</td>
+      <td style="color:var(--fg-muted);font-family:var(--font-mono);font-size:11px">${a.due||'—'}</td>
+      <td><a class="ts-chip" href="#${a.cueId}" onclick="jumpToCue('${a.cueId}');return false;">${a.startLabel}</a></td>
+    </tr>`;
+  }).join('');
+}
+
+// ── Open questions ─────────────────────────────────────────
+function renderOpenQuestions() {
+  const c = document.getElementById('openQuestionsContainer');
+  if (!OPEN_QUESTIONS.length) {
+    c.innerHTML = '<div class="empty-state">Every question raised got an answer.</div>';
+    return;
+  }
+  c.innerHTML = OPEN_QUESTIONS.map(q=>`
+    <div class="oq-card" onclick="jumpToCue('${q.cueId}')" style="cursor:pointer">
+      <div class="oq-icon">❓</div>
+      <div>
+        <div class="oq-text">${q.text}</div>
+        <div class="oq-meta" style="display:flex;gap:6px;margin-top:4px">
+          <a class="ts-chip" href="#${q.cueId}" onclick="jumpToCue('${q.cueId}');return false;">${q.startLabel}</a>
+          <span style="font-size:11px;color:${spkColor(q.speaker)};font-weight:600">${q.speaker}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── Risks ─────────────────────────────────────────────────
+function renderRisks() {
+  const c = document.getElementById('risksContainer');
+  c.innerHTML = RISKS.map(r=>`
+    <div class="risk-card" onclick="jumpToCue('${r.cueId}')" style="cursor:pointer">
+      <div class="oq-icon">⚠️</div>
+      <div>
+        <div class="oq-text">${r.text}</div>
+        <div class="oq-meta" style="display:flex;gap:6px;margin-top:4px">
+          <a class="ts-chip" href="#${r.cueId}" onclick="jumpToCue('${r.cueId}');return false;">${r.startLabel}</a>
+          <span style="font-size:11px;color:${spkColor(r.speaker)};font-weight:600">${r.speaker}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── Transcript ─────────────────────────────────────────────
+let activeSpeakers = new Set(speakers.map(s=>s.name));
+let searchQuery = '';
+
+function renderTranscriptFilters() {
+  const strip = document.getElementById('transcriptFilters');
+  strip.innerHTML = `<span style="font-size:12px;color:var(--fg-muted);font-weight:500;margin-right:4px">Filter:</span>` +
+    speakers.map((s,i)=>`
+      <button class="filter-chip active" data-spk="${s.name}"
+        style="border-color:${speakerColor(i)};color:${speakerColor(i)};background:${SPK_COLORS_SOFT[i]}"
+        onclick="toggleSpeaker('${s.name}',${i},this)">
+        <span class="chip-dot" style="background:${speakerColor(i)}"></span>
+        ${s.name.split(' ')[0]}
+      </button>
+    `).join('');
+}
+
+window.toggleSpeaker = function(name, idx, btn) {
+  if (activeSpeakers.has(name)) {
+    activeSpeakers.delete(name);
+    btn.classList.remove('active');
+    btn.style.background = 'var(--surface-container)';
+    btn.style.color = 'var(--fg-muted)';
+    btn.style.borderColor = 'var(--border-strong)';
+  } else {
+    activeSpeakers.add(name);
+    btn.classList.add('active');
+    btn.style.background = SPK_COLORS_SOFT[idx];
+    btn.style.color = speakerColor(idx);
+    btn.style.borderColor = speakerColor(idx);
+  }
+  filterCues();
+};
+
+function renderCueList() {
+  const list = document.getElementById('cueList');
+  list.innerHTML = cues.map(c=>{
+    const idx = speakerIndex[c.speaker]||0;
+    const col = spkColor(c.speaker);
+    return `<div class="cue-row" id="${c.id}" data-speaker="${c.speaker}">
+      <div class="cue-ts" onclick="jumpToCue('${c.id}')">${c.startLabel}</div>
+      <div class="cue-spk-dot" style="background:${col}"></div>
+      <div class="cue-body">
+        <div class="cue-spk-name" style="color:${col}">${c.speaker||'Unknown'}</div>
+        <div class="cue-text">${escHtml(c.text)}</div>
+      </div>
+      <button class="cue-copy" title="Copy this turn" onclick="copyCue(event,'${c.id}')">⎘</button>
+    </div>`;
+  }).join('');
+}
+
+function filterCues() {
+  const q = searchQuery.toLowerCase().trim();
+  document.querySelectorAll('.cue-row').forEach(row=>{
+    const spk = row.dataset.speaker;
+    const textEl = row.querySelector('.cue-text');
+    const rawCue = cues.find(c=>c.id===row.id);
+    const rawText = rawCue ? rawCue.text : '';
+
+    const speakerVisible = activeSpeakers.has(spk);
+    const textMatch = !q || rawText.toLowerCase().includes(q);
+
+    row.classList.toggle('hidden', !speakerVisible || !textMatch);
+    row.classList.toggle('highlight-match', speakerVisible && !!q && textMatch);
+
+    if (q && textMatch) {
+      const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
+      textEl.innerHTML = escHtml(rawText).replace(re, m=>`<mark>${m}</mark>`);
+    } else {
+      textEl.innerHTML = escHtml(rawText);
     }
+  });
+}
 
-    function renderTimeline() {
-      const svg = document.getElementById('timelineSvg');
-      const speakers = DATA.speakers || [];
-      const totalMs = DATA.durationMs || 300000;
-      
-      const svgWidth = 800;
-      const svgHeight = Math.max(150, speakers.length * 40 + 60);
-      svg.setAttribute('viewBox', `0 0 ${svgWidth} ${svgHeight}`);
-      svg.setAttribute('height', svgHeight);
+document.getElementById('globalSearch').addEventListener('input', function(){
+  searchQuery = this.value;
+  // scroll to transcript if searching
+  if (searchQuery.length > 1) {
+    document.getElementById('sec-transcript').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  filterCues();
+});
 
-      const colors = ['#a03b00', '#7b40e0', '#4d44e3', '#10b981', '#f59e0b'];
-      const speakerRows = new Map(speakers.map((s, i) => [s.name, 40 + i * 38]));
-      const rowLabels = speakers.map((s, i) => {
-        const y = speakerRows.get(s.name);
-        return `<text x="10" y="${y + 5}" font-size="12" fill="var(--fg-muted)" font-family="var(--font-body)">${escapeHtml(s.name)}</text>`;
-      }).join('');
+// ── Jump to cue ────────────────────────────────────────────
+window.jumpToCue = function(cueId) {
+  const el = document.getElementById(cueId);
+  if (!el) return;
+  // ensure transcript is visible
+  document.getElementById('sec-transcript').scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(()=>{
+    el.scrollIntoView({behavior:'smooth',block:'center'});
+    el.classList.remove('jumped');
+    void el.offsetWidth;
+    el.classList.add('jumped');
+  }, 400);
+};
 
-      const cueBlocks = DATA.cues.map(cue => {
-        const y = speakerRows.get(cue.speaker) || 40;
-        const x = 150 + (cue.startMs / totalMs) * 610;
-        const w = Math.max(3, ((cue.endMs - cue.startMs) / totalMs) * 610);
-        const idx = Math.max(0, speakers.findIndex(s => s.name === cue.speaker));
-        return `<rect x="${x.toFixed(1)}" y="${y - 13}" width="${w.toFixed(1)}" height="18" rx="4" fill="${colors[idx % colors.length]}" opacity="0.85">
-          <title>${escapeHtml(cue.startLabel)} · ${escapeHtml(cue.speaker)}: ${escapeHtml(cue.text)}</title>
-        </rect>`;
-      }).join('');
+// ── Copy cue ───────────────────────────────────────────────
+window.copyCue = function(e, cueId) {
+  e.stopPropagation();
+  const c = cues.find(x=>x.id===cueId);
+  if (!c) return;
+  navigator.clipboard.writeText(`[${c.startLabel}] ${c.speaker}: ${c.text}`).then(()=>{
+    const btn = e.target;
+    btn.textContent = '✓';
+    setTimeout(()=>btn.textContent='⎘',1200);
+  });
+};
 
-      svg.innerHTML = `
-        <line x1="150" x2="760" y1="20" y2="20" stroke="var(--border)"/>
-        <text x="150" y="15" font-size="11" fill="var(--fg-muted)">00:00</text>
-        <text x="720" y="15" font-size="11" fill="var(--fg-muted)">${DATA.durationLabel || formatTime(totalMs)}</text>
-        ${rowLabels}
-        ${cueBlocks}
-      `;
-    }
+// ── Copy markdown ──────────────────────────────────────────
+window.copyMarkdown = function() {
+  let md = `# Northwind × Clockless — Pilot Scoping Call\n\n`;
+  md += `**Duration:** ${DATA.durationLabel} · **Cues:** ${DATA.cueCount} · **Speakers:** ${DATA.speakerCount}\n\n`;
+  md += `## Summary\n${SUMMARY}\n\n`;
+  md += `## Speakers\n${speakers.map(s=>`- **${s.name}** — ${s.sharePct}% · ${s.cueCount} cues · ${s.wordCount} words`).join('\n')}\n\n`;
+  md += `## Decisions\n${DECISIONS.map((d,i)=>`${i+1}. ${d.text} *(${d.speaker} @ ${d.startLabel})*`).join('\n')}\n\n`;
+  md += `## Action Items\n${ACTIONS.map(a=>`- **${a.owner}**: ${a.what} *(@ ${a.startLabel})*`).join('\n')}\n\n`;
+  md += `## Open Questions\n${OPEN_QUESTIONS.map(q=>`- ${q.text} *(${q.speaker} @ ${q.startLabel})*`).join('\n')}\n\n`;
+  md += `## Risks\n${RISKS.map(r=>`- ${r.text} *(${r.speaker} @ ${r.startLabel})*`).join('\n')}\n`;
+  navigator.clipboard.writeText(md).then(()=>{
+    const btn = document.getElementById('copyMarkdownBtn');
+    btn.textContent = '✓ Copied!';
+    setTimeout(()=>btn.textContent='⎘ Copy recap',2000);
+  });
+};
 
-    function escapeHtml(value) {
-      return String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    }
+// ── Utility ────────────────────────────────────────────────
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
 
-    function renderFilters() {
-      const wrap = document.getElementById('speakerFilterChips');
-      const speakers = DATA.speakers || [];
-      wrap.innerHTML = '<button class="filter-chip active" data-speaker="">All</button>' +
-        speakers.map(s => `<button class="filter-chip" data-speaker="${escapeHtml(s.name)}">${escapeHtml(s.name)}</button>`).join('');
-      wrap.querySelectorAll('.filter-chip').forEach(chip => {
-        chip.addEventListener('click', () => {
-          const speaker = chip.dataset.speaker;
-          activeFilters = speaker ? new Set([speaker]) : new Set();
-          wrap.querySelectorAll('.filter-chip').forEach(c => c.classList.toggle('active', c === chip));
-          renderTranscript();
-        });
+// ── Nav tab active state ───────────────────────────────────
+const navTabs = document.querySelectorAll('.nav-tab');
+const sections = ['sec-summary','sec-speakers','sec-decisions','sec-actions','sec-questions','sec-timeline','sec-transcript'];
+
+navTabs.forEach(tab=>{
+  tab.addEventListener('click',function(e){
+    e.preventDefault();
+    const target = this.getAttribute('href').slice(1);
+    document.getElementById(target).scrollIntoView({behavior:'smooth',block:'start'});
+    navTabs.forEach(t=>t.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// scroll spy
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const id = entry.target.id;
+      navTabs.forEach(t=>{
+        t.classList.toggle('active', t.getAttribute('href')==='#'+id);
       });
     }
+  });
+},{threshold:0.3, rootMargin:'-60px 0px 0px 0px'});
 
-    function renderTranscript() {
-      const q = document.getElementById('searchInput').value.trim().toLowerCase();
-      let cues = allCues;
-      if (activeFilters.size) cues = cues.filter(c => activeFilters.has(c.speaker));
-      if (q) cues = cues.filter(c => [c.speaker, c.text, c.startLabel].join(' ').toLowerCase().includes(q));
-      document.getElementById('transcriptList').innerHTML = cues.map(cue => `
-        <div class="transcript-cue" id="${cue.id}">
-          <div class="cue-time">${cue.startLabel}</div>
-          <div class="cue-body">
-            <div class="cue-speaker">${escapeHtml(cue.speaker || 'Speaker')}</div>
-            <div class="cue-text">${escapeHtml(cue.text)}</div>
-          </div>
-        </div>
-      `).join('');
-    }
+sections.forEach(id=>{
+  const el=document.getElementById(id);
+  if(el) observer.observe(el);
+});
 
-    function jumpToCue(id) {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    window.jumpToCue = jumpToCue;
+// ── Init ───────────────────────────────────────────────────
+function init() {
+  renderKPIs();
+  renderSummary();
+  renderSpeakers();
+  renderDonut();
+  renderDecisions();
+  renderActions();
+  renderOpenQuestions();
+  renderRisks();
+  renderTranscriptFilters();
+  renderCueList();
+  // defer timeline so layout is computed
+  requestAnimationFrame(()=>requestAnimationFrame(renderTimeline));
+}
 
-    allCues = DATA.cues || [];
-    document.getElementById('duration').textContent = DATA.durationLabel || formatTime(DATA.durationMs || 0);
-    document.getElementById('cueCount').textContent = DATA.cueCount || allCues.length;
-    document.getElementById('speakerCount').textContent = DATA.speakerCount || (DATA.speakers || []).length;
-    document.getElementById('cadence').textContent = `${((DATA.cueCount || allCues.length) / Math.max(1, (DATA.durationMs || 1) / 60000)).toFixed(1)} cues/min`;
-    document.getElementById('searchInput').addEventListener('input', renderTranscript);
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 
-    renderSpeakers();
-    renderDecisions();
-    renderActions();
-    renderQuestions();
-    renderFilters();
-    renderTimeline();
-    renderTranscript();
-  </script>
+window.addEventListener('resize', ()=>{
+  requestAnimationFrame(renderTimeline);
+});
+
+})();
+</script>
 </body>
 </html>

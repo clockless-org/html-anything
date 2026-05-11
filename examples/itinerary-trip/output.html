@@ -1,0 +1,1377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tokyo + Kyoto — 8-day itinerary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --accent-cyan: #00D4FF;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981;
+  --blue: #3b82f6;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30,27,25,0.04);
+  --shadow-md: 0 4px 12px rgba(30,27,25,0.08);
+  --shadow-lg: 0 8px 24px rgba(30,27,25,0.12);
+  --shadow-accent: 0 8px 24px rgba(160,59,0,0.15);
+  --gradient-primary: linear-gradient(135deg, #a03b00 0%, #c94c00 100%);
+  --gradient-hero: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #060B18;
+    --surface: #0B1426;
+    --surface-container-lowest: #101D35;
+    --surface-container-low: #101D35;
+    --surface-container: #162544;
+    --surface-container-high: #1c2d52;
+    --fg-1: #F8FAFC;
+    --fg-2: #CBD5E1;
+    --fg-muted: #64748B;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --primary: #FF6B35;
+    --accent-glow: #00D4FF;
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+    --outline-variant: #2a3a5c;
+    --primary-fixed: rgba(255,107,53,0.15);
+  }
+}
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--fg-1);
+  font-size: 15px;
+  line-height: 1.55;
+  min-height: 100vh;
+}
+
+/* ── LAYOUT SHELL ── */
+.map-shell {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  min-height: 100vh;
+}
+
+/* ── HERO HEADER ── */
+.atlas-hero {
+  background: var(--gradient-hero);
+  color: white;
+  padding: var(--space-3xl) var(--space-lg);
+  position: relative;
+  overflow: hidden;
+}
+.atlas-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.atlas-hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.atlas-hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin-bottom: var(--space-sm);
+}
+.atlas-hero-title {
+  font-family: var(--font-headline);
+  font-size: clamp(26px, 5vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: var(--space-lg);
+}
+.atlas-hero-headline {
+  font-size: 14px;
+  opacity: 0.85;
+  max-width: 680px;
+  line-height: 1.6;
+  margin-bottom: var(--space-2xl);
+}
+.atlas-stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+}
+.atlas-stat-pill {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: var(--radius-pill);
+  padding: var(--space-sm) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 90px;
+}
+.atlas-stat-pill .num {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1;
+}
+.atlas-stat-pill .lbl {
+  font-size: 11px;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 2px;
+}
+
+/* ── NAV TABS ── */
+.atlas-nav {
+  background: var(--surface-container-low);
+  border-bottom: 1px solid var(--border-strong);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.atlas-nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.atlas-nav-inner::-webkit-scrollbar { display: none; }
+.nav-tab {
+  font-family: var(--font-headline);
+  font-size: 13px;
+  font-weight: 500;
+  padding: var(--space-md) var(--space-lg);
+  color: var(--fg-muted);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color 0.18s, border-color 0.18s;
+}
+.nav-tab:hover { color: var(--fg-1); }
+.nav-tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+/* ── MAIN CONTENT ── */
+.atlas-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--space-lg);
+}
+
+/* ── SECTIONS ── */
+.atlas-section {
+  margin-bottom: var(--space-5xl);
+}
+.section-label {
+  font-family: var(--font-headline);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: var(--space-md);
+}
+.section-title {
+  font-family: var(--font-headline);
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+  margin-bottom: var(--space-2xl);
+}
+
+/* ── CITY ANCHOR STRIP ── */
+.anchor-strip {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-3xl);
+  padding: var(--space-lg);
+  background: var(--surface-container-low);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+.city-chip {
+  font-family: var(--font-headline);
+  font-size: 12px;
+  font-weight: 600;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: all 0.18s;
+  user-select: none;
+}
+.city-chip:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+.city-chip.active { border-color: currentColor; }
+
+/* ── DAY ROUTE VISUALIZATION ── */
+.atlas-stage {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--space-3xl);
+  overflow: hidden;
+}
+.route-svg-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+.route-svg-wrap svg {
+  width: 100%;
+  height: auto;
+  min-width: 320px;
+}
+
+/* ── DAY TIMELINE ── */
+.day-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+.day-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s;
+}
+.day-card:hover { box-shadow: var(--shadow-md); }
+.day-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  padding: var(--space-lg) var(--space-2xl);
+  background: var(--surface-container-low);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.day-number-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--gradient-primary);
+  color: white;
+  border-radius: var(--radius-pill);
+  padding: 3px 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.day-header-meta {
+  flex: 1;
+}
+.day-date {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--fg-muted);
+}
+.day-city {
+  font-family: var(--font-headline);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--fg-1);
+  margin-top: 1px;
+}
+.day-summary {
+  font-size: 12.5px;
+  color: var(--fg-muted);
+  margin-top: 2px;
+}
+.day-mini-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--surface-container);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  position: relative;
+  margin-top: var(--space-md);
+  flex-basis: 100%;
+}
+.day-mini-bar-fill {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  border-radius: var(--radius-pill);
+  min-width: 4px;
+}
+.day-items {
+  padding: var(--space-lg) var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.item-row {
+  display: grid;
+  grid-template-columns: 52px 1fr auto;
+  gap: var(--space-md);
+  align-items: start;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  transition: background 0.15s;
+}
+.item-row:hover { background: var(--surface-container-low); }
+.item-row.conflict {
+  background: rgba(239,68,68,0.06);
+  border: 1px solid rgba(239,68,68,0.2);
+}
+.item-time {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-muted);
+  padding-top: 2px;
+  white-space: nowrap;
+}
+.item-body {}
+.item-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--fg-1);
+  line-height: 1.4;
+}
+.item-location {
+  font-size: 12px;
+  color: var(--fg-muted);
+  margin-top: 1px;
+}
+.item-notes {
+  font-size: 12px;
+  color: var(--fg-2);
+  margin-top: 3px;
+  font-style: italic;
+  display: none;
+}
+.item-row.expanded .item-notes { display: block; }
+.item-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-xs);
+}
+.type-chip {
+  font-family: var(--font-headline);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+.type-flight { background: rgba(59,130,246,0.15); color: #3b82f6; }
+.type-transport { background: rgba(245,158,11,0.15); color: #b45309; }
+.type-hotel { background: rgba(16,185,129,0.15); color: #10b981; }
+.type-restaurant { background: rgba(239,68,68,0.12); color: #dc2626; }
+.type-activity { background: rgba(123,64,224,0.12); color: #7b40e0; }
+.type-other { background: var(--surface-container); color: var(--fg-muted); }
+.conflict-chip {
+  font-size: 10px;
+  font-weight: 600;
+  background: rgba(239,68,68,0.15);
+  color: var(--red);
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+}
+.item-cost {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-2);
+}
+
+/* ── BREAKDOWNS GRID ── */
+.breakdown-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+}
+@media (min-width: 640px) {
+  .breakdown-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 900px) {
+  .breakdown-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+.breakdown-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-sm);
+}
+.breakdown-card-title {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fg-1);
+  margin-bottom: var(--space-lg);
+}
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+.bar-label {
+  font-size: 13px;
+  width: 90px;
+  flex-shrink: 0;
+  color: var(--fg-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bar-track {
+  flex: 1;
+  height: 8px;
+  background: var(--surface-container-high);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transition: width 0.6s cubic-bezier(.4,0,.2,1);
+}
+.bar-count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-muted);
+  min-width: 24px;
+  text-align: right;
+}
+
+/* Donut chart */
+.donut-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  flex-wrap: wrap;
+}
+.donut-legend {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 12.5px;
+  color: var(--fg-2);
+}
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── COST SECTION ── */
+.cost-big {
+  font-family: var(--font-mono);
+  font-size: clamp(36px, 7vw, 56px);
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: var(--space-sm);
+}
+.cost-sub {
+  font-size: 13px;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-2xl);
+}
+.cost-per-grid {
+  display: flex;
+  gap: var(--space-2xl);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-3xl);
+}
+.cost-per-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.cost-per-num {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--fg-1);
+}
+.cost-per-lbl {
+  font-size: 12px;
+  color: var(--fg-muted);
+}
+.cost-bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.cost-bar-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+.cost-bar-day {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-muted);
+  width: 42px;
+  flex-shrink: 0;
+}
+.cost-bar-track {
+  flex: 1;
+  height: 18px;
+  background: var(--surface-container-high);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+}
+.cost-bar-inner {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-sm);
+  transition: width 0.7s cubic-bezier(.4,0,.2,1);
+  position: relative;
+}
+.cost-bar-val {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-muted);
+  min-width: 50px;
+  text-align: right;
+}
+
+/* ── CONFLICT CARDS ── */
+.conflict-card {
+  background: rgba(239,68,68,0.04);
+  border: 1.5px solid rgba(239,68,68,0.25);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  margin-bottom: var(--space-lg);
+}
+.conflict-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+}
+.conflict-date {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--fg-muted);
+}
+.conflict-badge {
+  background: rgba(239,68,68,0.15);
+  color: var(--red);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.conflict-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+.conflict-item-row {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+  background: var(--surface-container-low);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+}
+.conflict-item-time {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--red);
+  flex-shrink: 0;
+}
+.conflict-note {
+  font-size: 13px;
+  color: var(--fg-2);
+  font-style: italic;
+}
+.no-conflict {
+  color: var(--green);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* ── SEARCH + DRILL DOWN ── */
+.search-bar-wrap {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+}
+.search-input {
+  flex: 1;
+  min-width: 200px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--surface-container-lowest);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  color: var(--fg-1);
+  outline: none;
+  transition: border-color 0.18s;
+}
+.search-input:focus { border-color: var(--primary); }
+.search-input::placeholder { color: var(--fg-muted); }
+.filter-chips-row {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-lg);
+}
+.filter-chip {
+  font-family: var(--font-headline);
+  font-size: 12px;
+  font-weight: 500;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  border: 1.5px solid var(--border-strong);
+  background: var(--surface-container-low);
+  color: var(--fg-2);
+  transition: all 0.18s;
+  user-select: none;
+}
+.filter-chip:hover { background: var(--surface-container); }
+.filter-chip.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+.drill-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.drill-table th {
+  font-family: var(--font-headline);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border-strong);
+  text-align: left;
+  white-space: nowrap;
+}
+.drill-table td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--fg-2);
+}
+.drill-table tr:hover td { background: var(--surface-container-low); }
+.drill-table .mono { font-family: var(--font-mono); font-size: 12px; color: var(--fg-muted); }
+.drill-table .item-name { color: var(--fg-1); font-weight: 500; }
+mark {
+  background: rgba(232,64,13,0.2);
+  color: var(--fg-1);
+  border-radius: 2px;
+  padding: 0 2px;
+}
+.drill-result-count {
+  font-size: 12px;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-md);
+  font-family: var(--font-mono);
+}
+
+/* ── COLLAPSIBLE ── */
+.collapsible-section {}
+.collapsible-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-lg) var(--space-2xl);
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  font-family: var(--font-headline);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--fg-1);
+  text-align: left;
+  transition: background 0.18s;
+}
+.collapsible-toggle:hover { background: var(--surface-container); }
+.collapsible-toggle .chevron {
+  transition: transform 0.25s;
+  font-size: 18px;
+  color: var(--fg-muted);
+}
+.collapsible-toggle.open .chevron { transform: rotate(180deg); }
+.collapsible-body {
+  display: none;
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  padding: var(--space-2xl);
+  overflow-x: auto;
+}
+.collapsible-body.open { display: block; }
+
+/* ── COPY BUTTON ── */
+.copy-btn {
+  font-family: var(--font-headline);
+  font-size: 12px;
+  font-weight: 600;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--border-strong);
+  background: var(--surface-container-low);
+  color: var(--fg-2);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  transition: all 0.18s;
+}
+.copy-btn:hover { background: var(--surface-container); color: var(--fg-1); }
+.copy-btn.copied { background: var(--green); color: white; border-color: var(--green); }
+
+/* ── FOOTER ── */
+.atlas-footer {
+  border-top: 1px solid var(--border);
+  padding: var(--space-2xl) var(--space-lg);
+  text-align: center;
+  font-size: 12px;
+  color: var(--fg-muted);
+  line-height: 1.7;
+}
+.atlas-footer em { font-style: italic; }
+
+/* ── SCROLL REVEAL ── */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.4s, transform 0.4s; }
+.reveal.visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .atlas-hero { padding: var(--space-2xl) var(--space-lg); }
+  .atlas-content { padding: var(--space-2xl) var(--space-md); }
+  .item-row { grid-template-columns: 44px 1fr; }
+  .item-right { display: none; }
+  .drill-table .hide-mobile { display: none; }
+  .day-card-header { gap: var(--space-md); }
+}
+</style>
+</head>
+<body>
+<script>const DATA = {"kind":"itinerary","format":"itinerary-csv","items":[{"id":"itin_0001","date":"2026-05-04","dateEpoch":1777852800000,"dayNumber":1,"time":"06:30","location":"SFO Airport","city":"San Francisco","country":"USA","type":"transport","title":"Lyft to SFO","notes":"Pre-booked Lyft from apartment","cost":42,"currency":"USD","durationHours":0.5},{"id":"itin_0002","date":"2026-05-04","dateEpoch":1777852800000,"dayNumber":1,"time":"09:15","location":"SFO Airport","city":"San Francisco","country":"USA","type":"flight","title":"UA837 SFO → NRT","notes":"Window 27A; ~11h flight; remember to fill in landing card","cost":1450,"currency":"USD","durationHours":11},{"id":"itin_0003","date":"2026-05-05","dateEpoch":1777939200000,"dayNumber":2,"time":"15:30","location":"Narita Airport","city":"Narita","country":"Japan","type":"transport","title":"Narita Express to Shinjuku","notes":"Reserved seat car 4; ~80 min direct","cost":30,"currency":"USD","durationHours":1.5},{"id":"itin_0004","date":"2026-05-05","dateEpoch":1777939200000,"dayNumber":2,"time":"17:30","location":"Hotel Gracery Shinjuku","city":"Tokyo","country":"Japan","type":"hotel","title":"Check-in Hotel Gracery","notes":"2 nights; Godzilla view room","cost":420,"currency":"USD","durationHours":1},{"id":"itin_0005","date":"2026-05-05","dateEpoch":1777939200000,"dayNumber":2,"time":"19:30","location":"Omoide Yokocho","city":"Tokyo","country":"Japan","type":"restaurant","title":"Yakitori at Albatross","notes":"Walkable from hotel; cash only","cost":55,"currency":"USD","durationHours":1.5},{"id":"itin_0006","date":"2026-05-06","dateEpoch":1778025600000,"dayNumber":3,"time":"07:00","location":"Tsukiji Outer Market","city":"Tokyo","country":"Japan","type":"activity","title":"Sushi breakfast walk","notes":"Saturday morning crowds — go early; coffee at Turret Coffee after","cost":40,"currency":"USD","durationHours":2},{"id":"itin_0007","date":"2026-05-06","dateEpoch":1778025600000,"dayNumber":3,"time":"11:00","location":"Tokyo National Museum","city":"Tokyo","country":"Japan","type":"activity","title":"Honkan + Heiseikan","notes":"Permanent collection; allow 2.5h","cost":16,"currency":"USD","durationHours":2.5},{"id":"itin_0008","date":"2026-05-06","dateEpoch":1778025600000,"dayNumber":3,"time":"15:00","location":"Yanaka","city":"Tokyo","country":"Japan","type":"activity","title":"Yanaka old town walk","notes":"Stroll through alleys; cat shrines; bakery break","cost":20,"currency":"USD","durationHours":2},{"id":"itin_0009","date":"2026-05-06","dateEpoch":1778025600000,"dayNumber":3,"time":"18:30","location":"Sushi Saito (no — fully booked)","city":"Tokyo","country":"Japan","type":"restaurant","title":"FALLBACK: Sushi Hashiguchi","notes":"Confirmed via concierge; 18:30 seating","cost":210,"currency":"USD","durationHours":2},{"id":"itin_0010","date":"2026-05-06","dateEpoch":1778025600000,"dayNumber":3,"time":"19:00","location":"Robot Restaurant","city":"Tokyo","country":"Japan","type":"activity","title":"Robot Restaurant Shinjuku","notes":"Booked months ago — collides with Sushi Hashiguchi seating; pick one","cost":80,"currency":"USD","durationHours":2},{"id":"itin_0011","date":"2026-05-07","dateEpoch":1778112000000,"dayNumber":4,"time":"08:00","location":"Tokyo Station","city":"Tokyo","country":"Japan","type":"transport","title":"Shinkansen to Kyoto","notes":"Nozomi 213; reserved car 3; ~2h15","cost":140,"currency":"USD","durationHours":2.25},{"id":"itin_0012","date":"2026-05-07","dateEpoch":1778112000000,"dayNumber":4,"time":"10:45","location":"Tofuku-ji","city":"Kyoto","country":"Japan","type":"activity","title":"Tofuku-ji temple + zen garden","notes":"Drop bags at hotel first; temple opens 09:00","cost":8,"currency":"USD","durationHours":1.5},{"id":"itin_0013","date":"2026-05-07","dateEpoch":1778112000000,"dayNumber":4,"time":"14:00","location":"Hotel Kanra Kyoto","city":"Kyoto","country":"Japan","type":"hotel","title":"Check-in Hotel Kanra","notes":"3 nights; ryokan-style room with onsen tub","cost":720,"currency":"USD","durationHours":1},{"id":"itin_0014","date":"2026-05-07","dateEpoch":1778112000000,"dayNumber":4,"time":"15:30","location":"Fushimi Inari Shrine","city":"Kyoto","country":"Japan","type":"activity","title":"Fushimi Inari at golden hour","notes":"Climb to Yotsutsuji viewpoint; ~2h round trip","cost":0,"currency":"USD","durationHours":2.5},{"id":"itin_0015","date":"2026-05-07","dateEpoch":1778112000000,"dayNumber":4,"time":"18:30","location":"Tofuku-ji onsen","city":"Kyoto","country":"Japan","type":"activity","title":"Public onsen at Tofuku-ji","notes":"90 min reserved time; collides with 19:00 dinner — move dinner to 20:30 or skip onsen","cost":28,"currency":"USD","durationHours":1.5},{"id":"itin_0016","date":"2026-05-07","dateEpoch":1778112000000,"dayNumber":4,"time":"19:00","location":"Pontocho","city":"Kyoto","country":"Japan","type":"restaurant","title":"Kawayuka dinner along Kamogawa","notes":"Riverbank seating; reservations under last name","cost":135,"currency":"USD","durationHours":2},{"id":"itin_0017","date":"2026-05-08","dateEpoch":1778198400000,"dayNumber":5,"time":"08:00","location":"Arashiyama","city":"Kyoto","country":"Japan","type":"activity","title":"Bamboo grove at sunrise","notes":"Beat the crowds — be there 07:30 if possible","cost":0,"currency":"USD","durationHours":1.5},{"id":"itin_0018","date":"2026-05-08","dateEpoch":1778198400000,"dayNumber":5,"time":"10:00","location":"Tenryu-ji","city":"Kyoto","country":"Japan","type":"activity","title":"Tenryu-ji temple + sogenchi garden","notes":"Walking distance from bamboo grove","cost":7,"currency":"USD","durationHours":1.5},{"id":"itin_0019","date":"2026-05-08","dateEpoch":1778198400000,"dayNumber":5,"time":"12:00","location":"Sagano Yu","city":"Kyoto","country":"Japan","type":"restaurant","title":"Lunch — converted bathhouse","notes":"No reservations; ~30 min wait possible","cost":28,"currency":"USD","durationHours":1.5},{"id":"itin_0020","date":"2026-05-08","dateEpoch":1778198400000,"dayNumber":5,"time":"14:30","location":"Nishiki Market","city":"Kyoto","country":"Japan","type":"activity","title":"Nishiki market food crawl","notes":"~30 stalls; pickle shop; tako-tamago","cost":35,"currency":"USD","durationHours":2},{"id":"itin_0021","date":"2026-05-08","dateEpoch":1778198400000,"dayNumber":5,"time":"18:00","location":"Gion","city":"Kyoto","country":"Japan","type":"activity","title":"Gion evening walk","notes":"Geisha district; Hanamikoji-dori","cost":0,"currency":"USD","durationHours":1.5},{"id":"itin_0022","date":"2026-05-08","dateEpoch":1778198400000,"dayNumber":5,"time":"19:30","location":"Kikunoi","city":"Kyoto","country":"Japan","type":"restaurant","title":"Kaiseki dinner at Kikunoi Honten","notes":"Booked 2 months ago; 8-course; dress jacket","cost":420,"currency":"USD","durationHours":3},{"id":"itin_0023","date":"2026-05-09","dateEpoch":1778284800000,"dayNumber":6,"time":"09:00","location":"Kinkaku-ji","city":"Kyoto","country":"Japan","type":"activity","title":"Golden Pavilion","notes":"30 min walk through grounds; small entrance fee","cost":5,"currency":"USD","durationHours":1},{"id":"itin_0024","date":"2026-05-09","dateEpoch":1778284800000,"dayNumber":6,"time":"11:00","location":"Ryoan-ji","city":"Kyoto","country":"Japan","type":"activity","title":"Ryoan-ji rock garden","notes":"Iconic zen garden; sit and observe","cost":5,"currency":"USD","durationHours":1},{"id":"itin_0025","date":"2026-05-09","dateEpoch":1778284800000,"dayNumber":6,"time":"13:00","location":"Hokuriku Coffee","city":"Kyoto","country":"Japan","type":"restaurant","title":"Lunch at Hokuriku Coffee","notes":"Light lunch + cake","cost":18,"currency":"USD","durationHours":1.5},{"id":"itin_0026","date":"2026-05-09","dateEpoch":1778284800000,"dayNumber":6,"time":"16:00","location":"Philosopher's Path","city":"Kyoto","country":"Japan","type":"activity","title":"Philosopher's Path walk","notes":"~2 km path along canal; cherry trees","cost":0,"currency":"USD","durationHours":2},{"id":"itin_0027","date":"2026-05-09","dateEpoch":1778284800000,"dayNumber":6,"time":"19:00","location":"Hotel Kanra Kyoto","city":"Kyoto","country":"Japan","type":"restaurant","title":"Kanra in-house kaiseki","notes":"Lighter than Kikunoi; reserved","cost":180,"currency":"USD","durationHours":2},{"id":"itin_0028","date":"2026-05-10","dateEpoch":1778371200000,"dayNumber":7,"time":"07:00","location":"Hotel Kanra Kyoto","city":"Kyoto","country":"Japan","type":"hotel","title":"Check-out + leave luggage","notes":"Pick up at 18:00 before train","cost":0,"currency":"USD","durationHours":0.5},{"id":"itin_0029","date":"2026-05-10","dateEpoch":1778371200000,"dayNumber":7,"time":"09:00","location":"Nara Park","city":"Nara","country":"Japan","type":"activity","title":"Day trip to Nara","notes":"JR train ~45 min from Kyoto Station","cost":18,"currency":"USD","durationHours":1.5},{"id":"itin_0030","date":"2026-05-10","dateEpoch":1778371200000,"dayNumber":7,"time":"10:30","location":"Todai-ji","city":"Nara","country":"Japan","type":"activity","title":"Todai-ji daibutsu","notes":"Allow 2h with grounds","cost":7,"currency":"USD","durationHours":2},{"id":"itin_0031","date":"2026-05-10","dateEpoch":1778371200000,"dayNumber":7,"time":"13:00","location":"Yoshikawa","city":"Nara","country":"Japan","type":"restaurant","title":"Lunch — kakinoha-zushi","notes":"Persimmon-leaf wrapped sushi specialty","cost":32,"currency":"USD","durationHours":1.5},{"id":"itin_0032","date":"2026-05-10","dateEpoch":1778371200000,"dayNumber":7,"time":"18:30","location":"Kyoto Station","city":"Kyoto","country":"Japan","type":"transport","title":"Shinkansen back to Tokyo","notes":"Nozomi 224; ~2h15","cost":140,"currency":"USD","durationHours":2.25},{"id":"itin_0033","date":"2026-05-10","dateEpoch":1778371200000,"dayNumber":7,"time":"21:30","location":"Narita Airport","city":"Narita","country":"Japan","type":"transport","title":"Narita Express to airport hotel","notes":"Last train; 90 min direct","cost":30,"currency":"USD","durationHours":1.5},{"id":"itin_0034","date":"2026-05-10","dateEpoch":1778371200000,"dayNumber":7,"time":"22:30","location":"Narita Airport Rest House","city":"Narita","country":"Japan","type":"hotel","title":"Airport hotel — 1 night","notes":"Early flight tomorrow","cost":160,"currency":"USD","durationHours":8},{"id":"itin_0035","date":"2026-05-11","dateEpoch":1778457600000,"dayNumber":8,"time":"07:00","location":"Narita Airport","city":"Narita","country":"Japan","type":"flight","title":"UA838 NRT → SFO","notes":"Cross dateline; arrive same calendar day; ~10h","cost":1450,"currency":"USD","durationHours":10}],"days":[{"date":"2026-05-04","dayNumber":1,"items":[{"id":"itin_0001","date":"2026-05-04","dateEpoch":1777852800000,"dayNumber":1,"time":"06:30","location":"SFO Airport","city":"San Francisco","country":"USA","type":"transport","title":"Lyft to SFO","notes":"Pre-booked Lyft from apartment","cost":42,"currency":"USD","durationHours":0.5},{"id":"itin_0002","date":"2026-05-04","dateEpoch":1777852800000,"dayNumber":1,"time":"09:15","location":"SFO Airport","city":"San Francisco","country":"USA","type":"flight","title":"UA837 SFO → NRT","notes":"Window 27A; ~11h flight; remember to fill in landing card","cost":1450,"currency":"USD","durationHours":11}]},{"date":"2026-05-05","dayNumber":2,"items":[{"id":"itin_0003","date":"2026-05-05","dateEpoch":1777939200000,"dayNumber":2,"time":"15:30","location":"Narita Airport","city":"Narita","country":"Japan","type":"transport","title":"Narita Express to Shinjuku","notes":"Reserved seat car 4; ~80 min direct","cost":30,"currency":"USD","durationHours":1.5},{"id":"itin_0004","date":"2026-05-05","dateEpoch":1777939200000,"dayNumber":2,"time":"17:30","location":"Hotel Gracery Shinjuku","city":"Tokyo","country":"Japan","type":"hotel","title":"Check-in Hotel Gracery","notes":"2 nights; Godzilla view room","cost":420,"currency":"USD","durationHours":1},{"id":"itin_0005","date":"2026-05-05","dateEpoch":1777939200000,"dayNumber":2,"time":"19:30","location":"Omoide Yokocho","city":"Tokyo","country":"Japan","type":"restaurant","title":"Yakitori at Albatross","notes":"Walkable from hotel; cash only","cost":55,"currency":"USD","durationHours":1.5}]},{"date":"2026-05-06","dayNumber":3,"items":[{"id":"itin_0006","date":"2026-05-06","dateEpoch":1778025600000,"dayNumber":3,"time":"07:00","location":"Tsukiji Outer Market","city":"Tokyo","country":"Japan","type":"activity","title":"Sushi breakfast walk","notes":"Saturday morning crowds — go early; coffee at Turret Coffee after","cost":40,"currency":"USD","durationHours":2},{"id":"itin_0007","date":"2026-05-06","dateEpoch":1778025600000,"dayNumber":3,"time":"11:00","location":"Tokyo National Museum","city":"Tokyo","country":"Japan","type":"activity","title":"Honkan + Heiseikan","notes":"Permanent collection; allow 2.5h","cost":16,"currency":"USD","durationHours":2.5},{"id":"itin_0008","date":"2026-05-06","dateEpoch":1778025600000,"dayNumber":3,"time":"15:00","location":"Yanaka","city":"Tokyo","country":"Japan","type":"activity","title":"Yanaka old town walk","notes":"Stroll through alleys; cat shrines; bakery break","cost":20,"currency":"USD","durationHours":2},{"id":"itin_0009","date":"2026-05-06","dateEpoch":1778025600000,"dayNumber":3,"time":"18:30","location":"Sushi Saito (no — fully booked)","city":"Tokyo","country":"Japan","type":"restaurant","title":"FALLBACK: Sushi Hashiguchi","notes":"Confirmed via concierge; 18:30 seating","cost":210,"currency":"USD","durationHours":2},{"id":"itin_0010","date":"2026-05-06","dateEpoch":1778025600000,"dayNumber":3,"time":"19:00","location":"Robot Restaurant","city":"Tokyo","country":"Japan","type":"activity","title":"Robot Restaurant Shinjuku","notes":"Booked months ago — collides with Sushi Hashiguchi seating; pick one","cost":80,"currency":"USD","durationHours":2}]},{"date":"2026-05-07","dayNumber":4,"items":[{"id":"itin_0011","date":"2026-05-07","dateEpoch":1778112000000,"dayNumber":4,"time":"08:00","location":"Tokyo Station","city":"Tokyo","country":"Japan","type":"transport","title":"Shinkansen to Kyoto","notes":"Nozomi 213; reserved car 3; ~2h15","cost":140,"currency":"USD","durationHours":2.25},{"id":"itin_0012","date":"2026-05-07","dateEpoch":1778112000000,"dayNumber":4,"time":"10:45","location":"Tofuku-ji","city":"Kyoto","country":"Japan","type":"activity","title":"Tofuku-ji temple + zen garden","notes":"Drop bags at hotel first; temple opens 09:00","cost":8,"currency":"USD","durationHours":1.5},{"id":"itin_0013","date":"2026-05-07","dateEpoch":1778112000000,"dayNumber":4,"time":"14:00","location":"Hotel Kanra Kyoto","city":"Kyoto","country":"Japan","type":"hotel","title":"Check-in Hotel Kanra","notes":"3 nights; ryokan-style room with onsen tub","cost":720,"currency":"USD","durationHours":1},{"id":"itin_0014","date":"2026-05-07","dateEpoch":1778112000000,"dayNumber":4,"time":"15:30","location":"Fushimi Inari Shrine","city":"Kyoto","country":"Japan","type":"activity","title":"Fushimi Inari at golden hour","notes":"Climb to Yotsutsuji viewpoint; ~2h round trip","cost":0,"currency":"USD","durationHours":2.5},{"id":"itin_0015","date":"2026-05-07","dateEpoch":1778112000000,"dayNumber":4,"time":"18:30","location":"Tofuku-ji onsen","city":"Kyoto","country":"Japan","type":"activity","title":"Public onsen at Tofuku-ji","notes":"90 min reserved time; collides with 19:00 dinner — move dinner to 20:30 or skip onsen","cost":28,"currency":"USD","durationHours":1.5},{"id":"itin_0016","date":"2026-05-07","dateEpoch":1778112000000,"dayNumber":4,"time":"19:00","location":"Pontocho","city":"Kyoto","country":"Japan","type":"restaurant","title":"Kawayuka dinner along Kamogawa","notes":"Riverbank seating; reservations under last name","cost":135,"currency":"USD","durationHours":2}]},{"date":"2026-05-08","dayNumber":5,"items":[{"id":"itin_0017","date":"2026-05-08","dateEpoch":1778198400000,"dayNumber":5,"time":"08:00","location":"Arashiyama","city":"Kyoto","country":"Japan","type":"activity","title":"Bamboo grove at sunrise","notes":"Beat the crowds — be there 07:30 if possible","cost":0,"currency":"USD","durationHours":1.5},{"id":"itin_0018","date":"2026-05-08","dateEpoch":1778198400000,"dayNumber":5,"time":"10:00","location":"Tenryu-ji","city":"Kyoto","country":"Japan","type":"activity","title":"Tenryu-ji temple + sogenchi garden","notes":"Walking distance from bamboo grove","cost":7,"currency":"USD","durationHours":1.5},{"id":"itin_0019","date":"2026-05-08","dateEpoch":1778198400000,"dayNumber":5,"time":"12:00","location":"Sagano Yu","city":"Kyoto","country":"Japan","type":"restaurant","title":"Lunch — converted bathhouse","notes":"No reservations; ~30 min wait possible","cost":28,"currency":"USD","durationHours":1.5},{"id":"itin_0020","date":"2026-05-08","dateEpoch":1778198400000,"dayNumber":5,"time":"14:30","location":"Nishiki Market","city":"Kyoto","country":"Japan","type":"activity","title":"Nishiki market food crawl","notes":"~30 stalls; pickle shop; tako-tamago","cost":35,"currency":"USD","durationHours":2},{"id":"itin_0021","date":"2026-05-08","dateEpoch":1778198400000,"dayNumber":5,"time":"18:00","location":"Gion","city":"Kyoto","country":"Japan","type":"activity","title":"Gion evening walk","notes":"Geisha district; Hanamikoji-dori","cost":0,"currency":"USD","durationHours":1.5},{"id":"itin_0022","date":"2026-05-08","dateEpoch":1778198400000,"dayNumber":5,"time":"19:30","location":"Kikunoi","city":"Kyoto","country":"Japan","type":"restaurant","title":"Kaiseki dinner at Kikunoi Honten","notes":"Booked 2 months ago; 8-course; dress jacket","cost":420,"currency":"USD","durationHours":3}]},{"date":"2026-05-09","dayNumber":6,"items":[{"id":"itin_0023","date":"2026-05-09","dateEpoch":1778284800000,"dayNumber":6,"time":"09:00","location":"Kinkaku-ji","city":"Kyoto","country":"Japan","type":"activity","title":"Golden Pavilion","notes":"30 min walk through grounds; small entrance fee","cost":5,"currency":"USD","durationHours":1},{"id":"itin_0024","date":"2026-05-09","dateEpoch":1778284800000,"dayNumber":6,"time":"11:00","location":"Ryoan-ji","city":"Kyoto","country":"Japan","type":"activity","title":"Ryoan-ji rock garden","notes":"Iconic zen garden; sit and observe","cost":5,"currency":"USD","durationHours":1},{"id":"itin_0025","date":"2026-05-09","dateEpoch":1778284800000,"dayNumber":6,"time":"13:00","location":"Hokuriku Coffee","city":"Kyoto","country":"Japan","type":"restaurant","title":"Lunch at Hokuriku Coffee","notes":"Light lunch + cake","cost":18,"currency":"USD","durationHours":1.5},{"id":"itin_0026","date":"2026-05-09","dateEpoch":1778284800000,"dayNumber":6,"time":"16:00","location":"Philosopher's Path","city":"Kyoto","country":"Japan","type":"activity","title":"Philosopher's Path walk","notes":"~2 km path along canal; cherry trees","cost":0,"currency":"USD","durationHours":2},{"id":"itin_0027","date":"2026-05-09","dateEpoch":1778284800000,"dayNumber":6,"time":"19:00","location":"Hotel Kanra Kyoto","city":"Kyoto","country":"Japan","type":"restaurant","title":"Kanra in-house kaiseki","notes":"Lighter than Kikunoi; reserved","cost":180,"currency":"USD","durationHours":2}]},{"date":"2026-05-10","dayNumber":7,"items":[{"id":"itin_0028","date":"2026-05-10","dateEpoch":1778371200000,"dayNumber":7,"time":"07:00","location":"Hotel Kanra Kyoto","city":"Kyoto","country":"Japan","type":"hotel","title":"Check-out + leave luggage","notes":"Pick up at 18:00 before train","cost":0,"currency":"USD","durationHours":0.5},{"id":"itin_0029","date":"2026-05-10","dateEpoch":1778371200000,"dayNumber":7,"time":"09:00","location":"Nara Park","city":"Nara","country":"Japan","type":"activity","title":"Day trip to Nara","notes":"JR train ~45 min from Kyoto Station","cost":18,"currency":"USD","durationHours":1.5},{"id":"itin_0030","date":"2026-05-10","dateEpoch":1778371200000,"dayNumber":7,"time":"10:30","location":"Todai-ji","city":"Nara","country":"Japan","type":"activity","title":"Todai-ji daibutsu","notes":"Allow 2h with grounds","cost":7,"currency":"USD","durationHours":2},{"id":"itin_0031","date":"2026-05-10","dateEpoch":1778371200000,"dayNumber":7,"time":"13:00","location":"Yoshikawa","city":"Nara","country":"Japan","type":"restaurant","title":"Lunch — kakinoha-zushi","notes":"Persimmon-leaf wrapped sushi specialty","cost":32,"currency":"USD","durationHours":1.5},{"id":"itin_0032","date":"2026-05-10","dateEpoch":1778371200000,"dayNumber":7,"time":"18:30","location":"Kyoto Station","city":"Kyoto","country":"Japan","type":"transport","title":"Shinkansen back to Tokyo","notes":"Nozomi 224; ~2h15","cost":140,"currency":"USD","durationHours":2.25},{"id":"itin_0033","date":"2026-05-10","dateEpoch":1778371200000,"dayNumber":7,"time":"21:30","location":"Narita Airport","city":"Narita","country":"Japan","type":"transport","title":"Narita Express to airport hotel","notes":"Last train; 90 min direct","cost":30,"currency":"USD","durationHours":1.5},{"id":"itin_0034","date":"2026-05-10","dateEpoch":1778371200000,"dayNumber":7,"time":"22:30","location":"Narita Airport Rest House","city":"Narita","country":"Japan","type":"hotel","title":"Airport hotel — 1 night","notes":"Early flight tomorrow","cost":160,"currency":"USD","durationHours":8}]},{"date":"2026-05-11","dayNumber":8,"items":[{"id":"itin_0035","date":"2026-05-11","dateEpoch":1778457600000,"dayNumber":8,"time":"07:00","location":"Narita Airport","city":"Narita","country":"Japan","type":"flight","title":"UA838 NRT → SFO","notes":"Cross dateline; arrive same calendar day; ~10h","cost":1450,"currency":"USD","durationHours":10}]}],"conflicts":[{"date":"2026-05-06","items":[{"id":"itin_0009","date":"2026-05-06","dateEpoch":1778025600000,"dayNumber":3,"time":"18:30","location":"Sushi Saito (no — fully booked)","city":"Tokyo","country":"Japan","type":"restaurant","title":"FALLBACK: Sushi Hashiguchi","notes":"Confirmed via concierge; 18:30 seating","cost":210,"currency":"USD","durationHours":2},{"id":"itin_0010","date":"2026-05-06","dateEpoch":1778025600000,"dayNumber":3,"time":"19:00","location":"Robot Restaurant","city":"Tokyo","country":"Japan","type":"activity","title":"Robot Restaurant Shinjuku","notes":"Booked months ago — collides with Sushi Hashiguchi seating; pick one","cost":80,"currency":"USD","durationHours":2}]},{"date":"2026-05-07","items":[{"id":"itin_0015","date":"2026-05-07","dateEpoch":1778112000000,"dayNumber":4,"time":"18:30","location":"Tofuku-ji onsen","city":"Kyoto","country":"Japan","type":"activity","title":"Public onsen at Tofuku-ji","notes":"90 min reserved time; collides with 19:00 dinner — move dinner to 20:30 or skip onsen","cost":28,"currency":"USD","durationHours":1.5},{"id":"itin_0016","date":"2026-05-07","dateEpoch":1778112000000,"dayNumber":4,"time":"19:00","location":"Pontocho","city":"Kyoto","country":"Japan","type":"restaurant","title":"Kawayuka dinner along Kamogawa","notes":"Riverbank seating; reservations under last name","cost":135,"currency":"USD","durationHours":2}]},{"date":"2026-05-10","items":[{"id":"itin_0033","date":"2026-05-10","dateEpoch":1778371200000,"dayNumber":7,"time":"21:30","location":"Narita Airport","city":"Narita","country":"Japan","type":"transport","title":"Narita Express to airport hotel","notes":"Last train; 90 min direct","cost":30,"currency":"USD","durationHours":1.5},{"id":"itin_0034","date":"2026-05-10","dateEpoch":1778371200000,"dayNumber":7,"time":"22:30","location":"Narita Airport Rest House","city":"Narita","country":"Japan","type":"hotel","title":"Airport hotel — 1 night","notes":"Early flight tomorrow","cost":160,"currency":"USD","durationHours":8}]}],"cities":[{"name":"Kyoto","count":18},{"name":"Tokyo","count":8},{"name":"Narita","count":4},{"name":"Nara","count":3},{"name":"San Francisco","count":2}],"countries":[{"name":"Japan","count":33},{"name":"USA","count":2}],"types":[{"name":"activity","count":16},{"name":"restaurant","count":8},{"name":"transport","count":5},{"name":"hotel","count":4},{"name":"flight","count":2}],"totals":{"items":35,"days":8,"cities":5,"countries":2,"totalCost":5929,"costItems":35},"headers":["Date","Day","Time","Location","City","Country","Type","Title","Notes","Cost","Currency","Hours"],"meta":{"sourceFile":"input.csv","sizeBytes":4627,"format":"itinerary-csv","kind":"travel-itinerary","itemCount":35,"dayCount":8,"dateRange":"2026-05-04 → 2026-05-11","cities":["San Francisco","Narita","Tokyo","Kyoto","Nara"],"countries":["USA","Japan"],"headers":["Date","Day","Time","Location","City","Country","Type","Title","Notes","Cost","Currency","Hours"],"detectedColumns":{"date":"Date","location":"Location","city":"City","country":"Country","type":"Type"}}};</script>
+
+<div class="map-shell">
+
+<!-- HERO -->
+<header class="atlas-hero" id="top">
+  <div class="atlas-hero-inner">
+    <div class="atlas-hero-eyebrow">✈ Trip Itinerary · May 2026</div>
+    <h1 class="atlas-hero-title" id="hero-title">Tokyo + Kyoto</h1>
+    <p class="atlas-hero-headline" id="hero-headline">Loading trip summary…</p>
+    <div class="atlas-stat-row" id="hero-stats"></div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="atlas-nav">
+  <div class="atlas-nav-inner">
+    <button class="nav-tab active" onclick="scrollToSection('trip-card')">Trip</button>
+    <button class="nav-tab" onclick="scrollToSection('itinerary')">Itinerary</button>
+    <button class="nav-tab" onclick="scrollToSection('breakdowns')">Cities & Types</button>
+    <button class="nav-tab" onclick="scrollToSection('costs')">Costs</button>
+    <button class="nav-tab" onclick="scrollToSection('conflicts')">Conflicts</button>
+    <button class="nav-tab" onclick="scrollToSection('browse')">Browse All</button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="atlas-content">
+
+  <!-- SECTION: TRIP CARD -->
+  <section class="atlas-section reveal" id="trip-card">
+    <div class="section-label">Trip Overview</div>
+    <h2 class="section-title" id="trip-section-title">Tokyo + Kyoto — 8-day itinerary</h2>
+    <div id="anchor-strip-wrap"></div>
+    <div class="atlas-stage" id="route-viz">
+      <div class="section-label" style="margin-bottom: var(--space-md);">Route · City Sequence</div>
+      <div class="route-svg-wrap" id="route-svg-wrap"></div>
+    </div>
+  </section>
+
+  <!-- SECTION: ITINERARY / DAY BY DAY -->
+  <section class="atlas-section reveal" id="itinerary">
+    <div class="section-label">Itinerary</div>
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:var(--space-lg); margin-bottom:var(--space-2xl);">
+      <h2 class="section-title" style="margin-bottom:0;">Day by Day</h2>
+      <button class="copy-btn" id="copy-md-btn" onclick="copyMarkdown()">
+        <span>📋</span> Copy as Markdown
+      </button>
+    </div>
+    <div class="day-timeline" id="day-timeline"></div>
+  </section>
+
+  <!-- SECTION: BREAKDOWNS -->
+  <section class="atlas-section reveal" id="breakdowns">
+    <div class="section-label">Cities &amp; Types</div>
+    <h2 class="section-title">Destinations &amp; Activity Mix</h2>
+    <div class="breakdown-grid" id="breakdown-grid"></div>
+  </section>
+
+  <!-- SECTION: COSTS -->
+  <section class="atlas-section reveal" id="costs">
+    <div class="section-label">Costs</div>
+    <h2 class="section-title">Budget Overview</h2>
+    <div id="cost-section"></div>
+  </section>
+
+  <!-- SECTION: CONFLICTS -->
+  <section class="atlas-section reveal" id="conflicts">
+    <div class="section-label">Conflicts</div>
+    <h2 class="section-title">Overlap Callouts</h2>
+    <div id="conflicts-section"></div>
+  </section>
+
+  <!-- SECTION: BROWSE ALL -->
+  <section class="atlas-section reveal" id="browse">
+    <div class="collapsible-section">
+      <button class="collapsible-toggle" id="browse-toggle" onclick="toggleBrowse()">
+        <span id="browse-toggle-label">Browse all 35 items</span>
+        <span class="chevron">▾</span>
+      </button>
+      <div class="collapsible-body" id="browse-body">
+        <div class="search-bar-wrap">
+          <input class="search-input" id="drill-search" placeholder="Search title, location, city, notes…" oninput="filterDrill()">
+        </div>
+        <div class="filter-chips-row" id="drill-city-chips"></div>
+        <div class="filter-chips-row" id="drill-type-chips"></div>
+        <div class="drill-result-count" id="drill-count"></div>
+        <div style="overflow-x:auto;">
+          <table class="drill-table">
+            <thead>
+              <tr>
+                <th>Date &amp; Time</th>
+                <th>Title</th>
+                <th class="hide-mobile">Location / City</th>
+                <th>Type</th>
+                <th class="hide-mobile">Cost</th>
+              </tr>
+            </thead>
+            <tbody id="drill-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="atlas-footer">
+  <em>Generated locally — your itinerary data never left your machine. The full export is embedded in this HTML and rendered in your browser; no map tiles are loaded. For sharing, prefer an anonymized / cropped export.</em>
+</footer>
+
+</div><!-- .map-shell -->
+
+<script>
+(function () {
+  // ── CITY COLOR PALETTE ──
+  const CITY_COLORS = [
+    '#a03b00','#7b40e0','#0e7490','#10b981','#f59e0b','#ef4444','#3b82f6','#ec4899'
+  ];
+  const TYPE_COLORS = {
+    flight: '#3b82f6',
+    transport: '#f59e0b',
+    hotel: '#10b981',
+    restaurant: '#ef4444',
+    activity: '#7b40e0',
+  };
+
+  function typeClass(t) {
+    const m = { flight:'type-flight', transport:'type-transport', hotel:'type-hotel', restaurant:'type-restaurant', activity:'type-activity' };
+    return m[(t||'').toLowerCase()] || 'type-other';
+  }
+  function fmt$( c ) { return c != null ? `$${Number(c).toLocaleString()}` : ''; }
+  function fmtDate(d) {
+    if (!d) return '';
+    const parts = d.split('-');
+    if (parts.length < 3) return d;
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${months[parseInt(parts[1])-1]} ${parseInt(parts[2])}, ${parts[0]}`;
+  }
+  function dayOfWeek(d) {
+    if (!d) return '';
+    const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const dt = new Date(d + 'T12:00:00Z');
+    return days[dt.getUTCDay()];
+  }
+  function escHtml(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function highlight(s, q) {
+    if (!q) return escHtml(s);
+    const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+    return escHtml(s).replace(re, '<mark>$1</mark>');
+  }
+
+  // ── WAIT FOR DATA ──
+  function ready(fn) {
+    if (typeof DATA !== 'undefined') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+
+  ready(function() {
+    const D = DATA;
+    const items = (D.items || []).concat(
+      (D.days||[]).flatMap(d => d.items||[])
+    );
+    // dedupe by id
+    const seen = new Set();
+    const allItems = items.filter(it => {
+      if (seen.has(it.id)) return false;
+      seen.add(it.id);
+      return true;
+    });
+
+    const days = D.days || [];
+    const totals = D.totals || {};
+    const cities = D.cities || [];
+    const countries = D.countries || [];
+    const types = D.types || [];
+    const conflicts = D.conflicts || [];
+
+    // City → color map
+    const cityColorMap = {};
+    cities.forEach((c,i) => { cityColorMap[c.name] = CITY_COLORS[i % CITY_COLORS.length]; });
+
+    // ── HERO ──
+    function buildHero() {
+      const title = document.getElementById('hero-title');
+      title.textContent = 'Tokyo + Kyoto';
+
+      const dateRange = D.dateRange || '';
+      const totalCost = totals.totalCost;
+      const cityNames = cities.slice(0,4).map(c=>c.name).join(', ');
+      const conflictCount = conflicts.length;
+      let headline = `${totals.days||8}-day trip across ${totals.cities||cities.length} cities in Japan`;
+      if (totalCost) headline += `, $${Number(totalCost).toLocaleString()} total`;
+      if (conflictCount) headline += `. ${conflictCount} scheduling conflict${conflictCount>1?'s':''} detected — see below.`;
+      else headline += `. No scheduling conflicts detected.';`
+      document.getElementById('hero-headline').textContent = headline;
+
+      const stats = [
+        { num: totals.days||8, lbl: 'Days' },
+        { num: totals.items||35, lbl: 'Stops' },
+        { num: totals.cities||cities.length, lbl: 'Cities' },
+        { num: totals.countries||countries.length, lbl: 'Countries' },
+        { num: totalCost ? '$'+Number(totalCost).toLocaleString() : '—', lbl: 'Total Cost' },
+      ];
+      const container = document.getElementById('hero-stats');
+      container.innerHTML = stats.map(s => `
+        <div class="atlas-stat-pill">
+          <span class="num">${s.num}</span>
+          <span class="lbl">${s.lbl}</span>
+        </div>
+      `).join('');
+    }
+
+    // ── ANCHOR STRIP ──
+    function buildAnchorStrip() {
+      const wrap = document.getElementById('anchor-strip-wrap');
+      const allCities = cities.map(c => c.name);
+      let html = `<div class="anchor-strip" id="city-anchor-strip">
+        <span style="font-size:12px;color:var(--fg-muted);align-self:center;font-weight:600;">Cities:</span>`;
+      allCities.forEach(name => {
+        const col = cityColorMap[name] || '#888';
+        html += `<span class="city-chip" data-city="${escHtml(name)}" style="background:${col}22;color:${col};border-color:${col}44;" onclick="toggleCityFilter('${name.replace(/'/g,"\\'")}')">
+          ${escHtml(name)}
+        </span>`;
+      });
+      html += `<span class="city-chip" data-city="__all__" style="background:var(--surface-container);color:var(--fg-2);margin-left:auto;" onclick="clearCityFilter()">Show all</span>`;
+      html += `</div>`;
+      wrap.innerHTML = html;
+    }
+
+    // ── ROUTE SVG ──
+    function buildRouteSVG() {
+      const wrap = document.getElementById('route-svg-wrap');
+      // Build a visual city strip — horizontal route visualization
+      const dayCards = days.map(d => {
+        const anchorCity = d.items && d.items.length > 0 ? d.items[0].city : '?';
+        return { date: d.date, dayNumber: d.dayNumber, city: anchorCity, items: d.items||[], itemCount: d.itemCount||0 };
+      });
+
+      // Figure out unique cities in order
+      const citySeq = [];
+      dayCards.forEach(d => {
+        if (!citySeq.includes(d.city)) citySeq.push(d.city);
+      });
+
+      const W = 1000, H = 220;
+      const margin = { l: 40, r: 40, t: 60, b: 40 };
+      const innerW = W - margin.l - margin.r;
+      const innerH = H - margin.t - margin.b;
+      const n = dayCards.length;
+      const stepX = n > 1 ? innerW / (n - 1) : innerW / 2;
+
+      // y position per city
+      const uniqueCities = [...new Set(dayCards.map(d=>d.city))];
+      const cityY = {};
+      uniqueCities.forEach((c,i) => {
+        cityY[c] = margin.t + (innerH / Math.max(1, uniqueCities.length - 1)) * i;
+      });
+      if (uniqueCities.length === 1) cityY[uniqueCities[0]] = H / 2;
+
+      let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="max-height:240px;">
+        <defs>
+          <linearGradient id="routeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#a03b00"/>
+            <stop offset="100%" stop-color="#7b40e0"/>
+          </linearGradient>
+        </defs>
+        <!-- grid lines -->
+        ${Array.from({length:6},(_,i)=>{
+          const y = margin.t + (innerH/5)*i;
+          return `<line x1="${margin.l}" y1="${y}" x2="${W-margin.r}" y2="${y}" stroke="var(--border)" stroke-width="0.5"/>`;
+        }).join('')}
+      `;
+
+      // route path
+      const pts = dayCards.map((d,i) => {
+        const x = margin.l + i * stepX;
+        const y = cityY[d.city] || H/2;
+        return `${x},${y}`;
+      });
+      svg += `<polyline points="${pts.join(' ')}" fill="none" stroke="url(#routeGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>`;
+
+      // dots + labels
+      dayCards.forEach((d,i) => {
+        const x = margin.l + i * stepX;
+        const y = cityY[d.city] || H/2;
+        const col = cityColorMap[d.city] || '#888';
+        const isFirst = i === 0;
+        const isLast = i === dayCards.length - 1;
+        const r = isFirst || isLast ? 9 : 7;
+        svg += `<circle cx="${x}" cy="${y}" r="${r}" fill="${col}" stroke="var(--surface-container-lowest)" stroke-width="2" opacity="0.9"/>`;
+        // day number
+        svg += `<text x="${x}" y="${y+1}" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="9" font-family="monospace" font-weight="bold">${d.dayNumber||i+1}</text>`;
+        // date label above
+        const labelY = y > H/2 ? y - 20 : y + 20;
+        const anchor = i === 0 ? 'start' : i === n-1 ? 'end' : 'middle';
+        svg += `<text x="${x}" y="${labelY}" text-anchor="${anchor}" fill="var(--fg-muted)" font-size="10" font-family="monospace">${(d.date||'').slice(5)}</text>`;
+      });
+
+      // city labels on the side
+      uniqueCities.forEach(c => {
+        const y = cityY[c];
+        const col = cityColorMap[c] || '#888';
+        svg += `<text x="${margin.l - 8}" y="${y}" text-anchor="end" dominant-baseline="middle" fill="${col}" font-size="11" font-family="Plus Jakarta Sans, sans-serif" font-weight="600">${c}</text>`;
+      });
+
+      svg += `</svg>`;
+      wrap.innerHTML = svg;
+    }
+
+    // ── DAY TIMELINE ──
+    function buildDayTimeline() {
+      const container = document.getElementById('day-timeline');
+
+      // Build conflict item IDs set
+      const conflictItemIds = new Set();
+      conflicts.forEach(cf => {
+        (cf.items||[]).forEach(it => conflictItemIds.add(it.id));
+      });
+
+      let html = '';
+      days.forEach(day => {
+        const dc = day.items && day.items.length > 0 ? day.items[0].city : '?';
+        const col = cityColorMap[dc] || '#888';
+        const items = day.items || [];
+        const scheduledHours = items.reduce((s,it)=>s+(it.durationHours||0),0);
+        const dayCost = items.reduce((s,it)=>s+(it.cost||0),0);
+
+        // Mini 24h bar items
+        const miniItems = items.map(it => {
+          const timeParts = (it.time||'00:00').split(':');
+          const startH = parseFloat(timeParts[0]) + parseFloat(timeParts[1]||0)/60;
+          const dur = it.durationHours||0.5;
+          const leftPct = (startH/24)*100;
+          const widthPct = (dur/24)*100;
+          const typeCol = TYPE_COLORS[(it.type||'').toLowerCase()] || '#8d7166';
+          return { leftPct, widthPct, typeCol, isConflict: conflictItemIds.has(it.id) };
+        });
+
+        html += `<div class="day-card reveal" id="day-${day.date}">
+          <div class="day-card-header">
+            <div class="day-number-badge">Day ${day.dayNumber||''}</div>
+            <div class="day-header-meta">
+              <div class="day-date">${dayOfWeek(day.date)}, ${fmtDate(day.date)}</div>
+              <div class="day-city" style="color:${col}">${dc}</div>
+              <div class="day-summary">${items.length} stop${items.length!==1?'s':''} · ${scheduledHours.toFixed(1)}h scheduled · ${dayCost>0?'$'+dayCost.toLocaleString():''}</div>
+            </div>
+            <div class="day-mini-bar" style="max-width:200px;">
+              ${miniItems.map(mi=>`<div class="day-mini-bar-fill" style="left:${mi.leftPct.toFixed(1)}%;width:${Math.max(mi.widthPct,1).toFixed(1)}%;background:${mi.isConflict?'var(--red)':mi.typeCol};${mi.isConflict?'z-index:2;':''}"></div>`).join('')}
+            </div>
+          </div>
+          <div class="day-items">
+            ${items.map(it => {
+              const isConflict = conflictItemIds.has(it.id);
+              return `<div class="item-row${isConflict?' conflict':''}" data-item-id="${it.id}" onclick="toggleItem(this)">
+                <div class="item-time">${it.time||'—'}</div>
+                <div class="item-body">
+                  <div class="item-title">${escHtml(it.title)}</div>
+                  <div class="item-location">${escHtml(it.location||it.city||'')}</div>
+                  <div class="item-notes">${escHtml(it.notes||'')}</div>
+                </div>
+                <div class="item-right">
+                  <span class="type-chip ${typeClass(it.type)}">${escHtml(it.type||'other')}</span>
+                  ${isConflict ? '<span class="conflict-chip">⚠ overlap</span>' : ''}
+                  ${it.cost != null && it.cost > 0 ? `<span class="item-cost">$${it.cost}</span>` : ''}
+                </div>
+              </div>`;
+            }).join('')}
+          </div>
+        </div>`;
+      });
+      container.innerHTML = html;
+    }
+
+    // ── BREAKDOWNS ──
+    function buildBreakdowns() {
+      const grid = document.getElementById('breakdown-grid');
+
+      // Cities bar chart
+      const maxCity = Math.max(...cities.map(c=>c.count), 1);
+      let citiesHtml = `<div class="breakdown-card reveal">
+        <div class="breakdown-card-title">Stops by City</div>`;
+      cities.forEach(c => {
+        const col = cityColorMap[c.name] || '#888';
+        const pct = (c.count/maxCity*100).toFixed(1);
+        citiesHtml += `<div class="bar-row">
+          <span class="bar-label" title="${escHtml(c.name)}">${escHtml(c.name)}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${col};"></div></div>
+          <span class="bar-count">${c.count}</span>
+        </div>`;
+      });
+      citiesHtml += `</div>`;
+
+      // Countries bar chart
+      const maxCountry = Math.max(...countries.map(c=>c.count), 1);
+      let countriesHtml = `<div class="breakdown-card reveal">
+        <div class="breakdown-card-title">Stops by Country</div>`;
+      countries.forEach((c,i) => {
+        const col = CITY_COLORS[(cities.length + i) % CITY_COLORS.length];
+        const pct = (c.count/maxCountry*100).toFixed(1);
+        countriesHtml += `<div class="bar-row">
+          <span class="bar-label">${escHtml(c.name)}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${col};"></div></div>
+          <span class="bar-count">${c.count}</span>
+        </div>`;
+      });
+      countriesHtml += `</div>`;
+
+      // Types donut
+      const total = types.reduce((s,t)=>s+t.count,0);
+      const typeColArr = types.map(t => TYPE_COLORS[(t.name||'').toLowerCase()] || '#8d7166');
+      let donutHtml = buildDonut(types, typeColArr, total, 'Activity Types');
+
+      grid.innerHTML = citiesHtml + countriesHtml + donutHtml;
+    }
+
+    function buildDonut(types, colors, total, title) {
+      const r = 45, cx = 60, cy = 60, stroke = 22;
+      const circ = 2 * Math.PI * r;
+      let offset = 0;
+      let segments = '';
+      types.forEach((t,i) => {
+        const pct = t.count / total;
+        const dash = pct * circ;
+        const gap = circ - dash;
+        segments += `<circle cx="${cx}" cy="${cy}" r="${r}"
+          fill="none"
+          stroke="${colors[i]}"
+          stroke-width="${stroke}"
+          stroke-dasharray="${dash.toFixed(2)} ${gap.toFixed(2)}"
+          stroke-dashoffset="${(-offset * circ).toFixed(2)}"
+          transform="rotate(-90 ${cx} ${cy})"
+          opacity="0.85"/>`;
+        offset += pct;
+      });
+      const legend = types.map((t,i)=>`
+        <div class="legend-item">
+          <span class="legend-dot" style="background:${colors[i]}"></span>
+          <span>${escHtml(t.name)} <span style="font-family:var(--font-mono);color:var(--fg-muted)">${t.count}</span></span>
+        </div>`).join('');
+      return `<div class="breakdown-card reveal">
+        <div class="breakdown-card-title">${title}</div>
+        <div class="donut-wrap">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="var(--surface-container-high)" stroke-width="${stroke}"/>
+            ${segments}
+            <text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="middle"
+              fill="var(--fg-1)" font-size="14" font-weight="700" font-family="Space Grotesk, sans-serif">${total}</text>
+          </svg>
+          <div class="donut-legend">${legend}</div>
+        </div>
+      </div>`;
+    }
+
+    // ── COSTS ──
+    function buildCosts() {
+      const sec = document.getElementById('cost-section');
+      const totalCost = totals.totalCost;
+      if (!totalCost) {
+        sec.innerHTML = `<p style="color:var(--fg-muted);font-size:14px;">No cost data available.</p>`;
+        return;
+      }
+      const perDay = totalCost / (totals.days||8);
+      const perCity = totalCost / (totals.cities||cities.length);
+
+      // Per-day costs
+      const dayCosts = days.map(d => ({
+        label: `D${d.dayNumber}`,
+        date: d.date,
+        cost: (d.items||[]).reduce((s,it)=>s+(it.cost||0),0)
+      }));
+      const maxDayCost = Math.max(...dayCosts.map(d=>d.cost), 1);
+
+      const bars = dayCosts.map(d => {
+        const pct = (d.cost/maxDayCost*100).toFixed(1);
+        return `<div class="cost-bar-row">
+          <span class="cost-bar-day">${d.label}</span>
+          <div class="cost-bar-track">
+            <div class="cost-bar-inner" style="width:${pct}%"></div>
+          </div>
+          <span class="cost-bar-val">${d.cost>0?'$'+d.cost.toLocaleString():'—'}</span>
+        </div>`;
+      }).join('');
+
+      sec.innerHTML = `
+        <div class="cost-big">$${Number(totalCost).toLocaleString()}</div>
+        <div class="cost-sub">Total trip budget · USD</div>
+        <div class="cost-per-grid">
+          <div class="cost-per-item">
+            <span class="cost-per-num">$${perDay.toFixed(0)}</span>
+            <span class="cost-per-lbl">per day avg</span>
+          </div>
+          <div class="cost-per-item">
+            <span class="cost-per-num">$${perCity.toFixed(0)}</span>
+            <span class="cost-per-lbl">per city avg</span>
+          </div>
+          <div class="cost-per-item">
+            <span class="cost-per-num">${totals.costItems||allItems.length}</span>
+            <span class="cost-per-lbl">line items</span>
+          </div>
+        </div>
+        <div class="breakdown-card" style="max-width:520px;">
+          <div class="breakdown-card-title">Cost by Day</div>
+          <div class="cost-bar-chart">${bars}</div>
+        </div>`;
+    }
+
+    // ── CONFLICTS ──
+    function buildConflicts() {
+      const sec = document.getElementById('conflicts-section');
+      if (!conflicts || conflicts.length === 0) {
+        sec.innerHTML = `<div class="no-conflict">✓ No same-day scheduling overlaps detected.</div>`;
+        return;
+      }
+      let html = '';
+      conflicts.forEach(cf => {
+        const cfItems = cf.items || [];
+        const dateStr = cf.date ? fmtDate(cf.date) : '';
+        const times = cfItems.map(it=>it.time).filter(Boolean).sort();
+        html += `<div class="conflict-card">
+          <div class="conflict-header">
+            <span class="conflict-date">${dayOfWeek(cf.date)}, ${dateStr}</span>
+            <span class="conflict-badge">⚠ Overlap</span>
+          </div>
+          <div class="conflict-items">
+            ${cfItems.map(it=>`<div class="conflict-item-row">
+              <span class="conflict-item-time">${it.time||'?'}</span>
+              <div>
+                <div style="font-weight:500;font-size:14px;">${escHtml(it.title)}</div>
+                <div style="font-size:12px;color:var(--fg-muted);">${escHtml(it.location||it.city||'')} · ${escHtml(it.type||'')}</div>
+              </div>
+            </div>`).join('')}
+          </div>
+          <div class="conflict-note">${buildConflictNote(cfItems)}</div>
+        </div>`;
+      });
+      sec.innerHTML = html;
+    }
+
+    function buildConflictNote(items) {
+      if (!items || items.length < 2) return '';
+      const [a, b] = items;
+      return `${a.time||'?'} ${escHtml(a.title)} collides with ${b.time||'?'} ${escHtml(b.title)}${a.city && b.city &&

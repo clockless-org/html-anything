@@ -1,0 +1,985 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linewood Studio — Invoices & Receivables</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --accent-cyan: #00D4FF;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981;
+  --blue: #3b82f6;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30,27,25,0.04);
+  --shadow-md: 0 4px 12px rgba(30,27,25,0.08);
+  --shadow-lg: 0 8px 24px rgba(30,27,25,0.12);
+  --shadow-accent: 0 8px 24px rgba(160,59,0,0.15);
+  --gradient-primary: linear-gradient(135deg,#a03b00 0%,#c94c00 100%);
+  --gradient-hero: linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #060B18;
+    --surface: #0B1426;
+    --surface-container-lowest: #101D35;
+    --surface-container-low: #101D35;
+    --surface-container: #162544;
+    --surface-container-high: #1c2d52;
+    --fg-1: #F8FAFC;
+    --fg-2: #CBD5E1;
+    --fg-muted: #64748B;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --primary: #FF6B35;
+    --primary-fixed: rgba(255,107,53,0.15);
+    --outline-variant: rgba(255,255,255,0.12);
+    --accent-glow: #00D4FF;
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+  }
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--fg-1);
+  line-height: 1.55;
+  min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* OPS SHELL */
+.ops-shell { display: flex; flex-direction: column; min-height: 100vh; }
+
+/* COMMAND BAR */
+.command-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--surface-container-lowest);
+  border-bottom: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-md) var(--space-lg);
+}
+.command-bar-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: flex; align-items: center; gap: var(--space-md); flex-wrap: wrap;
+}
+.cmd-brand {
+  font-family: var(--font-headline);
+  font-size: 1rem; font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.cmd-period {
+  font-size: 0.75rem; color: var(--fg-muted);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.cmd-search-wrap {
+  flex: 1; min-width: 160px; max-width: 320px;
+  position: relative;
+}
+.cmd-search-wrap svg {
+  position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+  color: var(--fg-muted); pointer-events: none;
+}
+.cmd-search {
+  width: 100%;
+  padding: var(--space-sm) var(--space-sm) var(--space-sm) 32px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--surface-container);
+  color: var(--fg-1);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  outline: none;
+  transition: border-color 180ms, box-shadow 180ms;
+}
+.cmd-search:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-fixed); }
+.cmd-actions { display: flex; gap: var(--space-sm); margin-left: auto; flex-shrink: 0; }
+.cmd-btn {
+  display: flex; align-items: center; gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container);
+  color: var(--fg-2);
+  font-family: var(--font-body);
+  font-size: 0.75rem; font-weight: 500;
+  cursor: pointer;
+  transition: background 150ms, color 150ms;
+}
+.cmd-btn:hover { background: var(--surface-container-high); color: var(--fg-1); }
+.cmd-btn.primary-btn {
+  background: var(--primary); color: var(--on-primary);
+  border-color: transparent;
+}
+.cmd-btn.primary-btn:hover { background: var(--primary-container); }
+
+/* MAIN CONTENT */
+.ops-main { flex: 1; max-width: 1280px; margin: 0 auto; padding: var(--space-2xl) var(--space-lg) var(--space-4xl); width: 100%; }
+
+/* KPI RAIL */
+.kpi-rail {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+@media (min-width: 640px) { .kpi-rail { grid-template-columns: repeat(4, 1fr); } }
+.kpi-cell {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; gap: var(--space-xs);
+  opacity: 0; transform: translateY(8px);
+  transition: opacity 300ms, transform 300ms;
+}
+.kpi-cell.visible { opacity: 1; transform: none; }
+.kpi-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-muted); }
+.kpi-value {
+  font-family: var(--font-headline);
+  font-size: 1.5rem; font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-1);
+  line-height: 1.1;
+}
+.kpi-value.accent { color: var(--primary); }
+.kpi-value.warn { color: var(--red); }
+.kpi-value.success { color: var(--green); }
+.kpi-sub { font-size: 0.72rem; color: var(--fg-muted); }
+
+/* SECTION HEADERS */
+.section-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: var(--space-lg); flex-wrap: wrap; gap: var(--space-sm);
+}
+.section-title {
+  font-family: var(--font-headline);
+  font-size: 0.95rem; font-weight: 700;
+  letter-spacing: -0.01em; color: var(--fg-1);
+  display: flex; align-items: center; gap: var(--space-sm);
+}
+.section-title::before {
+  content: '';
+  display: block; width: 3px; height: 16px;
+  border-radius: 2px;
+  background: var(--primary);
+}
+.section-badge {
+  font-size: 0.7rem; font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--primary-fixed);
+  color: var(--primary);
+}
+
+/* WORK SURFACE GRID */
+.work-surface {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+@media (min-width: 768px) { .work-surface { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .work-surface { grid-template-columns: 1.6fr 1fr; } }
+
+.panel {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+}
+.panel-title {
+  font-family: var(--font-headline);
+  font-size: 0.82rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-lg);
+}
+
+/* STATUS MIX DONUT */
+.donut-wrap {
+  display: flex; align-items: center; gap: var(--space-xl); flex-wrap: wrap;
+}
+.donut-svg { flex-shrink: 0; }
+.donut-legend { display: flex; flex-direction: column; gap: var(--space-sm); flex: 1; min-width: 120px; }
+.legend-row { display: flex; align-items: center; gap: var(--space-sm); cursor: pointer; border-radius: var(--radius-sm); padding: 3px 6px; transition: background 150ms; }
+.legend-row:hover { background: var(--surface-container); }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.legend-label { font-size: 0.75rem; color: var(--fg-2); flex: 1; }
+.legend-val { font-size: 0.75rem; font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--fg-1); font-weight: 600; }
+
+/* AGING */
+.aging-panel { margin-bottom: var(--space-2xl); }
+.aging-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: var(--space-md); }
+@media (min-width: 480px) { .aging-grid { grid-template-columns: repeat(4,1fr); } }
+.aging-bucket {
+  background: var(--surface-container);
+  border: 2px solid transparent;
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  cursor: pointer;
+  transition: border-color 150ms, background 150ms, box-shadow 150ms;
+  text-align: left;
+}
+.aging-bucket:hover, .aging-bucket.active {
+  border-color: var(--primary);
+  background: var(--primary-fixed);
+  box-shadow: var(--shadow-accent);
+}
+.aging-bucket-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-muted); margin-bottom: var(--space-xs); }
+.aging-bucket-amount { font-family: var(--font-headline); font-size: 1.2rem; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; color: var(--fg-1); }
+.aging-bucket-count { font-size: 0.72rem; color: var(--fg-muted); margin-top: 2px; }
+.aging-bar-track { margin-top: var(--space-lg); background: var(--surface-container); border-radius: var(--radius-pill); height: 8px; overflow: hidden; display: flex; }
+.aging-bar-seg { height: 100%; transition: width 600ms cubic-bezier(.4,0,.2,1); }
+
+/* CUSTOMERS TABLE */
+.customers-panel { margin-bottom: var(--space-2xl); }
+.cust-table-wrap { overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+.cust-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.cust-table th {
+  background: var(--surface-container);
+  font-family: var(--font-headline);
+  font-size: 0.7rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--fg-muted);
+  padding: var(--space-sm) var(--space-md);
+  text-align: left; cursor: pointer; user-select: none;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--border-strong);
+  transition: color 150ms;
+}
+.cust-table th:hover { color: var(--primary); }
+.cust-table th.sorted { color: var(--primary); }
+.cust-table th.num, .cust-table td.num { text-align: right; }
+.cust-table td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border);
+  color: var(--fg-2);
+  font-variant-numeric: tabular-nums;
+  vertical-align: middle;
+}
+.cust-table tr:last-child td { border-bottom: none; }
+.cust-table tr:hover td { background: var(--surface-container-low); }
+.cust-name { font-weight: 600; color: var(--fg-1); }
+.outstanding-bar-wrap { display: flex; align-items: center; gap: var(--space-sm); }
+.outstanding-bar-bg { flex: 1; height: 5px; background: var(--surface-container-high); border-radius: var(--radius-pill); min-width: 40px; }
+.outstanding-bar-fill { height: 100%; border-radius: var(--radius-pill); background: var(--primary); transition: width 400ms; }
+.outstanding-bar-fill.full { background: var(--red); }
+.at-risk { background: rgba(239,68,68,0.08) !important; }
+.at-risk .cust-name { color: var(--red); }
+
+/* FLAGS */
+.flag-queue { margin-bottom: var(--space-2xl); }
+.flags-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-md); }
+@media (min-width: 640px) { .flags-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .flags-grid { grid-template-columns: 1fr 1fr 1fr; } }
+.flag-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--yellow);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: box-shadow 150ms, transform 150ms;
+  opacity: 0; transform: translateY(6px);
+  transition: opacity 280ms, transform 280ms, box-shadow 150ms;
+}
+.flag-card.visible { opacity: 1; transform: none; }
+.flag-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.flag-card.overdue { border-left-color: var(--red); }
+.flag-card.duplicate { border-left-color: var(--blue); }
+.flag-card.outlier { border-left-color: var(--secondary-container); }
+.flag-kind {
+  font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em;
+  color: var(--fg-muted); margin-bottom: var(--space-xs);
+}
+.flag-kind.overdue { color: var(--red); }
+.flag-label { font-size: 0.85rem; font-weight: 600; color: var(--fg-1); margin-bottom: var(--space-xs); line-height: 1.3; }
+.flag-detail { font-size: 0.78rem; color: var(--fg-muted); line-height: 1.4; }
+.flag-link { font-size: 0.72rem; color: var(--primary); margin-top: var(--space-sm); display: inline-block; font-weight: 500; }
+
+/* RECURRING */
+.recurring-panel { margin-bottom: var(--space-2xl); }
+.recurring-list { display: flex; flex-direction: column; gap: var(--space-sm); }
+.recurring-row {
+  display: flex; align-items: center; gap: var(--space-md);
+  background: var(--surface-container-low);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  flex-wrap: wrap;
+}
+.rec-name { font-weight: 600; font-size: 0.85rem; color: var(--fg-1); flex: 1; min-width: 120px; }
+.rec-cadence {
+  font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+  padding: 2px 8px; border-radius: var(--radius-pill);
+  background: var(--surface-container-high); color: var(--fg-muted);
+}
+.rec-amount { font-family: var(--font-mono); font-size: 0.85rem; font-variant-numeric: tabular-nums; font-weight: 600; color: var(--fg-1); }
+.rec-meta { font-size: 0.72rem; color: var(--fg-muted); text-align: right; }
+
+/* TIMELINE */
+.timeline-panel { margin-bottom: var(--space-2xl); }
+.timeline-svg-wrap { width: 100%; overflow: hidden; }
+
+/* DATA GRID */
+.data-grid-section { margin-bottom: var(--space-3xl); }
+.grid-toggle {
+  width: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-xl);
+  cursor: pointer;
+  font-family: var(--font-headline);
+  font-size: 0.9rem; font-weight: 600;
+  color: var(--fg-1);
+  letter-spacing: -0.01em;
+  transition: background 150ms;
+}
+.grid-toggle:hover { background: var(--surface-container-low); }
+.grid-toggle-icon { transition: transform 250ms; color: var(--fg-muted); }
+.grid-toggle.open .grid-toggle-icon { transform: rotate(180deg); }
+.grid-body { display: none; margin-top: var(--space-md); }
+.grid-body.open { display: block; }
+
+.filter-strip {
+  display: flex; flex-wrap: wrap; gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  align-items: center;
+}
+.filter-chip {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container);
+  color: var(--fg-2);
+  font-size: 0.75rem; font-weight: 500;
+  cursor: pointer;
+  transition: all 150ms;
+}
+.filter-chip:hover { background: var(--surface-container-high); color: var(--fg-1); }
+.filter-chip.active { background: var(--primary); color: var(--on-primary); border-color: transparent; }
+.filter-chip.paid-chip.active { background: var(--green); }
+.filter-chip.overdue-chip.active { background: var(--red); }
+.filter-chip.partial-chip.active { background: var(--yellow); color: #1e1b19; }
+.filter-chip.outstanding-chip.active { background: var(--blue); }
+
+.grid-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-lg); }
+.grid-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; min-width: 640px; }
+.grid-table th {
+  background: var(--surface-container);
+  font-family: var(--font-headline);
+  font-size: 0.68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--fg-muted);
+  padding: var(--space-sm) var(--space-md);
+  text-align: left; cursor: pointer; user-select: none;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--border-strong);
+  transition: color 150ms;
+  position: sticky; top: 0;
+}
+.grid-table th:hover { color: var(--primary); }
+.grid-table th.sorted { color: var(--primary); }
+.grid-table th.num, .grid-table td.num { text-align: right; }
+.grid-table td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border);
+  color: var(--fg-2);
+  font-variant-numeric: tabular-nums;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.grid-table tr:last-child td { border-bottom: none; }
+.grid-table tr.flagged-row td:first-child { border-left: 3px solid var(--red); }
+.grid-table tr:hover td { background: var(--surface-container-low); }
+.grid-table tr.expanded-row td { background: var(--surface-container-low); }
+.expand-detail {
+  display: none;
+  background: var(--surface-container);
+  padding: var(--space-lg);
+  font-size: 0.78rem;
+  color: var(--fg-2);
+  line-height: 1.6;
+}
+.expand-detail.open { display: table-cell; }
+.expand-raw { font-family: var(--font-mono); font-size: 0.72rem; color: var(--fg-muted); white-space: pre-wrap; margin-top: var(--space-sm); background: var(--surface-container-high); padding: var(--space-md); border-radius: var(--radius-sm); }
+.days-overdue-badge { color: var(--red); font-weight: 700; font-size: 0.75rem; }
+
+/* STATUS CHIPS */
+.status-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px; border-radius: var(--radius-pill);
+  font-size: 0.68rem; font-weight: 600; white-space: nowrap;
+}
+.status-chip.paid { background: rgba(16,185,129,0.12); color: var(--green); }
+.status-chip.overdue { background: rgba(239,68,68,0.12); color: var(--red); }
+.status-chip.outstanding { background: rgba(59,130,246,0.12); color: var(--blue); }
+.status-chip.partially-paid { background: rgba(245,158,11,0.12); color: var(--yellow); }
+
+.highlight { background: rgba(160,59,0,0.18); border-radius: 2px; }
+@media (prefers-color-scheme: dark) { .highlight { background: rgba(255,107,53,0.25); } }
+
+/* LOAD MORE */
+.load-more-wrap { text-align: center; padding: var(--space-lg); }
+.load-more-btn {
+  padding: var(--space-sm) var(--space-2xl);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container);
+  color: var(--fg-2);
+  font-family: var(--font-body);
+  font-size: 0.8rem; font-weight: 500;
+  cursor: pointer;
+  transition: background 150ms;
+}
+.load-more-btn:hover { background: var(--surface-container-high); color: var(--fg-1); }
+
+/* FOOTER */
+.ops-footer {
+  background: var(--surface-container);
+  border-top: 1px solid var(--border);
+  padding: var(--space-xl) var(--space-lg);
+  font-size: 0.72rem;
+  color: var(--fg-muted);
+  line-height: 1.6;
+  text-align: center;
+}
+.ops-footer p + p { margin-top: var(--space-xs); }
+
+/* TOAST */
+.toast {
+  position: fixed; bottom: var(--space-2xl); right: var(--space-2xl);
+  background: var(--fg-1); color: var(--bg);
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem; font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  opacity: 0; transform: translateY(8px);
+  transition: opacity 200ms, transform 200ms;
+  pointer-events: none; z-index: 999;
+}
+.toast.show { opacity: 1; transform: none; }
+
+/* EMPTY STATE */
+.empty-state { padding: var(--space-3xl); text-align: center; color: var(--fg-muted); font-size: 0.85rem; }
+
+/* GRID ROW COUNT */
+.grid-count { font-size: 0.75rem; color: var(--fg-muted); margin-bottom: var(--space-sm); font-family: var(--font-mono); }
+
+/* OVERVIEW CARD */
+.overview-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+  box-shadow: var(--shadow-md);
+}
+.overview-headline {
+  font-family: var(--font-headline);
+  font-size: 1.05rem; font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+  line-height: 1.5;
+  margin-bottom: var(--space-sm);
+}
+.overview-headline .hl { color: var(--primary); }
+.overview-headline .hl-red { color: var(--red); }
+.overview-meta { font-size: 0.78rem; color: var(--fg-muted); }
+.overview-meta span { margin: 0 var(--space-sm); }
+.overview-meta span:first-child { margin-left: 0; }
+
+/* SCORECARD ROW */
+.scorecard-row {
+  display: flex; flex-wrap: wrap; gap: var(--space-md);
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border);
+}
+.scorecard-item { display: flex; flex-direction: column; gap: 2px; }
+.scorecard-label { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-muted); }
+.scorecard-value { font-family: var(--font-mono); font-size: 0.95rem; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--fg-1); }
+
+/* SECTION SPACING */
+.section-block { margin-bottom: var(--space-3xl); }
+
+/* SORT ARROW */
+.sort-arrow { display: inline-block; margin-left: 3px; opacity: 0.4; }
+.sort-arrow.active { opacity: 1; color: var(--primary); }
+
+/* COPY FLASH */
+.copied { animation: copied-flash 400ms ease; }
+@keyframes copied-flash { 0%,100% { background: var(--surface-container); } 50% { background: rgba(16,185,129,0.2); } }
+</style>
+</head>
+<body>
+<script>const DATA = {"format":"invoices","subtype":"invoices","rows":[{"id":"tx_000001","date":"2026-01-03","dateEpoch":1767398400000,"amount":12500,"currency":"USD","description":"January retainer","merchant":"January retainer","category":null,"memo":"January retainer","account":null,"balance":null,"status":"paid","dueDate":"2026-02-02","dueDateEpoch":1769990400000,"issuedDate":"2026-01-03","paidDate":"2026-01-30","customer":"Northwind Co","invoiceNumber":"INV-1029","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1029","Issued":"2026-01-03","Customer":"Northwind Co","Amount":"12500.00","Due Date":"2026-02-02","Paid Date":"2026-01-30","Status":"paid","Memo":"January retainer"}},{"id":"tx_000002","date":"2026-01-08","dateEpoch":1767830400000,"amount":8500,"currency":"USD","description":"Discovery sprint","merchant":"Discovery sprint","category":null,"memo":"Discovery sprint","account":null,"balance":null,"status":"paid","dueDate":"2026-02-07","dueDateEpoch":1770422400000,"issuedDate":"2026-01-08","paidDate":"2026-02-04","customer":"Acme Labs","invoiceNumber":"INV-1031","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1031","Issued":"2026-01-08","Customer":"Acme Labs","Amount":"8500.00","Due Date":"2026-02-07","Paid Date":"2026-02-04","Status":"paid","Memo":"Discovery sprint"}},{"id":"tx_000003","date":"2026-01-12","dateEpoch":1768176000000,"amount":4250,"currency":"USD","description":"Website redesign milestone 1","merchant":"Website redesign milestone","category":null,"memo":"Website redesign milestone 1","account":null,"balance":null,"status":"paid","dueDate":"2026-02-11","dueDateEpoch":1770768000000,"issuedDate":"2026-01-12","paidDate":"2026-02-08","customer":"Lavender Projects","invoiceNumber":"INV-1033","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1033","Issued":"2026-01-12","Customer":"Lavender Projects","Amount":"4250.00","Due Date":"2026-02-11","Paid Date":"2026-02-08","Status":"paid","Memo":"Website redesign milestone 1"}},{"id":"tx_000004","date":"2026-02-01","dateEpoch":1769904000000,"amount":12500,"currency":"USD","description":"February retainer","merchant":"February retainer","category":null,"memo":"February retainer","account":null,"balance":null,"status":"paid","dueDate":"2026-03-03","dueDateEpoch":1772496000000,"issuedDate":"2026-02-01","paidDate":"2026-02-26","customer":"Northwind Co","invoiceNumber":"INV-1042","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1042","Issued":"2026-02-01","Customer":"Northwind Co","Amount":"12500.00","Due Date":"2026-03-03","Paid Date":"2026-02-26","Status":"paid","Memo":"February retainer"}},{"id":"tx_000005","date":"2026-02-04","dateEpoch":1770163200000,"amount":6800,"currency":"USD","description":"API integration phase 1","merchant":"API","category":null,"memo":"API integration phase 1","account":null,"balance":null,"status":"paid","dueDate":"2026-03-06","dueDateEpoch":1772755200000,"issuedDate":"2026-02-04","paidDate":"2026-03-04","customer":"SummitWorks LLC","invoiceNumber":"INV-1043","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1043","Issued":"2026-02-04","Customer":"SummitWorks LLC","Amount":"6800.00","Due Date":"2026-03-06","Paid Date":"2026-03-04","Status":"paid","Memo":"API integration phase 1"}},{"id":"tx_000006","date":"2026-02-15","dateEpoch":1771113600000,"amount":8500,"currency":"USD","description":"Implementation sprint 1","merchant":"Implementation sprint 1","category":null,"memo":"Implementation sprint 1","account":null,"balance":null,"status":"paid","dueDate":"2026-03-17","dueDateEpoch":1773705600000,"issuedDate":"2026-02-15","paidDate":"2026-03-15","customer":"Acme Labs","invoiceNumber":"INV-1054","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1054","Issued":"2026-02-15","Customer":"Acme Labs","Amount":"8500.00","Due Date":"2026-03-17","Paid Date":"2026-03-15","Status":"paid","Memo":"Implementation sprint 1"}},{"id":"tx_000007","date":"2026-02-18","dateEpoch":1771372800000,"amount":4250,"currency":"USD","description":"Website redesign milestone 2","merchant":"Website redesign milestone","category":null,"memo":"Website redesign milestone 2","account":null,"balance":null,"status":"paid","dueDate":"2026-03-20","dueDateEpoch":1773964800000,"issuedDate":"2026-02-18","paidDate":"2026-03-17","customer":"Lavender Projects","invoiceNumber":"INV-1055","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1055","Issued":"2026-02-18","Customer":"Lavender Projects","Amount":"4250.00","Due Date":"2026-03-20","Paid Date":"2026-03-17","Status":"paid","Memo":"Website redesign milestone 2"}},{"id":"tx_000008","date":"2026-03-01","dateEpoch":1772323200000,"amount":12500,"currency":"USD","description":"March retainer","merchant":"March retainer","category":null,"memo":"March retainer","account":null,"balance":null,"status":"paid","dueDate":"2026-03-31","dueDateEpoch":1774915200000,"issuedDate":"2026-03-01","paidDate":"2026-04-02","customer":"Northwind Co","invoiceNumber":"INV-1067","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1067","Issued":"2026-03-01","Customer":"Northwind Co","Amount":"12500.00","Due Date":"2026-03-31","Paid Date":"2026-04-02","Status":"paid","Memo":"March retainer"}},{"id":"tx_000009","date":"2026-03-04","dateEpoch":1772582400000,"amount":18400,"currency":"USD","description":"Q1 implementation","merchant":"Q1","category":null,"memo":"Q1 implementation","account":null,"balance":null,"status":"paid","dueDate":"2026-04-03","dueDateEpoch":1775174400000,"issuedDate":"2026-03-04","paidDate":"2026-04-01","customer":"Hilltop Manufacturing","invoiceNumber":"INV-1068","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1068","Issued":"2026-03-04","Customer":"Hilltop Manufacturing","Amount":"18400.00","Due Date":"2026-04-03","Paid Date":"2026-04-01","Status":"paid","Memo":"Q1 implementation"}},{"id":"tx_000010","date":"2026-03-10","dateEpoch":1773100800000,"amount":6800,"currency":"USD","description":"API integration phase 2","merchant":"API","category":null,"memo":"API integration phase 2","account":null,"balance":null,"status":"paid","dueDate":"2026-04-09","dueDateEpoch":1775692800000,"issuedDate":"2026-03-10","paidDate":"2026-04-08","customer":"SummitWorks LLC","invoiceNumber":"INV-1078","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1078","Issued":"2026-03-10","Customer":"SummitWorks LLC","Amount":"6800.00","Due Date":"2026-04-09","Paid Date":"2026-04-08","Status":"paid","Memo":"API integration phase 2"}},{"id":"tx_000011","date":"2026-03-15","dateEpoch":1773532800000,"amount":8500,"currency":"USD","description":"Implementation sprint 2","merchant":"Implementation sprint 2","category":null,"memo":"Implementation sprint 2","account":null,"balance":null,"status":"outstanding","dueDate":"2026-04-14","dueDateEpoch":1776124800000,"issuedDate":"2026-03-15","paidDate":null,"customer":"Acme Labs","invoiceNumber":"INV-1082","classCol":null,"type":null,"flags":["overdue"],"raw":{"Invoice Number":"INV-1082","Issued":"2026-03-15","Customer":"Acme Labs","Amount":"8500.00","Due Date":"2026-04-14","Paid Date":"","Status":"outstanding","Memo":"Implementation sprint 2"}},{"id":"tx_000012","date":"2026-03-22","dateEpoch":1774137600000,"amount":15400,"currency":"USD","description":"Strategy retainer Q2","merchant":"Strategy retainer Q2","category":null,"memo":"Strategy retainer Q2","account":null,"balance":null,"status":"overdue","dueDate":"2026-04-21","dueDateEpoch":1776729600000,"issuedDate":"2026-03-22","paidDate":null,"customer":"Riverbend Capital","invoiceNumber":"INV-1085","classCol":null,"type":null,"flags":["overdue"],"raw":{"Invoice Number":"INV-1085","Issued":"2026-03-22","Customer":"Riverbend Capital","Amount":"15400.00","Due Date":"2026-04-21","Paid Date":"","Status":"overdue","Memo":"Strategy retainer Q2"}},{"id":"tx_000013","date":"2026-03-28","dateEpoch":1774656000000,"amount":4250,"currency":"USD","description":"Website redesign milestone 3","merchant":"Website redesign milestone","category":null,"memo":"Website redesign milestone 3","account":null,"balance":null,"status":"outstanding","dueDate":"2026-04-27","dueDateEpoch":1777248000000,"issuedDate":"2026-03-28","paidDate":null,"customer":"Lavender Projects","invoiceNumber":"INV-1090","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1090","Issued":"2026-03-28","Customer":"Lavender Projects","Amount":"4250.00","Due Date":"2026-04-27","Paid Date":"","Status":"outstanding","Memo":"Website redesign milestone 3"}},{"id":"tx_000014","date":"2026-04-01","dateEpoch":1775001600000,"amount":12500,"currency":"USD","description":"April retainer","merchant":"April retainer","category":null,"memo":"April retainer","account":null,"balance":null,"status":"outstanding","dueDate":"2026-05-01","dueDateEpoch":1777593600000,"issuedDate":"2026-04-01","paidDate":null,"customer":"Northwind Co","invoiceNumber":"INV-1096","classCol":null,"type":null,"flags":["overdue"],"raw":{"Invoice Number":"INV-1096","Issued":"2026-04-01","Customer":"Northwind Co","Amount":"12500.00","Due Date":"2026-05-01","Paid Date":"","Status":"outstanding","Memo":"April retainer"}},{"id":"tx_000015","date":"2026-04-03","dateEpoch":1775174400000,"amount":9200,"currency":"USD","description":"Q2 discovery","merchant":"Q2","category":null,"memo":"Q2 discovery","account":null,"balance":null,"status":"outstanding","dueDate":"2026-05-03","dueDateEpoch":1777766400000,"issuedDate":"2026-04-03","paidDate":null,"customer":"Hilltop Manufacturing","invoiceNumber":"INV-1098","classCol":null,"type":null,"flags":["overdue"],"raw":{"Invoice Number":"INV-1098","Issued":"2026-04-03","Customer":"Hilltop Manufacturing","Amount":"9200.00","Due Date":"2026-05-03","Paid Date":"","Status":"outstanding","Memo":"Q2 discovery"}},{"id":"tx_000016","date":"2026-04-08","dateEpoch":1775606400000,"amount":15400,"currency":"USD","description":"Strategy retainer Q2 - month 2","merchant":"Strategy retainer Q2","category":null,"memo":"Strategy retainer Q2 - month 2","account":null,"balance":null,"status":"outstanding","dueDate":"2026-05-08","dueDateEpoch":1778198400000,"issuedDate":"2026-04-08","paidDate":null,"customer":"Riverbend Capital","invoiceNumber":"INV-1102","classCol":null,"type":null,"flags":["overdue"],"raw":{"Invoice Number":"INV-1102","Issued":"2026-04-08","Customer":"Riverbend Capital","Amount":"15400.00","Due Date":"2026-05-08","Paid Date":"","Status":"outstanding","Memo":"Strategy retainer Q2 - month 2"}},{"id":"tx_000017","date":"2026-04-12","dateEpoch":1775952000000,"amount":3400,"currency":"USD","description":"Brand sprint","merchant":"Brand sprint","category":null,"memo":"Brand sprint","account":null,"balance":null,"status":"outstanding","dueDate":"2026-05-12","dueDateEpoch":1778544000000,"issuedDate":"2026-04-12","paidDate":null,"customer":"Tessera Foundry","invoiceNumber":"INV-1108","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1108","Issued":"2026-04-12","Customer":"Tessera Foundry","Amount":"3400.00","Due Date":"2026-05-12","Paid Date":"","Status":"outstanding","Memo":"Brand sprint"}},{"id":"tx_000018","date":"2026-04-15","dateEpoch":1776211200000,"amount":6800,"currency":"USD","description":"API integration phase 3","merchant":"API","category":null,"memo":"API integration phase 3","account":null,"balance":null,"status":"outstanding","dueDate":"2026-05-15","dueDateEpoch":1778803200000,"issuedDate":"2026-04-15","paidDate":null,"customer":"SummitWorks LLC","invoiceNumber":"INV-1112","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1112","Issued":"2026-04-15","Customer":"SummitWorks LLC","Amount":"6800.00","Due Date":"2026-05-15","Paid Date":"","Status":"outstanding","Memo":"API integration phase 3"}},{"id":"tx_000019","date":"2026-04-20","dateEpoch":1776643200000,"amount":4200,"currency":"USD","description":"Additional scope item","merchant":"Additional scope item","category":null,"memo":"Additional scope item","account":null,"balance":null,"status":"outstanding","dueDate":"2026-05-20","dueDateEpoch":1779235200000,"issuedDate":"2026-04-20","paidDate":null,"customer":"Northwind Co","invoiceNumber":"INV-1118","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1118","Issued":"2026-04-20","Customer":"Northwind Co","Amount":"4200.00","Due Date":"2026-05-20","Paid Date":"","Status":"outstanding","Memo":"Additional scope item"}},{"id":"tx_000020","date":"2026-04-22","dateEpoch":1776816000000,"amount":7800,"currency":"USD","description":"Discovery workshop","merchant":"Discovery workshop","category":null,"memo":"Discovery workshop","account":null,"balance":null,"status":"outstanding","dueDate":"2026-05-22","dueDateEpoch":1779408000000,"issuedDate":"2026-04-22","paidDate":null,"customer":"Pinnacle Health Group","invoiceNumber":"INV-1120","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1120","Issued":"2026-04-22","Customer":"Pinnacle Health Group","Amount":"7800.00","Due Date":"2026-05-22","Paid Date":"","Status":"outstanding","Memo":"Discovery workshop"}},{"id":"tx_000021","date":"2026-01-29","dateEpoch":1769644800000,"amount":15400,"currency":"USD","description":"Strategy retainer Q1","merchant":"Strategy retainer Q1","category":null,"memo":"Strategy retainer Q1","account":null,"balance":null,"status":"overdue","dueDate":"2026-02-28","dueDateEpoch":1772236800000,"issuedDate":"2026-01-29","paidDate":null,"customer":"Riverbend Capital","invoiceNumber":"INV-1009","classCol":null,"type":null,"flags":["overdue"],"raw":{"Invoice Number":"INV-1009","Issued":"2026-01-29","Customer":"Riverbend Capital","Amount":"15400.00","Due Date":"2026-02-28","Paid Date":"","Status":"overdue","Memo":"Strategy retainer Q1"}},{"id":"tx_000022","date":"2026-02-08","dateEpoch":1770508800000,"amount":9200,"currency":"USD","description":"Pre-implementation discovery","merchant":"Pre-implementation discovery","category":null,"memo":"Pre-implementation discovery","account":null,"balance":null,"status":"overdue","dueDate":"2026-03-10","dueDateEpoch":1773100800000,"issuedDate":"2026-02-08","paidDate":null,"customer":"Hilltop Manufacturing","invoiceNumber":"INV-1015","classCol":null,"type":null,"flags":["overdue"],"raw":{"Invoice Number":"INV-1015","Issued":"2026-02-08","Customer":"Hilltop Manufacturing","Amount":"9200.00","Due Date":"2026-03-10","Paid Date":"","Status":"overdue","Memo":"Pre-implementation discovery"}},{"id":"tx_000023","date":"2026-02-22","dateEpoch":1771718400000,"amount":3400,"currency":"USD","description":"Brand sprint deposit","merchant":"Brand sprint deposit","category":null,"memo":"Brand sprint deposit","account":null,"balance":null,"status":"overdue","dueDate":"2026-03-24","dueDateEpoch":1774310400000,"issuedDate":"2026-02-22","paidDate":null,"customer":"Tessera Foundry","invoiceNumber":"INV-1018","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1018","Issued":"2026-02-22","Customer":"Tessera Foundry","Amount":"3400.00","Due Date":"2026-03-24","Paid Date":"","Status":"overdue","Memo":"Brand sprint deposit"}},{"id":"tx_000024","date":"2026-03-08","dateEpoch":1772928000000,"amount":8200,"currency":"USD","description":"Workshop facilitation","merchant":"Workshop facilitation","category":null,"memo":"Workshop facilitation","account":null,"balance":null,"status":"overdue","dueDate":"2026-04-07","dueDateEpoch":1775520000000,"issuedDate":"2026-03-08","paidDate":null,"customer":"Riverbend Capital","invoiceNumber":"INV-1024","classCol":null,"type":null,"flags":["overdue"],"raw":{"Invoice Number":"INV-1024","Issued":"2026-03-08","Customer":"Riverbend Capital","Amount":"8200.00","Due Date":"2026-04-07","Paid Date":"","Status":"overdue","Memo":"Workshop facilitation"}},{"id":"tx_000025","date":"2026-03-12","dateEpoch":1773273600000,"amount":12400,"currency":"USD","description":"Compliance review","merchant":"Compliance review","category":null,"memo":"Compliance review","account":null,"balance":null,"status":"overdue","dueDate":"2026-04-11","dueDateEpoch":1775865600000,"issuedDate":"2026-03-12","paidDate":null,"customer":"Pinnacle Health Group","invoiceNumber":"INV-1027","classCol":null,"type":null,"flags":["overdue"],"raw":{"Invoice Number":"INV-1027","Issued":"2026-03-12","Customer":"Pinnacle Health Group","Amount":"12400.00","Due Date":"2026-04-11","Paid Date":"","Status":"overdue","Memo":"Compliance review"}},{"id":"tx_000026","date":"2026-03-25","dateEpoch":1774396800000,"amount":5400,"currency":"USD","description":"Add-on training","merchant":"Add-on training","category":null,"memo":"Add-on training","account":null,"balance":null,"status":"overdue","dueDate":"2026-04-24","dueDateEpoch":1776988800000,"issuedDate":"2026-03-25","paidDate":null,"customer":"Hilltop Manufacturing","invoiceNumber":"INV-1030","classCol":null,"type":null,"flags":["overdue"],"raw":{"Invoice Number":"INV-1030","Issued":"2026-03-25","Customer":"Hilltop Manufacturing","Amount":"5400.00","Due Date":"2026-04-24","Paid Date":"","Status":"overdue","Memo":"Add-on training"}},{"id":"tx_000027","date":"2026-03-30","dateEpoch":1774828800000,"amount":2200,"currency":"USD","description":"Brand assets follow-up","merchant":"Brand assets follow-up","category":null,"memo":"Brand assets follow-up","account":null,"balance":null,"status":"overdue","dueDate":"2026-04-29","dueDateEpoch":1777420800000,"issuedDate":"2026-03-30","paidDate":null,"customer":"Tessera Foundry","invoiceNumber":"INV-1036","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1036","Issued":"2026-03-30","Customer":"Tessera Foundry","Amount":"2200.00","Due Date":"2026-04-29","Paid Date":"","Status":"overdue","Memo":"Brand assets follow-up"}},{"id":"tx_000028","date":"2026-04-25","dateEpoch":1777075200000,"amount":2100,"currency":"USD","description":"Website redesign milestone 3 - partial payment received","merchant":"Website redesign milestone","category":null,"memo":"Website redesign milestone 3 - partial payment received","account":null,"balance":null,"status":"partially paid","dueDate":"2026-05-25","dueDateEpoch":1779667200000,"issuedDate":"2026-04-25","paidDate":null,"customer":"Lavender Projects","invoiceNumber":"INV-1124","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1124","Issued":"2026-04-25","Customer":"Lavender Projects","Amount":"2100.00","Due Date":"2026-05-25","Paid Date":"","Status":"partially paid","Memo":"Website redesign milestone 3 - partial payment received"}},{"id":"tx_000029","date":"2026-04-28","dateEpoch":1777334400000,"amount":4200,"currency":"USD","description":"Implementation sprint 2 - partial","merchant":"Implementation sprint 2","category":null,"memo":"Implementation sprint 2 - partial","account":null,"balance":null,"status":"partially paid","dueDate":"2026-05-28","dueDateEpoch":1779926400000,"issuedDate":"2026-04-28","paidDate":null,"customer":"Acme Labs","invoiceNumber":"INV-1126","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1126","Issued":"2026-04-28","Customer":"Acme Labs","Amount":"4200.00","Due Date":"2026-05-28","Paid Date":"","Status":"partially paid","Memo":"Implementation sprint 2 - partial"}},{"id":"tx_000030","date":"2026-05-04","dateEpoch":1777852800000,"amount":12500,"currency":"USD","description":"May retainer","merchant":"May retainer","category":null,"memo":"May retainer","account":null,"balance":null,"status":"outstanding","dueDate":"2026-06-03","dueDateEpoch":1780444800000,"issuedDate":"2026-05-04","paidDate":null,"customer":"Northwind Co","invoiceNumber":"INV-1140","classCol":null,"type":null,"flags":[],"raw":{"Invoice Number":"INV-1140","Issued":"2026-05-04","Customer":"Northwind Co","Amount":"12500.00","Due Date":"2026-06-03","Paid Date":"","Status":"outstanding","Memo":"May retainer"}}],"summary":{"rowCount":30,"inflow":257450,"outflow":0,"net":257450,"currencySymbol":"$","currencyCode":"USD","period":"2026-01-03 → 2026-05-04","durationLabel":"4 months","distinctMerchants":23,"distinctCategories":0,"invoiced":257450,"paid":98150,"outstanding":159300,"overdue":121450,"invoiceCount":30,"customerCount":8},"categoryTotals":[{"category":"Uncategorized","inflow":257450,"outflow":0,"net":257450,"count":30,"share":100}],"recurring":[{"name":"API","cadence":"monthly","avgAmount":6800,"count":3,"lastSeen":"2026-04-15","nextExpected":"2026-05-15","tag":"income"},{"name":"Website redesign milestone","cadence":"monthly","avgAmount":3712.5,"count":4,"lastSeen":"2026-04-25","nextExpected":"2026-05-25","tag":"income"}],"flags":[{"kind":"overdue","label":"Acme Labs: invoice 27 days overdue","detail":"$8,500.00 outstanding (oldest 27d past due)","rowIds":["tx_000011"]},{"kind":"overdue","label":"Pinnacle Health Group: invoice 30 days overdue","detail":"$12,400.00 outstanding (oldest 30d past due)","rowIds":["tx_000025"]},{"kind":"overdue","label":"Northwind Co: invoice 10 days overdue","detail":"$12,500.00 outstanding (oldest 10d past due)","rowIds":["tx_000014"]},{"kind":"overdue","label":"Hilltop Manufacturing: 3 overdue invoices","detail":"$23,800.00 outstanding (oldest 62d past due)","rowIds":["tx_000015","tx_000022","tx_000026"]},{"kind":"overdue","label":"Riverbend Capital: 4 overdue invoices","detail":"$54,400.00 outstanding (oldest 72d past due)","rowIds":["tx_000012","tx_000016","tx_000021","tx_000024"]}],"timeline":[{"date":"2026-01-03","inflow":12500,"outflow":0,"net":12500,"balance":null,"count":1},{"date":"2026-01-08","inflow":8500,"outflow":0,"net":8500,"balance":null,"count":1},{"date":"2026-01-12","inflow":4250,"outflow":0,"net":4250,"balance":null,"count":1},{"date":"2026-01-29","inflow":15400,"outflow":0,"net":15400,"balance":null,"count":1},{"date":"2026-02-01","inflow":12500,"outflow":0,"net":12500,"balance":null,"count":1},{"date":"2026-02-04","inflow":6800,"outflow":0,"net":6800,"balance":null,"count":1},{"date":"2026-02-08","inflow":9200,"outflow":0,"net":9200,"balance":null,"count":1},{"date":"2026-02-15","inflow":8500,"outflow":0,"net":8500,"balance":null,"count":1},{"date":"2026-02-18","inflow":4250,"outflow":0,"net":4250,"balance":null,"count":1},{"date":"2026-02-22","inflow":3400,"outflow":0,"net":3400,"balance":null,"count":1},{"date":"2026-03-01","inflow":12500,"outflow":0,"net":12500,"balance":null,"count":1},{"date":"2026-03-04","inflow":18400,"outflow":0,"net":18400,"balance":null,"count":1},{"date":"2026-03-08","inflow":8200,"outflow":0,"net":8200,"balance":null,"count":1},{"date":"2026-03-10","inflow":6800,"outflow":0,"net":6800,"balance":null,"count":1},{"date":"2026-03-12","inflow":12400,"outflow":0,"net":12400,"balance":null,"count":1},{"date":"2026-03-15","inflow":8500,"outflow":0,"net":8500,"balance":null,"count":1},{"date":"2026-03-22","inflow":15400,"outflow":0,"net":15400,"balance":null,"count":1},{"date":"2026-03-25","inflow":5400,"outflow":0,"net":5400,"balance":null,"count":1},{"date":"2026-03-28","inflow":4250,"outflow":0,"net":4250,"balance":null,"count":1},{"date":"2026-03-30","inflow":2200,"outflow":0,"net":2200,"balance":null,"count":1},{"date":"2026-04-01","inflow":12500,"outflow":0,"net":12500,"balance":null,"count":1},{"date":"2026-04-03","inflow":9200,"outflow":0,"net":9200,"balance":null,"count":1},{"date":"2026-04-08","inflow":15400,"outflow":0,"net":15400,"balance":null,"count":1},{"date":"2026-04-12","inflow":3400,"outflow":0,"net":3400,"balance":null,"count":1},{"date":"2026-04-15","inflow":6800,"outflow":0,"net":6800,"balance":null,"count":1},{"date":"2026-04-20","inflow":4200,"outflow":0,"net":4200,"balance":null,"count":1},{"date":"2026-04-22","inflow":7800,"outflow":0,"net":7800,"balance":null,"count":1},{"date":"2026-04-25","inflow":2100,"outflow":0,"net":2100,"balance":null,"count":1},{"date":"2026-04-28","inflow":4200,"outflow":0,"net":4200,"balance":null,"count":1},{"date":"2026-05-04","inflow":12500,"outflow":0,"net":12500,"balance":null,"count":1}],"topVendors":[{"name":"Strategy retainer Q2","inflow":30800,"outflow":0,"count":2},{"name":"API","inflow":20400,"outflow":0,"count":3},{"name":"Q1","inflow":18400,"outflow":0,"count":1},{"name":"Strategy retainer Q1","inflow":15400,"outflow":0,"count":1},{"name":"Website redesign milestone","inflow":14850,"outflow":0,"count":4},{"name":"Implementation sprint 2","inflow":12700,"outflow":0,"count":2},{"name":"January retainer","inflow":12500,"outflow":0,"count":1},{"name":"February retainer","inflow":12500,"outflow":0,"count":1},{"name":"March retainer","inflow":12500,"outflow":0,"count":1},{"name":"April retainer","inflow":12500,"outflow":0,"count":1},{"name":"May retainer","inflow":12500,"outflow":0,"count":1},{"name":"Compliance review","inflow":12400,"outflow":0,"count":1},{"name":"Q2","inflow":9200,"outflow":0,"count":1},{"name":"Pre-implementation discovery","inflow":9200,"outflow":0,"count":1},{"name":"Discovery sprint","inflow":8500,"outflow":0,"count":1},{"name":"Implementation sprint 1","inflow":8500,"outflow":0,"count":1},{"name":"Workshop facilitation","inflow":8200,"outflow":0,"count":1},{"name":"Discovery workshop","inflow":7800,"outflow":0,"count":1},{"name":"Add-on training","inflow":5400,"outflow":0,"count":1},{"name":"Additional scope item","inflow":4200,"outflow":0,"count":1},{"name":"Brand sprint","inflow":3400,"outflow":0,"count":1},{"name":"Brand sprint deposit","inflow":3400,"outflow":0,"count":1},{"name":"Brand assets follow-up","inflow":2200,"outflow":0,"count":1}],"topCustomers":[{"name":"Northwind Co","invoiced":66700,"paid":37500,"outstanding":29200,"count":6},{"name":"Riverbend Capital","invoiced":54400,"paid":0,"outstanding":54400,"count":4},{"name":"Hilltop Manufacturing","invoiced":42200,"paid":18400,"outstanding":23800,"count":4},{"name":"Acme Labs","invoiced":29700,"paid":19100,"outstanding":10600,"count":4},{"name":"SummitWorks LLC","invoiced":20400,"paid":13600,"outstanding":6800,"count":3},{"name":"Pinnacle Health Group","invoiced":20200,"paid":0,"outstanding":20200,"count":2},{"name":"Lavender Projects","invoiced":14850,"paid":9550,"outstanding":5300,"count":4},{"name":"Tessera Foundry","invoiced":9000,"paid":0,"outstanding":9000,"count":3}],"aging":[{"bucket":"0-30","amount":119950,"count":14},{"bucket":"31-60","amount":11600,"count":2},{"bucket":"61-90","amount":24600,"count":2},{"bucket":"90+","amount":0,"count":0}],"hasBalance":false,"spansMultipleMonths":true,"meta":{"sourceFile":"input.csv","sizeBytes":2812,"format":"invoices","subtype":"invoices","rowCount":30,"columnCount":8,"headers":["Invoice Number","Issued","Customer","Amount","Due Date","Paid Date","Status","Memo"],"detectedColumns":{"amount":"Amount","memo":"Memo","status":"Status","dueDate":"Due Date","issuedDate":"Issued","paidDate":"Paid Date","customer":"Customer","invoiceNumber":"Invoice Number"},"currencyCode":"USD","currencySymbol":"$","hasBalance":false,"spansMultipleMonths":true,"period":"2026-01-03 → 2026-05-04","durationLabel":"4 months","separator":","}};</script>
+<div class="ops-shell">
+
+  <!-- COMMAND BAR -->
+  <header class="command-bar">
+    <div class="command-bar-inner">
+      <span class="cmd-brand">Linewood Studio</span>
+      <span class="cmd-period" id="cmd-period">—</span>
+      <div class="cmd-search-wrap">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input class="cmd-search" id="globalSearch" type="search" placeholder="Search invoices…" autocomplete="off">
+      </div>
+      <div class="cmd-actions">
+        <button class="cmd-btn" id="copyMdBtn" title="Copy summary as Markdown">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy MD
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="ops-main">
+
+    <!-- OVERVIEW / SUMMARY -->
+    <section class="section-block" id="section-summary">
+      <div class="section-header">
+        <div class="section-title">Summary</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-headline" id="overviewHeadline">Loading…</div>
+        <div class="overview-meta" id="overviewMeta">—</div>
+        <div class="scorecard-row" id="scorecardRow"></div>
+      </div>
+    </section>
+
+    <!-- KPI RAIL -->
+    <div class="kpi-rail" id="kpiRail"></div>
+
+    <!-- WORK SURFACE: STATUS DONUT + AGING -->
+    <section class="section-block">
+      <div class="work-surface">
+        <!-- STATUS MIX DONUT -->
+        <div class="panel" id="section-status">
+          <div class="panel-title">Status Mix</div>
+          <div class="donut-wrap">
+            <svg class="donut-svg" id="donutSvg" width="140" height="140" viewBox="0 0 140 140"></svg>
+            <div class="donut-legend" id="donutLegend"></div>
+          </div>
+        </div>
+        <!-- TIMELINE PANEL -->
+        <div class="panel" id="section-timeline">
+          <div class="panel-title">Invoice Timeline</div>
+          <div class="timeline-svg-wrap" id="timelineWrap"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AGING -->
+    <section class="section-block aging-panel" id="section-aging">
+      <div class="section-header">
+        <div class="section-title">Aging <span class="section-badge" id="agingBadge">Receivables</span></div>
+        <button class="cmd-btn" id="clearAgingFilter" style="display:none">Clear filter ×</button>
+      </div>
+      <div class="aging-grid" id="agingGrid"></div>
+      <div class="aging-bar-track" id="agingBarTrack" style="margin-top:var(--space-lg)"></div>
+    </section>
+
+    <!-- TOP CUSTOMERS -->
+    <section class="section-block customers-panel" id="section-customers">
+      <div class="section-header">
+        <div class="section-title">Top Customers</div>
+        <span class="section-badge" id="custBadge">—</span>
+      </div>
+      <div class="cust-table-wrap">
+        <table class="cust-table" id="custTable">
+          <thead>
+            <tr>
+              <th data-col="name">Customer <span class="sort-arrow" data-col="name">↕</span></th>
+              <th class="num" data-col="invoiced">Invoiced <span class="sort-arrow" data-col="invoiced">↕</span></th>
+              <th class="num" data-col="paid">Paid <span class="sort-arrow" data-col="paid">↕</span></th>
+              <th class="num" data-col="outstanding">Outstanding <span class="sort-arrow" data-col="outstanding">↕</span></th>
+              <th class="num" data-col="count"># Inv <span class="sort-arrow" data-col="count">↕</span></th>
+            </tr>
+          </thead>
+          <tbody id="custTbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FLAGS / ANOMALIES -->
+    <section class="section-block flag-queue" id="section-flags">
+      <div class="section-header">
+        <div class="section-title">Anomalies <span class="section-badge" id="flagsBadge">0</span></div>
+      </div>
+      <div class="flags-grid" id="flagsGrid"></div>
+    </section>
+
+    <!-- RECURRING -->
+    <section class="section-block recurring-panel" id="section-recurring">
+      <div class="section-header">
+        <div class="section-title">Recurring</div>
+      </div>
+      <div class="recurring-list" id="recurringList"></div>
+    </section>
+
+    <!-- DATA GRID -->
+    <section class="data-grid-section" id="section-grid">
+      <button class="grid-toggle" id="gridToggle">
+        <span id="gridToggleLabel">Browse all invoices</span>
+        <svg class="grid-toggle-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="grid-body" id="gridBody">
+        <div class="filter-strip" id="filterStrip"></div>
+        <div class="grid-count" id="gridCount"></div>
+        <div class="grid-table-wrap">
+          <table class="grid-table" id="gridTable">
+            <thead>
+              <tr>
+                <th data-col="invoiceNumber">Invoice # <span class="sort-arrow" data-col="invoiceNumber">↕</span></th>
+                <th data-col="date">Issued <span class="sort-arrow" data-col="date">↕</span></th>
+                <th data-col="customer">Customer <span class="sort-arrow" data-col="customer">↕</span></th>
+                <th class="num" data-col="amount">Amount <span class="sort-arrow" data-col="amount">↕</span></th>
+                <th data-col="dueDate">Due <span class="sort-arrow" data-col="dueDate">↕</span></th>
+                <th data-col="paidDate">Paid <span class="sort-arrow" data-col="paidDate">↕</span></th>
+                <th data-col="status">Status <span class="sort-arrow" data-col="status">↕</span></th>
+              </tr>
+            </thead>
+            <tbody id="gridTbody"></tbody>
+          </table>
+        </div>
+        <div class="load-more-wrap" id="loadMoreWrap" style="display:none">
+          <button class="load-more-btn" id="loadMoreBtn">Load more</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="ops-footer">
+    <p>Analytical summary, not accounting or tax advice. Categories and recurring patterns are inferred from the file's text — verify against your books before acting on anything here.</p>
+    <p>Generated locally — your finance file never left your machine. The full invoice list is embedded in this HTML and rendered in your browser. For sharing, prefer an anonymized export with customer names and amounts redacted.</p>
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function() {
+  // ── helpers ──────────────────────────────────────────────────────────────
+  const $ = (sel, ctx) => (ctx || document).querySelector(sel);
+  const $$ = (sel, ctx) => Array.from((ctx || document).querySelectorAll(sel));
+  const fmt = (n, sym) => {
+    if (n == null || isNaN(n)) return '—';
+    const s = sym || DATA.summary?.currencySymbol || '$';
+    return s + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  };
+  const fmtFull = (n, sym) => {
+    if (n == null || isNaN(n)) return '—';
+    const s = sym || DATA.summary?.currencySymbol || '$';
+    return s + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  };
+  const fmtDate = d => d ? d.slice(0, 10) : '—';
+  const today = new Date(); today.setHours(0,0,0,0);
+  const daysDiff = (d) => { if (!d) return null; const dt = new Date(d); dt.setHours(0,0,0,0); return Math.round((today - dt) / 86400000); };
+  function toast(msg, dur=2000) {
+    const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), dur);
+  }
+  function escapeHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function highlightText(text, query) {
+    if (!query) return escapeHtml(text);
+    const re = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi');
+    return escapeHtml(text).replace(re, '<mark class="highlight">$1</mark>');
+  }
+
+  // ── wait for DATA ────────────────────────────────────────────────────────
+  function init() {
+    if (typeof DATA === 'undefined') { setTimeout(init, 50); return; }
+    const S = DATA.summary || {};
+    const rows = DATA.rows || [];
+    const sym = S.currencySymbol || '$';
+
+    // period
+    $('#cmd-period').textContent = S.period || DATA.period || '';
+
+    // ── KPI RAIL ─────────────────────────────────────────────────────────
+    const kpiData = [
+      { label: 'Invoiced', value: fmt(S.invoiced, sym), sub: `${S.invoiceCount} invoices`, cls: 'accent' },
+      { label: 'Collected', value: fmt(S.paid, sym), sub: `${Math.round((S.paid/S.invoiced)*100)||0}% of invoiced`, cls: 'success' },
+      { label: 'Outstanding', value: fmt(S.outstanding, sym), sub: `${S.invoiceCount - (rows.filter(r=>r.status==='paid').length)} invoices`, cls: '' },
+      { label: 'Overdue', value: fmt(S.overdue, sym), sub: `${rows.filter(r=>r.status==='overdue').length} invoices`, cls: 'warn' },
+    ];
+    const rail = $('#kpiRail');
+    kpiData.forEach((k, i) => {
+      const cell = document.createElement('div');
+      cell.className = 'kpi-cell';
+      cell.style.transitionDelay = (i * 60) + 'ms';
+      cell.innerHTML = `<div class="kpi-label">${k.label}</div><div class="kpi-value ${k.cls}">${k.value}</div><div class="kpi-sub">${k.sub}</div>`;
+      rail.appendChild(cell);
+    });
+    setTimeout(() => $$('.kpi-cell').forEach(c => c.classList.add('visible')), 80);
+
+    // ── OVERVIEW ─────────────────────────────────────────────────────────
+    const overdueAmt = fmt(S.overdue, sym);
+    const paidPct = S.invoiced ? Math.round((S.paid / S.invoiced) * 100) : 0;
+    $('#overviewHeadline').innerHTML =
+      `<span class="hl">${fmt(S.invoiced, sym)} invoiced</span> across ${S.invoiceCount} invoices and ${S.customerCount} customers — ` +
+      `<span class="hl">${fmt(S.paid, sym)}</span> collected (${paidPct}%) — ` +
+      `<span class="hl-red">${fmt(S.outstanding, sym)} still outstanding</span>, including ${overdueAmt} overdue.`;
+    $('#overviewMeta').innerHTML =
+      `<span>${S.period}</span> · <span>${S.durationLabel}</span> · <span>${S.invoiceCount} invoices</span> · <span>${S.customerCount} customers</span>`;
+
+    // scorecard: avg days to pay, % paid on time
+    const paidRows = rows.filter(r => r.status === 'paid' && r.issuedDate && r.paidDate);
+    if (paidRows.length) {
+      const daysArr = paidRows.map(r => daysDiff(r.issuedDate) - daysDiff(r.paidDate)).filter(d => !isNaN(d) && isFinite(d));
+      const paid30 = paidRows.filter(r => {
+        const d = new Date(r.paidDate) - new Date(r.issuedDate);
+        return d / 86400000 <= 30;
+      });
+      const avgDays = paidRows.map(r => {
+        const d = new Date(r.paidDate) - new Date(r.issuedDate);
+        return Math.round(d / 86400000);
+      });
+      const avg = avgDays.length ? Math.round(avgDays.reduce((a,b)=>a+b,0)/avgDays.length) : null;
+      const med = avgDays.length ? avgDays.slice().sort((a,b)=>a-b)[Math.floor(avgDays.length/2)] : null;
+      const pct30 = paidRows.length ? Math.round((paid30.length/paidRows.length)*100) : 0;
+      const sc = $('#scorecardRow');
+      if (avg != null) {
+        sc.innerHTML = `
+          <div class="scorecard-item"><span class="scorecard-label">Avg Days to Pay</span><span class="scorecard-value">${avg}d</span></div>
+          <div class="scorecard-item"><span class="scorecard-label">Median Days to Pay</span><span class="scorecard-value">${med}d</span></div>
+          <div class="scorecard-item"><span class="scorecard-label">Paid within 30d</span><span class="scorecard-value">${pct30}%</span></div>
+          <div class="scorecard-item"><span class="scorecard-label">Collection Rate</span><span class="scorecard-value">${paidPct}%</span></div>`;
+      } else {
+        sc.innerHTML = `<div class="scorecard-item"><span class="scorecard-label">Collection Rate</span><span class="scorecard-value">${paidPct}%</span></div>`;
+      }
+    }
+
+    // ── STATUS DONUT ─────────────────────────────────────────────────────
+    const statusCounts = { paid: 0, outstanding: 0, overdue: 0, 'partially paid': 0 };
+    const statusAmts   = { paid: 0, outstanding: 0, overdue: 0, 'partially paid': 0 };
+    rows.forEach(r => {
+      const s = (r.status || 'outstanding').toLowerCase();
+      if (statusCounts[s] !== undefined) { statusCounts[s]++; statusAmts[s] += r.amount || 0; }
+      else { statusCounts['outstanding']++; statusAmts['outstanding'] += r.amount || 0; }
+    });
+    const donutColors = { paid: 'var(--green)', outstanding: 'var(--blue)', overdue: 'var(--red)', 'partially paid': 'var(--yellow)' };
+    const donutLabels = { paid: 'Paid', outstanding: 'Outstanding', overdue: 'Overdue', 'partially paid': 'Partial' };
+    const donutTotal  = Object.values(statusAmts).reduce((a,b)=>a+b,0);
+    const svg = $('#donutSvg');
+    const cx = 70, cy = 70, r = 52, ir = 35;
+    let startAngle = -Math.PI/2;
+    const donutEntries = Object.entries(statusAmts);
+    let paths = '';
+    donutEntries.forEach(([key, val]) => {
+      if (!val) return;
+      const frac = val / donutTotal;
+      const angle = frac * 2 * Math.PI;
+      const x1 = cx + r * Math.cos(startAngle);
+      const y1 = cy + r * Math.sin(startAngle);
+      const x2 = cx + r * Math.cos(startAngle + angle);
+      const y2 = cy + r * Math.sin(startAngle + angle);
+      const ix1 = cx + ir * Math.cos(startAngle);
+      const iy1 = cy + ir * Math.sin(startAngle);
+      const ix2 = cx + ir * Math.cos(startAngle + angle);
+      const iy2 = cy + ir * Math.sin(startAngle + angle);
+      const largeArc = angle > Math.PI ? 1 : 0;
+      paths += `<path d="M${x1},${y1} A${r},${r} 0 ${largeArc},1 ${x2},${y2} L${ix2},${iy2} A${ir},${ir} 0 ${largeArc},0 ${ix1},${iy1} Z" fill="${donutColors[key]}" opacity="0.85" data-key="${key}" style="cursor:pointer;transition:opacity 150ms"/>`;
+      startAngle += angle;
+    });
+    svg.innerHTML = paths + `<text x="${cx}" y="${cy-6}" text-anchor="middle" font-size="11" fill="var(--fg-muted)" font-family="var(--font-mono)">${rows.length}</text><text x="${cx}" y="${cy+10}" text-anchor="middle" font-size="9" fill="var(--fg-muted)" font-family="var(--font-body)">invoices</text>`;
+    const legend = $('#donutLegend');
+    Object.entries(statusAmts).forEach(([key, val]) => {
+      const pct = donutTotal ? Math.round(val/donutTotal*100) : 0;
+      const div = document.createElement('div');
+      div.className = 'legend-row';
+      div.dataset.key = key;
+      div.innerHTML = `<span class="legend-dot" style="background:${donutColors[key]}"></span><span class="legend-label">${donutLabels[key]}</span><span class="legend-val">${fmt(val, sym)}</span>`;
+      div.addEventListener('click', () => setStatusFilter(key));
+      legend.appendChild(div);
+    });
+    // path hover
+    $$('path[data-key]', svg).forEach(p => {
+      p.addEventListener('click', () => setStatusFilter(p.dataset.key));
+      p.addEventListener('mouseenter', () => p.style.opacity = '1');
+      p.addEventListener('mouseleave', () => p.style.opacity = '0.85');
+    });
+
+    // ── TIMELINE ─────────────────────────────────────────────────────────
+    const tl = DATA.timeline || DATA.timelinePreview || [];
+    if (tl.length > 1) {
+      const wrap = $('#timelineWrap');
+      const W = 320, H = 100;
+      const maxVal = Math.max(...tl.map(d => d.inflow || 0));
+      const minD = new Date(tl[0].date).getTime();
+      const maxD = new Date(tl[tl.length-1].date).getTime();
+      const px = (d) => maxD === minD ? 10 : 10 + (new Date(d).getTime() - minD) / (maxD - minD) * (W - 20);
+      const py = (v) => H - 10 - (maxVal ? (v / maxVal) * (H - 20) : 0);
+      const pts = tl.map(d => `${px(d.date).toFixed(1)},${py(d.inflow).toFixed(1)}`).join(' ');
+      const areaPath = `M${px(tl[0].date).toFixed(1)},${H-10} ` + tl.map(d=>`L${px(d.date).toFixed(1)},${py(d.inflow).toFixed(1)}`).join(' ') + ` L${px(tl[tl.length-1].date).toFixed(1)},${H-10} Z`;
+      const markers = tl.filter(d => d.inflow > maxVal * 0.6).map(d =>
+        `<circle cx="${px(d.date).toFixed(1)}" cy="${py(d.inflow).toFixed(1)}" r="3.5" fill="var(--primary)" opacity="0.9"><title>${fmtDate(d.date)}: ${fmt(d.inflow,sym)}</title></circle>`
+      ).join('');
+      wrap.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="height:100px;overflow:visible">
+        <defs><linearGradient id="tlGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--primary)" stop-opacity="0.25"/><stop offset="100%" stop-color="var(--primary)" stop-opacity="0"/></linearGradient></defs>
+        <path d="${areaPath}" fill="url(#tlGrad)"/>
+        <polyline points="${pts}" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linejoin="round"/>
+        ${markers}
+        <text x="10" y="9" font-size="8" fill="var(--fg-muted)" font-family="var(--font-mono)">${fmtDate(tl[0].date)}</text>
+        <text x="${W-10}" y="9" font-size="8" fill="var(--fg-muted)" font-family="var(--font-mono)" text-anchor="end">${fmtDate(tl[tl.length-1].date)}</text>
+      </svg>`;
+    } else {
+      $('#section-timeline').style.display = 'none';
+    }
+
+    // ── AGING ─────────────────────────────────────────────────────────────
+    const aging = DATA.aging || [];
+    const agingColors = ['var(--green)', 'var(--yellow)', 'var(--primary)', 'var(--red)'];
+    const agingTotal = aging.reduce((a,b) => a + (b.amount||0), 0);
+    const grid = $('#agingGrid');
+    const track = $('#agingBarTrack');
+    let activeAgingBucket = null;
+    aging.forEach((b, i) => {
+      const div = document.createElement('div');
+      div.className = 'aging-bucket';
+      div.dataset.bucket = b.bucket;
+      div.innerHTML = `<div class="aging-bucket-label">${b.bucket} days</div><div class="aging-bucket-amount">${fmt(b.amount, sym)}</div><div class="aging-bucket-count">${b.count} invoice${b.count!==1?'s':''}</div>`;
+      div.addEventListener('click', () => {
+        activeAgingBucket = activeAgingBucket === b.bucket ? null : b.bucket;
+        $$('.aging-bucket').forEach(el => el.classList.toggle('active', el.dataset.bucket === activeAgingBucket));
+        $('#clearAgingFilter').style.display = activeAgingBucket ? 'inline-flex' : 'none';
+        if (!$('#gridBody').classList.contains('open')) toggleGrid(true);
+        renderGrid();
+      });
+      grid.appendChild(div);
+      // bar seg
+      const seg = document.createElement('div');
+      seg.className = 'aging-bar-seg';
+      seg.style.background = agingColors[i];
+      seg.style.width = '0';
+      seg.style.opacity = b.amount ? '1' : '0.15';
+      seg.title = `${b.bucket}d: ${fmt(b.amount, sym)}`;
+      track.appendChild(seg);
+      setTimeout(() => { seg.style.width = agingTotal ? ((b.amount / agingTotal) * 100).toFixed(1) + '%' : '0'; }, 200 + i * 80);
+    });
+    $('#clearAgingFilter').addEventListener('click', () => {
+      activeAgingBucket = null;
+      $$('.aging-bucket').forEach(el => el.classList.remove('active'));
+      $('#clearAgingFilter').style.display = 'none';
+      renderGrid();
+    });
+    // badge
+    const overdueCount = aging.filter(b => ['31-60','61-90','90+'].includes(b.bucket)).reduce((a,b)=>a+b.count,0);
+    $('#agingBadge').textContent = `${overdueCount} overdue`;
+
+    // ── TOP CUSTOMERS ─────────────────────────────────────────────────────
+    const customers = DATA.topCustomers || DATA.topCustomersTop || [];
+    $('#custBadge').textContent = `${customers.length} customers`;
+    let custSort = { col: 'invoiced', dir: -1 };
+    const maxOut = customers.length ? Math.max(...customers.map(c=>c.outstanding||0)) : 1;
+    function renderCustTable() {
+      const sorted = [...customers].sort((a,b) => {
+        const av = a[custSort.col]; const bv = b[custSort.col];
+        if (typeof av === 'string') return custSort.dir * av.localeCompare(bv);
+        return custSort.dir * ((av||0) - (bv||0));
+      });
+      const tbody = $('#custTbody');
+      tbody.innerHTML = '';
+      sorted.forEach(c => {
+        const isRisk = (c.outstanding || 0) > 0 && customers.some(cx => cx.name === c.name);
+        // check overdue flag
+        const flagged = (DATA.flags || DATA.flagsTop || []).some(f => f.label && f.label.includes(c.name));
+        const pct = maxOut > 0 ? Math.min(100, ((c.outstanding||0)/maxOut)*100) : 0;
+        const tr = document.createElement('tr');
+        if (flagged) tr.classList.add('at-risk');
+        tr.innerHTML = `
+          <td><span class="cust-name">${escapeHtml(c.name)}</span></td>
+          <td class="num">${fmt(c.invoiced, sym)}</td>
+          <td class="num">${fmt(c.paid, sym)}</td>
+          <td class="num">
+            <div class="outstanding-bar-wrap">
+              <span>${fmt(c.outstanding, sym)}</span>
+              <div class="outstanding-bar-bg"><div class="outstanding-bar-fill${(c.outstanding||0)===(c.invoiced||0) && (c.outstanding||0)>0?' full':''}" style="width:${pct}%"></div></div>
+            </div>
+          </td>
+          <td class="num">${c.count}</td>`;
+        tbody.appendChild(tr);
+      });
+      // sort arrows
+      $$('#custTable th').forEach(th => {
+        const col = th.dataset.col;
+        const arrow = th.querySelector('.sort-arrow');
+        if (arrow) { arrow.textContent = custSort.col === col ? (custSort.dir === 1 ? '↑' : '↓') : '↕'; arrow.classList.toggle('active', custSort.col === col); }
+      });
+    }
+    $$('#custTable th[data-col]').forEach(th => {
+      th.addEventListener('click', () => {
+        if (custSort.col === th.dataset.col) custSort.dir *= -1;
+        else { custSort.col = th.dataset.col; custSort.dir = -1; }
+        renderCustTable();
+      });
+    });
+    renderCustTable();
+
+    // ── FLAGS ────────────────────────────────────────────────────────────
+    const flags = DATA.flags || DATA.flagsTop || [];
+    $('#flagsBadge').textContent = flags.length;
+    const flagsGrid = $('#flagsGrid');
+    if (!flags.length) {
+      flagsGrid.innerHTML = '<div class="empty-state">Nothing flagged in this file.</div>';
+    } else {
+      flags.forEach((f, i) => {
+        const card = document.createElement('div');
+        const isOverdue = f.kind === 'overdue';
+        const isDup = f.kind === 'duplicate';
+        card.className = `flag-card ${isOverdue ? 'overdue' : isDup ? 'duplicate' : 'outlier'}`;
+        card.style.transitionDelay = (i * 60) + 'ms';
+        card.innerHTML = `
+          <div class="flag-kind ${isOverdue?'overdue':''}">${(f.kind||'flag').replace(/-/g,' ')}</div>

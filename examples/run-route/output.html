@@ -1,0 +1,1251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning run — Prospect Park loop (7.6 km)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --accent-cyan: #00D4FF;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981;
+  --blue: #3b82f6;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30,27,25,0.04);
+  --shadow-md: 0 4px 12px rgba(30,27,25,0.08);
+  --shadow-lg: 0 8px 24px rgba(30,27,25,0.12);
+  --shadow-accent: 0 8px 24px rgba(160,59,0,0.15);
+  --gradient-primary: linear-gradient(135deg,#a03b00 0%,#c94c00 100%);
+  --gradient-hero: linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #060B18;
+    --surface: #0B1426;
+    --surface-container-lowest: #101D35;
+    --surface-container-low: #101D35;
+    --surface-container: #162544;
+    --surface-container-high: #1c2d52;
+    --fg-1: #F8FAFC;
+    --fg-2: #CBD5E1;
+    --fg-muted: #64748B;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --primary: #FF6B35;
+    --accent-glow: #00D4FF;
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+  }
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--fg-1);
+  font-size:15px;
+  line-height:1.55;
+  min-height:100vh;
+}
+/* Map Atlas shell */
+.map-shell{
+  display:grid;
+  grid-template-columns:1fr;
+  min-height:100vh;
+}
+/* Header */
+.atlas-header{
+  background:var(--surface-container-low);
+  border-bottom:1px solid var(--border-strong);
+  padding:var(--space-lg) var(--space-2xl);
+  display:flex;
+  align-items:center;
+  gap:var(--space-lg);
+  flex-wrap:wrap;
+  position:sticky;
+  top:0;
+  z-index:100;
+  backdrop-filter:blur(8px);
+}
+.atlas-header .route-title{
+  font-family:var(--font-headline);
+  font-size:1.1rem;
+  font-weight:700;
+  letter-spacing:-0.01em;
+  color:var(--fg-1);
+  flex:1;
+  min-width:0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.activity-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:var(--space-xs);
+  background:var(--primary);
+  color:var(--on-primary);
+  font-family:var(--font-headline);
+  font-size:0.72rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+  padding:3px 10px;
+  border-radius:var(--radius-pill);
+  flex-shrink:0;
+}
+.header-actions{
+  display:flex;
+  gap:var(--space-sm);
+  flex-shrink:0;
+}
+.btn-icon{
+  background:var(--surface-container);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-sm);
+  color:var(--fg-2);
+  font-family:var(--font-body);
+  font-size:0.8rem;
+  font-weight:500;
+  padding:6px 12px;
+  cursor:pointer;
+  transition:background 0.15s,color 0.15s;
+  white-space:nowrap;
+}
+.btn-icon:hover{background:var(--surface-container-high);color:var(--fg-1)}
+/* Main layout: 2 col on desktop */
+.atlas-body{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:0;
+}
+@media(min-width:900px){
+  .atlas-body{
+    grid-template-columns:360px 1fr;
+    align-items:start;
+  }
+  .atlas-sidebar{
+    height:calc(100vh - 57px);
+    overflow-y:auto;
+    position:sticky;
+    top:57px;
+    border-right:1px solid var(--border-strong);
+  }
+  .atlas-main{
+    min-height:calc(100vh - 57px);
+  }
+}
+.atlas-sidebar{
+  background:var(--surface-container-low);
+  padding:var(--space-2xl);
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-3xl);
+}
+.atlas-main{
+  padding:var(--space-2xl);
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-3xl);
+}
+/* Stats card */
+.stats-card{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-xl);
+  padding:var(--space-2xl);
+  box-shadow:var(--shadow-md);
+}
+.stats-card .section-label{
+  font-family:var(--font-headline);
+  font-size:0.68rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  color:var(--fg-muted);
+  margin-bottom:var(--space-md);
+}
+.headline-read{
+  font-family:var(--font-body);
+  font-size:0.88rem;
+  color:var(--fg-2);
+  line-height:1.5;
+  margin-bottom:var(--space-xl);
+  border-left:3px solid var(--primary);
+  padding-left:var(--space-md);
+}
+.stat-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:var(--space-md) var(--space-lg);
+}
+.stat-item{}
+.stat-value{
+  font-family:var(--font-mono);
+  font-size:1.45rem;
+  font-weight:600;
+  color:var(--fg-1);
+  line-height:1.1;
+}
+.stat-value.accent{color:var(--primary)}
+.stat-label{
+  font-size:0.72rem;
+  color:var(--fg-muted);
+  font-weight:500;
+  margin-top:2px;
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+}
+.stat-sub{
+  font-family:var(--font-mono);
+  font-size:0.75rem;
+  color:var(--fg-muted);
+  margin-top:1px;
+}
+/* Section headings */
+.section-heading{
+  font-family:var(--font-headline);
+  font-size:1rem;
+  font-weight:700;
+  letter-spacing:-0.01em;
+  color:var(--fg-1);
+  margin-bottom:var(--space-lg);
+  display:flex;
+  align-items:center;
+  gap:var(--space-sm);
+}
+.section-heading .pill-label{
+  font-size:0.65rem;
+  font-weight:600;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  background:var(--surface-container);
+  color:var(--fg-muted);
+  padding:2px 8px;
+  border-radius:var(--radius-pill);
+}
+/* Atlas stage (route map) */
+.atlas-stage-wrap{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-xl);
+  overflow:hidden;
+  box-shadow:var(--shadow-md);
+  position:relative;
+}
+.atlas-stage-wrap svg{
+  width:100%;
+  height:auto;
+  display:block;
+}
+.map-tooltip{
+  position:absolute;
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-md);
+  padding:var(--space-sm) var(--space-md);
+  pointer-events:none;
+  font-family:var(--font-mono);
+  font-size:0.75rem;
+  color:var(--fg-1);
+  box-shadow:var(--shadow-lg);
+  z-index:20;
+  opacity:0;
+  transition:opacity 0.12s;
+  max-width:180px;
+  line-height:1.4;
+}
+.map-tooltip.visible{opacity:1}
+/* North arrow + scale bar */
+.map-overlay{
+  position:absolute;
+  bottom:var(--space-lg);
+  right:var(--space-lg);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:var(--space-xs);
+}
+.north-arrow{
+  font-size:0.7rem;
+  font-weight:700;
+  color:var(--fg-muted);
+  font-family:var(--font-headline);
+  text-align:center;
+}
+.scale-bar{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2px;
+}
+.scale-bar-line{
+  height:3px;
+  background:var(--fg-muted);
+  border-radius:1px;
+  opacity:0.6;
+}
+.scale-bar-label{
+  font-family:var(--font-mono);
+  font-size:0.65rem;
+  color:var(--fg-muted);
+}
+/* Elevation chart */
+.elevation-chart-wrap{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-xl);
+  padding:var(--space-2xl);
+  box-shadow:var(--shadow-md);
+}
+.elevation-chart-wrap svg{
+  width:100%;
+  display:block;
+}
+/* Splits chart */
+.splits-wrap{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-xl);
+  padding:var(--space-2xl);
+  box-shadow:var(--shadow-md);
+}
+.splits-bars{
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-sm);
+}
+.split-row{
+  display:grid;
+  grid-template-columns:36px 1fr auto;
+  align-items:center;
+  gap:var(--space-sm);
+}
+.split-km{
+  font-family:var(--font-mono);
+  font-size:0.75rem;
+  color:var(--fg-muted);
+  text-align:right;
+}
+.split-bar-track{
+  background:var(--surface-container);
+  border-radius:var(--radius-pill);
+  height:28px;
+  position:relative;
+  overflow:hidden;
+}
+.split-bar-fill{
+  height:100%;
+  border-radius:var(--radius-pill);
+  display:flex;
+  align-items:center;
+  padding-left:var(--space-md);
+  min-width:60px;
+  transition:width 0.6s cubic-bezier(0.4,0,0.2,1);
+  cursor:pointer;
+  position:relative;
+}
+.split-bar-fill.fastest{background:linear-gradient(90deg,var(--primary),var(--primary-container))}
+.split-bar-fill.slowest{background:linear-gradient(90deg,#b01010,var(--red))}
+.split-bar-fill.normal{background:linear-gradient(90deg,#2563eb,#3b82f6)}
+.split-pace{
+  font-family:var(--font-mono);
+  font-size:0.75rem;
+  font-weight:600;
+  color:#fff;
+}
+.split-meta{
+  font-family:var(--font-mono);
+  font-size:0.72rem;
+  color:var(--fg-muted);
+  white-space:nowrap;
+}
+.splits-summary{
+  display:flex;
+  gap:var(--space-xl);
+  margin-top:var(--space-lg);
+  padding-top:var(--space-lg);
+  border-top:1px solid var(--border);
+  flex-wrap:wrap;
+}
+.splits-summary-item{
+  font-size:0.8rem;
+  color:var(--fg-2);
+}
+.splits-summary-item strong{
+  font-family:var(--font-mono);
+  color:var(--fg-1);
+}
+/* Pace profile */
+.pace-chart-wrap{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-xl);
+  padding:var(--space-2xl);
+  box-shadow:var(--shadow-md);
+}
+/* Pauses panel */
+.pauses-wrap{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-xl);
+  padding:var(--space-2xl);
+  box-shadow:var(--shadow-md);
+}
+.pause-card{
+  background:var(--surface-container);
+  border-radius:var(--radius-lg);
+  padding:var(--space-lg);
+  display:flex;
+  gap:var(--space-lg);
+  align-items:flex-start;
+}
+.pause-icon{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:var(--yellow);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1rem;
+  flex-shrink:0;
+}
+.pause-body{}
+.pause-title{
+  font-family:var(--font-mono);
+  font-size:0.85rem;
+  font-weight:600;
+  color:var(--fg-1);
+}
+.pause-desc{
+  font-size:0.82rem;
+  color:var(--fg-2);
+  margin-top:2px;
+}
+.pause-coords{
+  font-family:var(--font-mono);
+  font-size:0.7rem;
+  color:var(--fg-muted);
+  margin-top:4px;
+}
+.no-pauses{
+  font-size:0.85rem;
+  color:var(--fg-muted);
+  font-style:italic;
+}
+/* Waypoints list */
+.waypoints-wrap{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-xl);
+  padding:var(--space-2xl);
+  box-shadow:var(--shadow-md);
+}
+.waypoint-search{
+  width:100%;
+  background:var(--surface-container);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-md);
+  padding:var(--space-sm) var(--space-lg);
+  font-family:var(--font-body);
+  font-size:0.85rem;
+  color:var(--fg-1);
+  margin-bottom:var(--space-lg);
+  outline:none;
+  transition:border-color 0.15s;
+}
+.waypoint-search:focus{border-color:var(--primary)}
+.waypoint-search::placeholder{color:var(--fg-muted)}
+.waypoint-list{
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+}
+.waypoint-row{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:var(--space-md);
+  padding:var(--space-md) var(--space-sm);
+  border-radius:var(--radius-md);
+  cursor:pointer;
+  transition:background 0.12s;
+  border-bottom:1px solid var(--border);
+}
+.waypoint-row:last-child{border-bottom:none}
+.waypoint-row:hover,.waypoint-row.highlighted{background:var(--surface-container)}
+.waypoint-row.highlighted .waypoint-name{color:var(--primary)}
+.waypoint-dot{
+  width:10px;height:10px;
+  border-radius:50%;
+  background:var(--secondary-container);
+  flex-shrink:0;
+}
+.waypoint-dot.start{background:var(--green)}
+.waypoint-dot.end{background:var(--red)}
+.waypoint-name{
+  font-size:0.85rem;
+  font-weight:500;
+  color:var(--fg-1);
+}
+.waypoint-time{
+  font-family:var(--font-mono);
+  font-size:0.7rem;
+  color:var(--fg-muted);
+}
+.waypoint-coords{
+  font-family:var(--font-mono);
+  font-size:0.7rem;
+  color:var(--fg-muted);
+}
+.waypoint-ele{
+  font-family:var(--font-mono);
+  font-size:0.72rem;
+  color:var(--fg-2);
+  text-align:right;
+}
+/* Drill-down */
+.drilldown-wrap{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-xl);
+  overflow:hidden;
+  box-shadow:var(--shadow-md);
+}
+.drilldown-toggle{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:var(--space-xl) var(--space-2xl);
+  background:none;
+  border:none;
+  cursor:pointer;
+  font-family:var(--font-headline);
+  font-size:0.95rem;
+  font-weight:700;
+  color:var(--fg-1);
+  text-align:left;
+  letter-spacing:-0.01em;
+  transition:background 0.12s;
+}
+.drilldown-toggle:hover{background:var(--surface-container)}
+.drilldown-toggle .chevron{
+  transition:transform 0.2s;
+  color:var(--fg-muted);
+  font-size:1rem;
+}
+.drilldown-toggle.open .chevron{transform:rotate(180deg)}
+.drilldown-content{
+  display:none;
+  padding:0 var(--space-2xl) var(--space-2xl);
+}
+.drilldown-content.open{display:block}
+.drill-filters{
+  display:flex;
+  gap:var(--space-sm);
+  flex-wrap:wrap;
+  margin-bottom:var(--space-lg);
+}
+.drill-chip{
+  padding:4px 12px;
+  border-radius:var(--radius-pill);
+  border:1px solid var(--border-strong);
+  background:var(--surface-container);
+  color:var(--fg-2);
+  font-size:0.78rem;
+  font-weight:500;
+  cursor:pointer;
+  transition:all 0.12s;
+}
+.drill-chip.active{background:var(--primary);border-color:var(--primary);color:#fff}
+.drill-search{
+  width:100%;
+  background:var(--surface-container);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-md);
+  padding:var(--space-sm) var(--space-lg);
+  font-family:var(--font-body);
+  font-size:0.83rem;
+  color:var(--fg-1);
+  margin-bottom:var(--space-lg);
+  outline:none;
+  transition:border-color 0.15s;
+}
+.drill-search:focus{border-color:var(--primary)}
+.drill-search::placeholder{color:var(--fg-muted)}
+.drill-table-wrap{
+  overflow-x:auto;
+  max-height:360px;
+  overflow-y:auto;
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+}
+.drill-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:0.78rem;
+}
+.drill-table th{
+  background:var(--surface-container);
+  font-family:var(--font-headline);
+  font-size:0.68rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  color:var(--fg-muted);
+  padding:var(--space-sm) var(--space-md);
+  text-align:left;
+  position:sticky;
+  top:0;
+  z-index:2;
+  border-bottom:1px solid var(--border-strong);
+  white-space:nowrap;
+}
+.drill-table td{
+  font-family:var(--font-mono);
+  font-size:0.75rem;
+  color:var(--fg-2);
+  padding:6px var(--space-md);
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+.drill-table tr.paused-row td{color:var(--fg-muted)}
+.drill-table tr:hover td{background:var(--surface-container-low)}
+/* Footer */
+.atlas-footer{
+  background:var(--surface-container-low);
+  border-top:1px solid var(--border);
+  padding:var(--space-xl) var(--space-2xl);
+  text-align:center;
+}
+.privacy-note{
+  font-size:0.77rem;
+  color:var(--fg-muted);
+  font-style:italic;
+  max-width:600px;
+  margin:0 auto;
+}
+/* Split tooltip */
+.split-tooltip{
+  position:fixed;
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-md);
+  padding:var(--space-sm) var(--space-md);
+  font-family:var(--font-mono);
+  font-size:0.75rem;
+  color:var(--fg-1);
+  box-shadow:var(--shadow-lg);
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 0.1s;
+  z-index:200;
+  line-height:1.5;
+}
+.split-tooltip.visible{opacity:1}
+/* Reveal animations */
+@keyframes fadeSlideUp{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.reveal{animation:fadeSlideUp 0.3s ease both}
+.reveal-1{animation-delay:0.05s}
+.reveal-2{animation-delay:0.12s}
+.reveal-3{animation-delay:0.19s}
+.reveal-4{animation-delay:0.26s}
+.reveal-5{animation-delay:0.33s}
+@media(prefers-reduced-motion:reduce){
+  .reveal,.reveal-1,.reveal-2,.reveal-3,.reveal-4,.reveal-5{animation:none}
+  .split-bar-fill{transition:none}
+  path.route-path{stroke-dashoffset:0!important;transition:none!important}
+}
+/* Responsive */
+@media(max-width:600px){
+  .atlas-header{padding:var(--space-md) var(--space-lg)}
+  .atlas-sidebar,.atlas-main{padding:var(--space-lg)}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  .stat-value{font-size:1.15rem}
+  .split-row{grid-template-columns:28px 1fr auto}
+}
+/* SVG route path drawing */
+.route-path{
+  stroke-dasharray:var(--path-len,9999);
+  stroke-dashoffset:var(--path-len,9999);
+  transition:stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1);
+}
+.route-path.drawn{stroke-dashoffset:0}
+/* Highlight match */
+mark{background:var(--primary-fixed);color:var(--fg-1);border-radius:2px;padding:0 2px}
+.hidden-row{display:none}
+</style>
+</head>
+<body>
+<script>const DATA = {"kind":"route","format":"gpx","metadata":{"name":"Morning run — Prospect Park loop","time":"2026-04-21T07:30:00.000Z","creator":"html-anything synthetic example"},"tracks":[{"name":"Morning run — Prospect Park loop","pointCount":191,"bbox":{"minLat":40.654449,"maxLat":40.672254,"minLon":-73.972558,"maxLon":-73.959945},"stats":{"pointCount":191,"distanceKm":7.623,"elapsedSec":2348,"movingSec":2310,"pausedSec":38,"elevationGainM":28,"elevationLossM":32,"minEleM":22,"maxEleM":56,"maxSpeedKmh":12.8,"startTime":"2026-04-21T07:30:00.000Z","endTime":"2026-04-21T08:09:07.506Z","movingPaceSecPerKm":303,"avgSpeedKmh":11.9,"avgPaceSecPerKm":308},"polyline":"viewBox=\"0 0 1000 1861\" points=\"205.2,1074.9 206.8,1032.4 206.4,989.5 204,952 200.7,919.2 198.6,884.6 198.6,845.1 200.6,804.1 203.1,765.9 204.6,729.3 204.5,689.9 203.4,647.3 202.7,606.9 203.3,572.1 204.7,539.7 205.6,503.1 204.8,461.5 202.3,420.2 199.5,382.4 198.1,345.5 199,305.4 201.8,263.8 204.8,226.1 206.2,193.1 205.7,159.3 204,119.8 202.6,76.5 202.5,35.9 203.5,0 194.7,30.6 184.1,65.6 171.2,106.1 156.9,146.1 143,181 130.7,213 119.8,247.4 109.3,284.4 97.8,319.6 85.2,351.3 72.3,383.8 60.6,421.7 50.6,463 41.7,501.1 32.2,533.5 20.7,564.8 2.6,597 5.3,633 6.9,674.8 6.7,717.5 5.5,755.4 4.7,789.2 4.9,824.4 6,862.9 6.8,901 6,935.6 3.8,969.7 1.2,1008.5 0,1051.6 1.1,1092.7 2.8,1118.3 18.6,1157 33.5,1198 47.2,1234.8 60.6,1266.6 74.8,1298.6 90.9,1334.1 107.7,1370.8 124.2,1404.2 138.5,1436.1 150.7,1471.8 164.1,1507.8 204.5,1517.8 243.5,1524.4 281,1525.4 318.3,1525.2 356.9,1528.6 397.9,1534.3 440.6,1537.7 482.7,1544.3 512.7,1525.7 540.8,1501.1 566.7,1474 591.8,1449.9 617.9,1429.4 646.1,1407.7 678.9,1391.2 687.9,1426.2 695.2,1457.2 700.2,1490.7 703.8,1528.4 707.8,1566.3 713.2,1601 720.1,1635.3 727.2,1673.8 733.3,1715.1 738.3,1753.2 743.1,1785.3 749.1,1816.2 755.6,1861 797.9,1856 839.1,1852.1 878.6,1853.1 917.1,1855.5 956,1855 994.1,1856.8 995.2,1814.4 994.8,1813.9 995.6,1776.7 994.8,1741.7 993.7,1704.7 993.5,1665.2 995.1,1627.6 997.8,1593.8 999.9,1559.5 1000,1519.6 997.9,1475.9 994.7,1435.1 992.3,1399.7 991.9,1365.7 993.3,1328.3 995.3,1288.9 996.4,1252.1 996.1,1217.8 996.9,1172.9 973.8,1140.5 949.3,1112.2 923.3,1082.7 897.1,1050.1 872.2,1018 849.6,989.6 828.7,962 808,929.6 785.6,892.6 760.1,857.7 739.3,830.6 716.6,803.8 691.7,773.4 665.7,742.1 640.8,714.2 617.9,688.1 599.3,650.5 591.7,619.5 582.4,585.2 570.9,548.6 558,514.6 545.4,483.1 534.2,449.2 524.4,410.1 514.7,369.9 504.1,334.6 492.2,304.3 480.2,273.1 469.4,237.6 460.6,200.8 452.9,166.9 438.4,131.4 406.9,114.3 374.4,94.1 340.3,75 305.3,59.1 270.7,42.1 237.3,20.2 201.5,2.9 202.6,39.9 202.7,76.8 201.8,116.9 200.5,157.3 200.3,193.5 202,226.3 204.8,262 207.1,303.7 207.3,347.3 205.3,386.8 202.2,422.6 199.7,459.5 199.2,499.3 200.6,538.3 202.4,573.2 203.4,607.2 203,646 202.1,689.7 201.9,732.4 203.2,769.6 205.3,804.1 206.7,841.2 206.1,881 203.7,919.2 200.4,954.1 198.4,990.1 198.7,1031.5 202.8,1071.8\"","splits":[{"km":1,"durationSec":313,"paceSecPerKm":313,"startTime":"2026-04-21T07:30:00.000Z","endTime":"2026-04-21T07:35:13.112Z"},{"km":2,"durationSec":299,"paceSecPerKm":299,"elevationGainM":2,"startTime":"2026-04-21T07:35:13.112Z","endTime":"2026-04-21T07:40:12.160Z"},{"km":3,"durationSec":300,"paceSecPerKm":300,"elevationGainM":16,"elevationLossM":5,"startTime":"2026-04-21T07:40:12.160Z","endTime":"2026-04-21T07:45:12.139Z"},{"km":4,"durationSec":317,"paceSecPerKm":317,"elevationLossM":26,"startTime":"2026-04-21T07:45:12.139Z","endTime":"2026-04-21T07:50:28.697Z"},{"km":5,"durationSec":347,"paceSecPerKm":347,"elevationGainM":11,"elevationLossM":2,"startTime":"2026-04-21T07:50:28.697Z","endTime":"2026-04-21T07:56:15.258Z"},{"km":6,"durationSec":291,"paceSecPerKm":291,"elevationGainM":4,"startTime":"2026-04-21T07:56:15.258Z","endTime":"2026-04-21T08:01:05.776Z"},{"km":7,"durationSec":303,"paceSecPerKm":303,"elevationGainM":0,"elevationLossM":4,"startTime":"2026-04-21T08:01:05.776Z","endTime":"2026-04-21T08:06:08.423Z"}],"elevationProfile":[{"km":0,"ele":35.2},{"km":0.038,"ele":35.2},{"km":0.076,"ele":35.4},{"km":0.114,"ele":35.5},{"km":0.152,"ele":35.5},{"km":0.191,"ele":35.5},{"km":0.229,"ele":35.5},{"km":0.267,"ele":35.4},{"km":0.305,"ele":35.3},{"km":0.343,"ele":35.1},{"km":0.381,"ele":35.1},{"km":0.419,"ele":35},{"km":0.457,"ele":35},{"km":0.495,"ele":35},{"km":0.534,"ele":35.1},{"km":0.572,"ele":35.4},{"km":0.61,"ele":35.6},{"km":0.648,"ele":35.6},{"km":0.686,"ele":35.8},{"km":0.724,"ele":36},{"km":0.762,"ele":36.1},{"km":0.8,"ele":36.1},{"km":0.839,"ele":36.1},{"km":0.877,"ele":36},{"km":0.915,"ele":35.9},{"km":0.953,"ele":35.8},{"km":0.991,"ele":35.7},{"km":1.029,"ele":35.6},{"km":1.067,"ele":35.6},{"km":1.105,"ele":35.6},{"km":1.143,"ele":36},{"km":1.182,"ele":36.6},{"km":1.22,"ele":36.9},{"km":1.258,"ele":36.9},{"km":1.296,"ele":37.1},{"km":1.334,"ele":37.2},{"km":1.372,"ele":37.3},{"km":1.41,"ele":37.4},{"km":1.448,"ele":37.4},{"km":1.486,"ele":37.4},{"km":1.525,"ele":37.5},{"km":1.563,"ele":37.6},{"km":1.601,"ele":37.7},{"km":1.639,"ele":37.9},{"km":1.677,"ele":38.2},{"km":1.715,"ele":38.5},{"km":1.753,"ele":38.9},{"km":1.791,"ele":39},{"km":1.83,"ele":39.3},{"km":1.868,"ele":39.6},{"km":1.906,"ele":39.8},{"km":1.944,"ele":39.8},{"km":1.982,"ele":40},{"km":2.02,"ele":40.1},{"km":2.058,"ele":40.1},{"km":2.096,"ele":40.1},{"km":2.134,"ele":40.1},{"km":2.173,"ele":40.1},{"km":2.211,"ele":40.1},{"km":2.249,"ele":40.2},{"km":2.287,"ele":40.3},{"km":2.325,"ele":40.5},{"km":2.363,"ele":41},{"km":2.401,"ele":42.5},{"km":2.439,"ele":44},{"km":2.477,"ele":45.5},{"km":2.516,"ele":46.9},{"km":2.554,"ele":48.2},{"km":2.592,"ele":49.5},{"km":2.63,"ele":50.7},{"km":2.668,"ele":51.9},{"km":2.706,"ele":53.1},{"km":2.744,"ele":54.3},{"km":2.782,"ele":56},{"km":2.821,"ele":55.2},{"km":2.859,"ele":55.2},{"km":2.897,"ele":54.3},{"km":2.935,"ele":53.4},{"km":2.973,"ele":52.4},{"km":3.011,"ele":51.4},{"km":3.049,"ele":50.3},{"km":3.087,"ele":49.1},{"km":3.125,"ele":48},{"km":3.164,"ele":45.2},{"km":3.202,"ele":42.3},{"km":3.24,"ele":39.4},{"km":3.278,"ele":39.4},{"km":3.316,"ele":36.4},{"km":3.354,"ele":30.3},{"km":3.392,"ele":27},{"km":3.43,"ele":27},{"km":3.468,"ele":27},{"km":3.507,"ele":26.9},{"km":3.545,"ele":26.8},{"km":3.583,"ele":26.6},{"km":3.621,"ele":26.3},{"km":3.659,"ele":26.1},{"km":3.697,"ele":25.7},{"km":3.735,"ele":25.4},{"km":3.773,"ele":25.4},{"km":3.812,"ele":25.2},{"km":3.85,"ele":24.9},{"km":3.888,"ele":25},{"km":3.926,"ele":25},{"km":3.964,"ele":24.7},{"km":4.002,"ele":24.3},{"km":4.04,"ele":23.9},{"km":4.078,"ele":23.4},{"km":4.116,"ele":22.9},{"km":4.155,"ele":22},{"km":4.193,"ele":22.7},{"km":4.231,"ele":22.7},{"km":4.269,"ele":23.4},{"km":4.307,"ele":24},{"km":4.345,"ele":24.6},{"km":4.383,"ele":25.1},{"km":4.421,"ele":25.6},{"km":4.459,"ele":26},{"km":4.498,"ele":26.4},{"km":4.536,"ele":26.8},{"km":4.574,"ele":27.3},{"km":4.612,"ele":27.7},{"km":4.65,"ele":28.3},{"km":4.688,"ele":28.9},{"km":4.726,"ele":29.5},{"km":4.764,"ele":30.2},{"km":4.802,"ele":30.9},{"km":4.841,"ele":31.6},{"km":4.879,"ele":32},{"km":4.917,"ele":32},{"km":4.955,"ele":32.5},{"km":4.993,"ele":32.9},{"km":5.031,"ele":33.3},{"km":5.069,"ele":33.6},{"km":5.107,"ele":33.9},{"km":5.146,"ele":34.1},{"km":5.184,"ele":34.2},{"km":5.222,"ele":34.4},{"km":5.26,"ele":34.5},{"km":5.298,"ele":35},{"km":5.336,"ele":35},{"km":5.374,"ele":35.6},{"km":5.412,"ele":36.7},{"km":5.45,"ele":36.7},{"km":5.489,"ele":37.1},{"km":5.527,"ele":37.5},{"km":5.565,"ele":37.8},{"km":5.603,"ele":38},{"km":5.641,"ele":38.3},{"km":5.679,"ele":38.6},{"km":5.717,"ele":38.8},{"km":5.755,"ele":38.9},{"km":5.793,"ele":39},{"km":5.832,"ele":39.1},{"km":5.87,"ele":39.1},{"km":5.908,"ele":39},{"km":5.946,"ele":39},{"km":5.984,"ele":39},{"km":6.022,"ele":39.1},{"km":6.06,"ele":39.2},{"km":6.098,"ele":39.4},{"km":6.137,"ele":39.6},{"km":6.175,"ele":40},{"km":6.213,"ele":39.6},{"km":6.251,"ele":39.1},{"km":6.289,"ele":38.7},{"km":6.327,"ele":38.1},{"km":6.365,"ele":37.5},{"km":6.403,"ele":36.8},{"km":6.441,"ele":36.8},{"km":6.48,"ele":36},{"km":6.518,"ele":36.1},{"km":6.556,"ele":36.2},{"km":6.594,"ele":36.3},{"km":6.632,"ele":36.3},{"km":6.67,"ele":36.2},{"km":6.708,"ele":36.1},{"km":6.746,"ele":35.9},{"km":6.784,"ele":35.7},{"km":6.823,"ele":35.5},{"km":6.861,"ele":35.3},{"km":6.899,"ele":35.2},{"km":6.937,"ele":35.2},{"km":6.975,"ele":35.2},{"km":7.013,"ele":35.2},{"km":7.051,"ele":35.2},{"km":7.089,"ele":35.4},{"km":7.128,"ele":35.5},{"km":7.166,"ele":35.6},{"km":7.204,"ele":35.7},{"km":7.242,"ele":35.7},{"km":7.28,"ele":35.7},{"km":7.318,"ele":35.6},{"km":7.356,"ele":35.4},{"km":7.394,"ele":35.3},{"km":7.432,"ele":35.1},{"km":7.471,"ele":34.9},{"km":7.509,"ele":34.7},{"km":7.547,"ele":34.6},{"km":7.585,"ele":35},{"km":7.623,"ele":35}],"paceProfile":[{"km":0.203,"paceSecPerKm":308},{"km":0.41,"paceSecPerKm":308},{"km":0.653,"paceSecPerKm":308},{"km":0.864,"paceSecPerKm":308},{"km":1.107,"paceSecPerKm":304},{"km":1.308,"paceSecPerKm":298},{"km":1.539,"paceSecPerKm":298},{"km":1.741,"paceSecPerKm":298},{"km":1.945,"paceSecPerKm":298},{"km":2.177,"paceSecPerKm":298},{"km":2.416,"paceSecPerKm":298},{"km":2.619,"paceSecPerKm":298},{"km":2.82,"paceSecPerKm":298},{"km":3.027,"paceSecPerKm":298},{"km":3.24,"paceSecPerKm":300},{"km":3.467,"paceSecPerKm":300},{"km":3.693,"paceSecPerKm":330},{"km":3.936,"paceSecPerKm":332},{"km":4.149,"paceSecPerKm":332},{"km":4.352,"paceSecPerKm":519},{"km":4.596,"paceSecPerKm":332},{"km":4.834,"paceSecPerKm":303},{"km":5.042,"paceSecPerKm":282},{"km":5.246,"paceSecPerKm":282},{"km":5.454,"paceSecPerKm":282},{"km":5.69,"paceSecPerKm":289},{"km":5.931,"paceSecPerKm":300},{"km":6.157,"paceSecPerKm":300},{"km":6.359,"paceSecPerKm":300},{"km":6.563,"paceSecPerKm":300},{"km":6.805,"paceSecPerKm":300},{"km":7.013,"paceSecPerKm":300},{"km":7.216,"paceSecPerKm":300},{"km":7.42,"paceSecPerKm":291},{"km":7.623,"paceSecPerKm":290}],"pauses":[{"atKm":4.236,"durationSec":38,"lat":40.654895,"lon":-73.960005,"time":"2026-04-21T07:51:38.505Z"}]}],"waypoints":[{"lat":40.67225,"lon":-73.97,"name":"Grand Army Plaza","ele":36,"time":"2026-04-21T07:35:51.065Z"},{"lat":40.6665,"lon":-73.9725,"name":"Long Meadow N","ele":39,"time":"2026-04-21T07:39:11.166Z"},{"lat":40.6615,"lon":-73.9725,"name":"Picnic House","ele":41,"time":"2026-04-21T07:41:56.571Z"},{"lat":40.6578,"lon":-73.9705,"name":"Lookout Hill","ele":56,"time":"2026-04-21T07:44:10.348Z"},{"lat":40.6575,"lon":-73.9665,"name":"Wellhouse Drive","ele":48,"time":"2026-04-21T07:45:52.590Z"},{"lat":40.659,"lon":-73.964,"name":"Lakeside","ele":27,"time":"2026-04-21T07:47:12.528Z"},{"lat":40.6545,"lon":-73.963,"name":"Park Circle","ele":25,"time":"2026-04-21T07:49:59.052Z"},{"lat":40.6545,"lon":-73.96,"name":"Parkside Ave","ele":22,"time":"2026-04-21T07:51:23.485Z"},{"lat":40.661,"lon":-73.96,"name":"Ocean Ave","ele":32,"time":"2026-04-21T07:55:52.107Z"},{"lat":40.664,"lon":-73.963,"name":"Lincoln Rd","ele":35,"time":"2026-04-21T07:57:50.571Z"},{"lat":40.666,"lon":-73.965,"name":"Empire Blvd","ele":38,"time":"2026-04-21T07:59:09.949Z"},{"lat":40.671,"lon":-73.967,"name":"Eastern Pkwy","ele":40,"time":"2026-04-21T08:02:03.697Z"},{"lat":40.67225,"lon":-73.97,"name":"Grand Army Plaza","ele":36,"time":"2026-04-21T07:35:51.065Z"}],"totals":{"pointCount":191,"distanceKm":7.623,"elapsedSec":2348,"movingSec":2310,"elevationGainM":28,"maxSpeedKmh":12.8,"startTime":"2026-04-21T07:30:00.000Z","endTime":"2026-04-21T08:09:07.506Z","trackCount":1},"bbox":{"minLat":40.654449,"maxLat":40.672254,"minLon":-73.972558,"maxLon":-73.959945},"activityKind":"run","isWorkout":true,"meta":{"sourceFile":"input.gpx","sizeBytes":27603,"format":"gpx","kind":"gpx-route","routeName":"Morning run — Prospect Park loop","creator":"html-anything synthetic example","startTime":"2026-04-21T07:30:00.000Z","endTime":"2026-04-21T08:09:07.506Z","distanceKm":7.62,"elapsedSec":2348,"movingSec":2310,"elevationGainM":28,"pointCount":191,"trackCount":1,"waypointCount":13,"dateRange":"2026-04-21"}};</script>
+
+<div class="map-shell">
+  <!-- Header -->
+  <header class="atlas-header">
+    <span class="activity-chip">🏃 Run</span>
+    <span class="route-title" id="routeTitle">Morning run — Prospect Park loop</span>
+    <div class="header-actions">
+      <button class="btn-icon" id="copyMdBtn" title="Copy as Markdown">📋 Copy as Markdown</button>
+    </div>
+  </header>
+
+  <!-- Body -->
+  <div class="atlas-body">
+    <!-- Sidebar: stats + waypoints -->
+    <aside class="atlas-sidebar">
+
+      <!-- 1. Stats card -->
+      <div class="stats-card reveal reveal-1" id="statsCard">
+        <div class="section-label">Activity / Workout</div>
+        <div class="headline-read" id="headlineRead">Loading…</div>
+        <div class="stat-grid" id="statGrid"></div>
+      </div>
+
+      <!-- 4. Waypoints -->
+      <div class="waypoints-wrap reveal reveal-3" id="waypointsWrap">
+        <div class="section-heading">
+          Waypoints <span class="pill-label" id="waypointCount">0</span>
+        </div>
+        <input class="waypoint-search" id="waypointSearch" type="text" placeholder="Search waypoints…" autocomplete="off">
+        <div class="waypoint-list" id="waypointList"></div>
+      </div>
+
+      <!-- Pauses panel -->
+      <div class="pauses-wrap reveal reveal-4" id="pausesWrap">
+        <div class="section-heading">Pauses / Highlights</div>
+        <div id="pausesList"></div>
+      </div>
+
+    </aside>
+
+    <!-- Main: map + charts + drill-down -->
+    <main class="atlas-main">
+
+      <!-- 2. Route trace -->
+      <div class="reveal reveal-2">
+        <div class="section-heading">Route <span class="pill-label">Inline SVG</span></div>
+        <div class="atlas-stage-wrap" id="atlasStageWrap">
+          <div id="routeMapContainer"></div>
+          <div class="map-tooltip" id="mapTooltip"></div>
+          <div class="map-overlay">
+            <div class="north-arrow">N↑</div>
+            <div class="scale-bar">
+              <div class="scale-bar-line" id="scaleBarLine"></div>
+              <div class="scale-bar-label" id="scaleBarLabel"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Splits -->
+      <div class="splits-wrap reveal reveal-3" id="splitsWrap">
+        <div class="section-heading">Splits <span class="pill-label">per km</span></div>
+        <div class="splits-bars" id="splitsBars"></div>
+        <div class="splits-summary" id="splitsSummary"></div>
+      </div>
+
+      <!-- Elevation profile -->
+      <div class="elevation-chart-wrap reveal reveal-4" id="elevationWrap">
+        <div class="section-heading">Elevation <span class="pill-label">m above sea</span></div>
+        <div id="elevationChart"></div>
+      </div>
+
+      <!-- Pace profile -->
+      <div class="pace-chart-wrap reveal reveal-5" id="paceWrap">
+        <div class="section-heading">Pace Profile <span class="pill-label">rolling</span></div>
+        <div id="paceChart"></div>
+      </div>
+
+      <!-- 5. Browse all points -->
+      <div class="drilldown-wrap reveal reveal-5">
+        <button class="drilldown-toggle" id="drillToggle">
+          <span id="drillLabel">Browse all 191 points</span>
+          <span class="chevron">▾</span>
+        </button>
+        <div class="drilldown-content" id="drillContent">
+          <div class="drill-filters" id="drillFilters">
+            <div class="drill-chip active" data-filter="all">All</div>
+            <div class="drill-chip" data-filter="moving">Moving</div>
+            <div class="drill-chip" data-filter="paused">Paused</div>
+          </div>
+          <input class="drill-search" id="drillSearch" type="text" placeholder="Search lat / lon…" autocomplete="off">
+          <div class="drill-table-wrap">
+            <table class="drill-table" id="drillTable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Time</th>
+                  <th>Lat</th>
+                  <th>Lon</th>
+                  <th>Ele (m)</th>
+                  <th>Pace</th>
+                  <th>State</th>
+                </tr>
+              </thead>
+              <tbody id="drillTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <footer class="atlas-footer">
+    <p class="privacy-note">Generated locally — your route / itinerary / location data never left your machine. The full export is embedded in this HTML and rendered in your browser; no map tiles are loaded. For sharing, prefer an anonymized / cropped export.</p>
+  </footer>
+</div>
+
+<div class="split-tooltip" id="splitTooltip"></div>
+
+<script>
+(function(){
+'use strict';
+
+// ── Helpers ──────────────────────────────────────────────────────────
+function fmtPace(secPerKm){
+  if(!secPerKm||secPerKm>1800)return '—';
+  const m=Math.floor(secPerKm/60);
+  const s=Math.round(secPerKm%60);
+  return m+':'+(s<10?'0':'')+s+'/km';
+}
+function fmtDur(sec){
+  if(!sec)return '—';
+  const h=Math.floor(sec/3600);
+  const m=Math.floor((sec%3600)/60);
+  const s=Math.round(sec%60);
+  if(h>0)return h+'h '+m+'m '+s+'s';
+  return m+'m '+s+'s';
+}
+function fmtTime(iso){
+  if(!iso)return '—';
+  try{
+    const d=new Date(iso);
+    return d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:false});
+  }catch{return iso}
+}
+function fmtDate(iso){
+  if(!iso)return '—';
+  try{
+    const d=new Date(iso);
+    return d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  }catch{return iso}
+}
+function latlon5(v){return v!=null?v.toFixed(5):'—'}
+function reducedMotion(){return window.matchMedia('(prefers-reduced-motion:reduce)').matches}
+
+// ── Data normalisation ────────────────────────────────────────────────
+const D = DATA;
+const track = (D.tracks&&D.tracks[0])||{};
+const stats = track.stats||D.totals||{};
+const splits = track.splits||[];
+const elevProfile = track.elevationProfile||[];
+const paceProfile = track.paceProfile||[];
+const pauses = track.pauses||[];
+const waypoints = D.waypoints||[];
+const bbox = D.bbox||track.bbox||{minLat:0,maxLat:1,minLon:0,maxLon:1};
+const totals = D.totals||stats;
+
+// ── Title ─────────────────────────────────────────────────────────────
+const routeName = D.metadata&&D.metadata.name ? D.metadata.name :
+                  track.name||D.routeName||'Route';
+document.title = routeName+' ('+( (totals.distanceKm||0).toFixed(1) )+' km)';
+document.getElementById('routeTitle').textContent = routeName;
+
+// ── Stats card ────────────────────────────────────────────────────────
+function buildStatsCard(){
+  const dist = (totals.distanceKm||stats.distanceKm||0).toFixed(2);
+  const elapsed = totals.elapsedSec||stats.elapsedSec||0;
+  const moving = totals.movingSec||stats.movingSec||elapsed;
+  const gain = totals.elevationGainM||stats.elevationGainM||0;
+  const loss = stats.elevationLossM||0;
+  const avgPace = stats.avgPaceSecPerKm||stats.movingPaceSecPerKm||(totals.elapsedSec&&totals.distanceKm?Math.round(totals.elapsedSec/totals.distanceKm):0);
+  const movPace = stats.movingPaceSecPerKm||avgPace;
+  const maxSpd = totals.maxSpeedKmh||stats.maxSpeedKmh||0;
+  const startT = stats.startTime||totals.startTime;
+  const endT = stats.endTime||totals.endTime;
+
+  // Headline
+  const dateStr = startT?fmtDate(startT):'2026-04-21';
+  const slowSplit = splits.reduce((a,b)=>b.paceSecPerKm>a.paceSecPerKm?b:a,splits[0]||{paceSecPerKm:0});
+  const fastSplit = splits.reduce((a,b)=>b.paceSecPerKm<a.paceSecPerKm?b:a,splits[0]||{paceSecPerKm:9999});
+  let headline = `${dist} km run on ${dateStr} — ${fmtDur(moving)} at ${fmtPace(movPace)}, ${gain} m gain.`;
+  if(slowSplit.km) headline += ` Slowest split km ${slowSplit.km} (${fmtPace(slowSplit.paceSecPerKm)}).`;
+  if(pauses.length>0) headline += ` ${pauses.length} pause${pauses.length>1?'s':''} (${fmtDur(stats.pausedSec||38)}).`;
+  document.getElementById('headlineRead').textContent = headline;
+
+  const items = [
+    {val:dist+' km',label:'Distance',accent:true},
+    {val:fmtDur(moving),label:'Moving time'},
+    {val:fmtPace(movPace),label:'Pace (moving)'},
+    {val:fmtPace(avgPace),label:'Avg pace'},
+    {val:gain+' m',label:'Elev gain'},
+    {val:loss+' m',label:'Elev loss'},
+    {val:maxSpd?maxSpd.toFixed(1)+' km/h':'—',label:'Max speed'},
+    {val:fmtTime(startT)+' → '+fmtTime(endT),label:'Time window'},
+  ];
+  const grid = document.getElementById('statGrid');
+  grid.innerHTML = items.map(i=>`
+    <div class="stat-item">
+      <div class="stat-value${i.accent?' accent':''}">${i.val}</div>
+      <div class="stat-label">${i.label}</div>
+    </div>`).join('');
+}
+buildStatsCard();
+
+// ── Route map (SVG) ───────────────────────────────────────────────────
+function buildRouteMap(){
+  const polylineAttr = track.polyline||'';
+  // Extract viewBox and points
+  const vbMatch = polylineAttr.match(/viewBox="([^"]+)"/);
+  const ptsMatch = polylineAttr.match(/points="([^"]+)"/);
+  if(!vbMatch||!ptsMatch){
+    document.getElementById('routeMapContainer').innerHTML='<p style="padding:2rem;color:var(--fg-muted)">No route data.</p>';
+    return;
+  }
+  const vb = vbMatch[1]; // "0 0 W H"
+  const vbParts = vb.split(' ').map(Number);
+  const VW=vbParts[2],VH=vbParts[3];
+  const rawPoints = ptsMatch[1];
+
+  // Parse points for hover snapping
+  const pts = rawPoints.trim().split(/\s+/).map(p=>{
+    const [x,y]=p.split(',').map(Number);
+    return {x,y};
+  });
+
+  // Graticule: every 0.01° lat/lon mapped into viewBox
+  const avgLat=(bbox.minLat+bbox.maxLat)/2;
+  const lonScale=Math.cos(avgLat*Math.PI/180);
+  const sx=VW/((bbox.maxLon-bbox.minLon)*lonScale);
+  const sy=VH/(bbox.maxLat-bbox.minLat);
+  function projectLon(lon){return (lon-bbox.minLon)*lonScale*sx}
+  function projectLat(lat){return (bbox.maxLat-lat)*sy}
+
+  // Graticule lines
+  let graticule='';
+  const latStep=0.005,lonStep=0.005;
+  for(let la=Math.ceil(bbox.minLat/latStep)*latStep;la<=bbox.maxLat;la+=latStep){
+    const y=projectLat(la);
+    graticule+=`<line x1="0" y1="${y.toFixed(1)}" x2="${VW}" y2="${y.toFixed(1)}" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>`;
+  }
+  for(let lo=Math.ceil(bbox.minLon/lonStep)*lonStep;lo<=bbox.maxLon;lo+=lonStep){
+    const x=projectLon(lo);
+    graticule+=`<line x1="${x.toFixed(1)}" y1="0" x2="${x.toFixed(1)}" y2="${VH}" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>`;
+  }
+
+  // Waypoint markers
+  let wayptSvg='';
+  const uniqueWpts=[];
+  const seen=new Set();
+  waypoints.forEach(w=>{
+    const key=w.name;
+    if(!seen.has(key)){seen.add(key);uniqueWpts.push(w);}
+  });
+  uniqueWpts.forEach((w,i)=>{
+    const x=projectLon(w.lon);
+    const y=projectLat(w.lat);
+    const isStart=i===0;
+    const isEnd=i===uniqueWpts.length-1;
+    const col=isStart?'var(--green)':isEnd?'var(--red)':'var(--secondary-container)';
+    wayptSvg+=`<g class="wpt-dot" data-idx="${i}" style="cursor:pointer">
+      <circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="8" fill="${col}" opacity="0.85" stroke="white" stroke-width="2"/>
+      <text x="${(x+12).toFixed(1)}" y="${(y+4).toFixed(1)}" font-size="18" font-family="var(--font-headline)" fill="var(--fg-1)" stroke="var(--surface)" stroke-width="4" paint-order="stroke">${w.name}</text>
+    </g>`;
+  });
+
+  // Pause dot
+  let pauseSvg='';
+  pauses.forEach(p=>{
+    const x=projectLon(p.lon);
+    const y=projectLat(p.lat);
+    pauseSvg+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="10" fill="var(--yellow)" stroke="white" stroke-width="2" opacity="0.9"/>
+    <text x="${x.toFixed(1)}" y="${(y+5).toFixed(1)}" font-size="16" text-anchor="middle" font-family="sans-serif">⏸</text>`;
+  });
+
+  // Start/end from first/last track point
+  const firstPt=pts[0],lastPt=pts[pts.length-1];
+
+  // Build gradient defs
+  const gradId='routeGrad'+Math.random().toString(36).slice(2,7);
+
+  // Compute path length for dash animation
+  // We'll do it after rendering via JS
+  const pathId='rpath'+Math.random().toString(36).slice(2,7);
+
+  const svgHTML=`<svg viewBox="0 0 ${VW} ${VH}" xmlns="http://www.w3.org/2000/svg" style="color:var(--fg-muted);max-height:580px" id="routeSvg">
+    <defs>
+      <linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#10b981"/>
+        <stop offset="50%" stop-color="#3b82f6"/>
+        <stop offset="100%" stop-color="#ef4444"/>
+      </linearGradient>
+      <filter id="glow">
+        <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+        <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    ${graticule}
+    <polyline id="${pathId}" class="route-path" points="${rawPoints}" fill="none" stroke="url(#${gradId})" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+    ${pauseSvg}
+    ${wayptSvg}
+    <circle cx="${firstPt.x.toFixed(1)}" cy="${firstPt.y.toFixed(1)}" r="12" fill="var(--green)" stroke="white" stroke-width="3"/>
+    <circle cx="${lastPt.x.toFixed(1)}" cy="${lastPt.y.toFixed(1)}" r="12" fill="var(--red)" stroke="white" stroke-width="3"/>
+    <text x="${firstPt.x.toFixed(1)}" y="${(firstPt.y+5).toFixed(1)}" font-size="14" text-anchor="middle" fill="white" font-weight="700" font-family="sans-serif">S</text>
+    <text x="${lastPt.x.toFixed(1)}" y="${(lastPt.y+5).toFixed(1)}" font-size="14" text-anchor="middle" fill="white" font-weight="700" font-family="sans-serif">E</text>
+    <rect class="hit-rect" x="0" y="0" width="${VW}" height="${VH}" fill="transparent" id="svgHitRect"/>
+  </svg>`;
+
+  document.getElementById('routeMapContainer').innerHTML=svgHTML;
+
+  // Animate path draw
+  const pathEl=document.getElementById(pathId);
+  if(pathEl&&!reducedMotion()){
+    try{
+      const len=pathEl.getTotalLength&&pathEl.getTotalLength()||9999;
+      pathEl.style.setProperty('--path-len',len);
+      pathEl.style.strokeDasharray=len;
+      pathEl.style.strokeDashoffset=len;
+      requestAnimationFrame(()=>{
+        requestAnimationFrame(()=>{
+          pathEl.style.transition='stroke-dashoffset 1.4s cubic-bezier(0.4,0,0.2,1)';
+          pathEl.style.strokeDashoffset=0;
+        });
+      });
+    }catch(e){pathEl.style.strokeDashoffset=0;}
+  } else if(pathEl){
+    pathEl.style.strokeDashoffset=0;
+  }
+
+  // Scale bar
+  const haversineKm=(la1,lo1,la2,lo2)=>{
+    const R=6371;
+    const dLat=(la2-la1)*Math.PI/180;
+    const dLon=(lo2-lo1)*Math.PI/180;
+    const a=Math.sin(dLat/2)**2+Math.cos(la1*Math.PI/180)*Math.cos(la2*Math.PI/180)*Math.sin(dLon/2)**2;
+    return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+  };
+  const totalWidthKm=haversineKm(avgLat,bbox.minLon,avgLat,bbox.maxLon);
+  const scaleKm=Math.round(totalWidthKm/4*10)/10||0.5;
+  const scalePixels=(scaleKm/totalWidthKm)*100;
+  const sbl=document.getElementById('scaleBarLine');
+  const sblabel=document.getElementById('scaleBarLabel');
+  if(sbl){sbl.style.width=scalePixels+'%';sbl.style.minWidth='40px'}
+  if(sblabel){sblabel.textContent=scaleKm.toFixed(1)+' km'}
+
+  // Hover tooltip
+  const svgEl=document.getElementById('routeSvg');
+  const tooltip=document.getElementById('mapTooltip');
+  if(svgEl&&tooltip&&pts.length){
+    svgEl.addEventListener('mousemove',e=>{
+      const rect=svgEl.getBoundingClientRect();
+      const scaleX=VW/rect.width;
+      const scaleY=VH/rect.height;
+      const mx=(e.clientX-rect.left)*scaleX;
+      const my=(e.clientY-rect.top)*scaleY;
+      // Find closest point
+      let best=0,bestDist=Infinity;
+      pts.forEach((p,i)=>{
+        const d=(p.x-mx)**2+(p.y-my)**2;
+        if(d<bestDist){bestDist=d;best=i;}
+      });
+      const p=pts[best];
+      const approxKm=(best/(pts.length-1))*(totals.distanceKm||0);
+      // Find elevation
+      let ele='—';
+      if(elevProfile.length){
+        const ep=elevProfile.reduce((a,b)=>Math.abs(b.km-approxKm)<Math.abs(a.km-approxKm)?b:a,elevProfile[0]);
+        ele=ep.ele.toFixed(1)+' m';
+      }
+      // Find pace
+      let pace='—';
+      if(paceProfile.length){
+        const pp=paceProfile.reduce((a,b)=>Math.abs(b.km-approxKm)<Math.abs(a.km-approxKm)?b:a,paceProfile[0]);
+        if(pp.paceSecPerKm<600)pace=fmtPace(pp.paceSecPerKm);
+      }
+      tooltip.innerHTML=`<b>km ${approxKm.toFixed(2)}</b><br>Ele: ${ele}<br>Pace: ${pace}<br><span style="font-size:0.65rem;color:var(--fg-muted)">pt #${best+1}</span>`;
+      // Position tooltip
+      const pxNorm=p.x/VW*rect.width+rect.left;
+      const pyNorm=p.y/VH*rect.height+rect.top;
+      const tw=document.getElementById('routeMapContainer');
+      const cRect=tw.getBoundingClientRect();
+      let tx=pxNorm-cRect.left+12;
+      let ty=pyNorm-cRect.top-20;
+      if(tx+200>cRect.width)tx=pxNorm-cRect.left-180;
+      if(ty<0)ty=pyNorm-cRect.top+12;
+      tooltip.style.left=tx+'px';
+      tooltip.style.top=ty+'px';
+      tooltip.classList.add('visible');
+    });
+    svgEl.addEventListener('mouseleave',()=>tooltip.classList.remove('visible'));
+  }
+
+  // Waypoint click → highlight waypoint row
+  document.querySelectorAll('.wpt-dot').forEach(el=>{
+    el.addEventListener('click',()=>{
+      const idx=parseInt(el.dataset.idx);
+      const rows=document.querySelectorAll('.waypoint-row');
+      rows.forEach(r=>r.classList.remove('highlighted'));
+      const target=rows[idx];
+      if(target){
+        target.classList.add('highlighted');
+        target.scrollIntoView({behavior:'smooth',block:'nearest'});
+      }
+    });
+  });
+}
+buildRouteMap();
+
+// ── Splits bars ───────────────────────────────────────────────────────
+function buildSplits(){
+  if(!splits.length){
+    document.getElementById('splitsWrap').innerHTML='<div class="section-heading">Splits</div><p class="no-pauses">No split data available.</p>';
+    return;
+  }
+  const maxPace=Math.max(...splits.map(s=>s.paceSecPerKm));
+  const minPace=Math.min(...splits.map(s=>s.paceSecPerKm));
+  const avgPace=splits.reduce((a,b)=>a+b.paceSecPerKm,0)/splits.length;
+
+  // Bar width: slowest split = 100%, fastest = minPace/maxPace * 100
+  const container=document.getElementById('splitsBars');
+  const tooltip=document.getElementById('splitTooltip');
+
+  splits.forEach(s=>{
+    const isSlowest=s.paceSecPerKm===maxPace;
+    const isFastest=s.paceSecPerKm===minPace;
+    const cls=isSlowest?'slowest':isFastest?'fastest':'normal';
+    const pct=(s.paceSecPerKm/maxPace)*100;
+    const row=document.createElement('div');
+    row.className='split-row';
+    row.innerHTML=`
+      <div class="split-km">${s.km}</div>
+      <div class="split-bar-track">
+        <div class="split-bar-fill ${cls}" style="width:0%;max-width:${pct}%" data-target="${pct}">
+          <span class="split-pace">${fmtPace(s.paceSecPerKm)}</span>
+        </div>
+      </div>
+      <div class="split-meta">${isSlowest?'🐢':isFastest?'⚡':''} ${s.elevationGainM?'+'+s.elevationGainM+'m':''}</div>`;
+    // hover tooltip
+    row.addEventListener('mouseenter',e=>{
+      tooltip.innerHTML=`km ${s.km}<br>Pace: ${fmtPace(s.paceSecPerKm)}<br>Time: ${fmtDur(s.durationSec)}<br>${s.elevationGainM?'↑'+s.elevationGainM+'m ':''} ${s.elevationLossM?'↓'+s.elevationLossM+'m':''}`;
+      tooltip.classList.add('visible');
+    });
+    row.addEventListener('mousemove',e=>{
+      tooltip.style.left=(e.clientX+14)+'px';
+      tooltip.style.top=(e.clientY-40)+'px';
+    });
+    row.addEventListener('mouseleave',()=>tooltip.classList.remove('visible'));
+    container.appendChild(row);
+  });
+
+  // Animate bars after a frame
+  if(!reducedMotion()){
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        document.querySelectorAll('.split-bar-fill').forEach(el=>{
+          el.style.width=el.dataset.target+'%';
+        });
+      });
+    });
+  } else {
+    document.querySelectorAll('.split-bar-fill').forEach(el=>{el.style.width=el.dataset.target+'%'});
+  }
+
+  // Summary
+  const stdev=Math.sqrt(splits.reduce((a,s)=>a+(s.paceSecPerKm-avgPace)**2,0)/splits.length);
+  document.getElementById('splitsSummary').innerHTML=`
+    <div class="splits-summary-item">Median: <strong>${fmtPace(avgPace)}</strong></div>
+    <div class="splits-summary-item">Fastest: <strong>${fmtPace(minPace)} (km ${splits.find(s=>s.paceSecPerKm===minPace).km})</strong></div>
+    <div class="splits-summary-item">Slowest: <strong>${fmtPace(maxPace)} (km ${splits.find(s=>s.paceSecPerKm===maxPace).km})</strong></div>
+    <div class="splits-summary-item">Std dev: <strong>${fmtPace(Math.round(stdev))}</strong></div>`;
+}
+buildSplits();
+
+// ── Elevation chart ───────────────────────────────────────────────────
+function buildElevation(){
+  if(!elevProfile.length){document.getElementById('elevationWrap').style.display='none';return;}
+  const W=800,H=160,PAD={top:24,right:16,bottom:28,left:40};
+  const CW=W-PAD.left-PAD.right,CH=H-PAD.top-PAD.bottom;
+  const eles=elevProfile.map(p=>p.ele);
+  const kms=elevProfile.map(p=>p.km);
+  const minE=Math.min(...eles),maxE=Math.max(...eles);
+  const minK=kms[0],maxK=kms[kms.length-1];
+  const sx=v=>(v-minK)/(maxK-minK)*CW;
+  const sy=v=>CH-(v-minE)/(maxE-minE||1)*CH;
+
+  const pts=elevProfile.map(p=>`${PAD.left+sx(p.km).toFixed(1)},${PAD.top+sy(p.ele).toFixed(1)}`).join(' ');
+  const first=elevProfile[0],last=elevProfile[elevProfile.length-1];
+  const areaPath=`M${PAD.left+sx(first.km).toFixed(1)},${PAD.top+CH} `+
+    elevProfile.map(p=>`L${PAD.left+sx(p.km).toFixed(1)},${PAD.top+sy(p.ele).toFixed(1)}`).join(' ')+
+    ` L${PAD.left+sx(last.km).toFixed(1)},${PAD.top+CH} Z`;
+
+  // High + low
+  const maxEpt=elevProfile.reduce((a,b)=>b.ele>a.ele?b:a);
+  const minEpt=elevProfile.reduce((a,b)=>b.ele<a.ele?b:a);
+
+  // Y axis ticks
+  const yTicks=[];
+  const tickStep=Math.ceil((maxE-minE)/4/5)*5||5;
+  for(let e=Math.floor(minE/tickStep)*tickStep;e<=maxE;e+=tickStep)yTicks.push(e);
+
+  // X axis ticks (each km)
+  const xTicks=splits.map(s=>s.km);
+
+  const svg=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;overflow:visible">
+    <defs>
+      <linearGradient id="eleGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="var(--primary)" stop-opacity="0.5"/>
+        <stop offset="100%" stop-color="var(--primary)" stop-opacity="0.03"/>
+      </linearGradient>
+    </defs>
+    ${yTicks.map(t=>`
+      <line x1="${PAD.left}" y1="${(PAD.top+sy(t)).toFixed(1)}" x2="${PAD.left+CW}" y2="${(PAD.top+sy(t)).toFixed(1)}" stroke="var(--border)" stroke-width="1"/>
+      <text x="${PAD.left-6}" y="${(PAD.top+sy(t)+4).toFixed(1)}" font-size="9" fill="var(--fg-muted)" text-anchor="end" font-family="var(--font-mono)">${t}</text>`).join('')}
+    ${xTicks.map(k=>`
+      <line x1="${(PAD.left+sx(k)).toFixed(1)}" y1="${PAD.top}" x2="${(PAD.left+sx(k)).toFixed(1)}" y2="${PAD.top+CH}" stroke="var(--border)" stroke-width="1" stroke-dasharray="3,3"/>
+      <text x="${(PAD.left+sx(k)).toFixed(1)}" y="${PAD.top+CH+14}" font-size="9" fill="var(--fg-muted)" text-anchor="middle" font-family="var(--font-mono)">${k}km</text>`).join('')}
+    <path d="${areaPath}" fill="url(#eleGrad)"/>
+    <polyline points="${pts}" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- High point -->
+    <circle cx="${(PAD.left+sx(maxEpt.km)).toFixed(1)}" cy="${(PAD.top+sy(maxEpt.ele)).toFixed(1)}" r="4" fill="var(--primary)" stroke="white" stroke-width="1.5"/>
+    <text x="${(PAD.left+sx(maxEpt.km)).toFixed(1)}" y="${(PAD.top+sy(maxEpt.ele)-8).toFixed(1)}" font-size="9" fill="var(--primary)" text-anchor="middle" font-family="var(--font-mono)" font-weight="700">▲ ${maxEpt.ele.toFixed(0)}m @ ${maxEpt.km.toFixed(2)}km</text>
+    <!-- Low point -->
+    <circle cx="${(PAD.left+sx(minEpt.km)).toFixed(1)}" cy="${(PAD.top+sy(minEpt.ele)).toFixed(1)}" r="4" fill="var(--blue)" stroke="white" stroke-width="1.5"/>
+    <text x="${(PAD.left+sx(minEpt.km)).toFixed(1)}" y="${(PAD.top+sy(minEpt.ele)+18).toFixed(1)}" font-size="9" fill="var(--blue)" text-anchor="middle" font-family="var(--font-mono)" font-weight="700">▼

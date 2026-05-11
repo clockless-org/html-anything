@@ -1,510 +1,631 @@
 <!doctype html>
 <html lang="en" data-ha-style="dashboard">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pricing Page V2 — Sprint Review</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <style>
-    :root {
-      /* Brand */
-      --primary: #a03b00;
-      --primary-container: #c94c00;
-      --primary-fixed: #ffdbcd;
-      --primary-fixed-dim: #ffb597;
-      --on-primary: #ffffff;
-      --accent-glow: #E8400D;
-
-      /* Secondary / tertiary */
-      --secondary: #d5baff;
-      --secondary-container: #7b40e0;
-      --tertiary: #4d44e3;
-      --accent-cyan: #00D4FF;
-
-      /* Surfaces */
-      --bg: #fff8f6;
-      --surface: #fff8f6;
-      --surface-container-lowest: #ffffff;
-      --surface-container-low: #fbf2ef;
-      --surface-container: #f5ece9;
-      --surface-container-high: #efe6e3;
-
-      /* Text */
-      --fg-1: #1e1b19;
-      --fg-2: #594138;
-      --fg-muted: #8d7166;
-
-      /* Borders */
-      --border: rgba(0, 0, 0, 0.06);
-      --border-strong: rgba(0, 0, 0, 0.12);
-      --outline-variant: #e1bfb2;
-
-      /* Status */
-      --green: #10b981;
-      --blue: #3b82f6;
-      --yellow: #f59e0b;
-      --red: #ef4444;
-
-      /* Typography */
-      --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-      --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
-      --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
-
-      /* Spacing (4px base) */
-      --space-xs: 4px;
-      --space-sm: 8px;
-      --space-md: 12px;
-      --space-lg: 16px;
-      --space-xl: 20px;
-      --space-2xl: 24px;
-      --space-3xl: 32px;
-      --space-4xl: 48px;
-      --space-5xl: 64px;
-
-      /* Radius */
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
-      --radius-xl: 20px;
-      --radius-2xl: 28px;
-      --radius-pill: 9999px;
-
-      /* Shadows */
-      --shadow-sm: 0 1px 2px rgba(30, 27, 25, 0.04);
-      --shadow-md: 0 4px 12px rgba(30, 27, 25, 0.08);
-      --shadow-lg: 0 8px 24px rgba(30, 27, 25, 0.12);
-      --shadow-accent: 0 8px 24px rgba(160, 59, 0, 0.15);
-
-      /* Gradients */
-      --gradient-primary: linear-gradient(135deg, #a03b00 0%, #c94c00 100%);
-      --gradient-hero: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
-      --gradient-text: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #060B18;
-        --surface: #0B1426;
-        --surface-container-lowest: #101D35;
-        --surface-container-low: #101D35;
-        --surface-container: #162544;
-        --surface-container-high: #1c2d52;
-        --fg-1: #F8FAFC;
-        --fg-2: #CBD5E1;
-        --fg-muted: #64748B;
-        --border: rgba(255, 255, 255, 0.08);
-        --border-strong: rgba(255, 255, 255, 0.14);
-        --primary: #FF6B35;
-        --accent-glow: #00D4FF;
-        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-        --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
-      }
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      width: 100%;
-      height: 100%;
-    }
-
-    body {
-      font-family: var(--font-body);
-      font-size: 15px;
-      line-height: 1.6;
-      color: var(--fg-1);
-      background: var(--bg);
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: var(--space-lg);
-    }
-
-    /* Header */
-    .header {
-      margin-bottom: var(--space-4xl);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: var(--space-3xl);
-    }
-
-    .header h1 {
-      font-family: var(--font-headline);
-      font-size: clamp(28px, 5vw, 42px);
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      color: var(--fg-1);
-      margin-bottom: var(--space-md);
-    }
-
-    .meeting-summary {
-      font-size: 15px;
-      line-height: 1.6;
-      color: var(--fg-2);
-      margin-bottom: var(--space-lg);
-    }
-
-    .meeting-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-lg);
-      font-size: 14px;
-      color: var(--fg-muted);
-      font-family: var(--font-mono);
-    }
-
-    /* Card */
-    .card {
-      background: var(--surface-container-lowest);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-2xl);
-      margin-bottom: var(--space-3xl);
-      box-shadow: var(--shadow-md);
-    }
-
-    .card h2 {
-      font-family: var(--font-headline);
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      color: var(--fg-1);
-      margin-bottom: var(--space-lg);
-    }
-
-    /* Section title */
-    .section-title {
-      font-family: var(--font-headline);
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      color: var(--fg-1);
-      margin-bottom: var(--space-lg);
-      margin-top: var(--space-2xl);
-    }
-
-    /* Speakers */
-    .speaker-item {
-      margin-bottom: var(--space-lg);
-    }
-
-    .speaker-name {
-      font-weight: 600;
-      color: var(--fg-1);
-      margin-bottom: var(--space-sm);
-      font-size: 14px;
-    }
-
-    .speaker-stats {
-      font-size: 12px;
-      color: var(--fg-muted);
-      margin-bottom: var(--space-sm);
-    }
-
-    .talk-time-bar {
-      width: 100%;
-      height: 24px;
-      background: var(--surface-container-high);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-    }
-
-    .talk-time-fill {
-      height: 100%;
-      background: var(--gradient-primary);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 11px;
-      font-weight: 600;
-      font-family: var(--font-mono);
-    }
-
-    /* Decisions / Actions / Questions */
-    .item-card {
-      background: var(--surface-container-low);
-      border-left: 4px solid var(--primary);
-      padding: var(--space-lg);
-      margin-bottom: var(--space-md);
-      border-radius: var(--radius-md);
-    }
-
-    .item-text {
-      color: var(--fg-1);
-      margin-bottom: var(--space-sm);
-      line-height: 1.6;
-    }
-
-    .item-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-md);
-      font-size: 12px;
-      color: var(--fg-muted);
-    }
-
-    .timestamp-chip {
-      background: var(--surface-container);
-      padding: var(--space-xs) var(--space-sm);
-      border-radius: var(--radius-sm);
-      font-family: var(--font-mono);
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .timestamp-chip:hover {
-      background: var(--surface-container-high);
-    }
-
-    .speaker-chip {
-      background: var(--primary-fixed);
-      color: var(--primary);
-      padding: var(--space-xs) var(--space-sm);
-      border-radius: var(--radius-sm);
-      font-weight: 600;
-      font-size: 12px;
-    }
-
-    /* Empty state */
-    .empty-state {
-      color: var(--fg-muted);
-      font-style: italic;
-      padding: var(--space-lg);
-    }
-
-    /* Timeline */
-    .timeline-container {
-      position: relative;
-      margin-top: var(--space-lg);
-      overflow-x: auto;
-    }
-
-    .timeline {
-      display: flex;
-      gap: var(--space-sm);
-      padding: var(--space-md) 0;
-      min-width: min-content;
-    }
-
-    .timeline-slot {
-      flex: 1;
-      min-width: 40px;
-      height: 120px;
-      background: var(--surface-container);
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      position: relative;
-    }
-
-    .timeline-speaker {
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 100%;
-      display: flex;
-      gap: var(--space-xs);
-      padding: var(--space-xs);
-      flex-wrap: wrap;
-      align-content: flex-start;
-    }
-
-    .timeline-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-    }
-
-    /* Transcript */
-    .transcript-controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-md);
-      margin-bottom: var(--space-lg);
-      align-items: center;
-    }
-
-    .search-box {
-      flex: 1;
-      min-width: 200px;
-      padding: var(--space-sm) var(--space-lg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      background: var(--surface-container-lowest);
-      color: var(--fg-1);
-      font-family: var(--font-body);
-      font-size: 14px;
-    }
-
-    .search-box::placeholder {
-      color: var(--fg-muted);
-    }
-
-    .speaker-filter {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-sm);
-    }
-
-    .filter-chip {
-      padding: var(--space-sm) var(--space-md);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-pill);
-      background: var(--surface-container-low);
-      color: var(--fg-1);
-      cursor: pointer;
-      font-size: 13px;
-      transition: all 0.2s;
-    }
-
-    .filter-chip.active {
-      background: var(--primary);
-      color: var(--on-primary);
-      border-color: var(--primary);
-    }
-
-    .cue {
-      margin-bottom: var(--space-lg);
-      padding: var(--space-lg);
-      background: var(--surface-container-low);
-      border-left: 3px solid transparent;
-      border-radius: var(--radius-md);
-      transition: all 0.2s;
-    }
-
-    .cue.hidden {
-      display: none;
-    }
-
-    .cue.highlight {
-      background: var(--primary-fixed);
-      border-left-color: var(--primary);
-    }
-
-    .cue-speaker {
-      font-weight: 600;
-      color: var(--primary);
-      font-size: 13px;
-      margin-bottom: var(--space-sm);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .cue-text {
-      color: var(--fg-1);
-      margin-bottom: var(--space-sm);
-      line-height: 1.6;
-    }
-
-    .cue-footer {
-      display: flex;
-      gap: var(--space-md);
-      font-size: 12px;
-    }
-
-    .cue-timestamp {
-      color: var(--fg-muted);
-      font-family: var(--font-mono);
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .cue-timestamp:hover {
-      color: var(--primary);
-    }
-
-    .copy-btn {
-      background: none;
-      border: none;
-      color: var(--fg-muted);
-      cursor: pointer;
-      font-size: 12px;
-      padding: 0;
-      transition: color 0.2s;
-    }
-
-    .copy-btn:hover {
-      color: var(--primary);
-    }
-
-    .copy-btn.copied {
-      color: var(--green);
-    }
-
-    /* Footer */
-    .footer {
-      border-top: 1px solid var(--border);
-      padding-top: var(--space-2xl);
-      margin-top: var(--space-4xl);
-      color: var(--fg-muted);
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    .footer p {
-      margin-bottom: var(--space-md);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .container {
-        padding: var(--space-md);
-      }
-
-      .header h1 {
-        font-size: 24px;
-      }
-
-      .card {
-        padding: var(--space-lg);
-      }
-
-      .meeting-meta {
-        flex-direction: column;
-        gap: var(--space-sm);
-      }
-
-      .transcript-controls {
-        flex-direction: column;
-      }
-
-      .search-box {
-        width: 100%;
-      }
-
-      .speaker-filter {
-        width: 100%;
-      }
-
-      .timeline {
-        gap: var(--space-xs);
-      }
-
-      .timeline-slot {
-        min-width: 30px;
-        height: 80px;
-      }
-    }
-
-    /* SVG charts */
-    svg {
-      max-width: 100%;
-      height: auto;
-    }
-
-    .chart-container {
-      margin: var(--space-lg) 0;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing Page V2 — Sprint Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --accent-cyan: #00D4FF;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981;
+  --blue: #3b82f6;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30,27,25,0.04);
+  --shadow-md: 0 4px 12px rgba(30,27,25,0.08);
+  --shadow-lg: 0 8px 24px rgba(30,27,25,0.12);
+  --shadow-accent: 0 8px 24px rgba(160,59,0,0.15);
+  --gradient-primary: linear-gradient(135deg,#a03b00 0%,#c94c00 100%);
+  --gradient-hero: linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
+  --sp-casey: #a03b00;
+  --sp-mia: #7b40e0;
+  --sp-devon: #4d44e3;
+  --sp-wes: #10b981;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #060B18;
+    --surface: #0B1426;
+    --surface-container-lowest: #101D35;
+    --surface-container-low: #101D35;
+    --surface-container: #162544;
+    --surface-container-high: #1c2d52;
+    --fg-1: #F8FAFC;
+    --fg-2: #CBD5E1;
+    --fg-muted: #64748B;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --primary: #FF6B35;
+    --accent-glow: #00D4FF;
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+  }
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--fg-1);
+  font-size:15px;
+  line-height:1.55;
+  min-height:100vh;
+}
+h1,h2,h3,h4{font-family:var(--font-headline);letter-spacing:-0.01em;font-weight:600}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+input{font-family:inherit}
+
+/* ── OPS SHELL ── */
+.ops-shell{
+  max-width:1200px;
+  margin:0 auto;
+  padding:var(--space-lg) var(--space-lg) var(--space-5xl);
+}
+
+/* ── COMMAND BAR ── */
+.command-bar{
+  background:var(--surface-container-low);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:var(--space-md) var(--space-lg);
+  display:flex;
+  align-items:center;
+  gap:var(--space-md);
+  flex-wrap:wrap;
+  margin-bottom:var(--space-2xl);
+  box-shadow:var(--shadow-sm);
+  position:sticky;
+  top:var(--space-sm);
+  z-index:100;
+}
+.command-bar-title{
+  font-family:var(--font-headline);
+  font-size:15px;
+  font-weight:700;
+  color:var(--fg-1);
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.command-bar-meta{
+  font-size:12px;
+  color:var(--fg-muted);
+  white-space:nowrap;
+  flex-shrink:0;
+  font-family:var(--font-mono);
+}
+.command-bar-spacer{flex:1;min-width:var(--space-sm)}
+.search-box{
+  display:flex;
+  align-items:center;
+  gap:var(--space-sm);
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-pill);
+  padding:var(--space-xs) var(--space-md);
+  min-width:160px;
+  max-width:240px;
+  flex:1;
+}
+.search-box svg{flex-shrink:0;opacity:0.45}
+.search-box input{
+  background:none;
+  border:none;
+  outline:none;
+  color:var(--fg-1);
+  font-size:13px;
+  width:100%;
+}
+.search-box input::placeholder{color:var(--fg-muted)}
+.copy-btn{
+  display:flex;
+  align-items:center;
+  gap:var(--space-xs);
+  font-size:12px;
+  font-weight:500;
+  color:var(--fg-2);
+  background:var(--surface-container);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-pill);
+  padding:var(--space-xs) var(--space-md);
+  transition:background 150ms,color 150ms;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.copy-btn:hover{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.copy-btn.copied{background:var(--green);color:#fff;border-color:var(--green)}
+
+/* ── KPI RAIL ── */
+.kpi-rail{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:var(--space-md);
+  margin-bottom:var(--space-2xl);
+}
+.kpi-cell{
+  background:var(--surface-container-low);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:var(--space-lg);
+  box-shadow:var(--shadow-sm);
+}
+.kpi-cell-label{
+  font-size:11px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  color:var(--fg-muted);
+  margin-bottom:var(--space-xs);
+}
+.kpi-cell-value{
+  font-family:var(--font-headline);
+  font-size:22px;
+  font-weight:700;
+  color:var(--fg-1);
+  font-variant-numeric:tabular-nums;
+  line-height:1.2;
+}
+.kpi-cell-sub{font-size:12px;color:var(--fg-muted);margin-top:2px}
+.kpi-cell.accent .kpi-cell-value{color:var(--primary)}
+
+/* ── SUMMARY CARD ── */
+.summary-card{
+  background:var(--surface-container-low);
+  border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+  padding:var(--space-xl) var(--space-2xl);
+  margin-bottom:var(--space-2xl);
+  box-shadow:var(--shadow-sm);
+}
+.summary-card-headline{
+  font-family:var(--font-headline);
+  font-size:13px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.07em;
+  color:var(--fg-muted);
+  margin-bottom:var(--space-sm);
+}
+.summary-card-body{
+  font-size:15px;
+  line-height:1.65;
+  color:var(--fg-2);
+}
+
+/* ── SECTION HEADERS ── */
+.section-header{
+  display:flex;
+  align-items:center;
+  gap:var(--space-md);
+  margin-bottom:var(--space-lg);
+}
+.section-label{
+  font-family:var(--font-headline);
+  font-size:14px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.07em;
+  color:var(--fg-muted);
+}
+.section-count{
+  font-size:11px;
+  font-family:var(--font-mono);
+  color:var(--fg-muted);
+  background:var(--surface-container);
+  border:1px solid var(--border);
+  border-radius:var(--radius-pill);
+  padding:1px 8px;
+}
+.section-divider{flex:1;height:1px;background:var(--border)}
+
+/* ── WORK SURFACE GRID ── */
+.work-surface{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:var(--space-lg);
+  margin-bottom:var(--space-2xl);
+}
+@media(max-width:700px){.work-surface{grid-template-columns:1fr}}
+
+/* ── PANEL ── */
+.panel{
+  background:var(--surface-container-low);
+  border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+  padding:var(--space-xl);
+  box-shadow:var(--shadow-sm);
+}
+.panel-title{
+  font-family:var(--font-headline);
+  font-size:13px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  color:var(--fg-muted);
+  margin-bottom:var(--space-lg);
+}
+
+/* ── SPEAKERS ── */
+.speaker-list{display:flex;flex-direction:column;gap:var(--space-md)}
+.speaker-row{display:flex;flex-direction:column;gap:var(--space-xs)}
+.speaker-row-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--space-sm);
+}
+.speaker-dot{
+  width:10px;height:10px;
+  border-radius:50%;
+  flex-shrink:0;
+}
+.speaker-name{
+  font-size:13px;
+  font-weight:600;
+  color:var(--fg-1);
+  flex:1;
+}
+.speaker-stats{
+  font-size:11px;
+  font-family:var(--font-mono);
+  color:var(--fg-muted);
+  display:flex;
+  gap:var(--space-md);
+}
+.speaker-bar-track{
+  height:6px;
+  background:var(--surface-container);
+  border-radius:var(--radius-pill);
+  overflow:hidden;
+}
+.speaker-bar-fill{
+  height:100%;
+  border-radius:var(--radius-pill);
+  transition:width 600ms cubic-bezier(.4,0,.2,1);
+  width:0;
+}
+
+/* ── DONUT CHART ── */
+.donut-wrap{display:flex;align-items:center;gap:var(--space-xl);flex-wrap:wrap}
+.donut-legend{display:flex;flex-direction:column;gap:var(--space-sm);flex:1}
+.donut-legend-item{display:flex;align-items:center;gap:var(--space-sm);font-size:12px}
+.donut-legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.donut-legend-name{color:var(--fg-2);flex:1}
+.donut-legend-pct{font-family:var(--font-mono);font-weight:600;color:var(--fg-1)}
+
+/* ── TIMELINE ── */
+.timeline-svg-wrap{overflow-x:auto;margin-bottom:var(--space-sm)}
+.timeline-svg-wrap svg{display:block}
+
+/* ── DECISIONS ── */
+.decision-list{display:flex;flex-direction:column;gap:var(--space-md)}
+.decision-card{
+  background:var(--surface-container);
+  border:1px solid var(--border);
+  border-left:3px solid var(--primary);
+  border-radius:var(--radius-md);
+  padding:var(--space-md) var(--space-lg);
+}
+.decision-num{
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  color:var(--primary);
+  margin-bottom:var(--space-xs);
+}
+.decision-text{
+  font-size:14px;
+  color:var(--fg-1);
+  line-height:1.5;
+  margin-bottom:var(--space-xs);
+}
+.decision-meta{display:flex;align-items:center;gap:var(--space-sm);flex-wrap:wrap}
+.ts-chip{
+  font-family:var(--font-mono);
+  font-size:11px;
+  background:var(--surface-container-high);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-pill);
+  padding:1px 8px;
+  color:var(--fg-muted);
+  cursor:pointer;
+  transition:background 150ms,color 150ms;
+  text-decoration:none;
+  display:inline-block;
+}
+.ts-chip:hover{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.speaker-tag{
+  font-size:11px;
+  font-weight:600;
+  border-radius:var(--radius-pill);
+  padding:1px 8px;
+  color:#fff;
+}
+.empty-state{
+  font-size:13px;
+  color:var(--fg-muted);
+  font-style:italic;
+  padding:var(--space-sm) 0;
+}
+
+/* ── ACTION ITEMS TABLE ── */
+.ai-table{width:100%;border-collapse:collapse;font-size:13px}
+.ai-table th{
+  text-align:left;
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  color:var(--fg-muted);
+  border-bottom:1px solid var(--border-strong);
+  padding:var(--space-sm) var(--space-md);
+}
+.ai-table td{
+  padding:var(--space-sm) var(--space-md);
+  border-bottom:1px solid var(--border);
+  color:var(--fg-2);
+  vertical-align:top;
+}
+.ai-table tr:last-child td{border-bottom:none}
+.ai-table tr:hover td{background:var(--surface-container)}
+.owner-badge{
+  font-size:11px;
+  font-weight:600;
+  border-radius:var(--radius-pill);
+  padding:2px 8px;
+  color:#fff;
+  white-space:nowrap;
+  display:inline-block;
+}
+
+/* ── OPEN QUESTIONS ── */
+.oq-list{display:flex;flex-direction:column;gap:var(--space-sm)}
+.oq-item{
+  background:rgba(245,158,11,0.08);
+  border:1px solid rgba(245,158,11,0.22);
+  border-left:3px solid var(--yellow);
+  border-radius:var(--radius-md);
+  padding:var(--space-sm) var(--space-lg);
+  font-size:13.5px;
+  color:var(--fg-1);
+  line-height:1.5;
+  display:flex;
+  align-items:flex-start;
+  gap:var(--space-md);
+  flex-wrap:wrap;
+}
+.oq-icon{flex-shrink:0;color:var(--yellow);margin-top:2px}
+
+/* ── RISKS ── */
+.risk-list{display:flex;flex-direction:column;gap:var(--space-sm)}
+.risk-item{
+  background:rgba(239,68,68,0.06);
+  border:1px solid rgba(239,68,68,0.2);
+  border-left:3px solid var(--red);
+  border-radius:var(--radius-md);
+  padding:var(--space-sm) var(--space-lg);
+  font-size:13.5px;
+  color:var(--fg-1);
+  line-height:1.5;
+}
+
+/* ── FLAG QUEUE ── */
+.flag-queue{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:var(--space-lg);
+  margin-bottom:var(--space-2xl);
+}
+@media(max-width:700px){.flag-queue{grid-template-columns:1fr}}
+
+/* ── TRANSCRIPT ── */
+.transcript-section{margin-bottom:var(--space-2xl)}
+.filter-strip{
+  display:flex;
+  align-items:center;
+  gap:var(--space-sm);
+  flex-wrap:wrap;
+  margin-bottom:var(--space-lg);
+}
+.filter-chip{
+  font-size:12px;
+  font-weight:600;
+  border-radius:var(--radius-pill);
+  padding:var(--space-xs) var(--space-md);
+  border:2px solid transparent;
+  cursor:pointer;
+  transition:opacity 150ms,transform 100ms;
+  color:#fff;
+}
+.filter-chip.inactive{opacity:0.35}
+.filter-chip:hover{transform:scale(1.04)}
+.filter-chip-all{
+  font-size:12px;
+  font-weight:600;
+  border-radius:var(--radius-pill);
+  padding:var(--space-xs) var(--space-md);
+  border:1px solid var(--border-strong);
+  cursor:pointer;
+  background:var(--surface-container);
+  color:var(--fg-2);
+  transition:background 150ms;
+}
+.filter-chip-all:hover,.filter-chip-all.active{background:var(--fg-1);color:var(--bg)}
+
+.transcript-list{display:flex;flex-direction:column;gap:2px}
+.cue-row{
+  display:flex;
+  gap:var(--space-md);
+  align-items:flex-start;
+  padding:var(--space-sm) var(--space-md);
+  border-radius:var(--radius-md);
+  transition:background 150ms;
+  border-left:3px solid transparent;
+}
+.cue-row:hover{background:var(--surface-container)}
+.cue-row.highlighted{background:rgba(160,59,0,0.08);border-left-color:var(--primary)}
+.cue-row.hidden{display:none}
+.cue-ts{
+  font-family:var(--font-mono);
+  font-size:11px;
+  color:var(--fg-muted);
+  white-space:nowrap;
+  flex-shrink:0;
+  margin-top:2px;
+  cursor:pointer;
+  padding:1px 6px;
+  border-radius:var(--radius-pill);
+  border:1px solid var(--border);
+  transition:background 150ms,color 150ms;
+}
+.cue-ts:hover{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.cue-speaker-tag{
+  font-size:10px;
+  font-weight:700;
+  border-radius:var(--radius-pill);
+  padding:1px 8px;
+  color:#fff;
+  flex-shrink:0;
+  margin-top:2px;
+  white-space:nowrap;
+}
+.cue-text{
+  font-size:14px;
+  color:var(--fg-2);
+  line-height:1.55;
+  flex:1;
+}
+.cue-text mark{
+  background:rgba(245,158,11,0.35);
+  color:inherit;
+  border-radius:2px;
+  padding:0 1px;
+}
+.cue-copy{
+  opacity:0;
+  font-size:11px;
+  color:var(--fg-muted);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:2px 6px;
+  flex-shrink:0;
+  transition:opacity 150ms,background 150ms;
+  background:var(--surface-container-lowest);
+}
+.cue-row:hover .cue-copy{opacity:1}
+.cue-copy:hover{background:var(--surface-container-high);color:var(--fg-1)}
+
+/* ── SEARCH HIGHLIGHT ── */
+.search-highlight{
+  background:rgba(245,158,11,0.4);
+  color:inherit;
+  border-radius:2px;
+  padding:0 1px;
+}
+
+/* ── FULL-WIDTH PANEL ── */
+.panel-full{
+  background:var(--surface-container-low);
+  border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+  padding:var(--space-xl);
+  box-shadow:var(--shadow-sm);
+  margin-bottom:var(--space-2xl);
+}
+
+/* ── TOPIC MARKERS ── */
+.topic-list{display:flex;flex-direction:column;gap:var(--space-sm)}
+.topic-item{
+  display:flex;
+  align-items:flex-start;
+  gap:var(--space-md);
+  font-size:13px;
+  color:var(--fg-2);
+  line-height:1.5;
+}
+.topic-pin{
+  width:28px;height:28px;
+  border-radius:50%;
+  background:var(--gradient-primary);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  font-size:10px;
+  font-weight:700;
+  color:#fff;
+  margin-top:1px;
+}
+
+/* ── FOOTER ── */
+.ops-footer{
+  border-top:1px solid var(--border);
+  padding-top:var(--space-xl);
+  margin-top:var(--space-4xl);
+  font-size:12px;
+  color:var(--fg-muted);
+  line-height:1.6;
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-sm);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeSlideIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@media(prefers-reduced-motion:no-preference){
+  .kpi-cell,.panel,.panel-full,.decision-card,.oq-item,.risk-item{
+    animation:fadeSlideIn 280ms ease both;
+  }
+}
+.kpi-cell:nth-child(1){animation-delay:40ms}
+.kpi-cell:nth-child(2){animation-delay:80ms}
+.kpi-cell:nth-child(3){animation-delay:120ms}
+.kpi-cell:nth-child(4){animation-delay:160ms}
+
+/* ── RESPONSIVE ── */
+@media(max-width:540px){
+  .command-bar{position:static}
+  .kpi-rail{grid-template-columns:1fr 1fr}
+  .donut-wrap{flex-direction:column}
+}
+@media(max-width:400px){
+  .kpi-rail{grid-template-columns:1fr}
+  .ai-table{font-size:12px}
+}
+</style>
 <!-- html-anything example style skin:start -->
 
 <style id="html-anything-example-style-skin">
@@ -609,35 +730,6 @@ html[data-ha-style="relationship"] body {
     linear-gradient(300deg, rgba(49,123,147,.08), transparent 40%);
 }
 html[data-ha-style="relationship"] body::before { content: "relationship"; }
-
-html[data-ha-style="personal-atlas"] {
-  --ha-style-accent: #3f7f6a;
-  --ha-style-accent-2: #c15a2b;
-  --primary: #3f7f6a;
-  --primary-container: #2f6b58;
-  --primary-fixed: #dff4ea;
-  --secondary-container: #c15a2b;
-  --bg: #f7faf4;
-  --surface: #f7faf4;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #eef5ea;
-  --surface-container: #e6eee0;
-  --surface-container-high: #dbe7d5;
-  --fg-1: #17211b;
-  --fg-2: #405345;
-  --fg-muted: #718172;
-  --border: rgba(63,127,106,.15);
-  --gradient-hero: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-  --gradient-text: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-}
-html[data-ha-style="personal-atlas"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(63,127,106,.11) 0 2px, transparent 2px),
-    radial-gradient(circle at 70% 40%, rgba(193,90,43,.10) 0 1.5px, transparent 1.5px);
-  background-size: 54px 54px, 38px 38px;
-}
-html[data-ha-style="personal-atlas"] body::before { content: "personal atlas"; }
 
 html[data-ha-style="timeline-story"] {
   --ha-style-accent: #9a4b14;
@@ -788,7 +880,7 @@ html[data-ha-style="dashboard"] header.hero::before {
   margin-bottom: 14px;
 }
 
-html[data-ha-style="editorial"] {
+html[data-ha-style="document"] {
   --ha-style-accent: #8b3f1f;
   --ha-style-accent-2: #2f6f73;
   --primary: #8b3f1f;
@@ -809,14 +901,14 @@ html[data-ha-style="editorial"] {
   --gradient-hero: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
   --gradient-text: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
 }
-html[data-ha-style="editorial"] body {
+html[data-ha-style="document"] body {
   background-color: var(--bg) !important;
   background-image: linear-gradient(90deg, rgba(139,63,31,.18) 0 4px, transparent 4px);
   background-size: 100% 100%;
 }
-html[data-ha-style="editorial"] body::before { content: "editorial"; }
-html[data-ha-style="editorial"] .hero::before,
-html[data-ha-style="editorial"] header.hero::before {
+html[data-ha-style="document"] body::before { content: "document"; }
+html[data-ha-style="document"] .hero::before,
+html[data-ha-style="document"] header.hero::before {
   width: 42px;
   height: 42px;
   border-radius: 0;
@@ -824,33 +916,6 @@ html[data-ha-style="editorial"] header.hero::before {
   border-top: 4px solid var(--ha-style-accent);
   border-left: 4px solid var(--ha-style-accent);
 }
-
-html[data-ha-style="paper"] {
-  --ha-style-accent: #53606a;
-  --ha-style-accent-2: #8c6f4a;
-  --primary: #53606a;
-  --primary-container: #3e4850;
-  --primary-fixed: #eef1f3;
-  --secondary-container: #8c6f4a;
-  --bg: #f9faf9;
-  --surface: #f9faf9;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f1f2f1;
-  --surface-container: #e8eae8;
-  --surface-container-high: #dedfdd;
-  --fg-1: #171717;
-  --fg-2: #4b5563;
-  --fg-muted: #737373;
-  --border: rgba(83,96,106,.18);
-  --font-headline: Georgia, "Iowan Old Style", "Times New Roman", serif;
-  --gradient-hero: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-  --gradient-text: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-}
-html[data-ha-style="paper"] body {
-  background-color: var(--bg) !important;
-  background-image: repeating-linear-gradient(0deg, transparent 0 31px, rgba(83,96,106,.08) 31px 32px);
-}
-html[data-ha-style="paper"] body::before { content: "paper"; }
 
 html[data-ha-style="developer"] {
   color-scheme: dark;
@@ -895,386 +960,610 @@ html[data-ha-style="developer"] .mono {
 <!-- html-anything example style skin:end -->
 </head>
 <body>
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <h1>Pricing Page V2 — Sprint Review</h1>
-      <p class="meeting-summary">
-        Sprint planning call to lock the pricing page design and engineering for Friday ship. Team aligned on shipping three tier cards (Starter, Pro/Team, Scale) without the comparison table. Final hi-fi due Tuesday; ship Friday.
-      </p>
-      <div class="meeting-meta">
-        <span id="meeting-duration"></span>
-        <span id="meeting-cadence"></span>
-        <span id="speaker-count"></span>
-      </div>
-    </div>
+<script>const DATA = {"cues":[{"id":"c_0001","startMs":0,"endMs":11200,"durationMs":11200,"startLabel":"00:00","speaker":"Casey Lin","text":"Okay, let's do this. Sprint review for the pricing page. Quick agenda — Mia walks us through final hi-fi, Wes and Devon update on the engineering side, then we lock what's actually shipping Friday."},{"id":"c_0002","startMs":11200,"endMs":31200,"durationMs":20000,"startLabel":"00:11","speaker":"Mia Torres","text":"Sounds good. I'll share my screen — give me one second. Right. So this is where we landed. Three pricing tiers across the top — Starter, Pro, and Scale. The big change from last week is the comparison table. I tried two versions and honestly neither felt right at this card density."},{"id":"c_0003","startMs":31200,"endMs":36800,"durationMs":5600,"startLabel":"00:31","speaker":"Devon Park","text":"Yeah, I built the prototype for that table on Monday and it adds about eighty kilobytes to the page."},{"id":"c_0004","startMs":36800,"endMs":42300,"durationMs":5500,"startLabel":"00:36","speaker":"Wes Chen","text":"And it doesn't render well on mobile under three-fifty pixels wide. We'd have to redesign the breakpoint."},{"id":"c_0005","startMs":42300,"endMs":48100,"durationMs":5800,"startLabel":"00:42","speaker":"Casey Lin","text":"Okay, that's a real trade-off. Mia, what would you cut to make it ship?"},{"id":"c_0006","startMs":48100,"endMs":57700,"durationMs":9600,"startLabel":"00:48","speaker":"Mia Torres","text":"I'd cut the comparison table from this sprint and keep just the three tier cards. That's what most of the inbound is responding to anyway based on the May test."},{"id":"c_0007","startMs":57700,"endMs":62400,"durationMs":4700,"startLabel":"00:57","speaker":"Casey Lin","text":"I'm fine with that. Anyone disagree? Going once."},{"id":"c_0008","startMs":62400,"endMs":67800,"durationMs":5400,"startLabel":"01:02","speaker":"Devon Park","text":"No, it's the right call. Comparison table can be its own ticket next sprint."},{"id":"c_0009","startMs":67800,"endMs":74500,"durationMs":6700,"startLabel":"01:07","speaker":"Casey Lin","text":"Decision then — we ship without the comparison table this sprint. Mia, will you file the follow-up ticket?"},{"id":"c_0010","startMs":74500,"endMs":78200,"durationMs":3700,"startLabel":"01:14","speaker":"Mia Torres","text":"Yep, I'll write it up after this meeting."},{"id":"c_0011","startMs":78200,"endMs":85400,"durationMs":7200,"startLabel":"01:18","speaker":"Casey Lin","text":"Second thing — the tier names. Pro is doing weird things in user testing. People assume it's the cheapest paid tier."},{"id":"c_0012","startMs":85400,"endMs":91800,"durationMs":6400,"startLabel":"01:25","speaker":"Mia Torres","text":"I noticed that too. I think we should just call it Team. It maps to what they actually buy."},{"id":"c_0013","startMs":91800,"endMs":96500,"durationMs":4700,"startLabel":"01:31","speaker":"Wes Chen","text":"Are we changing the underlying SKU IDs? Because that's a Stripe migration if so."},{"id":"c_0014","startMs":96500,"endMs":103200,"durationMs":6700,"startLabel":"01:36","speaker":"Mia Torres","text":"No — display name only. The internal SKU stays plan_pro. So no Stripe work."},{"id":"c_0015","startMs":103200,"endMs":110800,"durationMs":7600,"startLabel":"01:43","speaker":"Casey Lin","text":"Okay then let's do it. Pro becomes Team in the UI. Mia, that goes in the same hi-fi update?"},{"id":"c_0016","startMs":110800,"endMs":113900,"durationMs":3100,"startLabel":"01:50","speaker":"Mia Torres","text":"Yes. Tuesday EOD."},{"id":"c_0017","startMs":113900,"endMs":120500,"durationMs":6600,"startLabel":"01:53","speaker":"Casey Lin","text":"Wes, what's the engineering picture? When can the page actually go behind the flag?"},{"id":"c_0018","startMs":120500,"endMs":134200,"durationMs":13700,"startLabel":"02:00","speaker":"Wes Chen","text":"I need Mia's final hi-fi by Tuesday end of day to wire it up. Stripe checkout link is a one-day swap once she lands. So I can have it behind the flag by Wednesday end of day, ready for QA Thursday."},{"id":"c_0019","startMs":134200,"endMs":141500,"durationMs":7300,"startLabel":"02:14","speaker":"Devon Park","text":"I'll add the analytics tracking by Thursday morning. We'll need the conversion events defined before then though — I haven't gotten that spec."},{"id":"c_0020","startMs":141500,"endMs":146800,"durationMs":5300,"startLabel":"02:21","speaker":"Casey Lin","text":"That's on me. I'll send you the event list by Tuesday morning."},{"id":"c_0021","startMs":146800,"endMs":153400,"durationMs":6600,"startLabel":"02:26","speaker":"Devon Park","text":"Great. Then yeah, Thursday for tracking, Friday morning for QA cycle, ship Friday afternoon if no surprises."},{"id":"c_0022","startMs":153400,"endMs":159200,"durationMs":5800,"startLabel":"02:33","speaker":"Casey Lin","text":"Quick question — should we A/B-test the prices? I keep going back and forth on this."},{"id":"c_0023","startMs":159200,"endMs":168500,"durationMs":9300,"startLabel":"02:39","speaker":"Mia Torres","text":"I think we should hold off. We don't have enough traffic on the pricing page to get a clean read in under three weeks, and we're going to keep iterating anyway."},{"id":"c_0024","startMs":168500,"endMs":172800,"durationMs":4300,"startLabel":"02:48","speaker":"Wes Chen","text":"Plus the experiment infrastructure for pricing tiers is a whole project itself."},{"id":"c_0025","startMs":172800,"endMs":177500,"durationMs":4700,"startLabel":"02:52","speaker":"Casey Lin","text":"Fair. Let's defer A/B and just ship. We can revisit in Q2."},{"id":"c_0026","startMs":177500,"endMs":184800,"durationMs":7300,"startLabel":"02:57","speaker":"Devon Park","text":"One concern — mobile QA. Mia, are we doing real device testing or just Chrome devtools?"},{"id":"c_0027","startMs":184800,"endMs":194200,"durationMs":9400,"startLabel":"03:04","speaker":"Mia Torres","text":"I'd really want at least an iPhone 12 and a mid-tier Android in front of someone before we ship. The new card layout has some Safari-specific quirks I caught last week."},{"id":"c_0028","startMs":194200,"endMs":200800,"durationMs":6600,"startLabel":"03:14","speaker":"Casey Lin","text":"Okay — Wes, can you book thirty minutes Friday morning with someone in IT to grab the test devices?"},{"id":"c_0029","startMs":200800,"endMs":205000,"durationMs":4200,"startLabel":"03:20","speaker":"Wes Chen","text":"I'll set it up. Adding it to my Friday now."},{"id":"c_0030","startMs":205000,"endMs":212300,"durationMs":7300,"startLabel":"03:25","speaker":"Casey Lin","text":"Risks I want to surface for the wider team — biggest one is that we're shipping without the comparison table, so sales might push back."},{"id":"c_0031","startMs":212300,"endMs":218500,"durationMs":6200,"startLabel":"03:32","speaker":"Mia Torres","text":"I can write a note in the launch doc explaining why and what's coming next sprint. That'll cut down on the back-and-forth."},{"id":"c_0032","startMs":218500,"endMs":230200,"durationMs":11700,"startLabel":"03:38","speaker":"Casey Lin","text":"Perfect. Add that to your Tuesday list. Last thing — how are we measuring success post-launch? I want this defined before we hit publish."},{"id":"c_0033","startMs":230200,"endMs":240500,"durationMs":10300,"startLabel":"03:50","speaker":"Devon Park","text":"I'd propose two numbers — start-trial conversion rate from the pricing page, and Team-tier share of new signups. Baseline against the last 30 days."},{"id":"c_0034","startMs":240500,"endMs":248800,"durationMs":8300,"startLabel":"04:00","speaker":"Casey Lin","text":"That works. Devon, can you build a small dashboard so we're not chasing this in Mixpanel every Monday?"},{"id":"c_0035","startMs":248800,"endMs":254500,"durationMs":5700,"startLabel":"04:08","speaker":"Devon Park","text":"Yep. I'll have it up by the end of next week. Lower priority than the launch itself."},{"id":"c_0036","startMs":254500,"endMs":258200,"durationMs":3700,"startLabel":"04:14","speaker":"Casey Lin","text":"Anything else? Anyone blocked or sandbagging?"},{"id":"c_0037","startMs":258200,"endMs":263500,"durationMs":5300,"startLabel":"04:18","speaker":"Wes Chen","text":"Nope. Tuesday hi-fi, Wednesday flag, Thursday tracking, Friday QA, Friday ship."},{"id":"c_0038","startMs":263500,"endMs":268200,"durationMs":4700,"startLabel":"04:23","speaker":"Mia Torres","text":"Same. I have everything I need to land Tuesday."},{"id":"c_0039","startMs":268200,"endMs":272500,"durationMs":4300,"startLabel":"04:28","speaker":"Casey Lin","text":"All right. Talk Wednesday standup."}],"speakers":[{"name":"Casey Lin","cueCount":16,"wordCount":265,"talkSeconds":109,"sharePct":39.8},{"name":"Mia Torres","cueCount":10,"wordCount":219,"talkSeconds":79,"sharePct":28.8},{"name":"Devon Park","cueCount":7,"wordCount":130,"talkSeconds":48,"sharePct":17.5},{"name":"Wes Chen","cueCount":6,"wordCount":105,"talkSeconds":38,"sharePct":13.9}],"sourceFile":"input.srt","sizeBytes":5915,"format":"srt","durationMs":272500,"durationLabel":"4m 32s","cueCount":39,"speakerCount":4,"hasSpeakerLabels":true};</script>
+<div class="ops-shell">
 
-    <!-- Speakers Section -->
-    <div class="card">
-      <h2>Speakers</h2>
-      <div id="speakers-list"></div>
+  <!-- COMMAND BAR -->
+  <div class="command-bar">
+    <span class="command-bar-title">Pricing Page V2 — Sprint Review</span>
+    <span class="command-bar-meta" id="cb-meta">4m 32s · 39 cues · 4 speakers</span>
+    <span class="command-bar-spacer"></span>
+    <div class="search-box">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="global-search" placeholder="Search transcript…" autocomplete="off">
     </div>
+    <button class="copy-btn" id="copy-md-btn">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy as Markdown
+    </button>
+  </div>
 
-    <!-- Decisions Section -->
-    <div class="card">
-      <h2>Decisions</h2>
-      <div id="decisions-list"></div>
+  <!-- KPI RAIL -->
+  <div class="kpi-rail" id="kpi-rail">
+    <div class="kpi-cell accent">
+      <div class="kpi-cell-label">Duration</div>
+      <div class="kpi-cell-value" id="kpi-duration">4m 32s</div>
+      <div class="kpi-cell-sub">Sprint review call</div>
     </div>
-
-    <!-- Action Items Section -->
-    <div class="card">
-      <h2>Action Items</h2>
-      <div id="action-items-list"></div>
+    <div class="kpi-cell">
+      <div class="kpi-cell-label">Cues</div>
+      <div class="kpi-cell-value" id="kpi-cues">39</div>
+      <div class="kpi-cell-sub" id="kpi-cadence">8.6 cues/min</div>
     </div>
-
-    <!-- Open Questions Section -->
-    <div class="card">
-      <h2>Open Questions</h2>
-      <div id="open-questions-list"></div>
+    <div class="kpi-cell">
+      <div class="kpi-cell-label">Speakers</div>
+      <div class="kpi-cell-value" id="kpi-speakers">4</div>
+      <div class="kpi-cell-sub" id="kpi-dominant"></div>
     </div>
-
-    <!-- Timeline Section -->
-    <div class="card">
-      <h2>Timeline</h2>
-      <div id="timeline-viz"></div>
-    </div>
-
-    <!-- Transcript Section -->
-    <div class="card">
-      <h2>Transcript</h2>
-      <div class="transcript-controls">
-        <input type="text" class="search-box" id="search-input" placeholder="Search transcript…">
-        <div class="speaker-filter" id="speaker-filters"></div>
-      </div>
-      <div id="transcript-list"></div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-      <p><strong>Privacy:</strong> Generated locally — your transcript never left your machine. The full timecoded conversation is embedded in this HTML and rendered in your browser.</p>
-      <p><em>Auto-generated transcripts occasionally swap speakers or miss words. Treat the analysis as a starting draft.</em></p>
+    <div class="kpi-cell">
+      <div class="kpi-cell-label">Decisions</div>
+      <div class="kpi-cell-value" id="kpi-decisions">3</div>
+      <div class="kpi-cell-sub">Action items: <span id="kpi-ai-count">5</span></div>
     </div>
   </div>
 
-  <script>
-    const DATA = {"cues":[{"id":"c_0001","startMs":0,"endMs":11200,"durationMs":11200,"startLabel":"00:00","speaker":"Casey Lin","text":"Okay, let's do this. Sprint review for the pricing page. Quick agenda — Mia walks us through final hi-fi, Wes and Devon update on the engineering side, then we lock what's actually shipping Friday."},{"id":"c_0002","startMs":11200,"endMs":31200,"durationMs":20000,"startLabel":"00:11","speaker":"Mia Torres","text":"Sounds good. I'll share my screen — give me one second. Right. So this is where we landed. Three pricing tiers across the top — Starter, Pro, and Scale. The big change from last week is the comparison table. I tried two versions and honestly neither felt right at this card density."},{"id":"c_0003","startMs":31200,"endMs":36800,"durationMs":5600,"startLabel":"00:31","speaker":"Devon Park","text":"Yeah, I built the prototype for that table on Monday and it adds about eighty kilobytes to the page."},{"id":"c_0004","startMs":36800,"endMs":42300,"durationMs":5500,"startLabel":"00:36","speaker":"Wes Chen","text":"And it doesn't render well on mobile under three-fifty pixels wide. We'd have to redesign the breakpoint."},{"id":"c_0005","startMs":42300,"endMs":48100,"durationMs":5800,"startLabel":"00:42","speaker":"Casey Lin","text":"Okay, that's a real trade-off. Mia, what would you cut to make it ship?"},{"id":"c_0006","startMs":48100,"endMs":57700,"durationMs":9600,"startLabel":"00:48","speaker":"Mia Torres","text":"I'd cut the comparison table from this sprint and keep just the three tier cards. That's what most of the inbound is responding to anyway based on the May test."},{"id":"c_0007","startMs":57700,"endMs":62400,"durationMs":4700,"startLabel":"00:57","speaker":"Casey Lin","text":"I'm fine with that. Anyone disagree? Going once."},{"id":"c_0008","startMs":62400,"endMs":67800,"durationMs":5400,"startLabel":"01:02","speaker":"Devon Park","text":"No, it's the right call. Comparison table can be its own ticket next sprint."},{"id":"c_0009","startMs":67800,"endMs":74500,"durationMs":6700,"startLabel":"01:07","speaker":"Casey Lin","text":"Decision then — we ship without the comparison table this sprint. Mia, will you file the follow-up ticket?"},{"id":"c_0010","startMs":74500,"endMs":78200,"durationMs":3700,"startLabel":"01:14","speaker":"Mia Torres","text":"Yep, I'll write it up after this meeting."},{"id":"c_0011","startMs":78200,"endMs":85400,"durationMs":7200,"startLabel":"01:18","speaker":"Casey Lin","text":"Second thing — the tier names. Pro is doing weird things in user testing. People assume it's the cheapest paid tier."},{"id":"c_0012","startMs":85400,"endMs":91800,"durationMs":6400,"startLabel":"01:25","speaker":"Mia Torres","text":"I noticed that too. I think we should just call it Team. It maps to what they actually buy."},{"id":"c_0013","startMs":91800,"endMs":96500,"durationMs":4700,"startLabel":"01:31","speaker":"Wes Chen","text":"Are we changing the underlying SKU IDs? Because that's a Stripe migration if so."},{"id":"c_0014","startMs":96500,"endMs":103200,"durationMs":6700,"startLabel":"01:36","speaker":"Mia Torres","text":"No — display name only. The internal SKU stays plan_pro. So no Stripe work."},{"id":"c_0015","startMs":103200,"endMs":110800,"durationMs":7600,"startLabel":"01:43","speaker":"Casey Lin","text":"Okay then let's do it. Pro becomes Team in the UI. Mia, that goes in the same hi-fi update?"},{"id":"c_0016","startMs":110800,"endMs":113900,"durationMs":3100,"startLabel":"01:50","speaker":"Mia Torres","text":"Yes. Tuesday EOD."},{"id":"c_0017","startMs":113900,"endMs":120500,"durationMs":6600,"startLabel":"01:53","speaker":"Casey Lin","text":"Wes, what's the engineering picture? When can the page actually go behind the flag?"},{"id":"c_0018","startMs":120500,"endMs":134200,"durationMs":13700,"startLabel":"02:00","speaker":"Wes Chen","text":"I need Mia's final hi-fi by Tuesday end of day to wire it up. Stripe checkout link is a one-day swap once she lands. So I can have it behind the flag by Wednesday end of day, ready for QA Thursday."},{"id":"c_0019","startMs":134200,"endMs":141500,"durationMs":7300,"startLabel":"02:14","speaker":"Devon Park","text":"I'll add the analytics tracking by Thursday morning. We'll need the conversion events defined before then though — I haven't gotten that spec."},{"id":"c_0020","startMs":141500,"endMs":146800,"durationMs":5300,"startLabel":"02:21","speaker":"Casey Lin","text":"That's on me. I'll send you the event list by Tuesday morning."},{"id":"c_0021","startMs":146800,"endMs":153400,"durationMs":6600,"startLabel":"02:26","speaker":"Devon Park","text":"Great. Then yeah, Thursday for tracking, Friday morning for QA cycle, ship Friday afternoon if no surprises."},{"id":"c_0022","startMs":153400,"endMs":159200,"durationMs":5800,"startLabel":"02:33","speaker":"Casey Lin","text":"Quick question — should we A/B-test the prices? I keep going back and forth on this."},{"id":"c_0023","startMs":159200,"endMs":168500,"durationMs":9300,"startLabel":"02:39","speaker":"Mia Torres","text":"I think we should hold off. We don't have enough traffic on the pricing page to get a clean read in under three weeks, and we're going to keep iterating anyway."},{"id":"c_0024","startMs":168500,"endMs":172800,"durationMs":4300,"startLabel":"02:48","speaker":"Wes Chen","text":"Plus the experiment infrastructure for pricing tiers is a whole project itself."},{"id":"c_0025","startMs":172800,"endMs":177500,"durationMs":4700,"startLabel":"02:52","speaker":"Casey Lin","text":"Fair. Let's defer A/B and just ship. We can revisit in Q2."},{"id":"c_0026","startMs":177500,"endMs":184800,"durationMs":7300,"startLabel":"02:57","speaker":"Devon Park","text":"One concern — mobile QA. Mia, are we doing real device testing or just Chrome devtools?"},{"id":"c_0027","startMs":184800,"endMs":194200,"durationMs":9400,"startLabel":"03:04","speaker":"Mia Torres","text":"I'd really want at least an iPhone 12 and a mid-tier Android in front of someone before we ship. The new card layout has some Safari-specific quirks I caught last week."},{"id":"c_0028","startMs":194200,"endMs":200800,"durationMs":6600,"startLabel":"03:14","speaker":"Casey Lin","text":"Okay — Wes, can you book thirty minutes Friday morning with someone in IT to grab the test devices?"},{"id":"c_0029","startMs":200800,"endMs":205000,"durationMs":4200,"startLabel":"03:20","speaker":"Wes Chen","text":"I'll set it up. Adding it to my Friday now."},{"id":"c_0030","startMs":205000,"endMs":212300,"durationMs":7300,"startLabel":"03:25","speaker":"Casey Lin","text":"Risks I want to surface for the wider team — biggest one is that we're shipping without the comparison table, so sales might push back."},{"id":"c_0031","startMs":212300,"endMs":218500,"durationMs":6200,"startLabel":"03:32","speaker":"Mia Torres","text":"I can write a note in the launch doc explaining why and what's coming next sprint. That'll cut down on the back-and-forth."},{"id":"c_0032","startMs":218500,"endMs":230200,"durationMs":11700,"startLabel":"03:38","speaker":"Casey Lin","text":"Perfect. Add that to your Tuesday list. Last thing — how are we measuring success post-launch? I want this defined before we hit publish."},{"id":"c_0033","startMs":230200,"endMs":240500,"durationMs":10300,"startLabel":"03:50","speaker":"Devon Park","text":"I'd propose two numbers — start-trial conversion rate from the pricing page, and Team-tier share of new signups. Baseline against the last 30 days."},{"id":"c_0034","startMs":240500,"endMs":248800,"durationMs":8300,"startLabel":"04:00","speaker":"Casey Lin","text":"That works. Devon, can you build a small dashboard so we're not chasing this in Mixpanel every Monday?"},{"id":"c_0035","startMs":248800,"endMs":254500,"durationMs":5700,"startLabel":"04:08","speaker":"Devon Park","text":"Yep. I'll have it up by the end of next week. Lower priority than the launch itself."},{"id":"c_0036","startMs":254500,"endMs":258200,"durationMs":3700,"startLabel":"04:14","speaker":"Casey Lin","text":"Anything else? Anyone blocked or sandbagging?"},{"id":"c_0037","startMs":258200,"endMs":263500,"durationMs":5300,"startLabel":"04:18","speaker":"Wes Chen","text":"Nope. Tuesday hi-fi, Wednesday flag, Thursday tracking, Friday QA, Friday ship."},{"id":"c_0038","startMs":263500,"endMs":268200,"durationMs":4700,"startLabel":"04:23","speaker":"Mia Torres","text":"Same. I have everything I need to land Tuesday."},{"id":"c_0039","startMs":268200,"endMs":272500,"durationMs":4300,"startLabel":"04:28","speaker":"Casey Lin","text":"All right. Talk Wednesday standup."}],"speakers":[{"name":"Casey Lin","cueCount":16,"wordCount":265,"talkSeconds":109,"sharePct":39.8},{"name":"Mia Torres","cueCount":10,"wordCount":219,"talkSeconds":79,"sharePct":28.8},{"name":"Devon Park","cueCount":7,"wordCount":130,"talkSeconds":48,"sharePct":17.5},{"name":"Wes Chen","cueCount":6,"wordCount":105,"talkSeconds":38,"sharePct":13.9}],"sourceFile":"input.srt","sizeBytes":5915,"format":"srt","durationMs":272500,"durationLabel":"4m 32s","cueCount":39,"speakerCount":4,"hasSpeakerLabels":true};
+  <!-- SUMMARY -->
+  <div class="summary-card">
+    <div class="summary-card-headline">Meeting Abstract</div>
+    <div class="summary-card-body" id="summary-body">
+      The team convened for a sprint review of the Pricing Page V2, covering design, engineering, and analytics readiness before a Friday ship. Three clear decisions came out of the call: the comparison table was cut from this sprint, the "Pro" tier will be renamed "Team," and the team agreed to hold off on A/B testing for now due to insufficient traffic. Casey drove the agenda and decisions, Mia and Devon presented concrete timelines and blockers, and one open question — the conversion event spec for analytics — remained unresolved at close.
+    </div>
+  </div>
 
-    // Initialize the page
-    function init() {
-      renderMeetingMeta();
-      renderSpeakers();
-      renderDecisions();
-      renderActionItems();
-      renderOpenQuestions();
-      renderTimeline();
-      renderTranscript();
-      setupSearch();
-      setupSpeakerFilters();
+  <!-- SPEAKERS + TALK-TIME DONUT -->
+  <div class="section-header">
+    <span class="section-label">Speakers</span>
+    <span class="section-count" id="speakers-count">4</span>
+    <div class="section-divider"></div>
+  </div>
+  <div class="work-surface" style="margin-bottom:var(--space-2xl)">
+    <div class="panel">
+      <div class="panel-title">Talk-time breakdown</div>
+      <div class="speaker-list" id="speaker-list"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">Share of voice</div>
+      <div class="donut-wrap">
+        <svg id="donut-svg" width="120" height="120" viewBox="0 0 120 120" style="flex-shrink:0"></svg>
+        <div class="donut-legend" id="donut-legend"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section-header">
+    <span class="section-label">Timeline</span>
+    <div class="section-divider"></div>
+  </div>
+  <div class="panel-full" style="margin-bottom:var(--space-2xl)">
+    <div class="panel-title">Speaker timeline · each tick = one cue</div>
+    <div class="timeline-svg-wrap" id="timeline-wrap"></div>
+    <div id="topic-markers-row" style="margin-top:var(--space-lg)">
+      <div class="panel-title" style="margin-bottom:var(--space-md)">Key moments</div>
+      <div class="topic-list" id="topic-list"></div>
+    </div>
+  </div>
+
+  <!-- DECISIONS + ACTION ITEMS -->
+  <div class="section-header">
+    <span class="section-label">Decisions</span>
+    <span class="section-count" id="decisions-count">3</span>
+    <div class="section-divider"></div>
+  </div>
+  <div class="panel-full" style="margin-bottom:var(--space-2xl)">
+    <div class="decision-list" id="decision-list"></div>
+  </div>
+
+  <div class="section-header">
+    <span class="section-label">Action items</span>
+    <span class="section-count" id="ai-count">5</span>
+    <div class="section-divider"></div>
+  </div>
+  <div class="panel-full" style="margin-bottom:var(--space-2xl)">
+    <div style="overflow-x:auto">
+      <table class="ai-table" id="ai-table">
+        <thead>
+          <tr>
+            <th>Owner</th>
+            <th>What</th>
+            <th>Due</th>
+            <th>Cue</th>
+          </tr>
+        </thead>
+        <tbody id="ai-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- OPEN QUESTIONS + RISKS -->
+  <div class="flag-queue">
+    <div class="panel">
+      <div class="panel-title">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2.5" style="vertical-align:-2px;margin-right:4px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Open questions
+      </div>
+      <div class="oq-list" id="oq-list"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5" style="vertical-align:-2px;margin-right:4px"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Risks &amp; concerns
+      </div>
+      <div class="risk-list" id="risk-list"></div>
+    </div>
+  </div>
+
+  <!-- TRANSCRIPT -->
+  <div class="transcript-section">
+    <div class="section-header">
+      <span class="section-label">Transcript</span>
+      <span class="section-count" id="cue-visible-count">39</span>
+      <div class="section-divider"></div>
+    </div>
+    <div class="filter-strip" id="filter-strip">
+      <button class="filter-chip-all active" id="chip-all" onclick="setAllSpeakers()">All</button>
+    </div>
+    <div class="transcript-list" id="transcript-list"></div>
+  </div>
+
+  <footer class="ops-footer">
+    <div>⚠️ Auto-generated transcripts occasionally swap speakers or miss words. Treat the scorecard as a starting draft — verify decisions and action items with participants before distributing.</div>
+    <div>🔒 Generated locally — your transcript never left your machine. The full timecoded conversation is embedded in this HTML and rendered in your browser. For sharing, prefer an anonymized export.</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+// ── SPEAKER COLORS ──────────────────────────────────────────
+const SPEAKER_COLORS = {
+  'Casey Lin':  '#a03b00',
+  'Mia Torres': '#7b40e0',
+  'Devon Park': '#4d44e3',
+  'Wes Chen':   '#10b981',
+};
+function speakerColor(name){ return SPEAKER_COLORS[name]||'#8d7166'; }
+
+// ── HARD-CODED ANALYSIS ──────────────────────────────────────
+const DECISIONS = [
+  {
+    num:1,
+    text:"We ship without the comparison table this sprint — it adds 80KB, breaks mobile at 350px wide, and neither design version felt right at this card density.",
+    speaker:"Casey Lin",
+    cueId:"c_0009",
+    ts:"01:07"
+  },
+  {
+    num:2,
+    text:"The \"Pro\" tier will be renamed to \"Team\" — user testing showed people mistook Pro for the cheapest paid tier, and \"Team\" maps better to what they actually buy.",
+    speaker:"Casey Lin",
+    cueId:"c_0015",
+    ts:"01:42"
+  },
+  {
+    num:3,
+    text:"No A/B test for this launch — not enough pricing-page traffic to get a clean read in under three weeks, and the team will keep iterating anyway.",
+    speaker:"Casey Lin",
+    cueId:"c_0025",
+    ts:"02:52"
+  }
+];
+
+const ACTION_ITEMS = [
+  { owner:"Mia Torres",  what:"File the follow-up ticket for the comparison table (next sprint).", due:"After meeting", cueId:"c_0010", ts:"01:14" },
+  { owner:"Wes Chen",    what:"Wire up final hi-fi once received by Tuesday EOD; put Stripe checkout behind feature flag by Wednesday EOD.", due:"Wed EOD", cueId:"c_0018", ts:"02:00" },
+  { owner:"Devon Park",  what:"Add analytics tracking by Thursday morning once conversion events spec is received.", due:"Thu AM", cueId:"c_0019", ts:"02:14" },
+  { owner:"Casey Lin",   what:"Send the conversion events spec to Devon.", due:"ASAP", cueId:"c_0022", ts:"02:33" },
+  { owner:"Mia Torres",  what:"Arrange real-device QA on iPhone 12 and mid-tier Android before Friday ship.", due:"Thu", cueId:"c_0027", ts:"03:04" },
+];
+
+const OPEN_QUESTIONS = [
+  { text:"Who owns sending the conversion events spec to Devon, and when will it land? Devon flagged he hasn't received it yet and needs it before Thursday.", cueId:"c_0019", ts:"02:14" },
+  { text:"Will real-device QA (iPhone 12 + mid-tier Android) actually be scheduled in time — and who is running it?", cueId:"c_0027", ts:"03:04" },
+];
+
+const RISKS = [
+  { text:"The comparison table adds ~80KB to the page load and doesn't render on mobile under 350px wide — cut for now but a real design/engineering challenge for next sprint.", cueId:"c_0003", ts:"00:31" },
+  { text:"Safari-specific layout quirks were caught in the new card layout on real devices — may affect QA sign-off.", cueId:"c_0027", ts:"03:04" },
+  { text:"Insufficient pricing-page traffic to run a meaningful A/B test in under three weeks, making data-driven validation difficult post-launch.", cueId:"c_0023", ts:"02:39" },
+];
+
+const TOPICS = [
+  { ts:"00:00", label:"Agenda set", text:"Casey opens the review: lock what ships Friday." },
+  { ts:"00:11", label:"Design reveal", text:"Mia presents three-tier card layout; comparison table both versions felt off." },
+  { ts:"00:57", label:"Decision 1", text:"Comparison table cut — 80KB, mobile breakpoint broken, ships next sprint." },
+  { ts:"01:18", label:"Decision 2", text:"\"Pro\" → \"Team\": user testing showed confusion about tier hierarchy." },
+  { ts:"02:00", label:"Eng timeline", text:"Wes outlines hi-fi by Tuesday, flag by Wednesday, QA Thursday, ship Friday." },
+  { ts:"02:39", label:"A/B debate", text:"A/B test proposed, then deferred — not enough traffic for clean read." },
+  { ts:"03:04", label:"Risk flagged", text:"Mia calls for real-device QA; Safari quirks found in new card layout." },
+  { ts:"03:50", label:"Metrics set", text:"Devon proposes start-trial conversion rate + Team-tier share as baseline KPIs." },
+];
+
+// ── HELPERS ─────────────────────────────────────────────────
+function msToLabel(ms){
+  const s=Math.floor(ms/1000);
+  const m=Math.floor(s/60);
+  const sec=s%60;
+  return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+}
+function jumpTo(cueId){
+  const el=document.getElementById('cue-'+cueId);
+  if(!el)return;
+  el.scrollIntoView({behavior:'smooth',block:'center'});
+  el.classList.add('highlighted');
+  setTimeout(()=>el.classList.remove('highlighted'),2000);
+}
+
+// ── KPI RAIL ────────────────────────────────────────────────
+function buildKPIs(){
+  const d=DATA;
+  document.getElementById('kpi-duration').textContent=d.durationLabel||'—';
+  document.getElementById('kpi-cues').textContent=d.cueCount;
+  const mins=(d.durationMs/60000);
+  document.getElementById('kpi-cadence').textContent=(d.cueCount/mins).toFixed(1)+' cues/min';
+  document.getElementById('kpi-speakers').textContent=d.speakerCount;
+  if(d.speakers&&d.speakers.length){
+    const top=d.speakers[0];
+    document.getElementById('kpi-dominant').textContent=top.name+' ~'+top.sharePct+'%';
+  }
+  document.getElementById('kpi-decisions').textContent=DECISIONS.length;
+  document.getElementById('kpi-ai-count').textContent=ACTION_ITEMS.length;
+  document.getElementById('decisions-count').textContent=DECISIONS.length;
+  document.getElementById('ai-count').textContent=ACTION_ITEMS.length;
+  document.getElementById('speakers-count').textContent=DATA.speakerCount;
+  document.getElementById('cb-meta').textContent=
+    DATA.durationLabel+' · '+DATA.cueCount+' cues · '+DATA.speakerCount+' speakers';
+}
+
+// ── SPEAKERS ────────────────────────────────────────────────
+function buildSpeakers(){
+  const list=document.getElementById('speaker-list');
+  list.innerHTML='';
+  DATA.speakers.forEach(sp=>{
+    const color=speakerColor(sp.name);
+    const row=document.createElement('div');
+    row.className='speaker-row';
+    row.innerHTML=`
+      <div class="speaker-row-header">
+        <span class="speaker-dot" style="background:${color}"></span>
+        <span class="speaker-name">${sp.name}</span>
+        <span class="speaker-stats">
+          <span>${sp.sharePct}%</span>
+          <span>${sp.wordCount}w</span>
+          <span>${sp.cueCount} cues</span>
+        </span>
+      </div>
+      <div class="speaker-bar-track">
+        <div class="speaker-bar-fill" data-pct="${sp.sharePct}" style="background:${color};width:0%"></div>
+      </div>`;
+    list.appendChild(row);
+  });
+  // Animate bars
+  setTimeout(()=>{
+    document.querySelectorAll('.speaker-bar-fill').forEach(el=>{
+      el.style.width=el.dataset.pct+'%';
+    });
+  },120);
+}
+
+// ── DONUT ────────────────────────────────────────────────────
+function buildDonut(){
+  const svg=document.getElementById('donut-svg');
+  const legend=document.getElementById('donut-legend');
+  const cx=60,cy=60,r=48,stroke=14;
+  const total=DATA.speakers.reduce((a,s)=>a+s.sharePct,0);
+  let cumAngle=-Math.PI/2;
+  DATA.speakers.forEach(sp=>{
+    const frac=sp.sharePct/total;
+    const angle=frac*2*Math.PI;
+    const x1=cx+r*Math.cos(cumAngle);
+    const y1=cy+r*Math.sin(cumAngle);
+    const x2=cx+r*Math.cos(cumAngle+angle);
+    const y2=cy+r*Math.sin(cumAngle+angle);
+    const lg=angle>Math.PI?1:0;
+    const color=speakerColor(sp.name);
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',`M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${lg} 1 ${x2} ${y2} Z`);
+    path.setAttribute('fill',color);
+    path.setAttribute('opacity','0.88');
+    svg.appendChild(path);
+    cumAngle+=angle;
+    // Legend
+    const item=document.createElement('div');
+    item.className='donut-legend-item';
+    item.innerHTML=`<span class="donut-legend-dot" style="background:${color}"></span><span class="donut-legend-name">${sp.name}</span><span class="donut-legend-pct">${sp.sharePct}%</span>`;
+    legend.appendChild(item);
+  });
+  // Center hole
+  const circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  circle.setAttribute('cx',cx);circle.setAttribute('cy',cy);
+  circle.setAttribute('r',r-stroke);
+  circle.setAttribute('fill','var(--surface-container-low)');
+  svg.appendChild(circle);
+}
+
+// ── TIMELINE ────────────────────────────────────────────────
+function buildTimeline(){
+  const wrap=document.getElementById('timeline-wrap');
+  const totalMs=DATA.durationMs||272500;
+  const speakers=DATA.speakers.map(s=>s.name);
+  const rowH=26,gap=4,paddingL=70,paddingR=16,paddingT=8,paddingB=28;
+  const svgW=Math.min(900,window.innerWidth-64);
+  const svgH=paddingT+speakers.length*(rowH+gap)+paddingB;
+  const W=svgW-paddingL-paddingR;
+
+  let svgStr=`<svg width="${svgW}" height="${svgH}" viewBox="0 0 ${svgW} ${svgH}" xmlns="http://www.w3.org/2000/svg" style="min-width:320px;max-width:100%">`;
+
+  // Background lanes
+  speakers.forEach((sp,i)=>{
+    const y=paddingT+i*(rowH+gap);
+    const color=speakerColor(sp);
+    svgStr+=`<rect x="${paddingL}" y="${y}" width="${W}" height="${rowH}" rx="4" fill="${color}" opacity="0.06"/>`;
+    svgStr+=`<text x="${paddingL-6}" y="${y+rowH/2+4}" text-anchor="end" font-size="11" font-family="'Plus Jakarta Sans',sans-serif" fill="var(--fg-muted)">${sp.split(' ')[0]}</text>`;
+  });
+
+  // Cue ticks
+  if(DATA.cues){
+    DATA.cues.forEach(cue=>{
+      if(!cue.speaker)return;
+      const idx=speakers.indexOf(cue.speaker);
+      if(idx<0)return;
+      const xStart=paddingL+(cue.startMs/totalMs)*W;
+      const xEnd=paddingL+(cue.endMs/totalMs)*W;
+      const w=Math.max(xEnd-xStart,3);
+      const y=paddingT+idx*(rowH+gap);
+      const color=speakerColor(cue.speaker);
+      svgStr+=`<rect x="${xStart.toFixed(1)}" y="${y+4}" width="${w.toFixed(1)}" height="${rowH-8}" rx="2" fill="${color}" opacity="0.75">
+        <title>${cue.speaker} @ ${cue.startLabel}: ${cue.text.slice(0,60)}…</title>
+      </rect>`;
+    });
+  }
+
+  // Time axis
+  const tickMs=[0,60000,120000,180000,240000,272500];
+  tickMs.forEach(t=>{
+    if(t>totalMs)return;
+    const x=paddingL+(t/totalMs)*W;
+    svgStr+=`<line x1="${x}" y1="${paddingT}" x2="${x}" y2="${paddingT+speakers.length*(rowH+gap)}" stroke="var(--border-strong)" stroke-width="1"/>`;
+    svgStr+=`<text x="${x}" y="${svgH-8}" text-anchor="middle" font-size="10" font-family="'SF Mono',monospace" fill="var(--fg-muted)">${msToLabel(t)}</text>`;
+  });
+
+  // Topic pins
+  TOPICS.forEach((topic,ti)=>{
+    const parts=topic.ts.split(':');
+    const tMs=(parseInt(parts[0])*60+parseInt(parts[1]))*1000;
+    const x=paddingL+(tMs/totalMs)*W;
+    svgStr+=`<line x1="${x}" y1="${paddingT}" x2="${x}" y2="${paddingT+speakers.length*(rowH+gap)-4}" stroke="var(--primary)" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.6"/>`;
+    svgStr+=`<circle cx="${x}" cy="${paddingT+speakers.length*(rowH+gap)-4}" r="4" fill="var(--primary)" opacity="0.8"><title>${topic.label}: ${topic.text}</title></circle>`;
+  });
+
+  svgStr+='</svg>';
+  wrap.innerHTML=svgStr;
+}
+
+// ── TOPIC MARKERS ────────────────────────────────────────────
+function buildTopics(){
+  const list=document.getElementById('topic-list');
+  TOPICS.forEach((t,i)=>{
+    const item=document.createElement('div');
+    item.className='topic-item';
+    item.innerHTML=`<div class="topic-pin">${i+1}</div>
+      <div><span class="ts-chip" style="margin-right:6px">${t.ts}</span>
+      <strong style="font-size:13px;color:var(--fg-1)">${t.label}</strong>
+      <span style="color:var(--fg-muted)"> — ${t.text}</span></div>`;
+    list.appendChild(item);
+  });
+}
+
+// ── DECISIONS ────────────────────────────────────────────────
+function buildDecisions(){
+  const list=document.getElementById('decision-list');
+  if(!DECISIONS.length){
+    list.innerHTML='<div class="empty-state">No clear decisions recorded — this looked like an exploratory call.</div>';
+    return;
+  }
+  DECISIONS.forEach(d=>{
+    const color=speakerColor(d.speaker);
+    const card=document.createElement('div');
+    card.className='decision-card';
+    card.innerHTML=`
+      <div class="decision-num">Decision ${d.num}</div>
+      <div class="decision-text">${d.text}</div>
+      <div class="decision-meta">
+        <span class="speaker-tag" style="background:${color}">${d.speaker}</span>
+        <a class="ts-chip" onclick="jumpTo('${d.cueId}')" href="#cue-${d.cueId}">${d.ts}</a>
+      </div>`;
+    list.appendChild(card);
+  });
+}
+
+// ── ACTION ITEMS ─────────────────────────────────────────────
+function buildActionItems(){
+  const tbody=document.getElementById('ai-tbody');
+  if(!ACTION_ITEMS.length){
+    tbody.innerHTML='<tr><td colspan="4" class="empty-state">No action items captured.</td></tr>';
+    return;
+  }
+  ACTION_ITEMS.forEach(ai=>{
+    const color=speakerColor(ai.owner);
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td><span class="owner-badge" style="background:${color}">${ai.owner}</span></td>
+      <td>${ai.what}</td>
+      <td style="font-family:var(--font-mono);font-size:12px;color:var(--fg-muted);white-space:nowrap">${ai.due||'—'}</td>
+      <td><a class="ts-chip" onclick="jumpTo('${ai.cueId}')" href="#cue-${ai.cueId}">${ai.ts}</a></td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+// ── OPEN QUESTIONS ────────────────────────────────────────────
+function buildOpenQuestions(){
+  const list=document.getElementById('oq-list');
+  if(!OPEN_QUESTIONS.length){
+    list.innerHTML='<div class="empty-state">Every question raised got an answer.</div>';
+    return;
+  }
+  OPEN_QUESTIONS.forEach(q=>{
+    const item=document.createElement('div');
+    item.className='oq-item';
+    item.innerHTML=`<svg class="oq-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div style="flex:1">${q.text} <a class="ts-chip" style="margin-left:6px" onclick="jumpTo('${q.cueId}')" href="#cue-${q.cueId}">${q.ts}</a></div>`;
+    list.appendChild(item);
+  });
+}
+
+// ── RISKS ────────────────────────────────────────────────────
+function buildRisks(){
+  const list=document.getElementById('risk-list');
+  RISKS.forEach(r=>{
+    const item=document.createElement('div');
+    item.className='risk-item';
+    item.innerHTML=`${r.text} <a class="ts-chip" style="margin-left:6px" onclick="jumpTo('${r.cueId}')" href="#cue-${r.cueId}">${r.ts}</a>`;
+    list.appendChild(item);
+  });
+}
+
+// ── TRANSCRIPT ───────────────────────────────────────────────
+let activeSpeakers=new Set(DATA.speakers.map(s=>s.name));
+let searchTerm='';
+
+function buildFilterChips(){
+  const strip=document.getElementById('filter-strip');
+  DATA.speakers.forEach(sp=>{
+    const color=speakerColor(sp.name);
+    const btn=document.createElement('button');
+    btn.className='filter-chip';
+    btn.style.background=color;
+    btn.dataset.speaker=sp.name;
+    btn.textContent=sp.name.split(' ')[0];
+    btn.onclick=()=>toggleSpeaker(sp.name,btn);
+    strip.appendChild(btn);
+  });
+}
+
+function toggleSpeaker(name,btn){
+  if(activeSpeakers.has(name)){
+    activeSpeakers.delete(name);
+    btn.classList.add('inactive');
+  } else {
+    activeSpeakers.add(name);
+    btn.classList.remove('inactive');
+  }
+  document.getElementById('chip-all').classList.toggle('active',activeSpeakers.size===DATA.speakers.length);
+  filterTranscript();
+}
+
+window.setAllSpeakers=function(){
+  activeSpeakers=new Set(DATA.speakers.map(s=>s.name));
+  document.querySelectorAll('.filter-chip').forEach(btn=>btn.classList.remove('inactive'));
+  document.getElementById('chip-all').classList.add('active');
+  filterTranscript();
+};
+
+function filterTranscript(){
+  let visible=0;
+  document.querySelectorAll('.cue-row').forEach(row=>{
+    const speaker=row.dataset.speaker;
+    const text=row.dataset.text||'';
+    const spOk=!speaker||activeSpeakers.has(speaker);
+    const searchOk=!searchTerm||text.toLowerCase().includes(searchTerm.toLowerCase());
+    if(spOk&&searchOk){
+      row.classList.remove('hidden');
+      visible++;
+    } else {
+      row.classList.add('hidden');
     }
-
-    // Meeting metadata
-    function renderMeetingMeta() {
-      const totalSecs = DATA.durationMs / 1000;
-      const cadence = (DATA.cueCount / totalSecs).toFixed(2);
-      
-      document.getElementById('meeting-duration').textContent = 
-        `${DATA.durationLabel} · ${DATA.cueCount} turns`;
-      document.getElementById('meeting-cadence').textContent = 
-        `${cadence} turns/sec`;
-      document.getElementById('speaker-count').textContent = 
-        `${DATA.speakerCount} speakers`;
+    // Update highlighted text
+    const textEl=row.querySelector('.cue-text');
+    if(textEl&&searchTerm&&searchOk){
+      textEl.innerHTML=highlightText(text,searchTerm);
+    } else if(textEl){
+      textEl.textContent=text;
     }
+  });
+  document.getElementById('cue-visible-count').textContent=visible;
+}
 
-    // Speakers
-    function renderSpeakers() {
-      const container = document.getElementById('speakers-list');
-      const sorted = [...DATA.speakers].sort((a, b) => b.sharePct - a.sharePct);
-      
-      container.innerHTML = sorted.map(speaker => `
-        <div class="speaker-item">
-          <div class="speaker-name">${speaker.name}</div>
-          <div class="speaker-stats">${speaker.cueCount} cues · ${speaker.wordCount} words · ${speaker.talkSeconds}s</div>
-          <div class="talk-time-bar">
-            <div class="talk-time-fill" style="width: ${speaker.sharePct}%">
-              ${speaker.sharePct > 15 ? speaker.sharePct.toFixed(1) + '%' : ''}
-            </div>
-          </div>
-        </div>
-      `).join('');
-    }
+function highlightText(text,term){
+  if(!term)return escHtml(text);
+  const esc=term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return escHtml(text).replace(new RegExp(esc,'gi'),m=>`<mark>${m}</mark>`);
+}
+function escHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
 
-    // Extract decisions from transcript
-    function renderDecisions() {
-      const container = document.getElementById('decisions-list');
-      const decisions = extractDecisions();
-      
-      if (decisions.length === 0) {
-        container.innerHTML = '<div class="empty-state">No clear decisions recorded.</div>';
-        return;
-      }
-      
-      container.innerHTML = decisions.map((d, i) => `
-        <div class="item-card">
-          <div class="item-text"><strong>${i + 1}.</strong> ${d.text}</div>
-          <div class="item-meta">
-            <span class="speaker-chip">${d.speaker}</span>
-            <span class="timestamp-chip" onclick="jumpToCue('${d.cueId}')">[${d.time}]</span>
-          </div>
-        </div>
-      `).join('');
-    }
+function buildTranscript(){
+  const list=document.getElementById('transcript-list');
+  if(!DATA.cues)return;
+  DATA.cues.forEach(cue=>{
+    const row=document.createElement('div');
+    row.className='cue-row';
+    row.id='cue-'+cue.id;
+    row.dataset.speaker=cue.speaker||'';
+    row.dataset.text=cue.text||'';
+    const color=cue.speaker?speakerColor(cue.speaker):'var(--fg-muted)';
+    row.innerHTML=`
+      <span class="cue-ts" onclick="jumpTo('${cue.id}')" title="Jump to ${cue.startLabel}">${cue.startLabel}</span>
+      ${cue.speaker?`<span class="cue-speaker-tag" style="background:${color}">${cue.speaker.split(' ')[0]}</span>`:''}
+      <span class="cue-text">${escHtml(cue.text||'')}</span>
+      <button class="cue-copy" onclick="copyCue(this,'${cue.id}')" title="Copy this turn">Copy</button>`;
+    list.appendChild(row);
+  });
+}
 
-    function extractDecisions() {
-      const keywords = ['let\'s', 'we\'ll', 'i\'m in', 'approved', 'decision', 'decided', 'ship', 'we\'re going'];
-      const decisions = [];
-      
-      DATA.cues.forEach(cue => {
-        const text = cue.text.toLowerCase();
-        if (keywords.some(kw => text.includes(kw))) {
-          decisions.push({
-            text: cue.text,
-            speaker: cue.speaker || 'Unknown',
-            time: cue.startLabel,
-            cueId: cue.id
-          });
-        }
-      });
-      
-      return decisions.slice(0, 5); // Top 5
-    }
+window.copyCue=function(btn,cueId){
+  const cue=DATA.cues&&DATA.cues.find(c=>c.id===cueId);
+  if(!cue)return;
+  const text=`[${cue.startLabel}] ${cue.speaker||'Speaker'}: ${cue.text}`;
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='✓';
+    setTimeout(()=>btn.textContent='Copy',1200);
+  });
+};
 
-    // Extract action items
-    function renderActionItems() {
-      const container = document.getElementById('action-items-list');
-      const items = extractActionItems();
-      
-      if (items.length === 0) {
-        container.innerHTML = '<div class="empty-state">No action items captured.</div>';
-        return;
-      }
-      
-      container.innerHTML = items.map((item, i) => `
-        <div class="item-card">
-          <div class="item-text"><strong>${i + 1}.</strong> ${item.text}</div>
-          <div class="item-meta">
-            <span class="speaker-chip">${item.owner}</span>
-            <span class="timestamp-chip" onclick="jumpToCue('${item.cueId}')">[${item.time}]</span>
-          </div>
-        </div>
-      `).join('');
-    }
+// ── SEARCH ──────────────────────────────────────────────────
+document.getElementById('global-search').addEventListener('input',function(){
+  searchTerm=this.value.trim();
+  filterTranscript();
+});
 
-    function extractActionItems() {
-      const keywords = ['i\'ll', 'i\'m going to', 'let me', 'i can take', 'i can handle', 'file', 'write', 'add', 'build'];
-      const items = [];
-      
-      DATA.cues.forEach(cue => {
-        const text = cue.text.toLowerCase();
-        if (keywords.some(kw => text.includes(kw)) && cue.speaker) {
-          items.push({
-            text: cue.text,
-            owner: cue.speaker,
-            time: cue.startLabel,
-            cueId: cue.id
-          });
-        }
-      });
-      
-      return items;
-    }
+// ── COPY AS MARKDOWN ─────────────────────────────────────────
+document.getElementById('copy-md-btn').addEventListener('click',function(){
+  const btn=this;
+  let md=`# Pricing Page V2 — Sprint Review\n\n`;
+  md+=`**${DATA.durationLabel} · ${DATA.cueCount} cues · ${DATA.speakerCount} speakers**\n\n`;
+  md+=`## Summary\n${document.getElementById('summary-body').textContent.trim()}\n\n`;
+  md+=`## Speakers\n`;
+  DATA.speakers.forEach(s=>{ md+=`- **${s.name}** — ${s.sharePct}% of talk-time (${s.wordCount} words, ${s.cueCount} cues)\n`; });
+  md+=`\n## Decisions\n`;
+  DECISIONS.forEach(d=>{ md+=`${d.num}. **[${d.ts}]** ${d.text} *(${d.speaker})*\n`; });
+  md+=`\n## Action Items\n`;
+  ACTION_ITEMS.forEach(ai=>{ md+=`- **${ai.owner}** — ${ai.what} ${ai.due?'('+ai.due+')':''} [${ai.ts}]\n`; });
+  md+=`\n## Open Questions\n`;
+  OPEN_QUESTIONS.forEach(q=>{ md+=`- ${q.text} [${q.ts}]\n`; });
+  md+=`\n## Risks\n`;
+  RISKS.forEach(r=>{ md+=`- ${r.text} [${r.ts}]\n`; });
+  navigator.clipboard.writeText(md).then(()=>{
+    btn.classList.add('copied');
+    btn.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+    setTimeout(()=>{
+      btn.classList.remove('copied');
+      btn.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy as Markdown';
+    },2000);
+  });
+});
 
-    // Extract open questions
-    function renderOpenQuestions() {
-      const container = document.getElementById('open-questions-list');
-      const questions = extractOpenQuestions();
-      
-      if (questions.length === 0) {
-        container.innerHTML = '<div class="empty-state">Every question raised got an answer.</div>';
-        return;
-      }
-      
-      container.innerHTML = questions.map((q, i) => `
-        <div class="item-card">
-          <div class="item-text"><strong>${i + 1}.</strong> ${q.text}</div>
-          <div class="item-meta">
-            <span class="speaker-chip">${q.speaker}</span>
-            <span class="timestamp-chip" onclick="jumpToCue('${q.cueId}')">[${q.time}]</span>
-          </div>
-        </div>
-      `).join('');
-    }
+// ── INTERSECTION OBSERVER ────────────────────────────────────
+function observeSections(){
+  if(!window.IntersectionObserver)return;
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting) e.target.style.opacity='1';
+    });
+  },{threshold:0.1});
+  document.querySelectorAll('.panel,.panel-full,.kpi-cell').forEach(el=>{
+    obs.observe(el);
+  });
+}
 
-    function extractOpenQuestions() {
-      const questions = [];
-      
-      DATA.cues.forEach((cue, idx) => {
-        if (cue.text.includes('?')) {
-          // Simple heuristic: if not answered in next 3 cues
-          const nextText = DATA.cues.slice(idx + 1, idx + 4).map(c => c.text).join(' ').toLowerCase();
-          if (!nextText.includes('yes') && !nextText.includes('no') && !nextText.includes('agreed')) {
-            questions.push({
-              text: cue.text,
-              speaker: cue.speaker || 'Unknown',
-              time: cue.startLabel,
-              cueId: cue.id
-            });
-          }
-        }
-      });
-      
-      return questions.slice(0, 3);
-    }
-
-    // Timeline visualization
-    function renderTimeline() {
-      const container = document.getElementById('timeline-viz');
-      const speakerColors = {
-        'Casey Lin': '#a03b00',
-        'Mia Torres': '#7b40e0',
-        'Devon Park': '#4d44e3',
-        'Wes Chen': '#00D4FF'
-      };
-      
-      const bins = 16; // 16 bins for ~27s each
-      const binSize = DATA.durationMs / bins;
-      const timeline = Array(bins).fill(null).map(() => ({}));
-      
-      DATA.cues.forEach(cue => {
-        const binIdx = Math.floor(cue.startMs / binSize);
-        if (binIdx >= 0 && binIdx < bins) {
-          if (!timeline[binIdx][cue.speaker]) {
-            timeline[binIdx][cue.speaker] = 0;
-          }
-          timeline[binIdx][cue.speaker]++;
-        }
-      });
-      
-      let html = '<div class="timeline-container"><div class="timeline">';
-      
-      timeline.forEach((bin, i) => {
-        const binLabel = Math.floor(i * binSize / 1000);
-        const speakers = Object.keys(bin).filter(s => s);
-        
-        html += `<div class="timeline-slot" title="${binLabel}s">
-          <div class="timeline-speaker">`;
-        
-        speakers.forEach(speaker => {
-          const color = speakerColors[speaker] || '#999';
-          html += `<div class="timeline-dot" style="background: ${color}; flex: ${bin[speaker]};" title="${speaker}"></div>`;
-        });
-        
-        html += `</div></div>`;
-      });
-      
-      html += '</div></div>';
-      container.innerHTML = html;
-    }
-
-    // Transcript
-    function renderTranscript() {
-      const container = document.getElementById('transcript-list');
-      
-      container.innerHTML = DATA.cues.map(cue => `
-        <div class="cue" data-speaker="${cue.speaker}" data-cue-id="${cue.id}">
-          <div class="cue-speaker">${cue.speaker || 'Unknown'}</div>
-          <div class="cue-text">${cue.text}</div>
-          <div class="cue-footer">
-            <span class="cue-timestamp" onclick="jumpToCue('${cue.id}')">[${cue.startLabel}]</span>
-            <button class="copy-btn" onclick="copyCue('${cue.id}')">Copy</button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // Search
-    function setupSearch() {
-      const input = document.getElementById('search-input');
-      input.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        const cues = document.querySelectorAll('.cue');
-        
-        cues.forEach(cue => {
-          const text = cue.textContent.toLowerCase();
-          if (query === '') {
-            cue.classList.remove('highlight');
-            cue.classList.remove('hidden');
-          } else if (text.includes(query)) {
-            cue.classList.add('highlight');
-            cue.classList.remove('hidden');
-          } else {
-            cue.classList.remove('highlight');
-            cue.classList.add('hidden');
-          }
-        });
-      });
-    }
-
-    // Speaker filters
-    function setupSpeakerFilters() {
-      const container = document.getElementById('speaker-filters');
-      const speakers = [...new Set(DATA.cues.map(c => c.speaker).filter(Boolean))];
-      
-      container.innerHTML = speakers.map(speaker => `
-        <button class="filter-chip active" onclick="toggleSpeaker('${speaker}')">${speaker}</button>
-      `).join('');
-      
-      window.activeSpeakers = new Set(speakers);
-    }
-
-    window.toggleSpeaker = function(speaker) {
-      const btn = event.target;
-      if (window.activeSpeakers.has(speaker)) {
-        window.activeSpeakers.delete(speaker);
-        btn.classList.remove('active');
-      } else {
-        window.activeSpeakers.add(speaker);
-        btn.classList.add('active');
-      }
-      
-      const cues = document.querySelectorAll('.cue');
-      cues.forEach(cue => {
-        const cueSpkr = cue.getAttribute('data-speaker');
-        if (window.activeSpeakers.has(cueSpkr)) {
-          cue.classList.remove('hidden');
-        } else {
-          cue.classList.add('hidden');
-        }
-      });
-    };
-
-    // Jump to cue
-    window.jumpToCue = function(cueId) {
-      const cue = document.querySelector(`[data-cue-id="${cueId}"]`);
-      if (cue) {
-        cue.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        cue.classList.add('highlight');
-        setTimeout(() => cue.classList.remove('highlight'), 2000);
-      }
-    };
-
-    // Copy cue
-    window.copyCue = function(cueId) {
-      const cue = document.querySelector(`[data-cue-id="${cueId}"]`);
-      if (cue) {
-        const text = cue.querySelector('.cue-text').textContent;
-        const speaker = cue.querySelector('.cue-speaker').textContent;
-        const time = cue.querySelector('.cue-timestamp').textContent;
-        
-        const fullText = `${speaker} ${time}: ${text}`;
-        navigator.clipboard.writeText(fullText).then(() => {
-          const btn = event.target;
-          btn.classList.add('copied');
-          btn.textContent = 'Copied!';
-          setTimeout(() => {
-            btn.classList.remove('copied');
-            btn.textContent = 'Copy';
-          }, 2000);
-        });
-      }
-    };
-
-    // Initialize
-    init();
-  </script>
-</body>
-</html>
+// ── INIT ────────────────

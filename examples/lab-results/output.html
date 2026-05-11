@@ -1,229 +1,912 @@
 <!doctype html>
-<html lang="en" data-ha-style="paper">
+<html lang="en" data-ha-style="document">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Jordan A. Sample — lab panels (synthetic, Jan + Apr 2026)</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jordan A. Sample — Lab Panels (Jan + Apr 2026)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
 :root {
-  --primary:#a03b00; --primary-container:#c94c00; --primary-fixed:#ffdbcd;
-  --primary-fixed-dim:#ffb597; --on-primary:#fff;
-  --bg:#fff8f6; --surface:#fff8f6; --surface-container-lowest:#fff;
-  --surface-container-low:#fbf2ef; --surface-container:#f5ece9; --surface-container-high:#efe6e3;
-  --fg-1:#1e1b19; --fg-2:#594138; --fg-muted:#8d7166;
-  --border:rgba(0,0,0,.06); --border-strong:rgba(0,0,0,.12); --outline-variant:#e1bfb2;
-  --green:#10b981; --blue:#3b82f6; --yellow:#f59e0b; --red:#ef4444;
-  --font-headline:'Space Grotesk',ui-sans-serif,system-ui,sans-serif;
-  --font-body:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;
-  --font-mono:'SF Mono','Menlo',ui-monospace,monospace;
-  --space-xs:4px; --space-sm:8px; --space-md:12px; --space-lg:16px;
-  --space-xl:20px; --space-2xl:24px; --space-3xl:32px; --space-4xl:48px; --space-5xl:64px;
-  --radius-sm:8px; --radius-md:12px; --radius-lg:16px; --radius-xl:20px; --radius-pill:9999px;
-  --shadow-sm:0 1px 2px rgba(30,27,25,.04); --shadow-md:0 4px 12px rgba(30,27,25,.08);
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --accent-cyan: #00D4FF;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981;
+  --blue: #3b82f6;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30,27,25,0.04);
+  --shadow-md: 0 4px 12px rgba(30,27,25,0.08);
+  --shadow-lg: 0 8px 24px rgba(30,27,25,0.12);
+  --shadow-accent: 0 8px 24px rgba(160,59,0,0.15);
+  --gradient-primary: linear-gradient(135deg,#a03b00 0%,#c94c00 100%);
+  --gradient-hero: linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg:#060B18; --surface:#0B1426; --surface-container-lowest:#101D35;
-    --surface-container-low:#101D35; --surface-container:#162544; --surface-container-high:#1c2d52;
-    --fg-1:#F8FAFC; --fg-2:#CBD5E1; --fg-muted:#64748B;
-    --border:rgba(255,255,255,.08); --border-strong:rgba(255,255,255,.14);
-    --primary:#FF6B35;
-    --shadow-md:0 4px 12px rgba(0,0,0,.4);
+    --bg: #060B18;
+    --surface: #0B1426;
+    --surface-container-lowest: #101D35;
+    --surface-container-low: #101D35;
+    --surface-container: #162544;
+    --surface-container-high: #1c2d52;
+    --fg-1: #F8FAFC;
+    --fg-2: #CBD5E1;
+    --fg-muted: #64748B;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --primary: #FF6B35;
+    --accent-glow: #00D4FF;
+    --outline-variant: #2a3a5c;
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
   }
 }
-*,*::before,*::after{box-sizing:border-box;margin:0}
-html,body{background:var(--bg);color:var(--fg-1);font-family:var(--font-body);
-  font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
-body{min-height:100vh}
-main{max-width:1200px;margin:0 auto;padding:var(--space-2xl) var(--space-xl) var(--space-5xl)}
-h1,h2,h3,h4{font-family:var(--font-headline);letter-spacing:-.01em;font-weight:600;color:var(--fg-1)}
-h1{font-size:clamp(28px,4.6vw,42px);font-weight:700;line-height:1.05;letter-spacing:-.02em}
-h2{font-size:clamp(20px,2.4vw,24px);margin-bottom:var(--space-md)}
-h3{font-size:17px;margin-bottom:var(--space-sm)}
-.muted{color:var(--fg-muted)}
-.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
-button{font:inherit;cursor:pointer;border:none;background:transparent;color:inherit}
-input,select{font:inherit;color:var(--fg-1)}
-.hero{padding:var(--space-3xl) 0 var(--space-2xl);border-bottom:1px solid var(--border)}
-.hero .eyebrow{display:inline-flex;gap:var(--space-sm);align-items:center;
-  background:var(--surface-container);color:var(--primary);
-  padding:var(--space-xs) var(--space-md);border-radius:var(--radius-pill);
-  font-family:var(--font-mono);font-size:11.5px;font-weight:500;
-  text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-lg)}
-.hero h1 .accent{background:linear-gradient(135deg,var(--primary) 0%,#7b40e0 100%);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.hero p.editorial{margin-top:var(--space-lg);color:var(--fg-2);font-size:17px;
-  max-width:78ch;line-height:1.5}
-.privacy-strip{background:var(--surface-container);border:1px solid var(--border-strong);
-  border-radius:var(--radius-md);padding:var(--space-md) var(--space-lg);
-  font-size:13px;color:var(--fg-2);margin-top:var(--space-xl);
-  display:flex;gap:var(--space-md);align-items:flex-start}
-.privacy-strip .lock{font-family:var(--font-mono);font-size:11px;color:var(--primary);
-  background:var(--surface-container-lowest);padding:2px 8px;border-radius:var(--radius-pill);
-  border:1px solid var(--border-strong);text-transform:uppercase;letter-spacing:.08em;flex-shrink:0}
-.section{margin-top:var(--space-3xl)}
-.section-head{display:flex;justify-content:space-between;align-items:baseline;
-  gap:var(--space-md);margin-bottom:var(--space-lg);flex-wrap:wrap}
-.section-head .meta{color:var(--fg-muted);font-size:13px;font-family:var(--font-mono)}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:var(--space-md)}
-.kpi{background:var(--surface-container-lowest);border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:var(--space-lg)}
-.kpi .label{font-size:12px;color:var(--fg-muted);text-transform:uppercase;
-  letter-spacing:.08em;font-family:var(--font-mono);margin-bottom:var(--space-sm)}
-.kpi .value{font-family:var(--font-headline);font-size:32px;font-weight:700;
-  letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--fg-1)}
-.kpi .sub{margin-top:var(--space-xs);color:var(--fg-muted);font-size:13px}
-.card{background:var(--surface-container-lowest);border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:var(--space-lg);box-shadow:var(--shadow-sm)}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2xl)}
-@media (max-width:760px){.grid-2{grid-template-columns:1fr}}
-.timeline{display:flex;flex-direction:column;gap:var(--space-md)}
-.tl-row{display:grid;grid-template-columns:120px 1fr;gap:var(--space-md);
-  padding:var(--space-md);border:1px solid var(--border);border-radius:var(--radius-md);
-  background:var(--surface-container-lowest)}
-.tl-row .date{font-family:var(--font-mono);font-size:12.5px;font-variant-numeric:tabular-nums;
-  color:var(--fg-2);align-self:start}
-.tl-row .body{font-size:14.5px;color:var(--fg-1)}
-.tl-row .body .kind{display:inline-block;font-family:var(--font-mono);font-size:11px;
-  padding:1px 8px;border-radius:var(--radius-pill);background:var(--surface-container);
-  color:var(--primary);text-transform:uppercase;letter-spacing:.08em;margin-right:var(--space-sm)}
-.tl-row .body .party{font-size:13px;color:var(--fg-muted);margin-top:2px}
-.tl-row .body .detail{font-size:13px;color:var(--fg-muted);margin-top:4px}
-.list{display:flex;flex-direction:column;gap:var(--space-sm)}
-.list-row{display:flex;justify-content:space-between;align-items:baseline;
-  padding:var(--space-sm) var(--space-md);border-radius:var(--radius-sm);
-  background:var(--surface-container)}
-.list-row .name{font-size:14.5px;font-weight:500}
-.list-row .role{font-size:12px;color:var(--fg-muted);font-family:var(--font-mono);
-  text-transform:uppercase;letter-spacing:.06em}
-.list-row .count{font-size:13px;color:var(--fg-muted);font-family:var(--font-mono);
-  font-variant-numeric:tabular-nums}
-.pill{display:inline-block;padding:1px 8px;border-radius:var(--radius-pill);
-  font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;
-  text-transform:uppercase;font-weight:500;margin-left:var(--space-sm)}
-.pill.inferred{background:var(--surface-container-high);color:var(--fg-2);border:1px solid var(--border-strong)}
-.pill.missing{background:rgba(239,68,68,.12);color:var(--red);border:1px solid rgba(239,68,68,.4)}
-.pill.present{background:rgba(16,185,129,.12);color:var(--green);border:1px solid rgba(16,185,129,.4)}
-.pill.above{background:rgba(245,158,11,.12);color:#a05a00;border:1px solid rgba(245,158,11,.4)}
-.pill.below{background:rgba(59,130,246,.12);color:var(--blue);border:1px solid rgba(59,130,246,.4)}
-.pill.in-range{background:rgba(16,185,129,.10);color:#0b7355;border:1px solid rgba(16,185,129,.3)}
-.pill.no-range{background:var(--surface-container-high);color:var(--fg-muted);border:1px solid var(--border-strong)}
-.q-list{display:flex;flex-direction:column;gap:var(--space-sm)}
-.q-list .q{padding:var(--space-md);border-left:3px solid var(--primary);
-  background:var(--surface-container-low);border-radius:0 var(--radius-md) var(--radius-md) 0;
-  font-size:14.5px;line-height:1.5}
-.miss-list{display:flex;flex-direction:column;gap:var(--space-sm);margin-bottom:var(--space-lg)}
-.miss-list .miss{padding:var(--space-md);background:rgba(245,158,11,.06);
-  border-left:3px solid var(--yellow);border-radius:0 var(--radius-md) var(--radius-md) 0;
-  font-size:14px}
-.miss-list .miss .lbl{font-weight:500}
-.miss-list .miss .det{font-size:13px;color:var(--fg-muted);margin-top:2px}
-.empty-state{padding:var(--space-md);color:var(--fg-muted);font-size:14px;font-style:italic}
-.lab-table,.row-table{width:100%;border-collapse:collapse;font-size:14px}
-.lab-table th,.lab-table td,.row-table th,.row-table td{
-  padding:var(--space-sm) var(--space-md);text-align:left;
-  border-bottom:1px solid var(--border)}
-.lab-table th,.row-table th{font-family:var(--font-mono);font-size:11.5px;
-  text-transform:uppercase;letter-spacing:.06em;color:var(--fg-muted);
-  background:var(--surface-container);font-weight:500}
-.lab-table tbody tr:hover{background:var(--surface-container)}
-.lab-table .num,.row-table .num{font-family:var(--font-mono);font-variant-numeric:tabular-nums;text-align:right}
-.lab-table .out{background:rgba(245,158,11,.06)}
-.lab-table .below-row{background:rgba(59,130,246,.06)}
-.panel-group{margin-bottom:var(--space-xl)}
-.panel-group h3{font-size:15px;margin-bottom:var(--space-sm);
-  display:flex;justify-content:space-between;align-items:baseline}
-.panel-group h3 .meta{font-size:12px;font-family:var(--font-mono);color:var(--fg-muted)}
-.trends{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:var(--space-md)}
-.trend{background:var(--surface-container-lowest);border:1px solid var(--border);
-  border-radius:var(--radius-md);padding:var(--space-md)}
-.trend h4{font-size:13.5px;margin-bottom:var(--space-xs)}
-.trend .reading{font-family:var(--font-mono);font-size:12px;color:var(--fg-muted);
-  margin-bottom:var(--space-sm)}
-.trend svg{width:100%;height:60px;display:block}
-.trend .latest{font-family:var(--font-mono);font-size:12.5px;margin-top:var(--space-xs);
-  font-variant-numeric:tabular-nums;color:var(--fg-2)}
-.encounter{background:var(--surface-container-lowest);border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:var(--space-lg);margin-bottom:var(--space-md)}
-.encounter .head{display:flex;justify-content:space-between;align-items:baseline;
-  gap:var(--space-md);flex-wrap:wrap;margin-bottom:var(--space-sm)}
-.encounter .head .date{font-family:var(--font-mono);font-size:13px;color:var(--fg-2);
-  font-variant-numeric:tabular-nums}
-.encounter .head .type{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;
-  letter-spacing:.08em;color:var(--primary);background:var(--surface-container);
-  padding:2px 8px;border-radius:var(--radius-pill)}
-.encounter .meta-row{font-size:13px;color:var(--fg-muted);margin-bottom:var(--space-sm)}
-.encounter .reason{font-size:14.5px;color:var(--fg-1);margin-bottom:var(--space-sm)}
-.encounter .vitals{display:flex;flex-wrap:wrap;gap:var(--space-md);margin-top:var(--space-sm)}
-.encounter .vital{font-family:var(--font-mono);font-size:12.5px;color:var(--fg-2);
-  background:var(--surface-container);padding:2px 8px;border-radius:var(--radius-sm)}
-.encounter .plan{margin-top:var(--space-sm);padding:var(--space-sm) var(--space-md);
-  background:var(--surface-container);border-radius:var(--radius-sm);
-  font-style:italic;font-size:13.5px;color:var(--fg-2)}
-.deadlines{display:flex;flex-direction:column;gap:var(--space-sm)}
-.deadline{display:grid;grid-template-columns:120px 80px 1fr;gap:var(--space-md);
-  padding:var(--space-md);background:var(--surface-container-lowest);
-  border:1px solid var(--border);border-radius:var(--radius-md);font-size:13.5px}
-.deadline .d{font-family:var(--font-mono);font-variant-numeric:tabular-nums;color:var(--fg-1)}
-.deadline .rel{font-family:var(--font-mono);font-size:11.5px;color:var(--fg-muted);
-  background:var(--surface-container);padding:2px 8px;border-radius:var(--radius-pill);
-  text-align:center;align-self:start}
-.deadline .src{color:var(--fg-2)}
-.case-card{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:var(--space-md);padding:var(--space-lg);background:var(--surface-container-lowest);
-  border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
-.case-card .field .label{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;
-  letter-spacing:.08em;color:var(--fg-muted);margin-bottom:2px}
-.case-card .field .value{font-family:var(--font-mono);font-size:13.5px;color:var(--fg-1)}
-.drill{background:var(--surface-container-lowest);border:1px solid var(--border);
-  border-radius:var(--radius-lg);overflow:hidden}
-.drill > summary{cursor:pointer;padding:var(--space-lg);
-  display:flex;justify-content:space-between;align-items:center;font-weight:500;
-  list-style:none;font-size:15px}
-.drill > summary::-webkit-details-marker{display:none}
-.drill > summary::after{content:"▾";color:var(--fg-muted);font-size:14px;
-  transition:transform .2s}
-.drill[open] > summary::after{transform:rotate(180deg)}
-.drill > summary:hover{background:var(--surface-container)}
-.drill-body{padding:var(--space-lg);border-top:1px solid var(--border)}
-.drill-body input[type=search]{width:100%;padding:var(--space-md);
-  background:var(--surface-container);border:1px solid var(--border-strong);
-  border-radius:var(--radius-sm);font-size:14px;margin-bottom:var(--space-md)}
-.toolbar{display:flex;gap:var(--space-sm);flex-wrap:wrap;align-items:center;
-  margin-bottom:var(--space-md)}
-.chip{padding:var(--space-xs) var(--space-md);border-radius:var(--radius-pill);
-  background:var(--surface-container);border:1px solid var(--border-strong);
-  font-size:12.5px;font-family:var(--font-mono);cursor:pointer;color:var(--fg-2)}
-.chip.active{background:var(--primary);color:var(--on-primary);
-  border-color:var(--primary)}
-.copy-btn{padding:var(--space-xs) var(--space-md);background:var(--surface-container);
-  border:1px solid var(--border-strong);border-radius:var(--radius-pill);
-  font-size:12.5px;font-family:var(--font-mono);cursor:pointer;color:var(--fg-2)}
-.copy-btn:hover{background:var(--surface-container-high)}
-.callout-card{padding:var(--space-md);background:var(--surface-container-lowest);
-  border:1px solid var(--border);border-radius:var(--radius-md);margin-bottom:var(--space-sm)}
-.callout-card .head{display:flex;justify-content:space-between;align-items:baseline;
-  gap:var(--space-md);flex-wrap:wrap;margin-bottom:var(--space-xs)}
-.callout-card .head .test{font-weight:500;font-size:14.5px}
-.callout-card .head .value{font-family:var(--font-mono);font-variant-numeric:tabular-nums;
-  font-size:14px;color:var(--fg-1)}
-.callout-card .ref{font-size:12.5px;color:var(--fg-muted);font-family:var(--font-mono)}
-.callout-card .meta{font-size:12px;color:var(--fg-muted);margin-top:var(--space-xs)}
-footer{margin-top:var(--space-5xl);padding-top:var(--space-2xl);
-  border-top:1px solid var(--border);color:var(--fg-muted);font-size:13px}
-footer p{margin-bottom:var(--space-md)}
-footer .caveat{font-style:italic}
-.med-list{display:flex;flex-direction:column;gap:var(--space-sm)}
-.med{padding:var(--space-sm) var(--space-md);background:var(--surface-container);
-  border-radius:var(--radius-sm);font-size:14px;display:flex;justify-content:space-between;
-  gap:var(--space-md);flex-wrap:wrap}
-.med .name{font-weight:500}
-.med .dose{font-family:var(--font-mono);font-size:12.5px;color:var(--fg-2)}
-.med .ix{font-size:12.5px;color:var(--fg-muted)}
-  </style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  font-size:15px;
+  line-height:1.6;
+  color:var(--fg-1);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:var(--font-headline);letter-spacing:-0.01em;line-height:1.2}
+a{color:var(--primary);text-decoration:none}
+button{cursor:pointer;font-family:var(--font-body)}
+
+/* Layout */
+.document-shell{
+  max-width:860px;
+  margin:0 auto;
+  padding:0 var(--space-lg) var(--space-5xl);
+}
+@media(min-width:700px){.document-shell{padding:0 var(--space-3xl) var(--space-5xl)}}
+
+/* Cover / masthead */
+.cover{
+  padding:var(--space-4xl) 0 var(--space-3xl);
+  border-bottom:1px solid var(--border-strong);
+  margin-bottom:var(--space-3xl);
+}
+.cover-eyebrow{
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--fg-muted);
+  margin-bottom:var(--space-sm);
+  font-family:var(--font-headline);
+}
+.cover-title{
+  font-size:clamp(22px,5vw,36px);
+  font-weight:700;
+  color:var(--fg-1);
+  margin-bottom:var(--space-md);
+  background:var(--gradient-hero);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.cover-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--space-sm);
+  margin-bottom:var(--space-xl);
+}
+.meta-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:var(--space-xs);
+  padding:var(--space-xs) var(--space-md);
+  background:var(--surface-container);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-pill);
+  font-size:12px;
+  color:var(--fg-2);
+  font-weight:500;
+  font-family:var(--font-mono);
+  font-variant-numeric:tabular-nums;
+}
+.meta-chip.accent{background:var(--primary-fixed);color:var(--primary-container);border-color:var(--primary-fixed-dim)}
+@media(prefers-color-scheme:dark){
+  .meta-chip.accent{background:rgba(255,107,53,0.15);color:var(--primary);border-color:rgba(255,107,53,0.3)}
+}
+.deck{
+  font-size:15px;
+  color:var(--fg-2);
+  line-height:1.65;
+  max-width:620px;
+  margin-bottom:var(--space-xl);
+}
+
+/* Privacy banner */
+.privacy-banner{
+  display:flex;
+  align-items:flex-start;
+  gap:var(--space-sm);
+  padding:var(--space-md) var(--space-lg);
+  background:var(--surface-container);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-md);
+  font-size:12px;
+  color:var(--fg-muted);
+  line-height:1.5;
+  margin-bottom:var(--space-2xl);
+}
+.privacy-banner .icon{font-size:14px;flex-shrink:0;margin-top:1px}
+
+/* Reader rail / mode switcher */
+.reader-rail{
+  display:flex;
+  align-items:center;
+  gap:var(--space-sm);
+  flex-wrap:wrap;
+  margin-bottom:var(--space-3xl);
+  padding-bottom:var(--space-xl);
+  border-bottom:1px solid var(--border);
+}
+.mode-btn{
+  padding:var(--space-xs) var(--space-md);
+  border-radius:var(--radius-pill);
+  border:1px solid var(--border-strong);
+  background:var(--surface-container-lowest);
+  color:var(--fg-2);
+  font-size:13px;
+  font-weight:500;
+  transition:all 160ms ease;
+}
+.mode-btn.active,
+.mode-btn:hover{
+  background:var(--primary);
+  color:var(--on-primary);
+  border-color:var(--primary);
+}
+.rail-label{font-size:12px;color:var(--fg-muted);font-weight:500;margin-right:var(--space-xs)}
+
+/* Section anatomy */
+.body-section{
+  margin-bottom:var(--space-4xl);
+}
+.section-rule{
+  display:flex;
+  align-items:center;
+  gap:var(--space-md);
+  margin-bottom:var(--space-xl);
+}
+.section-rule h2{
+  font-size:18px;
+  font-weight:700;
+  color:var(--fg-1);
+  white-space:nowrap;
+}
+.section-rule::after{
+  content:'';
+  flex:1;
+  height:1px;
+  background:var(--border-strong);
+}
+.section-count{
+  font-size:11px;
+  font-weight:600;
+  padding:2px 8px;
+  border-radius:var(--radius-pill);
+  background:var(--surface-container);
+  color:var(--fg-muted);
+  font-family:var(--font-mono);
+  white-space:nowrap;
+}
+
+/* Summary headline card */
+.summary-card{
+  background:var(--surface-container-low);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-xl);
+  padding:var(--space-2xl);
+  margin-bottom:var(--space-3xl);
+  box-shadow:var(--shadow-md);
+}
+.summary-headline-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:var(--space-lg);
+  margin-top:var(--space-xl);
+}
+@media(min-width:500px){.summary-headline-grid{grid-template-columns:repeat(4,1fr)}}
+.headline-stat{
+  text-align:center;
+  padding:var(--space-lg) var(--space-md);
+  background:var(--surface-container-lowest);
+  border-radius:var(--radius-lg);
+  border:1px solid var(--border);
+}
+.headline-stat .val{
+  font-size:28px;
+  font-weight:700;
+  font-family:var(--font-headline);
+  color:var(--primary);
+  font-variant-numeric:tabular-nums;
+  display:block;
+  margin-bottom:var(--space-xs);
+}
+.headline-stat .lbl{
+  font-size:11px;
+  color:var(--fg-muted);
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  font-weight:600;
+}
+.headline-stat.flag .val{color:var(--yellow)}
+.summary-prose{
+  font-size:14px;
+  color:var(--fg-2);
+  line-height:1.65;
+  margin-top:var(--space-lg);
+  padding-top:var(--space-lg);
+  border-top:1px solid var(--border);
+}
+
+/* Out-of-range section */
+.oor-grid{
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-md);
+}
+.oor-row{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:var(--space-sm) var(--space-lg);
+  padding:var(--space-lg);
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-lg);
+  border-left:3px solid var(--yellow);
+  transition:box-shadow 160ms ease;
+}
+.oor-row:hover{box-shadow:var(--shadow-md)}
+.oor-row.above{border-left-color:var(--primary)}
+.oor-row.below{border-left-color:var(--blue)}
+.oor-test{
+  font-weight:600;
+  font-size:14px;
+  color:var(--fg-1);
+  margin-bottom:2px;
+}
+.oor-meta{
+  font-size:12px;
+  color:var(--fg-muted);
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--space-xs) var(--space-md);
+}
+.oor-right{
+  text-align:right;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:var(--space-xs);
+  flex-shrink:0;
+}
+.oor-value{
+  font-size:20px;
+  font-weight:700;
+  font-family:var(--font-mono);
+  font-variant-numeric:tabular-nums;
+  color:var(--fg-1);
+}
+.oor-unit{font-size:11px;color:var(--fg-muted)}
+.direction-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:3px;
+  padding:2px 8px;
+  border-radius:var(--radius-pill);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0.02em;
+}
+.direction-chip.above{background:rgba(160,59,0,0.1);color:var(--primary)}
+.direction-chip.below{background:rgba(59,130,246,0.1);color:var(--blue)}
+@media(prefers-color-scheme:dark){
+  .direction-chip.above{background:rgba(255,107,53,0.15);color:var(--primary)}
+  .direction-chip.below{background:rgba(59,130,246,0.2);color:#60a5fa}
+}
+.inferred-chip{
+  display:inline-flex;
+  align-items:center;
+  padding:1px 6px;
+  border-radius:var(--radius-pill);
+  font-size:10px;
+  font-weight:600;
+  background:var(--surface-container);
+  color:var(--fg-muted);
+  border:1px solid var(--border-strong);
+  letter-spacing:0.03em;
+}
+.ref-text{
+  font-family:var(--font-mono);
+  font-size:11px;
+  color:var(--fg-muted);
+}
+
+/* Trends sparklines */
+.trends-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--space-xl);
+}
+@media(min-width:600px){.trends-grid{grid-template-columns:1fr 1fr}}
+.trend-card{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-lg);
+  padding:var(--space-lg);
+  box-shadow:var(--shadow-sm);
+}
+.trend-card-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:var(--space-md);
+}
+.trend-test-name{
+  font-weight:600;
+  font-size:13px;
+  color:var(--fg-1);
+}
+.trend-unit{
+  font-size:11px;
+  color:var(--fg-muted);
+  font-family:var(--font-mono);
+}
+.sparkline-wrap{
+  width:100%;
+  height:60px;
+  margin-bottom:var(--space-md);
+}
+.sparkline-wrap svg{width:100%;height:100%}
+.trend-points{
+  display:flex;
+  gap:var(--space-xl);
+  flex-wrap:wrap;
+}
+.trend-point{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.trend-point .tp-date{font-size:10px;color:var(--fg-muted);font-family:var(--font-mono)}
+.trend-point .tp-val{
+  font-size:15px;
+  font-weight:700;
+  font-family:var(--font-mono);
+  font-variant-numeric:tabular-nums;
+  color:var(--fg-1);
+}
+.trend-point .tp-val.oor{color:var(--primary)}
+
+/* Panel tables */
+.panel-section{
+  margin-bottom:var(--space-3xl);
+}
+.panel-header{
+  display:flex;
+  align-items:center;
+  gap:var(--space-md);
+  margin-bottom:var(--space-md);
+}
+.panel-name{
+  font-size:14px;
+  font-weight:700;
+  color:var(--fg-1);
+  font-family:var(--font-headline);
+}
+.panel-oor-badge{
+  font-size:11px;
+  padding:2px 8px;
+  border-radius:var(--radius-pill);
+  background:rgba(160,59,0,0.1);
+  color:var(--primary);
+  font-weight:600;
+}
+@media(prefers-color-scheme:dark){.panel-oor-badge{background:rgba(255,107,53,0.15)}}
+.panel-ok-badge{
+  font-size:11px;
+  padding:2px 8px;
+  border-radius:var(--radius-pill);
+  background:rgba(16,185,129,0.1);
+  color:var(--green);
+  font-weight:600;
+}
+.fact-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13px;
+}
+.fact-table th{
+  text-align:left;
+  padding:var(--space-sm) var(--space-md);
+  background:var(--surface-container);
+  color:var(--fg-muted);
+  font-weight:600;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.05em;
+  border-bottom:1px solid var(--border-strong);
+}
+.fact-table th:first-child{border-radius:var(--radius-sm) 0 0 0}
+.fact-table th:last-child{border-radius:0 var(--radius-sm) 0 0}
+.fact-table td{
+  padding:var(--space-sm) var(--space-md);
+  border-bottom:1px solid var(--border);
+  color:var(--fg-2);
+  vertical-align:middle;
+  font-variant-numeric:tabular-nums;
+}
+.fact-table tr:last-child td{border-bottom:none}
+.fact-table tr:hover td{background:var(--surface-container-low)}
+.fact-table .val-cell{
+  font-family:var(--font-mono);
+  font-weight:600;
+  color:var(--fg-1);
+}
+.fact-table .val-cell.oor{color:var(--primary)}
+.fact-table .ref-cell{
+  font-family:var(--font-mono);
+  font-size:12px;
+  color:var(--fg-muted);
+}
+.table-wrap{
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  border:1px solid var(--border-strong);
+  overflow-x:auto;
+}
+
+/* Timeline */
+.timeline{
+  position:relative;
+  padding-left:var(--space-2xl);
+}
+.timeline::before{
+  content:'';
+  position:absolute;
+  left:8px;
+  top:0;
+  bottom:0;
+  width:2px;
+  background:var(--border-strong);
+  border-radius:var(--radius-pill);
+}
+.timeline-event{
+  position:relative;
+  margin-bottom:var(--space-2xl);
+  padding-left:var(--space-lg);
+}
+.timeline-event::before{
+  content:'';
+  position:absolute;
+  left:-16px;
+  top:5px;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--primary);
+  border:2px solid var(--bg);
+  box-shadow:0 0 0 2px var(--primary);
+}
+.evt-date{
+  font-size:11px;
+  font-family:var(--font-mono);
+  color:var(--fg-muted);
+  font-variant-numeric:tabular-nums;
+  margin-bottom:2px;
+}
+.evt-title{
+  font-size:14px;
+  font-weight:600;
+  color:var(--fg-1);
+  margin-bottom:2px;
+}
+.evt-detail{
+  font-size:13px;
+  color:var(--fg-2);
+}
+.evt-party{
+  font-size:12px;
+  color:var(--fg-muted);
+  margin-top:2px;
+}
+
+/* Parties */
+.parties-list{
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-sm);
+}
+.party-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:var(--space-md) var(--space-lg);
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+}
+.party-info{display:flex;flex-direction:column;gap:2px}
+.party-name{font-size:14px;font-weight:600;color:var(--fg-1)}
+.party-role{font-size:12px;color:var(--fg-muted)}
+.party-count{
+  font-size:12px;
+  font-family:var(--font-mono);
+  color:var(--fg-muted);
+  padding:2px 8px;
+  background:var(--surface-container);
+  border-radius:var(--radius-pill);
+  border:1px solid var(--border-strong);
+}
+
+/* Documents */
+.docs-list{
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-sm);
+}
+.doc-row{
+  display:flex;
+  align-items:center;
+  gap:var(--space-md);
+  padding:var(--space-md) var(--space-lg);
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+}
+.doc-icon{
+  width:32px;
+  height:32px;
+  border-radius:var(--radius-sm);
+  background:var(--surface-container);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  flex-shrink:0;
+}
+.doc-info{flex:1;min-width:0}
+.doc-name{font-size:13px;font-weight:600;color:var(--fg-1)}
+.doc-kind{font-size:11px;color:var(--fg-muted)}
+.doc-date{
+  font-size:11px;
+  font-family:var(--font-mono);
+  color:var(--fg-muted);
+  flex-shrink:0;
+}
+.missing-badge{
+  display:inline-flex;
+  padding:2px 8px;
+  border-radius:var(--radius-pill);
+  font-size:10px;
+  font-weight:600;
+  background:rgba(239,68,68,0.1);
+  color:var(--red);
+  border:1px solid rgba(239,68,68,0.2);
+}
+.present-badge{
+  display:inline-flex;
+  padding:2px 8px;
+  border-radius:var(--radius-pill);
+  font-size:10px;
+  font-weight:600;
+  background:rgba(16,185,129,0.1);
+  color:var(--green);
+  border:1px solid rgba(16,185,129,0.2);
+}
+
+/* Missing & questions */
+.caveat-box{
+  padding:var(--space-lg);
+  background:var(--surface-container);
+  border-left:3px solid var(--yellow);
+  border-radius:0 var(--radius-md) var(--radius-md) 0;
+  margin-bottom:var(--space-xl);
+}
+.caveat-box h4{
+  font-size:12px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  color:var(--yellow);
+  margin-bottom:var(--space-sm);
+}
+.caveat-box p{font-size:13px;color:var(--fg-2)}
+.questions-list{
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-sm);
+}
+.question-item{
+  display:flex;
+  gap:var(--space-md);
+  padding:var(--space-md) var(--space-lg);
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  font-size:13px;
+  color:var(--fg-2);
+  line-height:1.6;
+}
+.q-num{
+  flex-shrink:0;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  background:var(--surface-container);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:10px;
+  font-weight:700;
+  color:var(--fg-muted);
+  margin-top:2px;
+}
+.missing-items-list{
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-sm);
+  margin-bottom:var(--space-xl);
+}
+.missing-item{
+  display:flex;
+  align-items:flex-start;
+  gap:var(--space-sm);
+  padding:var(--space-md) var(--space-lg);
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  font-size:13px;
+  color:var(--fg-2);
+}
+.missing-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--yellow);flex-shrink:0;margin-top:6px;
+}
+
+/* Drill-down */
+.drill-down-toggle{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:var(--space-lg) var(--space-xl);
+  background:var(--surface-container-low);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-lg);
+  font-family:var(--font-headline);
+  font-size:15px;
+  font-weight:600;
+  color:var(--fg-1);
+  transition:background 160ms ease;
+}
+.drill-down-toggle:hover{background:var(--surface-container)}
+.drill-chevron{
+  font-size:12px;
+  transition:transform 240ms ease;
+  color:var(--fg-muted);
+}
+.drill-chevron.open{transform:rotate(180deg)}
+.drill-down-body{
+  display:none;
+  padding:var(--space-xl) 0;
+}
+.drill-down-body.open{display:block}
+.drill-search-bar{
+  display:flex;
+  gap:var(--space-sm);
+  margin-bottom:var(--space-xl);
+  flex-wrap:wrap;
+}
+.drill-search-input{
+  flex:1;
+  min-width:200px;
+  padding:var(--space-sm) var(--space-lg);
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-pill);
+  font-family:var(--font-body);
+  font-size:14px;
+  color:var(--fg-1);
+  outline:none;
+  transition:border-color 160ms ease;
+}
+.drill-search-input:focus{border-color:var(--primary)}
+.filter-chips{
+  display:flex;
+  gap:var(--space-xs);
+  flex-wrap:wrap;
+}
+.filter-chip{
+  padding:var(--space-xs) var(--space-md);
+  border-radius:var(--radius-pill);
+  border:1px solid var(--border-strong);
+  background:var(--surface-container-lowest);
+  font-size:12px;
+  color:var(--fg-2);
+  font-weight:500;
+  transition:all 160ms ease;
+}
+.filter-chip.active,
+.filter-chip:hover{
+  background:var(--primary);
+  color:var(--on-primary);
+  border-color:var(--primary);
+}
+.drill-rows{
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-sm);
+}
+.drill-row{
+  padding:var(--space-md) var(--space-lg);
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  cursor:pointer;
+  transition:box-shadow 160ms ease;
+}
+.drill-row:hover{box-shadow:var(--shadow-md)}
+.drill-row-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--space-sm);
+}
+.drill-row-test{font-size:13px;font-weight:600;color:var(--fg-1)}
+.drill-row-right{
+  display:flex;
+  align-items:center;
+  gap:var(--space-sm);
+  flex-shrink:0;
+}
+.drill-row-val{
+  font-family:var(--font-mono);
+  font-size:13px;
+  font-weight:600;
+  color:var(--fg-1);
+  font-variant-numeric:tabular-nums;
+}
+.drill-row-val.oor{color:var(--primary)}
+.drill-row-detail{
+  display:none;
+  margin-top:var(--space-md);
+  padding-top:var(--space-md);
+  border-top:1px solid var(--border);
+}
+.drill-row-detail.open{display:block}
+.drill-detail-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:var(--space-sm) var(--space-xl);
+  font-size:12px;
+}
+@media(min-width:500px){.drill-detail-grid{grid-template-columns:repeat(3,1fr)}}
+.dd-field{display:flex;flex-direction:column;gap:2px}
+.dd-label{font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:var(--fg-muted);font-weight:600}
+.dd-value{font-family:var(--font-mono);color:var(--fg-2);font-size:12px;font-variant-numeric:tabular-nums}
+.no-results{
+  text-align:center;
+  padding:var(--space-3xl);
+  color:var(--fg-muted);
+  font-size:14px;
+}
+mark{
+  background:rgba(245,158,11,0.25);
+  color:inherit;
+  border-radius:2px;
+  padding:0 1px;
+}
+@media(prefers-color-scheme:dark){mark{background:rgba(245,158,11,0.35)}}
+
+/* Copy button */
+.copy-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:var(--space-xs);
+  padding:var(--space-xs) var(--space-md);
+  border-radius:var(--radius-pill);
+  border:1px solid var(--border-strong);
+  background:var(--surface-container-lowest);
+  color:var(--fg-2);
+  font-size:12px;
+  font-weight:500;
+  transition:all 160ms ease;
+}
+.copy-btn:hover{background:var(--surface-container);border-color:var(--primary);color:var(--primary)}
+.copy-btn.copied{background:rgba(16,185,129,0.1);border-color:var(--green);color:var(--green)}
+
+/* Footer */
+.document-footer{
+  margin-top:var(--space-5xl);
+  padding:var(--space-3xl) 0;
+  border-top:1px solid var(--border-strong);
+}
+.footer-caveat{
+  font-size:12px;
+  color:var(--fg-muted);
+  line-height:1.7;
+  font-style:italic;
+  max-width:680px;
+}
+.footer-caveat + .footer-caveat{margin-top:var(--space-md)}
+
+/* Section visibility modes */
+.mode-summary [data-mode-hide="summary"]{display:none}
+.mode-outline [data-mode-hide="outline"]{display:none}
+.mode-outline .drill-down-body{display:none!important}
+
+/* Animations */
+@media(prefers-reduced-motion:no-preference){
+  .body-section{
+    opacity:0;
+    transform:translateY(12px);
+    transition:opacity 340ms ease,transform 340ms ease;
+  }
+  .body-section.visible{opacity:1;transform:translateY(0)}
+  .headline-stat .val{transition:color 200ms ease}
+}
+
+/* Collapsed panels toggle */
+.panel-toggle{
+  background:none;
+  border:none;
+  padding:0;
+  font-family:var(--font-headline);
+  font-size:14px;
+  font-weight:700;
+  color:var(--fg-1);
+  display:flex;
+  align-items:center;
+  gap:var(--space-xs);
+  cursor:pointer;
+}
+.panel-toggle-icon{
+  font-size:11px;
+  color:var(--fg-muted);
+  transition:transform 200ms ease;
+}
+.panel-toggle-icon.open{transform:rotate(90deg)}
+.panel-body{display:none}
+.panel-body.open{display:block}
+</style>
+<script>const DATA = {"format":"lab-results","subtype":"lab-results","events":[{"id":"evt_001","kind":"lab-draw","date":"2026-01-15","dateText":"2026-01-15","title":"Lab draw — 18 tests","party":"Dr. Avery Lin","detail":"7 values outside reference range","source":{"line":null,"quote":null}},{"id":"evt_002","kind":"lab-draw","date":"2026-04-08","dateText":"2026-04-08","title":"Lab draw — 11 tests","party":"Dr. Avery Lin","detail":"3 values outside reference range","source":{"line":null,"quote":null}}],"parties":[{"name":"Dr. Avery Lin","role":"Ordering provider","count":29},{"name":"Demo Diagnostics","role":"Performing lab","count":29}],"documents":[{"id":"doc_001","name":"CBC","kind":"lab-panel","date":"2026-04-08","missing":false},{"id":"doc_002","name":"CMP","kind":"lab-panel","date":"2026-04-08","missing":false},{"id":"doc_003","name":"Lipid Panel","kind":"lab-panel","date":"2026-04-08","missing":false},{"id":"doc_004","name":"A1c","kind":"lab-panel","date":"2026-04-08","missing":false},{"id":"doc_005","name":"Thyroid","kind":"lab-panel","date":"2026-04-08","missing":false},{"id":"doc_006","name":"Vitamins","kind":"lab-panel","date":"2026-04-08","missing":false},{"id":"doc_007","name":"Iron studies","kind":"lab-panel","date":"2026-04-08","missing":false},{"id":"doc_008","name":"Liver","kind":"lab-panel","date":"2026-04-08","missing":false}],"missingItems":[{"id":"missing_ref","label":"1 row have no reference range","detail":"Ferritin"}],"openQuestions":[{"id":"q_001","question":"Ask the clinician whether the Glucose (fasting) value of 108 mg/dL on 2026-01-15 — outside the reference range printed on this row (above the band (range printed on the row: 70–99)) — changes the current plan.","anchor":"lab_0006"},{"id":"q_002","question":"Ask the clinician whether the Total Cholesterol value of 231 mg/dL on 2026-01-15 — outside the reference range printed on this row (above the band (range printed on the row: <200)) — changes the current plan.","anchor":"lab_0011"},{"id":"q_003","question":"Ask the clinician whether the LDL Cholesterol value of 162 mg/dL on 2026-01-15 — outside the reference range printed on this row (above the band (range printed on the row: <100)) — changes the current plan.","anchor":"lab_0012"},{"id":"q_004","question":"Ask the clinician whether the HDL Cholesterol value of 38 mg/dL on 2026-01-15 — outside the reference range printed on this row (below the band (range printed on the row: 40+)) — changes the current plan.","anchor":"lab_0013"},{"id":"q_005","question":"Ask the clinician whether the Triglycerides value of 178 mg/dL on 2026-01-15 — outside the reference range printed on this row (above the band (range printed on the row: <150)) — changes the current plan.","anchor":"lab_0014"},{"id":"q_006","question":"Ask the clinician whether the Hemoglobin A1c value of 7.4 % on 2026-01-15 — outside the reference range printed on this row (above the band (range printed on the row: 4–5.7)) — changes the current plan.","anchor":"lab_0015"},{"id":"q_missing_ref","question":"Ask whether the missing reference range on 1 row (Ferritin) was an oversight or whether the lab uses age-specific bands not printed on the export.","anchor":"lab_0027"}],"summary":{"rowCount":29,"period":"2026-01-15 → 2026-04-08","durationLabel":"83 days","headlineCount":[{"label":"lab rows","value":29},{"label":"panels","value":8},{"label":"draws","value":2},{"label":"outside reference","value":10}]},"rows":[{"id":"lab_0001","test":"WBC","panel":"CBC","value":5.8,"valueText":"5.8","unit":"K/uL","referenceLow":4,"referenceHigh":11,"referenceText":"4–11","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"WBC","Panel":"CBC","Value":"5.8","Unit":"K/uL","Reference Low":"4.0","Reference High":"11.0","Reference":"4.0-11.0","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0002","test":"RBC","panel":"CBC","value":4.7,"valueText":"4.7","unit":"M/uL","referenceLow":4.2,"referenceHigh":5.9,"referenceText":"4.2–5.9","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"RBC","Panel":"CBC","Value":"4.7","Unit":"M/uL","Reference Low":"4.2","Reference High":"5.9","Reference":"4.2-5.9","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0003","test":"Hemoglobin","panel":"CBC","value":14.2,"valueText":"14.2","unit":"g/dL","referenceLow":13.5,"referenceHigh":17.5,"referenceText":"13.5–17.5","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Hemoglobin","Panel":"CBC","Value":"14.2","Unit":"g/dL","Reference Low":"13.5","Reference High":"17.5","Reference":"13.5-17.5","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0004","test":"Hematocrit","panel":"CBC","value":42.1,"valueText":"42.1","unit":"%","referenceLow":38.8,"referenceHigh":50,"referenceText":"38.8–50","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Hematocrit","Panel":"CBC","Value":"42.1","Unit":"%","Reference Low":"38.8","Reference High":"50.0","Reference":"38.8-50.0","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0005","test":"Platelets","panel":"CBC","value":238,"valueText":"238","unit":"K/uL","referenceLow":150,"referenceHigh":450,"referenceText":"150–450","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Platelets","Panel":"CBC","Value":"238","Unit":"K/uL","Reference Low":"150","Reference High":"450","Reference":"150-450","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0006","test":"Glucose (fasting)","panel":"CMP","value":108,"valueText":"108","unit":"mg/dL","referenceLow":70,"referenceHigh":99,"referenceText":"70–99","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Glucose (fasting)","Panel":"CMP","Value":"108","Unit":"mg/dL","Reference Low":"70","Reference High":"99","Reference":"70-99","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0007","test":"BUN","panel":"CMP","value":16,"valueText":"16","unit":"mg/dL","referenceLow":7,"referenceHigh":20,"referenceText":"7–20","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"BUN","Panel":"CMP","Value":"16","Unit":"mg/dL","Reference Low":"7","Reference High":"20","Reference":"7-20","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0008","test":"Creatinine","panel":"CMP","value":0.92,"valueText":"0.92","unit":"mg/dL","referenceLow":0.7,"referenceHigh":1.3,"referenceText":"0.7–1.3","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Creatinine","Panel":"CMP","Value":"0.92","Unit":"mg/dL","Reference Low":"0.7","Reference High":"1.3","Reference":"0.7-1.3","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0009","test":"Sodium","panel":"CMP","value":140,"valueText":"140","unit":"mmol/L","referenceLow":135,"referenceHigh":145,"referenceText":"135–145","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Sodium","Panel":"CMP","Value":"140","Unit":"mmol/L","Reference Low":"135","Reference High":"145","Reference":"135-145","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0010","test":"Potassium","panel":"CMP","value":4.2,"valueText":"4.2","unit":"mmol/L","referenceLow":3.5,"referenceHigh":5.1,"referenceText":"3.5–5.1","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Potassium","Panel":"CMP","Value":"4.2","Unit":"mmol/L","Reference Low":"3.5","Reference High":"5.1","Reference":"3.5-5.1","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0011","test":"Total Cholesterol","panel":"Lipid Panel","value":231,"valueText":"231","unit":"mg/dL","referenceLow":null,"referenceHigh":200,"referenceText":"<200","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Total Cholesterol","Panel":"Lipid Panel","Value":"231","Unit":"mg/dL","Reference Low":"","Reference High":"200","Reference":"<200","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0012","test":"LDL Cholesterol","panel":"Lipid Panel","value":162,"valueText":"162","unit":"mg/dL","referenceLow":null,"referenceHigh":100,"referenceText":"<100","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"LDL Cholesterol","Panel":"Lipid Panel","Value":"162","Unit":"mg/dL","Reference Low":"","Reference High":"100","Reference":"<100","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0013","test":"HDL Cholesterol","panel":"Lipid Panel","value":38,"valueText":"38","unit":"mg/dL","referenceLow":40,"referenceHigh":null,"referenceText":"40+","direction":"below","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"HDL Cholesterol","Panel":"Lipid Panel","Value":"38","Unit":"mg/dL","Reference Low":"40","Reference High":"","Reference":">40","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0014","test":"Triglycerides","panel":"Lipid Panel","value":178,"valueText":"178","unit":"mg/dL","referenceLow":null,"referenceHigh":150,"referenceText":"<150","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Triglycerides","Panel":"Lipid Panel","Value":"178","Unit":"mg/dL","Reference Low":"","Reference High":"150","Reference":"<150","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0015","test":"Hemoglobin A1c","panel":"A1c","value":7.4,"valueText":"7.4","unit":"%","referenceLow":4,"referenceHigh":5.7,"referenceText":"4–5.7","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Hemoglobin A1c","Panel":"A1c","Value":"7.4","Unit":"%","Reference Low":"4.0","Reference High":"5.7","Reference":"4.0-5.7","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0016","test":"TSH","panel":"Thyroid","value":2.1,"valueText":"2.1","unit":"uIU/mL","referenceLow":0.4,"referenceHigh":4.5,"referenceText":"0.4–4.5","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"TSH","Panel":"Thyroid","Value":"2.1","Unit":"uIU/mL","Reference Low":"0.4","Reference High":"4.5","Reference":"0.4-4.5","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0017","test":"Free T4","panel":"Thyroid","value":1.2,"valueText":"1.2","unit":"ng/dL","referenceLow":0.8,"referenceHigh":1.8,"referenceText":"0.8–1.8","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Free T4","Panel":"Thyroid","Value":"1.2","Unit":"ng/dL","Reference Low":"0.8","Reference High":"1.8","Reference":"0.8-1.8","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0018","test":"Vitamin D","panel":"Vitamins","value":28,"valueText":"28","unit":"ng/mL","referenceLow":30,"referenceHigh":100,"referenceText":"30–100","direction":"below","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Vitamin D","Panel":"Vitamins","Value":"28","Unit":"ng/mL","Reference Low":"30","Reference High":"100","Reference":"30-100","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0019","test":"Total Cholesterol","panel":"Lipid Panel","value":196,"valueText":"196","unit":"mg/dL","referenceLow":null,"referenceHigh":200,"referenceText":"<200","direction":"in-range","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Total Cholesterol","Panel":"Lipid Panel","Value":"196","Unit":"mg/dL","Reference Low":"","Reference High":"200","Reference":"<200","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0020","test":"LDL Cholesterol","panel":"Lipid Panel","value":118,"valueText":"118","unit":"mg/dL","referenceLow":null,"referenceHigh":100,"referenceText":"<100","direction":"above","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"LDL Cholesterol","Panel":"Lipid Panel","Value":"118","Unit":"mg/dL","Reference Low":"","Reference High":"100","Reference":"<100","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0021","test":"HDL Cholesterol","panel":"Lipid Panel","value":42,"valueText":"42","unit":"mg/dL","referenceLow":40,"referenceHigh":null,"referenceText":"40+","direction":"in-range","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"HDL Cholesterol","Panel":"Lipid Panel","Value":"42","Unit":"mg/dL","Reference Low":"40","Reference High":"","Reference":">40","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0022","test":"Triglycerides","panel":"Lipid Panel","value":144,"valueText":"144","unit":"mg/dL","referenceLow":null,"referenceHigh":150,"referenceText":"<150","direction":"in-range","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Triglycerides","Panel":"Lipid Panel","Value":"144","Unit":"mg/dL","Reference Low":"","Reference High":"150","Reference":"<150","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0023","test":"Hemoglobin A1c","panel":"A1c","value":7.1,"valueText":"7.1","unit":"%","referenceLow":4,"referenceHigh":5.7,"referenceText":"4–5.7","direction":"above","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Hemoglobin A1c","Panel":"A1c","Value":"7.1","Unit":"%","Reference Low":"4.0","Reference High":"5.7","Reference":"4.0-5.7","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0024","test":"Glucose (fasting)","panel":"CMP","value":102,"valueText":"102","unit":"mg/dL","referenceLow":70,"referenceHigh":99,"referenceText":"70–99","direction":"above","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Glucose (fasting)","Panel":"CMP","Value":"102","Unit":"mg/dL","Reference Low":"70","Reference High":"99","Reference":"70-99","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0025","test":"Creatinine","panel":"CMP","value":0.95,"valueText":"0.95","unit":"mg/dL","referenceLow":0.7,"referenceHigh":1.3,"referenceText":"0.7–1.3","direction":"in-range","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Creatinine","Panel":"CMP","Value":"0.95","Unit":"mg/dL","Reference Low":"0.7","Reference High":"1.3","Reference":"0.7-1.3","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0026","test":"Vitamin D","panel":"Vitamins","value":34,"valueText":"34","unit":"ng/mL","referenceLow":30,"referenceHigh":100,"referenceText":"30–100","direction":"in-range","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Vitamin D","Panel":"Vitamins","Value":"34","Unit":"ng/mL","Reference Low":"30","Reference High":"100","Reference":"30-100","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0027","test":"Ferritin","panel":"Iron studies","value":42,"valueText":"42","unit":"ng/mL","referenceLow":null,"referenceHigh":null,"referenceText":"","direction":"no-range","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Ferritin","Panel":"Iron studies","Value":"42","Unit":"ng/mL","Reference Low":"","Reference High":"","Reference":"","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0028","test":"ALT","panel":"Liver","value":28,"valueText":"28","unit":"U/L","referenceLow":7,"referenceHigh":55,"referenceText":"7–55","direction":"in-range","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"ALT","Panel":"Liver","Value":"28","Unit":"U/L","Reference Low":"7","Reference High":"55","Reference":"7-55","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0029","test":"AST","panel":"Liver","value":24,"valueText":"24","unit":"U/L","referenceLow":8,"referenceHigh":48,"referenceText":"8–48","direction":"in-range","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"AST","Panel":"Liver","Value":"24","Unit":"U/L","Reference Low":"8","Reference High":"48","Reference":"8-48","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}}],"outOfRange":[{"id":"lab_0006","test":"Glucose (fasting)","panel":"CMP","value":108,"valueText":"108","unit":"mg/dL","referenceLow":70,"referenceHigh":99,"referenceText":"70–99","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Glucose (fasting)","Panel":"CMP","Value":"108","Unit":"mg/dL","Reference Low":"70","Reference High":"99","Reference":"70-99","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0011","test":"Total Cholesterol","panel":"Lipid Panel","value":231,"valueText":"231","unit":"mg/dL","referenceLow":null,"referenceHigh":200,"referenceText":"<200","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Total Cholesterol","Panel":"Lipid Panel","Value":"231","Unit":"mg/dL","Reference Low":"","Reference High":"200","Reference":"<200","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0012","test":"LDL Cholesterol","panel":"Lipid Panel","value":162,"valueText":"162","unit":"mg/dL","referenceLow":null,"referenceHigh":100,"referenceText":"<100","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"LDL Cholesterol","Panel":"Lipid Panel","Value":"162","Unit":"mg/dL","Reference Low":"","Reference High":"100","Reference":"<100","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0013","test":"HDL Cholesterol","panel":"Lipid Panel","value":38,"valueText":"38","unit":"mg/dL","referenceLow":40,"referenceHigh":null,"referenceText":"40+","direction":"below","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"HDL Cholesterol","Panel":"Lipid Panel","Value":"38","Unit":"mg/dL","Reference Low":"40","Reference High":"","Reference":">40","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0014","test":"Triglycerides","panel":"Lipid Panel","value":178,"valueText":"178","unit":"mg/dL","referenceLow":null,"referenceHigh":150,"referenceText":"<150","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Triglycerides","Panel":"Lipid Panel","Value":"178","Unit":"mg/dL","Reference Low":"","Reference High":"150","Reference":"<150","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0015","test":"Hemoglobin A1c","panel":"A1c","value":7.4,"valueText":"7.4","unit":"%","referenceLow":4,"referenceHigh":5.7,"referenceText":"4–5.7","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Hemoglobin A1c","Panel":"A1c","Value":"7.4","Unit":"%","Reference Low":"4.0","Reference High":"5.7","Reference":"4.0-5.7","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0018","test":"Vitamin D","panel":"Vitamins","value":28,"valueText":"28","unit":"ng/mL","referenceLow":30,"referenceHigh":100,"referenceText":"30–100","direction":"below","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Vitamin D","Panel":"Vitamins","Value":"28","Unit":"ng/mL","Reference Low":"30","Reference High":"100","Reference":"30-100","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0020","test":"LDL Cholesterol","panel":"Lipid Panel","value":118,"valueText":"118","unit":"mg/dL","referenceLow":null,"referenceHigh":100,"referenceText":"<100","direction":"above","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"LDL Cholesterol","Panel":"Lipid Panel","Value":"118","Unit":"mg/dL","Reference Low":"","Reference High":"100","Reference":"<100","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0023","test":"Hemoglobin A1c","panel":"A1c","value":7.1,"valueText":"7.1","unit":"%","referenceLow":4,"referenceHigh":5.7,"referenceText":"4–5.7","direction":"above","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Hemoglobin A1c","Panel":"A1c","Value":"7.1","Unit":"%","Reference Low":"4.0","Reference High":"5.7","Reference":"4.0-5.7","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0024","test":"Glucose (fasting)","panel":"CMP","value":102,"valueText":"102","unit":"mg/dL","referenceLow":70,"referenceHigh":99,"referenceText":"70–99","direction":"above","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Glucose (fasting)","Panel":"CMP","Value":"102","Unit":"mg/dL","Reference Low":"70","Reference High":"99","Reference":"70-99","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}}],"panels":[{"name":"CBC","count":5,"outOfRangeCount":0},{"name":"CMP","count":7,"outOfRangeCount":2},{"name":"Lipid Panel","count":8,"outOfRangeCount":5},{"name":"A1c","count":2,"outOfRangeCount":2},{"name":"Thyroid","count":2,"outOfRangeCount":0},{"name":"Vitamins","count":2,"outOfRangeCount":1},{"name":"Iron studies","count":1,"outOfRangeCount":0},{"name":"Liver","count":2,"outOfRangeCount":0}],"trends":[{"test":"Glucose (fasting)","unit":"mg/dL","referenceLow":70,"referenceHigh":99,"points":[{"date":"2026-01-15","value":108},{"date":"2026-04-08","value":102}]},{"test":"Creatinine","unit":"mg/dL","referenceLow":0.7,"referenceHigh":1.3,"points":[{"date":"2026-01-15","value":0.92},{"date":"2026-04-08","value":0.95}]},{"test":"Total Cholesterol","unit":"mg/dL","referenceLow":null,"referenceHigh":200,"points":[{"date":"2026-01-15","value":231},{"date":"2026-04-08","value":196}]},{"test":"LDL Cholesterol","unit":"mg/dL","referenceLow":null,"referenceHigh":100,"points":[{"date":"2026-01-15","value":162},{"date":"2026-04-08","value":118}]},{"test":"HDL Cholesterol","unit":"mg/dL","referenceLow":40,"referenceHigh":null,"points":[{"date":"2026-01-15","value":38},{"date":"2026-04-08","value":42}]},{"test":"Triglycerides","unit":"mg/dL","referenceLow":null,"referenceHigh":150,"points":[{"date":"2026-01-15","value":178},{"date":"2026-04-08","value":144}]},{"test":"Hemoglobin A1c","unit":"%","referenceLow":4,"referenceHigh":5.7,"points":[{"date":"2026-01-15","value":7.4},{"date":"2026-04-08","value":7.1}]},{"test":"Vitamin D","unit":"ng/mL","referenceLow":30,"referenceHigh":100,"points":[{"date":"2026-01-15","value":28},{"date":"2026-04-08","value":34}]}],"rawRows":[["Test","Panel","Value","Unit","Reference Low","Reference High","Reference","Collected","Ordering Provider","Lab"],["WBC","CBC","5.8","K/uL","4.0","11.0","4.0-11.0","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["RBC","CBC","4.7","M/uL","4.2","5.9","4.2-5.9","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Hemoglobin","CBC","14.2","g/dL","13.5","17.5","13.5-17.5","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Hematocrit","CBC","42.1","%","38.8","50.0","38.8-50.0","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Platelets","CBC","238","K/uL","150","450","150-450","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Glucose (fasting)","CMP","108","mg/dL","70","99","70-99","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["BUN","CMP","16","mg/dL","7","20","7-20","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Creatinine","CMP","0.92","mg/dL","0.7","1.3","0.7-1.3","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Sodium","CMP","140","mmol/L","135","145","135-145","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Potassium","CMP","4.2","mmol/L","3.5","5.1","3.5-5.1","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Total Cholesterol","Lipid Panel","231","mg/dL","","200","<200","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["LDL Cholesterol","Lipid Panel","162","mg/dL","","100","<100","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["HDL Cholesterol","Lipid Panel","38","mg/dL","40","",">40","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Triglycerides","Lipid Panel","178","mg/dL","","150","<150","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Hemoglobin A1c","A1c","7.4","%","4.0","5.7","4.0-5.7","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["TSH","Thyroid","2.1","uIU/mL","0.4","4.5","0.4-4.5","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Free T4","Thyroid","1.2","ng/dL","0.8","1.8","0.8-1.8","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Vitamin D","Vitamins","28","ng/mL","30","100","30-100","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Total Cholesterol","Lipid Panel","196","mg/dL","","200","<200","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["LDL Cholesterol","Lipid Panel","118","mg/dL","","100","<100","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["HDL Cholesterol","Lipid Panel","42","mg/dL","40","",">40","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["Triglycerides","Lipid Panel","144","mg/dL","","150","<150","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["Hemoglobin A1c","A1c","7.1","%","4.0","5.7","4.0-5.7","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["Glucose (fasting)","CMP","102","mg/dL","70","99","70-99","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["Creatinine","CMP","0.95","mg/dL","0.7","1.3","0.7-1.3","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["Vitamin D","Vitamins","34","ng/mL","30","100","30-100","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["Ferritin","Iron studies","42","ng/mL","","","","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["ALT","Liver","28","U/L","7","55","7-55","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["AST","Liver","24","U/L","8","48","8-48","2026-04-08","Dr. Avery Lin","Demo Diagnostics"]]};</script>
 <!-- html-anything example style skin:start -->
 
 <style id="html-anything-example-style-skin">
@@ -328,35 +1011,6 @@ html[data-ha-style="relationship"] body {
     linear-gradient(300deg, rgba(49,123,147,.08), transparent 40%);
 }
 html[data-ha-style="relationship"] body::before { content: "relationship"; }
-
-html[data-ha-style="personal-atlas"] {
-  --ha-style-accent: #3f7f6a;
-  --ha-style-accent-2: #c15a2b;
-  --primary: #3f7f6a;
-  --primary-container: #2f6b58;
-  --primary-fixed: #dff4ea;
-  --secondary-container: #c15a2b;
-  --bg: #f7faf4;
-  --surface: #f7faf4;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #eef5ea;
-  --surface-container: #e6eee0;
-  --surface-container-high: #dbe7d5;
-  --fg-1: #17211b;
-  --fg-2: #405345;
-  --fg-muted: #718172;
-  --border: rgba(63,127,106,.15);
-  --gradient-hero: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-  --gradient-text: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-}
-html[data-ha-style="personal-atlas"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(63,127,106,.11) 0 2px, transparent 2px),
-    radial-gradient(circle at 70% 40%, rgba(193,90,43,.10) 0 1.5px, transparent 1.5px);
-  background-size: 54px 54px, 38px 38px;
-}
-html[data-ha-style="personal-atlas"] body::before { content: "personal atlas"; }
 
 html[data-ha-style="timeline-story"] {
   --ha-style-accent: #9a4b14;
@@ -507,7 +1161,7 @@ html[data-ha-style="dashboard"] header.hero::before {
   margin-bottom: 14px;
 }
 
-html[data-ha-style="editorial"] {
+html[data-ha-style="document"] {
   --ha-style-accent: #8b3f1f;
   --ha-style-accent-2: #2f6f73;
   --primary: #8b3f1f;
@@ -528,14 +1182,14 @@ html[data-ha-style="editorial"] {
   --gradient-hero: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
   --gradient-text: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
 }
-html[data-ha-style="editorial"] body {
+html[data-ha-style="document"] body {
   background-color: var(--bg) !important;
   background-image: linear-gradient(90deg, rgba(139,63,31,.18) 0 4px, transparent 4px);
   background-size: 100% 100%;
 }
-html[data-ha-style="editorial"] body::before { content: "editorial"; }
-html[data-ha-style="editorial"] .hero::before,
-html[data-ha-style="editorial"] header.hero::before {
+html[data-ha-style="document"] body::before { content: "document"; }
+html[data-ha-style="document"] .hero::before,
+html[data-ha-style="document"] header.hero::before {
   width: 42px;
   height: 42px;
   border-radius: 0;
@@ -543,33 +1197,6 @@ html[data-ha-style="editorial"] header.hero::before {
   border-top: 4px solid var(--ha-style-accent);
   border-left: 4px solid var(--ha-style-accent);
 }
-
-html[data-ha-style="paper"] {
-  --ha-style-accent: #53606a;
-  --ha-style-accent-2: #8c6f4a;
-  --primary: #53606a;
-  --primary-container: #3e4850;
-  --primary-fixed: #eef1f3;
-  --secondary-container: #8c6f4a;
-  --bg: #f9faf9;
-  --surface: #f9faf9;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f1f2f1;
-  --surface-container: #e8eae8;
-  --surface-container-high: #dedfdd;
-  --fg-1: #171717;
-  --fg-2: #4b5563;
-  --fg-muted: #737373;
-  --border: rgba(83,96,106,.18);
-  --font-headline: Georgia, "Iowan Old Style", "Times New Roman", serif;
-  --gradient-hero: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-  --gradient-text: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-}
-html[data-ha-style="paper"] body {
-  background-color: var(--bg) !important;
-  background-image: repeating-linear-gradient(0deg, transparent 0 31px, rgba(83,96,106,.08) 31px 32px);
-}
-html[data-ha-style="paper"] body::before { content: "paper"; }
 
 html[data-ha-style="developer"] {
   color-scheme: dark;
@@ -614,554 +1241,430 @@ html[data-ha-style="developer"] .mono {
 <!-- html-anything example style skin:end -->
 </head>
 <body>
-  <main>
-    <section class="hero">
-      <span class="eyebrow"><span id="eyebrow-text">Sensitive record</span></span>
-      <h1><span class="accent" id="hero-title">Jordan A. Sample — lab panels (synthetic, Jan + Apr 2026)</span></h1>
-      <p class="editorial" id="hero-editorial"></p>
-      <div class="privacy-strip">
-        <span class="lock">Local</span>
-        <span>Names, MRNs, case numbers, policy IDs, and dates inlined in this page never leave your machine. For sharing, generate from a redacted export. <strong>This page is an organizational summary, not medical / legal / insurance advice.</strong></span>
+<div class="document-shell">
+
+  <!-- Cover -->
+  <header class="cover">
+    <div class="cover-eyebrow">Lab Record · Organizational Summary</div>
+    <h1 class="cover-title">Jordan A. Sample — Lab Panels</h1>
+    <div class="cover-meta" id="coverMeta">
+      <!-- populated by JS -->
+    </div>
+    <p class="deck" id="coverDeck"><!-- populated by JS --></p>
+    <div style="display:flex;gap:var(--space-sm);flex-wrap:wrap;align-items:center">
+      <button class="copy-btn" id="copyMdBtn" onclick="copyMarkdown()">
+        <span>&#9113;</span> Copy as Markdown
+      </button>
+    </div>
+  </header>
+
+  <!-- Privacy banner -->
+  <div class="privacy-banner">
+    <span class="icon">&#128274;</span>
+    <span>Generated locally — your record never left your machine. The full content is embedded in this HTML and rendered in your browser. For sharing, generate from a redacted export with names and identifiers replaced or removed.</span>
+  </div>
+
+  <!-- Reading modes -->
+  <nav class="reader-rail" aria-label="Reading mode">
+    <span class="rail-label">View</span>
+    <button class="mode-btn active" onclick="setMode('full',this)">Full record</button>
+    <button class="mode-btn" onclick="setMode('summary',this)">Summary only</button>
+    <button class="mode-btn" onclick="setMode('outline',this)">Outline</button>
+  </nav>
+
+  <!-- 1. Summary -->
+  <section class="body-section" id="sec-summary" aria-labelledby="h-summary">
+    <div class="section-rule">
+      <h2 id="h-summary">Summary</h2>
+    </div>
+    <div class="summary-card">
+      <div class="summary-headline-grid" id="statsGrid"><!-- JS --></div>
+      <p class="summary-prose" id="summaryProse"><!-- JS --></p>
+    </div>
+  </section>
+
+  <!-- 2. Outside reference range -->
+  <section class="body-section" id="sec-oor" aria-labelledby="h-oor" data-mode-hide="outline">
+    <div class="section-rule">
+      <h2 id="h-oor">Outside reference range</h2>
+      <span class="section-count" id="oorCount"></span>
+    </div>
+    <p style="font-size:13px;color:var(--fg-muted);margin-bottom:var(--space-xl);">Values listed below are outside the reference range printed on the corresponding row in this file. The <span class="inferred-chip">Inferred</span> label indicates this is a numeric comparison, not a clinical determination.</p>
+    <div class="oor-grid" id="oorGrid"><!-- JS --></div>
+  </section>
+
+  <!-- 3. Trends -->
+  <section class="body-section" id="sec-trends" aria-labelledby="h-trends" data-mode-hide="outline">
+    <div class="section-rule">
+      <h2 id="h-trends">Trends</h2>
+      <span class="section-count" id="trendsCount"></span>
+    </div>
+    <p style="font-size:13px;color:var(--fg-muted);margin-bottom:var(--space-xl);">Tests with results from both draws are shown below. The shaded band represents the reference range printed in this file. No interpretive labels are applied.</p>
+    <div class="trends-grid" id="trendsGrid"><!-- JS --></div>
+  </section>
+
+  <!-- 4. Panel-by-panel -->
+  <section class="body-section" id="sec-panels" aria-labelledby="h-panels" data-mode-hide="outline">
+    <div class="section-rule">
+      <h2 id="h-panels">Panel detail</h2>
+      <span class="section-count" id="panelsCount"></span>
+    </div>
+    <div id="panelDetail"><!-- JS --></div>
+  </section>
+
+  <!-- 5. Timeline -->
+  <section class="body-section" id="sec-timeline" aria-labelledby="h-timeline">
+    <div class="section-rule">
+      <h2 id="h-timeline">Timeline</h2>
+    </div>
+    <div class="timeline" id="timelineList"><!-- JS --></div>
+  </section>
+
+  <!-- 6. Parties -->
+  <section class="body-section" id="sec-parties" aria-labelledby="h-parties">
+    <div class="section-rule">
+      <h2 id="h-parties">Parties</h2>
+    </div>
+    <div class="parties-list" id="partiesList"><!-- JS --></div>
+  </section>
+
+  <!-- 7. Documents -->
+  <section class="body-section" id="sec-docs" aria-labelledby="h-docs">
+    <div class="section-rule">
+      <h2 id="h-docs">Documents</h2>
+    </div>
+    <div class="docs-list" id="docsList"><!-- JS --></div>
+  </section>
+
+  <!-- 8. Missing & next questions -->
+  <section class="body-section" id="sec-missing" aria-labelledby="h-missing">
+    <div class="section-rule">
+      <h2 id="h-missing">Missing &amp; next questions</h2>
+    </div>
+    <h3 style="font-size:13px;font-weight:700;color:var(--fg-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:var(--space-md)">Missing information</h3>
+    <div class="missing-items-list" id="missingList"><!-- JS --></div>
+    <h3 style="font-size:13px;font-weight:700;color:var(--fg-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:var(--space-md);margin-top:var(--space-2xl)">Questions to ask</h3>
+    <p style="font-size:12px;color:var(--fg-muted);margin-bottom:var(--space-lg)">These are questions to bring to your clinician — not steps to take. Phrase as questions; let your provider interpret the record.</p>
+    <div class="questions-list" id="questionsList"><!-- JS --></div>
+  </section>
+
+  <!-- 9. Browse full record (drill-down) -->
+  <section class="body-section" id="sec-drill" aria-labelledby="h-drill">
+    <div class="section-rule">
+      <h2 id="h-drill">Browse the full record</h2>
+    </div>
+    <button class="drill-down-toggle" onclick="toggleDrill(this)" aria-expanded="false">
+      <span>Searchable row browser</span>
+      <span class="drill-chevron" id="drillChevron">&#9660;</span>
+    </button>
+    <div class="drill-down-body" id="drillBody">
+      <div class="drill-search-bar">
+        <input
+          class="drill-search-input"
+          type="search"
+          placeholder="Search tests, panels, values…"
+          id="drillSearch"
+          oninput="filterDrill()"
+          aria-label="Search lab rows"
+        >
+        <div class="filter-chips" id="filterChips"><!-- JS --></div>
       </div>
-    </section>
+      <div class="drill-rows" id="drillRows"><!-- JS --></div>
+    </div>
+  </section>
 
-    <section class="section" aria-labelledby="head-summary">
-      <div class="section-head">
-        <h2 id="head-summary">Summary</h2>
-        <span class="meta" id="summary-meta"></span>
-      </div>
-      <div class="kpis" id="kpis"></div>
-    </section>
+  <!-- Footer -->
+  <footer class="document-footer">
+    <p class="footer-caveat">Organizational summary, not medical advice. Out-of-range flags compare numbers to the reference range printed on the same row in your file — they are not a diagnosis. Bring the original lab report to your clinician and ask them whether any value here changes your care.</p>
+    <p class="footer-caveat" style="margin-top:var(--space-md)">Dates, parties, values, and flagged items are inferred from the file's text — verify against the original record and ask your clinician before acting on anything here. This page does not constitute a medical determination of any kind.</p>
+    <p class="footer-caveat" style="margin-top:var(--space-md)">Generated locally — your record never left your machine.</p>
+  </footer>
 
-    <section class="section" id="case-section" hidden aria-labelledby="head-case">
-      <div class="section-head"><h2 id="head-case">Case header</h2><span class="meta">Verbatim from chronology</span></div>
-      <div class="case-card" id="case-card"></div>
-    </section>
+</div>
 
-    <section class="section" aria-labelledby="head-timeline">
-      <div class="section-head"><h2 id="head-timeline">Timeline</h2><span class="meta" id="tl-meta"></span></div>
-      <div class="card"><div class="timeline" id="timeline"></div></div>
-    </section>
+<script>
+(function() {
+  // ── helpers ──────────────────────────────────────────────────────────────
+  function esc(s) {
+    if (s == null) return '';
+    return String(s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
+  }
+  function fmtDate(d) {
+    if (!d) return '';
+    try {
+      const [y,m,day] = d.split('-');
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return months[parseInt(m)-1] + ' ' + parseInt(day) + ', ' + y;
+    } catch(e) { return d; }
+  }
+  function highlight(text, q) {
+    if (!q) return esc(text);
+    const re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi');
+    return esc(text).replace(re, '<mark>$1</mark>');
+  }
 
-    <section class="section" id="oor-section" hidden aria-labelledby="head-oor">
-      <div class="section-head">
-        <h2 id="head-oor">Outside reference range</h2>
-        <span class="meta">Numeric comparison to range printed on each row</span>
-      </div>
-      <div class="card" id="oor-card"></div>
-    </section>
+  // ── DATA normalization ────────────────────────────────────────────────────
+  const D = DATA;
+  const rows = D.rows || [];
+  const oor = D.outOfRange || D.outOfRangePreview || [];
+  const trends = D.trends || D.trendsPreview || [];
+  const panels = D.panels || [];
+  const events = D.events || D.eventsPreview || [];
+  const parties = D.parties || [];
+  const docs = D.documents || D.documentsPreview || [];
+  const missing = D.missingItems || D.missingItemsPreview || [];
+  const questions = D.openQuestions || D.openQuestionsPreview || [];
+  const summary = D.summary || {};
 
-    <section class="section" id="trends-section" hidden aria-labelledby="head-trends">
-      <div class="section-head"><h2 id="head-trends">Trends</h2><span class="meta">Repeated tests over time</span></div>
-      <div class="trends" id="trends"></div>
-    </section>
+  // build full rows from panels or oor for drill-down if rows array absent
+  let allRows = rows;
+  if (!allRows.length) {
+    // reconstruct from oor + any data we have
+    allRows = oor.slice();
+  }
 
-    <section class="section" id="encounters-section" hidden aria-labelledby="head-enc">
-      <div class="section-head"><h2 id="head-enc">Encounters</h2><span class="meta" id="enc-meta"></span></div>
-      <div id="encounters"></div>
-    </section>
+  // ── Cover ─────────────────────────────────────────────────────────────────
+  const meta = document.getElementById('coverMeta');
+  const hc = summary.headlineCount || [];
+  hc.forEach(function(h) {
+    const chip = document.createElement('span');
+    chip.className = 'meta-chip' + (h.label === 'outside reference' ? ' accent' : '');
+    chip.textContent = h.value + ' ' + h.label;
+    meta.appendChild(chip);
+  });
+  if (summary.period) {
+    const p = document.createElement('span');
+    p.className = 'meta-chip';
+    p.textContent = summary.period;
+    meta.appendChild(p);
+  }
+  if (summary.durationLabel) {
+    const p = document.createElement('span');
+    p.className = 'meta-chip';
+    p.textContent = summary.durationLabel;
+    meta.appendChild(p);
+  }
 
-    <section class="section" id="meds-section" hidden aria-labelledby="head-meds">
-      <div class="section-head"><h2 id="head-meds">Medications</h2><span class="meta">Verbatim from record</span></div>
-      <div class="card"><div class="med-list" id="meds"></div></div>
-    </section>
+  document.getElementById('coverDeck').textContent =
+    'This record covers 2 lab draws for Jordan A. Sample between ' +
+    (summary.period || 'Jan 15 – Apr 8, 2026') +
+    ', ordered by Dr. Avery Lin at Demo Diagnostics. ' +
+    (oor.length) + ' values across ' + (panels.length || 8) +
+    ' panels are outside the reference ranges printed in this file.';
 
-    <section class="section" id="filings-section" hidden aria-labelledby="head-filings">
-      <div class="section-head"><h2 id="head-filings">Filings</h2><span class="meta" id="filings-meta"></span></div>
-      <div class="card"><div class="list" id="filings"></div></div>
-    </section>
+  // ── Summary stats ─────────────────────────────────────────────────────────
+  const grid = document.getElementById('statsGrid');
+  hc.forEach(function(h) {
+    grid.innerHTML += '<div class="headline-stat' + (h.label === 'outside reference' ? ' flag' : '') + '">' +
+      '<span class="val" data-target="' + h.value + '">0</span>' +
+      '<span class="lbl">' + esc(h.label) + '</span></div>';
+  });
+  document.getElementById('summaryProse').textContent =
+    'Record covers ' + (summary.rowCount || 29) + ' lab rows across ' +
+    (panels.length || 8) + ' panels from ' + (summary.durationLabel || '83 days') +
+    ' of follow-up. Both draws were performed at Demo Diagnostics under Dr. Avery Lin. ' +
+    oor.length + ' rows are outside the reference range printed on the corresponding row ' +
+    '— worth discussing with your clinician at the next appointment. 1 row (Ferritin) ' +
+    'has no reference range present in this record.';
 
-    <section class="section" id="deadlines-section" hidden aria-labelledby="head-deadlines">
-      <div class="section-head"><h2 id="head-deadlines">Deadlines</h2><span class="meta">Dates listed on the document</span></div>
-      <div class="deadlines" id="deadlines"></div>
-    </section>
-
-    <section class="section">
-      <div class="grid-2">
-        <div>
-          <div class="section-head"><h2 id="head-parties">Parties</h2><span class="meta" id="parties-meta"></span></div>
-          <div class="card"><div class="list" id="parties"></div></div>
-        </div>
-        <div>
-          <div class="section-head"><h2 id="head-docs">Documents</h2><span class="meta" id="docs-meta"></span></div>
-          <div class="card"><div class="list" id="documents"></div></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="head-mq">
-      <div class="section-head"><h2 id="head-mq">Missing &amp; next questions</h2><span class="meta">Inferred from the record's text</span></div>
-      <div class="card">
-        <h3 style="margin-bottom:var(--space-sm)">Missing information</h3>
-        <div class="miss-list" id="miss-list"></div>
-        <h3 style="margin-bottom:var(--space-sm);margin-top:var(--space-lg)">Questions to ask</h3>
-        <div class="q-list" id="q-list"></div>
-        <div style="margin-top:var(--space-lg)">
-          <button class="copy-btn" id="copy-md">Copy as Markdown</button>
-          <span class="muted mono" id="copy-status" style="margin-left:var(--space-md);font-size:12px"></span>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="head-drill">
-      <details class="drill" id="drill">
-        <summary>
-          <span><span id="drill-summary-text">Browse the full record</span></span>
-          <span class="meta mono" id="drill-summary-count"></span>
-        </summary>
-        <div class="drill-body">
-          <input type="search" placeholder="Search rows, events, encounters…" id="drill-search">
-          <div class="toolbar" id="drill-chips"></div>
-          <div id="drill-content"></div>
-        </div>
-      </details>
-    </section>
-
-    <footer>
-      <p class="caveat" id="caveat-line"></p>
-      <p>Generated locally — your record never left your machine. The full content is embedded in this HTML and rendered in your browser. For sharing, generate from a redacted export with names, MRNs, case numbers, and policy IDs replaced or removed.</p>
-      <p>Organizational summary, not medical / legal / insurance advice. Dates, parties, values, and missing-item callouts are pattern-matched from the file's text — verify against the original record and ask your clinician, attorney, or case manager before acting on anything here.</p>
-      <p class="mono" id="footer-meta" style="margin-top:var(--space-md)"></p>
-    </footer>
-  </main>
-
-  <script>
-    const DATA = {"format":"lab-results","subtype":"lab-results","events":[{"id":"evt_001","kind":"lab-draw","date":"2026-01-15","dateText":"2026-01-15","title":"Lab draw — 18 tests","party":"Dr. Avery Lin","detail":"7 values outside reference range","source":{"line":null,"quote":null}},{"id":"evt_002","kind":"lab-draw","date":"2026-04-08","dateText":"2026-04-08","title":"Lab draw — 11 tests","party":"Dr. Avery Lin","detail":"3 values outside reference range","source":{"line":null,"quote":null}}],"parties":[{"name":"Dr. Avery Lin","role":"Ordering provider","count":29},{"name":"Demo Diagnostics","role":"Performing lab","count":29}],"documents":[{"id":"doc_001","name":"CBC","kind":"lab-panel","date":"2026-04-08","missing":false},{"id":"doc_002","name":"CMP","kind":"lab-panel","date":"2026-04-08","missing":false},{"id":"doc_003","name":"Lipid Panel","kind":"lab-panel","date":"2026-04-08","missing":false},{"id":"doc_004","name":"A1c","kind":"lab-panel","date":"2026-04-08","missing":false},{"id":"doc_005","name":"Thyroid","kind":"lab-panel","date":"2026-04-08","missing":false},{"id":"doc_006","name":"Vitamins","kind":"lab-panel","date":"2026-04-08","missing":false},{"id":"doc_007","name":"Iron studies","kind":"lab-panel","date":"2026-04-08","missing":false},{"id":"doc_008","name":"Liver","kind":"lab-panel","date":"2026-04-08","missing":false}],"missingItems":[{"id":"missing_ref","label":"1 row have no reference range","detail":"Ferritin"}],"openQuestions":[{"id":"q_001","question":"Ask the clinician whether the Glucose (fasting) value of 108 mg/dL on 2026-01-15 — outside the reference range printed on this row (above the band (range printed on the row: 70–99)) — changes the current plan.","anchor":"lab_0006"},{"id":"q_002","question":"Ask the clinician whether the Total Cholesterol value of 231 mg/dL on 2026-01-15 — outside the reference range printed on this row (above the band (range printed on the row: <200)) — changes the current plan.","anchor":"lab_0011"},{"id":"q_003","question":"Ask the clinician whether the LDL Cholesterol value of 162 mg/dL on 2026-01-15 — outside the reference range printed on this row (above the band (range printed on the row: <100)) — changes the current plan.","anchor":"lab_0012"},{"id":"q_004","question":"Ask the clinician whether the HDL Cholesterol value of 38 mg/dL on 2026-01-15 — outside the reference range printed on this row (below the band (range printed on the row: 40+)) — changes the current plan.","anchor":"lab_0013"},{"id":"q_005","question":"Ask the clinician whether the Triglycerides value of 178 mg/dL on 2026-01-15 — outside the reference range printed on this row (above the band (range printed on the row: <150)) — changes the current plan.","anchor":"lab_0014"},{"id":"q_006","question":"Ask the clinician whether the Hemoglobin A1c value of 7.4 % on 2026-01-15 — outside the reference range printed on this row (above the band (range printed on the row: 4–5.7)) — changes the current plan.","anchor":"lab_0015"},{"id":"q_missing_ref","question":"Ask whether the missing reference range on 1 row (Ferritin) was an oversight or whether the lab uses age-specific bands not printed on the export.","anchor":"lab_0027"}],"summary":{"rowCount":29,"period":"2026-01-15 → 2026-04-08","durationLabel":"83 days","headlineCount":[{"label":"lab rows","value":29},{"label":"panels","value":8},{"label":"draws","value":2},{"label":"outside reference","value":10}]},"rows":[{"id":"lab_0001","test":"WBC","panel":"CBC","value":5.8,"valueText":"5.8","unit":"K/uL","referenceLow":4,"referenceHigh":11,"referenceText":"4–11","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"WBC","Panel":"CBC","Value":"5.8","Unit":"K/uL","Reference Low":"4.0","Reference High":"11.0","Reference":"4.0-11.0","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0002","test":"RBC","panel":"CBC","value":4.7,"valueText":"4.7","unit":"M/uL","referenceLow":4.2,"referenceHigh":5.9,"referenceText":"4.2–5.9","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"RBC","Panel":"CBC","Value":"4.7","Unit":"M/uL","Reference Low":"4.2","Reference High":"5.9","Reference":"4.2-5.9","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0003","test":"Hemoglobin","panel":"CBC","value":14.2,"valueText":"14.2","unit":"g/dL","referenceLow":13.5,"referenceHigh":17.5,"referenceText":"13.5–17.5","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Hemoglobin","Panel":"CBC","Value":"14.2","Unit":"g/dL","Reference Low":"13.5","Reference High":"17.5","Reference":"13.5-17.5","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0004","test":"Hematocrit","panel":"CBC","value":42.1,"valueText":"42.1","unit":"%","referenceLow":38.8,"referenceHigh":50,"referenceText":"38.8–50","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Hematocrit","Panel":"CBC","Value":"42.1","Unit":"%","Reference Low":"38.8","Reference High":"50.0","Reference":"38.8-50.0","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0005","test":"Platelets","panel":"CBC","value":238,"valueText":"238","unit":"K/uL","referenceLow":150,"referenceHigh":450,"referenceText":"150–450","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Platelets","Panel":"CBC","Value":"238","Unit":"K/uL","Reference Low":"150","Reference High":"450","Reference":"150-450","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0006","test":"Glucose (fasting)","panel":"CMP","value":108,"valueText":"108","unit":"mg/dL","referenceLow":70,"referenceHigh":99,"referenceText":"70–99","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Glucose (fasting)","Panel":"CMP","Value":"108","Unit":"mg/dL","Reference Low":"70","Reference High":"99","Reference":"70-99","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0007","test":"BUN","panel":"CMP","value":16,"valueText":"16","unit":"mg/dL","referenceLow":7,"referenceHigh":20,"referenceText":"7–20","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"BUN","Panel":"CMP","Value":"16","Unit":"mg/dL","Reference Low":"7","Reference High":"20","Reference":"7-20","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0008","test":"Creatinine","panel":"CMP","value":0.92,"valueText":"0.92","unit":"mg/dL","referenceLow":0.7,"referenceHigh":1.3,"referenceText":"0.7–1.3","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Creatinine","Panel":"CMP","Value":"0.92","Unit":"mg/dL","Reference Low":"0.7","Reference High":"1.3","Reference":"0.7-1.3","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0009","test":"Sodium","panel":"CMP","value":140,"valueText":"140","unit":"mmol/L","referenceLow":135,"referenceHigh":145,"referenceText":"135–145","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Sodium","Panel":"CMP","Value":"140","Unit":"mmol/L","Reference Low":"135","Reference High":"145","Reference":"135-145","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0010","test":"Potassium","panel":"CMP","value":4.2,"valueText":"4.2","unit":"mmol/L","referenceLow":3.5,"referenceHigh":5.1,"referenceText":"3.5–5.1","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Potassium","Panel":"CMP","Value":"4.2","Unit":"mmol/L","Reference Low":"3.5","Reference High":"5.1","Reference":"3.5-5.1","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0011","test":"Total Cholesterol","panel":"Lipid Panel","value":231,"valueText":"231","unit":"mg/dL","referenceLow":null,"referenceHigh":200,"referenceText":"<200","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Total Cholesterol","Panel":"Lipid Panel","Value":"231","Unit":"mg/dL","Reference Low":"","Reference High":"200","Reference":"<200","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0012","test":"LDL Cholesterol","panel":"Lipid Panel","value":162,"valueText":"162","unit":"mg/dL","referenceLow":null,"referenceHigh":100,"referenceText":"<100","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"LDL Cholesterol","Panel":"Lipid Panel","Value":"162","Unit":"mg/dL","Reference Low":"","Reference High":"100","Reference":"<100","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0013","test":"HDL Cholesterol","panel":"Lipid Panel","value":38,"valueText":"38","unit":"mg/dL","referenceLow":40,"referenceHigh":null,"referenceText":"40+","direction":"below","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"HDL Cholesterol","Panel":"Lipid Panel","Value":"38","Unit":"mg/dL","Reference Low":"40","Reference High":"","Reference":">40","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0014","test":"Triglycerides","panel":"Lipid Panel","value":178,"valueText":"178","unit":"mg/dL","referenceLow":null,"referenceHigh":150,"referenceText":"<150","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Triglycerides","Panel":"Lipid Panel","Value":"178","Unit":"mg/dL","Reference Low":"","Reference High":"150","Reference":"<150","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0015","test":"Hemoglobin A1c","panel":"A1c","value":7.4,"valueText":"7.4","unit":"%","referenceLow":4,"referenceHigh":5.7,"referenceText":"4–5.7","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Hemoglobin A1c","Panel":"A1c","Value":"7.4","Unit":"%","Reference Low":"4.0","Reference High":"5.7","Reference":"4.0-5.7","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0016","test":"TSH","panel":"Thyroid","value":2.1,"valueText":"2.1","unit":"uIU/mL","referenceLow":0.4,"referenceHigh":4.5,"referenceText":"0.4–4.5","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"TSH","Panel":"Thyroid","Value":"2.1","Unit":"uIU/mL","Reference Low":"0.4","Reference High":"4.5","Reference":"0.4-4.5","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0017","test":"Free T4","panel":"Thyroid","value":1.2,"valueText":"1.2","unit":"ng/dL","referenceLow":0.8,"referenceHigh":1.8,"referenceText":"0.8–1.8","direction":"in-range","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Free T4","Panel":"Thyroid","Value":"1.2","Unit":"ng/dL","Reference Low":"0.8","Reference High":"1.8","Reference":"0.8-1.8","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0018","test":"Vitamin D","panel":"Vitamins","value":28,"valueText":"28","unit":"ng/mL","referenceLow":30,"referenceHigh":100,"referenceText":"30–100","direction":"below","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Vitamin D","Panel":"Vitamins","Value":"28","Unit":"ng/mL","Reference Low":"30","Reference High":"100","Reference":"30-100","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0019","test":"Total Cholesterol","panel":"Lipid Panel","value":196,"valueText":"196","unit":"mg/dL","referenceLow":null,"referenceHigh":200,"referenceText":"<200","direction":"in-range","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Total Cholesterol","Panel":"Lipid Panel","Value":"196","Unit":"mg/dL","Reference Low":"","Reference High":"200","Reference":"<200","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0020","test":"LDL Cholesterol","panel":"Lipid Panel","value":118,"valueText":"118","unit":"mg/dL","referenceLow":null,"referenceHigh":100,"referenceText":"<100","direction":"above","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"LDL Cholesterol","Panel":"Lipid Panel","Value":"118","Unit":"mg/dL","Reference Low":"","Reference High":"100","Reference":"<100","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0021","test":"HDL Cholesterol","panel":"Lipid Panel","value":42,"valueText":"42","unit":"mg/dL","referenceLow":40,"referenceHigh":null,"referenceText":"40+","direction":"in-range","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"HDL Cholesterol","Panel":"Lipid Panel","Value":"42","Unit":"mg/dL","Reference Low":"40","Reference High":"","Reference":">40","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0022","test":"Triglycerides","panel":"Lipid Panel","value":144,"valueText":"144","unit":"mg/dL","referenceLow":null,"referenceHigh":150,"referenceText":"<150","direction":"in-range","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Triglycerides","Panel":"Lipid Panel","Value":"144","Unit":"mg/dL","Reference Low":"","Reference High":"150","Reference":"<150","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0023","test":"Hemoglobin A1c","panel":"A1c","value":7.1,"valueText":"7.1","unit":"%","referenceLow":4,"referenceHigh":5.7,"referenceText":"4–5.7","direction":"above","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Hemoglobin A1c","Panel":"A1c","Value":"7.1","Unit":"%","Reference Low":"4.0","Reference High":"5.7","Reference":"4.0-5.7","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0024","test":"Glucose (fasting)","panel":"CMP","value":102,"valueText":"102","unit":"mg/dL","referenceLow":70,"referenceHigh":99,"referenceText":"70–99","direction":"above","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Glucose (fasting)","Panel":"CMP","Value":"102","Unit":"mg/dL","Reference Low":"70","Reference High":"99","Reference":"70-99","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0025","test":"Creatinine","panel":"CMP","value":0.95,"valueText":"0.95","unit":"mg/dL","referenceLow":0.7,"referenceHigh":1.3,"referenceText":"0.7–1.3","direction":"in-range","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Creatinine","Panel":"CMP","Value":"0.95","Unit":"mg/dL","Reference Low":"0.7","Reference High":"1.3","Reference":"0.7-1.3","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0026","test":"Vitamin D","panel":"Vitamins","value":34,"valueText":"34","unit":"ng/mL","referenceLow":30,"referenceHigh":100,"referenceText":"30–100","direction":"in-range","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Vitamin D","Panel":"Vitamins","Value":"34","Unit":"ng/mL","Reference Low":"30","Reference High":"100","Reference":"30-100","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0027","test":"Ferritin","panel":"Iron studies","value":42,"valueText":"42","unit":"ng/mL","referenceLow":null,"referenceHigh":null,"referenceText":"","direction":"no-range","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Ferritin","Panel":"Iron studies","Value":"42","Unit":"ng/mL","Reference Low":"","Reference High":"","Reference":"","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0028","test":"ALT","panel":"Liver","value":28,"valueText":"28","unit":"U/L","referenceLow":7,"referenceHigh":55,"referenceText":"7–55","direction":"in-range","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"ALT","Panel":"Liver","Value":"28","Unit":"U/L","Reference Low":"7","Reference High":"55","Reference":"7-55","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0029","test":"AST","panel":"Liver","value":24,"valueText":"24","unit":"U/L","referenceLow":8,"referenceHigh":48,"referenceText":"8–48","direction":"in-range","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"AST","Panel":"Liver","Value":"24","Unit":"U/L","Reference Low":"8","Reference High":"48","Reference":"8-48","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}}],"outOfRange":[{"id":"lab_0006","test":"Glucose (fasting)","panel":"CMP","value":108,"valueText":"108","unit":"mg/dL","referenceLow":70,"referenceHigh":99,"referenceText":"70–99","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Glucose (fasting)","Panel":"CMP","Value":"108","Unit":"mg/dL","Reference Low":"70","Reference High":"99","Reference":"70-99","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0011","test":"Total Cholesterol","panel":"Lipid Panel","value":231,"valueText":"231","unit":"mg/dL","referenceLow":null,"referenceHigh":200,"referenceText":"<200","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Total Cholesterol","Panel":"Lipid Panel","Value":"231","Unit":"mg/dL","Reference Low":"","Reference High":"200","Reference":"<200","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0012","test":"LDL Cholesterol","panel":"Lipid Panel","value":162,"valueText":"162","unit":"mg/dL","referenceLow":null,"referenceHigh":100,"referenceText":"<100","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"LDL Cholesterol","Panel":"Lipid Panel","Value":"162","Unit":"mg/dL","Reference Low":"","Reference High":"100","Reference":"<100","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0013","test":"HDL Cholesterol","panel":"Lipid Panel","value":38,"valueText":"38","unit":"mg/dL","referenceLow":40,"referenceHigh":null,"referenceText":"40+","direction":"below","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"HDL Cholesterol","Panel":"Lipid Panel","Value":"38","Unit":"mg/dL","Reference Low":"40","Reference High":"","Reference":">40","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0014","test":"Triglycerides","panel":"Lipid Panel","value":178,"valueText":"178","unit":"mg/dL","referenceLow":null,"referenceHigh":150,"referenceText":"<150","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Triglycerides","Panel":"Lipid Panel","Value":"178","Unit":"mg/dL","Reference Low":"","Reference High":"150","Reference":"<150","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0015","test":"Hemoglobin A1c","panel":"A1c","value":7.4,"valueText":"7.4","unit":"%","referenceLow":4,"referenceHigh":5.7,"referenceText":"4–5.7","direction":"above","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Hemoglobin A1c","Panel":"A1c","Value":"7.4","Unit":"%","Reference Low":"4.0","Reference High":"5.7","Reference":"4.0-5.7","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0018","test":"Vitamin D","panel":"Vitamins","value":28,"valueText":"28","unit":"ng/mL","referenceLow":30,"referenceHigh":100,"referenceText":"30–100","direction":"below","collectedAt":"2026-01-15","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Vitamin D","Panel":"Vitamins","Value":"28","Unit":"ng/mL","Reference Low":"30","Reference High":"100","Reference":"30-100","Collected":"2026-01-15","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0020","test":"LDL Cholesterol","panel":"Lipid Panel","value":118,"valueText":"118","unit":"mg/dL","referenceLow":null,"referenceHigh":100,"referenceText":"<100","direction":"above","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"LDL Cholesterol","Panel":"Lipid Panel","Value":"118","Unit":"mg/dL","Reference Low":"","Reference High":"100","Reference":"<100","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0023","test":"Hemoglobin A1c","panel":"A1c","value":7.1,"valueText":"7.1","unit":"%","referenceLow":4,"referenceHigh":5.7,"referenceText":"4–5.7","direction":"above","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Hemoglobin A1c","Panel":"A1c","Value":"7.1","Unit":"%","Reference Low":"4.0","Reference High":"5.7","Reference":"4.0-5.7","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}},{"id":"lab_0024","test":"Glucose (fasting)","panel":"CMP","value":102,"valueText":"102","unit":"mg/dL","referenceLow":70,"referenceHigh":99,"referenceText":"70–99","direction":"above","collectedAt":"2026-04-08","orderingProvider":"Dr. Avery Lin","lab":"Demo Diagnostics","raw":{"Test":"Glucose (fasting)","Panel":"CMP","Value":"102","Unit":"mg/dL","Reference Low":"70","Reference High":"99","Reference":"70-99","Collected":"2026-04-08","Ordering Provider":"Dr. Avery Lin","Lab":"Demo Diagnostics"}}],"panels":[{"name":"CBC","count":5,"outOfRangeCount":0},{"name":"CMP","count":7,"outOfRangeCount":2},{"name":"Lipid Panel","count":8,"outOfRangeCount":5},{"name":"A1c","count":2,"outOfRangeCount":2},{"name":"Thyroid","count":2,"outOfRangeCount":0},{"name":"Vitamins","count":2,"outOfRangeCount":1},{"name":"Iron studies","count":1,"outOfRangeCount":0},{"name":"Liver","count":2,"outOfRangeCount":0}],"trends":[{"test":"Glucose (fasting)","unit":"mg/dL","referenceLow":70,"referenceHigh":99,"points":[{"date":"2026-01-15","value":108},{"date":"2026-04-08","value":102}]},{"test":"Creatinine","unit":"mg/dL","referenceLow":0.7,"referenceHigh":1.3,"points":[{"date":"2026-01-15","value":0.92},{"date":"2026-04-08","value":0.95}]},{"test":"Total Cholesterol","unit":"mg/dL","referenceLow":null,"referenceHigh":200,"points":[{"date":"2026-01-15","value":231},{"date":"2026-04-08","value":196}]},{"test":"LDL Cholesterol","unit":"mg/dL","referenceLow":null,"referenceHigh":100,"points":[{"date":"2026-01-15","value":162},{"date":"2026-04-08","value":118}]},{"test":"HDL Cholesterol","unit":"mg/dL","referenceLow":40,"referenceHigh":null,"points":[{"date":"2026-01-15","value":38},{"date":"2026-04-08","value":42}]},{"test":"Triglycerides","unit":"mg/dL","referenceLow":null,"referenceHigh":150,"points":[{"date":"2026-01-15","value":178},{"date":"2026-04-08","value":144}]},{"test":"Hemoglobin A1c","unit":"%","referenceLow":4,"referenceHigh":5.7,"points":[{"date":"2026-01-15","value":7.4},{"date":"2026-04-08","value":7.1}]},{"test":"Vitamin D","unit":"ng/mL","referenceLow":30,"referenceHigh":100,"points":[{"date":"2026-01-15","value":28},{"date":"2026-04-08","value":34}]}],"rawRows":[["Test","Panel","Value","Unit","Reference Low","Reference High","Reference","Collected","Ordering Provider","Lab"],["WBC","CBC","5.8","K/uL","4.0","11.0","4.0-11.0","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["RBC","CBC","4.7","M/uL","4.2","5.9","4.2-5.9","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Hemoglobin","CBC","14.2","g/dL","13.5","17.5","13.5-17.5","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Hematocrit","CBC","42.1","%","38.8","50.0","38.8-50.0","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Platelets","CBC","238","K/uL","150","450","150-450","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Glucose (fasting)","CMP","108","mg/dL","70","99","70-99","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["BUN","CMP","16","mg/dL","7","20","7-20","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Creatinine","CMP","0.92","mg/dL","0.7","1.3","0.7-1.3","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Sodium","CMP","140","mmol/L","135","145","135-145","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Potassium","CMP","4.2","mmol/L","3.5","5.1","3.5-5.1","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Total Cholesterol","Lipid Panel","231","mg/dL","","200","<200","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["LDL Cholesterol","Lipid Panel","162","mg/dL","","100","<100","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["HDL Cholesterol","Lipid Panel","38","mg/dL","40","",">40","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Triglycerides","Lipid Panel","178","mg/dL","","150","<150","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Hemoglobin A1c","A1c","7.4","%","4.0","5.7","4.0-5.7","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["TSH","Thyroid","2.1","uIU/mL","0.4","4.5","0.4-4.5","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Free T4","Thyroid","1.2","ng/dL","0.8","1.8","0.8-1.8","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Vitamin D","Vitamins","28","ng/mL","30","100","30-100","2026-01-15","Dr. Avery Lin","Demo Diagnostics"],["Total Cholesterol","Lipid Panel","196","mg/dL","","200","<200","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["LDL Cholesterol","Lipid Panel","118","mg/dL","","100","<100","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["HDL Cholesterol","Lipid Panel","42","mg/dL","40","",">40","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["Triglycerides","Lipid Panel","144","mg/dL","","150","<150","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["Hemoglobin A1c","A1c","7.1","%","4.0","5.7","4.0-5.7","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["Glucose (fasting)","CMP","102","mg/dL","70","99","70-99","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["Creatinine","CMP","0.95","mg/dL","0.7","1.3","0.7-1.3","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["Vitamin D","Vitamins","34","ng/mL","30","100","30-100","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["Ferritin","Iron studies","42","ng/mL","","","","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["ALT","Liver","28","U/L","7","55","7-55","2026-04-08","Dr. Avery Lin","Demo Diagnostics"],["AST","Liver","24","U/L","8","48","8-48","2026-04-08","Dr. Avery Lin","Demo Diagnostics"]],"sourceFile":"input.csv","sizeBytes":2496};
-    const HERO_TITLE = "Jordan A. Sample — lab panels (synthetic, Jan + Apr 2026)";
-
-    const $ = (sel, root) => (root || document).querySelector(sel);
-    const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
-    const escHtml = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-    const fmtNum = n => n == null ? "—" : n.toLocaleString();
-
-    document.title = HERO_TITLE;
-    $("#hero-title").textContent = HERO_TITLE;
-
-    const SUBTYPE_LABEL = {
-      "lab-results": "Lab results",
-      "medical-visit": "Medical visit record",
-      "legal-chronology": "Legal case chronology",
-    };
-    const CAVEAT = {
-      "lab-results": "Out-of-range flags compare numbers to the reference range printed on the same row in your file — they are not a diagnosis. Bring the original lab report to your clinician and ask whether any value here changes your care.",
-      "medical-visit": "Visit dates, providers, and out-of-reference values are inferred from the file's text — bring the original record to your clinician and ask them whether anything here changes your care.",
-      "legal-chronology": "Dates, parties, filings, and deadlines are inferred from the chronology's text — verify against the original case file and ask your attorney before relying on anything here. Deadlines listed in this page are dates the document mentions; they are not legal computations of filing windows or statutes of limitations.",
-    };
-    const subtype = DATA.subtype || DATA.format;
-    $("#eyebrow-text").textContent = SUBTYPE_LABEL[subtype] || "Sensitive record";
-    $("#caveat-line").textContent = CAVEAT[subtype] || "";
-
-    const headlineSentence = () => {
-      const parts = (DATA.summary?.headlineCount || []).map(h => h.value + " " + h.label).slice(0, 4).join(" · ");
-      const period = DATA.summary?.period ? " over " + DATA.summary.period : "";
-      const sub = SUBTYPE_LABEL[subtype] || "Record";
-      return sub + " — " + parts + period + ".";
-    };
-    $("#hero-editorial").textContent = headlineSentence();
-    $("#summary-meta").textContent = (DATA.summary?.period || "") + (DATA.summary?.durationLabel ? " · " + DATA.summary.durationLabel : "");
-
-    /* ---- KPIs ---- */
-    (() => {
-      const kpis = DATA.summary?.headlineCount || [];
-      const root = $("#kpis");
-      kpis.forEach(k => {
-        const el = document.createElement("div");
-        el.className = "kpi";
-        el.innerHTML = '<div class="label">' + escHtml(k.label) + '</div>' +
-          '<div class="value">' + fmtNum(k.value) + '</div>';
-        root.appendChild(el);
-      });
-    })();
-
-    /* ---- Case header (legal only) ---- */
-    if (subtype === "legal-chronology" && DATA.caseHeader) {
-      $("#case-section").hidden = false;
-      const fields = [
-        ["Caption", DATA.caseHeader.caption],
-        ["Docket", DATA.caseHeader.docket],
-        ["Court", DATA.caseHeader.court],
-        ["Matter", DATA.caseHeader.matter],
-        ["Period", DATA.summary?.period],
-      ];
-      const root = $("#case-card");
-      fields.forEach(([label, value]) => {
-        const el = document.createElement("div");
-        el.className = "field";
-        el.innerHTML = '<div class="label">' + escHtml(label) + '</div>' +
-          '<div class="value">' + escHtml(value || "(not present in this record)") + '</div>';
-        root.appendChild(el);
-      });
-    }
-
-    /* ---- Timeline ---- */
-    (() => {
-      const events = (DATA.events || []).slice().sort((a, b) => (a.date || "").localeCompare(b.date || ""));
-      const root = $("#timeline");
-      $("#tl-meta").textContent = events.length + " event" + (events.length === 1 ? "" : "s");
-      events.forEach(e => {
-        const el = document.createElement("div");
-        el.className = "tl-row";
-        el.innerHTML = '<div class="date">' + escHtml(e.dateText || e.date || "(undated)") + '</div>' +
-          '<div class="body">' +
-            '<span class="kind">' + escHtml(e.kind) + '</span>' +
-            escHtml(e.title) +
-            (e.party ? '<div class="party">' + escHtml(e.party) + '</div>' : '') +
-            (e.detail ? '<div class="detail">' + escHtml(e.detail) + '</div>' : '') +
-          '</div>';
-        root.appendChild(el);
-      });
-    })();
-
-    /* ---- Out-of-reference panel (lab only) ---- */
-    if (subtype === "lab-results") {
-      $("#oor-section").hidden = false;
-      const oor = DATA.outOfRange || [];
-      const root = $("#oor-card");
-      if (oor.length === 0) {
-        root.innerHTML = '<p class="empty-state">No values fall outside the reference ranges printed in this file.</p>';
-      } else {
-        oor.forEach(r => {
-          const card = document.createElement("div");
-          card.className = "callout-card";
-          const dirLabel = r.direction === "above" ? "above" : "below";
-          card.innerHTML =
-            '<div class="head">' +
-              '<div><span class="test">' + escHtml(r.test) + '</span>' +
-                ' <span class="pill ' + r.direction + '">' + dirLabel + ' band</span>' +
-                ' <span class="pill inferred">Inferred</span></div>' +
-              '<div class="value">' + escHtml(r.valueText) + (r.unit ? " " + escHtml(r.unit) : "") + '</div>' +
-            '</div>' +
-            '<div class="ref">Reference printed on row: ' + escHtml(r.referenceText || "(none)") + '</div>' +
-            '<div class="meta">' + (r.collectedAt ? "Drawn " + escHtml(r.collectedAt) : "Date not present") +
-              (r.orderingProvider ? " · Ordered by " + escHtml(r.orderingProvider) : "") +
-              (r.lab ? " · " + escHtml(r.lab) : "") + '</div>';
-          root.appendChild(card);
-        });
-      }
-    }
-
-    /* ---- Trend sparklines (lab only) ---- */
-    if (subtype === "lab-results" && (DATA.trends || []).length > 0) {
-      $("#trends-section").hidden = false;
-      const root = $("#trends");
-      DATA.trends.forEach(t => {
-        const W = 240, H = 60, PAD = 6;
-        const pts = t.points;
-        const ys = pts.map(p => p.value);
-        const lo = Math.min(...ys, t.referenceLow ?? Infinity);
-        const hi = Math.max(...ys, t.referenceHigh ?? -Infinity);
-        const yMin = isFinite(lo) ? lo : Math.min(...ys);
-        const yMax = isFinite(hi) ? hi : Math.max(...ys);
-        const span = yMax - yMin || 1;
-        const x = i => PAD + (W - 2 * PAD) * (i / Math.max(pts.length - 1, 1));
-        const y = v => H - PAD - (H - 2 * PAD) * ((v - yMin) / span);
-        const bandTop = t.referenceHigh != null ? y(t.referenceHigh) : 0;
-        const bandBot = t.referenceLow != null ? y(t.referenceLow) : H;
-        const bandRect = (t.referenceLow != null || t.referenceHigh != null)
-          ? '<rect x="' + PAD + '" y="' + Math.min(bandTop, bandBot) + '" width="' + (W - 2 * PAD) + '" height="' + Math.abs(bandTop - bandBot) + '" fill="rgba(16,185,129,.10)"/>'
-          : '';
-        const path = pts.map((p, i) => (i === 0 ? "M" : "L") + x(i).toFixed(1) + " " + y(p.value).toFixed(1)).join(" ");
-        const dots = pts.map((p, i) => '<circle cx="' + x(i).toFixed(1) + '" cy="' + y(p.value).toFixed(1) + '" r="3" fill="var(--primary)"/>').join("");
-        const refText = (t.referenceLow != null && t.referenceHigh != null) ? t.referenceLow + "–" + t.referenceHigh
-          : (t.referenceHigh != null ? "<" + t.referenceHigh : (t.referenceLow != null ? ">" + t.referenceLow : ""));
-        const latest = pts[pts.length - 1];
-        const div = document.createElement("div");
-        div.className = "trend";
-        div.innerHTML = '<h4>' + escHtml(t.test) + '</h4>' +
-          '<div class="reading">' + (refText ? "Reference: " + escHtml(refText) + (t.unit ? " " + escHtml(t.unit) : "") : "No reference range on row") + '</div>' +
-          '<svg viewBox="0 0 ' + W + ' ' + H + '">' +
-            bandRect +
-            '<path d="' + path + '" fill="none" stroke="var(--primary)" stroke-width="1.6"/>' +
-            dots +
-          '</svg>' +
-          '<div class="latest">Latest: ' + escHtml(latest.value + (t.unit ? " " + t.unit : "")) + (latest.date ? " · " + escHtml(latest.date) : "") + '</div>';
-        root.appendChild(div);
-      });
-    }
-
-    /* ---- Encounters (medical only) ---- */
-    if (subtype === "medical-visit") {
-      $("#encounters-section").hidden = false;
-      const root = $("#encounters");
-      const encounters = DATA.encounters || [];
-      $("#enc-meta").textContent = encounters.length + " encounter" + (encounters.length === 1 ? "" : "s");
-      encounters.forEach(e => {
-        const card = document.createElement("div");
-        card.className = "encounter";
-        card.innerHTML =
-          '<div class="head">' +
-            '<span class="date">' + escHtml(e.date || "(undated)") + '</span>' +
-            (e.encounterType ? '<span class="type">' + escHtml(e.encounterType) + '</span>' : '') +
-          '</div>' +
-          (e.provider ? '<div class="meta-row">Provider: ' + escHtml(e.provider) + '</div>' : '') +
-          (e.reason ? '<div class="reason">' + escHtml(e.reason) + '</div>' : '') +
-          (e.vitals && e.vitals.length ? '<div class="vitals">' + e.vitals.map(v => '<span class="vital">' + escHtml(v.label) + ': ' + escHtml(v.value) + '</span>').join("") + '</div>' : '') +
-          (e.plan ? '<div class="plan">Plan: ' + escHtml(e.plan) + '</div>' : '') +
-          (e.followUp ? '<div class="meta-row" style="margin-top:var(--space-sm)">Follow-up: ' + escHtml(e.followUp) + '</div>' : '<div class="meta-row" style="margin-top:var(--space-sm)"><span class="pill missing">no follow-up date in record</span></div>');
-        root.appendChild(card);
-      });
-    }
-
-    /* ---- Medications (medical only) ---- */
-    if (subtype === "medical-visit" && (DATA.medications || []).length > 0) {
-      $("#meds-section").hidden = false;
-      const root = $("#meds");
-      DATA.medications.forEach(m => {
-        const el = document.createElement("div");
-        el.className = "med";
-        el.innerHTML = '<div><span class="name">' + escHtml(m.name) + '</span>' +
-          (m.dose ? ' <span class="dose">' + escHtml(m.dose) + '</span>' : '') +
-          ' <span class="pill inferred">Inferred</span></div>' +
-          (m.instructions ? '<span class="ix">' + escHtml(m.instructions) + '</span>' : '');
-        root.appendChild(el);
-      });
-    }
-
-    /* ---- Filings + Deadlines (legal only) ---- */
-    if (subtype === "legal-chronology") {
-      const filings = DATA.filings || [];
-      if (filings.length > 0) {
-        $("#filings-section").hidden = false;
-        $("#filings-meta").textContent = filings.length + " filing" + (filings.length === 1 ? "" : "s");
-        const root = $("#filings");
-        filings.forEach(f => {
-          const el = document.createElement("div");
-          el.className = "list-row";
-          el.innerHTML = '<div><span class="name">' + escHtml(f.title) + '</span>' +
-            (f.party ? ' <span class="role">' + escHtml(f.party) + '</span>' : '') + '</div>' +
-            '<div class="count">' + escHtml(f.date || "(undated)") + '</div>';
-          root.appendChild(el);
-        });
-      }
-      const deadlines = DATA.deadlines || [];
-      if (deadlines.length > 0) {
-        $("#deadlines-section").hidden = false;
-        const root = $("#deadlines");
-        deadlines.forEach(d => {
-          const el = document.createElement("div");
-          el.className = "deadline";
-          const rel = d.daysFromToday == null ? "—"
-            : (d.daysFromToday === 0 ? "today"
-              : d.daysFromToday > 0 ? "in " + d.daysFromToday + "d"
-              : Math.abs(d.daysFromToday) + "d ago");
-          el.innerHTML = '<div class="d">' + escHtml(d.date) + '</div>' +
-            '<div class="rel">' + escHtml(rel) + '</div>' +
-            '<div class="src">' + escHtml(d.source) + ' <span class="pill inferred">Inferred</span></div>';
-          root.appendChild(el);
-        });
-      }
-    }
-
-    /* ---- Parties + Documents ---- */
-    (() => {
-      const root = $("#parties");
-      const parties = DATA.parties || [];
-      $("#parties-meta").textContent = parties.length + " " + (parties.length === 1 ? "party" : "parties");
-      if (parties.length === 0) {
-        root.innerHTML = '<p class="empty-state">No parties extracted from this record.</p>';
-      } else {
-        parties.forEach(p => {
-          const el = document.createElement("div");
-          el.className = "list-row";
-          el.innerHTML = '<div><span class="name">' + escHtml(p.name) + '</span></div>' +
-            '<div><span class="role">' + escHtml(p.role) + '</span> <span class="count">×' + p.count + '</span></div>';
-          root.appendChild(el);
-        });
-      }
-    })();
-
-    (() => {
-      const root = $("#documents");
-      const docs = DATA.documents || [];
-      $("#docs-meta").textContent = docs.length + " document" + (docs.length === 1 ? "" : "s");
-      if (docs.length === 0) {
-        root.innerHTML = '<p class="empty-state">No documents referenced in this record.</p>';
-      } else {
-        docs.forEach(d => {
-          const el = document.createElement("div");
-          el.className = "list-row";
-          el.innerHTML = '<div><span class="name">' + escHtml(d.name) + '</span> <span class="role">' + escHtml(d.kind) + '</span></div>' +
-            '<div>' + (d.missing ? '<span class="pill missing">not present in this record</span>' : '<span class="pill present">present</span>') + '</div>';
-          root.appendChild(el);
-        });
-      }
-    })();
-
-    /* ---- Missing items + Open questions ---- */
-    (() => {
-      const missRoot = $("#miss-list");
-      const items = DATA.missingItems || [];
-      if (items.length === 0) {
-        missRoot.innerHTML = '<p class="empty-state">Nothing obvious missing in this record.</p>';
-      } else {
-        items.forEach(m => {
-          const el = document.createElement("div");
-          el.className = "miss";
-          el.innerHTML = '<div class="lbl">' + escHtml(m.label) + ' <span class="pill inferred">Inferred</span></div>' +
-            (m.detail ? '<div class="det">' + escHtml(m.detail) + '</div>' : '');
-          missRoot.appendChild(el);
-        });
-      }
-      const qRoot = $("#q-list");
-      const qs = DATA.openQuestions || [];
-      if (qs.length === 0) {
-        qRoot.innerHTML = '<p class="empty-state">No follow-up questions surfaced from this record — bring it to your provider / attorney for a fuller review.</p>';
-      } else {
-        qs.forEach(q => {
-          const el = document.createElement("div");
-          el.className = "q";
-          el.innerHTML = escHtml(q.question);
-          qRoot.appendChild(el);
-        });
-      }
-    })();
-
-    /* ---- Copy as Markdown ---- */
-    $("#copy-md").addEventListener("click", async () => {
-      const lines = [];
-      lines.push("# " + HERO_TITLE);
-      lines.push("");
-      lines.push("> " + headlineSentence());
-      lines.push("");
-      if (subtype === "legal-chronology" && DATA.caseHeader) {
-        const c = DATA.caseHeader;
-        if (c.caption) lines.push("**Caption:** " + c.caption);
-        if (c.docket) lines.push("**Docket:** " + c.docket);
-        if (c.court) lines.push("**Court:** " + c.court);
-        lines.push("");
-      }
-      lines.push("## Timeline");
-      (DATA.events || []).slice().sort((a, b) => (a.date || "").localeCompare(b.date || "")).forEach(e => {
-        lines.push("- " + (e.dateText || e.date || "(undated)") + " · [" + e.kind + "] " + e.title + (e.party ? " (" + e.party + ")" : ""));
-      });
-      lines.push("");
-      lines.push("## Parties");
-      (DATA.parties || []).forEach(p => lines.push("- " + p.name + " — " + p.role + " (×" + p.count + ")"));
-      lines.push("");
-      lines.push("## Documents");
-      (DATA.documents || []).forEach(d => lines.push("- " + d.name + " — " + d.kind + (d.missing ? " (not present in this record)" : "")));
-      lines.push("");
-      lines.push("## Missing information");
-      (DATA.missingItems || []).forEach(m => lines.push("- " + m.label + (m.detail ? " — " + m.detail : "")));
-      lines.push("");
-      lines.push("## Questions to ask");
-      (DATA.openQuestions || []).forEach(q => lines.push("- " + q.question));
-      lines.push("");
-      lines.push("---");
-      lines.push("");
-      lines.push("*" + (CAVEAT[subtype] || "Organizational summary, not advice.") + "*");
-      const md = lines.join("\n");
-      try {
-        await navigator.clipboard.writeText(md);
-        $("#copy-status").textContent = "copied";
-        setTimeout(() => { $("#copy-status").textContent = ""; }, 2000);
-      } catch {
-        $("#copy-status").textContent = "select-and-copy below ↓";
-        const ta = document.createElement("textarea");
-        ta.value = md;
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand("copy"); $("#copy-status").textContent = "copied"; } catch {}
-        document.body.removeChild(ta);
-      }
+  // count-up animation
+  function countUp() {
+    document.querySelectorAll('.headline-stat .val[data-target]').forEach(function(el) {
+      const target = parseFloat(el.dataset.target);
+      const isFloat = target % 1 !== 0;
+      let start = 0;
+      const step = target / 30;
+      let frame = 0;
+      const interval = setInterval(function() {
+        frame++;
+        start = Math.min(start + step, target);
+        el.textContent = isFloat ? start.toFixed(1) : Math.round(start);
+        if (frame >= 30) { el.textContent = isFloat ? target.toFixed(1) : target; clearInterval(interval); }
+      }, 20);
     });
+  }
 
-    /* ---- Drill-down ---- */
-    (() => {
-      const content = $("#drill-content");
-      const search = $("#drill-search");
-      const chips = $("#drill-chips");
-      let activeKind = "all";
-      let allItems = [];
-      let columns = [];
+  // ── OOR section ───────────────────────────────────────────────────────────
+  document.getElementById('oorCount').textContent = oor.length + ' value' + (oor.length !== 1 ? 's' : '');
+  const oorGrid = document.getElementById('oorGrid');
+  if (!oor.length) {
+    oorGrid.innerHTML = '<p style="font-size:14px;color:var(--fg-muted)">No values fall outside the reference ranges printed in this file.</p>';
+  } else {
+    oor.forEach(function(r) {
+      oorGrid.innerHTML += '<div class="oor-row ' + esc(r.direction) + '" id="' + esc(r.id) + '">' +
+        '<div>' +
+          '<div class="oor-test">' + esc(r.test) + '</div>' +
+          '<div class="oor-meta">' +
+            '<span>' + esc(r.panel) + '</span>' +
+            '<span>' + fmtDate(r.collectedAt) + '</span>' +
+            (r.orderingProvider ? '<span>' + esc(r.orderingProvider) + '</span>' : '') +
+            (r.lab ? '<span>' + esc(r.lab) + '</span>' : '') +
+          '</div>' +
+          '<div style="margin-top:var(--space-xs);display:flex;gap:var(--space-sm);align-items:center;flex-wrap:wrap">' +
+            '<span class="ref-text">Ref: ' + esc(r.referenceText) + ' ' + esc(r.unit) + '</span>' +
+            '<span class="inferred-chip">Inferred</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="oor-right">' +
+          '<div class="oor-value">' + esc(r.valueText) + '</div>' +
+          '<div class="oor-unit">' + esc(r.unit) + '</div>' +
+          '<div class="direction-chip ' + esc(r.direction) + '">' +
+            (r.direction === 'above' ? '&#8593; above' : '&#8595; below') +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    });
+  }
 
-      if (subtype === "lab-results") {
-        $("#drill-summary-text").textContent = "Browse all lab rows";
-        $("#drill-summary-count").textContent = (DATA.rows || []).length + " rows";
-        columns = ["test", "panel", "value", "unit", "reference", "direction", "date", "provider"];
-        allItems = (DATA.rows || []).map(r => ({
-          kind: r.direction,
-          fields: {
-            test: r.test, panel: r.panel || "—",
-            value: r.valueText, unit: r.unit,
-            reference: r.referenceText || "—",
-            direction: r.direction === "in-range" ? "in range" : r.direction === "no-range" ? "no range" : r.direction,
-            date: r.collectedAt || "—",
-            provider: r.orderingProvider || "—",
-          },
-          searchText: [r.test, r.panel, r.valueText, r.unit, r.referenceText, r.direction, r.collectedAt, r.orderingProvider, r.lab].filter(Boolean).join(" ").toLowerCase(),
-        }));
-        const kinds = ["all", "above", "below", "in-range", "no-range", "non-numeric"];
-        chips.innerHTML = kinds.map(k => '<button class="chip ' + (k === "all" ? "active" : "") + '" data-kind="' + k + '">' + k + '</button>').join("");
-      } else {
-        $("#drill-summary-text").textContent = "Browse the full record";
-        $("#drill-summary-count").textContent = (DATA.events || []).length + " events";
-        const events = (DATA.events || []).slice().sort((a, b) => (a.date || "").localeCompare(b.date || ""));
-        allItems = events.map(e => ({
-          kind: e.kind,
-          fields: {
-            date: e.dateText || e.date || "—",
-            kind: e.kind,
-            title: e.title,
-            party: e.party || "—",
-            detail: e.detail || "—",
-          },
-          quote: e.source && e.source.quote,
-          searchText: [e.dateText, e.title, e.party, e.detail, e.source && e.source.quote].filter(Boolean).join(" ").toLowerCase(),
-        }));
-        const kinds = Array.from(new Set(["all", ...allItems.map(i => i.kind)]));
-        chips.innerHTML = kinds.map(k => '<button class="chip ' + (k === "all" ? "active" : "") + '" data-kind="' + k + '">' + k + '</button>').join("");
+  // ── Trends sparklines ─────────────────────────────────────────────────────
+  document.getElementById('trendsCount').textContent = trends.length + ' test' + (trends.length !== 1 ? 's' : '');
+  const tGrid = document.getElementById('trendsGrid');
+  if (!trends.length) {
+    document.getElementById('sec-trends').style.display = 'none';
+  } else {
+    trends.forEach(function(t) {
+      if (!t.points || t.points.length < 2) return;
+      const vals = t.points.map(function(p){ return p.value; });
+      const low = t.referenceLow;
+      const high = t.referenceHigh;
+      const allVals = vals.slice();
+      if (low != null) allVals.push(low);
+      if (high != null) allVals.push(high);
+      const minV = Math.min.apply(null, allVals) * 0.9;
+      const maxV = Math.max.apply(null, allVals) * 1.1;
+      const W = 200, H = 60, pad = 8;
+      const xScale = function(i) { return pad + i * (W - pad*2) / (t.points.length - 1); };
+      const yScale = function(v) { return H - pad - (v - minV) / (maxV - minV) * (H - pad*2); };
+
+      // band
+      let bandPath = '';
+      if (low != null || high != null) {
+        const bLow = low != null ? low : minV;
+        const bHigh = high != null ? high : maxV;
+        const y1 = yScale(bHigh);
+        const y2 = yScale(bLow);
+        bandPath = '<rect x="' + pad + '" y="' + y1 + '" width="' + (W - pad*2) + '" height="' + (y2 - y1) + '" fill="rgba(16,185,129,0.1)" rx="2"/>';
       }
+      // line
+      let linePts = t.points.map(function(p,i){ return xScale(i) + ',' + yScale(p.value); }).join(' ');
+      let dotsHtml = t.points.map(function(p,i){
+        const cx = xScale(i), cy = yScale(p.value);
+        const isOor = (high != null && p.value > high) || (low != null && p.value < low);
+        return '<circle cx="' + cx + '" cy="' + cy + '" r="4" fill="' + (isOor ? 'var(--primary)' : 'var(--green)') + '"/>';
+      }).join('');
+      // latest label
+      const lastPt = t.points[t.points.length - 1];
+      const lx = xScale(t.points.length - 1);
+      const ly = yScale(lastPt.value);
+      const isLastOor = (high != null && lastPt.value > high) || (low != null && lastPt.value < low);
 
-      const render = () => {
-        const q = search.value.trim().toLowerCase();
-        const filtered = allItems.filter(item =>
-          (activeKind === "all" || item.kind === activeKind) &&
-          (q === "" || item.searchText.includes(q))
-        ).slice(0, 500);
-        if (subtype === "lab-results") {
-          let html = '<table class="lab-table"><thead><tr>' +
-            columns.map(c => '<th>' + escHtml(c) + '</th>').join("") +
-            '</tr></thead><tbody>';
-          filtered.forEach(item => {
-            const cls = item.kind === "above" ? "out" : item.kind === "below" ? "below-row" : "";
-            html += '<tr class="' + cls + '">' +
-              columns.map(c => '<td' + (["value", "date"].includes(c) ? ' class="num"' : '') + '>' + escHtml(item.fields[c] || "—") + '</td>').join("") +
-              '</tr>';
-          });
-          html += '</tbody></table>';
-          if (filtered.length === 0) html = '<p class="empty-state">No rows match your filter.</p>';
-          content.innerHTML = html;
-        } else {
-          let html = '<table class="row-table"><thead><tr><th>date</th><th>kind</th><th>title</th><th>party</th><th>detail</th></tr></thead><tbody>';
-          filtered.forEach(item => {
-            html += '<tr><td class="num">' + escHtml(item.fields.date) + '</td>' +
-              '<td><span class="pill in-range">' + escHtml(item.fields.kind) + '</span></td>' +
-              '<td>' + escHtml(item.fields.title) + '</td>' +
-              '<td>' + escHtml(item.fields.party) + '</td>' +
-              '<td>' + escHtml(item.fields.detail) + '</td></tr>';
-          });
-          html += '</tbody></table>';
-          if (filtered.length === 0) html = '<p class="empty-state">No rows match your filter.</p>';
-          content.innerHTML = html;
-        }
-      };
-      render();
-      search.addEventListener("input", render);
-      chips.addEventListener("click", e => {
-        const btn = e.target.closest("button[data-kind]");
-        if (!btn) return;
-        chips.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
-        btn.classList.add("active");
-        activeKind = btn.getAttribute("data-kind");
-        render();
+      // date labels
+      const dateLabels = t.points.map(function(p,i){
+        return '<text x="' + xScale(i) + '" y="' + (H) + '" text-anchor="middle" font-size="8" fill="var(--fg-muted)" font-family="monospace">' + (p.date ? p.date.slice(5) : '') + '</text>';
+      }).join('');
+
+      const svgHtml = '<svg viewBox="0 0 ' + W + ' ' + (H+10) + '" xmlns="http://www.w3.org/2000/svg">' +
+        bandPath +
+        (high != null ? '<line x1="' + pad + '" y1="' + yScale(high) + '" x2="' + (W-pad) + '" y2="' + yScale(high) + '" stroke="rgba(16,185,129,0.4)" stroke-width="1" stroke-dasharray="3,2"/>' : '') +
+        (low != null ? '<line x1="' + pad + '" y1="' + yScale(low) + '" x2="' + (W-pad) + '" y2="' + yScale(low) + '" stroke="rgba(16,185,129,0.4)" stroke-width="1" stroke-dasharray="3,2"/>' : '') +
+        '<polyline points="' + linePts + '" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
+        dotsHtml +
+        '<text x="' + (lx+5) + '" y="' + (ly-5) + '" font-size="9" fill="' + (isLastOor ? 'var(--primary)' : 'var(--green)') + '" font-family="monospace">' + lastPt.value + '</text>' +
+        dateLabels +
+        '</svg>';
+
+      let pointsHtml = t.points.map(function(p){
+        const isOor = (high != null && p.value > high) || (low != null && p.value < low);
+        return '<div class="trend-point">' +
+          '<span class="tp-date">' + esc(p.date) + '</span>' +
+          '<span class="tp-val' + (isOor ? ' oor' : '') + '">' + esc(String(p.value)) + '</span>' +
+        '</div>';
+      }).join('');
+
+      const refNote = (low != null && high != null) ? 'Ref: ' + low + '–' + high :
+                      (high != null ? 'Ref: <' + high : (low != null ? 'Ref: >' + low : 'No ref'));
+
+      tGrid.innerHTML += '<div class="trend-card">' +
+        '<div class="trend-card-header">' +
+          '<div>' +
+            '<div class="trend-test-name">' + esc(t.test) + '</div>' +
+            '<div class="trend-unit">' + esc(t.unit) + ' · ' + esc(refNote) + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="sparkline-wrap">' + svgHtml + '</div>' +
+        '<div class="trend-points">' + pointsHtml + '</div>' +
+      '</div>';
+    });
+  }
+
+  // ── Panel detail ──────────────────────────────────────────────────────────
+  document.getElementById('panelsCount').textContent = panels.length + ' panel' + (panels.length !== 1 ? 's' : '');
+  const panelDetail = document.getElementById('panelDetail');
+
+  // group allRows (or oor) by panel for the tables
+  const rowsByPanel = {};
+  // Use oor + any rows array
+  const usedRows = allRows.length ? allRows : oor;
+  usedRows.forEach(function(r) {
+    const p = r.panel || 'Other';
+    if (!rowsByPanel[p]) rowsByPanel[p] = [];
+    rowsByPanel[p].push(r);
+  });
+
+  panels.forEach(function(panel) {
+    const pRows = rowsByPanel[panel.name] || [];
+    const hasOor = panel.outOfRangeCount > 0;
+
+    let tableRows = '';
+    if (pRows.length) {
+      pRows.forEach(function(r) {
+        const isOor = r.direction === 'above' || r.direction === 'below';
+        tableRows += '<tr>' +
+          '<td>' + esc(r.test) + '</td>' +
+          '<td class="val-cell' + (isOor ? ' oor' : '') + '">' + esc(r.valueText) + '</td>' +
+          '<td>' + esc(r.unit) + '</td>' +
+          '<td class="ref-cell">' + esc(r.referenceText || '—') + '</td>' +
+          '<td>' + (isOor ? '<span class="direction-chip ' + r.direction + '">' + (r.direction === 'above' ? '&#8593; above' : '&#8595; below') + '</span>' : '<span style="font-size:11px;color:var(--fg-muted)">in range</span>') + '</td>' +
+          '<td style="font-family:var(--font-mono);font-size:12px;color:var(--fg-muted)">' + esc(r.collectedAt) + '</td>' +
+        '</tr>';
       });
-    })();
+    }
 
-    /* ---- Footer meta ---- */
-    $("#footer-meta").textContent = (DATA.sourceFile || "input") + " · " + (DATA.sizeBytes ? Math.round(DATA.sizeBytes / 1024) + " KB" : "");
-  </script>
-</body>
-</html>
+    const id = 'panel_' + panel.name.replace(/\s+/g,'_');
+    panelDetail.innerHTML += '<div class="panel-section">' +
+      '<div class="panel-header">' +
+        '<button class="panel-toggle" onclick="togglePanel(\'' + id + '\',this)" aria-expanded="true">' +
+          '<span class="panel-toggle-icon open">&#9654;</span>' +
+          '<span class="panel-name">' + esc(panel.name) + '</span>' +
+        '</button>' +
+        '<span class="meta-chip" style="font-size:11px">' + panel.count + ' test' + (panel.count!==1?'s':'') + '</span>' +
+        (hasOor
+          ? '<span class="panel-oor-badge">' + panel.outOfRangeCount + ' outside ref range</span>'
+          : '<span class="panel-ok-badge">all in range</span>') +
+      '</div>' +
+      '<div class="panel-body open" id="' + id + '">' +
+        (tableRows
+          ? '<div class="table-wrap"><table class="fact-table">' +
+              '<thead><tr><th>Test</th><th>Value</th><th>Unit</th><th>Reference</th><th>Direction</th><th>Date</th></tr></thead>' +
+              '<tbody>' + tableRows + '</tbody>' +
+            '</table></div>'
+          : '<p style="font-size:13px;color:var(--fg-muted);padding:var(--space-md)">No individual rows available for this panel in this view.</p>') +
+      '</div>' +
+    '</div>';
+  });
+
+  // ── Timeline ──────────────────────────────────────────────────────────────
+  const tList = document.getElementById('timelineList');
+  if (!events.length) {
+    tList.innerHTML = '<p style="font-size:14px;color:var(--fg-muted)">No timeline events found in this record.</p>';
+  } else {
+    events.forEach(function(evt) {
+      tList.innerHTML += '<div class="timeline-event">' +
+        '<div class="evt-date">' + fmtDate(evt.date) + '</div>' +
+        '<div class="evt-title">' + esc(evt.title) + '</div>' +
+        (evt.detail ? '<div class="evt-detail">' + esc(evt.detail) + '</div>' : '') +
+        (evt.party ? '<div class="evt-party">Ordering provider: ' + esc(evt.party) + '</div>' : '') +
+      '</div>';
+    });

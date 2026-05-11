@@ -1,166 +1,1150 @@
 <!doctype html>
 <html lang="en" data-ha-style="network-map">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Sam Reyes — address book (synthetic, 34 contacts)</title>
-  <style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sam Reyes — Address Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
 :root {
-  --primary:#a03b00; --primary-container:#c94c00; --primary-fixed:#ffdbcd;
-  --primary-fixed-dim:#ffb597; --on-primary:#fff; --accent-glow:#E8400D;
-  --secondary:#d5baff; --secondary-container:#7b40e0; --tertiary:#4d44e3; --accent-cyan:#00D4FF;
-  --bg:#fff8f6; --surface:#fff8f6; --surface-container-lowest:#fff;
-  --surface-container-low:#fbf2ef; --surface-container:#f5ece9; --surface-container-high:#efe6e3;
-  --fg-1:#1e1b19; --fg-2:#594138; --fg-muted:#8d7166;
-  --border:rgba(0,0,0,.06); --border-strong:rgba(0,0,0,.12); --outline-variant:#e1bfb2;
-  --green:#10b981; --blue:#3b82f6; --yellow:#f59e0b; --red:#ef4444;
-  --font-headline:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-  --font-body:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-  --font-mono:ui-monospace,'SF Mono','Menlo',Consolas,monospace;
-  --space-xs:4px; --space-sm:8px; --space-md:12px; --space-lg:16px;
-  --space-xl:20px; --space-2xl:24px; --space-3xl:32px; --space-4xl:48px; --space-5xl:64px;
-  --radius-sm:8px; --radius-md:12px; --radius-lg:16px; --radius-xl:20px; --radius-2xl:28px; --radius-pill:9999px;
-  --shadow-sm:0 1px 2px rgba(30,27,25,.04); --shadow-md:0 4px 12px rgba(30,27,25,.08);
-  --shadow-lg:0 8px 24px rgba(30,27,25,.12); --shadow-accent:0 8px 24px rgba(160,59,0,.15);
-  --gradient-primary:linear-gradient(135deg,#a03b00 0%,#c94c00 100%);
-  --gradient-text:linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --accent-cyan: #00D4FF;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981;
+  --blue: #3b82f6;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30,27,25,0.04);
+  --shadow-md: 0 4px 12px rgba(30,27,25,0.08);
+  --shadow-lg: 0 8px 24px rgba(30,27,25,0.12);
+  --shadow-accent: 0 8px 24px rgba(160,59,0,0.15);
+  --gradient-primary: linear-gradient(135deg, #a03b00 0%, #c94c00 100%);
+  --gradient-hero: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg:#060B18; --surface:#0B1426; --surface-container-lowest:#101D35;
-    --surface-container-low:#101D35; --surface-container:#162544; --surface-container-high:#1c2d52;
-    --fg-1:#F8FAFC; --fg-2:#CBD5E1; --fg-muted:#64748B;
-    --border:rgba(255,255,255,.08); --border-strong:rgba(255,255,255,.14);
-    --primary:#FF6B35; --accent-glow:#00D4FF;
-    --shadow-md:0 4px 12px rgba(0,0,0,.4); --shadow-lg:0 8px 24px rgba(0,0,0,.5);
+    --bg: #060B18;
+    --surface: #0B1426;
+    --surface-container-lowest: #101D35;
+    --surface-container-low: #101D35;
+    --surface-container: #162544;
+    --surface-container-high: #1c2d52;
+    --fg-1: #F8FAFC;
+    --fg-2: #CBD5E1;
+    --fg-muted: #64748B;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --primary: #FF6B35;
+    --accent-glow: #00D4FF;
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+    --outline-variant: #2a3a5c;
+    --primary-fixed: rgba(255,107,53,0.15);
   }
 }
-*,*::before,*::after{box-sizing:border-box;margin:0}
-html,body{background:var(--bg);color:var(--fg-1);font-family:var(--font-body);
-  font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
-body{min-height:100vh}
-main{max-width:1240px;margin:0 auto;padding:var(--space-2xl) var(--space-xl) var(--space-5xl)}
-h1,h2,h3,h4{font-family:var(--font-headline);letter-spacing:-.01em;font-weight:600;color:var(--fg-1)}
-h1{font-size:clamp(28px,5vw,46px);font-weight:700;line-height:1.05;letter-spacing:-.02em}
-h2{font-size:clamp(20px,2.4vw,24px);margin-bottom:var(--space-md)}
-h3{font-size:17px;margin-bottom:var(--space-sm)}
-h4{font-size:14.5px;margin-bottom:var(--space-xs);color:var(--fg-1);font-weight:600}
-.muted{color:var(--fg-muted)}
-.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
-.num{font-variant-numeric:tabular-nums}
-button{font:inherit;cursor:pointer;border:none;background:transparent;color:inherit}
-input,select{font:inherit;color:var(--fg-1)}
-a{color:var(--primary);text-decoration:none}
-a:hover{text-decoration:underline}
-.hero{padding:var(--space-3xl) 0 var(--space-2xl);border-bottom:1px solid var(--border)}
-.hero .eyebrow{display:inline-flex;gap:var(--space-sm);align-items:center;
-  background:var(--surface-container);color:var(--primary);
-  padding:var(--space-xs) var(--space-md);border-radius:var(--radius-pill);
-  font-family:var(--font-mono);font-size:11.5px;font-weight:500;
-  text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-lg)}
-.hero h1{background:var(--gradient-text);-webkit-background-clip:text;background-clip:text;color:transparent;max-width:22ch}
-.hero .editorial{margin-top:var(--space-lg);max-width:62ch;color:var(--fg-2);font-size:17px;line-height:1.55}
-.hero-actions{display:flex;gap:var(--space-md);margin-top:var(--space-xl);flex-wrap:wrap;align-items:center}
-.btn{display:inline-flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-lg);
-  border-radius:var(--radius-pill);font-weight:600;font-size:14px;border:1px solid var(--border-strong);
-  background:var(--surface-container-lowest);color:var(--fg-1);transition:all .15s ease;cursor:pointer}
-.btn:hover{background:var(--surface-container);box-shadow:var(--shadow-sm)}
-.btn.primary{background:var(--gradient-primary);color:var(--on-primary);border-color:transparent}
-.btn.primary:hover{box-shadow:var(--shadow-accent)}
-.btn .eye{font-size:13px}
-.btn.toggle.on{background:var(--surface-container-high);color:var(--primary);border-color:var(--primary)}
-.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:var(--space-lg);margin-top:var(--space-3xl)}
-.kpi{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:var(--space-lg) var(--space-xl);box-shadow:var(--shadow-sm)}
-.kpi .label{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--fg-muted);font-weight:500}
-.kpi .value{font-family:var(--font-headline);font-size:30px;font-weight:600;margin-top:var(--space-xs);color:var(--fg-1);font-variant-numeric:tabular-nums}
-.kpi .value.accent{color:var(--primary)}
-.kpi .sub{font-size:12.5px;color:var(--fg-muted);margin-top:2px;font-family:var(--font-mono)}
-.section{margin-top:var(--space-4xl)}
-.section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-lg);gap:var(--space-md);flex-wrap:wrap}
-.section-head .meta{font-size:13px;color:var(--fg-muted);font-family:var(--font-mono)}
-.heuristic-chip{display:inline-flex;align-items:center;gap:6px;padding:2px 10px;border-radius:var(--radius-pill);
-  background:var(--surface-container);color:var(--fg-2);font-family:var(--font-mono);font-size:10.5px;
-  text-transform:uppercase;letter-spacing:.06em;font-weight:600}
-.card{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:var(--space-xl);box-shadow:var(--shadow-sm)}
-.audit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:var(--space-md)}
-.audit{padding:var(--space-md) var(--space-lg);border:1px solid var(--border);border-radius:var(--radius-md);
-  background:var(--surface-container-lowest);display:flex;flex-direction:column;gap:var(--space-xs)}
-.audit .audit-label{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--fg-muted);font-family:var(--font-mono);font-weight:500}
-.audit .audit-count{font-family:var(--font-headline);font-size:24px;font-weight:600;color:var(--fg-1);font-variant-numeric:tabular-nums}
-.audit .audit-count.zero{color:var(--fg-muted)}
-.audit .audit-sub{font-family:var(--font-mono);font-size:11.5px;color:var(--fg-2);margin-top:var(--space-xs);line-height:1.45}
-.audit .audit-sub b{color:var(--primary);font-weight:600}
-.atlas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--space-md)}
-.atlas{padding:var(--space-md) var(--space-lg);border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface-container-lowest);display:flex;flex-direction:column;gap:var(--space-xs)}
-.atlas .atlas-head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-sm)}
-.atlas .atlas-head h4{margin:0}
-.atlas .atlas-head .count{font-family:var(--font-mono);font-size:11.5px;color:var(--fg-muted)}
-.atlas .row{display:flex;justify-content:space-between;align-items:center;gap:var(--space-sm);padding:3px 0;font-family:var(--font-mono);font-size:12.5px}
-.atlas .row .v{color:var(--fg-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.atlas .row .c{color:var(--primary);font-weight:600;font-variant-numeric:tabular-nums}
-.atlas .row .bar{flex:1 1 auto;height:4px;background:var(--surface-container);border-radius:2px;position:relative;margin:0 var(--space-sm)}
-.atlas .row .bar i{position:absolute;left:0;top:0;bottom:0;background:var(--primary);border-radius:2px;display:block}
-.bday-strip{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;margin-top:var(--space-md)}
-.bday-strip .m{background:var(--surface-container);border-radius:3px;text-align:center;font-family:var(--font-mono);font-size:10.5px;color:var(--fg-muted);padding:8px 2px;position:relative;overflow:hidden;cursor:pointer}
-.bday-strip .m i{position:absolute;left:0;right:0;bottom:0;background:var(--gradient-primary);border-radius:0 0 3px 3px}
-.bday-strip .m span{position:relative;z-index:1;font-weight:500}
-.bday-strip .m .c{position:relative;z-index:1;display:block;font-size:11px;color:var(--fg-1);font-weight:600}
-.dup-list{display:grid;grid-template-columns:1fr;gap:var(--space-md)}
-.dup{padding:var(--space-lg) var(--space-xl);border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface-container-lowest)}
-.dup .dup-head{display:flex;align-items:center;gap:var(--space-md);flex-wrap:wrap;margin-bottom:var(--space-md)}
-.dup .dup-reason{display:inline-flex;padding:2px 10px;border-radius:var(--radius-pill);font-family:var(--font-mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:600;background:var(--surface-container-high);color:var(--fg-2)}
-.dup .dup-reason.shared-phone{background:rgba(245,158,11,.18);color:#a06200}
-.dup .dup-reason.shared-email{background:rgba(123,64,224,.15);color:var(--secondary-container)}
-.dup .dup-reason.normalized-name{background:rgba(0,0,0,.06);color:var(--fg-muted)}
-@media (prefers-color-scheme:dark){.dup .dup-reason.shared-phone{color:#fcd34d}.dup .dup-reason.normalized-name{color:var(--fg-2)}}
-.dup .dup-key{font-family:var(--font-mono);font-size:12.5px;color:var(--fg-2)}
-.dup-table{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-md)}
-.dup-cell{padding:var(--space-md);border:1px dashed var(--border-strong);border-radius:var(--radius-sm);background:var(--surface-container-low);font-size:13px}
-.dup-cell .name{font-weight:600;font-size:14px;color:var(--fg-1);margin-bottom:var(--space-xs)}
-.dup-cell .field{font-family:var(--font-mono);font-size:11.5px;color:var(--fg-2);line-height:1.4;display:block}
-.dup-cell .field b{color:var(--fg-muted);font-weight:500}
-.drill-toolbar{display:flex;gap:var(--space-md);margin-bottom:var(--space-md);flex-wrap:wrap;align-items:center}
-.drill-search{flex:1 1 280px;min-width:220px;padding:var(--space-sm) var(--space-md);border:1px solid var(--border-strong);border-radius:var(--radius-md);background:var(--surface-container-lowest);font-size:14px;font-family:var(--font-mono)}
-.drill-search:focus{outline:2px solid var(--primary);outline-offset:1px;border-color:var(--primary)}
-.drill-meta{font-size:12.5px;color:var(--fg-muted);font-family:var(--font-mono)}
-.chips{display:flex;gap:var(--space-sm);flex-wrap:wrap;margin-bottom:var(--space-md)}
-.chip{display:inline-flex;align-items:center;gap:var(--space-sm);padding:6px var(--space-md);border-radius:var(--radius-pill);background:var(--surface-container);border:1px solid var(--border);font-size:12.5px;font-weight:500;cursor:pointer;transition:all .15s ease;user-select:none}
-.chip:hover{background:var(--surface-container-high)}
-.chip.active{background:var(--primary);color:var(--on-primary);border-color:transparent}
-.chip .count{font-family:var(--font-mono);font-size:11.5px;color:var(--fg-muted);font-weight:400}
-.chip.active .count{color:rgba(255,255,255,.8)}
-.chip-row-label{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--fg-muted);font-family:var(--font-mono);font-weight:500;margin-bottom:var(--space-xs);margin-top:var(--space-md)}
-.contact-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:var(--space-md)}
-.contact{padding:var(--space-md) var(--space-lg);border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface-container-lowest);display:flex;flex-direction:column;gap:var(--space-xs)}
-.contact .name{font-weight:600;font-size:15px;color:var(--fg-1);line-height:1.3}
-.contact .name.italic{font-style:italic;color:var(--fg-muted)}
-.contact .org-line{font-family:var(--font-mono);font-size:11.5px;color:var(--fg-muted);line-height:1.4}
-.contact .org-line b{color:var(--fg-2);font-weight:500}
-.contact .field{font-family:var(--font-mono);font-size:12px;color:var(--fg-2);display:flex;gap:var(--space-sm);align-items:center}
-.contact .field .label{font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--fg-muted);background:var(--surface-container);padding:1px 6px;border-radius:4px;flex-shrink:0}
-.contact .field .v{cursor:pointer;text-decoration:underline dotted var(--border-strong);text-underline-offset:3px}
-.contact .field .v:hover{color:var(--primary);text-decoration-color:var(--primary)}
-.contact .badges{display:flex;flex-wrap:wrap;gap:var(--space-xs);margin-top:var(--space-xs)}
-.contact .badge{display:inline-block;padding:1px 8px;border-radius:var(--radius-sm);background:var(--surface-container);color:var(--fg-2);font-family:var(--font-mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
-.contact .badge.dup{background:rgba(245,158,11,.18);color:#a06200}
-@media (prefers-color-scheme:dark){.contact .badge.dup{color:#fcd34d}}
-.contact .badge.photo{background:rgba(123,64,224,.15);color:var(--secondary-container)}
-.contact .badge.flag{background:rgba(239,68,68,.12);color:var(--red)}
-.contact .badge.cat{background:var(--primary-fixed);color:var(--primary)}
-.contact .note{font-size:12.5px;color:var(--fg-2);font-style:italic;line-height:1.45;margin-top:var(--space-xs);padding-top:var(--space-xs);border-top:1px dashed var(--border)}
-.contact .rev{font-family:var(--font-mono);font-size:11px;color:var(--fg-muted)}
-.empty-state{padding:var(--space-2xl);text-align:center;font-size:13.5px;color:var(--fg-muted)}
-.tbl-loadmore{display:flex;justify-content:center;padding:var(--space-md);font-size:13px;color:var(--fg-muted);grid-column:1/-1}
-.tbl-loadmore button{padding:var(--space-sm) var(--space-lg);border-radius:var(--radius-pill);border:1px solid var(--border-strong);background:var(--surface-container-lowest)}
-footer{margin-top:var(--space-5xl);padding-top:var(--space-2xl);border-top:1px solid var(--border);font-size:12.5px;color:var(--fg-muted);max-width:78ch;line-height:1.6}
-footer .privacy{font-style:italic}
-@media (max-width:540px){
-  main{padding:var(--space-lg) var(--space-md) var(--space-4xl)}
-  .bday-strip{grid-template-columns:repeat(6,1fr)}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--fg-1);
+  font-size: 15px;
+  line-height: 1.55;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
-  </style>
+
+/* ── Network Shell ── */
+.network-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── Toolbar ── */
+.network-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+.toolbar-brand {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+  flex-shrink: 0;
+}
+.toolbar-brand span {
+  color: var(--primary);
+}
+.toolbar-spacer { flex: 1; }
+.toolbar-search {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--surface-container);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  padding: var(--space-xs) var(--space-md);
+  flex: 1;
+  min-width: 160px;
+  max-width: 320px;
+}
+.toolbar-search input {
+  background: none;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--fg-1);
+  width: 100%;
+}
+.toolbar-search input::placeholder { color: var(--fg-muted); }
+.toolbar-search .search-icon { color: var(--fg-muted); font-size: 13px; }
+.privacy-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: var(--surface-container);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  padding: var(--space-xs) var(--space-md);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: var(--font-body);
+  color: var(--fg-2);
+  transition: all 150ms ease;
+  white-space: nowrap;
+}
+.privacy-toggle:hover { background: var(--surface-container-high); }
+.privacy-toggle.revealed { color: var(--primary); border-color: var(--primary); }
+
+/* ── Hero Strip ── */
+.network-hero {
+  background: var(--gradient-hero);
+  color: white;
+  padding: var(--space-4xl) var(--space-lg) var(--space-3xl);
+  position: relative;
+  overflow: hidden;
+}
+.network-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+.hero-title {
+  font-family: var(--font-headline);
+  font-size: clamp(24px, 5vw, 38px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-lg);
+  line-height: 1.15;
+}
+.hero-title em {
+  font-style: normal;
+  opacity: 0.75;
+  font-size: 0.6em;
+  display: block;
+  font-weight: 400;
+  letter-spacing: 0;
+  margin-bottom: var(--space-xs);
+  text-transform: uppercase;
+  font-size: 11px;
+}
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hero-stat-num {
+  font-family: var(--font-headline);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.hero-stat-label {
+  font-size: 12px;
+  opacity: 0.72;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+.hero-stat-sub {
+  font-size: 11px;
+  opacity: 0.55;
+}
+.hero-divider {
+  width: 1px;
+  background: rgba(255,255,255,0.2);
+  align-self: stretch;
+  margin: var(--space-xs) 0;
+  display: none;
+}
+@media (min-width: 480px) { .hero-divider { display: block; } }
+.hero-editorial {
+  font-size: 14px;
+  opacity: 0.82;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: rgba(255,255,255,0.15);
+  border-radius: var(--radius-pill);
+  padding: 3px var(--space-sm);
+  font-size: 12px;
+  font-weight: 500;
+  margin-left: var(--space-sm);
+}
+
+/* ── Main content ── */
+.network-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4xl);
+}
+
+/* ── Section header ── */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
+}
+.section-title {
+  font-family: var(--font-headline);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+}
+.section-subtitle {
+  font-size: 13px;
+  color: var(--fg-muted);
+}
+
+/* ── Network Canvas ── */
+.network-canvas-wrap {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  position: relative;
+}
+.network-canvas-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.canvas-control-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-right: var(--space-xs);
+}
+.cluster-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: var(--surface-container);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  padding: 4px var(--space-md);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--fg-2);
+  cursor: pointer;
+  transition: all 150ms ease;
+  white-space: nowrap;
+}
+.cluster-chip:hover { background: var(--surface-container-high); }
+.cluster-chip.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+#network-svg-container {
+  width: 100%;
+  height: 380px;
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+}
+#network-svg-container:active { cursor: grabbing; }
+#network-svg {
+  width: 100%;
+  height: 100%;
+}
+.node-label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  fill: var(--fg-2);
+  pointer-events: none;
+  user-select: none;
+}
+.network-canvas-hint {
+  position: absolute;
+  bottom: var(--space-md);
+  right: var(--space-lg);
+  font-size: 11px;
+  color: var(--fg-muted);
+  pointer-events: none;
+  opacity: 0.6;
+}
+.node-tooltip {
+  position: absolute;
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-md) var(--space-lg);
+  font-size: 13px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+  z-index: 50;
+  max-width: 220px;
+}
+.node-tooltip.visible { opacity: 1; }
+.node-tooltip-name { font-weight: 600; color: var(--fg-1); margin-bottom: 3px; }
+.node-tooltip-detail { color: var(--fg-muted); font-size: 12px; }
+
+/* ── Entity Inspector ── */
+.entity-inspector {
+  display: none;
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: slideIn 200ms ease;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.entity-inspector.visible { display: block; }
+.inspector-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-xl);
+  background: var(--surface-container);
+  border-bottom: 1px solid var(--border);
+}
+.inspector-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-pill);
+  background: var(--gradient-primary);
+  color: white;
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.inspector-name {
+  font-family: var(--font-headline);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+}
+.inspector-meta {
+  font-size: 13px;
+  color: var(--fg-muted);
+  margin-top: 2px;
+}
+.inspector-close {
+  margin-left: auto;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-container-high);
+  border: none;
+  cursor: pointer;
+  color: var(--fg-muted);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 150ms ease;
+}
+.inspector-close:hover { background: var(--border-strong); color: var(--fg-1); }
+.inspector-body {
+  padding: var(--space-xl);
+  display: grid;
+  gap: var(--space-xl);
+}
+.inspector-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-md);
+}
+.inspector-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.inspector-field-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fg-muted);
+}
+.inspector-field-value {
+  font-size: 14px;
+  color: var(--fg-1);
+  font-variant-numeric: tabular-nums;
+}
+.inspector-field-value.masked {
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition: color 150ms;
+}
+.inspector-field-value.masked:hover { color: var(--primary); }
+.inspector-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+.inspector-note {
+  background: var(--surface-container);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  font-size: 13px;
+  color: var(--fg-2);
+  font-style: italic;
+  line-height: 1.6;
+  border-left: 3px solid var(--primary);
+}
+
+/* ── Badges ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: var(--radius-pill);
+  padding: 3px var(--space-sm);
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.badge-org { background: var(--primary-fixed); color: var(--primary-container); }
+.badge-family { background: rgba(16,185,129,0.12); color: var(--green); }
+.badge-work { background: rgba(59,130,246,0.12); color: var(--blue); }
+.badge-coworker { background: rgba(123,64,224,0.15); color: var(--secondary-container); }
+.badge-dup { background: rgba(245,158,11,0.15); color: var(--yellow); }
+.badge-stale { background: rgba(239,68,68,0.1); color: var(--red); }
+.badge-photo { background: rgba(0,212,255,0.1); color: var(--accent-cyan); }
+.badge-legacy { background: var(--surface-container-high); color: var(--fg-muted); }
+.badge-missing { background: rgba(239,68,68,0.1); color: var(--red); }
+.badge-group { background: rgba(77,68,227,0.12); color: var(--tertiary); }
+.badge-generic { background: var(--surface-container); color: var(--fg-2); }
+@media (prefers-color-scheme: dark) {
+  .badge-org { background: rgba(255,107,53,0.15); color: #ff9a6c; }
+  .badge-coworker { background: rgba(213,186,255,0.15); color: var(--secondary); }
+}
+
+/* ── Cluster Controls (Atlas tabs) ── */
+.cluster-controls {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.cluster-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.cluster-tabs::-webkit-scrollbar { display: none; }
+.cluster-tab {
+  padding: var(--space-md) var(--space-xl);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all 150ms ease;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: var(--font-body);
+}
+.cluster-tab:hover { color: var(--fg-1); }
+.cluster-tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+.cluster-panel { padding: var(--space-xl); display: none; }
+.cluster-panel.active { display: block; }
+.cluster-bar-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+  cursor: pointer;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  transition: background 120ms ease;
+}
+.cluster-bar-row:hover { background: var(--surface-container); }
+.cluster-bar-name {
+  font-size: 13px;
+  color: var(--fg-1);
+  min-width: 130px;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cluster-bar-track {
+  flex: 1;
+  height: 8px;
+  background: var(--surface-container);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+.cluster-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transition: width 400ms cubic-bezier(0.16,1,0.3,1);
+}
+.cluster-bar-count {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-muted);
+  min-width: 28px;
+  text-align: right;
+}
+.birthday-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-sm);
+}
+@media (min-width: 600px) {
+  .birthday-grid { grid-template-columns: repeat(12, 1fr); }
+}
+.birthday-month {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm) var(--space-xs);
+  transition: background 120ms;
+}
+.birthday-month:hover { background: var(--surface-container); }
+.birthday-month.highlight { background: var(--primary-fixed); }
+.birthday-bar-wrap {
+  height: 48px;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+}
+.birthday-bar {
+  width: 100%;
+  border-radius: 3px 3px 0 0;
+  min-height: 3px;
+  transition: height 400ms cubic-bezier(0.16,1,0.3,1);
+}
+.birthday-month-label {
+  font-size: 10px;
+  color: var(--fg-muted);
+  font-weight: 500;
+}
+.birthday-month-count {
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-1);
+  font-weight: 600;
+}
+
+/* ── Hub Cards (audit) ── */
+.hub-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-lg);
+}
+.hub-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-lg);
+  transition: box-shadow 150ms ease;
+}
+.hub-card:hover { box-shadow: var(--shadow-md); }
+.hub-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+.hub-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.hub-card-icon.yellow { background: rgba(245,158,11,0.15); }
+.hub-card-icon.red { background: rgba(239,68,68,0.1); }
+.hub-card-icon.blue { background: rgba(59,130,246,0.12); }
+.hub-card-icon.green { background: rgba(16,185,129,0.12); }
+.hub-card-icon.purple { background: rgba(123,64,224,0.12); }
+.hub-card-title {
+  font-family: var(--font-headline);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--fg-1);
+  line-height: 1.3;
+}
+.hub-card-count {
+  font-family: var(--font-headline);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  margin-bottom: var(--space-sm);
+}
+.hub-card-samples {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+.hub-card-sample {
+  font-size: 12px;
+  color: var(--fg-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+.hub-card-sample::before {
+  content: '·';
+  color: var(--primary);
+  font-weight: 700;
+}
+.hub-card-note {
+  font-size: 12px;
+  color: var(--fg-muted);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+/* ── Duplicate Clusters ── */
+.dup-notice {
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  font-size: 13px;
+  color: var(--fg-2);
+  line-height: 1.6;
+  margin-bottom: var(--space-xl);
+}
+.dup-clusters {
+  display: grid;
+  gap: var(--space-lg);
+}
+.dup-cluster {
+  background: var(--surface-container-lowest);
+  border: 1px solid rgba(245,158,11,0.25);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.dup-cluster-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: rgba(245,158,11,0.06);
+  border-bottom: 1px solid rgba(245,158,11,0.15);
+}
+.dup-cluster-reason {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.dup-cluster-key {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-muted);
+}
+.dup-cards-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0;
+}
+.dup-card {
+  padding: var(--space-lg);
+  border-right: 1px solid var(--border);
+}
+.dup-card:last-child { border-right: none; }
+.dup-card-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--fg-1);
+  margin-bottom: var(--space-sm);
+}
+.dup-card-field {
+  display: flex;
+  gap: var(--space-sm);
+  font-size: 12px;
+  color: var(--fg-muted);
+  margin-bottom: 3px;
+}
+.dup-card-field-label {
+  font-weight: 500;
+  color: var(--fg-2);
+  min-width: 40px;
+  flex-shrink: 0;
+}
+.dup-card-unique {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--green);
+  font-weight: 500;
+}
+
+/* ── Linked Records / Contact Table ── */
+.linked-records {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.records-toolbar {
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.records-search {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--surface-container);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  padding: var(--space-sm) var(--space-md);
+}
+.records-search input {
+  background: none;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--fg-1);
+  width: 100%;
+}
+.records-search input::placeholder { color: var(--fg-muted); }
+.filter-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  align-items: center;
+}
+.filter-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-right: var(--space-xs);
+}
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--surface-container);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  padding: 3px var(--space-md);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--fg-2);
+  cursor: pointer;
+  transition: all 120ms ease;
+  white-space: nowrap;
+}
+.filter-chip:hover { background: var(--surface-container-high); }
+.filter-chip.active { background: var(--primary); color: white; border-color: var(--primary); }
+.records-sort-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+.sort-label {
+  font-size: 12px;
+  color: var(--fg-muted);
+  font-weight: 500;
+}
+.sort-select {
+  background: var(--surface-container);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  padding: 4px var(--space-md);
+  font-size: 12px;
+  color: var(--fg-1);
+  font-family: var(--font-body);
+  cursor: pointer;
+  outline: none;
+}
+.records-count {
+  font-size: 12px;
+  color: var(--fg-muted);
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Contact Grid */
+.contacts-grid {
+  padding: var(--space-lg);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+  min-height: 200px;
+}
+.contact-card {
+  background: var(--surface-container-low);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  cursor: pointer;
+  transition: all 150ms ease;
+  position: relative;
+}
+.contact-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+.contact-card.expanded {
+  grid-column: 1 / -1;
+  cursor: default;
+  border-color: var(--primary);
+  box-shadow: var(--shadow-accent);
+}
+.contact-card.selected {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-accent);
+}
+.contact-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+.contact-initials {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 15px;
+  color: white;
+  flex-shrink: 0;
+}
+.contact-name-block { flex: 1; min-width: 0; }
+.contact-name {
+  font-family: var(--font-headline);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--fg-1);
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.contact-name.noname {
+  color: var(--fg-muted);
+  font-style: italic;
+  font-weight: 400;
+}
+.contact-org-title {
+  font-size: 12px;
+  color: var(--fg-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 1px;
+}
+.contact-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: var(--space-sm);
+}
+.contact-field {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 12px;
+  color: var(--fg-2);
+}
+.contact-field-icon { font-size: 11px; color: var(--fg-muted); width: 14px; flex-shrink: 0; }
+.contact-field-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  font-variant-numeric: tabular-nums;
+}
+.contact-field-value.masked { color: var(--fg-muted); }
+.contact-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: var(--space-sm);
+}
+
+/* Expanded contact detail */
+.contact-expanded-body {
+  display: none;
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border);
+}
+.contact-card.expanded .contact-expanded-body { display: block; }
+.expanded-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+.expanded-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-sm);
+}
+.expanded-field-row {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+  font-size: 13px;
+}
+.expanded-field-type {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--fg-muted);
+  min-width: 40px;
+  padding-top: 2px;
+}
+.expanded-field-val {
+  color: var(--fg-1);
+  font-variant-numeric: tabular-nums;
+}
+.expanded-field-val.masked {
+  color: var(--fg-muted);
+  cursor: pointer;
+}
+.expanded-note {
+  font-style: italic;
+  font-size: 13px;
+  color: var(--fg-2);
+  background: var(--surface-container);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  line-height: 1.6;
+  border-left: 3px solid var(--primary);
+}
+.expand-close {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-lg);
+}
+.btn-ghost {
+  background: var(--surface-container);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  padding: var(--space-sm) var(--space-lg);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fg-2);
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+.btn-ghost:hover { background: var(--surface-container-high); }
+
+/* highlight for search */
+mark {
+  background: rgba(232,64,13,0.2);
+  color: var(--primary);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+/* ── Footer ── */
+.network-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  padding: var(--space-3xl) var(--space-lg);
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+.footer-actions {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-xl);
+}
+.btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: var(--space-sm) var(--space-xl);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+.btn-primary:hover { opacity: 0.88; }
+.footer-privacy {
+  font-size: 12px;
+  color: var(--fg-muted);
+  line-height: 1.7;
+  max-width: 700px;
+}
+.footer-privacy strong { color: var(--fg-2); font-weight: 600; }
+
+/* ── Utility ── */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--space-5xl) var(--space-lg);
+  color: var(--fg-muted);
+  font-size: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-stats { gap: var(--space-lg); }
+  .hero-stat-num { font-size: 26px; }
+  .network-toolbar { gap: var(--space-sm); }
+  .toolbar-search { max-width: none; flex: 1; min-width: 0; }
+  .contacts-grid { grid-template-columns: 1fr; padding: var(--space-md); }
+}
+
+/* ── Scrollbar styling ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--outline-variant); border-radius: var(--radius-pill); }
+</style>
 <!-- html-anything example style skin:start -->
 
 <style id="html-anything-example-style-skin">
@@ -265,35 +1249,6 @@ html[data-ha-style="relationship"] body {
     linear-gradient(300deg, rgba(49,123,147,.08), transparent 40%);
 }
 html[data-ha-style="relationship"] body::before { content: "relationship"; }
-
-html[data-ha-style="personal-atlas"] {
-  --ha-style-accent: #3f7f6a;
-  --ha-style-accent-2: #c15a2b;
-  --primary: #3f7f6a;
-  --primary-container: #2f6b58;
-  --primary-fixed: #dff4ea;
-  --secondary-container: #c15a2b;
-  --bg: #f7faf4;
-  --surface: #f7faf4;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #eef5ea;
-  --surface-container: #e6eee0;
-  --surface-container-high: #dbe7d5;
-  --fg-1: #17211b;
-  --fg-2: #405345;
-  --fg-muted: #718172;
-  --border: rgba(63,127,106,.15);
-  --gradient-hero: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-  --gradient-text: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-}
-html[data-ha-style="personal-atlas"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(63,127,106,.11) 0 2px, transparent 2px),
-    radial-gradient(circle at 70% 40%, rgba(193,90,43,.10) 0 1.5px, transparent 1.5px);
-  background-size: 54px 54px, 38px 38px;
-}
-html[data-ha-style="personal-atlas"] body::before { content: "personal atlas"; }
 
 html[data-ha-style="timeline-story"] {
   --ha-style-accent: #9a4b14;
@@ -444,7 +1399,7 @@ html[data-ha-style="dashboard"] header.hero::before {
   margin-bottom: 14px;
 }
 
-html[data-ha-style="editorial"] {
+html[data-ha-style="document"] {
   --ha-style-accent: #8b3f1f;
   --ha-style-accent-2: #2f6f73;
   --primary: #8b3f1f;
@@ -465,14 +1420,14 @@ html[data-ha-style="editorial"] {
   --gradient-hero: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
   --gradient-text: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
 }
-html[data-ha-style="editorial"] body {
+html[data-ha-style="document"] body {
   background-color: var(--bg) !important;
   background-image: linear-gradient(90deg, rgba(139,63,31,.18) 0 4px, transparent 4px);
   background-size: 100% 100%;
 }
-html[data-ha-style="editorial"] body::before { content: "editorial"; }
-html[data-ha-style="editorial"] .hero::before,
-html[data-ha-style="editorial"] header.hero::before {
+html[data-ha-style="document"] body::before { content: "document"; }
+html[data-ha-style="document"] .hero::before,
+html[data-ha-style="document"] header.hero::before {
   width: 42px;
   height: 42px;
   border-radius: 0;
@@ -480,33 +1435,6 @@ html[data-ha-style="editorial"] header.hero::before {
   border-top: 4px solid var(--ha-style-accent);
   border-left: 4px solid var(--ha-style-accent);
 }
-
-html[data-ha-style="paper"] {
-  --ha-style-accent: #53606a;
-  --ha-style-accent-2: #8c6f4a;
-  --primary: #53606a;
-  --primary-container: #3e4850;
-  --primary-fixed: #eef1f3;
-  --secondary-container: #8c6f4a;
-  --bg: #f9faf9;
-  --surface: #f9faf9;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f1f2f1;
-  --surface-container: #e8eae8;
-  --surface-container-high: #dedfdd;
-  --fg-1: #171717;
-  --fg-2: #4b5563;
-  --fg-muted: #737373;
-  --border: rgba(83,96,106,.18);
-  --font-headline: Georgia, "Iowan Old Style", "Times New Roman", serif;
-  --gradient-hero: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-  --gradient-text: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-}
-html[data-ha-style="paper"] body {
-  background-color: var(--bg) !important;
-  background-image: repeating-linear-gradient(0deg, transparent 0 31px, rgba(83,96,106,.08) 31px 32px);
-}
-html[data-ha-style="paper"] body::before { content: "paper"; }
 
 html[data-ha-style="developer"] {
   color-scheme: dark;
@@ -551,542 +1479,378 @@ html[data-ha-style="developer"] .mono {
 <!-- html-anything example style skin:end -->
 </head>
 <body>
-  <main>
-    <header class="hero">
-      <span class="eyebrow"><span class="mono">VCARD CONTACTS</span> · html-anything</span>
-      <h1 id="hero-title">Sam Reyes — address book (synthetic, 34 contacts)</h1>
-      <p class="editorial" id="hero-editorial"></p>
-      <div class="hero-actions">
-        <button class="btn primary" id="copy-md-btn">Copy audit summary as Markdown</button>
-        <button class="btn" id="jump-table-btn">Jump to contacts</button>
-        <button class="btn toggle" id="mask-toggle"><span class="eye">&#128065;</span> <span id="mask-toggle-label">Show real phone &amp; email</span></button>
-      </div>
-    </header>
+<script>const DATA = {"kind":"vcard-contacts","format":"vcard-contacts","version":"mixed","rows":[{"id":"c_000001","fn":"Mom","familyName":"Acharya","givenName":"Riya","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550101","type":"CELL","masked":"+1 (55) •••••• 01"}],"emails":[{"value":"riya.synth@example.com","type":"HOME","masked":"r••••h@example.com"}],"addresses":[{"type":"HOME","pob":null,"extended":null,"street":"421 Synthetic Way","city":"Brookline","region":"MA","postal":"02446","country":"United States","formatted":"421 Synthetic Way, Brookline MA 02446, United States"}],"urls":[],"bday":"1962-05-12","bdayMonth":5,"bdayDay":12,"categories":["Family"],"note":"Mom — favorite color is forest green, prefers texts to calls.","rev":"2024-09-09","hasPhoto":true,"photoMime":"image/jpeg","kind":"individual","uid":"synth-mom-1","legacy":false,"duplicateOfClusterId":"dup_001","auditFlags":[],"vcardVersion":"3.0"},{"id":"c_000002","fn":"Mom (Riya)","familyName":"Acharya","givenName":"Riya","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550101","type":"CELL","masked":"+1 (55) •••••• 01"}],"emails":[{"value":"riya.synth@example.com","type":"HOME","masked":"r••••h@example.com"}],"addresses":[],"urls":[],"bday":"1962-05-12","bdayMonth":5,"bdayDay":12,"categories":[],"note":null,"rev":"2021-01-05","hasPhoto":false,"photoMime":null,"kind":"individual","uid":"synth-mom-2","legacy":false,"duplicateOfClusterId":"dup_001","auditFlags":["stale-rev"],"vcardVersion":"3.0"},{"id":"c_000003","fn":"Riya Acharya","familyName":"Acharya","givenName":"Riya","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550101","type":"CELL","masked":"+1 (55) •••••• 01"}],"emails":[{"value":"riya.synth@example.com","type":"HOME","masked":"r••••h@example.com"}],"addresses":[{"type":"HOME","pob":null,"extended":null,"street":"421 Synthetic Way","city":"Brookline","region":"MA","postal":"02446","country":"United States","formatted":"421 Synthetic Way, Brookline MA 02446, United States"}],"urls":[],"bday":"1962-05-12","bdayMonth":5,"bdayDay":12,"categories":[],"note":null,"rev":"2026-02-18","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":"dup_001","auditFlags":[],"vcardVersion":"4.0"},{"id":"c_000004","fn":"Dad","familyName":"Acharya","givenName":"Naveen","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":"Dad","org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550118","type":"CELL","masked":"+1 (55) •••••• 18"},{"value":"+15555550224","type":"HOME","masked":"+1 (55) •••••• 24"}],"emails":[{"value":"naveen.synth@example.org","type":"HOME","masked":"n••••h@example.org"}],"addresses":[{"type":"HOME","pob":null,"extended":null,"street":"421 Synthetic Way","city":"Brookline","region":"MA","postal":"02446","country":"United States","formatted":"421 Synthetic Way, Brookline MA 02446, United States"}],"urls":[],"bday":"1958-11-30","bdayMonth":11,"bdayDay":30,"categories":["Family"],"note":"Dad. Best reached evenings after 7pm Eastern.","rev":"2025-12-05","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"3.0"},{"id":"c_000005","fn":"Anya Acharya","familyName":"Acharya","givenName":"Anya","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550138","type":"CELL","masked":"+1 (55) •••••• 38"}],"emails":[{"value":"anya.a@example.com","type":"WORK","masked":"a••••a@example.com"}],"addresses":[{"type":"HOME","pob":null,"extended":null,"street":"421 Synthetic Way","city":"Brookline","region":"MA","postal":"02446","country":"United States","formatted":"421 Synthetic Way, Brookline MA 02446, United States"}],"urls":[],"bday":"1990-03-22","bdayMonth":3,"bdayDay":22,"categories":["Family"],"note":null,"rev":"2025-11-30","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"4.0"},{"id":"c_000006","fn":"Maeve Tindall","familyName":"Tindall","givenName":"Maeve","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Solare Global","orgUnits":["Engineering"],"title":"Senior Software Engineer","phones":[{"value":"+15555550207","type":"WORK","masked":"+1 (55) •••••• 07"},{"value":"+15555550230","type":"CELL","masked":"+1 (55) •••••• 30"}],"emails":[{"value":"m.tindall@example.com","type":"WORK","masked":"m••••l@example.com"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"44 Demonstration Plaza, Floor 12","city":"San Francisco","region":"CA","postal":"94107","country":"United States","formatted":"44 Demonstration Plaza, Floor 12, San Francisco CA 94107, United States"}],"urls":[],"bday":"1991-06-12","bdayMonth":6,"bdayDay":12,"categories":["Coworker","Solare"],"note":null,"rev":"2023-10-12","hasPhoto":true,"photoMime":"image/jpeg","kind":"individual","uid":"synth-solare-0","legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"3.0"},{"id":"c_000007","fn":"Hanan Boutros","familyName":"Boutros","givenName":"Hanan","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Solare Global","orgUnits":["Engineering"],"title":"Engineering Manager","phones":[{"value":"+15555550208","type":"WORK","masked":"+1 (55) •••••• 08"},{"value":"+15555550231","type":"CELL","masked":"+1 (55) •••••• 31"}],"emails":[{"value":"hanan.b@example.com","type":"WORK","masked":"h••••b@example.com"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"44 Demonstration Plaza, Floor 12","city":"San Francisco","region":"CA","postal":"94107","country":"United States","formatted":"44 Demonstration Plaza, Floor 12, San Francisco CA 94107, United States"}],"urls":[],"bday":"1985-09-04","bdayMonth":9,"bdayDay":4,"categories":["Coworker","Solare"],"note":null,"rev":"2024-01-22","hasPhoto":true,"photoMime":"image/jpeg","kind":"individual","uid":"synth-solare-1","legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"4.0"},{"id":"c_000008","fn":"Mira Salonen","familyName":"Salonen","givenName":"Mira","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Solare Global","orgUnits":["Engineering"],"title":"Staff Designer","phones":[{"value":"+15555550210","type":"WORK","masked":"+1 (55) •••••• 10"},{"value":"+15555550232","type":"CELL","masked":"+1 (55) •••••• 32"}],"emails":[{"value":"mira.s@example.com","type":"WORK","masked":"m••••s@example.com"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"44 Demonstration Plaza, Floor 12","city":"San Francisco","region":"CA","postal":"94107","country":"United States","formatted":"44 Demonstration Plaza, Floor 12, San Francisco CA 94107, United States"}],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Coworker","Solare"],"note":null,"rev":"2024-08-11","hasPhoto":false,"photoMime":null,"kind":"individual","uid":"synth-solare-2","legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"3.0"},{"id":"c_000009","fn":"Aleksandr Volkov","familyName":"Volkov","givenName":"Aleksandr","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Solare Global","orgUnits":["Engineering"],"title":"Site Reliability","phones":[{"value":"+15555550211","type":"WORK","masked":"+1 (55) •••••• 11"},{"value":"+15555550233","type":"CELL","masked":"+1 (55) •••••• 33"}],"emails":[{"value":"alex.v@example.com","type":"WORK","masked":"a••••v@example.com"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"44 Demonstration Plaza, Floor 12","city":"San Francisco","region":"CA","postal":"94107","country":"United States","formatted":"44 Demonstration Plaza, Floor 12, San Francisco CA 94107, United States"}],"urls":[],"bday":"1988-11-20","bdayMonth":11,"bdayDay":20,"categories":["Coworker","Solare"],"note":null,"rev":"2025-02-14","hasPhoto":false,"photoMime":null,"kind":"individual","uid":"synth-solare-3","legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"4.0"},{"id":"c_000010","fn":"Calla Reyes","familyName":"Reyes","givenName":"Calla","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Solare Global","orgUnits":["Engineering"],"title":"Product Manager","phones":[{"value":"+15555550212","type":"WORK","masked":"+1 (55) •••••• 12"},{"value":"+15555550234","type":"CELL","masked":"+1 (55) •••••• 34"}],"emails":[{"value":"calla.r@example.com","type":"WORK","masked":"c••••r@example.com"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"44 Demonstration Plaza, Floor 12","city":"San Francisco","region":"CA","postal":"94107","country":"United States","formatted":"44 Demonstration Plaza, Floor 12, San Francisco CA 94107, United States"}],"urls":[],"bday":"1992-02-19","bdayMonth":2,"bdayDay":19,"categories":["Coworker","Solare"],"note":null,"rev":"2025-09-03","hasPhoto":false,"photoMime":null,"kind":"individual","uid":"synth-solare-4","legacy":false,"duplicateOfClusterId":"dup_003","auditFlags":[],"vcardVersion":"3.0"},{"id":"c_000011","fn":"Jia Mwangi","familyName":"Mwangi","givenName":"Jia","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Drysdale Variety Co.","orgUnits":[],"title":"Operations Lead","phones":[{"value":"+15555550241","type":"WORK","masked":"+1 (55) •••••• 41"}],"emails":[{"value":"jia.mwangi@example.org","type":"WORK","masked":"j••••i@example.org"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"12 Imaginary Mews","city":"Brooklyn","region":"NY","postal":"11211","country":"United States","formatted":"12 Imaginary Mews, Brooklyn NY 11211, United States"}],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Coworker","Drysdale"],"note":"Old colleague at Drysdale, kept in touch via LinkedIn.","rev":"2019-06-14","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["stale-rev"],"vcardVersion":"3.0"},{"id":"c_000012","fn":"Field Hartwell","familyName":"Hartwell","givenName":"Field","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Drysdale Variety Co.","orgUnits":[],"title":"Account Manager","phones":[{"value":"+15555550242","type":"WORK","masked":"+1 (55) •••••• 42"}],"emails":[{"value":"field.h@example.org","type":"WORK","masked":"f••••h@example.org"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"12 Imaginary Mews","city":"Brooklyn","region":"NY","postal":"11211","country":"United States","formatted":"12 Imaginary Mews, Brooklyn NY 11211, United States"}],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Coworker","Drysdale"],"note":null,"rev":"2018-03-22","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["stale-rev"],"vcardVersion":"3.0"},{"id":"c_000013","fn":"Petra Fall","familyName":"Fall","givenName":"Petra","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Drysdale Variety Co.","orgUnits":[],"title":"Designer","phones":[{"value":"+15555550243","type":"WORK","masked":"+1 (55) •••••• 43"}],"emails":[{"value":"petra.fall@example.org","type":"WORK","masked":"p••••l@example.org"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"12 Imaginary Mews","city":"Brooklyn","region":"NY","postal":"11211","country":"United States","formatted":"12 Imaginary Mews, Brooklyn NY 11211, United States"}],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Coworker","Drysdale"],"note":null,"rev":"2020-07-15","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["stale-rev"],"vcardVersion":"3.0"},{"id":"c_000014","fn":"Owen Skylight","familyName":"Skylight","givenName":"Owen","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Atlas Monthly","orgUnits":[],"title":"Editor","phones":[{"value":"+15555550261","type":"WORK","masked":"+1 (55) •••••• 61"}],"emails":[{"value":"owen.s@example.net","type":"WORK","masked":"o••••s@example.net"}],"addresses":[],"urls":[],"bday":"1987-08-09","bdayMonth":8,"bdayDay":9,"categories":["Coworker","Atlas"],"note":null,"rev":"2023-01-18","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"4.0"},{"id":"c_000015","fn":"Quinn Drysdale","familyName":"Drysdale","givenName":"Quinn","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Atlas Monthly","orgUnits":[],"title":"Writer","phones":[{"value":"+15555550262","type":"WORK","masked":"+1 (55) •••••• 62"}],"emails":[{"value":"quinn.d@example.net","type":"WORK","masked":"q••••d@example.net"}],"addresses":[],"urls":[],"bday":"1990-04-02","bdayMonth":4,"bdayDay":2,"categories":["Coworker","Atlas"],"note":null,"rev":"2023-01-18","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"4.0"},{"id":"c_000016","fn":"Brookline Family Dental","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Brookline Family Dental","orgUnits":[],"title":null,"phones":[{"value":"+15555550311","type":"WORK","masked":"+1 (55) •••••• 11"},{"value":"+15555550312","type":"FAX","masked":"+1 (55) •••••• 12"}],"emails":[{"value":"front.desk@example.com","type":"WORK","masked":"f••••k@example.com"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"200 Imaginary Drive, Suite 4","city":"Brookline","region":"MA","postal":"02446","country":"United States","formatted":"200 Imaginary Drive, Suite 4, Brookline MA 02446, United States"}],"urls":[{"value":"https://example.com/brookline-dental","type":null}],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Service","Health"],"note":"Cleaning every 6 months — last visit Q1 2025.","rev":"2025-03-18","hasPhoto":false,"photoMime":null,"kind":"org","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"3.0"},{"id":"c_000017","fn":"Mongoose Garage","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Mongoose Garage","orgUnits":[],"title":null,"phones":[{"value":"+15555550321","type":"WORK","masked":"+1 (55) •••••• 21"}],"emails":[],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"88 Synthetic Avenue","city":"Cambridge","region":"MA","postal":"02139","country":"United States","formatted":"88 Synthetic Avenue, Cambridge MA 02139, United States"}],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Service"],"note":null,"rev":"2024-06-08","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["missing-email"],"vcardVersion":"3.0"},{"id":"c_000018","fn":"Verdant Repo Animal Hospital","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Verdant Repo Animal Hospital","orgUnits":[],"title":null,"phones":[{"value":"+15555550331","type":"WORK","masked":"+1 (55) •••••• 31"}],"emails":[{"value":"appointments@example.org","type":"WORK","masked":"a••••s@example.org"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"12 Demonstration Court","city":"Brookline","region":"MA","postal":"02446","country":"United States","formatted":"12 Demonstration Court, Brookline MA 02446, United States"}],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Service","Pets"],"note":"Cat: Plum. Annual checkup December.","rev":"2025-12-01","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"3.0"},{"id":"c_000019","fn":"The Pickled Onion","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"The Pickled Onion","orgUnits":[],"title":null,"phones":[{"value":"+15555550341","type":"WORK","masked":"+1 (55) •••••• 41"}],"emails":[],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"55 Fictional Square","city":"Boston","region":"MA","postal":"02114","country":"United States","formatted":"55 Fictional Square, Boston MA 02114, United States"}],"urls":[{"value":"https://example.org/pickled-onion","type":null}],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Restaurant"],"note":"Anniversary spot, reserve 4 weeks ahead.","rev":"2024-02-10","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["missing-email"],"vcardVersion":"3.0"},{"id":"c_000020","fn":"Sam Nightingale","familyName":"Nightingale","givenName":"Sam","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Backslash Burrito","orgUnits":[],"title":null,"phones":[{"value":"+15555550401","type":"CELL","masked":"+1 (55) •••••• 01"}],"emails":[{"value":"samn@example.net","type":"HOME","masked":"s••n@example.net"}],"addresses":[],"urls":[],"bday":"1989-07-14","bdayMonth":7,"bdayDay":14,"categories":["College","Friend"],"note":"Roommate sophomore year.","rev":"2019-11-02","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["stale-rev"],"vcardVersion":"3.0"},{"id":"c_000021","fn":"Marbleweather","familyName":"Weather","givenName":"Mara","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":"Marbleweather","org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550402","type":"CELL","masked":"+1 (55) •••••• 02"}],"emails":[{"value":"marbleweather@example.com","type":"HOME","masked":"m••••r@example.com"}],"addresses":[],"urls":[],"bday":"1990-12-04","bdayMonth":12,"bdayDay":4,"categories":["College"],"note":null,"rev":"2018-09-18","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["stale-rev"],"vcardVersion":"3.0"},{"id":"c_000022","fn":"Skylight Diner","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Skylight Diner","orgUnits":[],"title":null,"phones":[{"value":"+15555550411","type":"WORK","masked":"+1 (55) •••••• 11"}],"emails":[],"addresses":[],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Restaurant"],"note":null,"rev":"2017-05-22","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["missing-email","stale-rev"],"vcardVersion":"3.0"},{"id":"c_000023","fn":"Folded Paper Studio","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Folded Paper Studio","orgUnits":[],"title":null,"phones":[{"value":"+44 1632 960123","type":"WORK","masked":"+4 (41) ••••••• 23"}],"emails":[{"value":"hello@example.org","type":"WORK","masked":"h•••o@example.org"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"21 Invented Lane","city":"London","region":null,"postal":"EC1A 1BB","country":"United Kingdom","formatted":"21 Invented Lane, London EC1A 1BB, United Kingdom"}],"urls":[{"value":"https://example.org/folded-paper","type":null}],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Vendor"],"note":null,"rev":"2025-10-10","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"4.0"},{"id":"c_000024","fn":"Tide Reports KK","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Tide Reports KK","orgUnits":[],"title":null,"phones":[{"value":"+81-3-5555-9012","type":"WORK","masked":"+8 (13) •••••• 12"}],"emails":[{"value":"office@example.net","type":"WORK","masked":"o••••e@example.net"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"1-2-3 Synthetic-cho","city":"Tokyo","region":null,"postal":"100-0001","country":"Japan","formatted":"1-2-3 Synthetic-cho, Tokyo 100-0001, Japan"}],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Vendor"],"note":null,"rev":"2025-06-29","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"4.0"},{"id":"c_000025","fn":"Family Group","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[],"emails":[{"value":"family@example.com","type":"HOME","masked":"f••••y@example.com"}],"addresses":[],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Family"],"note":null,"rev":"2024-07-15","hasPhoto":false,"photoMime":null,"kind":"group","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["missing-phone"],"vcardVersion":"4.0"},{"id":"c_000026","fn":"Plumber referral","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[],"emails":[],"addresses":[],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":[],"note":"Friend recommended a plumber named Pat — get number from Anya.","rev":"2024-03-20","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["missing-phone","missing-email","missing-both","note-only"],"vcardVersion":"3.0"},{"id":"c_000027","fn":"","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550521","type":"CELL","masked":"+1 (55) •••••• 21"}],"emails":[],"addresses":[],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":[],"note":null,"rev":"2023-10-04","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["missing-email","nameless"],"vcardVersion":"3.0"},{"id":"c_000028","fn":"Q (sticker design)","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[],"emails":[{"value":"q.sticker[at]example.com","type":"HOME","masked":"••••••••••••••••••••••••"}],"addresses":[],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":[],"note":null,"rev":"2023-08-11","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["missing-phone","malformed-email"],"vcardVersion":"3.0"},{"id":"c_000029","fn":"Pat Pickle (plumber)","familyName":"Pickle","givenName":"Pat","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550601","type":"CELL","masked":"+1 (55) •••••• 01"}],"emails":[{"value":"pat.p@example.org","type":"HOME","masked":"p•••p@example.org"}],"addresses":[],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":[],"note":null,"rev":"2024-08-11","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":"dup_002","auditFlags":[],"vcardVersion":"3.0"},{"id":"c_000030","fn":"Patty Pickle","familyName":"Pickle","givenName":"Patty","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550602","type":"CELL","masked":"+1 (55) •••••• 02"}],"emails":[{"value":"pat.p@example.org","type":"HOME","masked":"p•••p@example.org"}],"addresses":[],"urls":[],"bday":"1985-03-15","bdayMonth":3,"bdayDay":15,"categories":["Service"],"note":"Plumber. Quote on bathroom retrofit early 2024.","rev":"2024-02-18","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":"dup_002","auditFlags":[],"vcardVersion":"4.0"},{"id":"c_000031","fn":"Mezzanine Tape Studio","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Mezzanine Tape","orgUnits":[],"title":null,"phones":[{"value":"+15555550701","type":"STUDIOLINE","masked":"+1 (55) •••••• 01"}],"emails":[{"value":"studio@example.net","type":"WORK","masked":"s••••o@example.net"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"9 Imaginary Wharf","city":"Portland","region":"OR","postal":"97209","country":"United States","formatted":"9 Imaginary Wharf, Portland OR 97209, United States"}],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":[],"note":null,"rev":"2024-05-17","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"3.0"},{"id":"c_000032","fn":"Quincy Old","familyName":"Old","givenName":"Quincy","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550801","type":"VOICE","masked":"+1 (55) •••••• 01"}],"emails":[{"value":"quincy@example.com","type":"INTERNET","masked":"q••••y@example.com"}],"addresses":[],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":[],"note":null,"rev":"2014-08-22","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":true,"duplicateOfClusterId":null,"auditFlags":["legacy-vcard","stale-rev"],"vcardVersion":"2.1"},{"id":"c_000033","fn":"Briar Stoneham","familyName":"Stoneham","givenName":"Briar","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Long Take Sports","orgUnits":[],"title":"Editor","phones":[{"value":"+15555550901","type":"CELL","masked":"+1 (55) •••••• 01"}],"emails":[{"value":"briar.s@example.com","type":"WORK","masked":"b••••s@example.com"}],"addresses":[],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":[],"note":null,"rev":"2018-01-01","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["stale-rev"],"vcardVersion":"3.0"},{"id":"c_000034","fn":"Calla R. Reyes","familyName":"Reyes","givenName":"Calla","additionalNames":"R.","prefixes":null,"suffixes":null,"nickname":null,"org":"Solare Global","orgUnits":[],"title":"Product Manager","phones":[{"value":"+15555550942","type":"CELL","masked":"+1 (55) •••••• 42"}],"emails":[{"value":"calla.reyes@example.net","type":"HOME","masked":"c••••s@example.net"}],"addresses":[],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":[],"note":null,"rev":"2022-09-19","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":"dup_003","auditFlags":[],"vcardVersion":"3.0"}],"organizations":[{"name":"Solare Global","count":6,"sampleIds":["c_000006","c_000007","c_000008","c_000009","c_000010","c_000034"]},{"name":"Drysdale Variety Co.","count":3,"sampleIds":["c_000011","c_000012","c_000013"]},{"name":"Atlas Monthly","count":2,"sampleIds":["c_000014","c_000015"]},{"name":"Brookline Family Dental","count":1,"sampleIds":["c_000016"]},{"name":"Mongoose Garage","count":1,"sampleIds":["c_000017"]},{"name":"Verdant Repo Animal Hospital","count":1,"sampleIds":["c_000018"]},{"name":"The Pickled Onion","count":1,"sampleIds":["c_000019"]},{"name":"Backslash Burrito","count":1,"sampleIds":["c_000020"]},{"name":"Skylight Diner","count":1,"sampleIds":["c_000022"]},{"name":"Folded Paper Studio","count":1,"sampleIds":["c_000023"]},{"name":"Tide Reports KK","count":1,"sampleIds":["c_000024"]},{"name":"Mezzanine Tape","count":1,"sampleIds":["c_000031"]},{"name":"Long Take Sports","count":1,"sampleIds":["c_000033"]}],"emailDomains":[{"domain":"example.com","count":14,"kind":"work","sampleIds":["c_000001","c_000002","c_000003","c_000005","c_000006","c_000007"]},{"domain":"example.org","count":8,"kind":"work","sampleIds":["c_000004","c_000011","c_000012","c_000013","c_000018","c_000023"]},{"domain":"example.net","count":6,"kind":"work","sampleIds":["c_000014","c_000015","c_000020","c_000024","c_000031","c_000034"]}],"cities":[{"city":"Brookline, MA","count":6,"sampleIds":["c_000001","c_000003","c_000004","c_000005","c_000016","c_000018"]},{"city":"San Francisco, CA","count":5,"sampleIds":["c_000006","c_000007","c_000008","c_000009","c_000010"]},{"city":"Brooklyn, NY","count":3,"sampleIds":["c_000011","c_000012","c_000013"]},{"city":"Cambridge, MA","count":1,"sampleIds":["c_000017"]},{"city":"Boston, MA","count":1,"sampleIds":["c_000019"]},{"city":"London","count":1,"sampleIds":["c_000023"]},{"city":"Tokyo","count":1,"sampleIds":["c_000024"]},{"city":"Portland, OR","count":1,"sampleIds":["c_000031"]}],"birthdayMonths":[{"month":1,"count":0},{"month":2,"count":1},{"month":3,"count":2},{"month":4,"count":1},{"month":5,"count":3},{"month":6,"count":1},{"month":7,"count":1},{"month":8,"count":1},{"month":9,"count":1},{"month":10,"count":0},{"month":11,"count":2},{"month":12,"count":1}],"categories":[{"name":"Coworker","count":10,"sampleIds":["c_000006","c_000007","c_000008","c_000009","c_000010","c_000011"]},{"name":"Solare","count":5,"sampleIds":["c_000006","c_000007","c_000008","c_000009","c_000010"]},{"name":"Family","count":4,"sampleIds":["c_000001","c_000004","c_000005","c_000025"]},{"name":"Service","count":4,"sampleIds":["c_000016","c_000017","c_000018","c_000030"]},{"name":"Drysdale","count":3,"sampleIds":["c_000011","c_000012","c_000013"]},{"name":"Atlas","count":2,"sampleIds":["c_000014","c_000015"]},{"name":"Restaurant","count":2,"sampleIds":["c_000019","c_000022"]},{"name":"College","count":2,"sampleIds":["c_000020","c_000021"]},{"name":"Vendor","count":2,"sampleIds":["c_000023","c_000024"]},{"name":"Health","count":1,"sampleIds":["c_000016"]},{"name":"Pets","count":1,"sampleIds":["c_000018"]},{"name":"Friend","count":1,"sampleIds":["c_000020"]}],"duplicateClusters":[{"id":"dup_001","reason":"shared-phone","key":"+15555550101","contactIds":["c_000001","c_000002","c_000003"],"candidateNames":["Mom","Mom (Riya)","Riya Acharya"]},{"id":"dup_002","reason":"shared-email","key":"pat.p@example.org","contactIds":["c_000029","c_000030"],"candidateNames":["Pat Pickle (plumber)","Patty Pickle"]},{"id":"dup_003","reason":"normalized-name","key":"calla reyes","contactIds":["c_000010","c_000034"],"candidateNames":["Calla Reyes","Calla R. Reyes"]}],"audit":{"missingPhone":{"count":3,"sampleIds":["c_000025","c_000026","c_000028"]},"missingEmail":{"count":5,"sampleIds":["c_000017","c_000019","c_000022","c_000026","c_000027"]},"missingBoth":{"count":1,"sampleIds":["c_000026"]},"malformedEmail":{"count":1,"samples":[{"id":"c_000028","value":"q.sticker[at]example.com"}]},"staleRev":{"count":9,"threshold":"2021-02-18","sampleIds":["c_000002","c_000011","c_000012","c_000013","c_000020","c_000021"]},"repeatedPhone":[{"value":"+15555550101","count":3,"contactIds":["c_000001","c_000002","c_000003"]}],"repeatedEmail":[{"value":"riya.synth@example.com","count":3,"contactIds":["c_000001","c_000002","c_000003"]},{"value":"pat.p@example.org","count":2,"contactIds":["c_000029","c_000030"]}],"noteOnly":{"count":1,"sampleIds":["c_000026"]},"nameless":{"count":1,"sampleIds":["c_000027"]},"legacy21":{"count":1,"sampleIds":["c_000032"]}},"summary":{"contactCount":34,"individualCount":32,"groupCount":1,"withPhone":31,"withEmail":29,"withAddress":19,"withBirthday":14,"withPhoto":3,"withCategories":24,"distinctOrgs":13,"distinctEmailDomains":3,"distinctCities":8,"distinctCountries":3,"duplicateClusterCount":3,"revWindow":"2014-08-22 → 2026-02-18","revDurationLabel":"11 years 6 months","topOrganization":"Solare Global","topOrganizationShare":0.17647058823529413,"topCity":"Brookline, MA","topCityShare":0.17647058823529413},"meta":{"sourceFile":"input.vcf","sizeBytes":9208,"format":"vcard-contacts","kind":"vcard-contacts","sourceFormat":"vcf","encoding":"utf-8","contactCount":34,"versionDistribution":{"3.0":23,"4.0":10,"2.1":1}}};</script>
 
-    <section class="kpi-row" aria-label="Address book summary">
-      <div class="kpi"><div class="label">Contacts</div><div class="value mono accent" id="kpi-contacts">0</div><div class="sub" id="kpi-contacts-sub"></div></div>
-      <div class="kpi"><div class="label">Reachability</div><div class="value mono" id="kpi-reach">0</div><div class="sub" id="kpi-reach-sub"></div></div>
-      <div class="kpi"><div class="label">Revision window</div><div class="value mono" id="kpi-window">&mdash;</div><div class="sub" id="kpi-window-sub"></div></div>
-      <div class="kpi"><div class="label">Top organization</div><div class="value mono" id="kpi-org">&mdash;</div><div class="sub" id="kpi-org-sub"></div></div>
-    </section>
+<div class="network-shell">
 
-    <section class="section" aria-labelledby="head-audit">
-      <div class="section-head">
-        <h2 id="head-audit">Health audit</h2>
-        <span class="heuristic-chip" title="Read-only audit. Verify in your Contacts app before deleting anything.">Heuristic</span>
-      </div>
-      <div class="card">
-        <div class="audit-grid" id="audit-grid"></div>
-      </div>
-    </section>
+<!-- Toolbar -->
+<nav class="network-toolbar" role="navigation">
+  <div class="toolbar-brand">Sam Reyes <span>·</span> Address Book</div>
+  <div class="toolbar-search">
+    <span class="search-icon">⌕</span>
+    <input type="text" id="globalSearch" placeholder="Search all contacts…" aria-label="Search contacts">
+  </div>
+  <button class="privacy-toggle" id="privacyToggle" title="Toggle phone & email visibility">
+    <span id="privacyIcon">👁</span>
+    <span id="privacyLabel">Show Info</span>
+  </button>
+</nav>
 
-    <section class="section" aria-labelledby="head-atlas">
-      <div class="section-head">
-        <h2 id="head-atlas">Address book atlas</h2>
-        <span class="meta" id="atlas-meta"></span>
+<!-- Hero Strip -->
+<header class="network-hero">
+  <div class="hero-inner">
+    <div class="hero-title">
+      <em>Address Book · vCard Export</em>
+      Sam Reyes — <span id="heroContactCount">34</span> Contacts
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num" id="heroWithPhone">–</div>
+        <div class="hero-stat-label">With Phone</div>
       </div>
-      <div class="atlas-grid">
-        <div class="atlas">
-          <div class="atlas-head"><h4>Organizations</h4><span class="count" id="org-count"></span></div>
-          <div id="org-list"></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num" id="heroWithEmail">–</div>
+        <div class="hero-stat-label">With Email</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num" id="heroWithAddress">–</div>
+        <div class="hero-stat-label">With Address</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num" id="heroDupCount">–</div>
+        <div class="hero-stat-label">Dup Clusters</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num" id="heroRevWindow">–</div>
+        <div class="hero-stat-label">Rev Span</div>
+        <div class="hero-stat-sub" id="heroRevDetail">–</div>
+      </div>
+    </div>
+    <div class="hero-editorial" id="heroEditorial">
+      Loading contact atlas…
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main class="network-content">
+
+  <!-- Network Canvas -->
+  <section aria-label="Network Map">
+    <div class="section-header">
+      <h2 class="section-title">Relationship Atlas</h2>
+      <span class="section-subtitle">Click a node to inspect · hover for details</span>
+    </div>
+    <div class="network-canvas-wrap">
+      <div class="network-canvas-controls">
+        <span class="canvas-control-label">Group by</span>
+        <button class="cluster-chip active" data-group="org" id="groupOrg">Organization</button>
+        <button class="cluster-chip" data-group="category" id="groupCat">Category</button>
+        <button class="cluster-chip" data-group="city" id="groupCity">City</button>
+        <button class="cluster-chip" data-group="none" id="groupNone">All Contacts</button>
+      </div>
+      <div id="network-svg-container">
+        <svg id="network-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="node-tooltip" id="nodeTooltip">
+          <div class="node-tooltip-name" id="tooltipName"></div>
+          <div class="node-tooltip-detail" id="tooltipDetail"></div>
         </div>
-        <div class="atlas">
-          <div class="atlas-head"><h4>Email domains</h4><span class="count" id="domain-count"></span></div>
-          <div id="domain-list"></div>
+        <div class="network-canvas-hint">click node · drag · scroll zoom</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Entity Inspector -->
+  <div class="entity-inspector" id="entityInspector" role="complementary" aria-label="Contact inspector">
+    <div class="inspector-header">
+      <div class="inspector-avatar" id="inspAvatar">?</div>
+      <div>
+        <div class="inspector-name" id="inspName">—</div>
+        <div class="inspector-meta" id="inspMeta">—</div>
+      </div>
+      <button class="inspector-close" id="inspectorClose" title="Close inspector">✕</button>
+    </div>
+    <div class="inspector-body">
+      <div class="inspector-fields" id="inspFields"></div>
+      <div class="inspector-badges" id="inspBadges"></div>
+      <div id="inspNoteWrap"></div>
+    </div>
+  </div>
+
+  <!-- Address-book Health Audit -->
+  <section aria-label="Health Audit">
+    <div class="section-header">
+      <h2 class="section-title">Address Book Health</h2>
+      <span class="section-subtitle">Quiet observations, not warnings</span>
+    </div>
+    <div class="hub-cards" id="auditCards"></div>
+  </section>
+
+  <!-- Relationship Atlas Tabs -->
+  <section aria-label="Relationship Atlas">
+    <div class="section-header">
+      <h2 class="section-title">Clusters &amp; Patterns</h2>
+      <span class="section-subtitle">Click a row to filter the contact table</span>
+    </div>
+    <div class="cluster-controls">
+      <div class="cluster-tabs" role="tablist">
+        <button class="cluster-tab active" role="tab" data-panel="orgs">Organizations</button>
+        <button class="cluster-tab" role="tab" data-panel="domains">Email Domains</button>
+        <button class="cluster-tab" role="tab" data-panel="cities">Cities</button>
+        <button class="cluster-tab" role="tab" data-panel="birthdays">Birthdays</button>
+        <button class="cluster-tab" role="tab" data-panel="tags">Tags</button>
+      </div>
+      <div class="cluster-panel active" id="panel-orgs"></div>
+      <div class="cluster-panel" id="panel-domains"></div>
+      <div class="cluster-panel" id="panel-cities"></div>
+      <div class="cluster-panel" id="panel-birthdays"></div>
+      <div class="cluster-panel" id="panel-tags"></div>
+    </div>
+  </section>
+
+  <!-- Duplicate Clusters -->
+  <section aria-label="Duplicate Clusters" id="dupSection">
+    <div class="section-header">
+      <h2 class="section-title">Possible Duplicates</h2>
+      <span class="section-subtitle" id="dupCount">—</span>
+    </div>
+    <div class="dup-notice">
+      ⚠ Duplicate detection is heuristic — same normalized name, shared phone, or shared email across separate cards. Verify in your Contacts app before deleting anything.
+    </div>
+    <div class="dup-clusters" id="dupClusters"></div>
+  </section>
+
+  <!-- Searchable Contact Table -->
+  <section aria-label="All Contacts">
+    <div class="section-header">
+      <h2 class="section-title">All Contacts</h2>
+      <span class="section-subtitle">Click a card to expand full detail</span>
+    </div>
+    <div class="linked-records">
+      <div class="records-toolbar">
+        <div class="records-search">
+          <span style="color:var(--fg-muted);font-size:13px">⌕</span>
+          <input type="text" id="tableSearch" placeholder="Search name, org, phone, email, note…" aria-label="Filter contacts">
         </div>
-        <div class="atlas">
-          <div class="atlas-head"><h4>Cities</h4><span class="count" id="city-count"></span></div>
-          <div id="city-list"></div>
+        <div class="filter-chips-row">
+          <span class="filter-label">Filter</span>
+          <button class="filter-chip" data-filter="phone">📞 Has Phone</button>
+          <button class="filter-chip" data-filter="email">✉ Has Email</button>
+          <button class="filter-chip" data-filter="address">📍 Has Address</button>
+          <button class="filter-chip" data-filter="birthday">🎂 Has Birthday</button>
+          <button class="filter-chip" data-filter="photo">🖼 Has Photo</button>
+          <button class="filter-chip" data-filter="dup">⚠ Possible Dup</button>
+          <button class="filter-chip" data-filter="stale">🕰 Stale Rev</button>
         </div>
-        <div class="atlas">
-          <div class="atlas-head"><h4>Birthdays</h4><span class="count" id="bday-count"></span></div>
-          <div class="bday-strip" id="bday-strip"></div>
-        </div>
-        <div class="atlas">
-          <div class="atlas-head"><h4>Tags / categories</h4><span class="count" id="cat-count"></span></div>
-          <div id="cat-list"></div>
+        <div class="records-sort-row">
+          <span class="sort-label">Sort</span>
+          <select class="sort-select" id="contactSort">
+            <option value="name">Name (A→Z)</option>
+            <option value="rev">Recently Revised</option>
+            <option value="fields">Most Fields</option>
+            <option value="dup">Duplicates First</option>
+          </select>
+          <span class="records-count" id="recordsCount">— contacts</span>
         </div>
       </div>
-    </section>
+      <div class="contacts-grid" id="contactsGrid"></div>
+    </div>
+  </section>
 
-    <section class="section" aria-labelledby="head-dup">
-      <div class="section-head">
-        <h2 id="head-dup">Duplicate merge worksheet</h2>
-        <span class="heuristic-chip" title="Heuristic. Verify before deleting.">Heuristic</span>
-      </div>
-      <p class="muted" style="font-size:13px;margin-bottom:var(--space-md)">Read-only. Each cluster shows the candidate cards side-by-side so you can compare and decide. The page does not offer a merge button.</p>
-      <div class="dup-list" id="dup-list"></div>
-    </section>
+</main>
 
-    <section class="section" aria-labelledby="head-table">
-      <div class="section-head">
-        <h2 id="head-table" style="scroll-margin-top:1em">Browse all contacts</h2>
-        <span class="meta">Phone &amp; email masked by default — toggle in the header.</span>
-      </div>
-      <div class="card">
-        <div class="drill-toolbar">
-          <input class="drill-search" id="drill-search" type="search" placeholder="Search name, org, title, phone, email, note&hellip;" aria-label="Search contacts">
-          <span class="drill-meta" id="drill-count">0 of 0</span>
-          <button class="btn" id="drill-clear">Clear filters</button>
-        </div>
-        <div class="chip-row-label">Has</div>
-        <div class="chips" id="has-chips"></div>
-        <div class="chip-row-label">Organization</div>
-        <div class="chips" id="org-chips"></div>
-        <div class="chip-row-label">City</div>
-        <div class="chips" id="city-chips"></div>
-        <div class="chip-row-label">Tag</div>
-        <div class="chips" id="cat-chips"></div>
-        <div class="chip-row-label">Audit</div>
-        <div class="chips" id="audit-chips"></div>
-        <div class="contact-list" id="contact-list"></div>
-        <div class="tbl-loadmore" id="loadmore"></div>
-      </div>
-    </section>
+<!-- Footer -->
+<footer style="background:var(--surface-container-low); border-top:1px solid var(--border); margin-top:var(--space-5xl);">
+  <div class="network-footer">
+    <div class="footer-actions">
+      <button class="btn-primary" id="copyAuditBtn">Copy Audit Summary</button>
+      <button class="btn-ghost" id="clearFiltersBtn">Clear All Filters</button>
+    </div>
+    <div class="footer-privacy">
+      <strong>Generated locally — your contacts never left your machine.</strong>
+      Every card is embedded in this HTML and rendered offline in your browser.
+      Phone numbers and emails are masked by default; the toggle is local-only and does not transmit anything.
+      Photos are not embedded — only a "PHOTO present" flag. The page makes no network calls after the initial font load.
+    </div>
+  </div>
+</footer>
 
-    <footer>
-      <p>Generated by <a href="https://github.com/clockless-org/html-anything">html-anything</a> from <span id="footer-source" class="mono"></span> (<span id="footer-bytes" class="mono"></span>) using the offline vcard-contacts template. This file is fully self-contained and makes no network calls — it uses your operating system's default sans-serif font.</p>
-      <p class="privacy" style="margin-top:var(--space-md)">Generated locally — your contacts never left your machine. Every card is embedded in this HTML and rendered offline in your browser. Phone numbers and emails are masked by default; the toggle is local-only and does not transmit anything. <strong>Photos are not embedded — only a "PHOTO present" flag.</strong> The page makes no network calls.</p>
-    </footer>
-  </main>
+</div><!-- .network-shell -->
 
-  <script>const DATA = {"kind":"vcard-contacts","format":"vcard-contacts","version":"mixed","rows":[{"id":"c_000001","fn":"Mom","familyName":"Acharya","givenName":"Riya","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550101","type":"CELL","masked":"+1 (55) •••••• 01"}],"emails":[{"value":"riya.synth@example.com","type":"HOME","masked":"r••••h@example.com"}],"addresses":[{"type":"HOME","pob":null,"extended":null,"street":"421 Synthetic Way","city":"Brookline","region":"MA","postal":"02446","country":"United States","formatted":"421 Synthetic Way, Brookline MA 02446, United States"}],"urls":[],"bday":"1962-05-12","bdayMonth":5,"bdayDay":12,"categories":["Family"],"note":"Mom — favorite color is forest green, prefers texts to calls.","rev":"2024-09-09","hasPhoto":true,"photoMime":"image/jpeg","kind":"individual","uid":"synth-mom-1","legacy":false,"duplicateOfClusterId":"dup_001","auditFlags":[],"vcardVersion":"3.0"},{"id":"c_000002","fn":"Mom (Riya)","familyName":"Acharya","givenName":"Riya","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550101","type":"CELL","masked":"+1 (55) •••••• 01"}],"emails":[{"value":"riya.synth@example.com","type":"HOME","masked":"r••••h@example.com"}],"addresses":[],"urls":[],"bday":"1962-05-12","bdayMonth":5,"bdayDay":12,"categories":[],"note":null,"rev":"2021-01-05","hasPhoto":false,"photoMime":null,"kind":"individual","uid":"synth-mom-2","legacy":false,"duplicateOfClusterId":"dup_001","auditFlags":["stale-rev"],"vcardVersion":"3.0"},{"id":"c_000003","fn":"Riya Acharya","familyName":"Acharya","givenName":"Riya","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550101","type":"CELL","masked":"+1 (55) •••••• 01"}],"emails":[{"value":"riya.synth@example.com","type":"HOME","masked":"r••••h@example.com"}],"addresses":[{"type":"HOME","pob":null,"extended":null,"street":"421 Synthetic Way","city":"Brookline","region":"MA","postal":"02446","country":"United States","formatted":"421 Synthetic Way, Brookline MA 02446, United States"}],"urls":[],"bday":"1962-05-12","bdayMonth":5,"bdayDay":12,"categories":[],"note":null,"rev":"2026-02-18","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":"dup_001","auditFlags":[],"vcardVersion":"4.0"},{"id":"c_000004","fn":"Dad","familyName":"Acharya","givenName":"Naveen","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":"Dad","org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550118","type":"CELL","masked":"+1 (55) •••••• 18"},{"value":"+15555550224","type":"HOME","masked":"+1 (55) •••••• 24"}],"emails":[{"value":"naveen.synth@example.org","type":"HOME","masked":"n••••h@example.org"}],"addresses":[{"type":"HOME","pob":null,"extended":null,"street":"421 Synthetic Way","city":"Brookline","region":"MA","postal":"02446","country":"United States","formatted":"421 Synthetic Way, Brookline MA 02446, United States"}],"urls":[],"bday":"1958-11-30","bdayMonth":11,"bdayDay":30,"categories":["Family"],"note":"Dad. Best reached evenings after 7pm Eastern.","rev":"2025-12-05","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"3.0"},{"id":"c_000005","fn":"Anya Acharya","familyName":"Acharya","givenName":"Anya","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550138","type":"CELL","masked":"+1 (55) •••••• 38"}],"emails":[{"value":"anya.a@example.com","type":"WORK","masked":"a••••a@example.com"}],"addresses":[{"type":"HOME","pob":null,"extended":null,"street":"421 Synthetic Way","city":"Brookline","region":"MA","postal":"02446","country":"United States","formatted":"421 Synthetic Way, Brookline MA 02446, United States"}],"urls":[],"bday":"1990-03-22","bdayMonth":3,"bdayDay":22,"categories":["Family"],"note":null,"rev":"2025-11-30","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"4.0"},{"id":"c_000006","fn":"Maeve Tindall","familyName":"Tindall","givenName":"Maeve","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Solare Global","orgUnits":["Engineering"],"title":"Senior Software Engineer","phones":[{"value":"+15555550207","type":"WORK","masked":"+1 (55) •••••• 07"},{"value":"+15555550230","type":"CELL","masked":"+1 (55) •••••• 30"}],"emails":[{"value":"m.tindall@example.com","type":"WORK","masked":"m••••l@example.com"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"44 Demonstration Plaza, Floor 12","city":"San Francisco","region":"CA","postal":"94107","country":"United States","formatted":"44 Demonstration Plaza, Floor 12, San Francisco CA 94107, United States"}],"urls":[],"bday":"1991-06-12","bdayMonth":6,"bdayDay":12,"categories":["Coworker","Solare"],"note":null,"rev":"2023-10-12","hasPhoto":true,"photoMime":"image/jpeg","kind":"individual","uid":"synth-solare-0","legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"3.0"},{"id":"c_000007","fn":"Hanan Boutros","familyName":"Boutros","givenName":"Hanan","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Solare Global","orgUnits":["Engineering"],"title":"Engineering Manager","phones":[{"value":"+15555550208","type":"WORK","masked":"+1 (55) •••••• 08"},{"value":"+15555550231","type":"CELL","masked":"+1 (55) •••••• 31"}],"emails":[{"value":"hanan.b@example.com","type":"WORK","masked":"h••••b@example.com"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"44 Demonstration Plaza, Floor 12","city":"San Francisco","region":"CA","postal":"94107","country":"United States","formatted":"44 Demonstration Plaza, Floor 12, San Francisco CA 94107, United States"}],"urls":[],"bday":"1985-09-04","bdayMonth":9,"bdayDay":4,"categories":["Coworker","Solare"],"note":null,"rev":"2024-01-22","hasPhoto":true,"photoMime":"image/jpeg","kind":"individual","uid":"synth-solare-1","legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"4.0"},{"id":"c_000008","fn":"Mira Salonen","familyName":"Salonen","givenName":"Mira","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Solare Global","orgUnits":["Engineering"],"title":"Staff Designer","phones":[{"value":"+15555550210","type":"WORK","masked":"+1 (55) •••••• 10"},{"value":"+15555550232","type":"CELL","masked":"+1 (55) •••••• 32"}],"emails":[{"value":"mira.s@example.com","type":"WORK","masked":"m••••s@example.com"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"44 Demonstration Plaza, Floor 12","city":"San Francisco","region":"CA","postal":"94107","country":"United States","formatted":"44 Demonstration Plaza, Floor 12, San Francisco CA 94107, United States"}],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Coworker","Solare"],"note":null,"rev":"2024-08-11","hasPhoto":false,"photoMime":null,"kind":"individual","uid":"synth-solare-2","legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"3.0"},{"id":"c_000009","fn":"Aleksandr Volkov","familyName":"Volkov","givenName":"Aleksandr","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Solare Global","orgUnits":["Engineering"],"title":"Site Reliability","phones":[{"value":"+15555550211","type":"WORK","masked":"+1 (55) •••••• 11"},{"value":"+15555550233","type":"CELL","masked":"+1 (55) •••••• 33"}],"emails":[{"value":"alex.v@example.com","type":"WORK","masked":"a••••v@example.com"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"44 Demonstration Plaza, Floor 12","city":"San Francisco","region":"CA","postal":"94107","country":"United States","formatted":"44 Demonstration Plaza, Floor 12, San Francisco CA 94107, United States"}],"urls":[],"bday":"1988-11-20","bdayMonth":11,"bdayDay":20,"categories":["Coworker","Solare"],"note":null,"rev":"2025-02-14","hasPhoto":false,"photoMime":null,"kind":"individual","uid":"synth-solare-3","legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"4.0"},{"id":"c_000010","fn":"Calla Reyes","familyName":"Reyes","givenName":"Calla","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Solare Global","orgUnits":["Engineering"],"title":"Product Manager","phones":[{"value":"+15555550212","type":"WORK","masked":"+1 (55) •••••• 12"},{"value":"+15555550234","type":"CELL","masked":"+1 (55) •••••• 34"}],"emails":[{"value":"calla.r@example.com","type":"WORK","masked":"c••••r@example.com"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"44 Demonstration Plaza, Floor 12","city":"San Francisco","region":"CA","postal":"94107","country":"United States","formatted":"44 Demonstration Plaza, Floor 12, San Francisco CA 94107, United States"}],"urls":[],"bday":"1992-02-19","bdayMonth":2,"bdayDay":19,"categories":["Coworker","Solare"],"note":null,"rev":"2025-09-03","hasPhoto":false,"photoMime":null,"kind":"individual","uid":"synth-solare-4","legacy":false,"duplicateOfClusterId":"dup_003","auditFlags":[],"vcardVersion":"3.0"},{"id":"c_000011","fn":"Jia Mwangi","familyName":"Mwangi","givenName":"Jia","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Drysdale Variety Co.","orgUnits":[],"title":"Operations Lead","phones":[{"value":"+15555550241","type":"WORK","masked":"+1 (55) •••••• 41"}],"emails":[{"value":"jia.mwangi@example.org","type":"WORK","masked":"j••••i@example.org"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"12 Imaginary Mews","city":"Brooklyn","region":"NY","postal":"11211","country":"United States","formatted":"12 Imaginary Mews, Brooklyn NY 11211, United States"}],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Coworker","Drysdale"],"note":"Old colleague at Drysdale, kept in touch via LinkedIn.","rev":"2019-06-14","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["stale-rev"],"vcardVersion":"3.0"},{"id":"c_000012","fn":"Field Hartwell","familyName":"Hartwell","givenName":"Field","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Drysdale Variety Co.","orgUnits":[],"title":"Account Manager","phones":[{"value":"+15555550242","type":"WORK","masked":"+1 (55) •••••• 42"}],"emails":[{"value":"field.h@example.org","type":"WORK","masked":"f••••h@example.org"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"12 Imaginary Mews","city":"Brooklyn","region":"NY","postal":"11211","country":"United States","formatted":"12 Imaginary Mews, Brooklyn NY 11211, United States"}],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Coworker","Drysdale"],"note":null,"rev":"2018-03-22","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["stale-rev"],"vcardVersion":"3.0"},{"id":"c_000013","fn":"Petra Fall","familyName":"Fall","givenName":"Petra","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Drysdale Variety Co.","orgUnits":[],"title":"Designer","phones":[{"value":"+15555550243","type":"WORK","masked":"+1 (55) •••••• 43"}],"emails":[{"value":"petra.fall@example.org","type":"WORK","masked":"p••••l@example.org"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"12 Imaginary Mews","city":"Brooklyn","region":"NY","postal":"11211","country":"United States","formatted":"12 Imaginary Mews, Brooklyn NY 11211, United States"}],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Coworker","Drysdale"],"note":null,"rev":"2020-07-15","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["stale-rev"],"vcardVersion":"3.0"},{"id":"c_000014","fn":"Owen Skylight","familyName":"Skylight","givenName":"Owen","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Atlas Monthly","orgUnits":[],"title":"Editor","phones":[{"value":"+15555550261","type":"WORK","masked":"+1 (55) •••••• 61"}],"emails":[{"value":"owen.s@example.net","type":"WORK","masked":"o••••s@example.net"}],"addresses":[],"urls":[],"bday":"1987-08-09","bdayMonth":8,"bdayDay":9,"categories":["Coworker","Atlas"],"note":null,"rev":"2023-01-18","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"4.0"},{"id":"c_000015","fn":"Quinn Drysdale","familyName":"Drysdale","givenName":"Quinn","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Atlas Monthly","orgUnits":[],"title":"Writer","phones":[{"value":"+15555550262","type":"WORK","masked":"+1 (55) •••••• 62"}],"emails":[{"value":"quinn.d@example.net","type":"WORK","masked":"q••••d@example.net"}],"addresses":[],"urls":[],"bday":"1990-04-02","bdayMonth":4,"bdayDay":2,"categories":["Coworker","Atlas"],"note":null,"rev":"2023-01-18","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"4.0"},{"id":"c_000016","fn":"Brookline Family Dental","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Brookline Family Dental","orgUnits":[],"title":null,"phones":[{"value":"+15555550311","type":"WORK","masked":"+1 (55) •••••• 11"},{"value":"+15555550312","type":"FAX","masked":"+1 (55) •••••• 12"}],"emails":[{"value":"front.desk@example.com","type":"WORK","masked":"f••••k@example.com"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"200 Imaginary Drive, Suite 4","city":"Brookline","region":"MA","postal":"02446","country":"United States","formatted":"200 Imaginary Drive, Suite 4, Brookline MA 02446, United States"}],"urls":[{"value":"https://example.com/brookline-dental","type":null}],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Service","Health"],"note":"Cleaning every 6 months — last visit Q1 2025.","rev":"2025-03-18","hasPhoto":false,"photoMime":null,"kind":"org","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"3.0"},{"id":"c_000017","fn":"Mongoose Garage","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Mongoose Garage","orgUnits":[],"title":null,"phones":[{"value":"+15555550321","type":"WORK","masked":"+1 (55) •••••• 21"}],"emails":[],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"88 Synthetic Avenue","city":"Cambridge","region":"MA","postal":"02139","country":"United States","formatted":"88 Synthetic Avenue, Cambridge MA 02139, United States"}],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Service"],"note":null,"rev":"2024-06-08","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["missing-email"],"vcardVersion":"3.0"},{"id":"c_000018","fn":"Verdant Repo Animal Hospital","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Verdant Repo Animal Hospital","orgUnits":[],"title":null,"phones":[{"value":"+15555550331","type":"WORK","masked":"+1 (55) •••••• 31"}],"emails":[{"value":"appointments@example.org","type":"WORK","masked":"a••••s@example.org"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"12 Demonstration Court","city":"Brookline","region":"MA","postal":"02446","country":"United States","formatted":"12 Demonstration Court, Brookline MA 02446, United States"}],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Service","Pets"],"note":"Cat: Plum. Annual checkup December.","rev":"2025-12-01","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"3.0"},{"id":"c_000019","fn":"The Pickled Onion","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"The Pickled Onion","orgUnits":[],"title":null,"phones":[{"value":"+15555550341","type":"WORK","masked":"+1 (55) •••••• 41"}],"emails":[],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"55 Fictional Square","city":"Boston","region":"MA","postal":"02114","country":"United States","formatted":"55 Fictional Square, Boston MA 02114, United States"}],"urls":[{"value":"https://example.org/pickled-onion","type":null}],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Restaurant"],"note":"Anniversary spot, reserve 4 weeks ahead.","rev":"2024-02-10","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["missing-email"],"vcardVersion":"3.0"},{"id":"c_000020","fn":"Sam Nightingale","familyName":"Nightingale","givenName":"Sam","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Backslash Burrito","orgUnits":[],"title":null,"phones":[{"value":"+15555550401","type":"CELL","masked":"+1 (55) •••••• 01"}],"emails":[{"value":"samn@example.net","type":"HOME","masked":"s••n@example.net"}],"addresses":[],"urls":[],"bday":"1989-07-14","bdayMonth":7,"bdayDay":14,"categories":["College","Friend"],"note":"Roommate sophomore year.","rev":"2019-11-02","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["stale-rev"],"vcardVersion":"3.0"},{"id":"c_000021","fn":"Marbleweather","familyName":"Weather","givenName":"Mara","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":"Marbleweather","org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550402","type":"CELL","masked":"+1 (55) •••••• 02"}],"emails":[{"value":"marbleweather@example.com","type":"HOME","masked":"m••••r@example.com"}],"addresses":[],"urls":[],"bday":"1990-12-04","bdayMonth":12,"bdayDay":4,"categories":["College"],"note":null,"rev":"2018-09-18","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["stale-rev"],"vcardVersion":"3.0"},{"id":"c_000022","fn":"Skylight Diner","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Skylight Diner","orgUnits":[],"title":null,"phones":[{"value":"+15555550411","type":"WORK","masked":"+1 (55) •••••• 11"}],"emails":[],"addresses":[],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Restaurant"],"note":null,"rev":"2017-05-22","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["missing-email","stale-rev"],"vcardVersion":"3.0"},{"id":"c_000023","fn":"Folded Paper Studio","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Folded Paper Studio","orgUnits":[],"title":null,"phones":[{"value":"+44 1632 960123","type":"WORK","masked":"+4 (41) ••••••• 23"}],"emails":[{"value":"hello@example.org","type":"WORK","masked":"h•••o@example.org"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"21 Invented Lane","city":"London","region":null,"postal":"EC1A 1BB","country":"United Kingdom","formatted":"21 Invented Lane, London EC1A 1BB, United Kingdom"}],"urls":[{"value":"https://example.org/folded-paper","type":null}],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Vendor"],"note":null,"rev":"2025-10-10","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"4.0"},{"id":"c_000024","fn":"Tide Reports KK","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Tide Reports KK","orgUnits":[],"title":null,"phones":[{"value":"+81-3-5555-9012","type":"WORK","masked":"+8 (13) •••••• 12"}],"emails":[{"value":"office@example.net","type":"WORK","masked":"o••••e@example.net"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"1-2-3 Synthetic-cho","city":"Tokyo","region":null,"postal":"100-0001","country":"Japan","formatted":"1-2-3 Synthetic-cho, Tokyo 100-0001, Japan"}],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Vendor"],"note":null,"rev":"2025-06-29","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"4.0"},{"id":"c_000025","fn":"Family Group","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[],"emails":[{"value":"family@example.com","type":"HOME","masked":"f••••y@example.com"}],"addresses":[],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":["Family"],"note":null,"rev":"2024-07-15","hasPhoto":false,"photoMime":null,"kind":"group","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["missing-phone"],"vcardVersion":"4.0"},{"id":"c_000026","fn":"Plumber referral","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[],"emails":[],"addresses":[],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":[],"note":"Friend recommended a plumber named Pat — get number from Anya.","rev":"2024-03-20","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["missing-phone","missing-email","missing-both","note-only"],"vcardVersion":"3.0"},{"id":"c_000027","fn":"","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550521","type":"CELL","masked":"+1 (55) •••••• 21"}],"emails":[],"addresses":[],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":[],"note":null,"rev":"2023-10-04","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["missing-email","nameless"],"vcardVersion":"3.0"},{"id":"c_000028","fn":"Q (sticker design)","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[],"emails":[{"value":"q.sticker[at]example.com","type":"HOME","masked":"••••••••••••••••••••••••"}],"addresses":[],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":[],"note":null,"rev":"2023-08-11","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["missing-phone","malformed-email"],"vcardVersion":"3.0"},{"id":"c_000029","fn":"Pat Pickle (plumber)","familyName":"Pickle","givenName":"Pat","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550601","type":"CELL","masked":"+1 (55) •••••• 01"}],"emails":[{"value":"pat.p@example.org","type":"HOME","masked":"p•••p@example.org"}],"addresses":[],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":[],"note":null,"rev":"2024-08-11","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":"dup_002","auditFlags":[],"vcardVersion":"3.0"},{"id":"c_000030","fn":"Patty Pickle","familyName":"Pickle","givenName":"Patty","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550602","type":"CELL","masked":"+1 (55) •••••• 02"}],"emails":[{"value":"pat.p@example.org","type":"HOME","masked":"p•••p@example.org"}],"addresses":[],"urls":[],"bday":"1985-03-15","bdayMonth":3,"bdayDay":15,"categories":["Service"],"note":"Plumber. Quote on bathroom retrofit early 2024.","rev":"2024-02-18","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":"dup_002","auditFlags":[],"vcardVersion":"4.0"},{"id":"c_000031","fn":"Mezzanine Tape Studio","familyName":null,"givenName":null,"additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Mezzanine Tape","orgUnits":[],"title":null,"phones":[{"value":"+15555550701","type":"STUDIOLINE","masked":"+1 (55) •••••• 01"}],"emails":[{"value":"studio@example.net","type":"WORK","masked":"s••••o@example.net"}],"addresses":[{"type":"WORK","pob":null,"extended":null,"street":"9 Imaginary Wharf","city":"Portland","region":"OR","postal":"97209","country":"United States","formatted":"9 Imaginary Wharf, Portland OR 97209, United States"}],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":[],"note":null,"rev":"2024-05-17","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":[],"vcardVersion":"3.0"},{"id":"c_000032","fn":"Quincy Old","familyName":"Old","givenName":"Quincy","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":null,"orgUnits":[],"title":null,"phones":[{"value":"+15555550801","type":"VOICE","masked":"+1 (55) •••••• 01"}],"emails":[{"value":"quincy@example.com","type":"INTERNET","masked":"q••••y@example.com"}],"addresses":[],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":[],"note":null,"rev":"2014-08-22","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":true,"duplicateOfClusterId":null,"auditFlags":["legacy-vcard","stale-rev"],"vcardVersion":"2.1"},{"id":"c_000033","fn":"Briar Stoneham","familyName":"Stoneham","givenName":"Briar","additionalNames":null,"prefixes":null,"suffixes":null,"nickname":null,"org":"Long Take Sports","orgUnits":[],"title":"Editor","phones":[{"value":"+15555550901","type":"CELL","masked":"+1 (55) •••••• 01"}],"emails":[{"value":"briar.s@example.com","type":"WORK","masked":"b••••s@example.com"}],"addresses":[],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":[],"note":null,"rev":"2018-01-01","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":null,"auditFlags":["stale-rev"],"vcardVersion":"3.0"},{"id":"c_000034","fn":"Calla R. Reyes","familyName":"Reyes","givenName":"Calla","additionalNames":"R.","prefixes":null,"suffixes":null,"nickname":null,"org":"Solare Global","orgUnits":[],"title":"Product Manager","phones":[{"value":"+15555550942","type":"CELL","masked":"+1 (55) •••••• 42"}],"emails":[{"value":"calla.reyes@example.net","type":"HOME","masked":"c••••s@example.net"}],"addresses":[],"urls":[],"bday":null,"bdayMonth":null,"bdayDay":null,"categories":[],"note":null,"rev":"2022-09-19","hasPhoto":false,"photoMime":null,"kind":"individual","uid":null,"legacy":false,"duplicateOfClusterId":"dup_003","auditFlags":[],"vcardVersion":"3.0"}],"organizations":[{"name":"Solare Global","count":6,"sampleIds":["c_000006","c_000007","c_000008","c_000009","c_000010","c_000034"]},{"name":"Drysdale Variety Co.","count":3,"sampleIds":["c_000011","c_000012","c_000013"]},{"name":"Atlas Monthly","count":2,"sampleIds":["c_000014","c_000015"]},{"name":"Brookline Family Dental","count":1,"sampleIds":["c_000016"]},{"name":"Mongoose Garage","count":1,"sampleIds":["c_000017"]},{"name":"Verdant Repo Animal Hospital","count":1,"sampleIds":["c_000018"]},{"name":"The Pickled Onion","count":1,"sampleIds":["c_000019"]},{"name":"Backslash Burrito","count":1,"sampleIds":["c_000020"]},{"name":"Skylight Diner","count":1,"sampleIds":["c_000022"]},{"name":"Folded Paper Studio","count":1,"sampleIds":["c_000023"]},{"name":"Tide Reports KK","count":1,"sampleIds":["c_000024"]},{"name":"Mezzanine Tape","count":1,"sampleIds":["c_000031"]},{"name":"Long Take Sports","count":1,"sampleIds":["c_000033"]}],"emailDomains":[{"domain":"example.com","count":14,"kind":"work","sampleIds":["c_000001","c_000002","c_000003","c_000005","c_000006","c_000007"]},{"domain":"example.org","count":8,"kind":"work","sampleIds":["c_000004","c_000011","c_000012","c_000013","c_000018","c_000023"]},{"domain":"example.net","count":6,"kind":"work","sampleIds":["c_000014","c_000015","c_000020","c_000024","c_000031","c_000034"]}],"cities":[{"city":"Brookline, MA","count":6,"sampleIds":["c_000001","c_000003","c_000004","c_000005","c_000016","c_000018"]},{"city":"San Francisco, CA","count":5,"sampleIds":["c_000006","c_000007","c_000008","c_000009","c_000010"]},{"city":"Brooklyn, NY","count":3,"sampleIds":["c_000011","c_000012","c_000013"]},{"city":"Cambridge, MA","count":1,"sampleIds":["c_000017"]},{"city":"Boston, MA","count":1,"sampleIds":["c_000019"]},{"city":"London","count":1,"sampleIds":["c_000023"]},{"city":"Tokyo","count":1,"sampleIds":["c_000024"]},{"city":"Portland, OR","count":1,"sampleIds":["c_000031"]}],"birthdayMonths":[{"month":1,"count":0},{"month":2,"count":1},{"month":3,"count":2},{"month":4,"count":1},{"month":5,"count":3},{"month":6,"count":1},{"month":7,"count":1},{"month":8,"count":1},{"month":9,"count":1},{"month":10,"count":0},{"month":11,"count":2},{"month":12,"count":1}],"categories":[{"name":"Coworker","count":10,"sampleIds":["c_000006","c_000007","c_000008","c_000009","c_000010","c_000011"]},{"name":"Solare","count":5,"sampleIds":["c_000006","c_000007","c_000008","c_000009","c_000010"]},{"name":"Family","count":4,"sampleIds":["c_000001","c_000004","c_000005","c_000025"]},{"name":"Service","count":4,"sampleIds":["c_000016","c_000017","c_000018","c_000030"]},{"name":"Drysdale","count":3,"sampleIds":["c_000011","c_000012","c_000013"]},{"name":"Atlas","count":2,"sampleIds":["c_000014","c_000015"]},{"name":"Restaurant","count":2,"sampleIds":["c_000019","c_000022"]},{"name":"College","count":2,"sampleIds":["c_000020","c_000021"]},{"name":"Vendor","count":2,"sampleIds":["c_000023","c_000024"]},{"name":"Health","count":1,"sampleIds":["c_000016"]},{"name":"Pets","count":1,"sampleIds":["c_000018"]},{"name":"Friend","count":1,"sampleIds":["c_000020"]}],"duplicateClusters":[{"id":"dup_001","reason":"shared-phone","key":"+15555550101","contactIds":["c_000001","c_000002","c_000003"],"candidateNames":["Mom","Mom (Riya)","Riya Acharya"]},{"id":"dup_002","reason":"shared-email","key":"pat.p@example.org","contactIds":["c_000029","c_000030"],"candidateNames":["Pat Pickle (plumber)","Patty Pickle"]},{"id":"dup_003","reason":"normalized-name","key":"calla reyes","contactIds":["c_000010","c_000034"],"candidateNames":["Calla Reyes","Calla R. Reyes"]}],"audit":{"missingPhone":{"count":3,"sampleIds":["c_000025","c_000026","c_000028"]},"missingEmail":{"count":5,"sampleIds":["c_000017","c_000019","c_000022","c_000026","c_000027"]},"missingBoth":{"count":1,"sampleIds":["c_000026"]},"malformedEmail":{"count":1,"samples":[{"id":"c_000028","value":"q.sticker[at]example.com"}]},"staleRev":{"count":9,"threshold":"2021-02-18","sampleIds":["c_000002","c_000011","c_000012","c_000013","c_000020","c_000021"]},"repeatedPhone":[{"value":"+15555550101","count":3,"contactIds":["c_000001","c_000002","c_000003"]}],"repeatedEmail":[{"value":"riya.synth@example.com","count":3,"contactIds":["c_000001","c_000002","c_000003"]},{"value":"pat.p@example.org","count":2,"contactIds":["c_000029","c_000030"]}],"noteOnly":{"count":1,"sampleIds":["c_000026"]},"nameless":{"count":1,"sampleIds":["c_000027"]},"legacy21":{"count":1,"sampleIds":["c_000032"]}},"summary":{"contactCount":34,"individualCount":32,"groupCount":1,"withPhone":31,"withEmail":29,"withAddress":19,"withBirthday":14,"withPhoto":3,"withCategories":24,"distinctOrgs":13,"distinctEmailDomains":3,"distinctCities":8,"distinctCountries":3,"duplicateClusterCount":3,"revWindow":"2014-08-22 → 2026-02-18","revDurationLabel":"11 years 6 months","topOrganization":"Solare Global","topOrganizationShare":0.17647058823529413,"topCity":"Brookline, MA","topCityShare":0.17647058823529413},"meta":{"sourceFile":"input.vcf","sizeBytes":9208,"format":"vcard-contacts","kind":"vcard-contacts","sourceFormat":"vcf","encoding":"utf-8","contactCount":34,"versionDistribution":{"3.0":23,"4.0":10,"2.1":1}}};</script>
-  <script>
-(function(){
-  const fmt = new Intl.NumberFormat("en-US")
-  const summary = DATA.summary || {}
-  const rows = DATA.rows || []
-  const orgs = DATA.organizations || []
-  const domains = DATA.emailDomains || []
-  const cities = DATA.cities || []
-  const bdayMonths = DATA.birthdayMonths || []
-  const cats = DATA.categories || []
-  const audit = DATA.audit || {}
-  const dupClusters = DATA.duplicateClusters || []
-  const meta = DATA.meta || {}
-  const MONTH_LABELS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+<script>
+(function() {
+'use strict';
 
-  function escapeHtml(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c])) }
-  function ellipsize(s, n){ if (!s) return ""; return s.length > n ? s.slice(0, n-1) + "…" : s }
-  function pct(x){ return Math.round((x||0) * 100) + "%" }
-  function humanBytes(n){ if (!n) return "0 B"; const u = ["B","KB","MB","GB"]; let i=0; while (n >= 1024 && i < u.length - 1) { n /= 1024; i++ } return n.toFixed(n < 10 && i ? 1 : 0) + " " + u[i] }
-  function lookupName(id){
-    const r = rows.find(x => x.id === id)
-    if (!r) return id
-    return r.fn || ((r.givenName || "") + " " + (r.familyName || "")).trim() || "(no name)"
+// ── Wait for DATA ──
+let D = (typeof DATA !== 'undefined') ? DATA : null;
+if (!D) { document.body.innerHTML = '<p style="padding:2rem;color:red">DATA not loaded.</p>'; return; }
+
+// Normalize data shape
+const summary = D.summary || {};
+const rows = D.rows || [];
+const organizations = D.organizations || [];
+const emailDomains = D.emailDomains || [];
+const cities = D.cities || [];
+const birthdayMonths = D.birthdayMonths || [];
+const categories = D.categories || [];
+const duplicateClusters = D.duplicateClusters || [];
+const audit = D.audit || {};
+
+// ── State ──
+let privacyOn = false;
+let activeFilters = new Set();
+let sortMode = 'name';
+let tableQuery = '';
+let globalQuery = '';
+let expandedCardId = null;
+let selectedNodeId = null;
+let atlasCategoryFilter = null;
+
+// ── Palette for node clusters ──
+const CLUSTER_COLORS = [
+  '#a03b00','#7b40e0','#4d44e3','#00D4FF','#10b981','#f59e0b','#3b82f6','#ef4444',
+  '#e879f9','#06b6d4','#84cc16','#fb923c'
+];
+
+// ── Avatar color by initial ──
+function avatarColor(name) {
+  const n = (name || '?').charCodeAt(0);
+  return CLUSTER_COLORS[n % CLUSTER_COLORS.length];
+}
+
+function initials(fn) {
+  if (!fn || fn.trim() === '') return '?';
+  const parts = fn.trim().split(/\s+/);
+  if (parts.length >= 2) return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
+  return fn[0].toUpperCase();
+}
+
+// ── Privacy masking ──
+function maskPhone(c) {
+  if (privacyOn) return c.value;
+  return c.masked || c.value;
+}
+function maskEmail(c) {
+  if (privacyOn) return c.value;
+  return c.masked || c.value;
+}
+
+// ── Hero ──
+function buildHero() {
+  const s = summary;
+  animCount('heroContactCount', 0, s.contactCount || 0, 600);
+  animCount('heroWithPhone', 0, s.withPhone || 0, 500);
+  animCount('heroWithEmail', 0, s.withEmail || 0, 550);
+  animCount('heroWithAddress', 0, s.withAddress || 0, 500);
+  animCount('heroDupCount', 0, s.duplicateClusterCount || 0, 400);
+
+  const rw = s.revWindow || '';
+  const parts = rw.split('→');
+  document.getElementById('heroRevWindow').textContent = parts.length === 2
+    ? (parts[0].trim().slice(0,4) + '→' + parts[1].trim().slice(0,4))
+    : (s.revDurationLabel || '—');
+  document.getElementById('heroRevDetail').textContent = s.revDurationLabel || '';
+
+  // Editorial sentence
+  const topOrg = s.topOrganization ? `${s.topOrganization} (${Math.round((s.topOrganizationShare||0)*100)}% of contacts)` : null;
+  const missingPhone = audit.missingPhone ? audit.missingPhone.count : (s.contactCount - s.withPhone);
+  const dupC = s.duplicateClusterCount || 0;
+
+  let editorial = `${s.individualCount||s.contactCount} individuals`;
+  if (s.groupCount) editorial += ` and ${s.groupCount} group${s.groupCount>1?'s':''}`;
+  editorial += ' in the address book.';
+  if (topOrg) editorial += ` ${topOrg} leads the organization list.`;
+  if (missingPhone) editorial += ` ${missingPhone} contact${missingPhone>1?'s are':' is'} missing a phone number.`;
+  if (dupC) editorial += ` ${dupC} duplicate cluster${dupC>1?'s':''}  worth a look before the next phone migration.`;
+
+  document.getElementById('heroEditorial').textContent = editorial;
+}
+
+function animCount(id, from, to, dur) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = to;
+    return;
   }
-  function visibleName(r){ return r.fn || ((r.givenName||"")+" "+(r.familyName||"")).trim() || "(no name)" }
+  const start = performance.now();
+  function step(now) {
+    const p = Math.min((now - start) / dur, 1);
+    const ease = 1 - Math.pow(1-p, 3);
+    el.textContent = Math.round(from + (to-from)*ease);
+    if (p < 1) requestAnimationFrame(step);
+    else el.textContent = to;
+  }
+  requestAnimationFrame(step);
+}
 
-  document.getElementById("footer-source").textContent = meta.sourceFile || "Contacts.vcf"
-  document.getElementById("footer-bytes").textContent = humanBytes(meta.sizeBytes || 0)
+// ── Network Canvas (force-directed) ──
+let svgNS = 'http://www.w3.org/2000/svg';
+let nodes = [], edges = [], simulation = null, animFrame = null;
+let groupMode = 'org';
+let canvasDrag = null, canvasOffset = {x:0,y:0}, canvasScale = 1;
 
-  // ---------- KPIs ----------
-  document.getElementById("kpi-contacts").textContent = fmt.format(summary.contactCount || 0)
-  document.getElementById("kpi-contacts-sub").textContent = (summary.individualCount || 0) + " people · " + (summary.groupCount || 0) + " groups"
-  document.getElementById("kpi-reach").textContent = fmt.format(summary.withPhone || 0)
-  document.getElementById("kpi-reach-sub").textContent =
-    (summary.withPhone || 0) + " with phone · " +
-    (summary.withEmail || 0) + " with email · " +
-    (summary.withAddress || 0) + " with address"
-  document.getElementById("kpi-window").textContent = summary.revDurationLabel || "—"
-  document.getElementById("kpi-window-sub").textContent = summary.revWindow || ""
-  document.getElementById("kpi-org").textContent = ellipsize(summary.topOrganization || "—", 18)
-  document.getElementById("kpi-org-sub").textContent = summary.topOrganization
-    ? pct(summary.topOrganizationShare) + " of contacts"
-    : "no organization metadata"
+function buildGraph(mode) {
+  groupMode = mode;
+  const svg = document.getElementById('network-svg');
+  svg.innerHTML = '';
+  nodes = []; edges = [];
 
-  document.getElementById("hero-editorial").textContent = buildEditorial()
+  const w = svg.clientWidth || 700;
+  const h = svg.clientHeight || 380;
+  const cx = w/2, cy = h/2;
 
-  function buildEditorial(){
-    const parts = []
-    parts.push((summary.contactCount || 0) + " contacts " +
-      "(" + (summary.withPhone || 0) + " with phone, " + (summary.withEmail || 0) + " with email).")
-    if (summary.topOrganization) parts.push("Top organization: " + summary.topOrganization + " (" + pct(summary.topOrganizationShare) + ").")
-    if (audit.missingPhone && audit.missingPhone.count) parts.push(audit.missingPhone.count + " missing a phone number.")
-    if (summary.duplicateClusterCount) parts.push(summary.duplicateClusterCount + " possible duplicate clusters worth merging.")
-    if (audit.staleRev && audit.staleRev.count) parts.push(audit.staleRev.count + " contacts last revised before " + (audit.staleRev.threshold || "the threshold") + " (heuristic).")
-    return parts.join(" ")
+  // Build cluster hubs
+  const hubs = {};
+  let hubsArray = [];
+
+  if (mode === 'org') {
+    organizations.slice(0,10).forEach(o => { hubs[o.name] = { label: o.name, ids: o.sampleIds || [], count: o.count }; });
+  } else if (mode === 'category') {
+    categories.slice(0,10).forEach(c => { hubs[c.name] = { label: c.name, ids: c.sampleIds || [], count: c.count }; });
+  } else if (mode === 'city') {
+    cities.slice(0,8).forEach(c => { hubs[c.city] = { label: c.city, ids: c.sampleIds || [], count: c.count }; });
   }
 
-  // ---------- Health audit ----------
-  function auditCard(label, count, sub, sampleIds){
-    const c = (count || 0)
-    const cls = c === 0 ? "audit-count zero" : "audit-count"
-    let subHtml = ""
-    if (sub) subHtml = '<div class="audit-sub">' + sub + '</div>'
-    else if (sampleIds && sampleIds.length) {
-      const names = sampleIds.slice(0, 3).map(id => escapeHtml(ellipsize(lookupName(id), 24))).join(" · ")
-      subHtml = '<div class="audit-sub">e.g. ' + names + '</div>'
+  const hubKeys = Object.keys(hubs);
+
+  // Create hub nodes (larger)
+  hubKeys.forEach((k, i) => {
+    const angle = (i / hubKeys.length) * 2 * Math.PI - Math.PI/2;
+    const r = Math.min(w, h) * 0.28;
+    hubsArray.push({
+      id: 'hub_' + i,
+      label: hubs[k].label,
+      x: cx + r * Math.cos(angle),
+      y: cy + r * Math.sin(angle),
+      vx: 0, vy: 0,
+      isHub: true,
+      color: CLUSTER_COLORS[i % CLUSTER_COLORS.length],
+      count: hubs[k].count,
+      ids: hubs[k].ids
+    });
+  });
+
+  // Contact nodes (sample subset to keep graph readable — max 34 for this dataset)
+  const contactSample = rows.slice(0, 50);
+  const contactNodes = [];
+  contactSample.forEach((c, i) => {
+    // Assign to hub
+    let hubIdx = -1;
+    if (mode === 'org' && c.org) {
+      hubIdx = hubsArray.findIndex(h => h.label === c.org);
+    } else if (mode === 'category' && c.categories && c.categories.length) {
+      hubIdx = hubsArray.findIndex(h => c.categories.includes(h.label));
+    } else if (mode === 'city' && c.addresses && c.addresses.length) {
+      const city = c.addresses[0].city + (c.addresses[0].region ? ', '+c.addresses[0].region : '');
+      hubIdx = hubsArray.findIndex(h => h.label.startsWith(c.addresses[0].city));
     }
-    return '<div class="audit"><div class="audit-label">' + escapeHtml(label) + '</div>' +
-      '<div class="' + cls + '">' + fmt.format(c) + '</div>' + subHtml + '</div>'
-  }
-  function auditFromBlock(label, block){
-    if (!block) return auditCard(label, 0)
-    return auditCard(label, block.count, null, block.sampleIds)
-  }
-  function repeatedCard(label, items){
-    if (!items || !items.length) return auditCard(label, 0)
-    const lines = items.slice(0, 3).map(it => {
-      return '<b>' + escapeHtml(it.value) + '</b> on ' + it.count + ' cards'
-    }).join('<br>')
-    return '<div class="audit"><div class="audit-label">' + escapeHtml(label) + '</div>' +
-      '<div class="audit-count">' + items.length + '</div>' +
-      '<div class="audit-sub">' + lines + '</div></div>'
-  }
-  const auditCards = [
-    auditFromBlock("Missing phone", audit.missingPhone),
-    auditFromBlock("Missing email", audit.missingEmail),
-    auditFromBlock("Missing both", audit.missingBoth),
-    auditFromBlock("Malformed email", audit.malformedEmail && {
-      count: audit.malformedEmail.count,
-      sampleIds: (audit.malformedEmail.samples || []).map(s => s.id),
-    }),
-    auditFromBlock("Stale revisions (5y+)", audit.staleRev),
-    repeatedCard("Repeated phone", audit.repeatedPhone),
-    repeatedCard("Repeated email", audit.repeatedEmail),
-    auditFromBlock("Note-only contacts", audit.noteOnly),
-    auditFromBlock("Nameless cards", audit.nameless),
-    auditFromBlock("Legacy vCard 2.1", audit.legacy21),
-  ]
-  document.getElementById("audit-grid").innerHTML = auditCards.join("")
 
-  // ---------- Atlas ----------
-  document.getElementById("atlas-meta").textContent =
-    (summary.distinctOrgs || 0) + " orgs · " +
-    (summary.distinctEmailDomains || 0) + " domains · " +
-    (summary.distinctCities || 0) + " cities · " +
-    (summary.distinctCountries || 0) + " countries"
-
-  function renderBars(targetId, items, fmtRow){
-    const target = document.getElementById(targetId)
-    if (!items.length) { target.innerHTML = '<div class="empty-state">—</div>'; return }
-    const max = items[0].count || 1
-    target.innerHTML = items.slice(0, 8).map(item => {
-      const w = Math.max(8, Math.round((item.count / max) * 100))
-      return '<div class="row">' +
-        '<span class="v" title="' + escapeHtml(fmtRow.label(item)) + '">' + escapeHtml(ellipsize(fmtRow.label(item), 30)) + '</span>' +
-        '<span class="bar"><i style="width:' + w + '%"></i></span>' +
-        '<span class="c">' + fmt.format(item.count) + '</span>' +
-      '</div>'
-    }).join("")
-  }
-  document.getElementById("org-count").textContent = orgs.length + " distinct"
-  renderBars("org-list", orgs, { label: o => o.name })
-  document.getElementById("domain-count").textContent = domains.length + " distinct"
-  renderBars("domain-list", domains, { label: d => d.domain + (d.kind === "personal" ? " · personal" : "") })
-  document.getElementById("city-count").textContent = cities.length + " distinct"
-  renderBars("city-list", cities, { label: c => c.city })
-  document.getElementById("cat-count").textContent = cats.length + " tags"
-  renderBars("cat-list", cats, { label: c => c.name })
-
-  // Birthday strip
-  const bdayTotal = bdayMonths.reduce((s, m) => s + (m.count || 0), 0)
-  document.getElementById("bday-count").textContent = bdayTotal + " with birthday"
-  const bdayMax = Math.max(...bdayMonths.map(m => m.count || 0), 1)
-  document.getElementById("bday-strip").innerHTML = bdayMonths.map(m => {
-    const h = m.count ? Math.max(8, (m.count / bdayMax) * 100) : 0
-    return '<div class="m" data-month="' + m.month + '" title="' + MONTH_LABELS[m.month-1] + ': ' + m.count + ' birthday' + (m.count===1?"":"s") + '">' +
-      '<i style="height:' + h.toFixed(1) + '%"></i>' +
-      '<span class="c">' + (m.count || 0) + '</span>' +
-      '<span>' + MONTH_LABELS[m.month-1] + '</span>' +
-    '</div>'
-  }).join("")
-
-  // ---------- Duplicate worksheet ----------
-  const dupTarget = document.getElementById("dup-list")
-  if (!dupClusters.length) {
-    dupTarget.innerHTML = '<div class="empty-state">No likely duplicates detected.</div>'
-  } else {
-    dupTarget.innerHTML = dupClusters.slice(0, 12).map(c => {
-      const cells = c.contactIds.map(id => {
-        const r = rows.find(x => x.id === id)
-        if (!r) return '<div class="dup-cell"><div class="name">' + escapeHtml(id) + '</div></div>'
-        const tels = r.phones.slice(0, 3).map(p => '<span class="field"><b>' + (p.type || "TEL") + '</b> <span class="dup-mask" data-real="' + escapeHtml(p.value) + '" data-mask="' + escapeHtml(p.masked) + '">' + escapeHtml(p.masked) + '</span></span>').join("")
-        const emails = r.emails.slice(0, 2).map(e => '<span class="field"><b>' + (e.type || "EMAIL") + '</b> <span class="dup-mask" data-real="' + escapeHtml(e.value) + '" data-mask="' + escapeHtml(e.masked) + '">' + escapeHtml(e.masked) + '</span></span>').join("")
-        const orgChip = r.org ? '<span class="field"><b>ORG</b> ' + escapeHtml(r.org) + '</span>' : ''
-        const rev = r.rev ? '<span class="field"><b>REV</b> ' + escapeHtml(r.rev) + '</span>' : ''
-        return '<div class="dup-cell">' +
-          '<div class="name">' + escapeHtml(visibleName(r)) + '</div>' +
-          tels + emails + orgChip + rev +
-        '</div>'
-      }).join("")
-      const reasonLabel = c.reason === "shared-phone" ? "Shared phone"
-        : c.reason === "shared-email" ? "Shared email"
-        : "Same name"
-      return '<div class="dup">' +
-        '<div class="dup-head">' +
-          '<span class="dup-reason ' + c.reason + '">' + reasonLabel + '</span>' +
-          '<span class="dup-key">' + escapeHtml(c.key) + '</span>' +
-          '<span class="muted" style="font-family:var(--font-mono);font-size:11.5px">' + c.contactIds.length + ' candidates</span>' +
-        '</div>' +
-        '<div class="dup-table">' + cells + '</div>' +
-      '</div>'
-    }).join("")
-  }
-
-  // ---------- Browse all contacts ----------
-  const PAGE = 30
-  let limit = PAGE
-  let queryStr = ""
-  let activeFilters = {
-    has: new Set(),
-    orgs: new Set(),
-    cities: new Set(),
-    cats: new Set(),
-    audit: new Set(),
-  }
-  let unmasked = false  // mask toggle state
-
-  function makeChips(containerId, values, kind){
-    const target = document.getElementById(containerId)
-    if (!values.length) { target.innerHTML = '<span class="muted" style="font-size:13px">—</span>'; return }
-    target.innerHTML = values.map(v => {
-      const labelSafe = String(v.label).replace(/"/g,'&quot;')
-      return '<button class="chip" data-val="' + labelSafe + '">' + escapeHtml(ellipsize(String(v.label), 28)) + ' <span class="count">' + (v.count != null ? v.count : "") + '</span></button>'
-    }).join("")
-    target.querySelectorAll(".chip").forEach(el => {
-      el.addEventListener("click", () => {
-        const v = el.getAttribute("data-val")
-        const set = activeFilters[kind]
-        if (set.has(v)) { set.delete(v); el.classList.remove("active") }
-        else { set.add(v); el.classList.add("active") }
-        applyFilters()
-      })
-    })
-  }
-  // Has-X chips
-  const hasOptions = [
-    { label: "Has phone",     count: rows.filter(r => r.phones.length).length },
-    { label: "Has email",     count: rows.filter(r => r.emails.length).length },
-    { label: "Has address",   count: rows.filter(r => r.addresses.length).length },
-    { label: "Has birthday",  count: rows.filter(r => r.bday).length },
-    { label: "Has photo",     count: rows.filter(r => r.hasPhoto).length },
-    { label: "Has note",      count: rows.filter(r => r.note).length },
-    { label: "Possible duplicate", count: rows.filter(r => r.duplicateOfClusterId).length },
-  ]
-  makeChips("has-chips", hasOptions, "has")
-  makeChips("org-chips", orgs.slice(0, 8).map(o => ({ label: o.name, count: o.count })), "orgs")
-  makeChips("city-chips", cities.slice(0, 8).map(c => ({ label: c.city, count: c.count })), "cities")
-  makeChips("cat-chips", cats.slice(0, 10).map(c => ({ label: c.name, count: c.count })), "cats")
-  const auditOptions = []
-  const af = audit
-  if (af.missingPhone && af.missingPhone.count) auditOptions.push({ label: "missing-phone", count: af.missingPhone.count })
-  if (af.missingEmail && af.missingEmail.count) auditOptions.push({ label: "missing-email", count: af.missingEmail.count })
-  if (af.malformedEmail && af.malformedEmail.count) auditOptions.push({ label: "malformed-email", count: af.malformedEmail.count })
-  if (af.staleRev && af.staleRev.count) auditOptions.push({ label: "stale-rev", count: af.staleRev.count })
-  if (af.noteOnly && af.noteOnly.count) auditOptions.push({ label: "note-only", count: af.noteOnly.count })
-  if (af.nameless && af.nameless.count) auditOptions.push({ label: "nameless", count: af.nameless.count })
-  if (af.legacy21 && af.legacy21.count) auditOptions.push({ label: "legacy-vcard", count: af.legacy21.count })
-  makeChips("audit-chips", auditOptions, "audit")
-
-  // Filter logic
-  let filtered = rows.slice()
-  function applyFilters(){
-    const q = queryStr.toLowerCase().trim()
-    filtered = rows.filter(r => {
-      // Has-X
-      for (const h of activeFilters.has) {
-        if (h === "Has phone" && !r.phones.length) return false
-        if (h === "Has email" && !r.emails.length) return false
-        if (h === "Has address" && !r.addresses.length) return false
-        if (h === "Has birthday" && !r.bday) return false
-        if (h === "Has photo" && !r.hasPhoto) return false
-        if (h === "Has note" && !r.note) return false
-        if (h === "Possible duplicate" && !r.duplicateOfClusterId) return false
-      }
-      if (activeFilters.orgs.size && (!r.org || !activeFilters.orgs.has(r.org))) return false
-      if (activeFilters.cities.size) {
-        const cityLabels = r.addresses.map(a => a.region ? a.city + ", " + a.region : a.city).filter(Boolean)
-        let ok = false
-        for (const c of activeFilters.cities) if (cityLabels.includes(c)) { ok = true; break }
-        if (!ok) return false
-      }
-      if (activeFilters.cats.size) {
-        let ok = false
-        for (const c of activeFilters.cats) if (r.categories.includes(c)) { ok = true; break }
-        if (!ok) return false
-      }
-      if (activeFilters.audit.size) {
-        let ok = false
-        for (const f of activeFilters.audit) if (r.auditFlags.includes(f)) { ok = true; break }
-        if (!ok) return false
-      }
-      if (!q) return true
-      const haystack = [
-        r.fn, r.givenName, r.familyName, r.org, r.title, r.nickname, r.note,
-        r.id, (r.categories || []).join(" "),
-        r.phones.map(p => p.value).join(" "),
-        r.emails.map(e => e.value).join(" "),
-        r.addresses.map(a => a.formatted).join(" "),
-      ].filter(Boolean).join(" ").toLowerCase()
-      return haystack.includes(q)
-    })
-    limit = PAGE
-    renderTable()
-  }
-  function fieldCell(label, value, real){
-    const v = '<span class="v contact-mask" data-real="' + escapeHtml(real || value) + '" data-mask="' + escapeHtml(value) + '" title="Click to reveal locally">' + escapeHtml(value) + '</span>'
-    return '<span class="field"><span class="label">' + escapeHtml(label) + '</span> ' + v + '</span>'
-  }
-  function renderTable(){
-    document.getElementById("drill-count").textContent = filtered.length + " of " + rows.length
-    const target = document.getElementById("contact-list")
-    if (!filtered.length) { target.innerHTML = '<div class="empty-state">No contacts match these filters.</div>'; document.getElementById("loadmore").innerHTML = ""; return }
-    const slice = filtered.slice(0, limit)
-    target.innerHTML = slice.map(r => {
-      const nameClass = r.fn ? "name" : "name italic"
-      const nameText = r.fn ? r.fn : "(no name)"
-      const orgLineParts = []
-      if (r.org) orgLineParts.push('<b>' + escapeHtml(r.org) + '</b>')
-      if (r.title) orgLineParts.push(escapeHtml(r.title))
-      const orgLine = orgLineParts.length ? '<div class="org-line">' + orgLineParts.join(" · ") + '</div>' : ''
-      const phoneFields = r.phones.slice(0, 3).map(p =>
-        fieldCell(p.type || "tel", p.masked, p.value)).join("")
-      const emailFields = r.emails.slice(0, 3).map(e =>
-        fieldCell(e.type || "email", e.masked, e.value)).join("")
-      const addrFields = r.addresses.slice(0, 2).map(a =>
-        '<span class="field"><span class="label">' + (a.type || "addr") + '</span> ' + escapeHtml(a.formatted || "—") + '</span>').join("")
-      const bdayField = r.bday ? '<span class="field"><span class="label">bday</span> ' + escapeHtml(r.bday) + '</span>' : ''
-      const badges = []
-      if (r.duplicateOfClusterId) badges.push('<span class="badge dup">duplicate?</span>')
-      if (r.hasPhoto) badges.push('<span class="badge photo">photo</span>')
-      if (r.kind === "group") badges.push('<span class="badge cat">group</span>')
-      if (r.kind === "org") badges.push('<span class="badge cat">organization</span>')
-      for (const f of (r.auditFlags || []).slice(0, 4)) badges.push('<span class="badge flag">' + escapeHtml(f) + '</span>')
-      for (const c of r.categories.slice(0, 3)) badges.push('<span class="badge cat">' + escapeHtml(c) + '</span>')
-      const note = r.note ? '<div class="note">' + escapeHtml(ellipsize(r.note, 200)) + '</div>' : ''
-      const rev = r.rev ? '<div class="rev">last revised ' + escapeHtml(r.rev) + '</div>' : ''
-      return '<div class="contact" data-id="' + escapeHtml(r.id) + '">' +
-        '<div class="' + nameClass + '">' + escapeHtml(nameText) + '</div>' +
-        orgLine +
-        phoneFields + emailFields + addrFields + bdayField +
-        (badges.length ? '<div class="badges">' + badges.join("") + '</div>' : '') +
-        note + rev +
-      '</div>'
-    }).join("")
-    if (unmasked) revealAll()
-    target.querySelectorAll(".contact-mask").forEach(el => {
-      el.addEventListener("click", (ev) => {
-        ev.stopPropagation()
-        const cur = el.textContent
-        const real = el.getAttribute("data-real")
-        const mask = el.getAttribute("data-mask")
-        el.textContent = cur === real ? mask : real
-      })
-    })
-    const lm = document.getElementById("loadmore")
-    if (limit < filtered.length) lm.innerHTML = '<button id="lm-btn">Load ' + Math.min(PAGE, filtered.length-limit) + ' more</button>'
-    else lm.innerHTML = filtered.length + ' shown'
-    const btn = document.getElementById("lm-btn")
-    if (btn) btn.onclick = () => { limit += PAGE; renderTable() }
-  }
-  function revealAll(){
-    document.querySelectorAll(".contact-mask, .dup-mask").forEach(el => {
-      el.textContent = el.getAttribute("data-real")
-    })
-  }
-  function maskAll(){
-    document.querySelectorAll(".contact-mask, .dup-mask").forEach(el => {
-      el.textContent = el.getAttribute("data-mask")
-    })
-  }
-  document.getElementById("mask-toggle").addEventListener("click", () => {
-    unmasked = !unmasked
-    const btn = document.getElementById("mask-toggle")
-    btn.classList.toggle("on", unmasked)
-    document.getElementById("mask-toggle-label").textContent = unmasked
-      ? "Hide phone & email"
-      : "Show real phone & email"
-    if (unmasked) revealAll(); else maskAll()
-  })
-  document.getElementById("drill-search").addEventListener("input", (ev) => {
-    queryStr = ev.target.value || ""
-    applyFilters()
-  })
-  document.getElementById("drill-clear").addEventListener("click", () => {
-    document.getElementById("drill-search").value = ""
-    queryStr = ""
-    activeFilters = { has: new Set(), orgs: new Set(), cities: new Set(), cats: new Set(), audit: new Set() }
-    document.querySelectorAll(".chip.active").forEach(c => c.classList.remove("active"))
-    applyFilters()
-  })
-  applyFilters()
-
-  document.getElementById("jump-table-btn").addEventListener("click", () => document.getElementById("head-table").scrollIntoView({ behavior: "smooth" }))
-
-  // Birthday-month click → filter table to "Has birthday" + month match.
-  document.getElementById("bday-strip").querySelectorAll(".m").forEach(el => {
-    el.addEventListener("click", () => {
-      const month = parseInt(el.getAttribute("data-month"), 10)
-      activeFilters.has.add("Has birthday")
-      const hasButton = document.querySelector('#has-chips .chip[data-val="Has birthday"]')
-      if (hasButton) hasButton.classList.add("active")
-      // Also restrict via search: type the month abbreviation. Crude but works.
-      const ms = String(month).padStart(2, "0")
-      document.getElementById("drill-search").value = "-" + ms + "-"
-      queryStr = "-" + ms + "-"
-      applyFilters()
-      document.getElementById("head-table").scrollIntoView({ behavior: "smooth" })
-    })
-  })
-
-  // Copy summary as Markdown — audit + atlas only, NEVER the contact list.
-  document.getElementById("copy-md-btn").addEventListener("click", () => {
-    const md = buildMarkdown()
-    copyToClipboard(md, document.getElementById("copy-md-btn"))
-  })
-  function buildMarkdown(){
-    const lines = []
-    lines.push("# " + (document.getElementById("hero-title").textContent || "Address book audit"))
-    lines.push("")
-    lines.push(buildEditorial())
-    lines.push("")
-    lines.push("## Headline")
-    lines.push("- " + (summary.contactCount || 0) + " contacts (" + (summary.individualCount || 0) + " people, " + (summary.groupCount || 0) + " groups)")
-    lines.push("- " + (summary.withPhone || 0) + " with phone, " + (summary.withEmail || 0) + " with email, " + (summary.withAddress || 0) + " with address")
-    lines.push("- Revision window: " + (summary.revWindow || "—") + " (" + (summary.revDurationLabel || "—") + ")")
-    lines.push("- " + (summary.distinctOrgs || 0) + " orgs · " + (summary.distinctEmailDomains || 0) + " email domains · " + (summary.distinctCities || 0) + " cities · " + (summary.distinctCountries || 0) + " countries")
-    lines.push("- " + (summary.duplicateClusterCount || 0) + " possible duplicate clusters")
-    lines.push("")
-    lines.push("## Health audit")
-    if (audit.missingPhone) lines.push("- Missing phone: " + audit.missingPhone.count)
-    if (audit.missingEmail) lines.push("- Missing email: " + audit.missingEmail.count)
-    if (audit.missingBoth) lines.push("- Missing both phone + email: " + audit.missingBoth.count)
-    if (audit.malformedEmail) lines.push("- Malformed email: " + audit.malformedEmail.count)
-    if (audit.staleRev) lines.push("- Stale revisions (5y+): " + audit.staleRev.count)
-    if (audit.noteOnly) lines.push("- Note-only: " + audit.noteOnly.count)
-    if (audit.nameless) lines.push("- Nameless cards: " + audit.nameless.count)
-    if (audit.legacy21) lines.push("- Legacy vCard 2.1: " + audit.legacy21.count)
-    lines.push("")
-    lines.push("## Top organizations")
-    for (const o of orgs.slice(0, 8)) lines.push("- " + o.name + " — " + o.count)
-    lines.push("")
-    lines.push("## Top email domains")
-    for (const d of domains.slice(0, 8)) lines.push("- " + d.domain + " — " + d.count + " (" + d.kind + ")")
-    lines.push("")
-    lines.push("## Top cities")
-    for (const c of cities.slice(0, 8)) lines.push("- " + c.city + " — " + c.count)
-    lines.push("")
-    lines.push("_Audit summary only — individual contacts intentionally omitted._")
-    return lines.join("\n")
-  }
-  function copyToClipboard(text, btn){
-    const orig = btn.querySelector("span") ? btn.innerHTML : btn.textContent
-    const useText = !btn.querySelector("span")
-    const reset = () => { if (useText) btn.textContent = orig; else btn.innerHTML = orig }
-    navigator.clipboard.writeText(text).then(() => {
-      if (useText) btn.textContent = "Copied"
-      else btn.innerHTML = "Copied"
-      setTimeout(reset, 1400)
-    }).catch(() => {
-      window.prompt("Copy this:", text)
-      if (useText) btn.textContent = "Copied"
-      else btn.innerHTML = "Copied"
-      setTimeout(reset, 1400)
-    })
-  }
-})()
-  </script>
-</body>
-</html>
+    let startX = cx + (Math.random()-0.5)*200;
+    let startY = cy + (Math.random()-0.5)*200;
+    if (hubIdx >= 0) {
+      const hub =

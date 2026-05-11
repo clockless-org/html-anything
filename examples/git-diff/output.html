@@ -1,208 +1,811 @@
 <!doctype html>
 <html lang="en" data-ha-style="developer">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>checkout-service: session expiry verification</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>checkout-service: session expiry verification — diff review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
 :root {
-  --primary:#a03b00; --primary-container:#c94c00; --primary-fixed:#ffdbcd;
-  --primary-fixed-dim:#ffb597; --on-primary:#fff; --accent-glow:#E8400D;
-  --secondary:#d5baff; --secondary-container:#7b40e0; --tertiary:#4d44e3; --accent-cyan:#00D4FF;
-  --bg:#fff8f6; --surface:#fff8f6; --surface-container-lowest:#fff;
-  --surface-container-low:#fbf2ef; --surface-container:#f5ece9; --surface-container-high:#efe6e3;
-  --fg-1:#1e1b19; --fg-2:#594138; --fg-muted:#8d7166;
-  --border:rgba(0,0,0,.06); --border-strong:rgba(0,0,0,.12); --outline-variant:#e1bfb2;
-  --green:#10b981; --blue:#3b82f6; --yellow:#f59e0b; --red:#ef4444;
-  --font-headline:'Space Grotesk',ui-sans-serif,system-ui,sans-serif;
-  --font-body:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;
-  --font-mono:'SF Mono','Menlo',ui-monospace,monospace;
-  --space-xs:4px; --space-sm:8px; --space-md:12px; --space-lg:16px;
-  --space-xl:20px; --space-2xl:24px; --space-3xl:32px; --space-4xl:48px; --space-5xl:64px;
-  --radius-sm:8px; --radius-md:12px; --radius-lg:16px; --radius-xl:20px; --radius-2xl:28px; --radius-pill:9999px;
-  --shadow-sm:0 1px 2px rgba(30,27,25,.04); --shadow-md:0 4px 12px rgba(30,27,25,.08);
-  --shadow-lg:0 8px 24px rgba(30,27,25,.12); --shadow-accent:0 8px 24px rgba(160,59,0,.15);
-  --gradient-primary:linear-gradient(135deg,#a03b00 0%,#c94c00 100%);
-  --gradient-hero:linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
-  --gradient-text:linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --accent-cyan: #00D4FF;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981;
+  --blue: #3b82f6;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30,27,25,0.04);
+  --shadow-md: 0 4px 12px rgba(30,27,25,0.08);
+  --shadow-lg: 0 8px 24px rgba(30,27,25,0.12);
+  --shadow-accent: 0 8px 24px rgba(160,59,0,0.15);
+  --gradient-primary: linear-gradient(135deg,#a03b00 0%,#c94c00 100%);
+  --gradient-hero: linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
+
+  --add-bg: rgba(16,185,129,0.08);
+  --del-bg: rgba(239,68,68,0.08);
+  --add-border: rgba(16,185,129,0.25);
+  --del-border: rgba(239,68,68,0.25);
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg:#060B18; --surface:#0B1426; --surface-container-lowest:#101D35;
-    --surface-container-low:#101D35; --surface-container:#162544; --surface-container-high:#1c2d52;
-    --fg-1:#F8FAFC; --fg-2:#CBD5E1; --fg-muted:#64748B;
-    --border:rgba(255,255,255,.08); --border-strong:rgba(255,255,255,.14);
-    --primary:#FF6B35; --accent-glow:#00D4FF;
-    --shadow-md:0 4px 12px rgba(0,0,0,.4); --shadow-lg:0 8px 24px rgba(0,0,0,.5);
+    --bg: #060B18;
+    --surface: #0B1426;
+    --surface-container-lowest: #101D35;
+    --surface-container-low: #101D35;
+    --surface-container: #162544;
+    --surface-container-high: #1c2d52;
+    --fg-1: #F8FAFC;
+    --fg-2: #CBD5E1;
+    --fg-muted: #64748B;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --primary: #FF6B35;
+    --accent-glow: #00D4FF;
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+    --add-bg: rgba(16,185,129,0.12);
+    --del-bg: rgba(239,68,68,0.12);
+    --add-border: rgba(16,185,129,0.3);
+    --del-border: rgba(239,68,68,0.3);
   }
 }
-*,*::before,*::after{box-sizing:border-box;margin:0}
-html,body{background:var(--bg);color:var(--fg-1);font-family:var(--font-body);
-  font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
-body{min-height:100vh}
-main{max-width:1240px;margin:0 auto;padding:var(--space-2xl) var(--space-xl) var(--space-5xl)}
-h1,h2,h3,h4{font-family:var(--font-headline);letter-spacing:-.01em;font-weight:600;color:var(--fg-1)}
-h1{font-size:clamp(28px,5vw,44px);font-weight:700;line-height:1.05;letter-spacing:-.02em}
-h2{font-size:clamp(20px,2.4vw,24px);margin-bottom:var(--space-md)}
-h3{font-size:17px;margin-bottom:var(--space-sm)}
-.muted{color:var(--fg-muted)}
-.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
-button{font:inherit;cursor:pointer;border:none;background:transparent;color:inherit}
-input,select{font:inherit;color:var(--fg-1)}
-.hero{padding:var(--space-3xl) 0 var(--space-2xl);border-bottom:1px solid var(--border)}
-.hero .eyebrow{display:inline-flex;gap:var(--space-sm);align-items:center;
-  background:var(--surface-container);color:var(--primary);
-  padding:var(--space-xs) var(--space-md);border-radius:var(--radius-pill);
-  font-family:var(--font-mono);font-size:11.5px;font-weight:500;
-  text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-lg)}
-.hero h1{background:var(--gradient-text);-webkit-background-clip:text;background-clip:text;color:transparent;max-width:22ch}
-.hero .editorial{margin-top:var(--space-lg);max-width:64ch;color:var(--fg-2);font-size:16px;line-height:1.55}
-.hero-actions{display:flex;gap:var(--space-md);margin-top:var(--space-xl);flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-lg);
-  border-radius:var(--radius-pill);font-weight:600;font-size:14px;border:1px solid var(--border-strong);
-  background:var(--surface-container-lowest);color:var(--fg-1);transition:all .15s ease;cursor:pointer}
-.btn:hover{background:var(--surface-container);box-shadow:var(--shadow-sm)}
-.btn.primary{background:var(--gradient-primary);color:var(--on-primary);border-color:transparent}
-.btn.primary:hover{box-shadow:var(--shadow-accent)}
-.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:var(--space-lg);margin-top:var(--space-3xl)}
-.kpi{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:var(--space-lg) var(--space-xl);box-shadow:var(--shadow-sm)}
-.kpi .label{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--fg-muted);font-weight:500}
-.kpi .value{font-family:var(--font-headline);font-size:28px;font-weight:600;margin-top:var(--space-xs);color:var(--fg-1)}
-.kpi .value.accent{color:var(--primary)}
-.kpi .value.green{color:var(--green)} .kpi .value.red{color:var(--red)} .kpi .value.yellow{color:var(--yellow)}
-.kpi .sub{font-size:12.5px;color:var(--fg-muted);margin-top:2px;font-family:var(--font-mono)}
-.section{margin-top:var(--space-4xl)}
-.section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-lg);gap:var(--space-md);flex-wrap:wrap}
-.section-head .meta{font-size:13px;color:var(--fg-muted);font-family:var(--font-mono)}
-.card{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:var(--space-xl);box-shadow:var(--shadow-sm)}
-.card h3{margin-bottom:var(--space-md)}
-.hyp{display:inline-flex;align-items:center;gap:6px;padding:2px 10px;border-radius:var(--radius-pill);
-  background:var(--secondary);color:var(--secondary-container);font-family:var(--font-mono);font-size:10.5px;
-  font-weight:600;text-transform:uppercase;letter-spacing:.06em;border:1px solid var(--secondary-container)}
-.hyp::before{content:"•";color:var(--secondary-container)}
-.badge{display:inline-flex;align-items:center;padding:1px 8px;border-radius:var(--radius-pill);
-  background:var(--surface-container);color:var(--fg-2);font-family:var(--font-mono);font-size:11px;font-weight:500}
-.badge.green{background:rgba(16,185,129,.14);color:var(--green)}
-.badge.red{background:rgba(239,68,68,.14);color:var(--red)}
-.badge.yellow{background:rgba(245,158,11,.16);color:var(--yellow)}
-.badge.blue{background:rgba(59,130,246,.14);color:var(--blue)}
-.badge.app{background:rgba(160,59,0,.12);color:var(--primary)}
-.badge.vendor{background:var(--surface-container);color:var(--fg-muted)}
-.checklist{list-style:none;margin:0;padding:0}
-.checklist li{display:flex;gap:var(--space-md);align-items:flex-start;padding:var(--space-sm) 0;
-  border-bottom:1px solid var(--border)}
-.checklist li:last-child{border-bottom:none}
-.checklist .num{font-family:var(--font-mono);font-size:11px;color:var(--fg-muted);
-  background:var(--surface-container);border-radius:var(--radius-pill);padding:2px 8px;
-  min-width:26px;text-align:center;flex-shrink:0}
-.checklist .text{flex:1;color:var(--fg-2)}
-.checklist .text code{font-family:var(--font-mono);font-size:13px;background:var(--surface-container);
-  padding:1px 6px;border-radius:var(--radius-sm)}
-.hotspots{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-lg)}
-.hotspot{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:var(--space-lg);position:relative}
-.hotspot .head{display:flex;align-items:center;justify-content:space-between;gap:var(--space-md);margin-bottom:var(--space-sm)}
-.hotspot .path{font-family:var(--font-mono);font-size:13.5px;color:var(--fg-1);font-weight:600;
-  word-break:break-all}
-.hotspot .why{color:var(--fg-2);font-size:13.5px;line-height:1.5;margin-top:var(--space-xs)}
-.hotspot .why .hyp{margin-right:var(--space-xs)}
-.searchbox{display:flex;gap:var(--space-sm);align-items:center;background:var(--surface-container-lowest);
-  border:1px solid var(--border);border-radius:var(--radius-pill);padding:var(--space-xs) var(--space-md);
-  max-width:380px}
-.searchbox input{flex:1;border:none;outline:none;background:transparent;padding:var(--space-xs) 0;font-size:14px}
-mark{background:var(--primary-fixed);color:var(--fg-1);padding:0 2px;border-radius:2px}
-details{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:var(--space-md) var(--space-lg);transition:background .15s ease}
-details[open]{box-shadow:var(--shadow-sm)}
-details > summary{cursor:pointer;font-weight:600;font-size:15.5px;color:var(--fg-1);list-style:none;
-  display:flex;align-items:center;justify-content:space-between;gap:var(--space-md)}
-details > summary::-webkit-details-marker{display:none}
-details > summary::after{content:"▾";color:var(--fg-muted);transition:transform .15s ease}
-details[open] > summary::after{transform:rotate(180deg)}
-details > .body{margin-top:var(--space-md)}
-.diff{font-family:var(--font-mono);font-size:12.5px;line-height:1.5;white-space:pre;overflow-x:auto;
-  background:var(--surface-container-low);border-radius:var(--radius-md);padding:var(--space-md);
-  border:1px solid var(--border)}
-.diff .ln{display:inline-block;width:54px;color:var(--fg-muted);user-select:none;text-align:right;
-  padding-right:var(--space-md)}
-.diff .add{background:rgba(16,185,129,.10);display:block}
-.diff .add .ln{color:var(--green)}
-.diff .del{background:rgba(239,68,68,.10);display:block}
-.diff .del .ln{color:var(--red)}
-.diff .ctx{display:block;color:var(--fg-2)}
-.diff .hunk{display:block;color:var(--secondary-container);background:var(--surface-container);
-  padding:var(--space-xs) var(--space-md);margin:var(--space-md) calc(-1 * var(--space-md)) var(--space-xs);
-  font-weight:600}
-.diff .file-head{display:block;color:var(--primary);font-weight:600;
-  background:var(--primary-fixed);padding:var(--space-sm) var(--space-md);
-  margin:var(--space-md) calc(-1 * var(--space-md)) var(--space-sm);border-radius:var(--radius-sm)}
-.log-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px}
-.log-table td{padding:2px var(--space-sm);vertical-align:top;border-bottom:1px solid rgba(0,0,0,.02)}
-.log-table tr.error td{background:rgba(239,68,68,.06)}
-.log-table tr.warning td{background:rgba(245,158,11,.06)}
-.log-table tr.group td{background:var(--surface-container);color:var(--secondary-container);font-weight:600}
-.log-table .ln{width:54px;text-align:right;color:var(--fg-muted);padding-right:var(--space-md)}
-.log-table .text{white-space:pre-wrap;color:var(--fg-1)}
-.log-table tr.error .text{color:var(--red)}
-.log-table tr.warning .text{color:var(--yellow)}
-.frames{list-style:none;padding:0;margin:0}
-.frames li{padding:var(--space-sm) var(--space-md);border-bottom:1px solid var(--border);
-  font-family:var(--font-mono);font-size:13px;display:flex;gap:var(--space-md);align-items:flex-start}
-.frames li:last-child{border-bottom:none}
-.frames .marker{width:90px;flex-shrink:0;color:var(--fg-muted);font-size:11px;text-transform:uppercase;
-  letter-spacing:.05em;font-weight:600}
-.frames .marker.app{color:var(--primary)}
-.frames .marker.vendor{color:var(--fg-muted)}
-.frames .body{flex:1;min-width:0}
-.frames .file{color:var(--fg-1);font-weight:500;word-break:break-all}
-.frames .fn{color:var(--fg-2);font-size:12.5px}
-.frames .fold-toggle{cursor:pointer;background:var(--surface-container);color:var(--fg-muted);
-  padding:var(--space-sm) var(--space-md);border-radius:var(--radius-sm);font-style:italic;font-size:12.5px}
-.frames .fold-toggle:hover{color:var(--fg-1)}
-.commits{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:var(--space-md)}
-.commits li{padding:var(--space-md) var(--space-lg);background:var(--surface-container-lowest);
-  border:1px solid var(--border);border-radius:var(--radius-lg);display:flex;gap:var(--space-md);align-items:flex-start}
-.commits .hash{font-family:var(--font-mono);font-size:12px;background:var(--surface-container);
-  color:var(--secondary-container);padding:2px 10px;border-radius:var(--radius-pill);flex-shrink:0;
-  align-self:flex-start;margin-top:2px}
-.commits .meta{flex:1}
-.commits .subject{font-weight:600;color:var(--fg-1);margin-bottom:2px}
-.commits .author{color:var(--fg-muted);font-size:12.5px;font-family:var(--font-mono)}
-.commits .stat{margin-top:var(--space-xs);color:var(--fg-2);font-size:13px}
-.cause-chain{display:flex;flex-direction:column;gap:var(--space-md)}
-.cause{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:var(--space-lg)}
-.cause.deepest{border-color:var(--primary);box-shadow:var(--shadow-accent)}
-.cause .type{font-family:var(--font-mono);font-size:13.5px;color:var(--fg-1);font-weight:600}
-.cause .msg{color:var(--fg-2);margin-top:2px;font-size:13.5px}
-.cause .top-frame{margin-top:var(--space-sm);font-family:var(--font-mono);font-size:12.5px;color:var(--fg-muted)}
-.failing-tests{display:flex;flex-direction:column;gap:var(--space-md)}
-.failing-test{background:var(--surface-container-lowest);border:1px solid var(--border);border-left:3px solid var(--red);
-  border-radius:var(--radius-md);padding:var(--space-md) var(--space-lg)}
-.failing-test .name{font-family:var(--font-mono);font-size:13.5px;color:var(--fg-1);font-weight:600}
-.failing-test .where{font-family:var(--font-mono);font-size:12px;color:var(--fg-muted);margin-top:2px}
-.failing-test .msg{color:var(--fg-2);font-size:13.5px;margin-top:var(--space-xs)}
-.risk-table{width:100%;border-collapse:collapse;font-size:13.5px}
-.risk-table th{text-align:left;padding:var(--space-sm) var(--space-md);font-weight:600;font-size:12px;
-  color:var(--fg-muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border-strong)}
-.risk-table td{padding:var(--space-sm) var(--space-md);border-bottom:1px solid var(--border);vertical-align:top}
-.risk-table .path{font-family:var(--font-mono);font-size:13px;color:var(--fg-1);word-break:break-all}
-.risk-table .delta{font-family:var(--font-mono);font-size:12.5px;white-space:nowrap}
-.risk-table .delta .add{color:var(--green)}
-.risk-table .delta .del{color:var(--red)}
-.risk-table .why{color:var(--fg-2);font-size:13px}
-.empty{color:var(--fg-muted);font-style:italic;padding:var(--space-md) 0}
-footer{margin-top:var(--space-5xl);padding-top:var(--space-xl);border-top:1px solid var(--border);
-  color:var(--fg-muted);font-size:13px;line-height:1.5}
-@media (max-width:780px){
-  .frames .marker{width:70px}
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--fg-1);
+  font-size: 14.5px;
+  line-height: 1.6;
+  min-height: 100vh;
 }
-  </style>
+
+/* ===== DEV SHELL ===== */
+.dev-shell {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-lg) var(--space-5xl);
+}
+
+/* ===== FINDING BAR ===== */
+.finding-bar {
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  margin-bottom: var(--space-2xl);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transform: translateY(-8px);
+  animation: slideIn 0.28s ease forwards;
+}
+@keyframes slideIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.finding-bar-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-lg);
+}
+.finding-title {
+  font-family: var(--font-headline);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+  flex: 1;
+  min-width: 200px;
+}
+.finding-title span {
+  background: var(--gradient-hero);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+.stat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container);
+  color: var(--fg-2);
+  white-space: nowrap;
+}
+.stat-chip.add { color: var(--green); border-color: var(--add-border); background: var(--add-bg); }
+.stat-chip.del { color: var(--red); border-color: var(--del-border); background: var(--del-bg); }
+.stat-chip.file { color: var(--primary); border-color: rgba(160,59,0,0.2); background: var(--primary-fixed); }
+.stat-chip.lang { color: var(--secondary-container); border-color: rgba(123,64,224,0.2); background: rgba(123,64,224,0.06); }
+
+@media (prefers-color-scheme: dark) {
+  .stat-chip.file { background: rgba(255,107,53,0.12); border-color: rgba(255,107,53,0.3); color: var(--primary); }
+  .stat-chip.lang { background: rgba(123,64,224,0.15); }
+}
+
+.shape-hypothesis {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  background: rgba(245,158,11,0.07);
+  border: 1px solid rgba(245,158,11,0.25);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  font-size: 0.875rem;
+  color: var(--fg-2);
+}
+.hypothesis-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-pill);
+  background: rgba(245,158,11,0.15);
+  border: 1px solid rgba(245,158,11,0.35);
+  color: var(--yellow);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ===== HEATMAP ===== */
+.heatmap-section {
+  margin-bottom: var(--space-2xl);
+  opacity: 0;
+  animation: slideIn 0.28s ease 0.1s forwards;
+}
+.section-label {
+  font-family: var(--font-headline);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-strong);
+}
+
+.heatmap-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-sm);
+  height: 80px;
+  padding: 0 var(--space-xs);
+}
+.heatmap-bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  cursor: pointer;
+}
+.heatmap-bar-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  gap: 1px;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  overflow: hidden;
+  transition: opacity 0.18s;
+}
+.heatmap-bar-group:hover .heatmap-bar-stack { opacity: 0.8; }
+.hbar-add {
+  background: var(--green);
+  opacity: 0.75;
+  min-height: 2px;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+.hbar-del {
+  background: var(--red);
+  opacity: 0.7;
+  min-height: 2px;
+}
+.hbar-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--fg-muted);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  max-width: 80px;
+}
+
+/* ===== RISK HOTSPOTS ===== */
+.evidence-workbench {
+  margin-bottom: var(--space-2xl);
+  opacity: 0;
+  animation: slideIn 0.28s ease 0.15s forwards;
+}
+.hotspot-map {
+  display: grid;
+  gap: var(--space-md);
+}
+.hotspot-card {
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+  cursor: pointer;
+  transition: box-shadow 0.18s, border-color 0.18s;
+}
+.hotspot-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--outline-variant);
+}
+.hotspot-card.sev-high { border-left: 3px solid var(--red); }
+.hotspot-card.sev-med { border-left: 3px solid var(--yellow); }
+.hotspot-card.sev-low { border-left: 3px solid var(--blue); }
+.hotspot-sev {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-pill);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.sev-high .hotspot-sev { background: rgba(239,68,68,0.12); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+.sev-med .hotspot-sev { background: rgba(245,158,11,0.12); color: var(--yellow); border: 1px solid rgba(245,158,11,0.3); }
+.sev-low .hotspot-sev { background: rgba(59,130,246,0.1); color: var(--blue); border: 1px solid rgba(59,130,246,0.25); }
+.hotspot-body { flex: 1; min-width: 0; }
+.hotspot-path {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--primary);
+  margin-bottom: var(--space-xs);
+  word-break: break-all;
+}
+.hotspot-text {
+  font-size: 0.875rem;
+  color: var(--fg-2);
+  line-height: 1.5;
+}
+.hotspot-link {
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  margin-top: var(--space-xs);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.hotspot-link:hover { color: var(--primary); }
+
+/* ===== RISK MAP TABLE ===== */
+.risk-checklist {
+  margin-bottom: var(--space-2xl);
+  opacity: 0;
+  animation: slideIn 0.28s ease 0.2s forwards;
+}
+.file-risk-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.file-risk-table th {
+  font-family: var(--font-headline);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  border-bottom: 1px solid var(--border-strong);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+.file-risk-table th:hover { color: var(--fg-1); }
+.file-risk-table th .sort-icon { opacity: 0.4; margin-left: 4px; }
+.file-risk-table th.sorted .sort-icon { opacity: 1; color: var(--primary); }
+.file-risk-table td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.file-risk-table tr:last-child td { border-bottom: none; }
+.file-risk-table tr:hover td { background: var(--surface-container); }
+.frt-path {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--primary);
+  word-break: break-all;
+}
+.frt-status {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+.status-modified { background: rgba(59,130,246,0.1); color: var(--blue); border: 1px solid rgba(59,130,246,0.2); }
+.status-added { background: rgba(16,185,129,0.1); color: var(--green); border: 1px solid rgba(16,185,129,0.2); }
+.status-deleted { background: rgba(239,68,68,0.1); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
+.frt-add { font-family: var(--font-mono); font-size: 0.8rem; color: var(--green); white-space: nowrap; }
+.frt-del { font-family: var(--font-mono); font-size: 0.8rem; color: var(--red); white-space: nowrap; }
+.frt-risk { font-size: 0.8rem; color: var(--fg-2); line-height: 1.45; }
+.frt-risk .hypothesis-chip { font-size: 0.58rem; vertical-align: middle; }
+.table-wrap { background: var(--surface-container-low); border: 1px solid var(--border-strong); border-radius: var(--radius-lg); overflow-x: auto; }
+
+/* ===== REVIEW CHECKLIST ===== */
+.checklist-panel {
+  margin-bottom: var(--space-2xl);
+  opacity: 0;
+  animation: slideIn 0.28s ease 0.25s forwards;
+}
+.checklist-grid {
+  display: grid;
+  gap: var(--space-sm);
+}
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  background: var(--surface-container-low);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  transition: background 0.15s;
+}
+.checklist-item:hover { background: var(--surface-container); }
+.check-box {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  border: 2px solid var(--border-strong);
+  flex-shrink: 0;
+  margin-top: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, border-color 0.15s;
+  position: relative;
+}
+.check-box.checked {
+  background: var(--green);
+  border-color: var(--green);
+}
+.check-box.checked::after {
+  content: '✓';
+  font-size: 11px;
+  color: white;
+  font-weight: 700;
+}
+.check-text {
+  font-size: 0.875rem;
+  color: var(--fg-2);
+  flex: 1;
+  cursor: pointer;
+}
+.check-text code {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  background: var(--surface-container-high);
+  padding: 1px 5px;
+  border-radius: 4px;
+  color: var(--primary);
+}
+.checklist-progress {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-md);
+}
+.checklist-progress span { color: var(--primary); font-weight: 700; }
+
+/* ===== CALL SITES PANEL ===== */
+.callsites-panel {
+  margin-bottom: var(--space-2xl);
+  opacity: 0;
+  animation: slideIn 0.28s ease 0.3s forwards;
+}
+.callsite-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border);
+}
+.callsite-item:last-child { border-bottom: none; }
+.callsite-sym { font-family: var(--font-mono); font-size: 0.8rem; color: var(--primary); flex-shrink: 0; }
+.callsite-desc { font-size: 0.85rem; color: var(--fg-2); }
+
+/* ===== RAW ARTIFACT ===== */
+.raw-artifact {
+  margin-bottom: var(--space-2xl);
+  opacity: 0;
+  animation: slideIn 0.28s ease 0.35s forwards;
+}
+.artifact-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  background: var(--surface-container);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: var(--space-md) var(--space-lg);
+  cursor: pointer;
+  user-select: none;
+  border-bottom: none;
+}
+.artifact-header.collapsed {
+  border-radius: var(--radius-lg);
+  border-bottom: 1px solid var(--border-strong);
+}
+.artifact-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+.artifact-title {
+  font-family: var(--font-headline);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.artifact-toggle {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+.toggle-chevron {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+.artifact-header:not(.collapsed) .toggle-chevron { transform: rotate(180deg); }
+
+.artifact-controls {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  align-items: center;
+}
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  padding: var(--space-xs) var(--space-md);
+}
+.search-box input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--fg-1);
+  width: 140px;
+}
+.search-box input::placeholder { color: var(--fg-muted); }
+.search-nav { display: flex; gap: 2px; }
+.search-nav button {
+  background: none;
+  border: none;
+  color: var(--fg-muted);
+  cursor: pointer;
+  font-size: 0.7rem;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+.search-nav button:hover { background: var(--border); color: var(--fg-1); }
+.search-count { font-family: var(--font-mono); font-size: 0.7rem; color: var(--fg-muted); }
+.btn-sm {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container-lowest);
+  color: var(--fg-2);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.btn-sm:hover { background: var(--surface-container-high); color: var(--fg-1); }
+.btn-primary {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  color: white;
+}
+.btn-primary:hover { opacity: 0.9; background: var(--gradient-primary); color: white; }
+
+.artifact-body {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+.artifact-body.hidden { display: none; }
+
+.file-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-container-low);
+}
+.file-nav-btn {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container);
+  color: var(--fg-2);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.file-nav-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
+.diff-file-section {
+  border-bottom: 1px solid var(--border-strong);
+}
+.diff-file-section:last-child { border-bottom: none; }
+
+.diff-file-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--surface-container);
+  cursor: pointer;
+  user-select: none;
+  flex-wrap: wrap;
+}
+.diff-file-path {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--primary);
+  font-weight: 600;
+  flex: 1;
+}
+.diff-file-delta {
+  display: flex;
+  gap: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+.diff-add { color: var(--green); }
+.diff-del { color: var(--red); }
+.diff-file-toggle { font-size: 0.7rem; color: var(--fg-muted); }
+
+.diff-file-body { overflow-x: auto; }
+.diff-file-body.collapsed { display: none; }
+
+.diff-hunk-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-lg);
+  background: rgba(59,130,246,0.06);
+  border-top: 1px solid rgba(59,130,246,0.12);
+  border-bottom: 1px solid rgba(59,130,246,0.12);
+}
+.hunk-chip {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--blue);
+  background: rgba(59,130,246,0.1);
+  border: 1px solid rgba(59,130,246,0.2);
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+}
+.hunk-context-text {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--fg-muted);
+  flex: 1;
+}
+.hunk-copy-btn {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container);
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.hunk-copy-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
+.diff-line-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+}
+.diff-line-table tr { line-height: 1.5; }
+.ln {
+  width: 36px;
+  min-width: 36px;
+  text-align: right;
+  padding: 0 var(--space-sm);
+  color: var(--fg-muted);
+  user-select: none;
+  vertical-align: top;
+  border-right: 1px solid var(--border);
+  white-space: nowrap;
+}
+.diff-line-table tr.line-add { background: var(--add-bg); }
+.diff-line-table tr.line-del { background: var(--del-bg); }
+.diff-line-table tr.line-add .ln { color: var(--green); opacity: 0.8; }
+.diff-line-table tr.line-del .ln { color: var(--red); opacity: 0.8; }
+.line-sign {
+  width: 18px;
+  min-width: 18px;
+  text-align: center;
+  padding: 0 2px;
+  font-weight: 700;
+  user-select: none;
+  vertical-align: top;
+}
+.line-add .line-sign { color: var(--green); }
+.line-del .line-sign { color: var(--red); }
+.line-context .line-sign { color: var(--fg-muted); opacity: 0.4; }
+.line-code {
+  padding: 0 var(--space-md) 0 var(--space-xs);
+  color: var(--fg-2);
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+.line-add .line-code { color: var(--fg-1); }
+.line-del .line-code { color: var(--fg-2); }
+
+.search-highlight {
+  background: rgba(245,158,11,0.35);
+  border-radius: 2px;
+  color: var(--fg-1);
+}
+.search-highlight.active {
+  background: rgba(245,158,11,0.7);
+  outline: 1px solid var(--yellow);
+}
+
+/* ===== COPY HANDOFF ===== */
+.copy-handoff {
+  margin-bottom: var(--space-2xl);
+  opacity: 0;
+  animation: slideIn 0.28s ease 0.4s forwards;
+}
+.handoff-panel {
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+}
+.handoff-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+.handoff-desc {
+  font-size: 0.875rem;
+  color: var(--fg-2);
+  flex: 1;
+}
+.copy-success {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--green);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.copy-success.show { opacity: 1; }
+
+/* ===== FOOTER ===== */
+.dev-footer {
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-xl);
+  font-size: 0.78rem;
+  color: var(--fg-muted);
+  line-height: 1.6;
+}
+.dev-footer em { font-style: italic; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .dev-shell { padding: var(--space-md) var(--space-md) var(--space-4xl); }
+  .finding-bar { padding: var(--space-lg); }
+  .file-risk-table th:nth-child(5),
+  .file-risk-table td:nth-child(5) { display: none; }
+  .search-box input { width: 90px; }
+  .heatmap-bars { height: 60px; }
+  .hbar-label { font-size: 0.55rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
 <!-- html-anything example style skin:start -->
 
 <style id="html-anything-example-style-skin">
@@ -307,35 +910,6 @@ html[data-ha-style="relationship"] body {
     linear-gradient(300deg, rgba(49,123,147,.08), transparent 40%);
 }
 html[data-ha-style="relationship"] body::before { content: "relationship"; }
-
-html[data-ha-style="personal-atlas"] {
-  --ha-style-accent: #3f7f6a;
-  --ha-style-accent-2: #c15a2b;
-  --primary: #3f7f6a;
-  --primary-container: #2f6b58;
-  --primary-fixed: #dff4ea;
-  --secondary-container: #c15a2b;
-  --bg: #f7faf4;
-  --surface: #f7faf4;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #eef5ea;
-  --surface-container: #e6eee0;
-  --surface-container-high: #dbe7d5;
-  --fg-1: #17211b;
-  --fg-2: #405345;
-  --fg-muted: #718172;
-  --border: rgba(63,127,106,.15);
-  --gradient-hero: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-  --gradient-text: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-}
-html[data-ha-style="personal-atlas"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(63,127,106,.11) 0 2px, transparent 2px),
-    radial-gradient(circle at 70% 40%, rgba(193,90,43,.10) 0 1.5px, transparent 1.5px);
-  background-size: 54px 54px, 38px 38px;
-}
-html[data-ha-style="personal-atlas"] body::before { content: "personal atlas"; }
 
 html[data-ha-style="timeline-story"] {
   --ha-style-accent: #9a4b14;
@@ -486,7 +1060,7 @@ html[data-ha-style="dashboard"] header.hero::before {
   margin-bottom: 14px;
 }
 
-html[data-ha-style="editorial"] {
+html[data-ha-style="document"] {
   --ha-style-accent: #8b3f1f;
   --ha-style-accent-2: #2f6f73;
   --primary: #8b3f1f;
@@ -507,14 +1081,14 @@ html[data-ha-style="editorial"] {
   --gradient-hero: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
   --gradient-text: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
 }
-html[data-ha-style="editorial"] body {
+html[data-ha-style="document"] body {
   background-color: var(--bg) !important;
   background-image: linear-gradient(90deg, rgba(139,63,31,.18) 0 4px, transparent 4px);
   background-size: 100% 100%;
 }
-html[data-ha-style="editorial"] body::before { content: "editorial"; }
-html[data-ha-style="editorial"] .hero::before,
-html[data-ha-style="editorial"] header.hero::before {
+html[data-ha-style="document"] body::before { content: "document"; }
+html[data-ha-style="document"] .hero::before,
+html[data-ha-style="document"] header.hero::before {
   width: 42px;
   height: 42px;
   border-radius: 0;
@@ -522,33 +1096,6 @@ html[data-ha-style="editorial"] header.hero::before {
   border-top: 4px solid var(--ha-style-accent);
   border-left: 4px solid var(--ha-style-accent);
 }
-
-html[data-ha-style="paper"] {
-  --ha-style-accent: #53606a;
-  --ha-style-accent-2: #8c6f4a;
-  --primary: #53606a;
-  --primary-container: #3e4850;
-  --primary-fixed: #eef1f3;
-  --secondary-container: #8c6f4a;
-  --bg: #f9faf9;
-  --surface: #f9faf9;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f1f2f1;
-  --surface-container: #e8eae8;
-  --surface-container-high: #dedfdd;
-  --fg-1: #171717;
-  --fg-2: #4b5563;
-  --fg-muted: #737373;
-  --border: rgba(83,96,106,.18);
-  --font-headline: Georgia, "Iowan Old Style", "Times New Roman", serif;
-  --gradient-hero: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-  --gradient-text: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-}
-html[data-ha-style="paper"] body {
-  background-color: var(--bg) !important;
-  background-image: repeating-linear-gradient(0deg, transparent 0 31px, rgba(83,96,106,.08) 31px 32px);
-}
-html[data-ha-style="paper"] body::before { content: "paper"; }
 
 html[data-ha-style="developer"] {
   color-scheme: dark;
@@ -593,156 +1140,460 @@ html[data-ha-style="developer"] .mono {
 <!-- html-anything example style skin:end -->
 </head>
 <body>
-<main>
-  <header class="hero">
-    <div class="eyebrow">Unified diff</div>
-    <h1>Diff review</h1>
-    <p class="editorial">5 files · +59 / −8 · 5 hunks.</p>
-    <div class="hero-actions">
-      <button class="btn primary" id="copy-md-btn">Copy summary</button>
-      <a class="btn" href="#raw-section">Jump to raw artifact</a>
-    </div>
-    <div class="kpi-row" id="kpi-row"><div class="kpi"><div class="label">Files changed</div><div class="value ">5</div></div><div class="kpi"><div class="label">Additions</div><div class="value green">+59</div></div><div class="kpi"><div class="label">Deletions</div><div class="value red">−8</div></div><div class="kpi"><div class="label">Hunks</div><div class="value ">5</div></div></div>
-  </header>
-  <section class="section" id="review-checklist">
-    <div class="section-head"><h2>Review checklist</h2></div>
-    <div class="card"><ol class="checklist"><li><span class="num">1</span><span class="text">Re-test <code>session.ts</code> with empty, expired, and malformed tokens — confirm the new guard still rejects each.</span></li><li><span class="num">2</span><span class="text">Re-test <code>middleware.ts</code> with empty, expired, and malformed tokens — confirm the new guard still rejects each.</span></li><li><span class="num">3</span><span class="text">Re-test <code>session.test.ts</code> with empty, expired, and malformed tokens — confirm the new guard still rejects each.</span></li><li><span class="num">4</span><span class="text">Re-test <code>0042_session_issuer.sql</code> with empty, expired, and malformed tokens — confirm the new guard still rejects each.</span></li></ol></div>
-  </section>
-<section class="section" >
-    <div class="section-head"><h2>Risk hotspots</h2></div>
-    <div class="hotspots"><div class="hotspot">
-          <div class="head"><span class="path">migrations/0042_session_issuer.sql</span><span class="badge red">high</span></div>
-          <div class="why"><span class="hyp">Hypothesis</span> Schema migration — verify it runs against a populated table without locking out concurrent writers, and that the rollback path is captured.</div>
-        </div><div class="hotspot">
-          <div class="head"><span class="path">tests/auth/session.test.ts</span><span class="badge red">high</span></div>
-          <div class="why"><span class="hyp">Hypothesis</span> Auth boundary touched — confirm every empty / malformed input case is still rejected and that the change does not loosen any existing guard.</div>
-        </div><div class="hotspot">
-          <div class="head"><span class="path">src/auth/session.ts</span><span class="badge yellow">elevated</span></div>
-          <div class="why"><span class="hyp">Hypothesis</span> Auth boundary touched — confirm every empty / malformed input case is still rejected and that the change does not loosen any existing guard.</div>
-        </div><div class="hotspot">
-          <div class="head"><span class="path">src/auth/middleware.ts</span><span class="badge yellow">elevated</span></div>
-          <div class="why"><span class="hyp">Hypothesis</span> Auth boundary touched — confirm every empty / malformed input case is still rejected and that the change does not loosen any existing guard.</div>
-        </div><div class="hotspot">
-          <div class="head"><span class="path">CHANGELOG.md</span><span class="badge">moderate</span></div>
-          <div class="why"><span class="hyp">Hypothesis</span> 6-line change — small but still worth a careful read; the surrounding context may carry the real risk.</div>
-        </div></div>
-  </section>
-<section class="section" >
-    <div class="section-head"><h2>Risk map by file</h2></div>
-    <table class="risk-table">
-      <thead><tr><th>File</th><th>Status</th><th>Δ</th><th>Why look here</th></tr></thead>
-      <tbody><tr>
-            <td><span class="path">migrations/0042_session_issuer.sql</span></td>
-            <td><span class="badge green">added</span></td>
-            <td class="delta"><span class="add">+9</span> / <span class="del">−0</span></td>
-            
-            <td class="why"><span class="hyp">Hypothesis</span> Schema migration — verify it runs against a populated table without locking out concurrent writers, and that the rollback path is captured.</td>
-          </tr><tr>
-            <td><span class="path">tests/auth/session.test.ts</span></td>
-            <td><span class="badge ">modified</span></td>
-            <td class="delta"><span class="add">+27</span> / <span class="del">−3</span></td>
-            
-            <td class="why"><span class="hyp">Hypothesis</span> Auth boundary touched — confirm every empty / malformed input case is still rejected and that the change does not loosen any existing guard.</td>
-          </tr><tr>
-            <td><span class="path">src/auth/session.ts</span></td>
-            <td><span class="badge ">modified</span></td>
-            <td class="delta"><span class="add">+11</span> / <span class="del">−3</span></td>
-            
-            <td class="why"><span class="hyp">Hypothesis</span> Auth boundary touched — confirm every empty / malformed input case is still rejected and that the change does not loosen any existing guard.</td>
-          </tr><tr>
-            <td><span class="path">src/auth/middleware.ts</span></td>
-            <td><span class="badge ">modified</span></td>
-            <td class="delta"><span class="add">+6</span> / <span class="del">−2</span></td>
-            
-            <td class="why"><span class="hyp">Hypothesis</span> Auth boundary touched — confirm every empty / malformed input case is still rejected and that the change does not loosen any existing guard.</td>
-          </tr><tr>
-            <td><span class="path">CHANGELOG.md</span></td>
-            <td><span class="badge ">modified</span></td>
-            <td class="delta"><span class="add">+6</span> / <span class="del">−0</span></td>
-            
-            <td class="why"><span class="hyp">Hypothesis</span> 6-line change — small but still worth a careful read; the surrounding context may carry the real risk.</td>
-          </tr></tbody>
-    </table>
-  </section>
-<details class="section" id="raw-section"><summary><h2 style="margin:0">Diff</h2><div><div class="searchbox" style="display:inline-flex"><input id="raw-search" type="search" placeholder="Search the diff…"></div></div></summary><div class="body"><div class="diff" id="raw-content"><span class="file-head" data-text="src/auth/session.ts" data-original="file src/auth/session.ts">src/auth/session.ts (modified)  +11 / −3</span><span class="hunk" data-text="@@ -1,12 +1,18 @@" data-original="@@ -1,12 +1,18 @@">@@ -1,12 +1,18 @@</span><span class="ctx" data-text=" import * as jwt from &quot;jsonwebtoken&quot;"><span class="ln">1</span> import * as jwt from &quot;jsonwebtoken&quot;</span><span class="ctx" data-text=" import { logger } from &quot;../obs/logger&quot;"><span class="ln">2</span> import { logger } from &quot;../obs/logger&quot;</span><span class="ctx" data-text=" "><span class="ln">3</span> </span><span class="add" data-text="+const EXPECTED_ISSUER = process.env.SESSION_ISSUER || &quot;clockless.ai&quot;"><span class="ln">4</span>+const EXPECTED_ISSUER = process.env.SESSION_ISSUER || &quot;clockless.ai&quot;</span><span class="add" data-text="+const CLOCK_SKEW_SECONDS = 30"><span class="ln">5</span>+const CLOCK_SKEW_SECONDS = 30</span><span class="add" data-text="+"><span class="ln">6</span>+</span><span class="ctx" data-text=" export function verifySession(token: string) {"><span class="ln">7</span> export function verifySession(token: string) {</span><span class="ctx" data-text="   if (!token) return null"><span class="ln">8</span>   if (!token) return null</span><span class="del" data-text="-  const decoded = jwt.decode(token) as { exp: number; sub: string }"><span class="ln">6</span>-  const decoded = jwt.decode(token) as { exp: number; sub: string }</span><span class="del" data-text="-  if (decoded.exp &lt; Date.now()) {"><span class="ln">7</span>-  if (decoded.exp &lt; Date.now()) {</span><span class="del" data-text="-    logger.info({ sub: decoded.sub }, &quot;session expired&quot;)"><span class="ln">8</span>-    logger.info({ sub: decoded.sub }, &quot;session expired&quot;)</span><span class="add" data-text="+  const decoded = jwt.decode(token) as { exp: number; sub: string; iss?: string } | null"><span class="ln">9</span>+  const decoded = jwt.decode(token) as { exp: number; sub: string; iss?: string } | null</span><span class="add" data-text="+  if (!decoded) return null"><span class="ln">10</span>+  if (!decoded) return null</span><span class="add" data-text="+  if (decoded.iss !== EXPECTED_ISSUER) {"><span class="ln">11</span>+  if (decoded.iss !== EXPECTED_ISSUER) {</span><span class="add" data-text="+    logger.warn({ iss: decoded.iss }, &quot;unexpected issuer&quot;)"><span class="ln">12</span>+    logger.warn({ iss: decoded.iss }, &quot;unexpected issuer&quot;)</span><span class="add" data-text="+    return null"><span class="ln">13</span>+    return null</span><span class="add" data-text="+  }"><span class="ln">14</span>+  }</span><span class="add" data-text="+  if (decoded.exp &lt; Math.floor(Date.now() / 1000) - CLOCK_SKEW_SECONDS) {"><span class="ln">15</span>+  if (decoded.exp &lt; Math.floor(Date.now() / 1000) - CLOCK_SKEW_SECONDS) {</span><span class="add" data-text="+    logger.info({ sub: decoded.sub }, &quot;session expired&quot;)"><span class="ln">16</span>+    logger.info({ sub: decoded.sub }, &quot;session expired&quot;)</span><span class="ctx" data-text="     return null"><span class="ln">17</span>     return null</span><span class="ctx" data-text="   }"><span class="ln">18</span>   }</span><span class="ctx" data-text="   return decoded"><span class="ln">19</span>   return decoded</span><span class="ctx" data-text=" }"><span class="ln">20</span> }</span><span class="file-head" data-text="src/auth/middleware.ts" data-original="file src/auth/middleware.ts">src/auth/middleware.ts (modified)  +6 / −2</span><span class="hunk" data-text="@@ -1,10 +1,14 @@" data-original="@@ -1,10 +1,14 @@">@@ -1,10 +1,14 @@</span><span class="ctx" data-text=" import type { Request, Response, NextFunction } from &quot;express&quot;"><span class="ln">1</span> import type { Request, Response, NextFunction } from &quot;express&quot;</span><span class="ctx" data-text=" import { verifySession } from &quot;./session&quot;"><span class="ln">2</span> import { verifySession } from &quot;./session&quot;</span><span class="ctx" data-text=" "><span class="ln">3</span> </span><span class="ctx" data-text=" export function requireSession(req: Request, res: Response, next: NextFunction) {"><span class="ln">4</span> export function requireSession(req: Request, res: Response, next: NextFunction) {</span><span class="del" data-text="-  const token = req.headers.authorization?.replace(/^Bearer /, &quot;&quot;)"><span class="ln">5</span>-  const token = req.headers.authorization?.replace(/^Bearer /, &quot;&quot;)</span><span class="add" data-text="+  const auth = req.headers.authorization"><span class="ln">5</span>+  const auth = req.headers.authorization</span><span class="add" data-text="+  if (!auth || !auth.startsWith(&quot;Bearer &quot;)) {"><span class="ln">6</span>+  if (!auth || !auth.startsWith(&quot;Bearer &quot;)) {</span><span class="add" data-text="+    return res.status(401).json({ error: &quot;missing_authorization&quot; })"><span class="ln">7</span>+    return res.status(401).json({ error: &quot;missing_authorization&quot; })</span><span class="add" data-text="+  }"><span class="ln">8</span>+  }</span><span class="add" data-text="+  const token = auth.slice(&quot;Bearer &quot;.length).trim()"><span class="ln">9</span>+  const token = auth.slice(&quot;Bearer &quot;.length).trim()</span><span class="ctx" data-text="   const session = verifySession(token || &quot;&quot;)"><span class="ln">10</span>   const session = verifySession(token || &quot;&quot;)</span><span class="ctx" data-text="   if (!session) {"><span class="ln">11</span>   if (!session) {</span><span class="del" data-text="-    return res.status(401).end()"><span class="ln">8</span>-    return res.status(401).end()</span><span class="add" data-text="+    return res.status(401).json({ error: &quot;invalid_session&quot; })"><span class="ln">12</span>+    return res.status(401).json({ error: &quot;invalid_session&quot; })</span><span class="ctx" data-text="   }"><span class="ln">13</span>   }</span><span class="ctx" data-text="   ;(req as any).session = session"><span class="ln">14</span>   ;(req as any).session = session</span><span class="ctx" data-text="   next()"><span class="ln">15</span>   next()</span><span class="file-head" data-text="tests/auth/session.test.ts" data-original="file tests/auth/session.test.ts">tests/auth/session.test.ts (modified)  +27 / −3</span><span class="hunk" data-text="@@ -1,20 +1,40 @@" data-original="@@ -1,20 +1,40 @@">@@ -1,20 +1,40 @@</span><span class="ctx" data-text=" import { describe, it, expect, vi } from &quot;vitest&quot;"><span class="ln">1</span> import { describe, it, expect, vi } from &quot;vitest&quot;</span><span class="ctx" data-text=" import { verifySession } from &quot;../../src/auth/session&quot;"><span class="ln">2</span> import { verifySession } from &quot;../../src/auth/session&quot;</span><span class="ctx" data-text=" import * as jwt from &quot;jsonwebtoken&quot;"><span class="ln">3</span> import * as jwt from &quot;jsonwebtoken&quot;</span><span class="ctx" data-text=" "><span class="ln">4</span> </span><span class="ctx" data-text=" describe(&quot;verifySession&quot;, () =&gt; {"><span class="ln">5</span> describe(&quot;verifySession&quot;, () =&gt; {</span><span class="ctx" data-text="   it(&quot;returns null for empty token&quot;, () =&gt; {"><span class="ln">6</span>   it(&quot;returns null for empty token&quot;, () =&gt; {</span><span class="ctx" data-text="     expect(verifySession(&quot;&quot;)).toBeNull()"><span class="ln">7</span>     expect(verifySession(&quot;&quot;)).toBeNull()</span><span class="ctx" data-text="   })"><span class="ln">8</span>   })</span><span class="ctx" data-text=" "><span class="ln">9</span> </span><span class="ctx" data-text="   it(&quot;returns null for expired token&quot;, () =&gt; {"><span class="ln">10</span>   it(&quot;returns null for expired token&quot;, () =&gt; {</span><span class="del" data-text="-    vi.spyOn(jwt, &quot;decode&quot;).mockReturnValue({ exp: 0, sub: &quot;u_1&quot; })"><span class="ln">11</span>-    vi.spyOn(jwt, &quot;decode&quot;).mockReturnValue({ exp: 0, sub: &quot;u_1&quot; })</span><span class="add" data-text="+    vi.spyOn(jwt, &quot;decode&quot;).mockReturnValue({ exp: 0, sub: &quot;u_1&quot;, iss: &quot;clockless.ai&quot; })"><span class="ln">11</span>+    vi.spyOn(jwt, &quot;decode&quot;).mockReturnValue({ exp: 0, sub: &quot;u_1&quot;, iss: &quot;clockless.ai&quot; })</span><span class="ctx" data-text="     expect(verifySession(&quot;expired&quot;)).toBeNull()"><span class="ln">12</span>     expect(verifySession(&quot;expired&quot;)).toBeNull()</span><span class="ctx" data-text="   })"><span class="ln">13</span>   })</span><span class="ctx" data-text=" "><span class="ln">14</span> </span><span class="add" data-text="+  it(&quot;returns null when issuer does not match&quot;, () =&gt; {"><span class="ln">15</span>+  it(&quot;returns null when issuer does not match&quot;, () =&gt; {</span><span class="add" data-text="+    vi.spyOn(jwt, &quot;decode&quot;).mockReturnValue({"><span class="ln">16</span>+    vi.spyOn(jwt, &quot;decode&quot;).mockReturnValue({</span><span class="add" data-text="+      exp: Math.floor(Date.now() / 1000) + 3600,"><span class="ln">17</span>+      exp: Math.floor(Date.now() / 1000) + 3600,</span><span class="add" data-text="+      sub: &quot;u_1&quot;,"><span class="ln">18</span>+      sub: &quot;u_1&quot;,</span><span class="add" data-text="+      iss: &quot;evil.example&quot;,"><span class="ln">19</span>+      iss: &quot;evil.example&quot;,</span><span class="add" data-text="+    })"><span class="ln">20</span>+    })</span><span class="add" data-text="+    expect(verifySession(&quot;wrong-issuer&quot;)).toBeNull()"><span class="ln">21</span>+    expect(verifySession(&quot;wrong-issuer&quot;)).toBeNull()</span><span class="add" data-text="+  })"><span class="ln">22</span>+  })</span><span class="add" data-text="+"><span class="ln">23</span>+</span><span class="add" data-text="+  it(&quot;accepts a token within clock skew&quot;, () =&gt; {"><span class="ln">24</span>+  it(&quot;accepts a token within clock skew&quot;, () =&gt; {</span><span class="add" data-text="+    vi.spyOn(jwt, &quot;decode&quot;).mockReturnValue({"><span class="ln">25</span>+    vi.spyOn(jwt, &quot;decode&quot;).mockReturnValue({</span><span class="add" data-text="+      exp: Math.floor(Date.now() / 1000) - 10,"><span class="ln">26</span>+      exp: Math.floor(Date.now() / 1000) - 10,</span><span class="add" data-text="+      sub: &quot;u_1&quot;,"><span class="ln">27</span>+      sub: &quot;u_1&quot;,</span><span class="add" data-text="+      iss: &quot;clockless.ai&quot;,"><span class="ln">28</span>+      iss: &quot;clockless.ai&quot;,</span><span class="add" data-text="+    })"><span class="ln">29</span>+    })</span><span class="add" data-text="+    expect(verifySession(&quot;recently-expired&quot;)).toBeTruthy()"><span class="ln">30</span>+    expect(verifySession(&quot;recently-expired&quot;)).toBeTruthy()</span><span class="add" data-text="+  })"><span class="ln">31</span>+  })</span><span class="add" data-text="+"><span class="ln">32</span>+</span><span class="add" data-text="+  it(&quot;returns null when decode returns null&quot;, () =&gt; {"><span class="ln">33</span>+  it(&quot;returns null when decode returns null&quot;, () =&gt; {</span><span class="add" data-text="+    vi.spyOn(jwt, &quot;decode&quot;).mockReturnValue(null as any)"><span class="ln">34</span>+    vi.spyOn(jwt, &quot;decode&quot;).mockReturnValue(null as any)</span><span class="add" data-text="+    expect(verifySession(&quot;malformed&quot;)).toBeNull()"><span class="ln">35</span>+    expect(verifySession(&quot;malformed&quot;)).toBeNull()</span><span class="add" data-text="+  })"><span class="ln">36</span>+  })</span><span class="add" data-text="+"><span class="ln">37</span>+</span><span class="ctx" data-text="   it(&quot;returns the decoded session for a valid token&quot;, () =&gt; {"><span class="ln">38</span>   it(&quot;returns the decoded session for a valid token&quot;, () =&gt; {</span><span class="del" data-text="-    vi.spyOn(jwt, &quot;decode&quot;).mockReturnValue({"><span class="ln">16</span>-    vi.spyOn(jwt, &quot;decode&quot;).mockReturnValue({</span><span class="del" data-text="-      exp: Date.now() + 3600_000,"><span class="ln">17</span>-      exp: Date.now() + 3600_000,</span><span class="add" data-text="+    vi.spyOn(jwt, &quot;decode&quot;).mockReturnValue({"><span class="ln">39</span>+    vi.spyOn(jwt, &quot;decode&quot;).mockReturnValue({</span><span class="add" data-text="+      exp: Math.floor(Date.now() / 1000) + 3600,"><span class="ln">40</span>+      exp: Math.floor(Date.now() / 1000) + 3600,</span><span class="ctx" data-text="       sub: &quot;u_42&quot;,"><span class="ln">41</span>       sub: &quot;u_42&quot;,</span><span class="add" data-text="+      iss: &quot;clockless.ai&quot;,"><span class="ln">42</span>+      iss: &quot;clockless.ai&quot;,</span><span class="ctx" data-text="     })"><span class="ln">43</span>     })</span><span class="ctx" data-text="     expect(verifySession(&quot;good&quot;)).toMatchObject({ sub: &quot;u_42&quot; })"><span class="ln">44</span>     expect(verifySession(&quot;good&quot;)).toMatchObject({ sub: &quot;u_42&quot; })</span><span class="ctx" data-text="   })"><span class="ln">45</span>   })</span><span class="ctx" data-text=" })"><span class="ln">46</span> })</span><span class="file-head" data-text="migrations/0042_session_issuer.sql" data-original="file migrations/0042_session_issuer.sql">migrations/0042_session_issuer.sql (added)  +9 / −0</span><span class="hunk" data-text="@@ -0,0 +1,9 @@" data-original="@@ -0,0 +1,9 @@">@@ -0,0 +1,9 @@</span><span class="add" data-text="+-- 0042_session_issuer"><span class="ln">1</span>+-- 0042_session_issuer</span><span class="add" data-text="+-- Adds issuer column to sessions for cross-issuer verification."><span class="ln">2</span>+-- Adds issuer column to sessions for cross-issuer verification.</span><span class="add" data-text="+-- Backfills existing rows to the legacy issuer; safe under concurrent writes."><span class="ln">3</span>+-- Backfills existing rows to the legacy issuer; safe under concurrent writes.</span><span class="add" data-text="+"><span class="ln">4</span>+</span><span class="add" data-text="+ALTER TABLE sessions ADD COLUMN issuer TEXT;"><span class="ln">5</span>+ALTER TABLE sessions ADD COLUMN issuer TEXT;</span><span class="add" data-text="+UPDATE sessions SET issuer = &#39;clockless.ai&#39; WHERE issuer IS NULL;"><span class="ln">6</span>+UPDATE sessions SET issuer = &#39;clockless.ai&#39; WHERE issuer IS NULL;</span><span class="add" data-text="+ALTER TABLE sessions ALTER COLUMN issuer SET NOT NULL;"><span class="ln">7</span>+ALTER TABLE sessions ALTER COLUMN issuer SET NOT NULL;</span><span class="add" data-text="+"><span class="ln">8</span>+</span><span class="add" data-text="+CREATE INDEX CONCURRENTLY idx_sessions_issuer ON sessions (issuer);"><span class="ln">9</span>+CREATE INDEX CONCURRENTLY idx_sessions_issuer ON sessions (issuer);</span><span class="file-head" data-text="CHANGELOG.md" data-original="file CHANGELOG.md">CHANGELOG.md (modified)  +6 / −0</span><span class="hunk" data-text="@@ -1,5 +1,11 @@" data-original="@@ -1,5 +1,11 @@">@@ -1,5 +1,11 @@</span><span class="ctx" data-text=" # Changelog"><span class="ln">1</span> # Changelog</span><span class="ctx" data-text=" "><span class="ln">2</span> </span><span class="add" data-text="+## Unreleased"><span class="ln">3</span>+## Unreleased</span><span class="add" data-text="+"><span class="ln">4</span>+</span><span class="add" data-text="+- auth: verify JWT issuer against `SESSION_ISSUER` (default `clockless.ai`)"><span class="ln">5</span>+- auth: verify JWT issuer against `SESSION_ISSUER` (default `clockless.ai`)</span><span class="add" data-text="+- auth: convert `exp` comparison to seconds and tolerate 30s of clock skew"><span class="ln">6</span>+- auth: convert `exp` comparison to seconds and tolerate 30s of clock skew</span><span class="add" data-text="+- auth: return structured 401 errors instead of empty bodies"><span class="ln">7</span>+- auth: return structured 401 errors instead of empty bodies</span><span class="add" data-text="+"><span class="ln">8</span>+</span><span class="ctx" data-text=" ## 0.4.1 — 2026-04-22"><span class="ln">9</span> ## 0.4.1 — 2026-04-22</span><span class="ctx" data-text=" "><span class="ln">10</span> </span><span class="ctx" data-text=" - csv: handle BOM-prefixed UTF-8 inputs"><span class="ln">11</span> - csv: handle BOM-prefixed UTF-8 inputs</span><span class="ctx" data-text=" "><span class="ln">12</span> </span></div></div></details>
-  <footer>
-    <p><em>Generated locally — your diff / log / trace never left your machine. The full artifact is embedded in this HTML and rendered in your browser. The analysis above is a <strong>hypothesis</strong> from a sample, not a verdict; verify against the runtime before acting on it.</em></p>
-  </footer>
-</main>
 <script>const DATA = {"kind":"git-diff","files":[{"id":"f_0001","path":"src/auth/session.ts","oldPath":"src/auth/session.ts","newPath":"src/auth/session.ts","status":"modified","language":"typescript","additions":11,"deletions":3,"isBinary":false,"hunks":[{"id":"h_0001","header":"@@ -1,12 +1,18 @@","oldStart":1,"oldLines":12,"newStart":1,"newLines":18,"context":"","lines":[{"kind":"context","oldNum":1,"newNum":1,"text":"import * as jwt from \"jsonwebtoken\""},{"kind":"context","oldNum":2,"newNum":2,"text":"import { logger } from \"../obs/logger\""},{"kind":"context","oldNum":3,"newNum":3,"text":""},{"kind":"add","oldNum":null,"newNum":4,"text":"const EXPECTED_ISSUER = process.env.SESSION_ISSUER || \"clockless.ai\""},{"kind":"add","oldNum":null,"newNum":5,"text":"const CLOCK_SKEW_SECONDS = 30"},{"kind":"add","oldNum":null,"newNum":6,"text":""},{"kind":"context","oldNum":4,"newNum":7,"text":"export function verifySession(token: string) {"},{"kind":"context","oldNum":5,"newNum":8,"text":"  if (!token) return null"},{"kind":"del","oldNum":6,"newNum":null,"text":"  const decoded = jwt.decode(token) as { exp: number; sub: string }"},{"kind":"del","oldNum":7,"newNum":null,"text":"  if (decoded.exp < Date.now()) {"},{"kind":"del","oldNum":8,"newNum":null,"text":"    logger.info({ sub: decoded.sub }, \"session expired\")"},{"kind":"add","oldNum":null,"newNum":9,"text":"  const decoded = jwt.decode(token) as { exp: number; sub: string; iss?: string } | null"},{"kind":"add","oldNum":null,"newNum":10,"text":"  if (!decoded) return null"},{"kind":"add","oldNum":null,"newNum":11,"text":"  if (decoded.iss !== EXPECTED_ISSUER) {"},{"kind":"add","oldNum":null,"newNum":12,"text":"    logger.warn({ iss: decoded.iss }, \"unexpected issuer\")"},{"kind":"add","oldNum":null,"newNum":13,"text":"    return null"},{"kind":"add","oldNum":null,"newNum":14,"text":"  }"},{"kind":"add","oldNum":null,"newNum":15,"text":"  if (decoded.exp < Math.floor(Date.now() / 1000) - CLOCK_SKEW_SECONDS) {"},{"kind":"add","oldNum":null,"newNum":16,"text":"    logger.info({ sub: decoded.sub }, \"session expired\")"},{"kind":"context","oldNum":9,"newNum":17,"text":"    return null"},{"kind":"context","oldNum":10,"newNum":18,"text":"  }"},{"kind":"context","oldNum":11,"newNum":19,"text":"  return decoded"},{"kind":"context","oldNum":12,"newNum":20,"text":"}"}]}]},{"id":"f_0002","path":"src/auth/middleware.ts","oldPath":"src/auth/middleware.ts","newPath":"src/auth/middleware.ts","status":"modified","language":"typescript","additions":6,"deletions":2,"isBinary":false,"hunks":[{"id":"h_0002","header":"@@ -1,10 +1,14 @@","oldStart":1,"oldLines":10,"newStart":1,"newLines":14,"context":"","lines":[{"kind":"context","oldNum":1,"newNum":1,"text":"import type { Request, Response, NextFunction } from \"express\""},{"kind":"context","oldNum":2,"newNum":2,"text":"import { verifySession } from \"./session\""},{"kind":"context","oldNum":3,"newNum":3,"text":""},{"kind":"context","oldNum":4,"newNum":4,"text":"export function requireSession(req: Request, res: Response, next: NextFunction) {"},{"kind":"del","oldNum":5,"newNum":null,"text":"  const token = req.headers.authorization?.replace(/^Bearer /, \"\")"},{"kind":"add","oldNum":null,"newNum":5,"text":"  const auth = req.headers.authorization"},{"kind":"add","oldNum":null,"newNum":6,"text":"  if (!auth || !auth.startsWith(\"Bearer \")) {"},{"kind":"add","oldNum":null,"newNum":7,"text":"    return res.status(401).json({ error: \"missing_authorization\" })"},{"kind":"add","oldNum":null,"newNum":8,"text":"  }"},{"kind":"add","oldNum":null,"newNum":9,"text":"  const token = auth.slice(\"Bearer \".length).trim()"},{"kind":"context","oldNum":6,"newNum":10,"text":"  const session = verifySession(token || \"\")"},{"kind":"context","oldNum":7,"newNum":11,"text":"  if (!session) {"},{"kind":"del","oldNum":8,"newNum":null,"text":"    return res.status(401).end()"},{"kind":"add","oldNum":null,"newNum":12,"text":"    return res.status(401).json({ error: \"invalid_session\" })"},{"kind":"context","oldNum":9,"newNum":13,"text":"  }"},{"kind":"context","oldNum":10,"newNum":14,"text":"  ;(req as any).session = session"},{"kind":"context","oldNum":11,"newNum":15,"text":"  next()"}]}]},{"id":"f_0003","path":"tests/auth/session.test.ts","oldPath":"tests/auth/session.test.ts","newPath":"tests/auth/session.test.ts","status":"modified","language":"typescript","additions":27,"deletions":3,"isBinary":false,"hunks":[{"id":"h_0003","header":"@@ -1,20 +1,40 @@","oldStart":1,"oldLines":20,"newStart":1,"newLines":40,"context":"","lines":[{"kind":"context","oldNum":1,"newNum":1,"text":"import { describe, it, expect, vi } from \"vitest\""},{"kind":"context","oldNum":2,"newNum":2,"text":"import { verifySession } from \"../../src/auth/session\""},{"kind":"context","oldNum":3,"newNum":3,"text":"import * as jwt from \"jsonwebtoken\""},{"kind":"context","oldNum":4,"newNum":4,"text":""},{"kind":"context","oldNum":5,"newNum":5,"text":"describe(\"verifySession\", () => {"},{"kind":"context","oldNum":6,"newNum":6,"text":"  it(\"returns null for empty token\", () => {"},{"kind":"context","oldNum":7,"newNum":7,"text":"    expect(verifySession(\"\")).toBeNull()"},{"kind":"context","oldNum":8,"newNum":8,"text":"  })"},{"kind":"context","oldNum":9,"newNum":9,"text":""},{"kind":"context","oldNum":10,"newNum":10,"text":"  it(\"returns null for expired token\", () => {"},{"kind":"del","oldNum":11,"newNum":null,"text":"    vi.spyOn(jwt, \"decode\").mockReturnValue({ exp: 0, sub: \"u_1\" })"},{"kind":"add","oldNum":null,"newNum":11,"text":"    vi.spyOn(jwt, \"decode\").mockReturnValue({ exp: 0, sub: \"u_1\", iss: \"clockless.ai\" })"},{"kind":"context","oldNum":12,"newNum":12,"text":"    expect(verifySession(\"expired\")).toBeNull()"},{"kind":"context","oldNum":13,"newNum":13,"text":"  })"},{"kind":"context","oldNum":14,"newNum":14,"text":""},{"kind":"add","oldNum":null,"newNum":15,"text":"  it(\"returns null when issuer does not match\", () => {"},{"kind":"add","oldNum":null,"newNum":16,"text":"    vi.spyOn(jwt, \"decode\").mockReturnValue({"},{"kind":"add","oldNum":null,"newNum":17,"text":"      exp: Math.floor(Date.now() / 1000) + 3600,"},{"kind":"add","oldNum":null,"newNum":18,"text":"      sub: \"u_1\","},{"kind":"add","oldNum":null,"newNum":19,"text":"      iss: \"evil.example\","},{"kind":"add","oldNum":null,"newNum":20,"text":"    })"},{"kind":"add","oldNum":null,"newNum":21,"text":"    expect(verifySession(\"wrong-issuer\")).toBeNull()"},{"kind":"add","oldNum":null,"newNum":22,"text":"  })"},{"kind":"add","oldNum":null,"newNum":23,"text":""},{"kind":"add","oldNum":null,"newNum":24,"text":"  it(\"accepts a token within clock skew\", () => {"},{"kind":"add","oldNum":null,"newNum":25,"text":"    vi.spyOn(jwt, \"decode\").mockReturnValue({"},{"kind":"add","oldNum":null,"newNum":26,"text":"      exp: Math.floor(Date.now() / 1000) - 10,"},{"kind":"add","oldNum":null,"newNum":27,"text":"      sub: \"u_1\","},{"kind":"add","oldNum":null,"newNum":28,"text":"      iss: \"clockless.ai\","},{"kind":"add","oldNum":null,"newNum":29,"text":"    })"},{"kind":"add","oldNum":null,"newNum":30,"text":"    expect(verifySession(\"recently-expired\")).toBeTruthy()"},{"kind":"add","oldNum":null,"newNum":31,"text":"  })"},{"kind":"add","oldNum":null,"newNum":32,"text":""},{"kind":"add","oldNum":null,"newNum":33,"text":"  it(\"returns null when decode returns null\", () => {"},{"kind":"add","oldNum":null,"newNum":34,"text":"    vi.spyOn(jwt, \"decode\").mockReturnValue(null as any)"},{"kind":"add","oldNum":null,"newNum":35,"text":"    expect(verifySession(\"malformed\")).toBeNull()"},{"kind":"add","oldNum":null,"newNum":36,"text":"  })"},{"kind":"add","oldNum":null,"newNum":37,"text":""},{"kind":"context","oldNum":15,"newNum":38,"text":"  it(\"returns the decoded session for a valid token\", () => {"},{"kind":"del","oldNum":16,"newNum":null,"text":"    vi.spyOn(jwt, \"decode\").mockReturnValue({"},{"kind":"del","oldNum":17,"newNum":null,"text":"      exp: Date.now() + 3600_000,"},{"kind":"add","oldNum":null,"newNum":39,"text":"    vi.spyOn(jwt, \"decode\").mockReturnValue({"},{"kind":"add","oldNum":null,"newNum":40,"text":"      exp: Math.floor(Date.now() / 1000) + 3600,"},{"kind":"context","oldNum":18,"newNum":41,"text":"      sub: \"u_42\","},{"kind":"add","oldNum":null,"newNum":42,"text":"      iss: \"clockless.ai\","},{"kind":"context","oldNum":19,"newNum":43,"text":"    })"},{"kind":"context","oldNum":20,"newNum":44,"text":"    expect(verifySession(\"good\")).toMatchObject({ sub: \"u_42\" })"},{"kind":"context","oldNum":21,"newNum":45,"text":"  })"},{"kind":"context","oldNum":22,"newNum":46,"text":"})"}]}]},{"id":"f_0004","path":"migrations/0042_session_issuer.sql","oldPath":"/dev/null","newPath":"migrations/0042_session_issuer.sql","status":"added","language":"sql","additions":9,"deletions":0,"isBinary":false,"hunks":[{"id":"h_0004","header":"@@ -0,0 +1,9 @@","oldStart":0,"oldLines":0,"newStart":1,"newLines":9,"context":"","lines":[{"kind":"add","oldNum":null,"newNum":1,"text":"-- 0042_session_issuer"},{"kind":"add","oldNum":null,"newNum":2,"text":"-- Adds issuer column to sessions for cross-issuer verification."},{"kind":"add","oldNum":null,"newNum":3,"text":"-- Backfills existing rows to the legacy issuer; safe under concurrent writes."},{"kind":"add","oldNum":null,"newNum":4,"text":""},{"kind":"add","oldNum":null,"newNum":5,"text":"ALTER TABLE sessions ADD COLUMN issuer TEXT;"},{"kind":"add","oldNum":null,"newNum":6,"text":"UPDATE sessions SET issuer = 'clockless.ai' WHERE issuer IS NULL;"},{"kind":"add","oldNum":null,"newNum":7,"text":"ALTER TABLE sessions ALTER COLUMN issuer SET NOT NULL;"},{"kind":"add","oldNum":null,"newNum":8,"text":""},{"kind":"add","oldNum":null,"newNum":9,"text":"CREATE INDEX CONCURRENTLY idx_sessions_issuer ON sessions (issuer);"}]}]},{"id":"f_0005","path":"CHANGELOG.md","oldPath":"CHANGELOG.md","newPath":"CHANGELOG.md","status":"modified","language":"markdown","additions":6,"deletions":0,"isBinary":false,"hunks":[{"id":"h_0005","header":"@@ -1,5 +1,11 @@","oldStart":1,"oldLines":5,"newStart":1,"newLines":11,"context":"","lines":[{"kind":"context","oldNum":1,"newNum":1,"text":"# Changelog"},{"kind":"context","oldNum":2,"newNum":2,"text":""},{"kind":"add","oldNum":null,"newNum":3,"text":"## Unreleased"},{"kind":"add","oldNum":null,"newNum":4,"text":""},{"kind":"add","oldNum":null,"newNum":5,"text":"- auth: verify JWT issuer against `SESSION_ISSUER` (default `clockless.ai`)"},{"kind":"add","oldNum":null,"newNum":6,"text":"- auth: convert `exp` comparison to seconds and tolerate 30s of clock skew"},{"kind":"add","oldNum":null,"newNum":7,"text":"- auth: return structured 401 errors instead of empty bodies"},{"kind":"add","oldNum":null,"newNum":8,"text":""},{"kind":"context","oldNum":3,"newNum":9,"text":"## 0.4.1 — 2026-04-22"},{"kind":"context","oldNum":4,"newNum":10,"text":""},{"kind":"context","oldNum":5,"newNum":11,"text":"- csv: handle BOM-prefixed UTF-8 inputs"},{"kind":"context","oldNum":6,"newNum":12,"text":""}]}]}],"totals":{"files":5,"additions":59,"deletions":8,"hunks":5,"byStatus":{"modified":4,"added":1,"deleted":0,"renamed":0},"byLanguage":{"typescript":3,"sql":1,"markdown":1}},"sourceFile":"input.diff","sizeBytes":4706,"format":"git-diff"};</script>
+<div class="dev-shell">
+
+  <!-- FINDING BAR -->
+  <div class="finding-bar" id="finding-bar">
+    <div class="finding-bar-header">
+      <div class="finding-title"><span>checkout-service: session expiry verification</span></div>
+    </div>
+    <div class="stat-row" id="stat-row"></div>
+    <div class="shape-hypothesis" id="shape-hypothesis">
+      <span class="hypothesis-chip">⚠ Hypothesis</span>
+      <span id="shape-text"></span>
+    </div>
+  </div>
+
+  <!-- HEATMAP -->
+  <div class="heatmap-section" id="heatmap-section">
+    <div class="section-label">Change heatmap</div>
+    <div class="heatmap-bars" id="heatmap-bars"></div>
+  </div>
+
+  <!-- RISK HOTSPOTS -->
+  <div class="evidence-workbench" id="hotspots-section">
+    <div class="section-label">Risk hotspots</div>
+    <div class="hotspot-map" id="hotspot-map"></div>
+  </div>
+
+  <!-- RISK MAP BY FILE -->
+  <div class="risk-checklist" id="risk-map-section">
+    <div class="section-label">Risk map by file</div>
+    <div class="table-wrap">
+      <table class="file-risk-table" id="file-risk-table">
+        <thead>
+          <tr>
+            <th data-col="path">File <span class="sort-icon">↕</span></th>
+            <th data-col="status">Status <span class="sort-icon">↕</span></th>
+            <th data-col="additions">+Add <span class="sort-icon">↕</span></th>
+            <th data-col="deletions">−Del <span class="sort-icon">↕</span></th>
+            <th data-col="risk">Risk note</th>
+          </tr>
+        </thead>
+        <tbody id="file-risk-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- REVIEW CHECKLIST -->
+  <div class="checklist-panel" id="checklist-section">
+    <div class="section-label">Review checklist</div>
+    <div class="checklist-progress"><span id="check-done">0</span> / <span id="check-total">0</span> verified</div>
+    <div class="checklist-grid" id="checklist-grid"></div>
+  </div>
+
+  <!-- CALL SITES PANEL -->
+  <div class="callsites-panel" id="callsites-section">
+    <div class="section-label">Call sites to check <span class="hypothesis-chip" style="font-size:0.6rem;margin-left:8px">Hypothesis</span></div>
+    <div class="table-wrap">
+      <div id="callsite-list"></div>
+    </div>
+  </div>
+
+  <!-- RAW ARTIFACT -->
+  <div class="raw-artifact" id="raw-artifact">
+    <div class="section-label">Raw diff</div>
+    <div class="artifact-header collapsed" id="artifact-header" onclick="toggleArtifact()">
+      <div class="artifact-title-row">
+        <span class="artifact-title">Full unified diff</span>
+        <span class="artifact-toggle"><span class="toggle-chevron">▼</span> click to expand</span>
+      </div>
+      <div class="artifact-controls" onclick="e => e.stopPropagation()">
+        <div class="search-box" onclick="event.stopPropagation()">
+          <span style="color:var(--fg-muted);font-size:0.75rem">⌕</span>
+          <input type="text" id="diff-search" placeholder="Search diff…" oninput="onDiffSearch(this.value)" onkeydown="searchKeyNav(event)">
+          <div class="search-nav">
+            <button onclick="event.stopPropagation();searchNav(-1)" title="Prev">▲</button>
+            <button onclick="event.stopPropagation();searchNav(1)" title="Next">▼</button>
+          </div>
+          <span class="search-count" id="search-count"></span>
+        </div>
+      </div>
+    </div>
+    <div class="artifact-body hidden" id="artifact-body">
+      <div class="file-nav" id="file-nav"></div>
+      <div id="diff-content"></div>
+    </div>
+  </div>
+
+  <!-- COPY HANDOFF -->
+  <div class="copy-handoff" id="copy-handoff">
+    <div class="section-label">Copy summary</div>
+    <div class="handoff-panel">
+      <div class="handoff-row">
+        <div class="handoff-desc">Paste a Markdown recap into a PR comment, incident channel, or ticket.</div>
+        <button class="btn-sm btn-primary" onclick="copySummary()">📋 Copy summary</button>
+        <span class="copy-success" id="copy-success">✓ Copied!</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="dev-footer">
+    <em>Generated locally — your diff / log / trace never left your machine. The full artifact is embedded in this HTML and rendered in your browser. The analysis above is a hypothesis from a sample, not a verdict; verify against the runtime before acting on it.</em>
+  </div>
+
+</div>
+
 <script>
-(function(){
-  const $ = sel => document.querySelector(sel);
-  const $$ = sel => Array.from(document.querySelectorAll(sel));
-
-  function escHtml(s){return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-  function escapeRegex(s){return String(s).replace(/[.*+?^()|[\]\\{}]/g, "\\$&")}
-  function highlight(s, q){
-    if (!q) return escHtml(s);
-    const re = new RegExp("(" + escapeRegex(q) + ")", "ig");
-    return escHtml(s).replace(re, "<mark>$1</mark>");
+(function() {
+  // ── helpers ──────────────────────────────────────────────────────────────
+  function esc(s) {
+    return String(s)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
   }
 
-  /* ---------- search across raw drill-down ---------- */
-  const rawSearch = $("#raw-search");
-  if (rawSearch) {
-    rawSearch.addEventListener("input", () => {
-      const q = rawSearch.value.trim();
-      const target = $("#raw-content");
-      if (!target) return;
-      const lines = target.querySelectorAll("[data-text]");
-      let firstHit = null;
-      lines.forEach(el => {
-        const text = el.getAttribute("data-text") || "";
-        if (!q) {
-          el.innerHTML = el.getAttribute("data-original") || escHtml(text);
-          el.style.display = "";
-        } else {
-          if (text.toLowerCase().includes(q.toLowerCase())) {
-            el.innerHTML = highlight(text, q);
-            el.style.display = "";
-            if (!firstHit) firstHit = el;
-          } else {
-            el.style.display = "none";
-          }
-        }
+  // ── risk model (static analysis based on schema) ─────────────────────────
+  const FILE_RISK = {
+    'src/auth/session.ts': {
+      sev: 'high',
+      note: 'Core auth boundary: the old `jwt.decode()` path compared `exp` against `Date.now()` (ms), the new path uses `Math.floor(Date.now()/1000)` (s) with a `CLOCK_SKEW_SECONDS` tolerance — confirm unit alignment is correct and no long-lived tokens bypass the new issuer check.',
+    },
+    'src/auth/middleware.ts': {
+      sev: 'med',
+      note: 'Auth header parsing is now stricter (explicit `Bearer ` prefix guard, `trim()`), and 401 responses gain a JSON body. Confirm downstream clients handle structured `{error}` payloads and that the `token || ""` fallback on line 10 is unreachable after the new early-return guard.',
+    },
+    'tests/auth/session.test.ts': {
+      sev: 'med',
+      note: 'Tests expand coverage (issuer mismatch case, `null` decode), but the sample is truncated — confirm a test covers the clock-skew boundary (`exp = now - CLOCK_SKEW_SECONDS - 1`) and a valid token with correct issuer is accepted.',
+    },
+    'migrations/0042_session_issuer.sql': {
+      sev: 'high',
+      note: 'Schema migration adds a `NOT NULL` `issuer` column with a backfill step; the backfill defaults to `clockless.ai`, but `CREATE INDEX CONCURRENTLY` requires a separate transaction — verify the migration runner allows that, and that rolling deployment handles rows written before migration completes.',
+    },
+    'CHANGELOG.md': {
+      sev: 'low',
+      note: 'Changelog entry only; no logic change. Confirm the version / date and that the entry accurately describes the scope of the change.',
+    },
+  };
+
+  const DEFAULT_RISK = { sev: 'low', note: 'No specific risk model for this file — review for correctness.' };
+
+  function fileRisk(path) {
+    return FILE_RISK[path] || DEFAULT_RISK;
+  }
+
+  const HOTSPOTS = [
+    {
+      sev: 'high',
+      path: 'src/auth/session.ts',
+      hunkId: 'h_0001',
+      text: 'The expiry comparison switches from milliseconds (`Date.now()`) to seconds (`Math.floor(Date.now()/1000)`) with a 30-second `CLOCK_SKEW_SECONDS` buffer. A unit mismatch between the old and new path could silently accept expired tokens; worth asserting the boundary in a test at exactly `exp = now_s - 31`.',
+    },
+    {
+      sev: 'high',
+      path: 'migrations/0042_session_issuer.sql',
+      hunkId: 'h_0004',
+      text: '`CREATE INDEX CONCURRENTLY` cannot run inside a transaction. If the migration runner wraps all steps in a single transaction, this will fail at runtime. Additionally, the `UPDATE … WHERE issuer IS NULL` backfill may lock the table under heavy write load during a rolling deploy.',
+    },
+    {
+      sev: 'med',
+      path: 'src/auth/middleware.ts',
+      hunkId: 'h_0002',
+      text: 'The `verifySession(token || "")` call on the context line remains from the old code — after the new explicit 401-early-return, `token` should never be falsy here, but the `|| ""` fallback masks that guarantee. Worth removing to make the invariant explicit.',
+    },
+    {
+      sev: 'med',
+      path: 'tests/auth/session.test.ts',
+      hunkId: 'h_0003',
+      text: 'The test file is truncated in the sample. At minimum, a test confirming a valid token with the correct issuer returns the decoded payload (the "happy path") and a clock-skew boundary test should be present.',
+    },
+  ];
+
+  const CHECKLIST = [
+    { text: 'Confirm the expiry comparison in <code>session.ts</code> uses consistent units: <code>exp</code> from JWT is in seconds; verify <code>Math.floor(Date.now()/1000)</code> is consistently applied and the 30-second skew is intentional.' },
+    { text: 'Verify a test covers the exact clock-skew boundary: <code>exp = Math.floor(Date.now()/1000) - CLOCK_SKEW_SECONDS - 1</code> should return null.' },
+    { text: 'Confirm a happy-path test exists: a valid, non-expired token with <code>iss === "clockless.ai"</code> should return the decoded payload.' },
+    { text: 'Check that <code>CREATE INDEX CONCURRENTLY</code> in migration <code>0042</code> is run outside a transaction (many runners wrap migrations automatically — verify the runner config).' },
+    { text: 'Confirm the backfill <code>UPDATE sessions SET issuer = \'clockless.ai\'</code> is safe under concurrent writes during a rolling deploy — existing sessions written by old code may lack the issuer column briefly.' },
+    { text: 'Verify downstream clients of <code>requireSession</code> handle the new structured JSON 401 body (<code>{"error":"missing_authorization"}</code>) rather than an empty 401 response.' },
+    { text: 'Grep for <code>verifySession(</code> call sites outside <code>middleware.ts</code> — the function signature changed (now returns <code>null</code> for bad issuer) and any caller that assumed non-null-on-valid-token needs review.' },
+    { text: 'Confirm <code>SESSION_ISSUER</code> environment variable is set in all deployment environments (staging, production); the fallback <code>"clockless.ai"</code> may not match production issuer values.' },
+  ];
+
+  const CALLSITES = [
+    { sym: 'verifySession(', desc: 'Renamed return type — now returns null for missing decoded payload, bad issuer, and expired token. Grep for all callers to confirm they handle null correctly.' },
+    { sym: 'EXPECTED_ISSUER', desc: 'New module-level constant; sourced from SESSION_ISSUER env var. Confirm this is set in all environments and CI.' },
+    { sym: 'CLOCK_SKEW_SECONDS', desc: 'Hardcoded to 30 — verify this is an acceptable skew tolerance for the use-case (30s may be too generous for short-lived session tokens).' },
+    { sym: 'requireSession(', desc: 'Middleware now returns a structured 401 JSON body on both missing-auth and invalid-session paths. Confirm API clients and integration tests expect this shape.' },
+  ];
+
+  // ── stat row ─────────────────────────────────────────────────────────────
+  function buildStats() {
+    const t = DATA.totals;
+    const statRow = document.getElementById('stat-row');
+    const items = [
+      { cls: 'file', label: `${t.files} file${t.files>1?'s':''}` },
+      { cls: 'add', label: `+${t.additions}` },
+      { cls: 'del', label: `−${t.deletions}` },
+      { cls: '', label: `${t.hunks} hunk${t.hunks>1?'s':''}` },
+    ];
+    // langs
+    Object.entries(t.byLanguage||{}).forEach(([lang, n]) => {
+      items.push({ cls: 'lang', label: `.${lang} × ${n}` });
+    });
+    statRow.innerHTML = items.map(i =>
+      `<span class="stat-chip ${i.cls}">${esc(i.label)}</span>`
+    ).join('');
+
+    // shape hypothesis
+    document.getElementById('shape-text').textContent =
+      'This appears to be a security hardening feature: the session layer adds issuer validation and fixes a JWT expiry unit bug (ms vs s), the middleware gains structured 401 responses, a SQL migration introduces the issuer column, and tests expand coverage — likely driven by a cross-issuer token acceptance vulnerability or an audit finding.';
+  }
+
+  // ── heatmap ──────────────────────────────────────────────────────────────
+  function buildHeatmap() {
+    const files = DATA.files;
+    const maxChurn = Math.max(...files.map(f => f.additions + f.deletions), 1);
+    const HEIGHT = 72;
+    const bars = document.getElementById('heatmap-bars');
+    bars.innerHTML = files.map(f => {
+      const total = f.additions + f.deletions;
+      const h = Math.max(4, Math.round((total / maxChurn) * HEIGHT));
+      const addH = total > 0 ? Math.round((f.additions / total) * h) : 0;
+      const delH = h - addH;
+      const shortName = f.path.split('/').pop();
+      return `<div class="heatmap-bar-group" onclick="scrollToFile('${esc(f.id)}')" title="${esc(f.path)}: +${f.additions} −${f.deletions}">
+        <div class="heatmap-bar-stack" style="height:${h}px">
+          ${addH > 0 ? `<div class="hbar-add" style="height:${addH}px"></div>` : ''}
+          ${delH > 0 ? `<div class="hbar-del" style="height:${delH}px"></div>` : ''}
+        </div>
+        <div class="hbar-label">${esc(shortName)}</div>
+      </div>`;
+    }).join('');
+  }
+
+  // ── hotspots ─────────────────────────────────────────────────────────────
+  function buildHotspots() {
+    const map = document.getElementById('hotspot-map');
+    map.innerHTML = HOTSPOTS.map(h =>
+      `<div class="hotspot-card sev-${h.sev}" onclick="jumpToHunk('${esc(h.hunkId)}')">
+        <span class="hotspot-sev">${h.sev.toUpperCase()}</span>
+        <div class="hotspot-body">
+          <div class="hotspot-path">${esc(h.path)}</div>
+          <div class="hotspot-text"><span class="hypothesis-chip">Hypothesis</span> ${esc(h.text)}</div>
+          <a class="hotspot-link" href="#hunk-${esc(h.hunkId)}" onclick="expandArtifact()">↓ view in diff</a>
+        </div>
+      </div>`
+    ).join('');
+  }
+
+  // ── risk map table ────────────────────────────────────────────────────────
+  let sortCol = 'risk'; let sortDir = 1;
+  function buildRiskMap() {
+    const tbody = document.getElementById('file-risk-tbody');
+    const files = [...DATA.files];
+
+    // sort
+    files.sort((a,b) => {
+      const sevOrder = {high:0, med:1, low:2};
+      if (sortCol === 'risk') {
+        const sa = sevOrder[fileRisk(a.path).sev] ?? 3;
+        const sb = sevOrder[fileRisk(b.path).sev] ?? 3;
+        return sortDir * (sa - sb);
+      }
+      if (sortCol === 'additions') return sortDir * (b.additions - a.additions);
+      if (sortCol === 'deletions') return sortDir * (b.deletions - a.deletions);
+      if (sortCol === 'path') return sortDir * a.path.localeCompare(b.path);
+      if (sortCol === 'status') return sortDir * a.status.localeCompare(b.status);
+      return 0;
+    });
+
+    tbody.innerHTML = files.map(f => {
+      const r = fileRisk(f.path);
+      return `<tr>
+        <td><span class="frt-path" onclick="scrollToFile('${esc(f.id)}')" style="cursor:pointer">${esc(f.path)}</span></td>
+        <td><span class="frt-status status-${esc(f.status)}">${esc(f.status)}</span></td>
+        <td><span class="frt-add">+${f.additions}</span></td>
+        <td><span class="frt-del">−${f.deletions}</span></td>
+        <td><span class="frt-risk"><span class="hypothesis-chip">Hypothesis</span> ${esc(r.note)}</span></td>
+      </tr>`;
+    }).join('');
+
+    // header sort indicators
+    document.querySelectorAll('.file-risk-table th').forEach(th => {
+      th.classList.toggle('sorted', th.dataset.col === sortCol);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.file-risk-table th[data-col]').forEach(th => {
+      th.addEventListener('click', () => {
+        if (sortCol === th.dataset.col) sortDir *= -1;
+        else { sortCol = th.dataset.col; sortDir = 1; }
+        buildRiskMap();
       });
-      const summary = $("#raw-section");
-      if (summary && q) summary.open = true;
-      if (firstHit) firstHit.scrollIntoView({block: "center", behavior: "smooth"});
     });
-  }
-
-  /* ---------- vendor frame fold (stack-trace) ---------- */
-  $$(".fold-toggle").forEach(t => {
-    t.addEventListener("click", () => {
-      const list = t.closest("ul").querySelectorAll("li.frame.vendor");
-      const folded = t.getAttribute("data-folded") === "1";
-      list.forEach(el => { el.style.display = folded ? "" : "none"; });
-      t.setAttribute("data-folded", folded ? "0" : "1");
-      t.textContent = folded ? "Hide framework / vendor frames" : ("Show " + list.length + " framework / vendor frames");
-    });
-    // start folded
-    const list = t.closest("ul").querySelectorAll("li.frame.vendor");
-    list.forEach(el => { el.style.display = "none"; });
   });
 
-  /* ---------- copy summary ---------- */
-  const btn = $("#copy-md-btn");
-  if (btn) {
-    btn.addEventListener("click", async () => {
-      const md = window.__MARKDOWN_SUMMARY__ || "";
-      try {
-        await navigator.clipboard.writeText(md);
-        btn.textContent = "Copied!";
-        setTimeout(() => { btn.textContent = "Copy summary"; }, 1500);
-      } catch {
-        window.prompt("Copy this Markdown:", md);
-      }
-    });
+  // ── checklist ─────────────────────────────────────────────────────────────
+  let checked = new Set();
+  function buildChecklist() {
+    const grid = document.getElementById('checklist-grid');
+    document.getElementById('check-total').textContent = CHECKLIST.length;
+    grid.innerHTML = CHECKLIST.map((item, i) =>
+      `<div class="checklist-item" onclick="toggleCheck(${i})">
+        <div class="check-box${checked.has(i)?' checked':''}" id="cb-${i}"></div>
+        <div class="check-text">${item.text}</div>
+      </div>`
+    ).join('');
   }
-})();
-</script>
-<script>window.__MARKDOWN_SUMMARY__ = "# Diff review\n\n- Files: 5\n- Diff: +59 / −8 across 5 hunks\n\n## Risk hotspots (hypothesis)\n- **migrations/0042_session_issuer.sql** (+9 / −0) — Schema migration — verify it runs against a populated table without locking out concurrent writers, and that the rollback path is captured.\n- **tests/auth/session.test.ts** (+27 / −3) — Auth boundary touched — confirm every empty / malformed input case is still rejected and that the change does not loosen any existing guard.\n- **src/auth/session.ts** (+11 / −3) — Auth boundary touched — confirm every empty / malformed input case is still rejected and that the change does not loosen any existing guard.\n- **src/auth/middleware.ts** (+6 / −2) — Auth boundary touched — confirm every empty / malformed input case is still rejected and that the change does not loosen any existing guard.\n\n## Review checklist\n1. Re-test session.ts with empty, expired, and malformed tokens — confirm the new guard still rejects each.\n2. Re-test middleware.ts with empty, expired, and malformed tokens — confirm the new guard still rejects each.\n3. Re-test session.test.ts with empty, expired, and malformed tokens — confirm the new guard still rejects each.\n4. Re-test 0042_session_issuer.sql with empty, expired, and malformed tokens — confirm the new guard still rejects each.\n\n_Hypothesis from a sample diff. Verify against the runtime before acting._";</script>
-</body>
-</html>
+  window.toggleCheck = function(i) {
+    if (checked.has(i)) checked.delete(i);
+    else checked.add(i);
+    document.getElementById(`cb-${i}`).className = 'check-box' + (checked.has(i)?' checked':'');
+    document.getElementById('check-done').textContent = checked.size;
+  };
+
+  // ── call sites ───────────────────────────────────────────────────────────
+  function buildCallSites() {
+    const list = document.getElementById('callsite-list');
+    list.innerHTML = CALLSITES.map(c =>
+      `<div class="callsite-item">
+        <span class="callsite-sym">${esc(c.sym)}</span>
+        <span class="callsite-desc">${esc(c.desc)}</span>
+      </div>`
+    ).join('');
+  }
+
+  // ── diff rendering ───────────────────────────────────────────────────────
+  function buildDiff() {
+    const fileNav = document.getElementById('file-nav');
+    const content = document.getElementById('diff-content');
+    fileNav.innerHTML = DATA.files.map(f =>
+      `<button class="file-nav-btn" onclick="scrollToFile('${esc(f.id)}')">${esc(f.path.split('/').pop())}</button>`
+    ).join('');
+
+    content.innerHTML = DATA.files.map(f => buildFileDiff(f)).join('');
+  }
+
+  function buildFileDiff(f) {
+    const r = fileRisk(f.path);
+    const hunksHtml = (f.hunks || []).map(h => buildHunk(f, h)).join('');
+    return `<div class="diff-file-section" id="file-${esc(f.id)}">
+      <div class="diff-file-header" onclick="toggleFileCollapse('${esc(f.id)}')">
+        <span class="diff-file-path">${esc(f.path)}</span>
+        <span class="frt-status status-${esc(f.status)}">${esc(f.status)}</span>
+        <div class="diff-file-delta">
+          <span class="diff-add">+${f.additions}</span>
+          <span class="diff-del">−${f.deletions}</span>
+        </div>
+        <span class="diff-file-toggle toggle-chevron">▼</span>
+      </div>
+      <div class="diff-file-body" id="fbody-${esc(f.id)}">${hunksHtml}</div>
+    </div>`;
+  }
+
+  function buildHunk(f, h) {
+    const lines = (h.sampleLines || h.lines || []);
+    const linesHtml = lines.map(l => {
+      const cls = l.kind === 'add' ? 'line-add' : l.kind === 'del' ? 'line-del' : 'line-context';
+      const sign = l.kind === 'add' ? '+' : l.kind === 'del' ? '−' : ' ';
+      const oldN = l.oldNum != null ? l.oldNum : '';
+      const newN = l.newNum != null ? l.newNum : '';
+      return `<tr class="${cls}" data-text="${esc(l.text)}">
+        <td class="ln">${esc(String(oldN))}</td>
+        <td class="ln">${esc(String(newN))}</td>
+        <td class="line-sign">${sign}</td>
+        <td class="line-code">${esc(l.text)}</td>
+      </tr>`;
+    }).join('');
+
+    const truncNote = h.truncated ?
+      `<tr><td colspan="4" style="padding:4px 16px;font-family:var(--font-mono);font-size:0.7rem;color:var(--fg-muted);background:var(--surface-container)">… ${(h.totalLines||0) - lines.length} more lines (truncated in sample)</td></tr>` : '';
+
+    return `<div id="hunk-${esc(h.id)}">
+      <div class="diff-hunk-header">
+        <span class="hunk-chip">${esc(h.header)}</span>
+        ${h.context ? `<span class="hunk-context-text">${esc(h.context)}</span>` : ''}
+        <button class="hunk-copy-btn" onclick="copyHunk('${esc(h.id)}')">copy hunk</button>
+      </div>
+      <table class="diff-line-table" id="htbl-${esc(h.id)}">${linesHtml}${truncNote}</table>
+    </div>`;
+  }
+
+  window.toggleFileCollapse = function(id) {
+    const body = document.getElementById('fbody-' + id);
+    if (!body) return;
+    body.classList.toggle('collapsed');
+  };
+
+  window.scrollToFile = function(id) {
+    expandArtifact();
+    setTimeout(() => {
+      const el = document.getElementById('file-' + id);
+      if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    }, 80);
+  };
+
+  window.jumpToHunk = function(hunkId) {
+    expandArtifact();
+    setTimeout(() => {
+      const el = document.getElementById('hunk-' + hunkId);
+      if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    }, 80);
+  };
+
+  // ── artifact expand/collapse ─────────────────────────────────────────────
+  window.toggleArtifact = function() {
+    const header = document.getElementById('artifact-header');
+    const body = document.getElementById('artifact-body');
+    const collapsed = header.classList.toggle('collapsed');
+    body.classList.toggle('hidden', collapsed);
+  };
+  window.expandArtifact = function() {
+    const header = document.getElementById('artifact-header');
+    const body = document.getElementById('artifact-body');
+    header.classList.remove('collapsed');
+    body.classList.remove('hidden');
+  };
+
+  // ── diff search ──────────────────────────────────────────────────────────
+  let matchNodes = [], matchIdx = 0;
+  window.onDiffSearch = function(q) {
+    // clear old
+    document.querySelectorAll('.search-highlight').forEach(el => {
+      el.replaceWith(document.createTextNode(el.textContent));
+    });
+    matchNodes = [];
+    if (!q || q.length < 2) { document.getElementById('search-count').textContent = ''; return; }
+
+    const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'gi');
+    document.querySelectorAll('.line-code').forEach(cell => {
+      const html = cell.innerHTML;
+      const newHtml = html.replace(re, m => `<mark class="search-highlight">${m}</mark>`);
+      if (newHtml !== html) cell.innerHTML = newHtml;
+    });
+    matchNodes = Array.from(document.querySelectorAll('.search-highlight'));
+    matchIdx = 0;
+    if (matchNodes.length > 0) activateMatch(0);
+    document.getElementById('search-count').textContent = matchNodes.length ? `${matchIdx+1}/${matchNodes.length}` : '0';
+  };
+
+  function activateMatch(i) {
+    matchNodes.forEach((n,j) => n.classList.toggle('active', j === i));
+    if (matchNodes[i]) matchNodes[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    document.getElementById('search-count').textContent = `${i+1}/${matchNodes.length}`;
+  }
+
+  window.searchNav = function(dir) {
+    if (!matchNodes.length) return;
+    matchIdx = (matchIdx + dir + matchNodes.length) % matchNodes.length;
+    activateMatch(matchIdx);
+  };
+  window.searchKeyNav = function(e) {
+    if (e.key === 'Enter') searchNav(e.shiftKey ?

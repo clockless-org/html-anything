@@ -1,0 +1,1474 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linewood Studio — Q1 2026 Bank Statement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --accent-cyan: #00D4FF;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981;
+  --blue: #3b82f6;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30,27,25,0.04);
+  --shadow-md: 0 4px 12px rgba(30,27,25,0.08);
+  --shadow-lg: 0 8px 24px rgba(30,27,25,0.12);
+  --shadow-accent: 0 8px 24px rgba(160,59,0,0.15);
+  --gradient-primary: linear-gradient(135deg,#a03b00 0%,#c94c00 100%);
+  --gradient-hero: linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #060B18;
+    --surface: #0B1426;
+    --surface-container-lowest: #101D35;
+    --surface-container-low: #101D35;
+    --surface-container: #162544;
+    --surface-container-high: #1c2d52;
+    --fg-1: #F8FAFC;
+    --fg-2: #CBD5E1;
+    --fg-muted: #64748B;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --primary: #FF6B35;
+    --accent-glow: #00D4FF;
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+    --outline-variant: #2a3a5c;
+  }
+}
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.55;
+  background: var(--bg);
+  color: var(--fg-1);
+  min-height: 100vh;
+}
+
+/* ─── OPS SHELL ─── */
+.ops-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ─── COMMAND BAR ─── */
+.command-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--surface-container-lowest);
+  border-bottom: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.command-bar-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 0 0 auto;
+}
+
+.command-bar-title {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+  white-space: nowrap;
+}
+
+.command-bar-period {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-muted);
+  white-space: nowrap;
+}
+
+.command-bar-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border-strong);
+  flex-shrink: 0;
+}
+
+.command-bar-search {
+  flex: 1 1 160px;
+  min-width: 120px;
+  max-width: 280px;
+  position: relative;
+}
+
+.command-bar-search input {
+  width: 100%;
+  padding: var(--space-sm) var(--space-sm) var(--space-sm) 28px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--surface-container);
+  color: var(--fg-1);
+  font-family: var(--font-body);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.command-bar-search input:focus {
+  border-color: var(--primary);
+}
+
+.command-bar-search .search-icon {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--fg-muted);
+  font-size: 13px;
+  pointer-events: none;
+}
+
+.filter-strip {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-chip {
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container);
+  color: var(--fg-2);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  font-family: var(--font-body);
+}
+
+.filter-chip:hover { border-color: var(--primary); color: var(--primary); }
+
+.filter-chip.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
+
+.cmd-actions {
+  display: flex;
+  gap: var(--space-sm);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.cmd-btn {
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container);
+  color: var(--fg-2);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font-body);
+  white-space: nowrap;
+}
+
+.cmd-btn:hover { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+
+/* ─── MAIN CONTENT ─── */
+.ops-main {
+  flex: 1;
+  padding: var(--space-lg);
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ─── KPI RAIL ─── */
+.kpi-rail {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.kpi-cell {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.kpi-cell.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+.kpi-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fg-muted);
+}
+
+.kpi-value {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-1);
+  line-height: 1.1;
+}
+
+.kpi-value.positive { color: var(--green); }
+.kpi-value.negative { color: var(--red); }
+.kpi-value.accent { color: var(--primary); }
+
+.kpi-sub {
+  font-size: 11.5px;
+  color: var(--fg-muted);
+}
+
+/* ─── SECTION HEADERS ─── */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+  gap: var(--space-md);
+}
+
+.section-title {
+  font-family: var(--font-headline);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* ─── WORK SURFACE ─── */
+.work-surface {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+@media (min-width: 900px) {
+  .work-surface {
+    grid-template-columns: 1fr 1fr;
+  }
+  .work-surface .span-2 {
+    grid-column: span 2;
+  }
+}
+
+.panel {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ─── TIMELINE CHART ─── */
+.timeline-chart-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.timeline-svg {
+  display: block;
+}
+
+/* ─── CATEGORY BARS ─── */
+.category-bar-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  min-height: 22px;
+}
+
+.cat-label {
+  font-size: 12.5px;
+  color: var(--fg-2);
+  width: 140px;
+  flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cat-bar-track {
+  flex: 1;
+  height: 8px;
+  background: var(--surface-container-high);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  min-width: 40px;
+}
+
+.cat-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.5s cubic-bezier(0.23,1,0.32,1);
+}
+
+.cat-meta {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--fg-muted);
+  width: 100px;
+  text-align: right;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ─── VENDOR LEADERBOARD ─── */
+.vendor-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.1s;
+  border-radius: var(--radius-sm);
+  padding-left: var(--space-sm);
+  padding-right: var(--space-sm);
+}
+
+.vendor-row:last-child { border-bottom: none; }
+.vendor-row:hover { background: var(--surface-container-low); }
+
+.vendor-rank {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-muted);
+  width: 20px;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.vendor-name {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fg-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vendor-badge {
+  font-size: 10px;
+  padding: 1px 7px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.badge-out { background: rgba(239,68,68,0.1); color: var(--red); }
+.badge-in { background: rgba(16,185,129,0.1); color: var(--green); }
+
+.vendor-amount {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+  text-align: right;
+  width: 90px;
+}
+
+.vendor-count {
+  font-size: 11px;
+  color: var(--fg-muted);
+  width: 32px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ─── RECURRING PANEL ─── */
+.recurring-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.recurring-row:last-child { border-bottom: none; }
+
+.recurring-info { flex: 1; min-width: 0; }
+
+.recurring-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recurring-meta {
+  font-size: 11.5px;
+  color: var(--fg-muted);
+  margin-top: 2px;
+}
+
+.recurring-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.recurring-amount {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.recurring-cadence {
+  font-size: 11px;
+  color: var(--fg-muted);
+  margin-top: 2px;
+}
+
+.tag-chip {
+  display: inline-block;
+  font-size: 10px;
+  padding: 1px 7px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  margin-right: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.tag-subscription { background: rgba(75,68,227,0.1); color: var(--tertiary); }
+.tag-payroll { background: rgba(245,158,11,0.1); color: var(--yellow); }
+.tag-income { background: rgba(16,185,129,0.1); color: var(--green); }
+.tag-payment { background: rgba(59,130,246,0.1); color: var(--blue); }
+
+/* ─── FLAG QUEUE ─── */
+.flag-queue {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.flag-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  border-left: 3px solid var(--fg-muted);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.flag-card.revealed { opacity: 1; transform: none; }
+
+.flag-card.kind-duplicate { border-left-color: var(--red); }
+.flag-card.kind-outlier-amount { border-left-color: var(--yellow); }
+.flag-card.kind-first-time-vendor { border-left-color: var(--blue); }
+.flag-card.kind-negative-balance { border-left-color: var(--secondary-container); }
+.flag-card.kind-missing-category { border-left-color: var(--fg-muted); }
+
+.flag-kind-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-sm);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.flag-card.kind-duplicate .flag-kind-badge { color: var(--red); }
+.flag-card.kind-outlier-amount .flag-kind-badge { color: var(--yellow); }
+.flag-card.kind-first-time-vendor .flag-kind-badge { color: var(--blue); }
+.flag-card.kind-negative-balance .flag-kind-badge { color: var(--secondary-container); }
+.flag-card.kind-missing-category .flag-kind-badge { color: var(--fg-muted); }
+
+.flag-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg-1);
+  margin-bottom: var(--space-xs);
+}
+
+.flag-detail {
+  font-size: 12px;
+  color: var(--fg-2);
+  line-height: 1.5;
+}
+
+.flag-link {
+  font-size: 11px;
+  color: var(--primary);
+  cursor: pointer;
+  margin-top: var(--space-sm);
+  display: inline-block;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.flag-link:hover { opacity: 0.8; }
+
+/* ─── DATA GRID ─── */
+.data-grid-section {
+  margin-bottom: var(--space-3xl);
+}
+
+.drill-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  cursor: pointer;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: background 0.15s;
+  font-family: var(--font-headline);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  user-select: none;
+}
+
+.drill-toggle:hover { background: var(--surface-container-low); }
+
+.drill-toggle .chevron {
+  margin-left: auto;
+  transition: transform 0.2s;
+  color: var(--fg-muted);
+}
+
+.drill-toggle.open .chevron { transform: rotate(180deg); }
+
+.drill-body {
+  display: none;
+  margin-top: var(--space-md);
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.drill-body.open { display: block; }
+
+.grid-controls {
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  align-items: center;
+  background: var(--surface-container-low);
+}
+
+.grid-search {
+  flex: 1 1 180px;
+  max-width: 300px;
+  position: relative;
+}
+
+.grid-search input {
+  width: 100%;
+  padding: var(--space-sm) var(--space-sm) var(--space-sm) 28px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--surface-container-lowest);
+  color: var(--fg-1);
+  font-family: var(--font-body);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.grid-search input:focus { border-color: var(--primary); }
+
+.grid-search .s-icon {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--fg-muted);
+  font-size: 13px;
+  pointer-events: none;
+}
+
+.grid-cat-chips {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.grid-cat-chip {
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container);
+  color: var(--fg-2);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.12s;
+  white-space: nowrap;
+}
+
+.grid-cat-chip:hover { border-color: var(--primary); color: var(--primary); }
+.grid-cat-chip.active { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+
+.data-grid {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+thead {
+  background: var(--surface-container-low);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+th {
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  font-family: var(--font-headline);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--fg-muted);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+th:hover { color: var(--primary); }
+th.sort-asc::after { content: ' ↑'; }
+th.sort-desc::after { content: ' ↓'; }
+
+th.right, td.right { text-align: right; }
+
+td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+  font-variant-numeric: tabular-nums;
+}
+
+tr:last-child td { border-bottom: none; }
+
+tr.row-flagged td { background: rgba(239,68,68,0.03); }
+
+tr.row-detail-open td { background: var(--surface-container-low); }
+
+.tr-clickable { cursor: pointer; transition: background 0.1s; }
+.tr-clickable:hover td { background: var(--surface-container-low); }
+
+.amount-out { color: var(--red); font-family: var(--font-mono); }
+.amount-in { color: var(--green); font-family: var(--font-mono); }
+.amount-zero { color: var(--fg-muted); font-family: var(--font-mono); }
+.balance-neg { color: var(--red); }
+
+.flag-badge-inline {
+  display: inline-block;
+  font-size: 9px;
+  padding: 1px 5px;
+  border-radius: var(--radius-pill);
+  background: rgba(239,68,68,0.12);
+  color: var(--red);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.row-detail {
+  display: none;
+  background: var(--surface-container);
+}
+
+.row-detail.open { display: table-row; }
+
+.row-detail td {
+  padding: var(--space-sm) var(--space-lg);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--fg-2);
+  border-bottom: 2px solid var(--border-strong);
+}
+
+.row-detail-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-xl);
+}
+
+.row-detail-kv { display: flex; flex-direction: column; gap: 2px; }
+.row-detail-k { font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fg-muted); }
+.row-detail-v { color: var(--fg-1); }
+
+.cat-tag {
+  display: inline-block;
+  font-size: 11px;
+  padding: 1px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-container-high);
+  color: var(--fg-2);
+  font-weight: 500;
+}
+
+.highlight {
+  background: rgba(232,64,13,0.2);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+.grid-footer {
+  padding: var(--space-md) var(--space-lg);
+  background: var(--surface-container-low);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.grid-count {
+  font-size: 12px;
+  color: var(--fg-muted);
+}
+
+.load-more-btn {
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container);
+  color: var(--fg-2);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font-body);
+}
+
+.load-more-btn:hover { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+
+/* ─── MONTH COMPARISON ─── */
+.month-tabs {
+  display: flex;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-lg);
+}
+
+.month-tab {
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container);
+  color: var(--fg-2);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font-body);
+}
+
+.month-tab:hover { border-color: var(--primary); color: var(--primary); }
+.month-tab.active { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+
+.mom-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-md);
+}
+
+.mom-card {
+  background: var(--surface-container-low);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  border: 1px solid var(--border);
+}
+
+.mom-cat { font-size: 12px; color: var(--fg-muted); margin-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mom-val { font-family: var(--font-mono); font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.mom-delta { font-size: 11.5px; margin-top: 2px; font-variant-numeric: tabular-nums; }
+.delta-up { color: var(--red); }
+.delta-down { color: var(--green); }
+.delta-neutral { color: var(--fg-muted); }
+
+/* ─── FOOTER ─── */
+.ops-footer {
+  background: var(--surface-container-low);
+  border-top: 1px solid var(--border);
+  padding: var(--space-xl) var(--space-lg);
+  text-align: center;
+}
+
+.footer-note {
+  font-size: 12px;
+  color: var(--fg-muted);
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.footer-note em { font-style: italic; }
+
+/* ─── TOAST ─── */
+.toast {
+  position: fixed;
+  bottom: var(--space-xl);
+  right: var(--space-xl);
+  background: var(--fg-1);
+  color: var(--bg);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: all 0.2s;
+  z-index: 1000;
+}
+
+.toast.show { opacity: 1; transform: none; }
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--outline-variant); border-radius: 3px; }
+
+/* ─── REDUCED MOTION ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, .cat-bar-fill, .kpi-cell, .flag-card {
+    animation: none !important;
+    transition: none !important;
+  }
+  .kpi-cell, .flag-card { opacity: 1 !important; transform: none !important; }
+  .cat-bar-fill { transform: none !important; }
+}
+</style>
+</head>
+<body>
+
+<script>const DATA = {"format":"bank-transactions","subtype":"bank","rows":[{"id":"tx_000001","date":"2026-01-02","dateEpoch":1767312000000,"amount":0,"currency":"USD","description":"OPENING BALANCE","merchant":"OPENING BALANCE","category":null,"memo":null,"account":null,"balance":18420.5,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-02","Description":"OPENING BALANCE","Merchant":"","Category":"","Amount":"","Balance":"18420.50"}},{"id":"tx_000002","date":"2026-01-03","dateEpoch":1767398400000,"amount":12500,"currency":"USD","description":"WIRE FROM NORTHWIND CO INV-1029","merchant":"Northwind Co","category":"Consulting Income","memo":null,"account":null,"balance":30920.5,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-03","Description":"WIRE FROM NORTHWIND CO INV-1029","Merchant":"Northwind Co","Category":"Consulting Income","Amount":"12500.00","Balance":"30920.50"}},{"id":"tx_000003","date":"2026-01-04","dateEpoch":1767484800000,"amount":-42.99,"currency":"USD","description":"STRIPE TRANSFER 09/04","merchant":"Stripe","category":"Payment Processing","memo":null,"account":null,"balance":30877.51,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-04","Description":"STRIPE TRANSFER 09/04","Merchant":"Stripe","Category":"Payment Processing","Amount":"-42.99","Balance":"30877.51"}},{"id":"tx_000004","date":"2026-01-04","dateEpoch":1767484800000,"amount":-842.18,"currency":"USD","description":"AWS MARKETPLACE","merchant":"AWS","category":"Cloud Infrastructure","memo":null,"account":null,"balance":30035.33,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-04","Description":"AWS MARKETPLACE","Merchant":"AWS","Category":"Cloud Infrastructure","Amount":"-842.18","Balance":"30035.33"}},{"id":"tx_000005","date":"2026-01-05","dateEpoch":1767571200000,"amount":-16,"currency":"USD","description":"NOTION LABS INC","merchant":"Notion","category":"Software","memo":null,"account":null,"balance":30019.33,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-05","Description":"NOTION LABS INC","Merchant":"Notion","Category":"Software","Amount":"-16.00","Balance":"30019.33"}},{"id":"tx_000006","date":"2026-01-05","dateEpoch":1767571200000,"amount":-21,"currency":"USD","description":"GITHUB INC PRO","merchant":"GitHub","category":"Software","memo":null,"account":null,"balance":29998.33,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-05","Description":"GITHUB INC PRO","Merchant":"GitHub","Category":"Software","Amount":"-21.00","Balance":"29998.33"}},{"id":"tx_000007","date":"2026-01-06","dateEpoch":1767657600000,"amount":-30,"currency":"USD","description":"SLACK TECHNOLOGIES","merchant":"Slack","category":"Software","memo":null,"account":null,"balance":29968.33,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-06","Description":"SLACK TECHNOLOGIES","Merchant":"Slack","Category":"Software","Amount":"-30.00","Balance":"29968.33"}},{"id":"tx_000008","date":"2026-01-06","dateEpoch":1767657600000,"amount":-15,"currency":"USD","description":"FIGMA INC PROFESSIONAL","merchant":"Figma","category":"Software","memo":null,"account":null,"balance":29953.33,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-06","Description":"FIGMA INC PROFESSIONAL","Merchant":"Figma","Category":"Software","Amount":"-15.00","Balance":"29953.33"}},{"id":"tx_000009","date":"2026-01-07","dateEpoch":1767744000000,"amount":4250,"currency":"USD","description":"DEPOSIT REMOTE - LAVENDER PROJECTS","merchant":"Lavender Projects","category":"Consulting Income","memo":null,"account":null,"balance":34203.33,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-07","Description":"DEPOSIT REMOTE - LAVENDER PROJECTS","Merchant":"Lavender Projects","Category":"Consulting Income","Amount":"4250.00","Balance":"34203.33"}},{"id":"tx_000010","date":"2026-01-08","dateEpoch":1767830400000,"amount":-48.2,"currency":"USD","description":"UBER EATS LUNCH MEETING","merchant":"Uber Eats","category":"Meals","memo":null,"account":null,"balance":34155.13,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-08","Description":"UBER EATS LUNCH MEETING","Merchant":"Uber Eats","Category":"Meals","Amount":"-48.20","Balance":"34155.13"}},{"id":"tx_000011","date":"2026-01-09","dateEpoch":1767916800000,"amount":-12.4,"currency":"USD","description":"ALPINE COFFEE HOUSE","merchant":"Alpine Coffee House","category":"Meals","memo":null,"account":null,"balance":34142.73,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-09","Description":"ALPINE COFFEE HOUSE","Merchant":"Alpine Coffee House","Category":"Meals","Amount":"-12.40","Balance":"34142.73"}},{"id":"tx_000012","date":"2026-01-12","dateEpoch":1768176000000,"amount":-149.9,"currency":"USD","description":"ZOOM VIDEO COMMUNICATIONS","merchant":"Zoom","category":"Software","memo":null,"account":null,"balance":33992.83,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-12","Description":"ZOOM VIDEO COMMUNICATIONS","Merchant":"Zoom","Category":"Software","Amount":"-149.90","Balance":"33992.83"}},{"id":"tx_000013","date":"2026-01-13","dateEpoch":1768262400000,"amount":-4200,"currency":"USD","description":"WE WORK MEMBERSHIP MONTHLY","merchant":"WeWork","category":"Rent","memo":null,"account":null,"balance":29792.83,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":["outlier-amount"],"raw":{"Date":"2026-01-13","Description":"WE WORK MEMBERSHIP MONTHLY","Merchant":"WeWork","Category":"Rent","Amount":"-4200.00","Balance":"29792.83"}},{"id":"tx_000014","date":"2026-01-15","dateEpoch":1768435200000,"amount":-12480.45,"currency":"USD","description":"GUSTO PAYROLL JAN1-15","merchant":"Gusto","category":"Payroll","memo":null,"account":null,"balance":17312.38,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-15","Description":"GUSTO PAYROLL JAN1-15","Merchant":"Gusto","Category":"Payroll","Amount":"-12480.45","Balance":"17312.38"}},{"id":"tx_000015","date":"2026-01-15","dateEpoch":1768435200000,"amount":-42.99,"currency":"USD","description":"STRIPE TRANSFER 09/15","merchant":"Stripe","category":"Payment Processing","memo":null,"account":null,"balance":17269.39,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":["duplicate"],"raw":{"Date":"2026-01-15","Description":"STRIPE TRANSFER 09/15","Merchant":"Stripe","Category":"Payment Processing","Amount":"-42.99","Balance":"17269.39"}},{"id":"tx_000016","date":"2026-01-15","dateEpoch":1768435200000,"amount":-42.99,"currency":"USD","description":"STRIPE TRANSFER 09/15","merchant":"Stripe","category":"Payment Processing","memo":null,"account":null,"balance":17226.4,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":["duplicate"],"raw":{"Date":"2026-01-15","Description":"STRIPE TRANSFER 09/15","Merchant":"Stripe","Category":"Payment Processing","Amount":"-42.99","Balance":"17226.40"}},{"id":"tx_000017","date":"2026-01-16","dateEpoch":1768521600000,"amount":-189.95,"currency":"USD","description":"COMCAST BUSINESS INTERNET","merchant":"Comcast","category":"Utilities","memo":null,"account":null,"balance":17036.45,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-16","Description":"COMCAST BUSINESS INTERNET","Merchant":"Comcast","Category":"Utilities","Amount":"-189.95","Balance":"17036.45"}},{"id":"tx_000018","date":"2026-01-16","dateEpoch":1768521600000,"amount":8500,"currency":"USD","description":"WIRE FROM ACME LABS INV-1031","merchant":"Acme Labs","category":"Consulting Income","memo":null,"account":null,"balance":25536.45,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-16","Description":"WIRE FROM ACME LABS INV-1031","Merchant":"Acme Labs","Category":"Consulting Income","Amount":"8500.00","Balance":"25536.45"}},{"id":"tx_000019","date":"2026-01-19","dateEpoch":1768780800000,"amount":-186.4,"currency":"USD","description":"ATT WIRELESS BUSINESS","merchant":"AT&T","category":"Utilities","memo":null,"account":null,"balance":25350.05,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-19","Description":"ATT WIRELESS BUSINESS","Merchant":"AT&T","Category":"Utilities","Amount":"-186.40","Balance":"25350.05"}},{"id":"tx_000020","date":"2026-01-20","dateEpoch":1768867200000,"amount":-128.42,"currency":"USD","description":"AMAZON.COM*1AB2C3DE WA","merchant":"Amazon","category":"Office Supplies","memo":null,"account":null,"balance":25221.63,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-20","Description":"AMAZON.COM*1AB2C3DE WA","Merchant":"Amazon","Category":"Office Supplies","Amount":"-128.42","Balance":"25221.63"}},{"id":"tx_000021","date":"2026-01-20","dateEpoch":1768867200000,"amount":-24,"currency":"USD","description":"LINEAR APP SOFTWARE","merchant":"Linear","category":"Software","memo":null,"account":null,"balance":25197.63,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-20","Description":"LINEAR APP SOFTWARE","Merchant":"Linear","Category":"Software","Amount":"-24.00","Balance":"25197.63"}},{"id":"tx_000022","date":"2026-01-22","dateEpoch":1769040000000,"amount":-72,"currency":"USD","description":"GOOGLE WORKSPACE BUSINESS","merchant":"Google Workspace","category":"Software","memo":null,"account":null,"balance":25125.63,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-22","Description":"GOOGLE WORKSPACE BUSINESS","Merchant":"Google Workspace","Category":"Software","Amount":"-72.00","Balance":"25125.63"}},{"id":"tx_000023","date":"2026-01-23","dateEpoch":1769126400000,"amount":-624.3,"currency":"USD","description":"DELTA AIR LINES NYC-SFO","merchant":"Delta","category":"Travel","memo":null,"account":null,"balance":24501.33,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-23","Description":"DELTA AIR LINES NYC-SFO","Merchant":"Delta","Category":"Travel","Amount":"-624.30","Balance":"24501.33"}},{"id":"tx_000024","date":"2026-01-23","dateEpoch":1769126400000,"amount":-38.2,"currency":"USD","description":"LYFT RIDE TO AIRPORT","merchant":"Lyft","category":"Travel","memo":null,"account":null,"balance":24463.13,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-23","Description":"LYFT RIDE TO AIRPORT","Merchant":"Lyft","Category":"Travel","Amount":"-38.20","Balance":"24463.13"}},{"id":"tx_000025","date":"2026-01-26","dateEpoch":1769385600000,"amount":-1240,"currency":"USD","description":"HOTEL HOTEL SF","merchant":"Hotel Hotel","category":"Travel","memo":null,"account":null,"balance":23223.13,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-26","Description":"HOTEL HOTEL SF","Merchant":"Hotel Hotel","Category":"Travel","Amount":"-1240.00","Balance":"23223.13"}},{"id":"tx_000026","date":"2026-01-29","dateEpoch":1769644800000,"amount":-42.99,"currency":"USD","description":"STRIPE TRANSFER 09/29","merchant":"Stripe","category":"Payment Processing","memo":null,"account":null,"balance":23180.14,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-29","Description":"STRIPE TRANSFER 09/29","Merchant":"Stripe","Category":"Payment Processing","Amount":"-42.99","Balance":"23180.14"}},{"id":"tx_000027","date":"2026-01-30","dateEpoch":1769731200000,"amount":-184.5,"currency":"USD","description":"ANTHROPIC API USAGE","merchant":"Anthropic","category":"Software","memo":null,"account":null,"balance":22995.64,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-30","Description":"ANTHROPIC API USAGE","Merchant":"Anthropic","Category":"Software","Amount":"-184.50","Balance":"22995.64"}},{"id":"tx_000028","date":"2026-01-30","dateEpoch":1769731200000,"amount":-12480.45,"currency":"USD","description":"GUSTO PAYROLL JAN16-31","merchant":"Gusto","category":"Payroll","memo":null,"account":null,"balance":10515.19,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-30","Description":"GUSTO PAYROLL JAN16-31","Merchant":"Gusto","Category":"Payroll","Amount":"-12480.45","Balance":"10515.19"}},{"id":"tx_000029","date":"2026-01-31","dateEpoch":1769817600000,"amount":6800,"currency":"USD","description":"DEPOSIT REMOTE - SUMMITWORKS LLC","merchant":"SummitWorks LLC","category":"Consulting Income","memo":null,"account":null,"balance":17315.19,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-01-31","Description":"DEPOSIT REMOTE - SUMMITWORKS LLC","Merchant":"SummitWorks LLC","Category":"Consulting Income","Amount":"6800.00","Balance":"17315.19"}},{"id":"tx_000030","date":"2026-02-01","dateEpoch":1769904000000,"amount":4200,"currency":"USD","description":"SUMITOMO TRANSFER REVERSAL","merchant":"SUMITOMO TRANSFER REVERSAL","category":"Transfer","memo":null,"account":null,"balance":21515.19,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-01","Description":"SUMITOMO TRANSFER REVERSAL","Merchant":"","Category":"Transfer","Amount":"4200.00","Balance":"21515.19"}},{"id":"tx_000031","date":"2026-02-02","dateEpoch":1769990400000,"amount":-4200,"currency":"USD","description":"WE WORK MEMBERSHIP MONTHLY","merchant":"WeWork","category":"Rent","memo":null,"account":null,"balance":17315.19,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-02","Description":"WE WORK MEMBERSHIP MONTHLY","Merchant":"WeWork","Category":"Rent","Amount":"-4200.00","Balance":"17315.19"}},{"id":"tx_000032","date":"2026-02-03","dateEpoch":1770076800000,"amount":12500,"currency":"USD","description":"WIRE FROM NORTHWIND CO INV-1042","merchant":"Northwind Co","category":"Consulting Income","memo":null,"account":null,"balance":29815.19,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-03","Description":"WIRE FROM NORTHWIND CO INV-1042","Merchant":"Northwind Co","Category":"Consulting Income","Amount":"12500.00","Balance":"29815.19"}},{"id":"tx_000033","date":"2026-02-04","dateEpoch":1770163200000,"amount":-918.4,"currency":"USD","description":"AWS MARKETPLACE","merchant":"AWS","category":"Cloud Infrastructure","memo":null,"account":null,"balance":28896.79,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-04","Description":"AWS MARKETPLACE","Merchant":"AWS","Category":"Cloud Infrastructure","Amount":"-918.40","Balance":"28896.79"}},{"id":"tx_000034","date":"2026-02-04","dateEpoch":1770163200000,"amount":-58.2,"currency":"USD","description":"STRIPE TRANSFER 09/04","merchant":"Stripe","category":"Payment Processing","memo":null,"account":null,"balance":28838.59,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-04","Description":"STRIPE TRANSFER 09/04","Merchant":"Stripe","Category":"Payment Processing","Amount":"-58.20","Balance":"28838.59"}},{"id":"tx_000035","date":"2026-02-05","dateEpoch":1770249600000,"amount":-16,"currency":"USD","description":"NOTION LABS INC","merchant":"Notion","category":"Software","memo":null,"account":null,"balance":28822.59,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-05","Description":"NOTION LABS INC","Merchant":"Notion","Category":"Software","Amount":"-16.00","Balance":"28822.59"}},{"id":"tx_000036","date":"2026-02-05","dateEpoch":1770249600000,"amount":-21,"currency":"USD","description":"GITHUB INC PRO","merchant":"GitHub","category":"Software","memo":null,"account":null,"balance":28801.59,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-05","Description":"GITHUB INC PRO","Merchant":"GitHub","Category":"Software","Amount":"-21.00","Balance":"28801.59"}},{"id":"tx_000037","date":"2026-02-06","dateEpoch":1770336000000,"amount":-30,"currency":"USD","description":"SLACK TECHNOLOGIES","merchant":"Slack","category":"Software","memo":null,"account":null,"balance":28771.59,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-06","Description":"SLACK TECHNOLOGIES","Merchant":"Slack","Category":"Software","Amount":"-30.00","Balance":"28771.59"}},{"id":"tx_000038","date":"2026-02-06","dateEpoch":1770336000000,"amount":-15,"currency":"USD","description":"FIGMA INC PROFESSIONAL","merchant":"Figma","category":"Software","memo":null,"account":null,"balance":28756.59,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-06","Description":"FIGMA INC PROFESSIONAL","Merchant":"Figma","Category":"Software","Amount":"-15.00","Balance":"28756.59"}},{"id":"tx_000039","date":"2026-02-09","dateEpoch":1770595200000,"amount":-48.1,"currency":"USD","description":"SHELL OIL FUEL","merchant":"Shell","category":"Travel","memo":null,"account":null,"balance":28708.49,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-09","Description":"SHELL OIL FUEL","Merchant":"Shell","Category":"Travel","Amount":"-48.10","Balance":"28708.49"}},{"id":"tx_000040","date":"2026-02-10","dateEpoch":1770681600000,"amount":-149.9,"currency":"USD","description":"ZOOM VIDEO COMMUNICATIONS","merchant":"Zoom","category":"Software","memo":null,"account":null,"balance":28558.59,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-10","Description":"ZOOM VIDEO COMMUNICATIONS","Merchant":"Zoom","Category":"Software","Amount":"-149.90","Balance":"28558.59"}},{"id":"tx_000041","date":"2026-02-13","dateEpoch":1770940800000,"amount":-12690.2,"currency":"USD","description":"GUSTO PAYROLL FEB1-15","merchant":"Gusto","category":"Payroll","memo":null,"account":null,"balance":15868.39,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-13","Description":"GUSTO PAYROLL FEB1-15","Merchant":"Gusto","Category":"Payroll","Amount":"-12690.20","Balance":"15868.39"}},{"id":"tx_000042","date":"2026-02-15","dateEpoch":1771113600000,"amount":-58.2,"currency":"USD","description":"STRIPE TRANSFER 09/15","merchant":"Stripe","category":"Payment Processing","memo":null,"account":null,"balance":15810.19,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-15","Description":"STRIPE TRANSFER 09/15","Merchant":"Stripe","Category":"Payment Processing","Amount":"-58.20","Balance":"15810.19"}},{"id":"tx_000043","date":"2026-02-16","dateEpoch":1771200000000,"amount":-189.95,"currency":"USD","description":"COMCAST BUSINESS INTERNET","merchant":"Comcast","category":"Utilities","memo":null,"account":null,"balance":15620.24,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-16","Description":"COMCAST BUSINESS INTERNET","Merchant":"Comcast","Category":"Utilities","Amount":"-189.95","Balance":"15620.24"}},{"id":"tx_000044","date":"2026-02-17","dateEpoch":1771286400000,"amount":8500,"currency":"USD","description":"WIRE FROM ACME LABS INV-1054","merchant":"Acme Labs","category":"Consulting Income","memo":null,"account":null,"balance":24120.24,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-17","Description":"WIRE FROM ACME LABS INV-1054","Merchant":"Acme Labs","Category":"Consulting Income","Amount":"8500.00","Balance":"24120.24"}},{"id":"tx_000045","date":"2026-02-19","dateEpoch":1771459200000,"amount":-186.4,"currency":"USD","description":"ATT WIRELESS BUSINESS","merchant":"AT&T","category":"Utilities","memo":null,"account":null,"balance":23933.84,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-19","Description":"ATT WIRELESS BUSINESS","Merchant":"AT&T","Category":"Utilities","Amount":"-186.40","Balance":"23933.84"}},{"id":"tx_000046","date":"2026-02-20","dateEpoch":1771545600000,"amount":-24,"currency":"USD","description":"LINEAR APP SOFTWARE","merchant":"Linear","category":"Software","memo":null,"account":null,"balance":23909.84,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-20","Description":"LINEAR APP SOFTWARE","Merchant":"Linear","Category":"Software","Amount":"-24.00","Balance":"23909.84"}},{"id":"tx_000047","date":"2026-02-22","dateEpoch":1771718400000,"amount":-9240,"currency":"USD","description":"ALPINE TOOLS LLC EQUIPMENT","merchant":"Alpine Tools LLC","category":"Equipment","memo":null,"account":null,"balance":14669.84,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":["outlier-amount","first-time-vendor"],"raw":{"Date":"2026-02-22","Description":"ALPINE TOOLS LLC EQUIPMENT","Merchant":"Alpine Tools LLC","Category":"Equipment","Amount":"-9240.00","Balance":"14669.84"}},{"id":"tx_000048","date":"2026-02-23","dateEpoch":1771804800000,"amount":-72,"currency":"USD","description":"GOOGLE WORKSPACE BUSINESS","merchant":"Google Workspace","category":"Software","memo":null,"account":null,"balance":14597.84,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-23","Description":"GOOGLE WORKSPACE BUSINESS","Merchant":"Google Workspace","Category":"Software","Amount":"-72.00","Balance":"14597.84"}},{"id":"tx_000049","date":"2026-02-25","dateEpoch":1771977600000,"amount":-86.2,"currency":"USD","description":"AMAZON.COM*9XY8WZ HEALTH PRODUCTS","merchant":"Amazon","category":"Office Supplies","memo":null,"account":null,"balance":14511.64,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-25","Description":"AMAZON.COM*9XY8WZ HEALTH PRODUCTS","Merchant":"Amazon","Category":"Office Supplies","Amount":"-86.20","Balance":"14511.64"}},{"id":"tx_000050","date":"2026-02-26","dateEpoch":1772064000000,"amount":-62.8,"currency":"USD","description":"UBER EATS DINNER MEETING","merchant":"Uber Eats","category":"Meals","memo":null,"account":null,"balance":14448.84,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-26","Description":"UBER EATS DINNER MEETING","Merchant":"Uber Eats","Category":"Meals","Amount":"-62.80","Balance":"14448.84"}},{"id":"tx_000051","date":"2026-02-27","dateEpoch":1772150400000,"amount":-58.2,"currency":"USD","description":"STRIPE TRANSFER 09/27","merchant":"Stripe","category":"Payment Processing","memo":null,"account":null,"balance":14390.64,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-27","Description":"STRIPE TRANSFER 09/27","Merchant":"Stripe","Category":"Payment Processing","Amount":"-58.20","Balance":"14390.64"}},{"id":"tx_000052","date":"2026-02-27","dateEpoch":1772150400000,"amount":-12690.2,"currency":"USD","description":"GUSTO PAYROLL FEB16-28","merchant":"Gusto","category":"Payroll","memo":null,"account":null,"balance":1700.44,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-27","Description":"GUSTO PAYROLL FEB16-28","Merchant":"Gusto","Category":"Payroll","Amount":"-12690.20","Balance":"1700.44"}},{"id":"tx_000053","date":"2026-02-28","dateEpoch":1772236800000,"amount":4250,"currency":"USD","description":"DEPOSIT REMOTE - LAVENDER PROJECTS","merchant":"Lavender Projects","category":"Consulting Income","memo":null,"account":null,"balance":5950.44,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-02-28","Description":"DEPOSIT REMOTE - LAVENDER PROJECTS","Merchant":"Lavender Projects","Category":"Consulting Income","Amount":"4250.00","Balance":"5950.44"}},{"id":"tx_000054","date":"2026-03-02","dateEpoch":1772409600000,"amount":-4200,"currency":"USD","description":"WE WORK MEMBERSHIP MONTHLY","merchant":"WeWork","category":"Rent","memo":null,"account":null,"balance":1750.44,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-02","Description":"WE WORK MEMBERSHIP MONTHLY","Merchant":"WeWork","Category":"Rent","Amount":"-4200.00","Balance":"1750.44"}},{"id":"tx_000055","date":"2026-03-03","dateEpoch":1772496000000,"amount":12500,"currency":"USD","description":"WIRE FROM NORTHWIND CO INV-1067","merchant":"Northwind Co","category":"Consulting Income","memo":null,"account":null,"balance":14250.44,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-03","Description":"WIRE FROM NORTHWIND CO INV-1067","Merchant":"Northwind Co","Category":"Consulting Income","Amount":"12500.00","Balance":"14250.44"}},{"id":"tx_000056","date":"2026-03-04","dateEpoch":1772582400000,"amount":-1024.5,"currency":"USD","description":"AWS MARKETPLACE","merchant":"AWS","category":"Cloud Infrastructure","memo":null,"account":null,"balance":13225.94,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-04","Description":"AWS MARKETPLACE","Merchant":"AWS","Category":"Cloud Infrastructure","Amount":"-1024.50","Balance":"13225.94"}},{"id":"tx_000057","date":"2026-03-05","dateEpoch":1772668800000,"amount":-16,"currency":"USD","description":"NOTION LABS INC","merchant":"Notion","category":"Software","memo":null,"account":null,"balance":13209.94,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-05","Description":"NOTION LABS INC","Merchant":"Notion","Category":"Software","Amount":"-16.00","Balance":"13209.94"}},{"id":"tx_000058","date":"2026-03-05","dateEpoch":1772668800000,"amount":-21,"currency":"USD","description":"GITHUB INC PRO","merchant":"GitHub","category":"Software","memo":null,"account":null,"balance":13188.94,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-05","Description":"GITHUB INC PRO","Merchant":"GitHub","Category":"Software","Amount":"-21.00","Balance":"13188.94"}},{"id":"tx_000059","date":"2026-03-06","dateEpoch":1772755200000,"amount":-30,"currency":"USD","description":"SLACK TECHNOLOGIES","merchant":"Slack","category":"Software","memo":null,"account":null,"balance":13158.94,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-06","Description":"SLACK TECHNOLOGIES","Merchant":"Slack","Category":"Software","Amount":"-30.00","Balance":"13158.94"}},{"id":"tx_000060","date":"2026-03-06","dateEpoch":1772755200000,"amount":-15,"currency":"USD","description":"FIGMA INC PROFESSIONAL","merchant":"Figma","category":"Software","memo":null,"account":null,"balance":13143.94,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-06","Description":"FIGMA INC PROFESSIONAL","Merchant":"Figma","Category":"Software","Amount":"-15.00","Balance":"13143.94"}},{"id":"tx_000061","date":"2026-03-08","dateEpoch":1772928000000,"amount":-241.8,"currency":"USD","description":"ANTHROPIC API USAGE","merchant":"Anthropic","category":"Software","memo":null,"account":null,"balance":12902.14,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-08","Description":"ANTHROPIC API USAGE","Merchant":"Anthropic","Category":"Software","Amount":"-241.80","Balance":"12902.14"}},{"id":"tx_000062","date":"2026-03-09","dateEpoch":1773014400000,"amount":-92.4,"currency":"USD","description":"UBER EATS TEAM LUNCH","merchant":"Uber Eats","category":"Meals","memo":null,"account":null,"balance":12809.74,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-09","Description":"UBER EATS TEAM LUNCH","Merchant":"Uber Eats","Category":"Meals","Amount":"-92.40","Balance":"12809.74"}},{"id":"tx_000063","date":"2026-03-12","dateEpoch":1773273600000,"amount":-149.9,"currency":"USD","description":"ZOOM VIDEO COMMUNICATIONS","merchant":"Zoom","category":"Software","memo":null,"account":null,"balance":12659.84,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-12","Description":"ZOOM VIDEO COMMUNICATIONS","Merchant":"Zoom","Category":"Software","Amount":"-149.90","Balance":"12659.84"}},{"id":"tx_000064","date":"2026-03-13","dateEpoch":1773360000000,"amount":-12890.2,"currency":"USD","description":"GUSTO PAYROLL MAR1-15","merchant":"Gusto","category":"Payroll","memo":null,"account":null,"balance":-230.36,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":["negative-balance"],"raw":{"Date":"2026-03-13","Description":"GUSTO PAYROLL MAR1-15","Merchant":"Gusto","Category":"Payroll","Amount":"-12890.20","Balance":"-230.36"}},{"id":"tx_000065","date":"2026-03-14","dateEpoch":1773446400000,"amount":6800,"currency":"USD","description":"WIRE FROM SUMMITWORKS LLC INV-1078","merchant":"SummitWorks LLC","category":"Consulting Income","memo":null,"account":null,"balance":6569.64,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-14","Description":"WIRE FROM SUMMITWORKS LLC INV-1078","Merchant":"SummitWorks LLC","Category":"Consulting Income","Amount":"6800.00","Balance":"6569.64"}},{"id":"tx_000066","date":"2026-03-15","dateEpoch":1773532800000,"amount":-72.4,"currency":"USD","description":"STRIPE TRANSFER 09/15","merchant":"Stripe","category":"Payment Processing","memo":null,"account":null,"balance":6497.24,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-15","Description":"STRIPE TRANSFER 09/15","Merchant":"Stripe","Category":"Payment Processing","Amount":"-72.40","Balance":"6497.24"}},{"id":"tx_000067","date":"2026-03-16","dateEpoch":1773619200000,"amount":-189.95,"currency":"USD","description":"COMCAST BUSINESS INTERNET","merchant":"Comcast","category":"Utilities","memo":null,"account":null,"balance":6307.29,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-16","Description":"COMCAST BUSINESS INTERNET","Merchant":"Comcast","Category":"Utilities","Amount":"-189.95","Balance":"6307.29"}},{"id":"tx_000068","date":"2026-03-17","dateEpoch":1773705600000,"amount":8500,"currency":"USD","description":"WIRE FROM ACME LABS INV-1082","merchant":"Acme Labs","category":"Consulting Income","memo":null,"account":null,"balance":14807.29,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-17","Description":"WIRE FROM ACME LABS INV-1082","Merchant":"Acme Labs","Category":"Consulting Income","Amount":"8500.00","Balance":"14807.29"}},{"id":"tx_000069","date":"2026-03-19","dateEpoch":1773878400000,"amount":-186.4,"currency":"USD","description":"ATT WIRELESS BUSINESS","merchant":"AT&T","category":"Utilities","memo":null,"account":null,"balance":14620.89,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-19","Description":"ATT WIRELESS BUSINESS","Merchant":"AT&T","Category":"Utilities","Amount":"-186.40","Balance":"14620.89"}},{"id":"tx_000070","date":"2026-03-20","dateEpoch":1773964800000,"amount":-24,"currency":"USD","description":"LINEAR APP SOFTWARE","merchant":"Linear","category":"Software","memo":null,"account":null,"balance":14596.89,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-20","Description":"LINEAR APP SOFTWARE","Merchant":"Linear","Category":"Software","Amount":"-24.00","Balance":"14596.89"}},{"id":"tx_000071","date":"2026-03-23","dateEpoch":1774224000000,"amount":-72,"currency":"USD","description":"GOOGLE WORKSPACE BUSINESS","merchant":"Google Workspace","category":"Software","memo":null,"account":null,"balance":14524.89,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-23","Description":"GOOGLE WORKSPACE BUSINESS","Merchant":"Google Workspace","Category":"Software","Amount":"-72.00","Balance":"14524.89"}},{"id":"tx_000072","date":"2026-03-24","dateEpoch":1774310400000,"amount":-218.94,"currency":"USD","description":"AMAZON.COM*4FF5EE OFFICE","merchant":"Amazon","category":"Office Supplies","memo":null,"account":null,"balance":14305.95,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-24","Description":"AMAZON.COM*4FF5EE OFFICE","Merchant":"Amazon","Category":"Office Supplies","Amount":"-218.94","Balance":"14305.95"}},{"id":"tx_000073","date":"2026-03-26","dateEpoch":1774483200000,"amount":-712.4,"currency":"USD","description":"DELTA AIR LINES SFO-NYC","merchant":"Delta","category":"Travel","memo":null,"account":null,"balance":13593.55,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-26","Description":"DELTA AIR LINES SFO-NYC","Merchant":"Delta","Category":"Travel","Amount":"-712.40","Balance":"13593.55"}},{"id":"tx_000074","date":"2026-03-27","dateEpoch":1774569600000,"amount":-12890.2,"currency":"USD","description":"GUSTO PAYROLL MAR16-31","merchant":"Gusto","category":"Payroll","memo":null,"account":null,"balance":703.35,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-27","Description":"GUSTO PAYROLL MAR16-31","Merchant":"Gusto","Category":"Payroll","Amount":"-12890.20","Balance":"703.35"}},{"id":"tx_000075","date":"2026-03-28","dateEpoch":1774656000000,"amount":6800,"currency":"USD","description":"DEPOSIT REMOTE - SUMMITWORKS LLC","merchant":"SummitWorks LLC","category":"Consulting Income","memo":null,"account":null,"balance":7503.35,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-28","Description":"DEPOSIT REMOTE - SUMMITWORKS LLC","Merchant":"SummitWorks LLC","Category":"Consulting Income","Amount":"6800.00","Balance":"7503.35"}},{"id":"tx_000076","date":"2026-03-29","dateEpoch":1774742400000,"amount":-72.4,"currency":"USD","description":"STRIPE TRANSFER 09/29","merchant":"Stripe","category":"Payment Processing","memo":null,"account":null,"balance":7430.95,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-29","Description":"STRIPE TRANSFER 09/29","Merchant":"Stripe","Category":"Payment Processing","Amount":"-72.40","Balance":"7430.95"}},{"id":"tx_000077","date":"2026-03-30","dateEpoch":1774828800000,"amount":-298.2,"currency":"USD","description":"ANTHROPIC API USAGE","merchant":"Anthropic","category":"Software","memo":null,"account":null,"balance":7132.75,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-30","Description":"ANTHROPIC API USAGE","Merchant":"Anthropic","Category":"Software","Amount":"-298.20","Balance":"7132.75"}},{"id":"tx_000078","date":"2026-03-31","dateEpoch":1774915200000,"amount":12500,"currency":"USD","description":"WIRE FROM NORTHWIND CO INV-1096","merchant":"Northwind Co","category":"Consulting Income","memo":null,"account":null,"balance":19632.75,"status":null,"dueDate":null,"dueDateEpoch":0,"issuedDate":null,"paidDate":null,"customer":null,"invoiceNumber":null,"classCol":null,"type":null,"flags":[],"raw":{"Date":"2026-03-31","Description":"WIRE FROM NORTHWIND CO INV-1096","Merchant":"Northwind Co","Category":"Consulting Income","Amount":"12500.00","Balance":"19632.75"}}],"summary":{"rowCount":78,"inflow":108600,"outflow":107387.75,"net":1212.25,"currencySymbol":"$","currencyCode":"USD","period":"2026-01-02 → 2026-03-31","durationLabel":"3 months","distinctMerchants":28,"distinctCategories":12},"categoryTotals":[{"category":"Consulting Income","inflow":104400,"outflow":0,"net":104400,"count":12,"share":48.3},{"category":"Payroll","inflow":0,"outflow":76121.7,"net":-76121.7,"count":6,"share":35.2},{"category":"Rent","inflow":0,"outflow":12600,"net":-12600,"count":3,"share":5.8},{"category":"Equipment","inflow":0,"outflow":9240,"net":-9240,"count":1,"share":4.3},{"category":"Transfer","inflow":4200,"outflow":0,"net":4200,"count":1,"share":1.9},{"category":"Cloud Infrastructure","inflow":0,"outflow":2785.08,"net":-2785.08,"count":3,"share":1.3},{"category":"Travel","inflow":0,"outflow":2663,"net":-2663,"count":5,"share":1.2},{"category":"Software","inflow":0,"outflow":1708.2,"net":-1708.2,"count":24,"share":0.8},{"category":"Utilities","inflow":0,"outflow":1129.05,"net":-1129.05,"count":6,"share":0.5},{"category":"Payment Processing","inflow":0,"outflow":491.36,"net":-491.36,"count":9,"share":0.2},{"category":"Office Supplies","inflow":0,"outflow":433.56,"net":-433.56,"count":3,"share":0.2},{"category":"Meals","inflow":0,"outflow":215.8,"net":-215.8,"count":4,"share":0.1},{"category":"Uncategorized","inflow":0,"outflow":0,"net":0,"count":1,"share":0}],"recurring":[{"name":"Gusto","cadence":"biweekly","avgAmount":-12686.95,"count":6,"lastSeen":"2026-03-27","nextExpected":"2026-04-10","tag":"payroll"},{"name":"Northwind Co","cadence":"monthly","avgAmount":12500,"count":4,"lastSeen":"2026-03-31","nextExpected":"2026-04-30","tag":"income"},{"name":"Acme Labs","cadence":"monthly","avgAmount":8500,"count":3,"lastSeen":"2026-03-17","nextExpected":"2026-04-16","tag":"income"},{"name":"SummitWorks LLC","cadence":"monthly","avgAmount":6800,"count":3,"lastSeen":"2026-03-28","nextExpected":"2026-04-27","tag":"income"},{"name":"AWS","cadence":"monthly","avgAmount":-928.36,"count":3,"lastSeen":"2026-03-04","nextExpected":"2026-04-03","tag":"subscription"},{"name":"Anthropic","cadence":"monthly","avgAmount":-241.5,"count":3,"lastSeen":"2026-03-30","nextExpected":"2026-04-29","tag":"subscription"},{"name":"Comcast","cadence":"monthly","avgAmount":-189.95,"count":3,"lastSeen":"2026-03-16","nextExpected":"2026-04-15","tag":"utility"},{"name":"AT&T","cadence":"monthly","avgAmount":-186.4,"count":3,"lastSeen":"2026-03-19","nextExpected":"2026-04-18","tag":"subscription"},{"name":"Stripe","cadence":"irregular","avgAmount":-54.6,"count":9,"lastSeen":"2026-03-29","nextExpected":null,"tag":"subscription"},{"name":"Zoom","cadence":"monthly","avgAmount":-149.9,"count":3,"lastSeen":"2026-03-12","nextExpected":"2026-04-11","tag":"subscription"},{"name":"Amazon","cadence":"monthly","avgAmount":-144.52,"count":3,"lastSeen":"2026-03-24","nextExpected":"2026-04-23","tag":"subscription"},{"name":"Google Workspace","cadence":"monthly","avgAmount":-72,"count":3,"lastSeen":"2026-03-23","nextExpected":"2026-04-22","tag":"subscription"},{"name":"Uber Eats","cadence":"monthly","avgAmount":-67.8,"count":3,"lastSeen":"2026-03-09","nextExpected":"2026-04-08","tag":"subscription"},{"name":"Slack","cadence":"monthly","avgAmount":-30,"count":3,"lastSeen":"2026-03-06","nextExpected":"2026-04-05","tag":"subscription"},{"name":"Linear","cadence":"monthly","avgAmount":-24,"count":3,"lastSeen":"2026-03-20","nextExpected":"2026-04-19","tag":"subscription"},{"name":"GitHub","cadence":"monthly","avgAmount":-21,"count":3,"lastSeen":"2026-03-05","nextExpected":"2026-04-04","tag":"subscription"},{"name":"Notion","cadence":"monthly","avgAmount":-16,"count":3,"lastSeen":"2026-03-05","nextExpected":"2026-04-04","tag":"subscription"},{"name":"Figma","cadence":"monthly","avgAmount":-15,"count":3,"lastSeen":"2026-03-06","nextExpected":"2026-04-05","tag":"subscription"}],"flags":[{"kind":"duplicate","label":"Duplicate Stripe","detail":"−$42.99 on 2026-01-15 and 2026-01-15","rowIds":["tx_000015","tx_000016"]},{"kind":"outlier-amount","label":"Unusually large outflow: Alpine Tools LLC","detail":"−$9,240.00 on 2026-02-22 — 107× median outflow","rowIds":["tx_000047"]},{"kind":"outlier-amount","label":"Unusually large outflow: WeWork","detail":"−$4,200.00 on 2026-01-13 — 49× median outflow","rowIds":["tx_000013"]},{"kind":"first-time-vendor","label":"First-time vendor: Alpine Tools LLC","detail":"−$9,240.00 on 2026-02-22 — no prior history in this file","rowIds":["tx_000047"]},{"kind":"negative-balance","label":"Account went negative on 2026-03-13","detail":"Balance reached −$230.36 after Gusto","rowIds":["tx_000064"]}],"timeline":[{"date":"2026-01-02","inflow":0,"outflow":0,"net":0,"balance":18420.5,"count":1},{"date":"2026-01-03","inflow":12500,"outflow":0,"net":12500,"balance":30920.5,"count":1},{"date":"2026-01-04","inflow":0,"outflow":885.17,"net":-885.17,"balance":30035.33,"count":2},{"date":"2026-01-05","inflow":0,"outflow":37,"net":-37,"balance":29998.33,"count":2},{"date":"2026-01-06","inflow":0,"outflow":45,"net":-45,"balance":29953.33,"count":2},{"date":"2026-01-07","inflow":4250,"outflow":0,"net":4250,"balance":34203.33,"count":1},{"date":"2026-01-08","inflow":0,"outflow":48.2,"net":-48.2,"balance":34155.13,"count":1},{"date":"2026-01-09","inflow":0,"outflow":12.4,"net":-12.4,"balance":34142.73,"count":1},{"date":"2026-01-12","inflow":0,"outflow":149.9,"net":-149.9,"balance":33992.83,"count":1},{"date":"2026-01-13","inflow":0,"outflow":4200,"net":-4200,"balance":29792.83,"count":1},{"date":"2026-01-15","inflow":0,"outflow":12566.43,"net":-12566.43,"balance":17226.4,"count":3},{"date":"2026-01-16","inflow":8500,"outflow":189.95,"net":8310.05,"balance":25536.45,"count":2},{"date":"2026-01-19","inflow":0,"outflow":186.4,"net":-186.4,"balance":25350.05,"count":1},{"date":"2026-01-20","inflow":0,"outflow":152.42,"net":-152.42,"balance":25197.63,"count":2},{"date":"2026-01-22","inflow":0,"outflow":72,"net":-72,"balance":25125.63,"count":1},{"date":"2026-01-23","inflow":0,"outflow":662.5,"net":-662.5,"balance":24463.13,"count":2},{"date":"2026-01-26","inflow":0,"outflow":1240,"net":-1240,"balance":23223.13,"count":1},{"date":"2026-01-29","inflow":0,"outflow":42.99,"net":-42.99,"balance":23180.14,"count":1},{"date":"2026-01-30","inflow":0,"outflow":12664.95,"net":-12664.95,"balance":10515.19,"count":2},{"date":"2026-01-31","inflow":6800,"outflow":0,"net":6800,"balance":17315.19,"count":1},{"date":"2026-02-01","inflow":4200,"outflow":0,"net":4200,"balance":21515.19,"count":1},{"date":"2026-02-02","inflow":0,"outflow":4200,"net":-4200,"balance":17315.19,"count":1},{"date":"2026-02-03","inflow":12500,"outflow":0,"net":12500,"balance":29815.19,"count":1},{"date":"2026-02-04","inflow":0,"outflow":976.6,"net":-976.6,"balance":28838.59,"count":2},{"date":"2026-02-05","inflow":0,"outflow":37,"net":-37,"balance":28801.59,"count":2},{"date":"2026-02-06","inflow":0,"outflow":45,"net":-45,"balance":28756.59,"count":2},{"date":"2026-02-09","inflow":0,"outflow":48.1,"net":-48.1,"balance":28708.49,"count":1},{"date":"2026-02-10","inflow":0,"outflow":149.9,"net":-149.9,"balance":28558.59,"count":1},{"date":"2026-02-13","inflow":0,"outflow":12690.2,"net":-12690.2,"balance":15868.39,"count":1},{"date":"2026-02-15","inflow":0,"outflow":58.2,"net":-58.2,"balance":15810.19,"count":1},{"date":"2026-02-16","inflow":0,"outflow":189.95,"net":-189.95,"balance":15620.24,"count":1},{"date":"2026-02-17","inflow":8500,"outflow":0,"net":8500,"balance":24120.24,"count":1},{"date":"2026-02-19","inflow":0,"outflow":186.4,"net":-186.4,"balance":23933.84,"count":1},{"date":"2026-02-20","inflow":0,"outflow":24,"net":-24,"balance":23909.84,"count":1},{"date":"2026-02-22","inflow":0,"outflow":9240,"net":-9240,"balance":14669.84,"count":1},{"date":"2026-02-23","inflow":0,"outflow":72,"net":-72,"balance":14597.84,"count":1},{"date":"2026-02-25","inflow":0,"outflow":86.2,"net":-86.2,"balance":14511.64,"count":1},{"date":"2026-02-26","inflow":0,"outflow":62.8,"net":-62.8,"balance":14448.84,"count":1},{"date":"2026-02-27","inflow":0,"outflow":12748.4,"net":-12748.4,"balance":1700.44,"count":2},{"date":"2026-02-28","inflow":4250,"outflow":0,"net":4250,"balance":5950.44,"count":1},{"date":"2026-03-02","inflow":0,"outflow":4200,"net":-4200,"balance":1750.44,"count":1},{"date":"2026-03-03","inflow":12500,"outflow":0,"net":12500,"balance":14250.44,"count":1},{"date":"2026-03-04","inflow":0,"outflow":1024.5,"net":-1024.5,"balance":13225.94,"count":1},{"date":"2026-03-05","inflow":0,"outflow":37,"net":-37,"balance":13188.94,"count":2},{"date":"2026-03-06","inflow":0,"outflow":45,"net":-45,"balance":13143.94,"count":2},{"date":"2026-03-08","inflow":0,"outflow":241.8,"net":-241.8,"balance":12902.14,"count":1},{"date":"2026-03-09","inflow":0,"outflow":92.4,"net":-92.4,"balance":12809.74,"count":1},{"date":"2026-03-12","inflow":0,"outflow":149.9,"net":-149.9,"balance":12659.84,"count":1},{"date":"2026-03-13","inflow":0,"outflow":12890.2,"net":-12890.2,"balance":-230.36,"count":1},{"date":"2026-03-14","inflow":6800,"outflow":0,"net":6800,"balance":6569.64,"count":1},{"date":"2026-03-15","inflow":0,"outflow":72.4,"net":-72.4,"balance":6497.24,"count":1},{"date":"2026-03-16","inflow":0,"outflow":189.95,"net":-189.95,"balance":6307.29,"count":1},{"date":"2026-03-17","inflow":8500,"outflow":0,"net":8500,"balance":14807.29,"count":1},{"date":"2026-03-19","inflow":0,"outflow":186.4,"net":-186.4,"balance":14620.89,"count":1},{"date":"2026-03-20","inflow":0,"outflow":24,"net":-24,"balance":14596.89,"count":1},{"date":"2026-03-23","inflow":0,"outflow":72,"net":-72,"balance":14524.89,"count":1},{"date":"2026-03-24","inflow":0,"outflow":218.94,"net":-218.94,"balance":14305.95,"count":1},{"date":"2026-03-26","inflow":0,"outflow":712.4,"net":-712.4,"balance":13593.55,"count":1},{"date":"2026-03-27","inflow":0,"outflow":12890.2,"net":-12890.2,"balance":703.35,"count":1},{"date":"2026-03-28","inflow":6800,"outflow":0,"net":6800,"balance":7503.35,"count":1},{"date":"2026-03-29","inflow":0,"outflow":72.4,"net":-72.4,"balance":7430.95,"count":1},{"date":"2026-03-30","inflow":0,"outflow":298.2,"net":-298.2,"balance":7132.75,"count":1},{"date":"2026-03-31","inflow":12500,"outflow":0,"net":12500,"balance":19632.75,"count":1}],"topVendors":[{"name":"Gusto","inflow":0,"outflow":76121.7,"count":6},{"name":"Northwind Co","inflow":50000,"outflow":0,"count":4},{"name":"Acme Labs","inflow":25500,"outflow":0,"count":3},{"name":"SummitWorks LLC","inflow":20400,"outflow":0,"count":3},{"name":"WeWork","inflow":0,"outflow":12600,"count":3},{"name":"Alpine Tools LLC","inflow":0,"outflow":9240,"count":1},{"name":"Lavender Projects","inflow":8500,"outflow":0,"count":2},{"name":"SUMITOMO TRANSFER REVERSAL","inflow":4200,"outflow":0,"count":1},{"name":"AWS","inflow":0,"outflow":2785.08,"count":3},{"name":"Delta","inflow":0,"outflow":1336.7,"count":2},{"name":"Hotel Hotel","inflow":0,"outflow":1240,"count":1},{"name":"Anthropic","inflow":0,"outflow":724.5,"count":3},{"name":"Comcast","inflow":0,"outflow":569.85,"count":3},{"name":"AT&T","inflow":0,"outflow":559.2,"count":3},{"name":"Stripe","inflow":0,"outflow":491.36,"count":9},{"name":"Zoom","inflow":0,"outflow":449.7,"count":3},{"name":"Amazon","inflow":0,"outflow":433.56,"count":3},{"name":"Google Workspace","inflow":0,"outflow":216,"count":3},{"name":"Uber Eats","inflow":0,"outflow":203.4,"count":3},{"name":"Slack","inflow":0,"outflow":90,"count":3},{"name":"Linear","inflow":0,"outflow":72,"count":3},{"name":"GitHub","inflow":0,"outflow":63,"count":3},{"name":"Shell","inflow":0,"outflow":48.1,"count":1},{"name":"Notion","inflow":0,"outflow":48,"count":3},{"name":"Figma","inflow":0,"outflow":45,"count":3}],"hasBalance":true,"spansMultipleMonths":true,"meta":{"sourceFile":"input.csv","sizeBytes":5604,"format":"bank-transactions","subtype":"bank","rowCount":78,"columnCount":6,"headers":["Date","Description","Merchant","Category","Amount","Balance"],"detectedColumns":{"date":"Date","amount":"Amount","merchant":"Merchant","description":"Description","category":"Category","balance":"Balance"},"currencyCode":"USD","currencySymbol":"$","hasBalance":true,"spansMultipleMonths":true,"period":"2026-01-02 → 2026-03-31","durationLabel":"3 months","separator":","}};</script>
+
+<div class="ops-shell">
+
+  <!-- COMMAND BAR -->
+  <header class="command-bar" id="commandBar">
+    <div class="command-bar-brand">
+      <div class="command-bar-title">Linewood Studio</div>
+      <div class="command-bar-period" id="cbPeriod">Q1 2026 · Bank Statement</div>
+    </div>
+    <div class="command-bar-divider"></div>
+    <div class="command-bar-search">
+      <span class="search-icon">⌕</span>
+      <input type="search" id="globalSearch" placeholder="Search transactions…" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="filter-strip" id="filterStrip"></div>
+    <div class="cmd-actions">
+      <button class="cmd-btn" id="copyMdBtn">Copy Summary</button>
+    </div>
+  </header>
+
+  <main class="ops-main">
+
+    <!-- KPI RAIL -->
+    <div class="kpi-rail" id="kpiRail">
+      <div class="kpi-cell" id="kpi0">
+        <div class="kpi-label">Total In</div>
+        <div class="kpi-value positive" id="kpiInflow">—</div>
+        <div class="kpi-sub" id="kpiInflowSub">—</div>
+      </div>
+      <div class="kpi-cell" id="kpi1">
+        <div class="kpi-label">Total Out</div>
+        <div class="kpi-value negative" id="kpiOutflow">—</div>
+        <div class="kpi-sub" id="kpiOutflowSub">—</div>
+      </div>
+      <div class="kpi-cell" id="kpi2">
+        <div class="kpi-label">Net Change</div>
+        <div class="kpi-value" id="kpiNet">—</div>
+        <div class="kpi-sub" id="kpiNetSub">—</div>
+      </div>
+      <div class="kpi-cell" id="kpi3">
+        <div class="kpi-label">Transactions</div>
+        <div class="kpi-value accent" id="kpiCount">—</div>
+        <div class="kpi-sub" id="kpiCountSub">—</div>
+      </div>
+      <div class="kpi-cell" id="kpi4">
+        <div class="kpi-label">Closing Balance</div>
+        <div class="kpi-value" id="kpiBalance">—</div>
+        <div class="kpi-sub" id="kpiBalanceSub">—</div>
+      </div>
+    </div>
+
+    <!-- PRIMARY WORK SURFACE: Timeline + Categories -->
+    <div class="work-surface">
+
+      <!-- Cashflow Timeline -->
+      <div class="panel span-2">
+        <div class="section-header">
+          <div class="section-title">Cashflow Timeline</div>
+          <div style="font-size:11px;color:var(--fg-muted)" id="timelineNote">Daily inflow vs outflow · balance line</div>
+        </div>
+        <div class="timeline-chart-wrap">
+          <svg id="timelineSvg" class="timeline-svg" width="100%" style="min-width:320px"></svg>
+        </div>
+      </div>
+
+      <!-- Spend by Category -->
+      <div class="panel">
+        <div class="section-header">
+          <div class="section-title">Spend by Category</div>
+        </div>
+        <div id="categoryBars"></div>
+      </div>
+
+      <!-- Top Vendors -->
+      <div class="panel">
+        <div class="section-header">
+          <div class="section-title">Top Vendors & Sources</div>
+          <div style="font-size:11px;color:var(--fg-muted)">Click to filter table</div>
+        </div>
+        <div id="vendorList"></div>
+      </div>
+
+    </div>
+
+    <!-- RECURRING PANEL -->
+    <div class="panel" style="margin-bottom:var(--space-xl)">
+      <div class="section-header">
+        <div class="section-title">Recurring</div>
+        <div style="font-size:11px;color:var(--fg-muted)">Auto-detected patterns</div>
+      </div>
+      <div id="recurringList"></div>
+    </div>
+
+    <!-- MONTH OVER MONTH -->
+    <div class="panel" style="margin-bottom:var(--space-xl)">
+      <div class="section-header">
+        <div class="section-title">Month-over-Month</div>
+        <div style="font-size:11px;color:var(--fg-muted)">Spend by category per month</div>
+      </div>
+      <div class="month-tabs" id="momTabs"></div>
+      <div class="mom-grid" id="momGrid"></div>
+    </div>
+
+    <!-- ANOMALIES / FLAGS -->
+    <div style="margin-bottom:var(--space-xl)">
+      <div class="section-header" style="margin-bottom:var(--space-md)">
+        <div class="section-title">Anomalies &amp; Flags</div>
+        <div style="font-size:11px;color:var(--fg-muted)" id="flagCount">—</div>
+      </div>
+      <div class="flag-queue" id="flagQueue"></div>
+    </div>
+
+    <!-- DATA GRID DRILL-DOWN -->
+    <div class="data-grid-section">
+      <div class="drill-toggle" id="drillToggle" tabindex="0" role="button" aria-expanded="false">
+        <span id="drillLabel">Browse all transactions</span>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="drill-body" id="drillBody">
+        <div class="grid-controls">
+          <div class="grid-search">
+            <span class="s-icon">⌕</span>
+            <input type="search" id="gridSearch" placeholder="Search…" autocomplete="off">
+          </div>
+          <div class="grid-cat-chips" id="gridCatChips"></div>
+          <button class="cmd-btn" id="clearFiltersBtn" style="margin-left:auto">Clear filters</button>
+        </div>
+        <div class="data-grid">
+          <table id="txTable">
+            <thead>
+              <tr>
+                <th data-col="date" class="sort-desc">Date</th>
+                <th data-col="description">Description</th>
+                <th data-col="merchant">Merchant</th>
+                <th data-col="category">Category</th>
+                <th data-col="amount" class="right">Amount</th>
+                <th data-col="balance" class="right">Balance</th>
+              </tr>
+            </thead>
+            <tbody id="txBody"></tbody>
+          </table>
+        </div>
+        <div class="grid-footer">
+          <span class="grid-count" id="gridCount">—</span>
+          <button class="load-more-btn" id="loadMoreBtn">Load more</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="ops-footer">
+    <p class="footer-note">
+      <em>Analytical summary only — not accounting or tax advice. Categories and recurring patterns are inferred from the file's text; verify against your books before acting on anything here.</em>
+    </p>
+    <p class="footer-note" style="margin-top:var(--space-sm)">
+      <em>Generated locally — your finance file never left your machine. The full transaction list is embedded in this HTML and rendered in your browser. For sharing, prefer an anonymized export with account numbers and customer names redacted.</em>
+    </p>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── HELPERS ───────────────────────────────────────────────────────────────
+const $ = (sel, ctx = document) => ctx.querySelector(sel);
+const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+
+function fmt(v, sym = '$') {
+  if (v == null || v === '') return '—';
+  const n = Number(v);
+  if (isNaN(n)) return v;
+  const abs = Math.abs(n);
+  const s = abs.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return (n < 0 ? '−' : '') + sym + s;
+}
+
+function fmtAbs(v, sym = '$') {
+  if (v == null) return '—';
+  const n = Math.abs(Number(v));
+  return sym + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function fmtShort(v) {
+  const n = Math.abs(Number(v));
+  if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
+  if (n >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'k';
+  return '$' + n.toFixed(0);
+}
+
+function countUp(el, target, duration = 700, sym = '$') {
+  const start = performance.now();
+  const prefix = target < 0 ? '−' : '';
+  const abs = Math.abs(target);
+  function tick(now) {
+    const t = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+    const cur = abs * ease;
+    el.textContent = prefix + sym + cur.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function showToast(msg, dur = 2000) {
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), dur);
+}
+
+function highlight(text, q) {
+  if (!q || !text) return escHtml(text || '');
+  const re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+  return escHtml(text).replace(re, '<mark class="highlight">$1</mark>');
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function dateLabel(d) {
+  if (!d) return '—';
+  const [y, m, dy] = d.split('-');
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return months[parseInt(m, 10) - 1] + ' ' + parseInt(dy, 10);
+}
+
+// ─── DATA ACCESS HELPERS ─────────────────────────────────────────────────────
+function getRows() { return (DATA.rows || DATA.firstRows || []); }
+function getSummary() { return DATA.summary || {}; }
+function getCategories() { return DATA.categoryTotals || DATA.categoryTotalsTop || []; }
+function getRecurring() { return DATA.recurring || DATA.recurringTop || []; }
+function getFlags() { return DATA.flags || DATA.flagsTop || []; }
+function getTimeline() { return DATA.timeline || DATA.timelinePreview || []; }
+function getVendors() { return DATA.topVendors || DATA.topVendorsTop || []; }
+function getCurrencySym() { return (getSummary().currencySymbol) || '$'; }
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initKpiRail();
+  initCategoryBars();
+  initTimeline();
+  initVendors();
+  initRecurring();
+  initMonthOverMonth();
+  initFlagQueue();
+  initDataGrid();
+  initCommandBar();
+  initDrillToggle();
+  revealOnScroll();
+});
+
+// ─── KPI RAIL ─────────────────────────────────────────────────────────────────
+function initKpiRail() {
+  const s = getSummary();
+  const sym = getCurrencySym();
+
+  $('#cbPeriod').textContent = (s.period || '') + ' · ' + (s.durationLabel || '');
+
+  const kpiNet = $('#kpiNet');
+  const net = s.net || 0;
+  kpiNet.classList.add(net >= 0 ? 'positive' : 'negative');
+
+  // Animate on reveal
+  const cells = $$('.kpi-cell');
+  setTimeout(() => {
+    cells.forEach((c, i) => {
+      setTimeout(() => {
+        c.classList.add('revealed');
+        if (i === 0) countUp($('#kpiInflow'), s.inflow || 0, 600, sym);
+        if (i === 1) countUp($('#kpiOutflow'), -(s.outflow || 0), 600, sym);
+        if (i === 2) countUp($('#kpiNet'), net, 600, sym);
+        if (i === 3) {
+          const el = $('#kpiCount');
+          const target = s.rowCount || 0;
+          let cur = 0;
+          const step = Math.ceil(target / 30);
+          const iv = setInterval(() => { cur = Math.min(cur + step, target); el.textContent = cur; if (cur >= target) clearInterval(iv); }, 20);
+        }
+        if (i === 4) {
+          const rows = getRows();
+          const lastRow = rows[rows.length - 1];
+          const bal = lastRow && lastRow.balance != null ? lastRow.balance : null;
+          if (bal != null) {
+            const el = $('#kpiBalance');
+            el.classList.add(bal < 0 ? 'negative' : '');
+            countUp(el, bal, 600, sym);
+          } else {
+            $('#kpiBalance').textContent = '—';
+          }
+        }
+      }, i * 60);
+    });
+  }, 100);
+
+  $('#kpiInflowSub').textContent = (s.rowCount || 0) + ' transactions';
+  $('#kpiOutflowSub').textContent = (s.distinctMerchants || 0) + ' merchants';
+  $('#kpiNetSub').textContent = s.period || '';
+  $('#kpiCountSub').textContent = (s.distinctCategories || 0) + ' categories';
+  $('#kpiBalanceSub').textContent = 'Closing ' + (s.period ? s.period.split('→')[1]?.trim() : '');
+}
+
+// ─── CATEGORY BARS ────────────────────────────────────────────────────────────
+const CAT_COLORS = [
+  'var(--primary)', 'var(--secondary-container)', 'var(--tertiary)',
+  'var(--accent-cyan)', 'var(--green)', 'var(--yellow)',
+  '#f97316', '#ec4899'
+];
+
+function initCategoryBars() {
+  const cats = getCategories();
+  const sym = getCurrencySym();
+  const container = $('#categoryBars');
+  if (!cats.length) { container.innerHTML = '<div style="color:var(--fg-muted);font-size:13px">No category data.</div>'; return; }
+
+  // Show outflow categories (and inflow separately)
+  const outflows = cats.filter(c => c.outflow > 0).sort((a, b) => b.outflow - a.outflow).slice(0, 8);
+  const inflows = cats.filter(c => c.inflow > 0).sort((a, b) => b.inflow - a.inflow).slice(0, 3);
+
+  const maxOut = outflows.length ? outflows[0].outflow : 1;
+
+  let html = '<div style="font-size:11.5px;font-weight:600;color:var(--fg-muted);margin-bottom:var(--space-sm);text-transform:uppercase;letter-spacing:.04em">Outflows</div>';
+  outflows.forEach((c, i) => {
+    const pct = (c.outflow / maxOut * 100).toFixed(1);
+    html += `
+      <div class="category-bar-row">
+        <div class="cat-label" title="${escHtml(c.category)}">${escHtml(c.category)}</div>
+        <div class="cat-bar-track">
+          <div class="cat-bar-fill" data-pct="${pct}" style="background:${CAT_COLORS[i % CAT_COLORS.length]}"></div>
+        </div>
+        <div class="cat-meta">${fmtAbs(c.outflow, sym)} <span style="opacity:.6">(${c.count})</span></div>
+      </div>`;
+  });
+
+  if (inflows.length) {
+    const maxIn = inflows[0].inflow;
+    html += '<div style="font-size:11.5px;font-weight:600;color:var(--fg-muted);margin:var(--space-lg) 0 var(--space-sm);text-transform:uppercase;letter-spacing:.04em">Inflows</div>';
+    inflows.forEach((c, i) => {
+      const pct = (c.inflow / maxIn * 100).toFixed(1);
+      html += `
+        <div class="category-bar-row">
+          <div class="cat-label" title="${escHtml(c.category)}">${escHtml(c.category)}</div>
+          <div class="cat-bar-track">
+            <div class="cat-bar-fill" data-pct="${pct}" style="background:var(--green)"></div>
+          </div>
+          <div class="cat-meta" style="color:var(--green)">${fmtAbs(c.inflow, sym)} <span style="opacity:.6">(${c.count})</span></div>
+        </div>`;
+    });
+  }
+
+  container.innerHTML = html;
+
+  // Animate bars with IntersectionObserver
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        $$('.cat-bar-fill', container).forEach(bar => {
+          const pct = bar.dataset.pct / 100;
+          bar.style.transform = `scaleX(${pct})`;
+        });
+        io.disconnect();
+      }
+    });
+  }, { threshold: 0.1 });
+  io.observe(container);
+}
+
+// ─── TIMELINE CHART ───────────────────────────────────────────────────────────
+function initTimeline() {
+  const tl = getTimeline();
+  if (!tl.length) return;
+
+  const sym = getCurrencySym();
+  const svgEl = $('#timelineSvg');
+  const PADDING = { top: 24, right: 20, bottom: 50, left: 64 };
+  const HEIGHT = 200;
+
+  function drawTimeline() {
+    const containerW = svgEl.parentElement.clientWidth || 600;
+    const W = Math.max(containerW, 320);
+    const chartW = W - PADDING.left - PADDING.right;
+    const chartH = HEIGHT - PADDING.top - PADDING.bottom;
+
+    const allDates = tl.map(d => d.date).sort();
+    const maxFlow = Math.max(...tl.map(d => Math.max(d.inflow || 0, d.outflow || 0)), 1);
+    const balances = tl.map(d => d.balance).filter(b => b != null);
+    const minBal = Math.min(...balances);
+    const maxBal = Math.max(...balances);
+    const balRange = maxBal - minBal || 1;
+
+    const xScale = i => PADDING.left + (i / Math.max(tl.length - 1, 1)) * chartW;
+    const yScaleFlow = v => PADDING.top + chartH - (v / maxFlow) * chartH;
+    const yScaleBal = v => PADDING.top + chartH - ((v - minBal) / balRange) * chartH;
+
+    const barW = Math.max(2, (chartW / tl.length) * 0.35);
+
+    let bars = '';
+    let balPath = '';
+    let labels = '';
+
+    tl.forEach((d, i) => {
+      const x = xScale(i);
+      const inH = ((d.inflow || 0) / maxFlow) * chartH;
+      const outH = ((d.outflow || 0) / maxFlow) * chartH;
+
+      if (d.inflow > 0) {
+        bars += `<rect x="${x - barW - 1}" y="${PADDING.top + chartH - inH}" width="${barW}" height="${inH}" fill="var(--green)" opacity="0.75" rx="1"/>`;
+      }
+      if (d.outflow > 0) {
+        bars += `<rect x="${x + 1}" y="${PADDING.top + chartH - outH}" width="${barW}" height="${outH}" fill="var(--red)" opacity="0.7" rx="1"/>`;
+      }
+
+      if (d.balance != null) {
+        balPath += (i === 0 ? 'M' : 'L') + x + ',' + yScaleBal(d.balance);
+      }
+
+      // X labels — every ~nth
+      const step = Math.max(1, Math.floor(tl.length / 8));
+      if (i % step === 0) {
+        labels += `<text x="${x}" y="${PADDING.top + chartH + 16}" text-anchor="middle" font-size="10" fill="var(--fg-muted)" font-family="var(--font-mono)">${dateLabel(d.date)}</text>`;
+      }
+    });
+
+    // Negative balance marker
+    const negPoints = tl.filter(d => d.balance != null && d.balance < 0);
+    let negMarkers = '';
+    negPoints.forEach((d, i) => {
+      const idx = tl.indexOf(d);
+      const x = xScale(idx);
+      const y = yScaleBal(d.balance);
+      negMarkers += `<circle cx="${x}" cy="${y}" r="4" fill="var(--red)" stroke="var(--bg)" stroke-width="1.5"/>`;
+      negMarkers += `<text x="${x}" y="${y - 8}" text-anchor="middle" font-size="9" fill="var(--red)" font-family="var(--font-mono)" font-weight="700">−bal</text>`;
+    });
+
+    // Y axis grid lines
+    let yGrid = '';
+    [0, 0.25, 0.5, 0.75, 1].forEach(f => {
+      const y = PADDING.top + chartH * (1 - f);
+      const v = maxFlow * f;
+      yGrid += `<line x1="${PADDING.left}" y1="${y}" x2="${PADDING.left + chartW}" y2="${y}" stroke="var(--border)" stroke-width="1"/>`;
+      yGrid += `<text x="${PADDING.left - 6}" y="${y + 3}" text-anchor="end" font-size="10" fill="var(--fg-muted)" font-family="var(--font-mono)">${fmtShort(v)}</text>`;
+    });
+
+    // Legend
+    const legY = PADDING.top + chartH + 34;
+    const legX = PADDING.left;
+    const legend = `
+      <rect x="${legX}" y="${legY}" width="8" height="8" fill="var(--green)" rx="2" opacity=".75"/>
+      <text x="${legX + 12}" y="${legY + 7}" font-size="10" fill="var(--fg-muted)" font-family="var(--font-body)">Inflow</text>
+      <rect x="${legX + 56}" y="${legY}" width="8" height="8" fill="var(--red)" rx="2" opacity=".7"/>
+      <text x="${legX + 68}" y="${legY + 7}" font-size="10" fill="var(--fg-muted)" font-family="var(--font-body)">Outflow</text>
+      <line x1="${legX + 120}" y1="${legY + 4}" x2="${legX + 128}" y2="${legY + 4}" stroke="var(--primary)" stroke-width="2"/>
+      <text x="${legX + 132}" y="${legY + 7}" font-size="10" fill="var(--fg-muted)" font-family="var(--font-body)">Balance</text>
+    `;
+
+    const totalH = HEIGHT + 20;
+    svgEl.setAttribute('height', totalH);
+    svgEl.setAttribute('viewBox', `0 0 ${W} ${totalH}`);
+    svgEl.innerHTML = `
+      ${yGrid}
+      ${bars}
+      ${balPath ? `<path d="${balPath}" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linejoin="round"/>` : ''}
+      ${negMarkers}
+      ${labels}
+      ${legend}
+    `;
+  }
+
+  drawTimeline();
+  const ro = new ResizeObserver(drawTimeline);
+  ro.observe(svgEl.parentElement);
+}
+
+// ─── VENDORS ─────────────────────────────────────────────────────────────────
+let activeVendorFilter = null;
+
+function initVendors() {
+  const vendors = getVendors();
+  const sym = getCurrencySym();
+  const container = $('#vendorList');
+  if (!vendors.length) { container.innerHTML = '<div style="color:var(--fg-muted);font-size:13px">No vendor data.</div>'; return; }
+
+  const sorted = [...vendors].sort((a, b) => {
+    const aMax = Math.max(a.outflow || 0, a.inflow || 0);
+    const bMax = Math.max(b.outflow || 0, b.inflow || 0);
+    return bMax - aMax;
+  }).slice(0, 12);
+
+  let html = '';
+  sorted.forEach((v, i) => {
+    const isOut = v.outflow > 0;
+    const amount = isOut ? v.outflow : v.inflow;
+    html += `
+      <div class="vendor-row" data-vendor="${escHtml(v.name)}" title="Filter transactions for ${escHtml(v.name)}">
+        <span class="vendor-rank">${i + 1}</span>
+        <span class="vendor-name">${escHtml(v.name)}</span>
+        <span class="vendor-badge ${isOut ? 'badge-out' : 'badge-in'}">${isOut ? 'OUT' : 'IN'}</span>
+        <span class="vendor-amount" style="color:${isOut ? 'var(--red)' : 'var(--green)'}">${fmtAbs(amount, sym)}</span>
+        <span class="vendor-count">${v.count}×</span>
+      </div>`;
+  });
+
+  container.innerHTML = html;
+
+  $$('.vendor-row', container).forEach(row => {
+    row.addEventListener('click', () => {
+      const name = row.dataset.vendor;
+      activeVendorFilter = activeVendorFilter === name ? null : name;
+      $$('.vendor-row', container).forEach(r => r.style.background = '');
+      if (activeVendorFilter) row.style.background = 'var(--surface-container)';
+      openDrill();
+      applyGridFilters();
+    });
+  });
+}
+
+// ─── RECURRING ────────────────────────────────────────────────────────────────
+function initRecurring() {
+  const rec = getRecurring();
+  const sym = getCurrencySym();
+  const container = $('#recurringList');
+
+  if (!rec.length) {
+    container.innerHTML = '<div style="color:var(--fg-muted);font-size:13px">No recurring patterns detected in this file.</div>';
+    return;
+  }
+
+  const sorted = [...rec].sort((a, b) => Math.abs(b.avgAmount) - Math.abs(a.avgAmount));
+
+  let html = '';
+  sorted.forEach(r => {
+    const isIncome = r.avgAmount > 0;
+    const tagClass = r.tag ? `tag-${r.tag}` :

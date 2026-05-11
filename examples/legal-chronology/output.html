@@ -1,229 +1,1031 @@
 <!doctype html>
-<html lang="en" data-ha-style="paper">
+<html lang="en" data-ha-style="document">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Hartwell v. Brookline Mfg. Co. — synthetic chronology</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hartwell v. Brookline Mfg. Co. — Case Chronology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
 :root {
-  --primary:#a03b00; --primary-container:#c94c00; --primary-fixed:#ffdbcd;
-  --primary-fixed-dim:#ffb597; --on-primary:#fff;
-  --bg:#fff8f6; --surface:#fff8f6; --surface-container-lowest:#fff;
-  --surface-container-low:#fbf2ef; --surface-container:#f5ece9; --surface-container-high:#efe6e3;
-  --fg-1:#1e1b19; --fg-2:#594138; --fg-muted:#8d7166;
-  --border:rgba(0,0,0,.06); --border-strong:rgba(0,0,0,.12); --outline-variant:#e1bfb2;
-  --green:#10b981; --blue:#3b82f6; --yellow:#f59e0b; --red:#ef4444;
-  --font-headline:'Space Grotesk',ui-sans-serif,system-ui,sans-serif;
-  --font-body:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;
-  --font-mono:'SF Mono','Menlo',ui-monospace,monospace;
-  --space-xs:4px; --space-sm:8px; --space-md:12px; --space-lg:16px;
-  --space-xl:20px; --space-2xl:24px; --space-3xl:32px; --space-4xl:48px; --space-5xl:64px;
-  --radius-sm:8px; --radius-md:12px; --radius-lg:16px; --radius-xl:20px; --radius-pill:9999px;
-  --shadow-sm:0 1px 2px rgba(30,27,25,.04); --shadow-md:0 4px 12px rgba(30,27,25,.08);
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --accent-cyan: #00D4FF;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981;
+  --blue: #3b82f6;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30,27,25,0.04);
+  --shadow-md: 0 4px 12px rgba(30,27,25,0.08);
+  --shadow-lg: 0 8px 24px rgba(30,27,25,0.12);
+  --shadow-accent: 0 8px 24px rgba(160,59,0,0.15);
+  --gradient-primary: linear-gradient(135deg, #a03b00 0%, #c94c00 100%);
 }
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg:#060B18; --surface:#0B1426; --surface-container-lowest:#101D35;
-    --surface-container-low:#101D35; --surface-container:#162544; --surface-container-high:#1c2d52;
-    --fg-1:#F8FAFC; --fg-2:#CBD5E1; --fg-muted:#64748B;
-    --border:rgba(255,255,255,.08); --border-strong:rgba(255,255,255,.14);
-    --primary:#FF6B35;
-    --shadow-md:0 4px 12px rgba(0,0,0,.4);
+    --bg: #060B18;
+    --surface: #0B1426;
+    --surface-container-lowest: #101D35;
+    --surface-container-low: #101D35;
+    --surface-container: #162544;
+    --surface-container-high: #1c2d52;
+    --fg-1: #F8FAFC;
+    --fg-2: #CBD5E1;
+    --fg-muted: #64748B;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --primary: #FF6B35;
+    --primary-fixed: rgba(255,107,53,0.12);
+    --primary-fixed-dim: rgba(255,107,53,0.2);
+    --outline-variant: rgba(255,255,255,0.12);
+    --accent-glow: #00D4FF;
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
   }
 }
-*,*::before,*::after{box-sizing:border-box;margin:0}
-html,body{background:var(--bg);color:var(--fg-1);font-family:var(--font-body);
-  font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
-body{min-height:100vh}
-main{max-width:1200px;margin:0 auto;padding:var(--space-2xl) var(--space-xl) var(--space-5xl)}
-h1,h2,h3,h4{font-family:var(--font-headline);letter-spacing:-.01em;font-weight:600;color:var(--fg-1)}
-h1{font-size:clamp(28px,4.6vw,42px);font-weight:700;line-height:1.05;letter-spacing:-.02em}
-h2{font-size:clamp(20px,2.4vw,24px);margin-bottom:var(--space-md)}
-h3{font-size:17px;margin-bottom:var(--space-sm)}
-.muted{color:var(--fg-muted)}
-.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
-button{font:inherit;cursor:pointer;border:none;background:transparent;color:inherit}
-input,select{font:inherit;color:var(--fg-1)}
-.hero{padding:var(--space-3xl) 0 var(--space-2xl);border-bottom:1px solid var(--border)}
-.hero .eyebrow{display:inline-flex;gap:var(--space-sm);align-items:center;
-  background:var(--surface-container);color:var(--primary);
-  padding:var(--space-xs) var(--space-md);border-radius:var(--radius-pill);
-  font-family:var(--font-mono);font-size:11.5px;font-weight:500;
-  text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-lg)}
-.hero h1 .accent{background:linear-gradient(135deg,var(--primary) 0%,#7b40e0 100%);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.hero p.editorial{margin-top:var(--space-lg);color:var(--fg-2);font-size:17px;
-  max-width:78ch;line-height:1.5}
-.privacy-strip{background:var(--surface-container);border:1px solid var(--border-strong);
-  border-radius:var(--radius-md);padding:var(--space-md) var(--space-lg);
-  font-size:13px;color:var(--fg-2);margin-top:var(--space-xl);
-  display:flex;gap:var(--space-md);align-items:flex-start}
-.privacy-strip .lock{font-family:var(--font-mono);font-size:11px;color:var(--primary);
-  background:var(--surface-container-lowest);padding:2px 8px;border-radius:var(--radius-pill);
-  border:1px solid var(--border-strong);text-transform:uppercase;letter-spacing:.08em;flex-shrink:0}
-.section{margin-top:var(--space-3xl)}
-.section-head{display:flex;justify-content:space-between;align-items:baseline;
-  gap:var(--space-md);margin-bottom:var(--space-lg);flex-wrap:wrap}
-.section-head .meta{color:var(--fg-muted);font-size:13px;font-family:var(--font-mono)}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:var(--space-md)}
-.kpi{background:var(--surface-container-lowest);border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:var(--space-lg)}
-.kpi .label{font-size:12px;color:var(--fg-muted);text-transform:uppercase;
-  letter-spacing:.08em;font-family:var(--font-mono);margin-bottom:var(--space-sm)}
-.kpi .value{font-family:var(--font-headline);font-size:32px;font-weight:700;
-  letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--fg-1)}
-.kpi .sub{margin-top:var(--space-xs);color:var(--fg-muted);font-size:13px}
-.card{background:var(--surface-container-lowest);border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:var(--space-lg);box-shadow:var(--shadow-sm)}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2xl)}
-@media (max-width:760px){.grid-2{grid-template-columns:1fr}}
-.timeline{display:flex;flex-direction:column;gap:var(--space-md)}
-.tl-row{display:grid;grid-template-columns:120px 1fr;gap:var(--space-md);
-  padding:var(--space-md);border:1px solid var(--border);border-radius:var(--radius-md);
-  background:var(--surface-container-lowest)}
-.tl-row .date{font-family:var(--font-mono);font-size:12.5px;font-variant-numeric:tabular-nums;
-  color:var(--fg-2);align-self:start}
-.tl-row .body{font-size:14.5px;color:var(--fg-1)}
-.tl-row .body .kind{display:inline-block;font-family:var(--font-mono);font-size:11px;
-  padding:1px 8px;border-radius:var(--radius-pill);background:var(--surface-container);
-  color:var(--primary);text-transform:uppercase;letter-spacing:.08em;margin-right:var(--space-sm)}
-.tl-row .body .party{font-size:13px;color:var(--fg-muted);margin-top:2px}
-.tl-row .body .detail{font-size:13px;color:var(--fg-muted);margin-top:4px}
-.list{display:flex;flex-direction:column;gap:var(--space-sm)}
-.list-row{display:flex;justify-content:space-between;align-items:baseline;
-  padding:var(--space-sm) var(--space-md);border-radius:var(--radius-sm);
-  background:var(--surface-container)}
-.list-row .name{font-size:14.5px;font-weight:500}
-.list-row .role{font-size:12px;color:var(--fg-muted);font-family:var(--font-mono);
-  text-transform:uppercase;letter-spacing:.06em}
-.list-row .count{font-size:13px;color:var(--fg-muted);font-family:var(--font-mono);
-  font-variant-numeric:tabular-nums}
-.pill{display:inline-block;padding:1px 8px;border-radius:var(--radius-pill);
-  font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;
-  text-transform:uppercase;font-weight:500;margin-left:var(--space-sm)}
-.pill.inferred{background:var(--surface-container-high);color:var(--fg-2);border:1px solid var(--border-strong)}
-.pill.missing{background:rgba(239,68,68,.12);color:var(--red);border:1px solid rgba(239,68,68,.4)}
-.pill.present{background:rgba(16,185,129,.12);color:var(--green);border:1px solid rgba(16,185,129,.4)}
-.pill.above{background:rgba(245,158,11,.12);color:#a05a00;border:1px solid rgba(245,158,11,.4)}
-.pill.below{background:rgba(59,130,246,.12);color:var(--blue);border:1px solid rgba(59,130,246,.4)}
-.pill.in-range{background:rgba(16,185,129,.10);color:#0b7355;border:1px solid rgba(16,185,129,.3)}
-.pill.no-range{background:var(--surface-container-high);color:var(--fg-muted);border:1px solid var(--border-strong)}
-.q-list{display:flex;flex-direction:column;gap:var(--space-sm)}
-.q-list .q{padding:var(--space-md);border-left:3px solid var(--primary);
-  background:var(--surface-container-low);border-radius:0 var(--radius-md) var(--radius-md) 0;
-  font-size:14.5px;line-height:1.5}
-.miss-list{display:flex;flex-direction:column;gap:var(--space-sm);margin-bottom:var(--space-lg)}
-.miss-list .miss{padding:var(--space-md);background:rgba(245,158,11,.06);
-  border-left:3px solid var(--yellow);border-radius:0 var(--radius-md) var(--radius-md) 0;
-  font-size:14px}
-.miss-list .miss .lbl{font-weight:500}
-.miss-list .miss .det{font-size:13px;color:var(--fg-muted);margin-top:2px}
-.empty-state{padding:var(--space-md);color:var(--fg-muted);font-size:14px;font-style:italic}
-.lab-table,.row-table{width:100%;border-collapse:collapse;font-size:14px}
-.lab-table th,.lab-table td,.row-table th,.row-table td{
-  padding:var(--space-sm) var(--space-md);text-align:left;
-  border-bottom:1px solid var(--border)}
-.lab-table th,.row-table th{font-family:var(--font-mono);font-size:11.5px;
-  text-transform:uppercase;letter-spacing:.06em;color:var(--fg-muted);
-  background:var(--surface-container);font-weight:500}
-.lab-table tbody tr:hover{background:var(--surface-container)}
-.lab-table .num,.row-table .num{font-family:var(--font-mono);font-variant-numeric:tabular-nums;text-align:right}
-.lab-table .out{background:rgba(245,158,11,.06)}
-.lab-table .below-row{background:rgba(59,130,246,.06)}
-.panel-group{margin-bottom:var(--space-xl)}
-.panel-group h3{font-size:15px;margin-bottom:var(--space-sm);
-  display:flex;justify-content:space-between;align-items:baseline}
-.panel-group h3 .meta{font-size:12px;font-family:var(--font-mono);color:var(--fg-muted)}
-.trends{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:var(--space-md)}
-.trend{background:var(--surface-container-lowest);border:1px solid var(--border);
-  border-radius:var(--radius-md);padding:var(--space-md)}
-.trend h4{font-size:13.5px;margin-bottom:var(--space-xs)}
-.trend .reading{font-family:var(--font-mono);font-size:12px;color:var(--fg-muted);
-  margin-bottom:var(--space-sm)}
-.trend svg{width:100%;height:60px;display:block}
-.trend .latest{font-family:var(--font-mono);font-size:12.5px;margin-top:var(--space-xs);
-  font-variant-numeric:tabular-nums;color:var(--fg-2)}
-.encounter{background:var(--surface-container-lowest);border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:var(--space-lg);margin-bottom:var(--space-md)}
-.encounter .head{display:flex;justify-content:space-between;align-items:baseline;
-  gap:var(--space-md);flex-wrap:wrap;margin-bottom:var(--space-sm)}
-.encounter .head .date{font-family:var(--font-mono);font-size:13px;color:var(--fg-2);
-  font-variant-numeric:tabular-nums}
-.encounter .head .type{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;
-  letter-spacing:.08em;color:var(--primary);background:var(--surface-container);
-  padding:2px 8px;border-radius:var(--radius-pill)}
-.encounter .meta-row{font-size:13px;color:var(--fg-muted);margin-bottom:var(--space-sm)}
-.encounter .reason{font-size:14.5px;color:var(--fg-1);margin-bottom:var(--space-sm)}
-.encounter .vitals{display:flex;flex-wrap:wrap;gap:var(--space-md);margin-top:var(--space-sm)}
-.encounter .vital{font-family:var(--font-mono);font-size:12.5px;color:var(--fg-2);
-  background:var(--surface-container);padding:2px 8px;border-radius:var(--radius-sm)}
-.encounter .plan{margin-top:var(--space-sm);padding:var(--space-sm) var(--space-md);
-  background:var(--surface-container);border-radius:var(--radius-sm);
-  font-style:italic;font-size:13.5px;color:var(--fg-2)}
-.deadlines{display:flex;flex-direction:column;gap:var(--space-sm)}
-.deadline{display:grid;grid-template-columns:120px 80px 1fr;gap:var(--space-md);
-  padding:var(--space-md);background:var(--surface-container-lowest);
-  border:1px solid var(--border);border-radius:var(--radius-md);font-size:13.5px}
-.deadline .d{font-family:var(--font-mono);font-variant-numeric:tabular-nums;color:var(--fg-1)}
-.deadline .rel{font-family:var(--font-mono);font-size:11.5px;color:var(--fg-muted);
-  background:var(--surface-container);padding:2px 8px;border-radius:var(--radius-pill);
-  text-align:center;align-self:start}
-.deadline .src{color:var(--fg-2)}
-.case-card{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:var(--space-md);padding:var(--space-lg);background:var(--surface-container-lowest);
-  border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
-.case-card .field .label{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;
-  letter-spacing:.08em;color:var(--fg-muted);margin-bottom:2px}
-.case-card .field .value{font-family:var(--font-mono);font-size:13.5px;color:var(--fg-1)}
-.drill{background:var(--surface-container-lowest);border:1px solid var(--border);
-  border-radius:var(--radius-lg);overflow:hidden}
-.drill > summary{cursor:pointer;padding:var(--space-lg);
-  display:flex;justify-content:space-between;align-items:center;font-weight:500;
-  list-style:none;font-size:15px}
-.drill > summary::-webkit-details-marker{display:none}
-.drill > summary::after{content:"▾";color:var(--fg-muted);font-size:14px;
-  transition:transform .2s}
-.drill[open] > summary::after{transform:rotate(180deg)}
-.drill > summary:hover{background:var(--surface-container)}
-.drill-body{padding:var(--space-lg);border-top:1px solid var(--border)}
-.drill-body input[type=search]{width:100%;padding:var(--space-md);
-  background:var(--surface-container);border:1px solid var(--border-strong);
-  border-radius:var(--radius-sm);font-size:14px;margin-bottom:var(--space-md)}
-.toolbar{display:flex;gap:var(--space-sm);flex-wrap:wrap;align-items:center;
-  margin-bottom:var(--space-md)}
-.chip{padding:var(--space-xs) var(--space-md);border-radius:var(--radius-pill);
-  background:var(--surface-container);border:1px solid var(--border-strong);
-  font-size:12.5px;font-family:var(--font-mono);cursor:pointer;color:var(--fg-2)}
-.chip.active{background:var(--primary);color:var(--on-primary);
-  border-color:var(--primary)}
-.copy-btn{padding:var(--space-xs) var(--space-md);background:var(--surface-container);
-  border:1px solid var(--border-strong);border-radius:var(--radius-pill);
-  font-size:12.5px;font-family:var(--font-mono);cursor:pointer;color:var(--fg-2)}
-.copy-btn:hover{background:var(--surface-container-high)}
-.callout-card{padding:var(--space-md);background:var(--surface-container-lowest);
-  border:1px solid var(--border);border-radius:var(--radius-md);margin-bottom:var(--space-sm)}
-.callout-card .head{display:flex;justify-content:space-between;align-items:baseline;
-  gap:var(--space-md);flex-wrap:wrap;margin-bottom:var(--space-xs)}
-.callout-card .head .test{font-weight:500;font-size:14.5px}
-.callout-card .head .value{font-family:var(--font-mono);font-variant-numeric:tabular-nums;
-  font-size:14px;color:var(--fg-1)}
-.callout-card .ref{font-size:12.5px;color:var(--fg-muted);font-family:var(--font-mono)}
-.callout-card .meta{font-size:12px;color:var(--fg-muted);margin-top:var(--space-xs)}
-footer{margin-top:var(--space-5xl);padding-top:var(--space-2xl);
-  border-top:1px solid var(--border);color:var(--fg-muted);font-size:13px}
-footer p{margin-bottom:var(--space-md)}
-footer .caveat{font-style:italic}
-.med-list{display:flex;flex-direction:column;gap:var(--space-sm)}
-.med{padding:var(--space-sm) var(--space-md);background:var(--surface-container);
-  border-radius:var(--radius-sm);font-size:14px;display:flex;justify-content:space-between;
-  gap:var(--space-md);flex-wrap:wrap}
-.med .name{font-weight:500}
-.med .dose{font-family:var(--font-mono);font-size:12.5px;color:var(--fg-2)}
-.med .ix{font-size:12.5px;color:var(--fg-muted)}
-  </style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--fg-1);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ─── Layout shell ─── */
+.document-shell {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-lg) var(--space-5xl);
+}
+
+@media (min-width: 640px) {
+  .document-shell { padding: var(--space-3xl) var(--space-2xl) var(--space-5xl); }
+}
+@media (min-width: 900px) {
+  .document-shell { padding: var(--space-4xl) var(--space-3xl) var(--space-5xl); }
+}
+
+/* ─── Cover ─── */
+.cover {
+  border-bottom: 2px solid var(--border-strong);
+  padding-bottom: var(--space-3xl);
+  margin-bottom: var(--space-3xl);
+}
+
+.cover-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-md);
+}
+
+.cover-title {
+  font-family: var(--font-headline);
+  font-size: clamp(22px, 4vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--fg-1);
+  line-height: 1.2;
+  margin-bottom: var(--space-xl);
+}
+
+.cover-title span {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Case header card */
+.case-header-card {
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+}
+
+.case-header-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+@media (min-width: 540px) {
+  .case-header-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.case-header-item {}
+.case-header-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: 2px;
+}
+.case-header-value {
+  font-size: 13.5px;
+  color: var(--fg-2);
+  font-weight: 500;
+}
+.case-header-value.mono {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--primary);
+}
+
+/* Stats strip */
+.stats-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.stat-pill {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--surface-container);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: var(--space-xs) var(--space-md);
+  font-size: 12.5px;
+  color: var(--fg-2);
+}
+
+.stat-pill-num {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--primary);
+  font-size: 14px;
+}
+
+/* Privacy banner */
+.privacy-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  background: var(--primary-fixed);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-2xl);
+  font-size: 12.5px;
+  color: var(--fg-2);
+  line-height: 1.5;
+}
+
+.privacy-banner-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+  color: var(--primary);
+}
+
+/* ─── Reader rail nav ─── */
+.reader-rail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-3xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+  padding-top: var(--space-md);
+}
+
+.rail-link {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--fg-muted);
+  text-decoration: none;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--surface-container-lowest);
+  transition: all 120ms ease;
+  white-space: nowrap;
+}
+
+.rail-link:hover, .rail-link.active {
+  background: var(--primary);
+  color: var(--on-primary);
+  border-color: var(--primary);
+}
+
+/* Copy button */
+.copy-btn {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--fg-muted);
+  background: var(--surface-container);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: var(--space-xs) var(--space-md);
+  cursor: pointer;
+  transition: all 120ms;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.copy-btn:hover { background: var(--surface-container-high); color: var(--fg-1); }
+.copy-btn.copied { background: var(--green); color: white; border-color: var(--green); }
+
+/* ─── Body sections ─── */
+.body-section {
+  margin-bottom: var(--space-4xl);
+  scroll-margin-top: 60px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.section-title {
+  font-family: var(--font-headline);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.section-title::before {
+  content: '';
+  display: block;
+  width: 3px;
+  height: 18px;
+  background: var(--primary);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.section-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-muted);
+  background: var(--surface-container);
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+}
+
+/* Summary card */
+.summary-card {
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--fg-2);
+}
+
+/* ─── Timeline ─── */
+.timeline-list {
+  position: relative;
+  list-style: none;
+}
+
+.timeline-list::before {
+  content: '';
+  position: absolute;
+  left: 60px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border-strong);
+}
+
+@media (max-width: 480px) {
+  .timeline-list::before { left: 12px; }
+}
+
+.timeline-item {
+  display: flex;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  position: relative;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 280ms ease, transform 280ms ease;
+}
+
+.timeline-item.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+.timeline-date-col {
+  flex: 0 0 60px;
+  text-align: right;
+  padding-top: 3px;
+}
+
+@media (max-width: 480px) {
+  .timeline-date-col { flex: 0 0 0; display: none; }
+}
+
+.timeline-date-chip {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--fg-muted);
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+
+.timeline-dot-col {
+  flex: 0 0 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5px;
+}
+
+.timeline-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px var(--border-strong);
+}
+
+.dot-event { background: var(--fg-muted); }
+.dot-filing { background: var(--primary); box-shadow: 0 0 0 2px var(--primary-fixed-dim); }
+.dot-deadline { background: var(--yellow); box-shadow: 0 0 0 2px rgba(245,158,11,0.3); }
+
+.timeline-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.timeline-body-inner {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  transition: border-color 120ms;
+}
+
+.timeline-body-inner:hover { border-color: var(--primary); }
+
+.timeline-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.timeline-mobile-date {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--fg-muted);
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .timeline-mobile-date { display: block; }
+}
+
+.kind-chip {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 1px 7px;
+  border-radius: var(--radius-pill);
+}
+
+.chip-event { background: var(--surface-container-high); color: var(--fg-muted); }
+.chip-filing { background: var(--primary-fixed); color: var(--primary-container); }
+.chip-deadline { background: rgba(245,158,11,0.12); color: #b45309; }
+
+@media (prefers-color-scheme: dark) {
+  .chip-filing { background: rgba(255,107,53,0.15); color: var(--primary); }
+  .chip-deadline { color: var(--yellow); }
+}
+
+.party-chip {
+  font-size: 10.5px;
+  color: var(--fg-muted);
+  padding: 1px 7px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--surface-container-low);
+}
+
+.inferred-chip {
+  font-size: 9.5px;
+  color: var(--fg-muted);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-pill);
+  padding: 1px 6px;
+  font-style: italic;
+}
+
+.timeline-title {
+  font-size: 13.5px;
+  color: var(--fg-1);
+  line-height: 1.5;
+}
+
+.timeline-exhibits {
+  margin-top: var(--space-xs);
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.exhibit-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--secondary-container);
+  background: rgba(123,64,224,0.08);
+  border: 1px solid rgba(123,64,224,0.15);
+  border-radius: var(--radius-pill);
+  padding: 1px 7px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .exhibit-tag { color: var(--secondary); background: rgba(213,186,255,0.1); border-color: rgba(213,186,255,0.2); }
+}
+
+/* Filter chips for timeline */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.filter-chip {
+  font-size: 12px;
+  font-weight: 500;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--surface-container-lowest);
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition: all 120ms;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.filter-chip.active {
+  background: var(--primary);
+  color: var(--on-primary);
+  border-color: var(--primary);
+}
+
+.filter-chip .chip-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* ─── Deadlines ─── */
+.deadline-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+@media (min-width: 540px) {
+  .deadline-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.deadline-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.deadline-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--yellow);
+}
+
+.deadline-card.past::before { background: var(--fg-muted); }
+.deadline-card.near::before { background: var(--primary); }
+
+.deadline-date {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--fg-1);
+  margin-bottom: var(--space-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.deadline-relative {
+  font-size: 11.5px;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-md);
+  font-style: italic;
+}
+
+.deadline-source {
+  font-size: 12.5px;
+  color: var(--fg-2);
+  line-height: 1.5;
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.deadline-party-label {
+  font-size: 11px;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-xs);
+  font-weight: 500;
+}
+
+/* ─── Filings ─── */
+.filings-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.filing-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-md) var(--space-lg);
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  align-items: start;
+}
+
+.filing-date {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-muted);
+  white-space: nowrap;
+  padding-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.filing-title {
+  font-size: 13.5px;
+  color: var(--fg-1);
+  line-height: 1.5;
+}
+
+.filing-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-xs);
+}
+
+/* ─── Parties ─── */
+.parties-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.parties-table th {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  text-align: left;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 2px solid var(--border-strong);
+  background: var(--surface-container-low);
+}
+
+.parties-table th:first-child { border-radius: var(--radius-sm) 0 0 0; }
+.parties-table th:last-child { border-radius: 0 var(--radius-sm) 0 0; }
+
+.parties-table td {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.parties-table tr:last-child td { border-bottom: none; }
+.parties-table tr:nth-child(even) td { background: var(--surface-container-low); }
+
+.role-badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  display: inline-block;
+}
+
+.role-plaintiff { background: rgba(59,130,246,0.1); color: var(--blue); }
+.role-defendant { background: rgba(239,68,68,0.1); color: var(--red); }
+.role-court { background: rgba(123,64,224,0.1); color: var(--secondary-container); }
+.role-other { background: var(--surface-container); color: var(--fg-muted); }
+
+@media (prefers-color-scheme: dark) {
+  .role-court { color: var(--secondary); }
+}
+
+.event-count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-muted);
+}
+
+/* ─── Documents ─── */
+.documents-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.document-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.document-id {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 600;
+  min-width: 70px;
+}
+
+.document-name {
+  font-size: 13.5px;
+  color: var(--fg-1);
+  flex: 1;
+  min-width: 120px;
+}
+
+.document-date {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.missing-badge {
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: rgba(239,68,68,0.1);
+  color: var(--red);
+  border: 1px solid rgba(239,68,68,0.2);
+}
+
+.present-badge {
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: rgba(16,185,129,0.1);
+  color: var(--green);
+  border: 1px solid rgba(16,185,129,0.2);
+}
+
+/* ─── Missing & Questions ─── */
+.missing-section {
+  background: rgba(239,68,68,0.05);
+  border: 1px solid rgba(239,68,68,0.15);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.missing-section-title {
+  font-family: var(--font-headline);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--red);
+  margin-bottom: var(--space-md);
+  letter-spacing: -0.01em;
+}
+
+.missing-item {
+  font-size: 13.5px;
+  color: var(--fg-2);
+  line-height: 1.5;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+}
+
+.missing-item:last-child { border-bottom: none; }
+
+.missing-item-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  color: var(--red);
+}
+
+.missing-detail {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-muted);
+  margin-top: 2px;
+}
+
+.questions-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.question-item {
+  background: var(--surface-container-low);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--secondary-container);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: var(--space-md) var(--space-lg);
+  font-size: 13.5px;
+  color: var(--fg-2);
+  line-height: 1.55;
+}
+
+/* ─── Drill-down / Evidence browser ─── */
+.drill-down-section {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.drill-down-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg) var(--space-xl);
+  background: var(--surface-container-low);
+  cursor: pointer;
+  user-select: none;
+  gap: var(--space-md);
+}
+
+.drill-down-header:hover { background: var(--surface-container); }
+
+.drill-down-title {
+  font-family: var(--font-headline);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+}
+
+.drill-down-toggle {
+  color: var(--fg-muted);
+  transition: transform 200ms;
+  flex-shrink: 0;
+}
+
+.drill-down-toggle.open { transform: rotate(180deg); }
+
+.drill-down-body {
+  display: none;
+  padding: var(--space-xl);
+  border-top: 1px solid var(--border);
+}
+
+.drill-down-body.open { display: block; }
+
+.search-box-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.search-icon {
+  color: var(--fg-muted);
+  flex-shrink: 0;
+}
+
+.search-input {
+  font-family: var(--font-body);
+  font-size: 14px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--fg-1);
+  flex: 1;
+  width: 100%;
+}
+
+.search-input::placeholder { color: var(--fg-muted); }
+
+.drill-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.drill-record-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.drill-record {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color 120ms;
+}
+
+.drill-record.hidden { display: none; }
+
+.drill-record-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--surface-container-lowest);
+  cursor: pointer;
+}
+
+.drill-record-header:hover { background: var(--surface-container-low); }
+
+.drill-record-date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-muted);
+  flex-shrink: 0;
+  padding-top: 2px;
+  font-variant-numeric: tabular-nums;
+  min-width: 75px;
+}
+
+.drill-record-title {
+  font-size: 13px;
+  color: var(--fg-1);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.drill-record-expand {
+  flex-shrink: 0;
+  color: var(--fg-muted);
+  transition: transform 200ms;
+}
+
+.drill-record-expand.open { transform: rotate(180deg); }
+
+.drill-record-detail {
+  display: none;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--surface-container-low);
+  border-top: 1px solid var(--border);
+  font-size: 12.5px;
+  color: var(--fg-2);
+  line-height: 1.6;
+}
+
+.drill-record-detail.open { display: block; }
+
+.drill-quote {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  background: var(--surface-container);
+  border-left: 3px solid var(--primary);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-top: var(--space-sm);
+  color: var(--fg-muted);
+  word-break: break-word;
+}
+
+mark {
+  background: rgba(232,64,13,0.18);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+/* ─── Footer ─── */
+.page-footer {
+  margin-top: var(--space-5xl);
+  padding-top: var(--space-3xl);
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--fg-muted);
+  line-height: 1.6;
+}
+
+.page-footer p { margin-bottom: var(--space-md); }
+
+.page-footer strong {
+  color: var(--fg-2);
+  font-weight: 600;
+}
+
+/* ─── Utilities ─── */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .timeline-item { opacity: 1 !important; transform: none !important; }
+}
+
+/* ─── Deadline timeline visual ─── */
+.deadline-lane {
+  position: relative;
+  padding: var(--space-xl) 0 var(--space-xl) 80px;
+  overflow-x: auto;
+}
+
+.deadline-lane-rule {
+  position: absolute;
+  left: 80px; right: 0;
+  top: 50%;
+  height: 2px;
+  background: var(--border-strong);
+}
+
+</style>
 <!-- html-anything example style skin:start -->
 
 <style id="html-anything-example-style-skin">
@@ -328,35 +1130,6 @@ html[data-ha-style="relationship"] body {
     linear-gradient(300deg, rgba(49,123,147,.08), transparent 40%);
 }
 html[data-ha-style="relationship"] body::before { content: "relationship"; }
-
-html[data-ha-style="personal-atlas"] {
-  --ha-style-accent: #3f7f6a;
-  --ha-style-accent-2: #c15a2b;
-  --primary: #3f7f6a;
-  --primary-container: #2f6b58;
-  --primary-fixed: #dff4ea;
-  --secondary-container: #c15a2b;
-  --bg: #f7faf4;
-  --surface: #f7faf4;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #eef5ea;
-  --surface-container: #e6eee0;
-  --surface-container-high: #dbe7d5;
-  --fg-1: #17211b;
-  --fg-2: #405345;
-  --fg-muted: #718172;
-  --border: rgba(63,127,106,.15);
-  --gradient-hero: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-  --gradient-text: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-}
-html[data-ha-style="personal-atlas"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(63,127,106,.11) 0 2px, transparent 2px),
-    radial-gradient(circle at 70% 40%, rgba(193,90,43,.10) 0 1.5px, transparent 1.5px);
-  background-size: 54px 54px, 38px 38px;
-}
-html[data-ha-style="personal-atlas"] body::before { content: "personal atlas"; }
 
 html[data-ha-style="timeline-story"] {
   --ha-style-accent: #9a4b14;
@@ -507,7 +1280,7 @@ html[data-ha-style="dashboard"] header.hero::before {
   margin-bottom: 14px;
 }
 
-html[data-ha-style="editorial"] {
+html[data-ha-style="document"] {
   --ha-style-accent: #8b3f1f;
   --ha-style-accent-2: #2f6f73;
   --primary: #8b3f1f;
@@ -528,14 +1301,14 @@ html[data-ha-style="editorial"] {
   --gradient-hero: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
   --gradient-text: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
 }
-html[data-ha-style="editorial"] body {
+html[data-ha-style="document"] body {
   background-color: var(--bg) !important;
   background-image: linear-gradient(90deg, rgba(139,63,31,.18) 0 4px, transparent 4px);
   background-size: 100% 100%;
 }
-html[data-ha-style="editorial"] body::before { content: "editorial"; }
-html[data-ha-style="editorial"] .hero::before,
-html[data-ha-style="editorial"] header.hero::before {
+html[data-ha-style="document"] body::before { content: "document"; }
+html[data-ha-style="document"] .hero::before,
+html[data-ha-style="document"] header.hero::before {
   width: 42px;
   height: 42px;
   border-radius: 0;
@@ -543,33 +1316,6 @@ html[data-ha-style="editorial"] header.hero::before {
   border-top: 4px solid var(--ha-style-accent);
   border-left: 4px solid var(--ha-style-accent);
 }
-
-html[data-ha-style="paper"] {
-  --ha-style-accent: #53606a;
-  --ha-style-accent-2: #8c6f4a;
-  --primary: #53606a;
-  --primary-container: #3e4850;
-  --primary-fixed: #eef1f3;
-  --secondary-container: #8c6f4a;
-  --bg: #f9faf9;
-  --surface: #f9faf9;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f1f2f1;
-  --surface-container: #e8eae8;
-  --surface-container-high: #dedfdd;
-  --fg-1: #171717;
-  --fg-2: #4b5563;
-  --fg-muted: #737373;
-  --border: rgba(83,96,106,.18);
-  --font-headline: Georgia, "Iowan Old Style", "Times New Roman", serif;
-  --gradient-hero: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-  --gradient-text: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-}
-html[data-ha-style="paper"] body {
-  background-color: var(--bg) !important;
-  background-image: repeating-linear-gradient(0deg, transparent 0 31px, rgba(83,96,106,.08) 31px 32px);
-}
-html[data-ha-style="paper"] body::before { content: "paper"; }
 
 html[data-ha-style="developer"] {
   color-scheme: dark;
@@ -614,554 +1360,493 @@ html[data-ha-style="developer"] .mono {
 <!-- html-anything example style skin:end -->
 </head>
 <body>
-  <main>
-    <section class="hero">
-      <span class="eyebrow"><span id="eyebrow-text">Sensitive record</span></span>
-      <h1><span class="accent" id="hero-title">Hartwell v. Brookline Mfg. Co. — synthetic chronology</span></h1>
-      <p class="editorial" id="hero-editorial"></p>
-      <div class="privacy-strip">
-        <span class="lock">Local</span>
-        <span>Names, MRNs, case numbers, policy IDs, and dates inlined in this page never leave your machine. For sharing, generate from a redacted export. <strong>This page is an organizational summary, not medical / legal / insurance advice.</strong></span>
+<script>const DATA = {"format":"legal-chronology","subtype":"legal-chronology","events":[{"id":"evt_001","kind":"event","date":"2025-11-04","dateText":"2025-11-04","title":"Plaintiff terminated by Brookline Manufacturing Co. according to termination letter (Exhibit A).","party":"Plaintiff","detail":"Exhibits: A","source":{"line":18,"quote":"- 2025-11-04 — Plaintiff terminated by Brookline Manufacturing Co."}},{"id":"evt_002","kind":"event","date":"2025-11-12","dateText":"2025-11-12","title":"Plaintiff sent demand letter to defendant via counsel for Plaintiff (Exhibit B).","party":"Plaintiff","detail":"Exhibits: B","source":{"line":20,"quote":"- 2025-11-12 — Plaintiff sent demand letter to defendant via counsel"}},{"id":"evt_003","kind":"event","date":"2025-11-19","dateText":"2025-11-19","title":"Defendant responded denying liability (Exhibit C).","party":"Defendant","detail":"Exhibits: C","source":{"line":22,"quote":"- 2025-11-19 — Defendant responded denying liability (Exhibit C)."}},{"id":"evt_004","kind":"event","date":"2025-12-08","dateText":"2025-12-08","title":"Plaintiff retained Demo & Sample LLP as counsel of record.","party":"Plaintiff","detail":null,"source":{"line":23,"quote":"- 2025-12-08 — Plaintiff retained Demo & Sample LLP as counsel of"}},{"id":"evt_005","kind":"filing","date":"2026-01-06","dateText":"2026-01-06","title":"Plaintiff filed Complaint with Demo District Court (Exhibit D).","party":"Plaintiff","detail":"Exhibits: D","source":{"line":28,"quote":"- 2026-01-06: Plaintiff filed Complaint with Demo District Court"}},{"id":"evt_006","kind":"filing","date":"2026-01-21","dateText":"2026-01-21","title":"Defendant filed Answer and Affirmative Defenses.","party":"Defendant","detail":null,"source":{"line":30,"quote":"- 2026-01-21: Defendant filed Answer and Affirmative Defenses."}},{"id":"evt_007","kind":"filing","date":"2026-02-03","dateText":"2026-02-03","title":"Defendant filed Motion to Dismiss for failure to state a claim. Hearing on Motion to Dismiss set for 2026-03-04.","party":"Defendant","detail":null,"source":{"line":31,"quote":"- 2026-02-03: Defendant filed Motion to Dismiss for failure to state"}},{"id":"evt_008","kind":"filing","date":"2026-02-17","dateText":"2026-02-17","title":"Plaintiff filed Opposition to Motion to Dismiss (Exhibit E).","party":"Plaintiff","detail":"Exhibits: E","source":{"line":33,"quote":"- 2026-02-17: Plaintiff filed Opposition to Motion to Dismiss"}},{"id":"evt_009","kind":"filing","date":"2026-02-24","dateText":"2026-02-24","title":"Defendant filed Reply in Support of Motion to Dismiss.","party":"Defendant","detail":null,"source":{"line":35,"quote":"- 2026-02-24: Defendant filed Reply in Support of Motion to Dismiss."}},{"id":"evt_010","kind":"filing","date":"2026-03-04","dateText":"2026-03-04","title":"Hearing on Motion to Dismiss before the court. The court took the motion under advisement.","party":null,"detail":null,"source":{"line":36,"quote":"- 2026-03-04: Hearing on Motion to Dismiss before the court. The court"}},{"id":"evt_011","kind":"filing","date":"2026-03-21","dateText":"2026-03-21","title":"The court entered an order denying Motion to Dismiss in part and granting in part. Counts I and II survive; Count III dismissed.","party":"The court","detail":null,"source":{"line":38,"quote":"- 2026-03-21: The court entered an order denying Motion to Dismiss in"}},{"id":"evt_012","kind":"filing","date":"2026-04-02","dateText":"2026-04-02","title":"Defendant filed Answer to surviving counts.","party":"Defendant","detail":null,"source":{"line":41,"quote":"- 2026-04-02: Defendant filed Answer to surviving counts."}},{"id":"evt_013","kind":"event","date":"2026-04-09","dateText":"2026-04-09","title":"Both parties exchanged Rule 26 initial disclosures.","party":"Both parties","detail":null,"source":{"line":45,"quote":"- 2026-04-09 — Both parties exchanged Rule 26 initial disclosures."}},{"id":"evt_014","kind":"event","date":"2026-04-15","dateText":"2026-04-15","title":"Plaintiff served first set of interrogatories on defendant.","party":"Plaintiff","detail":null,"source":{"line":46,"quote":"- 2026-04-15 — Plaintiff served first set of interrogatories on"}},{"id":"evt_015","kind":"event","date":"2026-04-15","dateText":"2026-04-15","title":"Plaintiff served first request for production of documents on defendant.","party":"Plaintiff","detail":null,"source":{"line":48,"quote":"- 2026-04-15 — Plaintiff served first request for production of"}},{"id":"evt_016","kind":"event","date":"2026-04-22","dateText":"2026-04-22","title":"Defendant served first set of interrogatories on plaintiff (Exhibit F).","party":"Defendant","detail":"Exhibits: F","source":{"line":50,"quote":"- 2026-04-22 — Defendant served first set of interrogatories on"}},{"id":"evt_017","kind":"deadline","date":"2026-05-09","dateText":"2026-05-09","title":"Discovery cutoff calendared for 2026-09-30 per scheduling order. Deposition of Plaintiff set for 2026-06-15. Deposition of Defendant's HR director set for 2026-07-08.","party":null,"detail":null,"source":{"line":52,"quote":"- 2026-05-09 — Discovery cutoff calendared for 2026-09-30 per"}},{"id":"evt_018","kind":"event","date":"2026-06-15","dateText":"2026-06-15","title":"Deposition of Plaintiff. Set by scheduling order; preparation packet not yet circulated by counsel.","party":null,"detail":null,"source":{"line":58,"quote":"- 2026-06-15: Deposition of Plaintiff. Set by scheduling order;"}},{"id":"evt_019","kind":"deadline","date":"2026-09-30","dateText":"2026-09-30","title":"Discovery cutoff per the court's scheduling order.","party":null,"detail":null,"source":{"line":60,"quote":"- 2026-09-30: Discovery cutoff per the court's scheduling order."}},{"id":"evt_020","kind":"deadline","date":"2026-10-21","dateText":"2026-10-21","title":"Dispositive motions due by no later than 2026-10-21 per the scheduling order.","party":null,"detail":null,"source":{"line":61,"quote":"- 2026-10-21: Dispositive motions due by no later than 2026-10-21 per"}},{"id":"evt_021","kind":"deadline","date":"2026-11-18","dateText":"2026-11-18","title":"Final pre-trial conference calendared for 2026-11-18.","party":null,"detail":null,"source":{"line":63,"quote":"- 2026-11-18: Final pre-trial conference calendared for 2026-11-18."}}],"parties":[{"name":"Plaintiff","role":"Plaintiff","count":7},{"name":"Defendant","role":"Defendant","count":6},{"name":"The court","role":"Court","count":1},{"name":"Both parties","role":"Party","count":1},{"name":"Case chronology — Hartwell","role":"Plaintiff / Petitioner","count":1},{"name":"Brookline Mfg. Co.","role":"Defendant / Respondent","count":1},{"name":"Demo District Court, Northern District of Demo State","role":"Court","count":1}],"documents":[{"id":"doc_001","name":"Exhibit A","kind":"exhibit","date":"2025-11-04","missing":true},{"id":"doc_002","name":"Exhibit B","kind":"exhibit","date":"2025-11-12","missing":true},{"id":"doc_003","name":"Exhibit C","kind":"exhibit","date":"2025-11-19","missing":true},{"id":"doc_004","name":"Exhibit D","kind":"exhibit","date":"2026-01-06","missing":true},{"id":"doc_005","name":"Exhibit E","kind":"exhibit","date":"2026-02-17","missing":true},{"id":"doc_006","name":"Exhibit F","kind":"exhibit","date":"2026-04-22","missing":true}],"missingItems":[{"id":"missing_exhibits","label":"6 exhibits are referenced but not present in this chronology","detail":"Exhibit A, Exhibit B, Exhibit C, Exhibit D, Exhibit E, Exhibit F"},{"id":"missing_deadline_party","label":"Some deadlines are listed without naming the responsible party","detail":null}],"openQuestions":[{"id":"q_exhibit_0","question":"Ask whether Exhibit A is attached to your case file — the chronology cites it but it is not present in this record.","anchor":"doc_001"},{"id":"q_exhibit_1","question":"Ask whether Exhibit B is attached to your case file — the chronology cites it but it is not present in this record.","anchor":"doc_002"},{"id":"q_exhibit_2","question":"Ask whether Exhibit C is attached to your case file — the chronology cites it but it is not present in this record.","anchor":"doc_003"},{"id":"q_exhibit_3","question":"Ask whether Exhibit D is attached to your case file — the chronology cites it but it is not present in this record.","anchor":"doc_004"},{"id":"q_motion_status","question":"Ask counsel whether any of the motions listed have been ruled on — the chronology lists filings but no ruling language.","anchor":"fil_001"}],"summary":{"rowCount":21,"period":"2025-11-04 → 2026-11-18","durationLabel":"379 days","headlineCount":[{"label":"events","value":21},{"label":"filings","value":8},{"label":"deadlines","value":6},{"label":"exhibits","value":6}]},"caseHeader":{"caption":"Case chronology — Hartwell v. Brookline Mfg. Co.","docket":"1:26-CV-00482-DEMO","court":"Demo District Court, Northern District of Demo State","matter":"Wrongful termination — synthetic demo case"},"deadlines":[{"id":"dl_001","date":"2026-02-03","daysFromToday":-97,"source":"Defendant filed Motion to Dismiss for failure to state a claim. Hearing on Motion to Dismiss set for 2026-03-04.","party":"Defendant"},{"id":"dl_002","date":"2026-03-04","daysFromToday":-68,"source":"Hearing on Motion to Dismiss before the court. The court took the motion under advisement.","party":null},{"id":"dl_003","date":"2026-05-09","daysFromToday":-2,"source":"Discovery cutoff calendared for 2026-09-30 per scheduling order. Deposition of Plaintiff set for 2026-06-15. Deposition of Defendant's HR director set for 2026-07-08.","party":null},{"id":"dl_004","date":"2026-09-30","daysFromToday":142,"source":"Discovery cutoff per the court's scheduling order.","party":null},{"id":"dl_005","date":"2026-10-21","daysFromToday":163,"source":"Dispositive motions due by no later than 2026-10-21 per the scheduling order.","party":null},{"id":"dl_006","date":"2026-11-18","daysFromToday":191,"source":"Final pre-trial conference calendared for 2026-11-18.","party":null}],"filings":[{"id":"fil_001","date":"2026-01-06","party":"Plaintiff","title":"Plaintiff filed Complaint with Demo District Court (Exhibit D).","exhibits":["D"]},{"id":"fil_002","date":"2026-01-21","party":"Defendant","title":"Defendant filed Answer and Affirmative Defenses.","exhibits":[]},{"id":"fil_003","date":"2026-02-03","party":"Defendant","title":"Defendant filed Motion to Dismiss for failure to state a claim. Hearing on Motion to Dismiss set for 2026-03-04.","exhibits":[]},{"id":"fil_004","date":"2026-02-17","party":"Plaintiff","title":"Plaintiff filed Opposition to Motion to Dismiss (Exhibit E).","exhibits":["E"]},{"id":"fil_005","date":"2026-02-24","party":"Defendant","title":"Defendant filed Reply in Support of Motion to Dismiss.","exhibits":[]},{"id":"fil_006","date":"2026-03-04","party":null,"title":"Hearing on Motion to Dismiss before the court. The court took the motion under advisement.","exhibits":[]},{"id":"fil_007","date":"2026-03-21","party":"The court","title":"The court entered an order denying Motion to Dismiss in part and granting in part. Counts I and II survive; Count III dismissed.","exhibits":[]},{"id":"fil_008","date":"2026-04-02","party":"Defendant","title":"Defendant filed Answer to surviving counts.","exhibits":[]}],"rawText":"# Case chronology — Hartwell v. Brookline Mfg. Co.\n\nCaption: Hartwell v. Brookline Manufacturing Company\nDocket No.: 1:26-CV-00482-DEMO\nCourt: Demo District Court, Northern District of Demo State\nMatter type: Wrongful termination — synthetic demo case\nPeriod covered: 2025-11-04 to 2026-05-09\nSource: synthetic record generated for the html-anything demo pack —\nno real plaintiff, defendant, court, counsel, or filings. Do not use\nthis file as a template for real case work.\n\n> *This is a synthetic case file generated for demo purposes only. All\n> names, docket numbers, dates, and filings are fabricated. Nothing in\n> this chronology is legal advice, and the case is not real.*\n\n## Pre-suit\n\n- 2025-11-04 — Plaintiff terminated by Brookline Manufacturing Co.\n  according to termination letter (Exhibit A).\n- 2025-11-12 — Plaintiff sent demand letter to defendant via counsel\n  for Plaintiff (Exhibit B).\n- 2025-11-19 — Defendant responded denying liability (Exhibit C).\n- 2025-12-08 — Plaintiff retained Demo & Sample LLP as counsel of\n  record.\n\n## Filings\n\n- 2026-01-06: Plaintiff filed Complaint with Demo District Court\n  (Exhibit D).\n- 2026-01-21: Defendant filed Answer and Affirmative Defenses.\n- 2026-02-03: Defendant filed Motion to Dismiss for failure to state\n  a claim. Hearing on Motion to Dismiss set for 2026-03-04.\n- 2026-02-17: Plaintiff filed Opposition to Motion to Dismiss\n  (Exhibit E).\n- 2026-02-24: Defendant filed Reply in Support of Motion to Dismiss.\n- 2026-03-04: Hearing on Motion to Dismiss before the court. The court\n  took the motion under advisement.\n- 2026-03-21: The court entered an order denying Motion to Dismiss in\n  part and granting in part. Counts I and II survive; Count III\n  dismissed.\n- 2026-04-02: Defendant filed Answer to surviving counts.\n\n## Discovery\n\n- 2026-04-09 — Both parties exchanged Rule 26 initial disclosures.\n- 2026-04-15 — Plaintiff served first set of interrogatories on\n  defendant.\n- 2026-04-15 — Plaintiff served first request for production of\n  documents on defendant.\n- 2026-04-22 — Defendant served first set of interrogatories on\n  plaintiff (Exhibit F).\n- 2026-05-09 — Discovery cutoff calendared for 2026-09-30 per\n  scheduling order. Deposition of Plaintiff set for 2026-06-15.\n  Deposition of Defendant's HR director set for 2026-07-08.\n\n## Open items\n\n- 2026-06-15: Deposition of Plaintiff. Set by scheduling order;\n  preparation packet not yet circulated by counsel.\n- 2026-09-30: Discovery cutoff per the court's scheduling order.\n- 2026-10-21: Dispositive motions due by no later than 2026-10-21 per\n  the scheduling order.\n- 2026-11-18: Final pre-trial conference calendared for 2026-11-18.\n\n## Parties of record\n\n- Hartwell, J. — Plaintiff\n- Brookline Manufacturing Co. — Defendant\n- Demo & Sample LLP — Counsel for Plaintiff\n- Mason Roe LLP — Counsel for Defendant\n- The Hon. R. Sample — Court\n\n## Exhibits referenced\n\n- Exhibit A — Termination letter, dated 2025-11-04\n- Exhibit B — Demand letter, dated 2025-11-12\n- Exhibit C — Response from defendant, dated 2025-11-19\n- Exhibit D — Complaint, dated 2026-01-06\n- Exhibit E — Opposition brief, dated 2026-02-17\n- Exhibit F — Defendant's first interrogatories, dated 2026-04-22\n- Exhibit G — Referenced in 2026-04-15 production request; document\n  not present in this chronology.\n\n---\n\n## Working notes\n\n- The 2026-03-21 ruling on the motion to dismiss requires confirming\n  the form of the surviving counts before the trial brief is drafted.\n- The discovery cutoff (2026-09-30) is fixed per the scheduling order;\n  any extension would require a stipulation and a court order.\n- Exhibit G is referenced but not attached to this chronology; ask\n  the records custodian whether it is in the case file.\n"};</script>
+
+<div class="document-shell">
+
+  <!-- Cover / Masthead -->
+  <div class="cover" id="top">
+    <div class="cover-eyebrow">Legal Case Chronology · Demo District Court</div>
+    <h1 class="cover-title">Hartwell v. <span>Brookline Mfg. Co.</span></h1>
+
+    <!-- Case header card -->
+    <div class="case-header-card">
+      <div class="case-header-grid" id="case-header-grid">
+        <!-- populated by JS -->
       </div>
-    </section>
+    </div>
 
-    <section class="section" aria-labelledby="head-summary">
-      <div class="section-head">
-        <h2 id="head-summary">Summary</h2>
-        <span class="meta" id="summary-meta"></span>
+    <!-- Stats strip -->
+    <div class="stats-strip" id="stats-strip">
+      <!-- populated by JS -->
+    </div>
+  </div>
+
+  <!-- Privacy banner -->
+  <div class="privacy-banner">
+    <svg class="privacy-banner-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M8 1.5L1.5 4.5V8c0 3.2 2.8 5.7 6.5 7C11.7 13.7 14.5 11.2 14.5 8V4.5L8 1.5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+      <path d="M8 5v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      <circle cx="8" cy="10.5" r="0.6" fill="currentColor"/>
+    </svg>
+    <span><strong>Privacy notice:</strong> Names, case numbers, docket IDs, and dates visible in this file are embedded locally. This file never left your machine. For sharing, generate from a redacted export with names and case numbers replaced or removed.</span>
+  </div>
+
+  <!-- Reader rail -->
+  <nav class="reader-rail" aria-label="Jump to section">
+    <a class="rail-link" href="#section-summary">Overview</a>
+    <a class="rail-link" href="#section-timeline">Timeline</a>
+    <a class="rail-link" href="#section-deadlines">Deadlines</a>
+    <a class="rail-link" href="#section-filings">Filings</a>
+    <a class="rail-link" href="#section-parties">Parties</a>
+    <a class="rail-link" href="#section-documents">Documents</a>
+    <a class="rail-link" href="#section-missing">Missing &amp; Questions</a>
+    <a class="rail-link" href="#section-drilldown">Browse Record</a>
+    <button class="copy-btn" id="copy-markdown-btn" aria-label="Copy analysis as Markdown">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="4" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 2h7a1.5 1.5 0 0 1 1.5 1.5V13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      Copy as Markdown
+    </button>
+  </nav>
+
+  <!-- 1. Summary -->
+  <section class="body-section" id="section-summary" aria-labelledby="summary-heading">
+    <div class="section-header">
+      <h2 class="section-title" id="summary-heading">Overview</h2>
+    </div>
+    <div class="summary-card" id="summary-card">
+      <!-- populated by JS -->
+    </div>
+  </section>
+
+  <!-- 2. Timeline -->
+  <section class="body-section" id="section-timeline" aria-labelledby="timeline-heading">
+    <div class="section-header">
+      <h2 class="section-title" id="timeline-heading">Timeline</h2>
+      <span class="section-count" id="timeline-count"></span>
+    </div>
+    <div class="filter-bar" id="timeline-filter-bar">
+      <button class="filter-chip active" data-filter="all">
+        <span class="chip-dot" style="background:var(--fg-muted)"></span> All
+      </button>
+      <button class="filter-chip" data-filter="event">
+        <span class="chip-dot" style="background:var(--fg-muted)"></span> Events
+      </button>
+      <button class="filter-chip" data-filter="filing">
+        <span class="chip-dot" style="background:var(--primary)"></span> Filings
+      </button>
+      <button class="filter-chip" data-filter="deadline">
+        <span class="chip-dot" style="background:var(--yellow)"></span> Deadlines
+      </button>
+    </div>
+    <ul class="timeline-list" id="timeline-list" aria-label="Case event timeline">
+      <!-- populated by JS -->
+    </ul>
+  </section>
+
+  <!-- 3. Deadlines -->
+  <section class="body-section" id="section-deadlines" aria-labelledby="deadlines-heading">
+    <div class="section-header">
+      <h2 class="section-title" id="deadlines-heading">Deadlines</h2>
+      <span class="section-count" id="deadlines-count"></span>
+    </div>
+    <div class="deadline-grid" id="deadline-grid">
+      <!-- populated by JS -->
+    </div>
+  </section>
+
+  <!-- 4. Filings -->
+  <section class="body-section" id="section-filings" aria-labelledby="filings-heading">
+    <div class="section-header">
+      <h2 class="section-title" id="filings-heading">Filings</h2>
+      <span class="section-count" id="filings-count"></span>
+    </div>
+    <div class="filings-list" id="filings-list">
+      <!-- populated by JS -->
+    </div>
+  </section>
+
+  <!-- 5. Parties -->
+  <section class="body-section" id="section-parties" aria-labelledby="parties-heading">
+    <div class="section-header">
+      <h2 class="section-title" id="parties-heading">Parties</h2>
+      <span class="section-count" id="parties-count"></span>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="parties-table" id="parties-table" aria-label="Case parties">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Events</th>
+          </tr>
+        </thead>
+        <tbody id="parties-tbody">
+          <!-- populated by JS -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 6. Documents -->
+  <section class="body-section" id="section-documents" aria-labelledby="documents-heading">
+    <div class="section-header">
+      <h2 class="section-title" id="documents-heading">Documents</h2>
+      <span class="section-count" id="documents-count"></span>
+    </div>
+    <div class="documents-list" id="documents-list">
+      <!-- populated by JS -->
+    </div>
+  </section>
+
+  <!-- 7. Missing & Questions -->
+  <section class="body-section" id="section-missing" aria-labelledby="missing-heading">
+    <div class="section-header">
+      <h2 class="section-title" id="missing-heading">Missing &amp; next questions</h2>
+    </div>
+
+    <div class="missing-section" id="missing-section">
+      <div class="missing-section-title">Missing information</div>
+      <div id="missing-list">
+        <!-- populated by JS -->
       </div>
-      <div class="kpis" id="kpis"></div>
-    </section>
+    </div>
 
-    <section class="section" id="case-section" hidden aria-labelledby="head-case">
-      <div class="section-head"><h2 id="head-case">Case header</h2><span class="meta">Verbatim from chronology</span></div>
-      <div class="case-card" id="case-card"></div>
-    </section>
-
-    <section class="section" aria-labelledby="head-timeline">
-      <div class="section-head"><h2 id="head-timeline">Timeline</h2><span class="meta" id="tl-meta"></span></div>
-      <div class="card"><div class="timeline" id="timeline"></div></div>
-    </section>
-
-    <section class="section" id="oor-section" hidden aria-labelledby="head-oor">
-      <div class="section-head">
-        <h2 id="head-oor">Outside reference range</h2>
-        <span class="meta">Numeric comparison to range printed on each row</span>
+    <div style="margin-bottom:var(--space-md);">
+      <h3 style="font-family:var(--font-headline);font-size:14px;font-weight:600;color:var(--fg-2);margin-bottom:var(--space-md);letter-spacing:-0.01em;">Questions to ask your attorney</h3>
+      <div class="questions-list" id="questions-list">
+        <!-- populated by JS -->
       </div>
-      <div class="card" id="oor-card"></div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section" id="trends-section" hidden aria-labelledby="head-trends">
-      <div class="section-head"><h2 id="head-trends">Trends</h2><span class="meta">Repeated tests over time</span></div>
-      <div class="trends" id="trends"></div>
-    </section>
-
-    <section class="section" id="encounters-section" hidden aria-labelledby="head-enc">
-      <div class="section-head"><h2 id="head-enc">Encounters</h2><span class="meta" id="enc-meta"></span></div>
-      <div id="encounters"></div>
-    </section>
-
-    <section class="section" id="meds-section" hidden aria-labelledby="head-meds">
-      <div class="section-head"><h2 id="head-meds">Medications</h2><span class="meta">Verbatim from record</span></div>
-      <div class="card"><div class="med-list" id="meds"></div></div>
-    </section>
-
-    <section class="section" id="filings-section" hidden aria-labelledby="head-filings">
-      <div class="section-head"><h2 id="head-filings">Filings</h2><span class="meta" id="filings-meta"></span></div>
-      <div class="card"><div class="list" id="filings"></div></div>
-    </section>
-
-    <section class="section" id="deadlines-section" hidden aria-labelledby="head-deadlines">
-      <div class="section-head"><h2 id="head-deadlines">Deadlines</h2><span class="meta">Dates listed on the document</span></div>
-      <div class="deadlines" id="deadlines"></div>
-    </section>
-
-    <section class="section">
-      <div class="grid-2">
-        <div>
-          <div class="section-head"><h2 id="head-parties">Parties</h2><span class="meta" id="parties-meta"></span></div>
-          <div class="card"><div class="list" id="parties"></div></div>
+  <!-- 8. Browse full record -->
+  <section class="body-section" id="section-drilldown" aria-labelledby="drilldown-heading">
+    <div class="drill-down-section">
+      <div class="drill-down-header" id="drilldown-toggle" role="button" tabindex="0" aria-expanded="false" aria-controls="drilldown-body">
+        <h2 class="drill-down-title" id="drilldown-heading">Browse the full record</h2>
+        <svg class="drill-down-toggle" id="drilldown-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="drill-down-body" id="drilldown-body">
+        <div class="search-box-wrap">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M10.5 10.5L13.5 13.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+          <input class="search-input" id="drill-search" type="search" placeholder="Search events, filings, parties…" aria-label="Search record">
         </div>
-        <div>
-          <div class="section-head"><h2 id="head-docs">Documents</h2><span class="meta" id="docs-meta"></span></div>
-          <div class="card"><div class="list" id="documents"></div></div>
+        <div class="drill-filter-bar" id="drill-filter-bar">
+          <button class="filter-chip active" data-drill-filter="all">All</button>
+          <button class="filter-chip" data-drill-filter="event">Events</button>
+          <button class="filter-chip" data-drill-filter="filing">Filings</button>
+          <button class="filter-chip" data-drill-filter="deadline">Deadlines</button>
+        </div>
+        <div class="drill-record-list" id="drill-record-list" aria-live="polite">
+          <!-- populated by JS -->
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section" aria-labelledby="head-mq">
-      <div class="section-head"><h2 id="head-mq">Missing &amp; next questions</h2><span class="meta">Inferred from the record's text</span></div>
-      <div class="card">
-        <h3 style="margin-bottom:var(--space-sm)">Missing information</h3>
-        <div class="miss-list" id="miss-list"></div>
-        <h3 style="margin-bottom:var(--space-sm);margin-top:var(--space-lg)">Questions to ask</h3>
-        <div class="q-list" id="q-list"></div>
-        <div style="margin-top:var(--space-lg)">
-          <button class="copy-btn" id="copy-md">Copy as Markdown</button>
-          <span class="muted mono" id="copy-status" style="margin-left:var(--space-md);font-size:12px"></span>
+  <!-- Footer -->
+  <footer class="page-footer">
+    <p><strong>Organizational summary, not legal advice.</strong> Dates, parties, filings, and deadlines are inferred from the chronology's text — verify against the original case file and ask your attorney before relying on anything here. Deadlines listed in this page are dates the document mentions; they are not legal computations of filing windows or statutes of limitations.</p>
+    <p>Pattern-matched inference — not a verdict, not a legal determination. Every inferred item is marked with an "Inferred" indicator. Verify against the original record.</p>
+    <p><strong>Generated locally</strong> — your record never left your machine. The full content is embedded in this HTML and rendered in your browser. For sharing, generate from a redacted export with names, case numbers, and party identifiers replaced or removed.</p>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ─── Helpers ───────────────────────────────────────────────────────────────
+
+  function esc(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function formatDate(dateStr) {
+    if (!dateStr) return '';
+    try {
+      const d = new Date(dateStr + 'T00:00:00');
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    } catch (e) { return dateStr; }
+  }
+
+  function relativeDay(daysFromToday) {
+    if (daysFromToday === null || daysFromToday === undefined) return '';
+    const abs = Math.abs(daysFromToday);
+    if (daysFromToday < 0) return abs === 1 ? '1 day ago per record' : abs + ' days ago per record';
+    if (daysFromToday === 0) return 'today per record';
+    return daysFromToday === 1 ? 'in 1 day per record' : 'in ' + daysFromToday + ' days per record';
+  }
+
+  function highlightText(text, query) {
+    if (!query) return esc(text);
+    const escaped = esc(text);
+    if (!query.trim()) return escaped;
+    const regex = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+    return escaped.replace(regex, '<mark>$1</mark>');
+  }
+
+  function getRoleBadgeClass(role) {
+    const r = (role || '').toLowerCase();
+    if (r.includes('plaintiff') || r.includes('petitioner')) return 'role-plaintiff';
+    if (r.includes('defendant') || r.includes('respondent')) return 'role-defendant';
+    if (r.includes('court')) return 'role-court';
+    return 'role-other';
+  }
+
+  // ─── Data access ──────────────────────────────────────────────────────────
+
+  const D = DATA;
+  const summary = D.summary || {};
+  const caseHeader = D.caseHeader || {};
+  const events = D.events || D.eventsPreview || [];
+  const deadlines = D.deadlines || D.deadlinesPreview || [];
+  const filings = D.filings || D.filingsPreview || [];
+  const parties = D.parties || [];
+  const documents = D.documents || D.documentsPreview || [];
+  const missingItems = D.missingItems || D.missingItemsPreview || [];
+  const openQuestions = D.openQuestions || D.openQuestionsPreview || [];
+
+  // ─── Case header card ──────────────────────────────────────────────────────
+
+  const headerFields = [
+    { label: 'Case caption', value: caseHeader.caption || 'Hartwell v. Brookline Mfg. Co.', mono: false },
+    { label: 'Docket number', value: caseHeader.docket || '—', mono: true },
+    { label: 'Court / venue', value: caseHeader.court || '—', mono: false },
+    { label: 'Matter type', value: caseHeader.matter || '—', mono: false },
+    { label: 'Period covered', value: (summary.period || '—') + ' (' + (summary.durationLabel || '') + ')', mono: true },
+  ];
+
+  const grid = document.getElementById('case-header-grid');
+  grid.innerHTML = headerFields.map(f => `
+    <div class="case-header-item">
+      <div class="case-header-label">${esc(f.label)}</div>
+      <div class="case-header-value${f.mono ? ' mono' : ''}">${esc(f.value)}</div>
+    </div>
+  `).join('');
+
+  // ─── Stats strip ──────────────────────────────────────────────────────────
+
+  const strip = document.getElementById('stats-strip');
+  const counts = summary.headlineCount || [];
+  strip.innerHTML = counts.map(c => `
+    <div class="stat-pill">
+      <span class="stat-pill-num">${esc(String(c.value))}</span>
+      <span>${esc(c.label)}</span>
+    </div>
+  `).join('');
+
+  // ─── Summary card ─────────────────────────────────────────────────────────
+
+  const sc = document.getElementById('summary-card');
+  const evtCount = summary.rowCount || events.length || 0;
+  const period = summary.period || '—';
+  const dur = summary.durationLabel || '';
+  const filCount = counts.find(c => c.label === 'filings');
+  const dlCount = counts.find(c => c.label === 'deadlines');
+  const exCount = counts.find(c => c.label === 'exhibits');
+
+  sc.innerHTML = `
+    <p>This is a legal case chronology for <strong>Hartwell v. Brookline Mfg. Co.</strong> —
+    a wrongful termination matter before the Demo District Court, Northern District of Demo State
+    (docket <span style="font-family:var(--font-mono);color:var(--primary);">${esc(caseHeader.docket || '—')}</span>).
+    The record covers <strong>${esc(String(evtCount))}</strong> events spanning
+    <strong>${esc(period)}</strong> (${esc(dur)}), including
+    ${filCount ? filCount.value : '—'} filings,
+    ${dlCount ? dlCount.value : '—'} documented deadlines, and
+    ${exCount ? exCount.value : '—'} referenced exhibits — none of which are present as attachments in this record.
+    Review with your attorney before drawing conclusions from this summary.</p>
+  `;
+
+  // ─── Timeline ─────────────────────────────────────────────────────────────
+
+  const timelineList = document.getElementById('timeline-list');
+  const timelineCount = document.getElementById('timeline-count');
+  timelineCount.textContent = events.length + ' events';
+
+  function buildTimeline(filterKind) {
+    timelineList.innerHTML = '';
+    const filtered = filterKind === 'all' ? events : events.filter(e => e.kind === filterKind);
+    if (filtered.length === 0) {
+      timelineList.innerHTML = '<li style="color:var(--fg-muted);font-size:13px;padding:var(--space-lg)">No events match this filter.</li>';
+      return;
+    }
+    filtered.forEach((evt, idx) => {
+      const kind = evt.kind || 'event';
+      const li = document.createElement('li');
+      li.className = 'timeline-item';
+      li.style.transitionDelay = Math.min(idx * 30, 400) + 'ms';
+      li.dataset.kind = kind;
+
+      let chipClass = 'chip-event';
+      let dotClass = 'dot-event';
+      if (kind === 'filing') { chipClass = 'chip-filing'; dotClass = 'dot-filing'; }
+      if (kind === 'deadline') { chipClass = 'chip-deadline'; dotClass = 'dot-deadline'; }
+
+      const exhibitStr = evt.detail ? evt.detail : '';
+      const exhibitMatches = exhibitStr.match(/Exhibits?:\s*(.+)/i);
+      const exhibitTags = exhibitMatches
+        ? exhibitMatches[1].split(/,\s*/).map(e => `<span class="exhibit-tag">Exhibit ${esc(e.trim())}</span>`).join('')
+        : '';
+
+      const partyName = evt.party || '';
+
+      li.innerHTML = `
+        <div class="timeline-date-col">
+          <div class="timeline-date-chip">${esc(evt.dateText || evt.date || '')}</div>
         </div>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="head-drill">
-      <details class="drill" id="drill">
-        <summary>
-          <span><span id="drill-summary-text">Browse the full record</span></span>
-          <span class="meta mono" id="drill-summary-count"></span>
-        </summary>
-        <div class="drill-body">
-          <input type="search" placeholder="Search rows, events, encounters…" id="drill-search">
-          <div class="toolbar" id="drill-chips"></div>
-          <div id="drill-content"></div>
+        <div class="timeline-dot-col">
+          <div class="timeline-dot ${dotClass}"></div>
         </div>
-      </details>
-    </section>
-
-    <footer>
-      <p class="caveat" id="caveat-line"></p>
-      <p>Generated locally — your record never left your machine. The full content is embedded in this HTML and rendered in your browser. For sharing, generate from a redacted export with names, MRNs, case numbers, and policy IDs replaced or removed.</p>
-      <p>Organizational summary, not medical / legal / insurance advice. Dates, parties, values, and missing-item callouts are pattern-matched from the file's text — verify against the original record and ask your clinician, attorney, or case manager before acting on anything here.</p>
-      <p class="mono" id="footer-meta" style="margin-top:var(--space-md)"></p>
-    </footer>
-  </main>
-
-  <script>
-    const DATA = {"format":"legal-chronology","subtype":"legal-chronology","events":[{"id":"evt_001","kind":"event","date":"2025-11-04","dateText":"2025-11-04","title":"Plaintiff terminated by Brookline Manufacturing Co. according to termination letter (Exhibit A).","party":"Plaintiff","detail":"Exhibits: A","source":{"line":18,"quote":"- 2025-11-04 — Plaintiff terminated by Brookline Manufacturing Co."}},{"id":"evt_002","kind":"event","date":"2025-11-12","dateText":"2025-11-12","title":"Plaintiff sent demand letter to defendant via counsel for Plaintiff (Exhibit B).","party":"Plaintiff","detail":"Exhibits: B","source":{"line":20,"quote":"- 2025-11-12 — Plaintiff sent demand letter to defendant via counsel"}},{"id":"evt_003","kind":"event","date":"2025-11-19","dateText":"2025-11-19","title":"Defendant responded denying liability (Exhibit C).","party":"Defendant","detail":"Exhibits: C","source":{"line":22,"quote":"- 2025-11-19 — Defendant responded denying liability (Exhibit C)."}},{"id":"evt_004","kind":"event","date":"2025-12-08","dateText":"2025-12-08","title":"Plaintiff retained Demo & Sample LLP as counsel of record.","party":"Plaintiff","detail":null,"source":{"line":23,"quote":"- 2025-12-08 — Plaintiff retained Demo & Sample LLP as counsel of"}},{"id":"evt_005","kind":"filing","date":"2026-01-06","dateText":"2026-01-06","title":"Plaintiff filed Complaint with Demo District Court (Exhibit D).","party":"Plaintiff","detail":"Exhibits: D","source":{"line":28,"quote":"- 2026-01-06: Plaintiff filed Complaint with Demo District Court"}},{"id":"evt_006","kind":"filing","date":"2026-01-21","dateText":"2026-01-21","title":"Defendant filed Answer and Affirmative Defenses.","party":"Defendant","detail":null,"source":{"line":30,"quote":"- 2026-01-21: Defendant filed Answer and Affirmative Defenses."}},{"id":"evt_007","kind":"filing","date":"2026-02-03","dateText":"2026-02-03","title":"Defendant filed Motion to Dismiss for failure to state a claim. Hearing on Motion to Dismiss set for 2026-03-04.","party":"Defendant","detail":null,"source":{"line":31,"quote":"- 2026-02-03: Defendant filed Motion to Dismiss for failure to state"}},{"id":"evt_008","kind":"filing","date":"2026-02-17","dateText":"2026-02-17","title":"Plaintiff filed Opposition to Motion to Dismiss (Exhibit E).","party":"Plaintiff","detail":"Exhibits: E","source":{"line":33,"quote":"- 2026-02-17: Plaintiff filed Opposition to Motion to Dismiss"}},{"id":"evt_009","kind":"filing","date":"2026-02-24","dateText":"2026-02-24","title":"Defendant filed Reply in Support of Motion to Dismiss.","party":"Defendant","detail":null,"source":{"line":35,"quote":"- 2026-02-24: Defendant filed Reply in Support of Motion to Dismiss."}},{"id":"evt_010","kind":"filing","date":"2026-03-04","dateText":"2026-03-04","title":"Hearing on Motion to Dismiss before the court. The court took the motion under advisement.","party":null,"detail":null,"source":{"line":36,"quote":"- 2026-03-04: Hearing on Motion to Dismiss before the court. The court"}},{"id":"evt_011","kind":"filing","date":"2026-03-21","dateText":"2026-03-21","title":"The court entered an order denying Motion to Dismiss in part and granting in part. Counts I and II survive; Count III dismissed.","party":"The court","detail":null,"source":{"line":38,"quote":"- 2026-03-21: The court entered an order denying Motion to Dismiss in"}},{"id":"evt_012","kind":"filing","date":"2026-04-02","dateText":"2026-04-02","title":"Defendant filed Answer to surviving counts.","party":"Defendant","detail":null,"source":{"line":41,"quote":"- 2026-04-02: Defendant filed Answer to surviving counts."}},{"id":"evt_013","kind":"event","date":"2026-04-09","dateText":"2026-04-09","title":"Both parties exchanged Rule 26 initial disclosures.","party":"Both parties","detail":null,"source":{"line":45,"quote":"- 2026-04-09 — Both parties exchanged Rule 26 initial disclosures."}},{"id":"evt_014","kind":"event","date":"2026-04-15","dateText":"2026-04-15","title":"Plaintiff served first set of interrogatories on defendant.","party":"Plaintiff","detail":null,"source":{"line":46,"quote":"- 2026-04-15 — Plaintiff served first set of interrogatories on"}},{"id":"evt_015","kind":"event","date":"2026-04-15","dateText":"2026-04-15","title":"Plaintiff served first request for production of documents on defendant.","party":"Plaintiff","detail":null,"source":{"line":48,"quote":"- 2026-04-15 — Plaintiff served first request for production of"}},{"id":"evt_016","kind":"event","date":"2026-04-22","dateText":"2026-04-22","title":"Defendant served first set of interrogatories on plaintiff (Exhibit F).","party":"Defendant","detail":"Exhibits: F","source":{"line":50,"quote":"- 2026-04-22 — Defendant served first set of interrogatories on"}},{"id":"evt_017","kind":"deadline","date":"2026-05-09","dateText":"2026-05-09","title":"Discovery cutoff calendared for 2026-09-30 per scheduling order. Deposition of Plaintiff set for 2026-06-15. Deposition of Defendant's HR director set for 2026-07-08.","party":null,"detail":null,"source":{"line":52,"quote":"- 2026-05-09 — Discovery cutoff calendared for 2026-09-30 per"}},{"id":"evt_018","kind":"event","date":"2026-06-15","dateText":"2026-06-15","title":"Deposition of Plaintiff. Set by scheduling order; preparation packet not yet circulated by counsel.","party":null,"detail":null,"source":{"line":58,"quote":"- 2026-06-15: Deposition of Plaintiff. Set by scheduling order;"}},{"id":"evt_019","kind":"deadline","date":"2026-09-30","dateText":"2026-09-30","title":"Discovery cutoff per the court's scheduling order.","party":null,"detail":null,"source":{"line":60,"quote":"- 2026-09-30: Discovery cutoff per the court's scheduling order."}},{"id":"evt_020","kind":"deadline","date":"2026-10-21","dateText":"2026-10-21","title":"Dispositive motions due by no later than 2026-10-21 per the scheduling order.","party":null,"detail":null,"source":{"line":61,"quote":"- 2026-10-21: Dispositive motions due by no later than 2026-10-21 per"}},{"id":"evt_021","kind":"deadline","date":"2026-11-18","dateText":"2026-11-18","title":"Final pre-trial conference calendared for 2026-11-18.","party":null,"detail":null,"source":{"line":63,"quote":"- 2026-11-18: Final pre-trial conference calendared for 2026-11-18."}}],"parties":[{"name":"Plaintiff","role":"Plaintiff","count":7},{"name":"Defendant","role":"Defendant","count":6},{"name":"The court","role":"Court","count":1},{"name":"Both parties","role":"Party","count":1},{"name":"Case chronology — Hartwell","role":"Plaintiff / Petitioner","count":1},{"name":"Brookline Mfg. Co.","role":"Defendant / Respondent","count":1},{"name":"Demo District Court, Northern District of Demo State","role":"Court","count":1}],"documents":[{"id":"doc_001","name":"Exhibit A","kind":"exhibit","date":"2025-11-04","missing":true},{"id":"doc_002","name":"Exhibit B","kind":"exhibit","date":"2025-11-12","missing":true},{"id":"doc_003","name":"Exhibit C","kind":"exhibit","date":"2025-11-19","missing":true},{"id":"doc_004","name":"Exhibit D","kind":"exhibit","date":"2026-01-06","missing":true},{"id":"doc_005","name":"Exhibit E","kind":"exhibit","date":"2026-02-17","missing":true},{"id":"doc_006","name":"Exhibit F","kind":"exhibit","date":"2026-04-22","missing":true}],"missingItems":[{"id":"missing_exhibits","label":"6 exhibits are referenced but not present in this chronology","detail":"Exhibit A, Exhibit B, Exhibit C, Exhibit D, Exhibit E, Exhibit F"},{"id":"missing_deadline_party","label":"Some deadlines are listed without naming the responsible party","detail":null}],"openQuestions":[{"id":"q_exhibit_0","question":"Ask whether Exhibit A is attached to your case file — the chronology cites it but it is not present in this record.","anchor":"doc_001"},{"id":"q_exhibit_1","question":"Ask whether Exhibit B is attached to your case file — the chronology cites it but it is not present in this record.","anchor":"doc_002"},{"id":"q_exhibit_2","question":"Ask whether Exhibit C is attached to your case file — the chronology cites it but it is not present in this record.","anchor":"doc_003"},{"id":"q_exhibit_3","question":"Ask whether Exhibit D is attached to your case file — the chronology cites it but it is not present in this record.","anchor":"doc_004"},{"id":"q_motion_status","question":"Ask counsel whether any of the motions listed have been ruled on — the chronology lists filings but no ruling language.","anchor":"fil_001"}],"summary":{"rowCount":21,"period":"2025-11-04 → 2026-11-18","durationLabel":"379 days","headlineCount":[{"label":"events","value":21},{"label":"filings","value":8},{"label":"deadlines","value":6},{"label":"exhibits","value":6}]},"caseHeader":{"caption":"Case chronology — Hartwell v. Brookline Mfg. Co.","docket":"1:26-CV-00482-DEMO","court":"Demo District Court, Northern District of Demo State","matter":"Wrongful termination — synthetic demo case"},"deadlines":[{"id":"dl_001","date":"2026-02-03","daysFromToday":-96,"source":"Defendant filed Motion to Dismiss for failure to state a claim. Hearing on Motion to Dismiss set for 2026-03-04.","party":"Defendant"},{"id":"dl_002","date":"2026-03-04","daysFromToday":-67,"source":"Hearing on Motion to Dismiss before the court. The court took the motion under advisement.","party":null},{"id":"dl_003","date":"2026-05-09","daysFromToday":-1,"source":"Discovery cutoff calendared for 2026-09-30 per scheduling order. Deposition of Plaintiff set for 2026-06-15. Deposition of Defendant's HR director set for 2026-07-08.","party":null},{"id":"dl_004","date":"2026-09-30","daysFromToday":143,"source":"Discovery cutoff per the court's scheduling order.","party":null},{"id":"dl_005","date":"2026-10-21","daysFromToday":164,"source":"Dispositive motions due by no later than 2026-10-21 per the scheduling order.","party":null},{"id":"dl_006","date":"2026-11-18","daysFromToday":192,"source":"Final pre-trial conference calendared for 2026-11-18.","party":null}],"filings":[{"id":"fil_001","date":"2026-01-06","party":"Plaintiff","title":"Plaintiff filed Complaint with Demo District Court (Exhibit D).","exhibits":["D"]},{"id":"fil_002","date":"2026-01-21","party":"Defendant","title":"Defendant filed Answer and Affirmative Defenses.","exhibits":[]},{"id":"fil_003","date":"2026-02-03","party":"Defendant","title":"Defendant filed Motion to Dismiss for failure to state a claim. Hearing on Motion to Dismiss set for 2026-03-04.","exhibits":[]},{"id":"fil_004","date":"2026-02-17","party":"Plaintiff","title":"Plaintiff filed Opposition to Motion to Dismiss (Exhibit E).","exhibits":["E"]},{"id":"fil_005","date":"2026-02-24","party":"Defendant","title":"Defendant filed Reply in Support of Motion to Dismiss.","exhibits":[]},{"id":"fil_006","date":"2026-03-04","party":null,"title":"Hearing on Motion to Dismiss before the court. The court took the motion under advisement.","exhibits":[]},{"id":"fil_007","date":"2026-03-21","party":"The court","title":"The court entered an order denying Motion to Dismiss in part and granting in part. Counts I and II survive; Count III dismissed.","exhibits":[]},{"id":"fil_008","date":"2026-04-02","party":"Defendant","title":"Defendant filed Answer to surviving counts.","exhibits":[]}],"rawText":"# Case chronology — Hartwell v. Brookline Mfg. Co.\n\nCaption: Hartwell v. Brookline Manufacturing Company\nDocket No.: 1:26-CV-00482-DEMO\nCourt: Demo District Court, Northern District of Demo State\nMatter type: Wrongful termination — synthetic demo case\nPeriod covered: 2025-11-04 to 2026-05-09\nSource: synthetic record generated for the html-anything demo pack —\nno real plaintiff, defendant, court, counsel, or filings. Do not use\nthis file as a template for real case work.\n\n> *This is a synthetic case file generated for demo purposes only. All\n> names, docket numbers, dates, and filings are fabricated. Nothing in\n> this chronology is legal advice, and the case is not real.*\n\n## Pre-suit\n\n- 2025-11-04 — Plaintiff terminated by Brookline Manufacturing Co.\n  according to termination letter (Exhibit A).\n- 2025-11-12 — Plaintiff sent demand letter to defendant via counsel\n  for Plaintiff (Exhibit B).\n- 2025-11-19 — Defendant responded denying liability (Exhibit C).\n- 2025-12-08 — Plaintiff retained Demo & Sample LLP as counsel of\n  record.\n\n## Filings\n\n- 2026-01-06: Plaintiff filed Complaint with Demo District Court\n  (Exhibit D).\n- 2026-01-21: Defendant filed Answer and Affirmative Defenses.\n- 2026-02-03: Defendant filed Motion to Dismiss for failure to state\n  a claim. Hearing on Motion to Dismiss set for 2026-03-04.\n- 2026-02-17: Plaintiff filed Opposition to Motion to Dismiss\n  (Exhibit E).\n- 2026-02-24: Defendant filed Reply in Support of Motion to Dismiss.\n- 2026-03-04: Hearing on Motion to Dismiss before the court. The court\n  took the motion under advisement.\n- 2026-03-21: The court entered an order denying Motion to Dismiss in\n  part and granting in part. Counts I and II survive; Count III\n  dismissed.\n- 2026-04-02: Defendant filed Answer to surviving counts.\n\n## Discovery\n\n- 2026-04-09 — Both parties exchanged Rule 26 initial disclosures.\n- 2026-04-15 — Plaintiff served first set of interrogatories on\n  defendant.\n- 2026-04-15 — Plaintiff served first request for production of\n  documents on defendant.\n- 2026-04-22 — Defendant served first set of interrogatories on\n  plaintiff (Exhibit F).\n- 2026-05-09 — Discovery cutoff calendared for 2026-09-30 per\n  scheduling order. Deposition of Plaintiff set for 2026-06-15.\n  Deposition of Defendant's HR director set for 2026-07-08.\n\n## Open items\n\n- 2026-06-15: Deposition of Plaintiff. Set by scheduling order;\n  preparation packet not yet circulated by counsel.\n- 2026-09-30: Discovery cutoff per the court's scheduling order.\n- 2026-10-21: Dispositive motions due by no later than 2026-10-21 per\n  the scheduling order.\n- 2026-11-18: Final pre-trial conference calendared for 2026-11-18.\n\n## Parties of record\n\n- Hartwell, J. — Plaintiff\n- Brookline Manufacturing Co. — Defendant\n- Demo & Sample LLP — Counsel for Plaintiff\n- Mason Roe LLP — Counsel for Defendant\n- The Hon. R. Sample — Court\n\n## Exhibits referenced\n\n- Exhibit A — Termination letter, dated 2025-11-04\n- Exhibit B — Demand letter, dated 2025-11-12\n- Exhibit C — Response from defendant, dated 2025-11-19\n- Exhibit D — Complaint, dated 2026-01-06\n- Exhibit E — Opposition brief, dated 2026-02-17\n- Exhibit F — Defendant's first interrogatories, dated 2026-04-22\n- Exhibit G — Referenced in 2026-04-15 production request; document\n  not present in this chronology.\n\n---\n\n## Working notes\n\n- The 2026-03-21 ruling on the motion to dismiss requires confirming\n  the form of the surviving counts before the trial brief is drafted.\n- The discovery cutoff (2026-09-30) is fixed per the scheduling order;\n  any extension would require a stipulation and a court order.\n- Exhibit G is referenced but not attached to this chronology; ask\n  the records custodian whether it is in the case file.\n","sourceFile":"input.md","sizeBytes":3784};
-    const HERO_TITLE = "Hartwell v. Brookline Mfg. Co. — synthetic chronology";
-
-    const $ = (sel, root) => (root || document).querySelector(sel);
-    const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
-    const escHtml = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-    const fmtNum = n => n == null ? "—" : n.toLocaleString();
-
-    document.title = HERO_TITLE;
-    $("#hero-title").textContent = HERO_TITLE;
-
-    const SUBTYPE_LABEL = {
-      "lab-results": "Lab results",
-      "medical-visit": "Medical visit record",
-      "legal-chronology": "Legal case chronology",
-    };
-    const CAVEAT = {
-      "lab-results": "Out-of-range flags compare numbers to the reference range printed on the same row in your file — they are not a diagnosis. Bring the original lab report to your clinician and ask whether any value here changes your care.",
-      "medical-visit": "Visit dates, providers, and out-of-reference values are inferred from the file's text — bring the original record to your clinician and ask them whether anything here changes your care.",
-      "legal-chronology": "Dates, parties, filings, and deadlines are inferred from the chronology's text — verify against the original case file and ask your attorney before relying on anything here. Deadlines listed in this page are dates the document mentions; they are not legal computations of filing windows or statutes of limitations.",
-    };
-    const subtype = DATA.subtype || DATA.format;
-    $("#eyebrow-text").textContent = SUBTYPE_LABEL[subtype] || "Sensitive record";
-    $("#caveat-line").textContent = CAVEAT[subtype] || "";
-
-    const headlineSentence = () => {
-      const parts = (DATA.summary?.headlineCount || []).map(h => h.value + " " + h.label).slice(0, 4).join(" · ");
-      const period = DATA.summary?.period ? " over " + DATA.summary.period : "";
-      const sub = SUBTYPE_LABEL[subtype] || "Record";
-      return sub + " — " + parts + period + ".";
-    };
-    $("#hero-editorial").textContent = headlineSentence();
-    $("#summary-meta").textContent = (DATA.summary?.period || "") + (DATA.summary?.durationLabel ? " · " + DATA.summary.durationLabel : "");
-
-    /* ---- KPIs ---- */
-    (() => {
-      const kpis = DATA.summary?.headlineCount || [];
-      const root = $("#kpis");
-      kpis.forEach(k => {
-        const el = document.createElement("div");
-        el.className = "kpi";
-        el.innerHTML = '<div class="label">' + escHtml(k.label) + '</div>' +
-          '<div class="value">' + fmtNum(k.value) + '</div>';
-        root.appendChild(el);
-      });
-    })();
-
-    /* ---- Case header (legal only) ---- */
-    if (subtype === "legal-chronology" && DATA.caseHeader) {
-      $("#case-section").hidden = false;
-      const fields = [
-        ["Caption", DATA.caseHeader.caption],
-        ["Docket", DATA.caseHeader.docket],
-        ["Court", DATA.caseHeader.court],
-        ["Matter", DATA.caseHeader.matter],
-        ["Period", DATA.summary?.period],
-      ];
-      const root = $("#case-card");
-      fields.forEach(([label, value]) => {
-        const el = document.createElement("div");
-        el.className = "field";
-        el.innerHTML = '<div class="label">' + escHtml(label) + '</div>' +
-          '<div class="value">' + escHtml(value || "(not present in this record)") + '</div>';
-        root.appendChild(el);
-      });
-    }
-
-    /* ---- Timeline ---- */
-    (() => {
-      const events = (DATA.events || []).slice().sort((a, b) => (a.date || "").localeCompare(b.date || ""));
-      const root = $("#timeline");
-      $("#tl-meta").textContent = events.length + " event" + (events.length === 1 ? "" : "s");
-      events.forEach(e => {
-        const el = document.createElement("div");
-        el.className = "tl-row";
-        el.innerHTML = '<div class="date">' + escHtml(e.dateText || e.date || "(undated)") + '</div>' +
-          '<div class="body">' +
-            '<span class="kind">' + escHtml(e.kind) + '</span>' +
-            escHtml(e.title) +
-            (e.party ? '<div class="party">' + escHtml(e.party) + '</div>' : '') +
-            (e.detail ? '<div class="detail">' + escHtml(e.detail) + '</div>' : '') +
-          '</div>';
-        root.appendChild(el);
-      });
-    })();
-
-    /* ---- Out-of-reference panel (lab only) ---- */
-    if (subtype === "lab-results") {
-      $("#oor-section").hidden = false;
-      const oor = DATA.outOfRange || [];
-      const root = $("#oor-card");
-      if (oor.length === 0) {
-        root.innerHTML = '<p class="empty-state">No values fall outside the reference ranges printed in this file.</p>';
-      } else {
-        oor.forEach(r => {
-          const card = document.createElement("div");
-          card.className = "callout-card";
-          const dirLabel = r.direction === "above" ? "above" : "below";
-          card.innerHTML =
-            '<div class="head">' +
-              '<div><span class="test">' + escHtml(r.test) + '</span>' +
-                ' <span class="pill ' + r.direction + '">' + dirLabel + ' band</span>' +
-                ' <span class="pill inferred">Inferred</span></div>' +
-              '<div class="value">' + escHtml(r.valueText) + (r.unit ? " " + escHtml(r.unit) : "") + '</div>' +
-            '</div>' +
-            '<div class="ref">Reference printed on row: ' + escHtml(r.referenceText || "(none)") + '</div>' +
-            '<div class="meta">' + (r.collectedAt ? "Drawn " + escHtml(r.collectedAt) : "Date not present") +
-              (r.orderingProvider ? " · Ordered by " + escHtml(r.orderingProvider) : "") +
-              (r.lab ? " · " + escHtml(r.lab) : "") + '</div>';
-          root.appendChild(card);
-        });
-      }
-    }
-
-    /* ---- Trend sparklines (lab only) ---- */
-    if (subtype === "lab-results" && (DATA.trends || []).length > 0) {
-      $("#trends-section").hidden = false;
-      const root = $("#trends");
-      DATA.trends.forEach(t => {
-        const W = 240, H = 60, PAD = 6;
-        const pts = t.points;
-        const ys = pts.map(p => p.value);
-        const lo = Math.min(...ys, t.referenceLow ?? Infinity);
-        const hi = Math.max(...ys, t.referenceHigh ?? -Infinity);
-        const yMin = isFinite(lo) ? lo : Math.min(...ys);
-        const yMax = isFinite(hi) ? hi : Math.max(...ys);
-        const span = yMax - yMin || 1;
-        const x = i => PAD + (W - 2 * PAD) * (i / Math.max(pts.length - 1, 1));
-        const y = v => H - PAD - (H - 2 * PAD) * ((v - yMin) / span);
-        const bandTop = t.referenceHigh != null ? y(t.referenceHigh) : 0;
-        const bandBot = t.referenceLow != null ? y(t.referenceLow) : H;
-        const bandRect = (t.referenceLow != null || t.referenceHigh != null)
-          ? '<rect x="' + PAD + '" y="' + Math.min(bandTop, bandBot) + '" width="' + (W - 2 * PAD) + '" height="' + Math.abs(bandTop - bandBot) + '" fill="rgba(16,185,129,.10)"/>'
-          : '';
-        const path = pts.map((p, i) => (i === 0 ? "M" : "L") + x(i).toFixed(1) + " " + y(p.value).toFixed(1)).join(" ");
-        const dots = pts.map((p, i) => '<circle cx="' + x(i).toFixed(1) + '" cy="' + y(p.value).toFixed(1) + '" r="3" fill="var(--primary)"/>').join("");
-        const refText = (t.referenceLow != null && t.referenceHigh != null) ? t.referenceLow + "–" + t.referenceHigh
-          : (t.referenceHigh != null ? "<" + t.referenceHigh : (t.referenceLow != null ? ">" + t.referenceLow : ""));
-        const latest = pts[pts.length - 1];
-        const div = document.createElement("div");
-        div.className = "trend";
-        div.innerHTML = '<h4>' + escHtml(t.test) + '</h4>' +
-          '<div class="reading">' + (refText ? "Reference: " + escHtml(refText) + (t.unit ? " " + escHtml(t.unit) : "") : "No reference range on row") + '</div>' +
-          '<svg viewBox="0 0 ' + W + ' ' + H + '">' +
-            bandRect +
-            '<path d="' + path + '" fill="none" stroke="var(--primary)" stroke-width="1.6"/>' +
-            dots +
-          '</svg>' +
-          '<div class="latest">Latest: ' + escHtml(latest.value + (t.unit ? " " + t.unit : "")) + (latest.date ? " · " + escHtml(latest.date) : "") + '</div>';
-        root.appendChild(div);
-      });
-    }
-
-    /* ---- Encounters (medical only) ---- */
-    if (subtype === "medical-visit") {
-      $("#encounters-section").hidden = false;
-      const root = $("#encounters");
-      const encounters = DATA.encounters || [];
-      $("#enc-meta").textContent = encounters.length + " encounter" + (encounters.length === 1 ? "" : "s");
-      encounters.forEach(e => {
-        const card = document.createElement("div");
-        card.className = "encounter";
-        card.innerHTML =
-          '<div class="head">' +
-            '<span class="date">' + escHtml(e.date || "(undated)") + '</span>' +
-            (e.encounterType ? '<span class="type">' + escHtml(e.encounterType) + '</span>' : '') +
-          '</div>' +
-          (e.provider ? '<div class="meta-row">Provider: ' + escHtml(e.provider) + '</div>' : '') +
-          (e.reason ? '<div class="reason">' + escHtml(e.reason) + '</div>' : '') +
-          (e.vitals && e.vitals.length ? '<div class="vitals">' + e.vitals.map(v => '<span class="vital">' + escHtml(v.label) + ': ' + escHtml(v.value) + '</span>').join("") + '</div>' : '') +
-          (e.plan ? '<div class="plan">Plan: ' + escHtml(e.plan) + '</div>' : '') +
-          (e.followUp ? '<div class="meta-row" style="margin-top:var(--space-sm)">Follow-up: ' + escHtml(e.followUp) + '</div>' : '<div class="meta-row" style="margin-top:var(--space-sm)"><span class="pill missing">no follow-up date in record</span></div>');
-        root.appendChild(card);
-      });
-    }
-
-    /* ---- Medications (medical only) ---- */
-    if (subtype === "medical-visit" && (DATA.medications || []).length > 0) {
-      $("#meds-section").hidden = false;
-      const root = $("#meds");
-      DATA.medications.forEach(m => {
-        const el = document.createElement("div");
-        el.className = "med";
-        el.innerHTML = '<div><span class="name">' + escHtml(m.name) + '</span>' +
-          (m.dose ? ' <span class="dose">' + escHtml(m.dose) + '</span>' : '') +
-          ' <span class="pill inferred">Inferred</span></div>' +
-          (m.instructions ? '<span class="ix">' + escHtml(m.instructions) + '</span>' : '');
-        root.appendChild(el);
-      });
-    }
-
-    /* ---- Filings + Deadlines (legal only) ---- */
-    if (subtype === "legal-chronology") {
-      const filings = DATA.filings || [];
-      if (filings.length > 0) {
-        $("#filings-section").hidden = false;
-        $("#filings-meta").textContent = filings.length + " filing" + (filings.length === 1 ? "" : "s");
-        const root = $("#filings");
-        filings.forEach(f => {
-          const el = document.createElement("div");
-          el.className = "list-row";
-          el.innerHTML = '<div><span class="name">' + escHtml(f.title) + '</span>' +
-            (f.party ? ' <span class="role">' + escHtml(f.party) + '</span>' : '') + '</div>' +
-            '<div class="count">' + escHtml(f.date || "(undated)") + '</div>';
-          root.appendChild(el);
-        });
-      }
-      const deadlines = DATA.deadlines || [];
-      if (deadlines.length > 0) {
-        $("#deadlines-section").hidden = false;
-        const root = $("#deadlines");
-        deadlines.forEach(d => {
-          const el = document.createElement("div");
-          el.className = "deadline";
-          const rel = d.daysFromToday == null ? "—"
-            : (d.daysFromToday === 0 ? "today"
-              : d.daysFromToday > 0 ? "in " + d.daysFromToday + "d"
-              : Math.abs(d.daysFromToday) + "d ago");
-          el.innerHTML = '<div class="d">' + escHtml(d.date) + '</div>' +
-            '<div class="rel">' + escHtml(rel) + '</div>' +
-            '<div class="src">' + escHtml(d.source) + ' <span class="pill inferred">Inferred</span></div>';
-          root.appendChild(el);
-        });
-      }
-    }
-
-    /* ---- Parties + Documents ---- */
-    (() => {
-      const root = $("#parties");
-      const parties = DATA.parties || [];
-      $("#parties-meta").textContent = parties.length + " " + (parties.length === 1 ? "party" : "parties");
-      if (parties.length === 0) {
-        root.innerHTML = '<p class="empty-state">No parties extracted from this record.</p>';
-      } else {
-        parties.forEach(p => {
-          const el = document.createElement("div");
-          el.className = "list-row";
-          el.innerHTML = '<div><span class="name">' + escHtml(p.name) + '</span></div>' +
-            '<div><span class="role">' + escHtml(p.role) + '</span> <span class="count">×' + p.count + '</span></div>';
-          root.appendChild(el);
-        });
-      }
-    })();
-
-    (() => {
-      const root = $("#documents");
-      const docs = DATA.documents || [];
-      $("#docs-meta").textContent = docs.length + " document" + (docs.length === 1 ? "" : "s");
-      if (docs.length === 0) {
-        root.innerHTML = '<p class="empty-state">No documents referenced in this record.</p>';
-      } else {
-        docs.forEach(d => {
-          const el = document.createElement("div");
-          el.className = "list-row";
-          el.innerHTML = '<div><span class="name">' + escHtml(d.name) + '</span> <span class="role">' + escHtml(d.kind) + '</span></div>' +
-            '<div>' + (d.missing ? '<span class="pill missing">not present in this record</span>' : '<span class="pill present">present</span>') + '</div>';
-          root.appendChild(el);
-        });
-      }
-    })();
-
-    /* ---- Missing items + Open questions ---- */
-    (() => {
-      const missRoot = $("#miss-list");
-      const items = DATA.missingItems || [];
-      if (items.length === 0) {
-        missRoot.innerHTML = '<p class="empty-state">Nothing obvious missing in this record.</p>';
-      } else {
-        items.forEach(m => {
-          const el = document.createElement("div");
-          el.className = "miss";
-          el.innerHTML = '<div class="lbl">' + escHtml(m.label) + ' <span class="pill inferred">Inferred</span></div>' +
-            (m.detail ? '<div class="det">' + escHtml(m.detail) + '</div>' : '');
-          missRoot.appendChild(el);
-        });
-      }
-      const qRoot = $("#q-list");
-      const qs = DATA.openQuestions || [];
-      if (qs.length === 0) {
-        qRoot.innerHTML = '<p class="empty-state">No follow-up questions surfaced from this record — bring it to your provider / attorney for a fuller review.</p>';
-      } else {
-        qs.forEach(q => {
-          const el = document.createElement("div");
-          el.className = "q";
-          el.innerHTML = escHtml(q.question);
-          qRoot.appendChild(el);
-        });
-      }
-    })();
-
-    /* ---- Copy as Markdown ---- */
-    $("#copy-md").addEventListener("click", async () => {
-      const lines = [];
-      lines.push("# " + HERO_TITLE);
-      lines.push("");
-      lines.push("> " + headlineSentence());
-      lines.push("");
-      if (subtype === "legal-chronology" && DATA.caseHeader) {
-        const c = DATA.caseHeader;
-        if (c.caption) lines.push("**Caption:** " + c.caption);
-        if (c.docket) lines.push("**Docket:** " + c.docket);
-        if (c.court) lines.push("**Court:** " + c.court);
-        lines.push("");
-      }
-      lines.push("## Timeline");
-      (DATA.events || []).slice().sort((a, b) => (a.date || "").localeCompare(b.date || "")).forEach(e => {
-        lines.push("- " + (e.dateText || e.date || "(undated)") + " · [" + e.kind + "] " + e.title + (e.party ? " (" + e.party + ")" : ""));
-      });
-      lines.push("");
-      lines.push("## Parties");
-      (DATA.parties || []).forEach(p => lines.push("- " + p.name + " — " + p.role + " (×" + p.count + ")"));
-      lines.push("");
-      lines.push("## Documents");
-      (DATA.documents || []).forEach(d => lines.push("- " + d.name + " — " + d.kind + (d.missing ? " (not present in this record)" : "")));
-      lines.push("");
-      lines.push("## Missing information");
-      (DATA.missingItems || []).forEach(m => lines.push("- " + m.label + (m.detail ? " — " + m.detail : "")));
-      lines.push("");
-      lines.push("## Questions to ask");
-      (DATA.openQuestions || []).forEach(q => lines.push("- " + q.question));
-      lines.push("");
-      lines.push("---");
-      lines.push("");
-      lines.push("*" + (CAVEAT[subtype] || "Organizational summary, not advice.") + "*");
-      const md = lines.join("\n");
-      try {
-        await navigator.clipboard.writeText(md);
-        $("#copy-status").textContent = "copied";
-        setTimeout(() => { $("#copy-status").textContent = ""; }, 2000);
-      } catch {
-        $("#copy-status").textContent = "select-and-copy below ↓";
-        const ta = document.createElement("textarea");
-        ta.value = md;
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand("copy"); $("#copy-status").textContent = "copied"; } catch {}
-        document.body.removeChild(ta);
-      }
+        <div class="timeline-body">
+          <div class="timeline-body-inner">
+            <div class="timeline-meta">
+              <span class="timeline-mobile-date">${esc(evt.dateText || evt.date || '')}</span>
+              <span class="kind-chip ${chipClass}">${esc(kind)}</span>
+              ${partyName ? `<span class="party-chip">${esc(partyName)}</span>` : ''}
+              <span class="inferred-chip">Inferred</span>
+            </div>
+            <div class="timeline-title">${esc(evt.title || '')}</div>
+            ${exhibitTags ? `<div class="timeline-exhibits">${exhibitTags}</div>` : ''}
+          </div>
+        </div>
+      `;
+      timelineList.appendChild(li);
     });
 
-    /* ---- Drill-down ---- */
-    (() => {
-      const content = $("#drill-content");
-      const search = $("#drill-search");
-      const chips = $("#drill-chips");
-      let activeKind = "all";
-      let allItems = [];
-      let columns = [];
-
-      if (subtype === "lab-results") {
-        $("#drill-summary-text").textContent = "Browse all lab rows";
-        $("#drill-summary-count").textContent = (DATA.rows || []).length + " rows";
-        columns = ["test", "panel", "value", "unit", "reference", "direction", "date", "provider"];
-        allItems = (DATA.rows || []).map(r => ({
-          kind: r.direction,
-          fields: {
-            test: r.test, panel: r.panel || "—",
-            value: r.valueText, unit: r.unit,
-            reference: r.referenceText || "—",
-            direction: r.direction === "in-range" ? "in range" : r.direction === "no-range" ? "no range" : r.direction,
-            date: r.collectedAt || "—",
-            provider: r.orderingProvider || "—",
-          },
-          searchText: [r.test, r.panel, r.valueText, r.unit, r.referenceText, r.direction, r.collectedAt, r.orderingProvider, r.lab].filter(Boolean).join(" ").toLowerCase(),
-        }));
-        const kinds = ["all", "above", "below", "in-range", "no-range", "non-numeric"];
-        chips.innerHTML = kinds.map(k => '<button class="chip ' + (k === "all" ? "active" : "") + '" data-kind="' + k + '">' + k + '</button>').join("");
-      } else {
-        $("#drill-summary-text").textContent = "Browse the full record";
-        $("#drill-summary-count").textContent = (DATA.events || []).length + " events";
-        const events = (DATA.events || []).slice().sort((a, b) => (a.date || "").localeCompare(b.date || ""));
-        allItems = events.map(e => ({
-          kind: e.kind,
-          fields: {
-            date: e.dateText || e.date || "—",
-            kind: e.kind,
-            title: e.title,
-            party: e.party || "—",
-            detail: e.detail || "—",
-          },
-          quote: e.source && e.source.quote,
-          searchText: [e.dateText, e.title, e.party, e.detail, e.source && e.source.quote].filter(Boolean).join(" ").toLowerCase(),
-        }));
-        const kinds = Array.from(new Set(["all", ...allItems.map(i => i.kind)]));
-        chips.innerHTML = kinds.map(k => '<button class="chip ' + (k === "all" ? "active" : "") + '" data-kind="' + k + '">' + k + '</button>').join("");
+    // Reveal animation
+    requestAnimationFrame(() => {
+      const items = timelineList.querySelectorAll('.timeline-item');
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        items.forEach(el => el.classList.add('revealed'));
+        return;
       }
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.05 });
+      items.forEach(el => observer.observe(el));
+    });
+  }
 
-      const render = () => {
-        const q = search.value.trim().toLowerCase();
-        const filtered = allItems.filter(item =>
-          (activeKind === "all" || item.kind === activeKind) &&
-          (q === "" || item.searchText.includes(q))
-        ).slice(0, 500);
-        if (subtype === "lab-results") {
-          let html = '<table class="lab-table"><thead><tr>' +
-            columns.map(c => '<th>' + escHtml(c) + '</th>').join("") +
-            '</tr></thead><tbody>';
-          filtered.forEach(item => {
-            const cls = item.kind === "above" ? "out" : item.kind === "below" ? "below-row" : "";
-            html += '<tr class="' + cls + '">' +
-              columns.map(c => '<td' + (["value", "date"].includes(c) ? ' class="num"' : '') + '>' + escHtml(item.fields[c] || "—") + '</td>').join("") +
-              '</tr>';
-          });
-          html += '</tbody></table>';
-          if (filtered.length === 0) html = '<p class="empty-state">No rows match your filter.</p>';
-          content.innerHTML = html;
-        } else {
-          let html = '<table class="row-table"><thead><tr><th>date</th><th>kind</th><th>title</th><th>party</th><th>detail</th></tr></thead><tbody>';
-          filtered.forEach(item => {
-            html += '<tr><td class="num">' + escHtml(item.fields.date) + '</td>' +
-              '<td><span class="pill in-range">' + escHtml(item.fields.kind) + '</span></td>' +
-              '<td>' + escHtml(item.fields.title) + '</td>' +
-              '<td>' + escHtml(item.fields.party) + '</td>' +
-              '<td>' + escHtml(item.fields.detail) + '</td></tr>';
-          });
-          html += '</tbody></table>';
-          if (filtered.length === 0) html = '<p class="empty-state">No rows match your filter.</p>';
-          content.innerHTML = html;
-        }
-      };
-      render();
-      search.addEventListener("input", render);
-      chips.addEventListener("click", e => {
-        const btn = e.target.closest("button[data-kind]");
-        if (!btn) return;
-        chips.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
-        btn.classList.add("active");
-        activeKind = btn.getAttribute("data-kind");
-        render();
-      });
-    })();
+  buildTimeline('all');
 
-    /* ---- Footer meta ---- */
-    $("#footer-meta").textContent = (DATA.sourceFile || "input") + " · " + (DATA.sizeBytes ? Math.round(DATA.sizeBytes / 1024) + " KB" : "");
-  </script>
-</body>
-</html>
+  // Timeline filter chips
+  document.getElementById('timeline-filter-bar').addEventListener('click', e => {
+    const chip = e.target.closest('[data-filter]');
+    if (!chip) return;
+    document.querySelectorAll('#timeline-filter-bar .filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    buildTimeline(chip.dataset.filter);
+  });
+
+  // ─── Deadlines ────────────────────────────────────────────────────────────
+
+  const deadlineGrid = document.getElementById('deadline-grid');
+  const deadlinesCount = document.getElementById('deadlines-count');
+  deadlinesCount.textContent = deadlines.length + ' deadlines';
+
+  if (deadlines.length === 0) {
+    deadlineGrid.innerHTML = '<p style="color:var(--fg-muted);font-size:13px;">No deadlines extracted from this record.</p>';
+  } else {
+    deadlineGrid.innerHTML = deadlines.map(dl => {
+      const days = dl.daysFromToday;
+      const isPast = days !== null && days !== undefined && days < 0;
+      const isNear = days !== null && days !== undefined && days >= 0 && days <= 30;
+      const cardClass = isPast ? 'past' : (isNear ? 'near' : '');
+      return `
+        <div class="deadline-card ${cardClass}">
+          <div style="display:flex;align-items:center;gap:var(--space-sm);margin-bottom:var(--space-xs);">
+            <span class="inferred-chip">Inferred · date listed on this document</span>
+          </div>
+          ${dl.party ? `<div class="deadline-party-label">${esc(dl.party)}</div>` : ''}
+          <div class="deadline-date">${esc(dl.date || '')}</div>
+          <div class="deadline-relative">${formatDate(dl.date)}${days !== null && days !== undefined ? ' — ' + relativeDay(days) : ''}</div>
+          <div class="deadline-source">${esc(dl.source || '')}</div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // ─── Filings ──────────────────────────────────────────────────────────────
+
+  const filingsList = document.getElementById('filings-list');
+  const filingsCount = document.getElementById('filings-count');
+  filingsCount.textContent = filings.length + ' filings';
+
+  if (filings.length === 0) {
+    filingsList.innerHTML = '<p style="color:var(--fg-muted);font-size:13px;">No filings extracted from this record.</p>';
+  } else {
+    filingsList.innerHTML = filings.map(f => {
+      const exTags = (f.exhibits || []).map(e => `<span class="exhibit-tag">Exhibit ${esc(e)}</span>`).join('');
+      const partyTag = f.party ? `<span class="party-chip">${esc(f.party)}</span>` : '';
+      return `
+        <div class="filing-row">
+          <div class="filing-date">${esc(f.date || '')}</div>
+          <div>
+            <div class="filing-title">${esc(f.title || '')}</div>
+            <div class="filing-meta">
+              ${partyTag}
+              ${exTags}
+              <span class="inferred-chip">Inferred</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // ─── Parties ──────────────────────────────────────────────────────────────
+
+  const partiesTbody = document.getElementById('parties-tbody');
+  const partiesCount = document.getElementById('parties-count');
+  partiesCount.textContent = parties.length + ' parties';
+
+  if (parties.length === 0) {
+    partiesTbody.innerHTML = '<tr><td colspan="3" style="color:var(--fg-muted);font-size:13px;">No parties extracted from this record.</td></tr>';
+  } else {
+    partiesTbody.innerHTML = parties.map(p => {
+      const badgeClass = getRoleBadgeClass(p.role);
+      return `
+        <tr>
+          <td style="font-weight:500;">${esc(p.name || '—')}</td>
+          <td><span class="role-badge ${badgeClass}">${esc(p.role || '—')}</span></td>
+          <td class="event-count">${p.count !== undefined ? p.count : '—'}</td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  // ─── Documents ────────────────────────────────────────────────────────────
+
+  const docsList = document.getElementById('documents-list');
+  const docsCount = document.getElementById('documents-count');
+  docsCount.textContent = documents.length + ' documents';
+
+  if (documents.length === 0) {
+    docsList.innerHTML = '<p style="color:var(--fg-muted);font-size:13px;">No documents referenced in this record.</p>';
+  } else {
+    docsList.innerHTML = documents.map(doc => {
+      const badge = doc.missing
+        ? `<span class="missing-badge">not present in this record</span>`
+        : `<span class="present-badge">present</span>`;
+      return `
+        <div class="document-row">
+          <div class="document-id">${esc(doc.name || doc.id || '—')}</div>
+          <div class="document-name">${esc(doc.kind || '—')}</div>
+          <div class="document-date">${esc(doc.date ||

@@ -1,208 +1,499 @@
 <!doctype html>
 <html lang="en" data-ha-style="developer">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Production stack trace — invoice tax-rate KeyError</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Production stack trace — invoice tax-rate KeyError</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
 :root {
-  --primary:#a03b00; --primary-container:#c94c00; --primary-fixed:#ffdbcd;
-  --primary-fixed-dim:#ffb597; --on-primary:#fff; --accent-glow:#E8400D;
-  --secondary:#d5baff; --secondary-container:#7b40e0; --tertiary:#4d44e3; --accent-cyan:#00D4FF;
-  --bg:#fff8f6; --surface:#fff8f6; --surface-container-lowest:#fff;
-  --surface-container-low:#fbf2ef; --surface-container:#f5ece9; --surface-container-high:#efe6e3;
-  --fg-1:#1e1b19; --fg-2:#594138; --fg-muted:#8d7166;
-  --border:rgba(0,0,0,.06); --border-strong:rgba(0,0,0,.12); --outline-variant:#e1bfb2;
-  --green:#10b981; --blue:#3b82f6; --yellow:#f59e0b; --red:#ef4444;
-  --font-headline:'Space Grotesk',ui-sans-serif,system-ui,sans-serif;
-  --font-body:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;
-  --font-mono:'SF Mono','Menlo',ui-monospace,monospace;
-  --space-xs:4px; --space-sm:8px; --space-md:12px; --space-lg:16px;
-  --space-xl:20px; --space-2xl:24px; --space-3xl:32px; --space-4xl:48px; --space-5xl:64px;
-  --radius-sm:8px; --radius-md:12px; --radius-lg:16px; --radius-xl:20px; --radius-2xl:28px; --radius-pill:9999px;
-  --shadow-sm:0 1px 2px rgba(30,27,25,.04); --shadow-md:0 4px 12px rgba(30,27,25,.08);
-  --shadow-lg:0 8px 24px rgba(30,27,25,.12); --shadow-accent:0 8px 24px rgba(160,59,0,.15);
-  --gradient-primary:linear-gradient(135deg,#a03b00 0%,#c94c00 100%);
-  --gradient-hero:linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
-  --gradient-text:linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --accent-cyan: #00D4FF;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981;
+  --blue: #3b82f6;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30,27,25,0.04);
+  --shadow-md: 0 4px 12px rgba(30,27,25,0.08);
+  --shadow-lg: 0 8px 24px rgba(30,27,25,0.12);
+  --shadow-accent: 0 8px 24px rgba(160,59,0,0.15);
+  --gradient-primary: linear-gradient(135deg,#a03b00 0%,#c94c00 100%);
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg:#060B18; --surface:#0B1426; --surface-container-lowest:#101D35;
-    --surface-container-low:#101D35; --surface-container:#162544; --surface-container-high:#1c2d52;
-    --fg-1:#F8FAFC; --fg-2:#CBD5E1; --fg-muted:#64748B;
-    --border:rgba(255,255,255,.08); --border-strong:rgba(255,255,255,.14);
-    --primary:#FF6B35; --accent-glow:#00D4FF;
-    --shadow-md:0 4px 12px rgba(0,0,0,.4); --shadow-lg:0 8px 24px rgba(0,0,0,.5);
+    --bg: #060B18;
+    --surface: #0B1426;
+    --surface-container-lowest: #101D35;
+    --surface-container-low: #101D35;
+    --surface-container: #162544;
+    --surface-container-high: #1c2d52;
+    --fg-1: #F8FAFC;
+    --fg-2: #CBD5E1;
+    --fg-muted: #64748B;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --primary: #FF6B35;
+    --accent-glow: #00D4FF;
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+    --outline-variant: #2a3a5c;
   }
 }
-*,*::before,*::after{box-sizing:border-box;margin:0}
-html,body{background:var(--bg);color:var(--fg-1);font-family:var(--font-body);
-  font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
-body{min-height:100vh}
-main{max-width:1240px;margin:0 auto;padding:var(--space-2xl) var(--space-xl) var(--space-5xl)}
-h1,h2,h3,h4{font-family:var(--font-headline);letter-spacing:-.01em;font-weight:600;color:var(--fg-1)}
-h1{font-size:clamp(28px,5vw,44px);font-weight:700;line-height:1.05;letter-spacing:-.02em}
-h2{font-size:clamp(20px,2.4vw,24px);margin-bottom:var(--space-md)}
-h3{font-size:17px;margin-bottom:var(--space-sm)}
-.muted{color:var(--fg-muted)}
-.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
-button{font:inherit;cursor:pointer;border:none;background:transparent;color:inherit}
-input,select{font:inherit;color:var(--fg-1)}
-.hero{padding:var(--space-3xl) 0 var(--space-2xl);border-bottom:1px solid var(--border)}
-.hero .eyebrow{display:inline-flex;gap:var(--space-sm);align-items:center;
-  background:var(--surface-container);color:var(--primary);
-  padding:var(--space-xs) var(--space-md);border-radius:var(--radius-pill);
-  font-family:var(--font-mono);font-size:11.5px;font-weight:500;
-  text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-lg)}
-.hero h1{background:var(--gradient-text);-webkit-background-clip:text;background-clip:text;color:transparent;max-width:22ch}
-.hero .editorial{margin-top:var(--space-lg);max-width:64ch;color:var(--fg-2);font-size:16px;line-height:1.55}
-.hero-actions{display:flex;gap:var(--space-md);margin-top:var(--space-xl);flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-lg);
-  border-radius:var(--radius-pill);font-weight:600;font-size:14px;border:1px solid var(--border-strong);
-  background:var(--surface-container-lowest);color:var(--fg-1);transition:all .15s ease;cursor:pointer}
-.btn:hover{background:var(--surface-container);box-shadow:var(--shadow-sm)}
-.btn.primary{background:var(--gradient-primary);color:var(--on-primary);border-color:transparent}
-.btn.primary:hover{box-shadow:var(--shadow-accent)}
-.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:var(--space-lg);margin-top:var(--space-3xl)}
-.kpi{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:var(--space-lg) var(--space-xl);box-shadow:var(--shadow-sm)}
-.kpi .label{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--fg-muted);font-weight:500}
-.kpi .value{font-family:var(--font-headline);font-size:28px;font-weight:600;margin-top:var(--space-xs);color:var(--fg-1)}
-.kpi .value.accent{color:var(--primary)}
-.kpi .value.green{color:var(--green)} .kpi .value.red{color:var(--red)} .kpi .value.yellow{color:var(--yellow)}
-.kpi .sub{font-size:12.5px;color:var(--fg-muted);margin-top:2px;font-family:var(--font-mono)}
-.section{margin-top:var(--space-4xl)}
-.section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-lg);gap:var(--space-md);flex-wrap:wrap}
-.section-head .meta{font-size:13px;color:var(--fg-muted);font-family:var(--font-mono)}
-.card{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:var(--space-xl);box-shadow:var(--shadow-sm)}
-.card h3{margin-bottom:var(--space-md)}
-.hyp{display:inline-flex;align-items:center;gap:6px;padding:2px 10px;border-radius:var(--radius-pill);
-  background:var(--secondary);color:var(--secondary-container);font-family:var(--font-mono);font-size:10.5px;
-  font-weight:600;text-transform:uppercase;letter-spacing:.06em;border:1px solid var(--secondary-container)}
-.hyp::before{content:"•";color:var(--secondary-container)}
-.badge{display:inline-flex;align-items:center;padding:1px 8px;border-radius:var(--radius-pill);
-  background:var(--surface-container);color:var(--fg-2);font-family:var(--font-mono);font-size:11px;font-weight:500}
-.badge.green{background:rgba(16,185,129,.14);color:var(--green)}
-.badge.red{background:rgba(239,68,68,.14);color:var(--red)}
-.badge.yellow{background:rgba(245,158,11,.16);color:var(--yellow)}
-.badge.blue{background:rgba(59,130,246,.14);color:var(--blue)}
-.badge.app{background:rgba(160,59,0,.12);color:var(--primary)}
-.badge.vendor{background:var(--surface-container);color:var(--fg-muted)}
-.checklist{list-style:none;margin:0;padding:0}
-.checklist li{display:flex;gap:var(--space-md);align-items:flex-start;padding:var(--space-sm) 0;
-  border-bottom:1px solid var(--border)}
-.checklist li:last-child{border-bottom:none}
-.checklist .num{font-family:var(--font-mono);font-size:11px;color:var(--fg-muted);
-  background:var(--surface-container);border-radius:var(--radius-pill);padding:2px 8px;
-  min-width:26px;text-align:center;flex-shrink:0}
-.checklist .text{flex:1;color:var(--fg-2)}
-.checklist .text code{font-family:var(--font-mono);font-size:13px;background:var(--surface-container);
-  padding:1px 6px;border-radius:var(--radius-sm)}
-.hotspots{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-lg)}
-.hotspot{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:var(--space-lg);position:relative}
-.hotspot .head{display:flex;align-items:center;justify-content:space-between;gap:var(--space-md);margin-bottom:var(--space-sm)}
-.hotspot .path{font-family:var(--font-mono);font-size:13.5px;color:var(--fg-1);font-weight:600;
-  word-break:break-all}
-.hotspot .why{color:var(--fg-2);font-size:13.5px;line-height:1.5;margin-top:var(--space-xs)}
-.hotspot .why .hyp{margin-right:var(--space-xs)}
-.searchbox{display:flex;gap:var(--space-sm);align-items:center;background:var(--surface-container-lowest);
-  border:1px solid var(--border);border-radius:var(--radius-pill);padding:var(--space-xs) var(--space-md);
-  max-width:380px}
-.searchbox input{flex:1;border:none;outline:none;background:transparent;padding:var(--space-xs) 0;font-size:14px}
-mark{background:var(--primary-fixed);color:var(--fg-1);padding:0 2px;border-radius:2px}
-details{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:var(--space-md) var(--space-lg);transition:background .15s ease}
-details[open]{box-shadow:var(--shadow-sm)}
-details > summary{cursor:pointer;font-weight:600;font-size:15.5px;color:var(--fg-1);list-style:none;
-  display:flex;align-items:center;justify-content:space-between;gap:var(--space-md)}
-details > summary::-webkit-details-marker{display:none}
-details > summary::after{content:"▾";color:var(--fg-muted);transition:transform .15s ease}
-details[open] > summary::after{transform:rotate(180deg)}
-details > .body{margin-top:var(--space-md)}
-.diff{font-family:var(--font-mono);font-size:12.5px;line-height:1.5;white-space:pre;overflow-x:auto;
-  background:var(--surface-container-low);border-radius:var(--radius-md);padding:var(--space-md);
-  border:1px solid var(--border)}
-.diff .ln{display:inline-block;width:54px;color:var(--fg-muted);user-select:none;text-align:right;
-  padding-right:var(--space-md)}
-.diff .add{background:rgba(16,185,129,.10);display:block}
-.diff .add .ln{color:var(--green)}
-.diff .del{background:rgba(239,68,68,.10);display:block}
-.diff .del .ln{color:var(--red)}
-.diff .ctx{display:block;color:var(--fg-2)}
-.diff .hunk{display:block;color:var(--secondary-container);background:var(--surface-container);
-  padding:var(--space-xs) var(--space-md);margin:var(--space-md) calc(-1 * var(--space-md)) var(--space-xs);
-  font-weight:600}
-.diff .file-head{display:block;color:var(--primary);font-weight:600;
-  background:var(--primary-fixed);padding:var(--space-sm) var(--space-md);
-  margin:var(--space-md) calc(-1 * var(--space-md)) var(--space-sm);border-radius:var(--radius-sm)}
-.log-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px}
-.log-table td{padding:2px var(--space-sm);vertical-align:top;border-bottom:1px solid rgba(0,0,0,.02)}
-.log-table tr.error td{background:rgba(239,68,68,.06)}
-.log-table tr.warning td{background:rgba(245,158,11,.06)}
-.log-table tr.group td{background:var(--surface-container);color:var(--secondary-container);font-weight:600}
-.log-table .ln{width:54px;text-align:right;color:var(--fg-muted);padding-right:var(--space-md)}
-.log-table .text{white-space:pre-wrap;color:var(--fg-1)}
-.log-table tr.error .text{color:var(--red)}
-.log-table tr.warning .text{color:var(--yellow)}
-.frames{list-style:none;padding:0;margin:0}
-.frames li{padding:var(--space-sm) var(--space-md);border-bottom:1px solid var(--border);
-  font-family:var(--font-mono);font-size:13px;display:flex;gap:var(--space-md);align-items:flex-start}
-.frames li:last-child{border-bottom:none}
-.frames .marker{width:90px;flex-shrink:0;color:var(--fg-muted);font-size:11px;text-transform:uppercase;
-  letter-spacing:.05em;font-weight:600}
-.frames .marker.app{color:var(--primary)}
-.frames .marker.vendor{color:var(--fg-muted)}
-.frames .body{flex:1;min-width:0}
-.frames .file{color:var(--fg-1);font-weight:500;word-break:break-all}
-.frames .fn{color:var(--fg-2);font-size:12.5px}
-.frames .fold-toggle{cursor:pointer;background:var(--surface-container);color:var(--fg-muted);
-  padding:var(--space-sm) var(--space-md);border-radius:var(--radius-sm);font-style:italic;font-size:12.5px}
-.frames .fold-toggle:hover{color:var(--fg-1)}
-.commits{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:var(--space-md)}
-.commits li{padding:var(--space-md) var(--space-lg);background:var(--surface-container-lowest);
-  border:1px solid var(--border);border-radius:var(--radius-lg);display:flex;gap:var(--space-md);align-items:flex-start}
-.commits .hash{font-family:var(--font-mono);font-size:12px;background:var(--surface-container);
-  color:var(--secondary-container);padding:2px 10px;border-radius:var(--radius-pill);flex-shrink:0;
-  align-self:flex-start;margin-top:2px}
-.commits .meta{flex:1}
-.commits .subject{font-weight:600;color:var(--fg-1);margin-bottom:2px}
-.commits .author{color:var(--fg-muted);font-size:12.5px;font-family:var(--font-mono)}
-.commits .stat{margin-top:var(--space-xs);color:var(--fg-2);font-size:13px}
-.cause-chain{display:flex;flex-direction:column;gap:var(--space-md)}
-.cause{background:var(--surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:var(--space-lg)}
-.cause.deepest{border-color:var(--primary);box-shadow:var(--shadow-accent)}
-.cause .type{font-family:var(--font-mono);font-size:13.5px;color:var(--fg-1);font-weight:600}
-.cause .msg{color:var(--fg-2);margin-top:2px;font-size:13.5px}
-.cause .top-frame{margin-top:var(--space-sm);font-family:var(--font-mono);font-size:12.5px;color:var(--fg-muted)}
-.failing-tests{display:flex;flex-direction:column;gap:var(--space-md)}
-.failing-test{background:var(--surface-container-lowest);border:1px solid var(--border);border-left:3px solid var(--red);
-  border-radius:var(--radius-md);padding:var(--space-md) var(--space-lg)}
-.failing-test .name{font-family:var(--font-mono);font-size:13.5px;color:var(--fg-1);font-weight:600}
-.failing-test .where{font-family:var(--font-mono);font-size:12px;color:var(--fg-muted);margin-top:2px}
-.failing-test .msg{color:var(--fg-2);font-size:13.5px;margin-top:var(--space-xs)}
-.risk-table{width:100%;border-collapse:collapse;font-size:13.5px}
-.risk-table th{text-align:left;padding:var(--space-sm) var(--space-md);font-weight:600;font-size:12px;
-  color:var(--fg-muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border-strong)}
-.risk-table td{padding:var(--space-sm) var(--space-md);border-bottom:1px solid var(--border);vertical-align:top}
-.risk-table .path{font-family:var(--font-mono);font-size:13px;color:var(--fg-1);word-break:break-all}
-.risk-table .delta{font-family:var(--font-mono);font-size:12.5px;white-space:nowrap}
-.risk-table .delta .add{color:var(--green)}
-.risk-table .delta .del{color:var(--red)}
-.risk-table .why{color:var(--fg-2);font-size:13px}
-.empty{color:var(--fg-muted);font-style:italic;padding:var(--space-md) 0}
-footer{margin-top:var(--space-5xl);padding-top:var(--space-xl);border-top:1px solid var(--border);
-  color:var(--fg-muted);font-size:13px;line-height:1.5}
-@media (max-width:780px){
-  .frames .marker{width:70px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--fg-1);
+  font-size:15px;
+  line-height:1.6;
+  min-height:100vh;
 }
-  </style>
+@media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+
+/* ── dev shell ── */
+.dev-shell{
+  max-width:900px;
+  margin:0 auto;
+  padding:var(--space-lg) var(--space-lg) var(--space-5xl);
+}
+
+/* ── finding bar ── */
+.finding-bar{
+  background:var(--surface-container-low);
+  border:1px solid var(--border-strong);
+  border-left:4px solid var(--red);
+  border-radius:var(--radius-lg);
+  padding:var(--space-xl) var(--space-2xl);
+  margin-bottom:var(--space-2xl);
+  box-shadow:var(--shadow-md);
+  animation:slideDown 280ms ease both;
+}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.finding-bar-top{display:flex;align-items:center;gap:var(--space-md);flex-wrap:wrap;margin-bottom:var(--space-md)}
+.finding-title{
+  font-family:var(--font-headline);
+  font-size:1.35rem;
+  font-weight:700;
+  letter-spacing:-0.01em;
+  color:var(--fg-1);
+  flex:1;min-width:0;
+}
+.exception-type{
+  font-family:var(--font-mono);
+  font-size:1.1rem;
+  color:var(--red);
+  font-weight:600;
+}
+.exception-msg{
+  font-family:var(--font-mono);
+  font-size:0.95rem;
+  color:var(--fg-2);
+  margin-top:var(--space-xs);
+}
+.finding-meta{
+  display:flex;gap:var(--space-sm);flex-wrap:wrap;margin-top:var(--space-md);
+}
+.chip{
+  font-family:var(--font-body);
+  font-size:0.72rem;
+  font-weight:600;
+  padding:2px var(--space-sm);
+  border-radius:var(--radius-pill);
+  letter-spacing:0.02em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.chip-error{background:rgba(239,68,68,0.15);color:var(--red);border:1px solid rgba(239,68,68,0.3)}
+.chip-warn{background:rgba(245,158,11,0.15);color:var(--yellow);border:1px solid rgba(245,158,11,0.3)}
+.chip-info{background:rgba(59,130,246,0.15);color:var(--blue);border:1px solid rgba(59,130,246,0.3)}
+.chip-hypo{background:rgba(123,64,224,0.15);color:#9b72f5;border:1px solid rgba(123,64,224,0.3)}
+.chip-app{background:rgba(16,185,129,0.15);color:var(--green);border:1px solid rgba(16,185,129,0.3)}
+.chip-vendor{background:var(--surface-container-high);color:var(--fg-muted);border:1px solid var(--border-strong)}
+.chip-python{background:rgba(77,68,227,0.15);color:#7b72f5;border:1px solid rgba(77,68,227,0.3)}
+
+/* ── section scaffold ── */
+.section{
+  margin-bottom:var(--space-3xl);
+  animation:fadeUp 320ms ease both;
+}
+.section:nth-child(2){animation-delay:60ms}
+.section:nth-child(3){animation-delay:120ms}
+.section:nth-child(4){animation-delay:180ms}
+.section:nth-child(5){animation-delay:240ms}
+.section:nth-child(6){animation-delay:300ms}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.section-label{
+  font-family:var(--font-headline);
+  font-size:0.7rem;
+  font-weight:700;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--fg-muted);
+  margin-bottom:var(--space-md);
+  display:flex;align-items:center;gap:var(--space-sm);
+}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border-strong)}
+
+/* ── stats row ── */
+.stats-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:var(--space-md);
+  margin-bottom:var(--space-2xl);
+}
+.stat-card{
+  background:var(--surface-container-low);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-md);
+  padding:var(--space-lg);
+  box-shadow:var(--shadow-sm);
+}
+.stat-val{
+  font-family:var(--font-mono);
+  font-size:1.6rem;
+  font-weight:700;
+  color:var(--primary);
+  line-height:1;
+  margin-bottom:var(--space-xs);
+}
+.stat-label{font-size:0.75rem;color:var(--fg-muted);font-weight:500}
+
+/* ── cause chain ── */
+.cause-chain{display:flex;flex-direction:column;gap:0}
+.cause-block{
+  background:var(--surface-container-low);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-md);
+  padding:var(--space-lg) var(--space-xl);
+  box-shadow:var(--shadow-sm);
+  position:relative;
+}
+.cause-block.origin{
+  border-left:3px solid var(--primary);
+  background:var(--surface-container);
+}
+.cause-connector{
+  width:2px;
+  height:var(--space-lg);
+  background:var(--outline-variant);
+  margin-left:var(--space-xl);
+}
+.cause-header{display:flex;align-items:center;gap:var(--space-sm);flex-wrap:wrap;margin-bottom:var(--space-sm)}
+.cause-type{font-family:var(--font-mono);font-size:0.88rem;font-weight:600;color:var(--red)}
+.cause-msg{font-family:var(--font-mono);font-size:0.82rem;color:var(--fg-2);margin-top:2px}
+.cause-origin-badge{
+  font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  background:var(--gradient-primary);color:white;
+  padding:2px var(--space-sm);border-radius:var(--radius-pill);
+}
+.cause-depth{font-size:0.7rem;color:var(--fg-muted);font-family:var(--font-mono)}
+
+/* ── risk hotspots ── */
+.hotspot-list{display:flex;flex-direction:column;gap:var(--space-md)}
+.hotspot-card{
+  background:var(--surface-container-low);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-md);
+  padding:var(--space-lg) var(--space-xl);
+  box-shadow:var(--shadow-sm);
+  cursor:pointer;
+  transition:box-shadow 150ms,border-color 150ms;
+}
+.hotspot-card:hover{box-shadow:var(--shadow-md);border-color:var(--outline-variant)}
+.hotspot-header{display:flex;align-items:flex-start;gap:var(--space-md);flex-wrap:wrap;margin-bottom:var(--space-sm)}
+.hotspot-rank{
+  font-family:var(--font-mono);font-size:0.75rem;font-weight:700;
+  min-width:24px;height:24px;border-radius:50%;
+  background:var(--surface-container-high);
+  color:var(--fg-muted);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.hotspot-rank.rank-1{background:rgba(239,68,68,0.15);color:var(--red)}
+.hotspot-rank.rank-2{background:rgba(245,158,11,0.15);color:var(--yellow)}
+.hotspot-rank.rank-3{background:rgba(59,130,246,0.15);color:var(--blue)}
+.hotspot-path{
+  font-family:var(--font-mono);
+  font-size:0.82rem;
+  color:var(--fg-1);
+  font-weight:600;
+  flex:1;
+  word-break:break-all;
+}
+.hotspot-path .line-ref{color:var(--fg-muted);font-weight:400}
+.hotspot-why{font-size:0.85rem;color:var(--fg-2);line-height:1.5;margin-top:var(--space-sm)}
+.hotspot-chips{display:flex;gap:var(--space-sm);flex-wrap:wrap;margin-top:var(--space-sm)}
+
+/* ── hypothesis cards ── */
+.hypo-list{display:flex;flex-direction:column;gap:var(--space-md)}
+.hypo-card{
+  background:var(--surface-container-low);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-md);
+  padding:var(--space-lg) var(--space-xl);
+  box-shadow:var(--shadow-sm);
+}
+.hypo-header{display:flex;align-items:center;gap:var(--space-md);flex-wrap:wrap;margin-bottom:var(--space-sm)}
+.hypo-title{font-family:var(--font-headline);font-size:0.95rem;font-weight:600;color:var(--fg-1)}
+.hypo-body{font-size:0.875rem;color:var(--fg-2);line-height:1.6;margin-bottom:var(--space-sm)}
+.hypo-distinguish{
+  font-size:0.8rem;color:var(--fg-muted);
+  background:var(--surface-container);
+  border-left:3px solid var(--outline-variant);
+  padding:var(--space-sm) var(--space-md);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  margin-top:var(--space-sm);
+}
+.hypo-evidence{display:flex;flex-wrap:wrap;gap:var(--space-xs);margin-top:var(--space-sm)}
+.frame-ref-btn{
+  font-family:var(--font-mono);
+  font-size:0.72rem;
+  padding:2px var(--space-sm);
+  border-radius:var(--radius-sm);
+  background:var(--surface-container-high);
+  color:var(--fg-2);
+  border:1px solid var(--border-strong);
+  cursor:pointer;
+  transition:background 120ms,color 120ms;
+  text-decoration:none;
+}
+.frame-ref-btn:hover{background:var(--primary);color:white;border-color:var(--primary)}
+
+/* ── review checklist ── */
+.checklist{
+  background:var(--surface-container-low);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-lg);
+  padding:var(--space-lg) var(--space-xl);
+  box-shadow:var(--shadow-sm);
+}
+.checklist-item{
+  display:flex;align-items:flex-start;gap:var(--space-md);
+  padding:var(--space-md) 0;
+  border-bottom:1px solid var(--border);
+  font-size:0.875rem;
+  color:var(--fg-2);
+  line-height:1.5;
+  cursor:pointer;
+  transition:color 120ms;
+}
+.checklist-item:last-child{border-bottom:none;padding-bottom:0}
+.checklist-item:first-child{padding-top:0}
+.check-box{
+  width:18px;height:18px;border-radius:4px;
+  border:2px solid var(--outline-variant);
+  flex-shrink:0;margin-top:1px;
+  transition:background 120ms,border-color 120ms;
+  display:flex;align-items:center;justify-content:center;
+}
+.checklist-item.checked .check-box{
+  background:var(--green);border-color:var(--green);
+}
+.checklist-item.checked .check-box::after{
+  content:'✓';color:white;font-size:11px;font-weight:700;
+}
+.checklist-item.checked .check-text{
+  text-decoration:line-through;color:var(--fg-muted);
+}
+.check-text{flex:1}
+.check-code{font-family:var(--font-mono);font-size:0.8em;background:var(--surface-container);padding:1px 5px;border-radius:4px;color:var(--primary)}
+
+/* ── frame stack ── */
+.frame-stack{
+  background:var(--surface-container-low);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+}
+.frame-stack-cause{
+  border-bottom:1px solid var(--border-strong);
+}
+.frame-stack-cause-header{
+  padding:var(--space-md) var(--space-xl);
+  background:var(--surface-container);
+  font-family:var(--font-mono);
+  font-size:0.78rem;
+  color:var(--fg-muted);
+  display:flex;align-items:center;gap:var(--space-sm);
+  flex-wrap:wrap;
+}
+.frame-stack-cause-header .cause-exception{color:var(--red);font-weight:600}
+.frame-row{
+  display:flex;align-items:flex-start;gap:var(--space-md);
+  padding:var(--space-md) var(--space-xl);
+  border-bottom:1px solid var(--border);
+  font-family:var(--font-mono);
+  font-size:0.8rem;
+  transition:background 120ms;
+}
+.frame-row:last-child{border-bottom:none}
+.frame-row:hover{background:var(--surface-container)}
+.frame-row.app-frame{border-left:3px solid var(--green)}
+.frame-row.vendor-frame{border-left:3px solid var(--border-strong);opacity:0.7}
+.frame-num{color:var(--fg-muted);min-width:28px;text-align:right;font-size:0.72rem;margin-top:2px;flex-shrink:0}
+.frame-main{flex:1;min-width:0}
+.frame-func{color:var(--fg-1);font-weight:600}
+.frame-file{color:var(--fg-muted);font-size:0.75rem;word-break:break-all;margin-top:2px}
+.frame-file .file-highlight{color:var(--primary)}
+.frame-line{color:var(--yellow);font-size:0.72rem;margin-left:var(--space-xs)}
+.vendor-fold{
+  padding:var(--space-sm) var(--space-xl);
+  display:flex;align-items:center;gap:var(--space-sm);
+  cursor:pointer;
+  background:var(--surface-container-high);
+  border-bottom:1px solid var(--border);
+  color:var(--fg-muted);
+  font-family:var(--font-mono);
+  font-size:0.76rem;
+  user-select:none;
+  transition:background 120ms;
+}
+.vendor-fold:hover{background:var(--outline-variant)}
+.vendor-fold-icon{transition:transform 200ms}
+.vendor-fold.open .vendor-fold-icon{transform:rotate(90deg)}
+
+/* ── raw artifact ── */
+.raw-artifact{
+  background:var(--surface-container-lowest);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+}
+.raw-artifact-header{
+  padding:var(--space-md) var(--space-xl);
+  background:var(--surface-container-high);
+  border-bottom:1px solid var(--border-strong);
+  display:flex;align-items:center;gap:var(--space-md);
+  flex-wrap:wrap;
+}
+.raw-artifact-title{
+  font-family:var(--font-headline);font-size:0.82rem;font-weight:600;
+  color:var(--fg-2);flex:1;
+}
+.raw-toggle-btn,.copy-btn,.copy-summary-btn{
+  font-family:var(--font-body);font-size:0.78rem;font-weight:600;
+  padding:var(--space-xs) var(--space-md);
+  border-radius:var(--radius-pill);
+  cursor:pointer;border:1px solid var(--border-strong);
+  background:var(--surface-container-low);
+  color:var(--fg-2);
+  transition:background 120ms,color 120ms,border-color 120ms;
+  display:inline-flex;align-items:center;gap:var(--space-xs);
+}
+.copy-btn:hover,.raw-toggle-btn:hover{background:var(--surface-container);color:var(--fg-1);border-color:var(--outline-variant)}
+.copy-summary-btn{
+  background:var(--gradient-primary);color:white;
+  border-color:transparent;
+  box-shadow:var(--shadow-accent);
+}
+.copy-summary-btn:hover{opacity:0.9}
+.copy-btn.copied,.copy-summary-btn.copied{background:var(--green);border-color:var(--green);color:white}
+.raw-body{display:none}
+.raw-body.open{display:block}
+.search-bar{
+  padding:var(--space-md) var(--space-xl);
+  border-bottom:1px solid var(--border);
+  display:flex;gap:var(--space-sm);align-items:center;
+}
+.search-input{
+  flex:1;
+  font-family:var(--font-mono);font-size:0.82rem;
+  padding:var(--space-sm) var(--space-md);
+  border-radius:var(--radius-sm);
+  border:1px solid var(--border-strong);
+  background:var(--surface-container-low);
+  color:var(--fg-1);
+  outline:none;transition:border-color 150ms;
+}
+.search-input:focus{border-color:var(--primary)}
+.search-count{font-size:0.75rem;color:var(--fg-muted);font-family:var(--font-mono);white-space:nowrap}
+.raw-lines{
+  overflow-x:auto;
+  max-height:480px;
+  overflow-y:auto;
+}
+.raw-line{
+  display:flex;
+  font-family:var(--font-mono);font-size:0.78rem;line-height:1.6;
+  white-space:pre;
+}
+.raw-line:hover{background:var(--surface-container)}
+.raw-line.match{background:rgba(245,158,11,0.15)}
+.raw-line.match .raw-line-text{color:var(--fg-1)}
+.line-num{
+  min-width:40px;text-align:right;padding:0 var(--space-md) 0 var(--space-lg);
+  color:var(--fg-muted);font-size:0.7rem;user-select:none;flex-shrink:0;
+  border-right:1px solid var(--border);margin-right:var(--space-md);
+}
+.raw-line-text{color:var(--fg-2);flex:1}
+.raw-line-text.is-exception{color:var(--red);font-weight:600}
+.raw-line-text.is-file{color:var(--fg-muted)}
+.raw-line-text.is-app-file{color:var(--green)}
+.raw-line-text .search-hl{background:rgba(245,158,11,0.5);color:var(--fg-1);border-radius:2px}
+
+/* ── copy summary bar ── */
+.copy-handoff{
+  background:var(--surface-container-low);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-lg);
+  padding:var(--space-xl) var(--space-2xl);
+  box-shadow:var(--shadow-md);
+  display:flex;align-items:center;gap:var(--space-xl);
+  flex-wrap:wrap;
+}
+.copy-handoff-text{flex:1;min-width:200px}
+.copy-handoff-title{font-family:var(--font-headline);font-size:0.95rem;font-weight:600;color:var(--fg-1);margin-bottom:var(--space-xs)}
+.copy-handoff-desc{font-size:0.8rem;color:var(--fg-muted)}
+
+/* ── footer ── */
+.dev-footer{
+  margin-top:var(--space-4xl);
+  padding-top:var(--space-2xl);
+  border-top:1px solid var(--border);
+  font-size:0.75rem;color:var(--fg-muted);
+  line-height:1.6;
+}
+
+/* ── mobile tweaks ── */
+@media(max-width:560px){
+  .finding-title{font-size:1.1rem}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .copy-handoff{flex-direction:column;align-items:flex-start}
+}
+</style>
 <!-- html-anything example style skin:start -->
 
 <style id="html-anything-example-style-skin">
@@ -307,35 +598,6 @@ html[data-ha-style="relationship"] body {
     linear-gradient(300deg, rgba(49,123,147,.08), transparent 40%);
 }
 html[data-ha-style="relationship"] body::before { content: "relationship"; }
-
-html[data-ha-style="personal-atlas"] {
-  --ha-style-accent: #3f7f6a;
-  --ha-style-accent-2: #c15a2b;
-  --primary: #3f7f6a;
-  --primary-container: #2f6b58;
-  --primary-fixed: #dff4ea;
-  --secondary-container: #c15a2b;
-  --bg: #f7faf4;
-  --surface: #f7faf4;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #eef5ea;
-  --surface-container: #e6eee0;
-  --surface-container-high: #dbe7d5;
-  --fg-1: #17211b;
-  --fg-2: #405345;
-  --fg-muted: #718172;
-  --border: rgba(63,127,106,.15);
-  --gradient-hero: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-  --gradient-text: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-}
-html[data-ha-style="personal-atlas"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(63,127,106,.11) 0 2px, transparent 2px),
-    radial-gradient(circle at 70% 40%, rgba(193,90,43,.10) 0 1.5px, transparent 1.5px);
-  background-size: 54px 54px, 38px 38px;
-}
-html[data-ha-style="personal-atlas"] body::before { content: "personal atlas"; }
 
 html[data-ha-style="timeline-story"] {
   --ha-style-accent: #9a4b14;
@@ -486,7 +748,7 @@ html[data-ha-style="dashboard"] header.hero::before {
   margin-bottom: 14px;
 }
 
-html[data-ha-style="editorial"] {
+html[data-ha-style="document"] {
   --ha-style-accent: #8b3f1f;
   --ha-style-accent-2: #2f6f73;
   --primary: #8b3f1f;
@@ -507,14 +769,14 @@ html[data-ha-style="editorial"] {
   --gradient-hero: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
   --gradient-text: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
 }
-html[data-ha-style="editorial"] body {
+html[data-ha-style="document"] body {
   background-color: var(--bg) !important;
   background-image: linear-gradient(90deg, rgba(139,63,31,.18) 0 4px, transparent 4px);
   background-size: 100% 100%;
 }
-html[data-ha-style="editorial"] body::before { content: "editorial"; }
-html[data-ha-style="editorial"] .hero::before,
-html[data-ha-style="editorial"] header.hero::before {
+html[data-ha-style="document"] body::before { content: "document"; }
+html[data-ha-style="document"] .hero::before,
+html[data-ha-style="document"] header.hero::before {
   width: 42px;
   height: 42px;
   border-radius: 0;
@@ -522,33 +784,6 @@ html[data-ha-style="editorial"] header.hero::before {
   border-top: 4px solid var(--ha-style-accent);
   border-left: 4px solid var(--ha-style-accent);
 }
-
-html[data-ha-style="paper"] {
-  --ha-style-accent: #53606a;
-  --ha-style-accent-2: #8c6f4a;
-  --primary: #53606a;
-  --primary-container: #3e4850;
-  --primary-fixed: #eef1f3;
-  --secondary-container: #8c6f4a;
-  --bg: #f9faf9;
-  --surface: #f9faf9;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f1f2f1;
-  --surface-container: #e8eae8;
-  --surface-container-high: #dedfdd;
-  --fg-1: #171717;
-  --fg-2: #4b5563;
-  --fg-muted: #737373;
-  --border: rgba(83,96,106,.18);
-  --font-headline: Georgia, "Iowan Old Style", "Times New Roman", serif;
-  --gradient-hero: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-  --gradient-text: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-}
-html[data-ha-style="paper"] body {
-  background-color: var(--bg) !important;
-  background-image: repeating-linear-gradient(0deg, transparent 0 31px, rgba(83,96,106,.08) 31px 32px);
-}
-html[data-ha-style="paper"] body::before { content: "paper"; }
 
 html[data-ha-style="developer"] {
   color-scheme: dark;
@@ -593,370 +828,458 @@ html[data-ha-style="developer"] .mono {
 <!-- html-anything example style skin:end -->
 </head>
 <body>
-<main>
-  <header class="hero">
-    <div class="eyebrow">Stack trace · python · 3-deep cause chain</div>
-    <h1>KeyError: 'CA-QC'</h1>
-    <p class="editorial">Trace has 10 frames; 7 look like application code, the rest are framework / vendor internals. Topmost app frame: /srv/checkout-service/src/api/invoice.py:87.</p>
-    <div class="hero-actions">
-      <button class="btn primary" id="copy-md-btn">Copy summary</button>
-      <a class="btn" href="#raw-section">Jump to raw artifact</a>
-    </div>
-    <div class="kpi-row" id="kpi-row"><div class="kpi"><div class="label">Language</div><div class="value ">python</div></div><div class="kpi"><div class="label">Frames (total)</div><div class="value ">10</div></div><div class="kpi"><div class="label">App frames</div><div class="value accent">7</div></div><div class="kpi"><div class="label">Vendor frames</div><div class="value ">3</div></div><div class="kpi"><div class="label">Cause chain depth</div><div class="value ">3</div></div></div>
-  </header>
-  <section class="section" >
-    <div class="section-head"><h2>Trace summary</h2></div>
-    <div class="card">
-      <div style="font-family:var(--font-mono);font-size:14px;color:var(--fg-1);margin-bottom:var(--space-sm)"><strong>KeyError</strong></div>
-      <div style="color:var(--fg-2);font-size:14.5px;line-height:1.5">&#39;CA-QC&#39;</div>
-      <div style="margin-top:var(--space-lg);padding:var(--space-md);background:var(--primary-fixed);border-radius:var(--radius-md)">
-        <div style="display:flex;align-items:center;gap:var(--space-sm);margin-bottom:var(--space-xs)"><span class="hyp">Hypothesis</span><span class="badge app">topmost app frame</span></div>
-        <div class="mono" style="font-size:13.5px;font-weight:600;color:var(--fg-1);word-break:break-all">generate_invoice — /srv/checkout-service/src/api/invoice.py:87</div>
+<script>const DATA = {"kind":"stack-trace","language":"python","exception":{"type":"KeyError","message":"'CA-QC'"},"causes":[{"id":"cause_0001","type":"KeyError","message":"'CA-QC'","frames":[{"id":"fr_0001","rawLine":"  File \"/srv/checkout-service/src/api/invoice.py\", line 87, in generate_invoice","file":"/srv/checkout-service/src/api/invoice.py","line":87,"col":null,"function":"generate_invoice","isApp":true,"isVendor":false},{"id":"fr_0002","rawLine":"  File \"/srv/checkout-service/src/billing/lineitems.py\", line 142, in build_line_items","file":"/srv/checkout-service/src/billing/lineitems.py","line":142,"col":null,"function":"build_line_items","isApp":true,"isVendor":false},{"id":"fr_0003","rawLine":"  File \"/srv/checkout-service/src/billing/tax.py\", line 64, in resolve_tax_rate","file":"/srv/checkout-service/src/billing/tax.py","line":64,"col":null,"function":"resolve_tax_rate","isApp":true,"isVendor":false}]},{"id":"cause_0002","type":"src.api.invoice.InvoiceGenerationError","message":"could not resolve tax rate","frames":[{"id":"fr_0004","rawLine":"  File \"/srv/checkout-service/src/api/invoice.py\", line 92, in generate_invoice","file":"/srv/checkout-service/src/api/invoice.py","line":92,"col":null,"function":"generate_invoice","isApp":true,"isVendor":false},{"id":"fr_0005","rawLine":"  File \"/usr/lib/python3.11/contextlib.py\", line 137, in __enter__","file":"/usr/lib/python3.11/contextlib.py","line":137,"col":null,"function":"__enter__","isApp":false,"isVendor":true},{"id":"fr_0006","rawLine":"  File \"/srv/checkout-service/src/obs/tracing.py\", line 41, in trace_span","file":"/srv/checkout-service/src/obs/tracing.py","line":41,"col":null,"function":"trace_span","isApp":true,"isVendor":false}]},{"id":"cause_0003","type":"fastapi.exceptions.HTTPException","message":"500: invoice generation failed","frames":[{"id":"fr_0007","rawLine":"  File \"/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py\", line 273, in app","file":"/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py","line":273,"col":null,"function":"app","isApp":false,"isVendor":true},{"id":"fr_0008","rawLine":"  File \"/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py\", line 192, in run_endpoint_function","file":"/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py","line":192,"col":null,"function":"run_endpoint_function","isApp":false,"isVendor":true},{"id":"fr_0009","rawLine":"  File \"/srv/checkout-service/src/api/invoice.py\", line 53, in post_invoice","file":"/srv/checkout-service/src/api/invoice.py","line":53,"col":null,"function":"post_invoice","isApp":true,"isVendor":false},{"id":"fr_0010","rawLine":"  File \"/srv/checkout-service/src/api/invoice.py\", line 95, in generate_invoice","file":"/srv/checkout-service/src/api/invoice.py","line":95,"col":null,"function":"generate_invoice","isApp":true,"isVendor":false}]}],"frameCount":10,"appFrameCount":7,"vendorFrameCount":3,"rawText":"[2026-05-04T16:42:18.4127Z] ERROR  api.invoice.generate  request_id=req_8a91f2c\nTraceback (most recent call last):\n  File \"/srv/checkout-service/src/api/invoice.py\", line 87, in generate_invoice\n    line_items = build_line_items(order, tax_strategy=tenant.tax_strategy)\n  File \"/srv/checkout-service/src/billing/lineitems.py\", line 142, in build_line_items\n    rate = resolve_tax_rate(order.region, strategy=tax_strategy)\n  File \"/srv/checkout-service/src/billing/tax.py\", line 64, in resolve_tax_rate\n    rate_table = TAX_RATES_BY_REGION[region.upper()]\nKeyError: 'CA-QC'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/srv/checkout-service/src/api/invoice.py\", line 92, in generate_invoice\n    raise InvoiceGenerationError(\"could not resolve tax rate\") from exc\n  File \"/usr/lib/python3.11/contextlib.py\", line 137, in __enter__\n    return next(self.gen)\n  File \"/srv/checkout-service/src/obs/tracing.py\", line 41, in trace_span\n    yield span\nsrc.api.invoice.InvoiceGenerationError: could not resolve tax rate\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py\", line 273, in app\n    raw_response = await run_endpoint_function(\n  File \"/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py\", line 192, in run_endpoint_function\n    return await dependant.call(**values)\n  File \"/srv/checkout-service/src/api/invoice.py\", line 53, in post_invoice\n    invoice = generate_invoice(order_id=payload.order_id, tenant=current_tenant)\n  File \"/srv/checkout-service/src/api/invoice.py\", line 95, in generate_invoice\n    raise HTTPException(status_code=500, detail=\"invoice generation failed\") from exc\nfastapi.exceptions.HTTPException: 500: invoice generation failed\n[request body]\n  order_id: ord_3c9f1\n  tenant_id: ten_clockless\n[request headers]\n  x-request-id: req_8a91f2c\n  user-agent: clockless-billing-cron/0.6.2 (python-requests/2.32.0)\n","sourceFile":"input.txt","sizeBytes":2064,"format":"stack-trace","causeChainDepth":3};</script>
+<div class="dev-shell">
+
+  <!-- FINDING BAR -->
+  <div class="finding-bar">
+    <div class="finding-bar-top">
+      <div>
+        <div class="finding-title">Production stack trace — invoice tax-rate KeyError</div>
+        <div class="exception-type" id="exc-type-hero"></div>
+        <div class="exception-msg" id="exc-msg-hero"></div>
       </div>
     </div>
-  </section>
-<section class="section" >
-    <div class="section-head"><h2>Review checklist</h2></div>
-    <div class="card"><ol class="checklist"><li><span class="num">1</span><span class="text">Open <code>/srv/checkout-service/src/api/invoice.py:87</code> and read <code>generate_invoice</code> in context — confirm what input shape it assumes vs what may have been passed.</span></li><li><span class="num">2</span><span class="text">Reproduce locally with inputs that mirror the production request that triggered this trace (use the request body / params from the log line preceding the trace, if available).</span></li><li><span class="num">3</span><span class="text">Add an early-return assertion or type-guard in <code>generate_invoice</code> for the input shape that triggered this exception.</span></li><li><span class="num">4</span><span class="text">The deepest cause in the chain is <code>fastapi.exceptions.HTTPException</code> — investigate that one before the wrapper exception(s).</span></li><li><span class="num">5</span><span class="text">Search your error tracker for <code>KeyError</code> in the last 24h to confirm whether this is a one-off or part of a pattern.</span></li><li><span class="num">6</span><span class="text">Verify the runtime / framework version in the failing environment matches the version this code was tested against.</span></li></ol></div>
-  </section>
-<section class="section" >
-    <div class="section-head"><h2>Risk hotspots</h2></div>
-    <div class="hotspots"><div class="hotspot">
-          <div class="head"><span class="path">generate_invoice</span><span class="badge app">app</span></div>
-          <div style="font-family:var(--font-mono);font-size:12.5px;color:var(--fg-muted);margin-top:2px;word-break:break-all">/srv/checkout-service/src/api/invoice.py:87</div>
-          <div class="why"><span class="hyp">Hypothesis</span> Topmost app-shaped frame in this cause chain — most likely the local entry point that triggered the exception. Read the surrounding code in invoice.py for the assumed shape of inputs vs what was provided.</div>
-        </div><div class="hotspot">
-          <div class="head"><span class="path">build_line_items</span><span class="badge app">app</span></div>
-          <div style="font-family:var(--font-mono);font-size:12.5px;color:var(--fg-muted);margin-top:2px;word-break:break-all">/srv/checkout-service/src/billing/lineitems.py:142</div>
-          <div class="why"><span class="hyp">Hypothesis</span> Topmost app-shaped frame in this cause chain — most likely the local entry point that triggered the exception. Read the surrounding code in lineitems.py for the assumed shape of inputs vs what was provided.</div>
-        </div><div class="hotspot">
-          <div class="head"><span class="path">resolve_tax_rate</span><span class="badge app">app</span></div>
-          <div style="font-family:var(--font-mono);font-size:12.5px;color:var(--fg-muted);margin-top:2px;word-break:break-all">/srv/checkout-service/src/billing/tax.py:64</div>
-          <div class="why"><span class="hyp">Hypothesis</span> Topmost app-shaped frame in this cause chain — most likely the local entry point that triggered the exception. Read the surrounding code in tax.py for the assumed shape of inputs vs what was provided.</div>
-        </div></div>
-  </section>
-<section class="section" >
-    <div class="section-head"><h2>Suspected cause</h2></div>
-    <div class="cause-chain"><div class="cause deepest">
-          <div style="display:flex;align-items:center;gap:var(--space-sm);justify-content:space-between"><span class="hyp">Hypothesis</span><span class="muted mono" style="font-size:11.5px">candidate 1 of 2</span></div>
-          <div class="msg" style="margin-top:var(--space-sm)">The exception (KeyError: &#39;CA-QC&#39;) was raised inside generate_invoice because the input shape it assumed at /srv/checkout-service/src/api/invoice.py:87 did not match what the caller provided.</div>
-          <div class="top-frame">Topmost app frame: generate_invoice at /srv/checkout-service/src/api/invoice.py:87</div>
-          <div class="msg" style="margin-top:var(--space-sm);font-size:13px"><strong>Distinguishing test:</strong> Reproduce locally with the same input shape; if the exception fires at the same frame, this is the cause.</div>
-        </div><div class="cause ">
-          <div style="display:flex;align-items:center;gap:var(--space-sm);justify-content:space-between"><span class="hyp">Hypothesis</span><span class="muted mono" style="font-size:11.5px">candidate 2 of 2</span></div>
-          <div class="msg" style="margin-top:var(--space-sm)">The wrapper exception (KeyError) is masking a deeper failure: fastapi.exceptions.HTTPException — that is the real origin and should be addressed first.</div>
-          <div class="top-frame">Deepest cause in chain: fastapi.exceptions.HTTPException — 500: invoice generation failed</div>
-          <div class="msg" style="margin-top:var(--space-sm);font-size:13px"><strong>Distinguishing test:</strong> Trace through the cause chain in the raw trace below; the deepest cause is the real bug, the others are wrappers.</div>
-        </div></div>
-  </section>
-<section class="section" >
-    <div class="section-head"><h2>Frames</h2></div>
-    <div class="card">
-            <div style="margin-bottom:var(--space-lg)">
-              <div style="display:flex;align-items:center;gap:var(--space-sm);margin-bottom:var(--space-sm)"><span class="badge">cause 1</span><span class="mono" style="font-size:13.5px;font-weight:600">KeyError: &#39;CA-QC&#39;</span></div>
-              <ul class="frames">
-                
-                
-                
-                  <li class="frame app">
-                    <div class="marker app">APP</div>
-                    <div class="body">
-                      <div class="file">generate_invoice</div>
-                      <div class="fn">/srv/checkout-service/src/api/invoice.py:87</div>
-                    </div>
-                  </li>
-                
-                  <li class="frame app">
-                    <div class="marker app">APP</div>
-                    <div class="body">
-                      <div class="file">build_line_items</div>
-                      <div class="fn">/srv/checkout-service/src/billing/lineitems.py:142</div>
-                    </div>
-                  </li>
-                
-                  <li class="frame app">
-                    <div class="marker app">APP</div>
-                    <div class="body">
-                      <div class="file">resolve_tax_rate</div>
-                      <div class="fn">/srv/checkout-service/src/billing/tax.py:64</div>
-                    </div>
-                  </li>
-                
-              </ul>
-            </div>
-          
-            <div style="margin-bottom:var(--space-lg)">
-              <div style="display:flex;align-items:center;gap:var(--space-sm);margin-bottom:var(--space-sm)"><span class="badge">cause 2</span><span class="mono" style="font-size:13.5px;font-weight:600">src.api.invoice.InvoiceGenerationError: could not resolve tax rate</span></div>
-              <ul class="frames">
-                
-                <li><div class="fold-toggle" data-folded="1">Show 1 framework / vendor frames</div></li>
-                
-                  <li class="frame app">
-                    <div class="marker app">APP</div>
-                    <div class="body">
-                      <div class="file">generate_invoice</div>
-                      <div class="fn">/srv/checkout-service/src/api/invoice.py:92</div>
-                    </div>
-                  </li>
-                
-                  <li class="frame vendor">
-                    <div class="marker vendor">vendor</div>
-                    <div class="body">
-                      <div class="file">__enter__</div>
-                      <div class="fn">/usr/lib/python3.11/contextlib.py:137</div>
-                    </div>
-                  </li>
-                
-                  <li class="frame app">
-                    <div class="marker app">APP</div>
-                    <div class="body">
-                      <div class="file">trace_span</div>
-                      <div class="fn">/srv/checkout-service/src/obs/tracing.py:41</div>
-                    </div>
-                  </li>
-                
-              </ul>
-            </div>
-          
-            <div style="margin-bottom:var(--space-lg)">
-              <div style="display:flex;align-items:center;gap:var(--space-sm);margin-bottom:var(--space-sm)"><span class="badge red">deepest cause</span><span class="mono" style="font-size:13.5px;font-weight:600">fastapi.exceptions.HTTPException: 500: invoice generation failed</span></div>
-              <ul class="frames">
-                
-                <li><div class="fold-toggle" data-folded="1">Show 2 framework / vendor frames</div></li>
-                
-                  <li class="frame vendor">
-                    <div class="marker vendor">vendor</div>
-                    <div class="body">
-                      <div class="file">app</div>
-                      <div class="fn">/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py:273</div>
-                    </div>
-                  </li>
-                
-                  <li class="frame vendor">
-                    <div class="marker vendor">vendor</div>
-                    <div class="body">
-                      <div class="file">run_endpoint_function</div>
-                      <div class="fn">/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py:192</div>
-                    </div>
-                  </li>
-                
-                  <li class="frame app">
-                    <div class="marker app">APP</div>
-                    <div class="body">
-                      <div class="file">post_invoice</div>
-                      <div class="fn">/srv/checkout-service/src/api/invoice.py:53</div>
-                    </div>
-                  </li>
-                
-                  <li class="frame app">
-                    <div class="marker app">APP</div>
-                    <div class="body">
-                      <div class="file">generate_invoice</div>
-                      <div class="fn">/srv/checkout-service/src/api/invoice.py:95</div>
-                    </div>
-                  </li>
-                
-              </ul>
-            </div>
-          </div>
-  </section>
-<details class="section" id="raw-section"><summary><h2 style="margin:0">Trace</h2></summary><div class="body"><div class="searchbox" style="margin-bottom:var(--space-md);max-width:100%"><input id="raw-search" type="search" placeholder="Search the trace…"></div>
-      <pre class="diff" id="raw-content" style="white-space:pre-wrap"><span data-text="[2026-05-04T16:42:18.4127Z] ERROR  api.invoice.generate  request_id=req_8a91f2c
-Traceback (most recent call last):
-  File &quot;/srv/checkout-service/src/api/invoice.py&quot;, line 87, in generate_invoice
-    line_items = build_line_items(order, tax_strategy=tenant.tax_strategy)
-  File &quot;/srv/checkout-service/src/billing/lineitems.py&quot;, line 142, in build_line_items
-    rate = resolve_tax_rate(order.region, strategy=tax_strategy)
-  File &quot;/srv/checkout-service/src/billing/tax.py&quot;, line 64, in resolve_tax_rate
-    rate_table = TAX_RATES_BY_REGION[region.upper()]
-KeyError: &#39;CA-QC&#39;
+    <div class="finding-meta" id="finding-meta"></div>
+  </div>
 
-During handling of the above exception, another exception occurred:
+  <!-- STATS -->
+  <div class="section">
+    <div class="section-label">Trace summary</div>
+    <div class="stats-row" id="stats-row"></div>
+  </div>
 
-Traceback (most recent call last):
-  File &quot;/srv/checkout-service/src/api/invoice.py&quot;, line 92, in generate_invoice
-    raise InvoiceGenerationError(&quot;could not resolve tax rate&quot;) from exc
-  File &quot;/usr/lib/python3.11/contextlib.py&quot;, line 137, in __enter__
-    return next(self.gen)
-  File &quot;/srv/checkout-service/src/obs/tracing.py&quot;, line 41, in trace_span
-    yield span
-src.api.invoice.InvoiceGenerationError: could not resolve tax rate
+  <!-- CAUSE CHAIN -->
+  <div class="section">
+    <div class="section-label">Cause chain</div>
+    <div class="cause-chain" id="cause-chain"></div>
+  </div>
 
-During handling of the above exception, another exception occurred:
+  <!-- RISK HOTSPOTS -->
+  <div class="section">
+    <div class="section-label">Risk hotspots</div>
+    <div class="hotspot-list" id="hotspot-list"></div>
+  </div>
 
-Traceback (most recent call last):
-  File &quot;/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py&quot;, line 273, in app
-    raw_response = await run_endpoint_function(
-  File &quot;/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py&quot;, line 192, in run_endpoint_function
-    return await dependant.call(**values)
-  File &quot;/srv/checkout-service/src/api/invoice.py&quot;, line 53, in post_invoice
-    invoice = generate_invoice(order_id=payload.order_id, tenant=current_tenant)
-  File &quot;/srv/checkout-service/src/api/invoice.py&quot;, line 95, in generate_invoice
-    raise HTTPException(status_code=500, detail=&quot;invoice generation failed&quot;) from exc
-fastapi.exceptions.HTTPException: 500: invoice generation failed
-[request body]
-  order_id: ord_3c9f1
-  tenant_id: ten_clockless
-[request headers]
-  x-request-id: req_8a91f2c
-  user-agent: clockless-billing-cron/0.6.2 (python-requests/2.32.0)
-" data-original="[2026-05-04T16:42:18.4127Z] ERROR  api.invoice.generate  request_id=req_8a91f2c
-Traceback (most recent call last):
-  File &quot;/srv/checkout-service/src/api/invoice.py&quot;, line 87, in generate_invoice
-    line_items = build_line_items(order, tax_strategy=tenant.tax_strategy)
-  File &quot;/srv/checkout-service/src/billing/lineitems.py&quot;, line 142, in build_line_items
-    rate = resolve_tax_rate(order.region, strategy=tax_strategy)
-  File &quot;/srv/checkout-service/src/billing/tax.py&quot;, line 64, in resolve_tax_rate
-    rate_table = TAX_RATES_BY_REGION[region.upper()]
-KeyError: &#39;CA-QC&#39;
+  <!-- SUSPECTED CAUSE -->
+  <div class="section">
+    <div class="section-label">Suspected cause</div>
+    <div class="hypo-list" id="hypo-list"></div>
+  </div>
 
-During handling of the above exception, another exception occurred:
+  <!-- REVIEW CHECKLIST -->
+  <div class="section">
+    <div class="section-label">Review checklist</div>
+    <div class="checklist" id="checklist"></div>
+  </div>
 
-Traceback (most recent call last):
-  File &quot;/srv/checkout-service/src/api/invoice.py&quot;, line 92, in generate_invoice
-    raise InvoiceGenerationError(&quot;could not resolve tax rate&quot;) from exc
-  File &quot;/usr/lib/python3.11/contextlib.py&quot;, line 137, in __enter__
-    return next(self.gen)
-  File &quot;/srv/checkout-service/src/obs/tracing.py&quot;, line 41, in trace_span
-    yield span
-src.api.invoice.InvoiceGenerationError: could not resolve tax rate
+  <!-- FRAMES -->
+  <div class="section">
+    <div class="section-label">Frames</div>
+    <div class="frame-stack" id="frame-stack"></div>
+  </div>
 
-During handling of the above exception, another exception occurred:
+  <!-- RAW ARTIFACT -->
+  <div class="section">
+    <div class="section-label">Raw trace</div>
+    <div class="raw-artifact">
+      <div class="raw-artifact-header">
+        <span class="raw-artifact-title" id="raw-title">input.txt</span>
+        <button class="copy-btn" id="copy-trace-btn">⎘ Copy trace</button>
+        <button class="raw-toggle-btn" id="raw-toggle-btn">▶ Expand raw trace</button>
+      </div>
+      <div class="raw-body" id="raw-body">
+        <div class="search-bar">
+          <input class="search-input" id="trace-search" type="text" placeholder="Search trace… (Ctrl+F / ⌘F)" autocomplete="off">
+          <span class="search-count" id="search-count"></span>
+        </div>
+        <div class="raw-lines" id="raw-lines"></div>
+      </div>
+    </div>
+  </div>
 
-Traceback (most recent call last):
-  File &quot;/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py&quot;, line 273, in app
-    raw_response = await run_endpoint_function(
-  File &quot;/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py&quot;, line 192, in run_endpoint_function
-    return await dependant.call(**values)
-  File &quot;/srv/checkout-service/src/api/invoice.py&quot;, line 53, in post_invoice
-    invoice = generate_invoice(order_id=payload.order_id, tenant=current_tenant)
-  File &quot;/srv/checkout-service/src/api/invoice.py&quot;, line 95, in generate_invoice
-    raise HTTPException(status_code=500, detail=&quot;invoice generation failed&quot;) from exc
-fastapi.exceptions.HTTPException: 500: invoice generation failed
-[request body]
-  order_id: ord_3c9f1
-  tenant_id: ten_clockless
-[request headers]
-  x-request-id: req_8a91f2c
-  user-agent: clockless-billing-cron/0.6.2 (python-requests/2.32.0)
-">[2026-05-04T16:42:18.4127Z] ERROR  api.invoice.generate  request_id=req_8a91f2c
-Traceback (most recent call last):
-  File &quot;/srv/checkout-service/src/api/invoice.py&quot;, line 87, in generate_invoice
-    line_items = build_line_items(order, tax_strategy=tenant.tax_strategy)
-  File &quot;/srv/checkout-service/src/billing/lineitems.py&quot;, line 142, in build_line_items
-    rate = resolve_tax_rate(order.region, strategy=tax_strategy)
-  File &quot;/srv/checkout-service/src/billing/tax.py&quot;, line 64, in resolve_tax_rate
-    rate_table = TAX_RATES_BY_REGION[region.upper()]
-KeyError: &#39;CA-QC&#39;
+  <!-- COPY HANDOFF -->
+  <div class="section">
+    <div class="section-label">Copy summary</div>
+    <div class="copy-handoff">
+      <div class="copy-handoff-text">
+        <div class="copy-handoff-title">Incident / ticket summary</div>
+        <div class="copy-handoff-desc">Paste-ready Markdown recap: exception, app frames, top hypothesis, and next verification step.</div>
+      </div>
+      <button class="copy-summary-btn" id="copy-summary-btn">⎘ Copy summary</button>
+    </div>
+  </div>
 
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File &quot;/srv/checkout-service/src/api/invoice.py&quot;, line 92, in generate_invoice
-    raise InvoiceGenerationError(&quot;could not resolve tax rate&quot;) from exc
-  File &quot;/usr/lib/python3.11/contextlib.py&quot;, line 137, in __enter__
-    return next(self.gen)
-  File &quot;/srv/checkout-service/src/obs/tracing.py&quot;, line 41, in trace_span
-    yield span
-src.api.invoice.InvoiceGenerationError: could not resolve tax rate
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File &quot;/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py&quot;, line 273, in app
-    raw_response = await run_endpoint_function(
-  File &quot;/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py&quot;, line 192, in run_endpoint_function
-    return await dependant.call(**values)
-  File &quot;/srv/checkout-service/src/api/invoice.py&quot;, line 53, in post_invoice
-    invoice = generate_invoice(order_id=payload.order_id, tenant=current_tenant)
-  File &quot;/srv/checkout-service/src/api/invoice.py&quot;, line 95, in generate_invoice
-    raise HTTPException(status_code=500, detail=&quot;invoice generation failed&quot;) from exc
-fastapi.exceptions.HTTPException: 500: invoice generation failed
-[request body]
-  order_id: ord_3c9f1
-  tenant_id: ten_clockless
-[request headers]
-  x-request-id: req_8a91f2c
-  user-agent: clockless-billing-cron/0.6.2 (python-requests/2.32.0)
-</span></pre></div></details>
-  <footer>
-    <p><em>Generated locally — your diff / log / trace never left your machine. The full artifact is embedded in this HTML and rendered in your browser. The analysis above is a <strong>hypothesis</strong> from a sample, not a verdict; verify against the runtime before acting on it.</em></p>
+  <footer class="dev-footer">
+    <p><strong>Generated locally</strong> — your trace never left your machine. The full artifact is embedded in this HTML and rendered in your browser.</p>
+    <p>The analysis above is a hypothesis derived from stack frames, not a verdict; verify against the runtime, request logs, and the codebase before acting on it.</p>
   </footer>
-</main>
-<script>const DATA = {"kind":"stack-trace","language":"python","exception":{"type":"KeyError","message":"'CA-QC'"},"causes":[{"id":"cause_0001","type":"KeyError","message":"'CA-QC'","frames":[{"id":"fr_0001","rawLine":"  File \"/srv/checkout-service/src/api/invoice.py\", line 87, in generate_invoice","file":"/srv/checkout-service/src/api/invoice.py","line":87,"col":null,"function":"generate_invoice","isApp":true,"isVendor":false},{"id":"fr_0002","rawLine":"  File \"/srv/checkout-service/src/billing/lineitems.py\", line 142, in build_line_items","file":"/srv/checkout-service/src/billing/lineitems.py","line":142,"col":null,"function":"build_line_items","isApp":true,"isVendor":false},{"id":"fr_0003","rawLine":"  File \"/srv/checkout-service/src/billing/tax.py\", line 64, in resolve_tax_rate","file":"/srv/checkout-service/src/billing/tax.py","line":64,"col":null,"function":"resolve_tax_rate","isApp":true,"isVendor":false}]},{"id":"cause_0002","type":"src.api.invoice.InvoiceGenerationError","message":"could not resolve tax rate","frames":[{"id":"fr_0004","rawLine":"  File \"/srv/checkout-service/src/api/invoice.py\", line 92, in generate_invoice","file":"/srv/checkout-service/src/api/invoice.py","line":92,"col":null,"function":"generate_invoice","isApp":true,"isVendor":false},{"id":"fr_0005","rawLine":"  File \"/usr/lib/python3.11/contextlib.py\", line 137, in __enter__","file":"/usr/lib/python3.11/contextlib.py","line":137,"col":null,"function":"__enter__","isApp":false,"isVendor":true},{"id":"fr_0006","rawLine":"  File \"/srv/checkout-service/src/obs/tracing.py\", line 41, in trace_span","file":"/srv/checkout-service/src/obs/tracing.py","line":41,"col":null,"function":"trace_span","isApp":true,"isVendor":false}]},{"id":"cause_0003","type":"fastapi.exceptions.HTTPException","message":"500: invoice generation failed","frames":[{"id":"fr_0007","rawLine":"  File \"/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py\", line 273, in app","file":"/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py","line":273,"col":null,"function":"app","isApp":false,"isVendor":true},{"id":"fr_0008","rawLine":"  File \"/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py\", line 192, in run_endpoint_function","file":"/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py","line":192,"col":null,"function":"run_endpoint_function","isApp":false,"isVendor":true},{"id":"fr_0009","rawLine":"  File \"/srv/checkout-service/src/api/invoice.py\", line 53, in post_invoice","file":"/srv/checkout-service/src/api/invoice.py","line":53,"col":null,"function":"post_invoice","isApp":true,"isVendor":false},{"id":"fr_0010","rawLine":"  File \"/srv/checkout-service/src/api/invoice.py\", line 95, in generate_invoice","file":"/srv/checkout-service/src/api/invoice.py","line":95,"col":null,"function":"generate_invoice","isApp":true,"isVendor":false}]}],"frameCount":10,"appFrameCount":7,"vendorFrameCount":3,"rawText":"[2026-05-04T16:42:18.4127Z] ERROR  api.invoice.generate  request_id=req_8a91f2c\nTraceback (most recent call last):\n  File \"/srv/checkout-service/src/api/invoice.py\", line 87, in generate_invoice\n    line_items = build_line_items(order, tax_strategy=tenant.tax_strategy)\n  File \"/srv/checkout-service/src/billing/lineitems.py\", line 142, in build_line_items\n    rate = resolve_tax_rate(order.region, strategy=tax_strategy)\n  File \"/srv/checkout-service/src/billing/tax.py\", line 64, in resolve_tax_rate\n    rate_table = TAX_RATES_BY_REGION[region.upper()]\nKeyError: 'CA-QC'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/srv/checkout-service/src/api/invoice.py\", line 92, in generate_invoice\n    raise InvoiceGenerationError(\"could not resolve tax rate\") from exc\n  File \"/usr/lib/python3.11/contextlib.py\", line 137, in __enter__\n    return next(self.gen)\n  File \"/srv/checkout-service/src/obs/tracing.py\", line 41, in trace_span\n    yield span\nsrc.api.invoice.InvoiceGenerationError: could not resolve tax rate\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py\", line 273, in app\n    raw_response = await run_endpoint_function(\n  File \"/srv/checkout-service/.venv/lib/python3.11/site-packages/fastapi/routing.py\", line 192, in run_endpoint_function\n    return await dependant.call(**values)\n  File \"/srv/checkout-service/src/api/invoice.py\", line 53, in post_invoice\n    invoice = generate_invoice(order_id=payload.order_id, tenant=current_tenant)\n  File \"/srv/checkout-service/src/api/invoice.py\", line 95, in generate_invoice\n    raise HTTPException(status_code=500, detail=\"invoice generation failed\") from exc\nfastapi.exceptions.HTTPException: 500: invoice generation failed\n[request body]\n  order_id: ord_3c9f1\n  tenant_id: ten_clockless\n[request headers]\n  x-request-id: req_8a91f2c\n  user-agent: clockless-billing-cron/0.6.2 (python-requests/2.32.0)\n","sourceFile":"input.txt","sizeBytes":2064,"format":"stack-trace","causeChainDepth":3};</script>
+</div>
+
 <script>
 (function(){
-  const $ = sel => document.querySelector(sel);
-  const $$ = sel => Array.from(document.querySelectorAll(sel));
-
-  function escHtml(s){return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-  function escapeRegex(s){return String(s).replace(/[.*+?^()|[\]\\{}]/g, "\\$&")}
-  function highlight(s, q){
-    if (!q) return escHtml(s);
-    const re = new RegExp("(" + escapeRegex(q) + ")", "ig");
-    return escHtml(s).replace(re, "<mark>$1</mark>");
+  // ── helpers ──────────────────────────────────────────────────────────
+  function esc(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
-
-  /* ---------- search across raw drill-down ---------- */
-  const rawSearch = $("#raw-search");
-  if (rawSearch) {
-    rawSearch.addEventListener("input", () => {
-      const q = rawSearch.value.trim();
-      const target = $("#raw-content");
-      if (!target) return;
-      const lines = target.querySelectorAll("[data-text]");
-      let firstHit = null;
-      lines.forEach(el => {
-        const text = el.getAttribute("data-text") || "";
-        if (!q) {
-          el.innerHTML = el.getAttribute("data-original") || escHtml(text);
-          el.style.display = "";
-        } else {
-          if (text.toLowerCase().includes(q.toLowerCase())) {
-            el.innerHTML = highlight(text, q);
-            el.style.display = "";
-            if (!firstHit) firstHit = el;
-          } else {
-            el.style.display = "none";
-          }
-        }
-      });
-      const summary = $("#raw-section");
-      if (summary && q) summary.open = true;
-      if (firstHit) firstHit.scrollIntoView({block: "center", behavior: "smooth"});
-    });
+  function shortFile(f){
+    if(!f)return'unknown';
+    // strip /srv/checkout-service/ prefix for display
+    return f.replace('/srv/checkout-service/','').replace(/^\/srv\//,'');
   }
+  function isAppFile(f){return f&&f.includes('/srv/checkout-service/src/')&&!f.includes('/site-packages/')&&!f.includes('/.venv/')}
+  function basename(f){return(f||'').split('/').pop()}
 
-  /* ---------- vendor frame fold (stack-trace) ---------- */
-  $$(".fold-toggle").forEach(t => {
-    t.addEventListener("click", () => {
-      const list = t.closest("ul").querySelectorAll("li.frame.vendor");
-      const folded = t.getAttribute("data-folded") === "1";
-      list.forEach(el => { el.style.display = folded ? "" : "none"; });
-      t.setAttribute("data-folded", folded ? "0" : "1");
-      t.textContent = folded ? "Hide framework / vendor frames" : ("Show " + list.length + " framework / vendor frames");
-    });
-    // start folded
-    const list = t.closest("ul").querySelectorAll("li.frame.vendor");
-    list.forEach(el => { el.style.display = "none"; });
+  // ── gather app frames across all causes ──────────────────────────────
+  const allFrames=[];
+  const seenIds=new Set();
+  DATA.causes.forEach(c=>{
+    (c.frames||[]).forEach(fr=>{if(!seenIds.has(fr.id)){seenIds.add(fr.id);allFrames.push({...fr,causeId:c.id,causeType:c.type})}});
+  });
+  const appFrames=allFrames.filter(f=>f.isApp);
+  const vendorFrames=allFrames.filter(f=>f.isVendor);
+
+  // ── FINDING BAR ──────────────────────────────────────────────────────
+  document.getElementById('exc-type-hero').textContent=DATA.exception.type;
+  document.getElementById('exc-msg-hero').textContent="'"+DATA.exception.message.replace(/^'+|'+$/g,'')+"'";
+  const meta=document.getElementById('finding-meta');
+  meta.innerHTML=`
+    <span class="chip chip-error">ERROR</span>
+    <span class="chip chip-python">Python</span>
+    <span class="chip chip-info">${DATA.causeChainDepth} causes</span>
+    <span class="chip chip-app">${DATA.appFrameCount} app frames</span>
+    <span class="chip chip-vendor">${DATA.vendorFrameCount} vendor frames</span>
+    <span class="chip chip-warn">500 HTTP</span>
+  `;
+
+  // ── STATS ─────────────────────────────────────────────────────────────
+  const statsRow=document.getElementById('stats-row');
+  const stats=[
+    {val:DATA.frameCount,label:'Total frames'},
+    {val:DATA.appFrameCount,label:'App frames'},
+    {val:DATA.vendorFrameCount,label:'Vendor frames'},
+    {val:DATA.causeChainDepth,label:'Cause chain depth'},
+    {val:DATA.exception.type,label:'Exception type',mono:true,small:true},
+    {val:(DATA.meta&&DATA.meta.sourceFile)||DATA.sourceFile||'input.txt',label:'Source file',mono:true,small:true},
+  ];
+  statsRow.innerHTML=stats.map(s=>`
+    <div class="stat-card">
+      <div class="stat-val" style="${s.small?'font-size:0.9rem;word-break:break-all':''}${s.mono?';font-family:var(--font-mono)':''}">${esc(String(s.val))}</div>
+      <div class="stat-label">${esc(s.label)}</div>
+    </div>
+  `).join('');
+
+  // ── CAUSE CHAIN ──────────────────────────────────────────────────────
+  const causeChainEl=document.getElementById('cause-chain');
+  DATA.causes.forEach((c,i)=>{
+    const isOrigin=i===0;
+    const topFrame=c.frames&&c.frames[0];
+    let html=`<div class="cause-block${isOrigin?' origin':''}">
+      <div class="cause-header">
+        ${isOrigin?'<span class="cause-origin-badge">Origin</span>':''}
+        <span class="cause-type">${esc(c.type)}</span>
+        <span class="chip ${isOrigin?'chip-error':'chip-warn'}">cause ${i+1}</span>
+        <span class="cause-depth">depth ${i+1}/${DATA.causeChainDepth}</span>
+      </div>
+      <div class="cause-msg">"${esc(c.message)}"</div>
+      ${topFrame?`<div style="margin-top:var(--space-sm);font-family:var(--font-mono);font-size:0.75rem;color:var(--fg-muted)">
+        top frame: <span style="color:${topFrame.isApp?'var(--green)':'var(--fg-muted)'}">${esc(shortFile(topFrame.file))}:${topFrame.line}</span> → <span style="color:var(--fg-2)">${esc(topFrame.function)}</span>
+      </div>`:''}
+    </div>`;
+    causeChainEl.insertAdjacentHTML('beforeend',html);
+    if(i<DATA.causes.length-1){
+      causeChainEl.insertAdjacentHTML('beforeend','<div class="cause-connector"></div>');
+    }
   });
 
-  /* ---------- copy summary ---------- */
-  const btn = $("#copy-md-btn");
-  if (btn) {
-    btn.addEventListener("click", async () => {
-      const md = window.__MARKDOWN_SUMMARY__ || "";
-      try {
-        await navigator.clipboard.writeText(md);
-        btn.textContent = "Copied!";
-        setTimeout(() => { btn.textContent = "Copy summary"; }, 1500);
-      } catch {
-        window.prompt("Copy this Markdown:", md);
-      }
+  // ── RISK HOTSPOTS ─────────────────────────────────────────────────────
+  // Top app frames across all causes, de-duped by file:line
+  const seenHotspot=new Set();
+  const hotspots=[];
+  DATA.causes.forEach(c=>{
+    (c.frames||[]).forEach(fr=>{
+      const key=`${fr.file}:${fr.line}`;
+      if(fr.isApp&&!seenHotspot.has(key)){seenHotspot.add(key);hotspots.push({fr,cause:c})}
     });
+  });
+  const topHotspots=hotspots.slice(0,4);
+  const hotspotList=document.getElementById('hotspot-list');
+  const hotspotWhys={
+    'resolve_tax_rate':'Deepest app frame in the origin cause — performs a dict lookup on <code class="check-code">TAX_RATES_BY_REGION</code> with an unvalidated region key; missing key triggers the <code class="check-code">KeyError</code>.',
+    'build_line_items':'Mid-chain app frame — passes <code class="check-code">order.region</code> directly to <code class="check-code">resolve_tax_rate</code> without normalising or checking validity first.',
+    'generate_invoice':'Appears in all three causes; wraps the billing logic and re-raises twice, obscuring the origin. The error handling path may mask the original region value.',
+    'post_invoice':'Entry point from the FastAPI router — the region value from the request payload reaches the billing stack unchecked here.',
+    'trace_span':'Appears in the second cause chain; the tracing context manager intercepts the exception during re-raise, which may hide the original stack in some error trackers.',
+  };
+  topHotspots.forEach((h,i)=>{
+    const why=hotspotWhys[h.fr.function]||'App frame in the call path — worth inspecting for missing input validation or error handling.';
+    hotspotList.insertAdjacentHTML('beforeend',`
+      <div class="hotspot-card" onclick="jumpToFrame('${esc(h.fr.id)}')">
+        <div class="hotspot-header">
+          <div class="hotspot-rank rank-${i+1}">${i+1}</div>
+          <div>
+            <div class="hotspot-path">${esc(shortFile(h.fr.file))}<span class="line-ref">:${h.fr.line}</span></div>
+            <div style="font-family:var(--font-mono);font-size:0.78rem;color:var(--fg-2);margin-top:2px">${esc(h.fr.function)}</div>
+          </div>
+        </div>
+        <div class="hotspot-why">${why}</div>
+        <div class="hotspot-chips">
+          <span class="chip chip-hypo">Hypothesis</span>
+          <span class="chip chip-app">App frame</span>
+          <span class="chip ${i===0?'chip-error':'chip-warn'}">${esc(h.cause.type.split('.').pop())}</span>
+        </div>
+      </div>
+    `);
+  });
+
+  // ── HYPOTHESES ────────────────────────────────────────────────────────
+  const hypoList=document.getElementById('hypo-list');
+  const hypos=[
+    {
+      title:'Missing or unmapped region key in TAX_RATES_BY_REGION',
+      body:'The region code <code class="check-code">\'CA-QC\'</code> (Québec, Canada) appears to be absent from the <code class="check-code">TAX_RATES_BY_REGION</code> dictionary in <code class="check-code">billing/tax.py</code>. The lookup at line 64 uses a bare dict subscript (<code class="check-code">TAX_RATES_BY_REGION[region.upper()]</code>) rather than <code class="check-code">.get()</code>, so an unrecognised region raises <code class="check-code">KeyError</code> instead of returning a default or raising a domain error.',
+      distinguish:'If adding <code class="check-code">\'CA-QC\'</code> to the tax rate table (or switching to <code class="check-code">.get(key, fallback)</code>) resolves the error when replayed locally with <code class="check-code">tenant_id=ten_clockless</code>, this is likely the root cause. If <code class="check-code">CA-QC</code> is already present, the issue may be normalisation — check whether <code class="check-code">region.upper()</code> strips hyphens or spaces differently in some tenant configs.',
+      frameIds:['fr_0003'],
+    },
+    {
+      title:'order.region arrives already normalised to a value the tax table does not cover',
+      body:'The <code class="check-code">order.region</code> field may be set at the API boundary (the request shows <code class="check-code">tenant_id: ten_clockless</code>) and could contain a region code in a format the tax table was not designed for (e.g. <code class="check-code">CA-QC</code> vs <code class="check-code">CA_QC</code> or <code class="check-code">QC</code>). <code class="check-code">build_line_items</code> at line 142 passes <code class="check-code">order.region</code> directly without normalisation.',
+      distinguish:'Check whether the tenant\'s <code class="check-code">tax_strategy</code> config specifies a region format different from the table\'s keys. Reproduce locally with both <code class="check-code">CA-QC</code> and <code class="check-code">CA_QC</code> to see which raises.',
+      frameIds:['fr_0002','fr_0003'],
+    },
+    {
+      title:'No graceful fallback in resolve_tax_rate for unknown regions',
+      body:'Even if the region key is occasionally missing, the function at <code class="check-code">billing/tax.py:64</code> does not use <code class="check-code">.get()</code>, <code class="check-code">setdefault()</code>, or explicit key existence checks. A new tenant or a newly-supported region could trigger this path on any request until the table is updated. The <code class="check-code">InvoiceGenerationError</code> wrapper in cause 2 indicates the author anticipated some failure here, but the original <code class="check-code">KeyError</code> is still allowed to propagate.',
+      distinguish:'This may co-exist with hypothesis 1 rather than replacing it. The fix would be twofold: add the missing key, and harden the lookup.',
+      frameIds:['fr_0001','fr_0004'],
+    },
+  ];
+  hypos.forEach((h,i)=>{
+    hypoList.insertAdjacentHTML('beforeend',`
+      <div class="hypo-card">
+        <div class="hypo-header">
+          <span class="chip chip-hypo">Hypothesis ${i+1}</span>
+          <span class="hypo-title">${h.title}</span>
+        </div>
+        <div class="hypo-body">${h.body}</div>
+        <div class="hypo-distinguish">🔍 <strong>To distinguish:</strong> ${h.distinguish}</div>
+        <div class="hypo-evidence">
+          ${h.frameIds.map(id=>`<button class="frame-ref-btn" onclick="jumpToFrame('${esc(id)}')" title="Jump to frame">${esc(id)}</button>`).join('')}
+        </div>
+      </div>
+    `);
+  });
+
+  // ── REVIEW CHECKLIST ──────────────────────────────────────────────────
+  const checklistEl=document.getElementById('checklist');
+  const items=[
+    'Reproduce locally: replay <code class="check-code">POST /invoice</code> with <code class="check-code">order_id=ord_3c9f1</code>, <code class="check-code">tenant_id=ten_clockless</code>, and <code class="check-code">order.region=\'CA-QC\'</code>.',
+    'Inspect <code class="check-code">billing/tax.py:64</code> — confirm whether <code class="check-code">\'CA-QC\'</code> exists as a key in <code class="check-code">TAX_RATES_BY_REGION</code>.',
+    'Switch the dict subscript at <code class="check-code">tax.py:64</code> to <code class="check-code">.get(region.upper())</code> with an explicit missing-region error or a default rate, so unknown regions raise a domain error rather than <code class="check-code">KeyError</code>.',
+    'Check <code class="check-code">build_line_items</code> at line 142 — determine whether <code class="check-code">order.region</code> should be validated or normalised before being passed to <code class="check-code">resolve_tax_rate</code>.',
+    'Verify <code class="check-code">generate_invoice</code>\'s exception-wrapping logic (lines 87–95) — confirm that the original <code class="check-code">KeyError</code> detail (including the region key) is preserved in the <code class="check-code">InvoiceGenerationError</code> for easier future triage.',
+    'Search the codebase for other callers of <code class="check-code">resolve_tax_rate</code> — confirm none silently swallow the <code class="check-code">KeyError</code> instead of surfacing it.',
+    'Audit the full set of region codes the tenant <code class="check-code">ten_clockless</code> may submit, and cross-reference with <code class="check-code">TAX_RATES_BY_REGION</code> to find any other missing entries.',
+    'Add a unit test for <code class="check-code">resolve_tax_rate</code> with an unrecognised region key; confirm it fails before the fix and passes after.',
+    'Check whether the tracing context manager in <code class="check-code">obs/tracing.py:41</code> can swallow exception metadata — ensure the span records the original <code class="check-code">KeyError</code> message before re-raising.',
+    'Confirm the <code class="check-code">request_id=req_8a91f2c</code> log entry is searchable in the production log aggregator and that the full trace is captured there.',
+  ];
+  items.forEach(txt=>{
+    const div=document.createElement('div');
+    div.className='checklist-item';
+    div.innerHTML=`<div class="check-box"></div><div class="check-text">${txt}</div>`;
+    div.addEventListener('click',()=>{div.classList.toggle('checked')});
+    checklistEl.appendChild(div);
+  });
+
+  // ── FRAME STACK ───────────────────────────────────────────────────────
+  const frameStackEl=document.getElementById('frame-stack');
+  DATA.causes.forEach((cause,ci)=>{
+    const causeDiv=document.createElement('div');
+    causeDiv.className='frame-stack-cause';
+    causeDiv.innerHTML=`<div class="frame-stack-cause-header">
+      <span>Cause ${ci+1}</span>
+      <span class="cause-exception">${esc(cause.type)}</span>
+      <span style="color:var(--fg-muted)">"${esc(cause.message)}"</span>
+    </div>`;
+    // Group frames: expand app, fold consecutive vendor
+    const frames=cause.frames||[];
+    let i=0;
+    while(i<frames.length){
+      const fr=frames[i];
+      if(fr.isVendor){
+        // collect run of vendor frames
+        let j=i;
+        while(j<frames.length&&frames[j].isVendor)j++;
+        const count=j-i;
+        const vendorGroup=frames.slice(i,j);
+        const foldId=`vfold-${cause.id}-${i}`;
+        const foldEl=document.createElement('div');
+        foldEl.innerHTML=`
+          <div class="vendor-fold" id="${foldId}-toggle" data-fold="${foldId}">
+            <span class="vendor-fold-icon">▶</span>
+            <span>${count} vendor frame${count>1?'s':''} (stdlib / site-packages)</span>
+            <span class="chip chip-vendor" style="margin-left:auto">collapsed</span>
+          </div>
+          <div id="${foldId}-body" style="display:none">${vendorGroup.map((vf,vi)=>renderFrame(vf,i+vi+1,false)).join('')}</div>
+        `;
+        causeDiv.appendChild(foldEl);
+        foldEl.querySelector(`#${foldId}-toggle`).addEventListener('click',function(){
+          const body=document.getElementById(`${foldId}-body`);
+          const open=body.style.display==='block';
+          body.style.display=open?'none':'block';
+          this.classList.toggle('open',!open);
+          this.querySelector('.vendor-fold-icon').textContent=open?'▶':'▼';
+          this.querySelector('.chip-vendor').textContent=open?'collapsed':'expanded';
+        });
+        i=j;
+      } else {
+        causeDiv.insertAdjacentHTML('beforeend',renderFrame(fr,i+1,true));
+        i++;
+      }
+    }
+    frameStackEl.appendChild(causeDiv);
+  });
+
+  function renderFrame(fr,idx,highlight){
+    const isApp=fr.isApp;
+    const fileShort=shortFile(fr.file);
+    return `<div class="frame-row ${isApp?'app-frame':'vendor-frame'}" id="frame-${esc(fr.id)}" data-frameid="${esc(fr.id)}">
+      <div class="frame-num">${idx}</div>
+      <div class="frame-main">
+        <div class="frame-func">${esc(fr.function)}</div>
+        <div class="frame-file">${esc(fileShort)}<span class="frame-line">:${fr.line}</span></div>
+      </div>
+      ${isApp?'<span class="chip chip-app" style="flex-shrink:0">app</span>':'<span class="chip chip-vendor" style="flex-shrink:0">vendor</span>'}
+    </div>`;
   }
+
+  window.jumpToFrame=function(frameId){
+    const el=document.getElementById(`frame-${frameId}`);
+    if(!el)return;
+    el.scrollIntoView({behavior:'smooth',block:'center'});
+    el.style.transition='background 200ms';
+    el.style.background='rgba(160,59,0,0.18)';
+    setTimeout(()=>{el.style.background='';},1200);
+  };
+
+  // ── RAW TRACE ─────────────────────────────────────────────────────────
+  const rawText=DATA.rawText||DATA.rawTextPreview||'';
+  document.getElementById('raw-title').textContent=(DATA.meta&&DATA.meta.sourceFile)||DATA.sourceFile||'input.txt';
+
+  const rawLines=rawText.split('\n');
+  const rawLinesEl=document.getElementById('raw-lines');
+
+  function classifyLine(line){
+    if(/^\s*File "/.test(line)){
+      if(line.includes('/srv/checkout-service/src/')&&!line.includes('/site-packages/')&&!line.includes('/.venv/'))return'is-app-file';
+      return'is-file';
+    }
+    if(/^(KeyError|TypeError|ValueError|RuntimeError|AttributeError|src\.|fastapi\.|Exception)/.test(line.trim()))return'is-exception';
+    if(/^(During handling|Traceback)/.test(line.trim()))return'is-exception';
+    return'';
+  }
+
+  function renderRawLines(search){
+    const q=search.trim().toLowerCase();
+    let matchCount=0;
+    const html=rawLines.map((line,i)=>{
+      const cls=classifyLine(line);
+      const matched=q&&line.toLowerCase().includes(q);
+      if(matched)matchCount++;
+      let display=esc(line);
+      if(q&&matched){
+        display=display.replace(new RegExp(esc(q).replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'),m=>`<span class="search-hl">${m}</span>`);
+      }
+      return `<div class="raw-line${matched?' match':''}"><span class="line-num">${i+1}</span><span class="raw-line-text ${cls}">${display}</span></div>`;
+    }).join('');
+    rawLinesEl.innerHTML=html;
+    const countEl=document.getElementById('search-count');
+    if(q){countEl.textContent=`${matchCount} match${matchCount!==1?'es':''}`;}
+    else{countEl.textContent=`${rawLines.length} lines`;}
+  }
+
+  const rawToggleBtn=document.getElementById('raw-toggle-btn');
+  const rawBody=document.getElementById('raw-body');
+  let rawOpen=false;
+  rawToggleBtn.addEventListener('click',()=>{
+    rawOpen=!rawOpen;
+    rawBody.classList.toggle('open',rawOpen);
+    rawToggleBtn.textContent=rawOpen?'▼ Collapse raw trace':'▶ Expand raw trace';
+    if(rawOpen&&rawLinesEl.innerHTML==='')renderRawLines('');
+  });
+
+  document.getElementById('trace-search').addEventListener('input',function(){
+    renderRawLines(this.value);
+  });
+
+  // Cmd+F / Ctrl+F capture
+  document.addEventListener('keydown',e=>{
+    if((e.metaKey||e.ctrlKey)&&e.key==='f'){
+      if(!rawOpen){
+        rawOpen=true;rawBody.classList.add('open');
+        rawToggleBtn.textContent='▼ Collapse raw trace';
+        if(rawLinesEl.innerHTML==='')renderRawLines('');
+      }
+      e.preventDefault();
+      document.getElementById('trace-search').focus();
+    }
+  });
+
+  // Copy trace
+  document.getElementById('copy-trace-btn').addEventListener('click',function(){
+    navigator.clipboard&&navigator.clipboard.writeText(rawText).then(()=>{
+      this.textContent='✓ Copied';this.classList.add('copied');
+      setTimeout(()=>{this.textContent='⎘ Copy trace';this.classList.remove('copied');},2000);
+    });
+  });
+
+  // ── COPY SUMMARY ──────────────────────────────────────────────────────
+  document.getElementById('copy-summary-btn').addEventListener('click',function(){
+    const summary=buildMarkdownSummary();
+    navigator.clipboard&&navigator.clipboard.writeText(summary).then(()=>{
+      this.textContent='✓ Copied!';this.classList.add('copied');
+      setTimeout(()=>{this.textContent='⎘ Copy summary';this.classList.remove('copied');},2500);
+    });
+  });
+
+  function buildMarkdownSummary(){
+    const d=DATA;
+    const ts=new Date().toISOString();
+    let md=`## 🔥 Production stack trace — invoice tax-rate KeyError\n\n`;
+    md+=`**Exception:** \`${d.exception.type}: ${d.exception.message}\`  \n`;
+    md+=`**Language:** Python  \n`;
+    md+=`**Cause chain depth:** ${d.causeChainDepth}  \n`;
+    md+=`**Frames:** ${d.frameCount} total — ${d.appFrameCount} app, ${d.vendorFrameCount} vendor  \n`;
+    md+=`**Source:** \`${(d.meta&&d.meta.sourceFile)||d.sourceFile||'input.txt'}\`  \n\n`;
+    md+=`### Cause chain\n\n`;
+    d.causes.forEach((c,i)=>{
+      md+=`${i+1}. \`${c.type}\`: "${c.message}"`;
+      if(i===0)md+=' ← **origin**';
+      md+='\n';
+    });
+    md+=`\n### Risk hotspots _(hypothesis)_\n\n`;
+    topHotspots.forEach((h,i)=>{
+      md+=`${i+1}. \`${shortFile(h.fr.file)}:${h.fr.line}\` → \`${h.fr.function}\` — `;
+      const why=hotspotWhys[h.fr.function]||'App frame in the call path.';
+      md+=why.replace(/<[^>]+>/g,'').replace(/&#39;/g,"'").replace(/&amp;/g,'&')+'\n';
+    });
+    md+=`\n### Suspected cause _(hypothesis)_\n\n`;
+    md+=`The region key \`'CA-QC'\` appears to be absent from \`TAX_RATES_BY_REGION\` in \`billing/tax.py\`. The bare dict subscript at line 64 raises \`KeyError\` instead of returning a default or domain error. Switching to \`.get()\` with an explicit missing-region error would harden this path.\n\n`;
+    md+=`**Top verification step:** Inspect \`billing/tax.py:64\` — check if \`'CA-QC'\` is a key in \`TAX_RATES_BY_REGION\`, and reproduce locally with \`order.region='CA-QC'\`.\n\n`;
+    md+=`### Review checklist\n\n`;
+    items.forEach(item=>{
+      md+=`- [ ] ${item.replace(/<[^>]+>/g,'').replace(/&#39;/g,"'").replace(/&amp;/g,'&')}\n`;
+    });
+    md+=`\n---\n_Analysis generated ${ts} — hypothesis from stack frames; verify against runtime before acting._\n`;
+    return md;
+  }
+
+  // ── staged load animation ─────────────────────────────────────────────
+  document.querySelectorAll('.section').forEach((s,i)=>{
+    s.style.animationDelay=`${60+i*60}ms`;
+  });
 })();
 </script>
-<script>window.__MARKDOWN_SUMMARY__ = "# Stack trace — KeyError\n\n> 'CA-QC'\n\n- Language: python\n- Frames: 10 (7 app, 3 vendor)\n- Cause chain depth: 3\n\n## Topmost app frame (hypothesis)\n- `generate_invoice` at `/srv/checkout-service/src/api/invoice.py:87`\n\n## Suspected cause (hypothesis)\n1. The exception (KeyError: 'CA-QC') was raised inside generate_invoice because the input shape it assumed at /srv/checkout-service/src/api/invoice.py:87 did not match what the caller provided.\n2. The wrapper exception (KeyError) is masking a deeper failure: fastapi.exceptions.HTTPException — that is the real origin and should be addressed first.\n\n## Review checklist\n1. Open /srv/checkout-service/src/api/invoice.py:87 and read generate_invoice in context — confirm what input shape it assumes vs what may have been passed.\n2. Reproduce locally with inputs that mirror the production request that triggered this trace (use the request body / params from the log line preceding the trace, if available).\n3. Add an early-return assertion or type-guard in generate_invoice for the input shape that triggered this exception.\n4. The deepest cause in the chain is fastapi.exceptions.HTTPException — investigate that one before the wrapper exception(s).\n5. Search your error tracker for KeyError in the last 24h to confirm whether this is a one-off or part of a pattern.\n6. Verify the runtime / framework version in the failing environment matches the version this code was tested against.\n\n_Hypothesis from a stack trace — not a verdict. Reproduce against the runtime before acting._";</script>
 </body>
 </html>

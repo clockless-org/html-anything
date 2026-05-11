@@ -1,229 +1,912 @@
 <!doctype html>
-<html lang="en" data-ha-style="paper">
+<html lang="en" data-ha-style="document">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Jordan A. Sample — synthetic care record (Q1 2026)</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jordan A. Sample — Synthetic Care Record (Q1 2026)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>const DATA = {"format":"medical-visit","subtype":"medical-visit","events":[{"id":"evt_001","kind":"visit","date":"2026-01-08","dateText":"2026-01-08","title":"Office visit","party":"Dr. Avery Lin","detail":"Annual physical and diabetes follow-up","source":{"line":null,"quote":"Continue metformin 500 mg twice daily. Order fasting lipid panel and"}},{"id":"evt_002","kind":"visit","date":"2026-02-12","dateText":"2026-02-12","title":"Telehealth visit","party":"Dr. Avery Lin","detail":"Lab follow-up and headache check","source":{"line":null,"quote":"Increase atorvastatin to 40 mg nightly. Continue metformin. Recheck"}},{"id":"evt_003","kind":"visit","date":"2026-04-12","dateText":"2026-04-12","title":"Office visit","party":"Dr. Sam Reyes, NP (covering for Dr. Lin)","detail":"Recheck after lipid + A1c follow-up labs","source":{"line":null,"quote":"Continue current regimen. Add daily walks (>30 min/day, 5 days/week)"}}],"parties":[{"name":"Dr. Avery Lin","role":"Provider","count":2},{"name":"Dr. Sam Reyes, NP (covering for Dr. Lin)","role":"Provider","count":1},{"name":"Jordan A. Sample (SYNTHETIC — DOB 1979-04-22, MRN 000-DEMO-04)","role":"Patient","count":3}],"documents":[{"id":"doc_001","name":"Form HC-2026-PT-INTAKE","kind":"form","date":null,"missing":false},{"id":"doc_002","name":"Lab order 8841-A","kind":"lab","date":null,"missing":false}],"missingItems":[{"id":"missing_followup","label":"1 encounter have no follow-up date listed","detail":"2026-04-12"}],"openQuestions":[{"id":"q_followup_2","question":"Ask the clinic whether a follow-up date was set after the 2026-04-12 office visit — none is recorded in this record.","anchor":"enc_003"},{"id":"q_med_review","question":"Ask whether the medication list still reflects what is currently being taken — 6 medications are recorded across these visits.","anchor":"med_001"}],"summary":{"rowCount":3,"period":"2026-01-08 → 2026-04-12","durationLabel":"94 days","headlineCount":[{"label":"encounters","value":3},{"label":"providers","value":2},{"label":"medications","value":6},{"label":"open questions","value":2}]},"encounters":[{"id":"enc_001","date":"2026-01-08","dateText":"2026-01-08","encounterType":"Office visit","provider":"Dr. Avery Lin","reason":"Annual physical and diabetes follow-up","vitals":[{"label":"BP","value":"138/86 mmHg"},{"label":"HR","value":"78 bpm"},{"label":"Weight","value":"198 lb"},{"label":"Height","value":"5'10\""},{"label":"Temp","value":"98.4 F"},{"label":"BMI","value":"28.4"}],"plan":"Continue metformin 500 mg twice daily. Order fasting lipid panel and","followUp":"3 months"},{"id":"enc_002","date":"2026-02-12","dateText":"2026-02-12","encounterType":"Telehealth visit","provider":"Dr. Avery Lin","reason":"Lab follow-up and headache check","vitals":[],"plan":"Increase atorvastatin to 40 mg nightly. Continue metformin. Recheck","followUp":"8 weeks"},{"id":"enc_003","date":"2026-04-12","dateText":"2026-04-12","encounterType":"Office visit","provider":"Dr. Sam Reyes, NP (covering for Dr. Lin)","reason":"Recheck after lipid + A1c follow-up labs","vitals":[{"label":"BP","value":"132/82 mmHg"},{"label":"HR","value":"74 bpm"},{"label":"Weight","value":"194 lb"}],"plan":"Continue current regimen. Add daily walks (>30 min/day, 5 days/week)","followUp":null}],"medications":[{"id":"med_001","name":"Metformin 500 mg","dose":"twice daily with meals (continued from prior)","instructions":null,"prescribedDate":null},{"id":"med_002","name":"Atorvastatin 20 mg","dose":"once daily at bedtime (continued from prior)","instructions":null,"prescribedDate":null},{"id":"med_003","name":"Atorvastatin 40 mg","dose":"once daily at bedtime (dose increased today)","instructions":null,"prescribedDate":null},{"id":"med_004","name":"Metformin 500 mg","dose":"twice daily with meals (continued)","instructions":null,"prescribedDate":null},{"id":"med_005","name":"Atorvastatin 40 mg","dose":"once daily at bedtime (continued)","instructions":null,"prescribedDate":null},{"id":"med_006","name":"Lisinopril 10 mg","dose":"once daily (NEW","instructions":"started today, for BP)","prescribedDate":null}],"rawText":"# After-Visit Summary — Riverbend Family Medicine\n\nPatient: Jordan A. Sample (SYNTHETIC — DOB 1979-04-22, MRN 000-DEMO-04)\nPrimary care: Dr. Avery Lin, MD — Riverbend Family Medicine, Demo City\nPeriod covered: 2026-01-08 to 2026-04-12\nSource: synthetic record generated for the html-anything demo pack — no\nreal patient, provider, or visit. Do not use in clinical care.\n\n## 2026-01-08 — Office visit (annual physical)\n\nProvider: Dr. Avery Lin\nReason for visit: Annual physical and diabetes follow-up\nEncounter type: Office visit\n\n### Vitals\n\n- BP: 138/86 mmHg\n- HR: 78 bpm\n- Weight: 198 lb\n- Height: 5'10\"\n- Temp: 98.4 F\n- BMI: 28.4\n\n### History of present illness (HPI)\n\nPatient reports occasional morning headaches over the past three months,\nwhich they attribute to \"not sleeping great\". No chest pain. No\nshortness of breath. Sleeps 5–6 hours/night per patient report.\n\n### Plan of care\n\nContinue metformin 500 mg twice daily. Order fasting lipid panel and\nA1c. Discussed sleep hygiene. Patient declined referral to sleep\nspecialist at this time. Reassess BP at next visit; if persistently\nelevated, will discuss adding antihypertensive.\n\nFollow-up: 3 months\n\n### Medications\n\n- Metformin 500 mg — twice daily with meals (continued from prior)\n- Atorvastatin 20 mg — once daily at bedtime (continued from prior)\n\n## 2026-02-12 — Telehealth visit\n\nProvider: Dr. Avery Lin\nReason for visit: Lab follow-up and headache check\nEncounter type: Telehealth visit\n\n### Vitals\n\n- BP (home cuff, patient-reported): 134/84 mmHg\n\n### Notes\n\nReviewed lab results from 2026-01-15 draw. LDL value of 162 mg/dL is\noutside the reference range printed on the lab report (range listed:\n<100 mg/dL). A1c at 7.4% is outside the reference range printed on the\nlab report (range listed: 4.0–5.7%, target <7.0% per the lab note).\nHeadaches reported as improved since prior visit. Patient sleeping ~7\nhours/night.\n\n### Plan of care\n\nIncrease atorvastatin to 40 mg nightly. Continue metformin. Recheck\nlipid panel and A1c in 8 weeks. Continue home BP monitoring; bring log\nto next visit.\n\nFollow-up: 8 weeks\n\n### Medications\n\n- Atorvastatin 40 mg — once daily at bedtime (dose increased today)\n\n## 2026-04-12 — Office visit (lab follow-up)\n\nProvider: Dr. Sam Reyes, NP (covering for Dr. Lin)\nReason for visit: Recheck after lipid + A1c follow-up labs\nEncounter type: Office visit\n\n### Vitals\n\n- BP: 132/82 mmHg\n- HR: 74 bpm\n- Weight: 194 lb\n\n### Notes\n\nA1c value of 7.1% on 2026-04-08 panel — outside the reference range\nprinted on the report (4.0–5.7%). LDL value of 118 mg/dL on 2026-04-08\npanel — outside the reference range printed on the report (<100\nmg/dL). Both values lower than prior draw. Patient reports tolerating\natorvastatin 40 mg without side effects. No headaches.\n\n### Plan of care\n\nContinue current regimen. Add daily walks (>30 min/day, 5 days/week)\nto plan. Recheck A1c in 12 weeks. Patient declined nutrition referral\nagain; agreed to revisit at next visit.\n\n### Medications\n\n- Metformin 500 mg — twice daily with meals (continued)\n- Atorvastatin 40 mg — once daily at bedtime (continued)\n- Lisinopril 10 mg — once daily (NEW — started today, for BP)\n\n### Follow-up\n\nRecheck labs in 12 weeks; office visit in 12 weeks if BP at target,\nsooner if patient notes side effects from lisinopril.\n\n---\n\n## Notes for the patient\n\n- Bring the home BP cuff log to the next visit.\n- The clinic mailed Form HC-2026-PT-INTAKE for the next annual update —\n  please complete before the next visit.\n- Lab order 8841-A was placed on 2026-04-12 for the next A1c + lipid\n  panel — schedule the draw 12 weeks from today.\n\n> *This is a synthetic record generated for the html-anything demo\n> pack. Patient name, MRN, providers, clinic, and clinical details are\n> fabricated. Do not use this file as a template for storing real\n> records — share only redacted exports.*\n"};</script>
+<style>
 :root {
-  --primary:#a03b00; --primary-container:#c94c00; --primary-fixed:#ffdbcd;
-  --primary-fixed-dim:#ffb597; --on-primary:#fff;
-  --bg:#fff8f6; --surface:#fff8f6; --surface-container-lowest:#fff;
-  --surface-container-low:#fbf2ef; --surface-container:#f5ece9; --surface-container-high:#efe6e3;
-  --fg-1:#1e1b19; --fg-2:#594138; --fg-muted:#8d7166;
-  --border:rgba(0,0,0,.06); --border-strong:rgba(0,0,0,.12); --outline-variant:#e1bfb2;
-  --green:#10b981; --blue:#3b82f6; --yellow:#f59e0b; --red:#ef4444;
-  --font-headline:'Space Grotesk',ui-sans-serif,system-ui,sans-serif;
-  --font-body:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;
-  --font-mono:'SF Mono','Menlo',ui-monospace,monospace;
-  --space-xs:4px; --space-sm:8px; --space-md:12px; --space-lg:16px;
-  --space-xl:20px; --space-2xl:24px; --space-3xl:32px; --space-4xl:48px; --space-5xl:64px;
-  --radius-sm:8px; --radius-md:12px; --radius-lg:16px; --radius-xl:20px; --radius-pill:9999px;
-  --shadow-sm:0 1px 2px rgba(30,27,25,.04); --shadow-md:0 4px 12px rgba(30,27,25,.08);
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --accent-cyan: #00D4FF;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981;
+  --blue: #3b82f6;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30,27,25,0.04);
+  --shadow-md: 0 4px 12px rgba(30,27,25,0.08);
+  --shadow-lg: 0 8px 24px rgba(30,27,25,0.12);
+  --shadow-accent: 0 8px 24px rgba(160,59,0,0.15);
+  --gradient-primary: linear-gradient(135deg, #a03b00 0%, #c94c00 100%);
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg:#060B18; --surface:#0B1426; --surface-container-lowest:#101D35;
-    --surface-container-low:#101D35; --surface-container:#162544; --surface-container-high:#1c2d52;
-    --fg-1:#F8FAFC; --fg-2:#CBD5E1; --fg-muted:#64748B;
-    --border:rgba(255,255,255,.08); --border-strong:rgba(255,255,255,.14);
-    --primary:#FF6B35;
-    --shadow-md:0 4px 12px rgba(0,0,0,.4);
+    --bg: #060B18;
+    --surface: #0B1426;
+    --surface-container-lowest: #101D35;
+    --surface-container-low: #101D35;
+    --surface-container: #162544;
+    --surface-container-high: #1c2d52;
+    --fg-1: #F8FAFC;
+    --fg-2: #CBD5E1;
+    --fg-muted: #64748B;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --primary: #FF6B35;
+    --primary-fixed: rgba(255,107,53,0.15);
+    --outline-variant: rgba(255,255,255,0.12);
+    --accent-glow: #00D4FF;
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
   }
 }
-*,*::before,*::after{box-sizing:border-box;margin:0}
-html,body{background:var(--bg);color:var(--fg-1);font-family:var(--font-body);
-  font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
-body{min-height:100vh}
-main{max-width:1200px;margin:0 auto;padding:var(--space-2xl) var(--space-xl) var(--space-5xl)}
-h1,h2,h3,h4{font-family:var(--font-headline);letter-spacing:-.01em;font-weight:600;color:var(--fg-1)}
-h1{font-size:clamp(28px,4.6vw,42px);font-weight:700;line-height:1.05;letter-spacing:-.02em}
-h2{font-size:clamp(20px,2.4vw,24px);margin-bottom:var(--space-md)}
-h3{font-size:17px;margin-bottom:var(--space-sm)}
-.muted{color:var(--fg-muted)}
-.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
-button{font:inherit;cursor:pointer;border:none;background:transparent;color:inherit}
-input,select{font:inherit;color:var(--fg-1)}
-.hero{padding:var(--space-3xl) 0 var(--space-2xl);border-bottom:1px solid var(--border)}
-.hero .eyebrow{display:inline-flex;gap:var(--space-sm);align-items:center;
-  background:var(--surface-container);color:var(--primary);
-  padding:var(--space-xs) var(--space-md);border-radius:var(--radius-pill);
-  font-family:var(--font-mono);font-size:11.5px;font-weight:500;
-  text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-lg)}
-.hero h1 .accent{background:linear-gradient(135deg,var(--primary) 0%,#7b40e0 100%);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.hero p.editorial{margin-top:var(--space-lg);color:var(--fg-2);font-size:17px;
-  max-width:78ch;line-height:1.5}
-.privacy-strip{background:var(--surface-container);border:1px solid var(--border-strong);
-  border-radius:var(--radius-md);padding:var(--space-md) var(--space-lg);
-  font-size:13px;color:var(--fg-2);margin-top:var(--space-xl);
-  display:flex;gap:var(--space-md);align-items:flex-start}
-.privacy-strip .lock{font-family:var(--font-mono);font-size:11px;color:var(--primary);
-  background:var(--surface-container-lowest);padding:2px 8px;border-radius:var(--radius-pill);
-  border:1px solid var(--border-strong);text-transform:uppercase;letter-spacing:.08em;flex-shrink:0}
-.section{margin-top:var(--space-3xl)}
-.section-head{display:flex;justify-content:space-between;align-items:baseline;
-  gap:var(--space-md);margin-bottom:var(--space-lg);flex-wrap:wrap}
-.section-head .meta{color:var(--fg-muted);font-size:13px;font-family:var(--font-mono)}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:var(--space-md)}
-.kpi{background:var(--surface-container-lowest);border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:var(--space-lg)}
-.kpi .label{font-size:12px;color:var(--fg-muted);text-transform:uppercase;
-  letter-spacing:.08em;font-family:var(--font-mono);margin-bottom:var(--space-sm)}
-.kpi .value{font-family:var(--font-headline);font-size:32px;font-weight:700;
-  letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--fg-1)}
-.kpi .sub{margin-top:var(--space-xs);color:var(--fg-muted);font-size:13px}
-.card{background:var(--surface-container-lowest);border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:var(--space-lg);box-shadow:var(--shadow-sm)}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2xl)}
-@media (max-width:760px){.grid-2{grid-template-columns:1fr}}
-.timeline{display:flex;flex-direction:column;gap:var(--space-md)}
-.tl-row{display:grid;grid-template-columns:120px 1fr;gap:var(--space-md);
-  padding:var(--space-md);border:1px solid var(--border);border-radius:var(--radius-md);
-  background:var(--surface-container-lowest)}
-.tl-row .date{font-family:var(--font-mono);font-size:12.5px;font-variant-numeric:tabular-nums;
-  color:var(--fg-2);align-self:start}
-.tl-row .body{font-size:14.5px;color:var(--fg-1)}
-.tl-row .body .kind{display:inline-block;font-family:var(--font-mono);font-size:11px;
-  padding:1px 8px;border-radius:var(--radius-pill);background:var(--surface-container);
-  color:var(--primary);text-transform:uppercase;letter-spacing:.08em;margin-right:var(--space-sm)}
-.tl-row .body .party{font-size:13px;color:var(--fg-muted);margin-top:2px}
-.tl-row .body .detail{font-size:13px;color:var(--fg-muted);margin-top:4px}
-.list{display:flex;flex-direction:column;gap:var(--space-sm)}
-.list-row{display:flex;justify-content:space-between;align-items:baseline;
-  padding:var(--space-sm) var(--space-md);border-radius:var(--radius-sm);
-  background:var(--surface-container)}
-.list-row .name{font-size:14.5px;font-weight:500}
-.list-row .role{font-size:12px;color:var(--fg-muted);font-family:var(--font-mono);
-  text-transform:uppercase;letter-spacing:.06em}
-.list-row .count{font-size:13px;color:var(--fg-muted);font-family:var(--font-mono);
-  font-variant-numeric:tabular-nums}
-.pill{display:inline-block;padding:1px 8px;border-radius:var(--radius-pill);
-  font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;
-  text-transform:uppercase;font-weight:500;margin-left:var(--space-sm)}
-.pill.inferred{background:var(--surface-container-high);color:var(--fg-2);border:1px solid var(--border-strong)}
-.pill.missing{background:rgba(239,68,68,.12);color:var(--red);border:1px solid rgba(239,68,68,.4)}
-.pill.present{background:rgba(16,185,129,.12);color:var(--green);border:1px solid rgba(16,185,129,.4)}
-.pill.above{background:rgba(245,158,11,.12);color:#a05a00;border:1px solid rgba(245,158,11,.4)}
-.pill.below{background:rgba(59,130,246,.12);color:var(--blue);border:1px solid rgba(59,130,246,.4)}
-.pill.in-range{background:rgba(16,185,129,.10);color:#0b7355;border:1px solid rgba(16,185,129,.3)}
-.pill.no-range{background:var(--surface-container-high);color:var(--fg-muted);border:1px solid var(--border-strong)}
-.q-list{display:flex;flex-direction:column;gap:var(--space-sm)}
-.q-list .q{padding:var(--space-md);border-left:3px solid var(--primary);
-  background:var(--surface-container-low);border-radius:0 var(--radius-md) var(--radius-md) 0;
-  font-size:14.5px;line-height:1.5}
-.miss-list{display:flex;flex-direction:column;gap:var(--space-sm);margin-bottom:var(--space-lg)}
-.miss-list .miss{padding:var(--space-md);background:rgba(245,158,11,.06);
-  border-left:3px solid var(--yellow);border-radius:0 var(--radius-md) var(--radius-md) 0;
-  font-size:14px}
-.miss-list .miss .lbl{font-weight:500}
-.miss-list .miss .det{font-size:13px;color:var(--fg-muted);margin-top:2px}
-.empty-state{padding:var(--space-md);color:var(--fg-muted);font-size:14px;font-style:italic}
-.lab-table,.row-table{width:100%;border-collapse:collapse;font-size:14px}
-.lab-table th,.lab-table td,.row-table th,.row-table td{
-  padding:var(--space-sm) var(--space-md);text-align:left;
-  border-bottom:1px solid var(--border)}
-.lab-table th,.row-table th{font-family:var(--font-mono);font-size:11.5px;
-  text-transform:uppercase;letter-spacing:.06em;color:var(--fg-muted);
-  background:var(--surface-container);font-weight:500}
-.lab-table tbody tr:hover{background:var(--surface-container)}
-.lab-table .num,.row-table .num{font-family:var(--font-mono);font-variant-numeric:tabular-nums;text-align:right}
-.lab-table .out{background:rgba(245,158,11,.06)}
-.lab-table .below-row{background:rgba(59,130,246,.06)}
-.panel-group{margin-bottom:var(--space-xl)}
-.panel-group h3{font-size:15px;margin-bottom:var(--space-sm);
-  display:flex;justify-content:space-between;align-items:baseline}
-.panel-group h3 .meta{font-size:12px;font-family:var(--font-mono);color:var(--fg-muted)}
-.trends{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:var(--space-md)}
-.trend{background:var(--surface-container-lowest);border:1px solid var(--border);
-  border-radius:var(--radius-md);padding:var(--space-md)}
-.trend h4{font-size:13.5px;margin-bottom:var(--space-xs)}
-.trend .reading{font-family:var(--font-mono);font-size:12px;color:var(--fg-muted);
-  margin-bottom:var(--space-sm)}
-.trend svg{width:100%;height:60px;display:block}
-.trend .latest{font-family:var(--font-mono);font-size:12.5px;margin-top:var(--space-xs);
-  font-variant-numeric:tabular-nums;color:var(--fg-2)}
-.encounter{background:var(--surface-container-lowest);border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:var(--space-lg);margin-bottom:var(--space-md)}
-.encounter .head{display:flex;justify-content:space-between;align-items:baseline;
-  gap:var(--space-md);flex-wrap:wrap;margin-bottom:var(--space-sm)}
-.encounter .head .date{font-family:var(--font-mono);font-size:13px;color:var(--fg-2);
-  font-variant-numeric:tabular-nums}
-.encounter .head .type{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;
-  letter-spacing:.08em;color:var(--primary);background:var(--surface-container);
-  padding:2px 8px;border-radius:var(--radius-pill)}
-.encounter .meta-row{font-size:13px;color:var(--fg-muted);margin-bottom:var(--space-sm)}
-.encounter .reason{font-size:14.5px;color:var(--fg-1);margin-bottom:var(--space-sm)}
-.encounter .vitals{display:flex;flex-wrap:wrap;gap:var(--space-md);margin-top:var(--space-sm)}
-.encounter .vital{font-family:var(--font-mono);font-size:12.5px;color:var(--fg-2);
-  background:var(--surface-container);padding:2px 8px;border-radius:var(--radius-sm)}
-.encounter .plan{margin-top:var(--space-sm);padding:var(--space-sm) var(--space-md);
-  background:var(--surface-container);border-radius:var(--radius-sm);
-  font-style:italic;font-size:13.5px;color:var(--fg-2)}
-.deadlines{display:flex;flex-direction:column;gap:var(--space-sm)}
-.deadline{display:grid;grid-template-columns:120px 80px 1fr;gap:var(--space-md);
-  padding:var(--space-md);background:var(--surface-container-lowest);
-  border:1px solid var(--border);border-radius:var(--radius-md);font-size:13.5px}
-.deadline .d{font-family:var(--font-mono);font-variant-numeric:tabular-nums;color:var(--fg-1)}
-.deadline .rel{font-family:var(--font-mono);font-size:11.5px;color:var(--fg-muted);
-  background:var(--surface-container);padding:2px 8px;border-radius:var(--radius-pill);
-  text-align:center;align-self:start}
-.deadline .src{color:var(--fg-2)}
-.case-card{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:var(--space-md);padding:var(--space-lg);background:var(--surface-container-lowest);
-  border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
-.case-card .field .label{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;
-  letter-spacing:.08em;color:var(--fg-muted);margin-bottom:2px}
-.case-card .field .value{font-family:var(--font-mono);font-size:13.5px;color:var(--fg-1)}
-.drill{background:var(--surface-container-lowest);border:1px solid var(--border);
-  border-radius:var(--radius-lg);overflow:hidden}
-.drill > summary{cursor:pointer;padding:var(--space-lg);
-  display:flex;justify-content:space-between;align-items:center;font-weight:500;
-  list-style:none;font-size:15px}
-.drill > summary::-webkit-details-marker{display:none}
-.drill > summary::after{content:"▾";color:var(--fg-muted);font-size:14px;
-  transition:transform .2s}
-.drill[open] > summary::after{transform:rotate(180deg)}
-.drill > summary:hover{background:var(--surface-container)}
-.drill-body{padding:var(--space-lg);border-top:1px solid var(--border)}
-.drill-body input[type=search]{width:100%;padding:var(--space-md);
-  background:var(--surface-container);border:1px solid var(--border-strong);
-  border-radius:var(--radius-sm);font-size:14px;margin-bottom:var(--space-md)}
-.toolbar{display:flex;gap:var(--space-sm);flex-wrap:wrap;align-items:center;
-  margin-bottom:var(--space-md)}
-.chip{padding:var(--space-xs) var(--space-md);border-radius:var(--radius-pill);
-  background:var(--surface-container);border:1px solid var(--border-strong);
-  font-size:12.5px;font-family:var(--font-mono);cursor:pointer;color:var(--fg-2)}
-.chip.active{background:var(--primary);color:var(--on-primary);
-  border-color:var(--primary)}
-.copy-btn{padding:var(--space-xs) var(--space-md);background:var(--surface-container);
-  border:1px solid var(--border-strong);border-radius:var(--radius-pill);
-  font-size:12.5px;font-family:var(--font-mono);cursor:pointer;color:var(--fg-2)}
-.copy-btn:hover{background:var(--surface-container-high)}
-.callout-card{padding:var(--space-md);background:var(--surface-container-lowest);
-  border:1px solid var(--border);border-radius:var(--radius-md);margin-bottom:var(--space-sm)}
-.callout-card .head{display:flex;justify-content:space-between;align-items:baseline;
-  gap:var(--space-md);flex-wrap:wrap;margin-bottom:var(--space-xs)}
-.callout-card .head .test{font-weight:500;font-size:14.5px}
-.callout-card .head .value{font-family:var(--font-mono);font-variant-numeric:tabular-nums;
-  font-size:14px;color:var(--fg-1)}
-.callout-card .ref{font-size:12.5px;color:var(--fg-muted);font-family:var(--font-mono)}
-.callout-card .meta{font-size:12px;color:var(--fg-muted);margin-top:var(--space-xs)}
-footer{margin-top:var(--space-5xl);padding-top:var(--space-2xl);
-  border-top:1px solid var(--border);color:var(--fg-muted);font-size:13px}
-footer p{margin-bottom:var(--space-md)}
-footer .caveat{font-style:italic}
-.med-list{display:flex;flex-direction:column;gap:var(--space-sm)}
-.med{padding:var(--space-sm) var(--space-md);background:var(--surface-container);
-  border-radius:var(--radius-sm);font-size:14px;display:flex;justify-content:space-between;
-  gap:var(--space-md);flex-wrap:wrap}
-.med .name{font-weight:500}
-.med .dose{font-family:var(--font-mono);font-size:12.5px;color:var(--fg-2)}
-.med .ix{font-size:12.5px;color:var(--fg-muted)}
-  </style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--fg-1);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Privacy banner ── */
+.privacy-banner {
+  background: var(--surface-container);
+  border-bottom: 1px solid var(--border-strong);
+  padding: var(--space-sm) var(--space-lg);
+  font-size: 12px;
+  color: var(--fg-muted);
+  text-align: center;
+  font-family: var(--font-body);
+}
+.privacy-banner strong { color: var(--fg-2); }
+
+/* ── Document shell ── */
+.document-shell {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg) var(--space-5xl);
+}
+
+/* ── Cover / masthead ── */
+.cover {
+  padding: var(--space-4xl) 0 var(--space-3xl);
+  border-bottom: 2px solid var(--outline-variant);
+  margin-bottom: var(--space-3xl);
+}
+.cover-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: var(--space-md);
+}
+.cover-title {
+  font-family: var(--font-headline);
+  font-size: clamp(22px, 5vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--fg-1);
+  margin-bottom: var(--space-md);
+  line-height: 1.15;
+}
+.cover-period {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-xl);
+  font-variant-numeric: tabular-nums;
+}
+.headline-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+.count-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-xl);
+  min-width: 90px;
+}
+.count-chip-value {
+  font-family: var(--font-headline);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.count-chip-label {
+  font-size: 11px;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: var(--space-xs);
+}
+.summary-deck {
+  background: var(--surface-container-low);
+  border-left: 3px solid var(--primary);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: var(--space-lg) var(--space-xl);
+  font-size: 14.5px;
+  color: var(--fg-2);
+  line-height: 1.6;
+}
+
+/* ── Reader rail + body ── */
+.document-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--space-4xl);
+  align-items: start;
+}
+@media (max-width: 700px) {
+  .document-layout { grid-template-columns: 1fr; }
+  .reader-rail { display: none; }
+}
+.reader-rail {
+  position: sticky;
+  top: var(--space-xl);
+  background: var(--surface-container-low);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  font-size: 13px;
+}
+.reader-rail-title {
+  font-family: var(--font-headline);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-md);
+}
+.rail-nav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+.rail-nav a {
+  display: block;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  color: var(--fg-2);
+  text-decoration: none;
+  font-size: 13px;
+  transition: background 150ms, color 150ms;
+}
+.rail-nav a:hover, .rail-nav a.active {
+  background: var(--primary-fixed);
+  color: var(--primary);
+}
+.rail-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: var(--space-md) 0;
+}
+.copy-summary-btn {
+  width: 100%;
+  background: var(--surface-container);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--fg-2);
+  cursor: pointer;
+  transition: background 150ms;
+  text-align: center;
+}
+.copy-summary-btn:hover { background: var(--outline-variant); }
+
+/* ── Section headings ── */
+.body-section {
+  margin-bottom: var(--space-4xl);
+  scroll-margin-top: var(--space-xl);
+}
+.section-heading {
+  font-family: var(--font-headline);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--outline-variant);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.section-icon {
+  width: 22px;
+  height: 22px;
+  background: var(--primary-fixed);
+  color: var(--primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+/* ── Encounter cards ── */
+.encounter-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+.encounter-card {
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 200ms;
+}
+.encounter-card:hover { box-shadow: var(--shadow-md); }
+.encounter-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-lg) var(--space-xl);
+  background: var(--surface-container);
+  border-bottom: 1px solid var(--border);
+}
+.encounter-date-badge {
+  background: var(--primary);
+  color: var(--on-primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  text-align: center;
+  min-width: 64px;
+  flex-shrink: 0;
+}
+.encounter-date-badge-month {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.encounter-date-badge-day {
+  font-family: var(--font-headline);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.encounter-date-badge-year {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  opacity: 0.75;
+}
+.encounter-header-info { flex: 1; min-width: 0; }
+.encounter-type-label {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--primary);
+  margin-bottom: var(--space-xs);
+}
+.encounter-provider-name {
+  font-family: var(--font-headline);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--fg-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.encounter-reason-tag {
+  display: inline-block;
+  background: var(--surface-container-high);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  color: var(--fg-2);
+  padding: 2px var(--space-sm);
+  margin-top: var(--space-xs);
+}
+.encounter-card-body {
+  padding: var(--space-lg) var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+.vitals-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+.vital-item {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.vital-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--fg-muted);
+}
+.vital-value {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg-1);
+  font-variant-numeric: tabular-nums;
+}
+.plan-block {
+  border-left: 2px solid var(--outline-variant);
+  padding-left: var(--space-md);
+}
+.plan-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-xs);
+}
+.plan-quote {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--fg-2);
+  line-height: 1.5;
+  font-style: italic;
+}
+.followup-line {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 13px;
+  color: var(--fg-2);
+}
+.followup-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: var(--surface-container);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  padding: 2px var(--space-sm);
+  font-family: var(--font-mono);
+  color: var(--fg-2);
+  font-variant-numeric: tabular-nums;
+}
+.followup-chip.missing {
+  color: var(--fg-muted);
+  border-style: dashed;
+}
+
+/* ── Timeline ── */
+.timeline-list {
+  position: relative;
+  padding-left: var(--space-2xl);
+}
+.timeline-list::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--outline-variant);
+}
+.timeline-event {
+  position: relative;
+  margin-bottom: var(--space-xl);
+  cursor: pointer;
+}
+.timeline-event::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--space-2xl) + 4px);
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  background: var(--primary);
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+}
+.timeline-event-inner {
+  background: var(--surface-container-low);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  transition: box-shadow 150ms, border-color 150ms;
+}
+.timeline-event:hover .timeline-event-inner {
+  box-shadow: var(--shadow-md);
+  border-color: var(--outline-variant);
+}
+.timeline-event-date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--space-xs);
+}
+.timeline-event-title {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fg-1);
+}
+.timeline-event-detail {
+  font-size: 13px;
+  color: var(--fg-2);
+  margin-top: var(--space-xs);
+}
+.timeline-event-party {
+  font-size: 12px;
+  color: var(--fg-muted);
+  margin-top: var(--space-xs);
+}
+.timeline-event-quote {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-muted);
+  margin-top: var(--space-sm);
+  font-style: italic;
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-sm);
+}
+.kind-chip {
+  display: inline-block;
+  border-radius: var(--radius-pill);
+  font-size: 10px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px var(--space-sm);
+  border: 1px solid;
+  margin-left: var(--space-sm);
+  vertical-align: middle;
+}
+.kind-visit { background: var(--primary-fixed); color: var(--primary); border-color: var(--primary-fixed-dim); }
+.kind-lab { background: rgba(59,130,246,0.1); color: var(--blue); border-color: rgba(59,130,246,0.25); }
+.kind-doc { background: rgba(123,64,224,0.1); color: var(--secondary-container); border-color: rgba(123,64,224,0.25); }
+
+/* ── Parties table ── */
+.fact-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.fact-table th {
+  text-align: left;
+  font-family: var(--font-headline);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fg-muted);
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--outline-variant);
+  font-weight: 600;
+}
+.fact-table td {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--fg-2);
+}
+.fact-table tr:last-child td { border-bottom: none; }
+.fact-table tr:hover td { background: var(--surface-container-low); }
+.role-badge {
+  display: inline-block;
+  border-radius: var(--radius-pill);
+  font-size: 10px;
+  font-family: var(--font-mono);
+  padding: 2px var(--space-sm);
+  letter-spacing: 0.04em;
+}
+.role-provider { background: var(--primary-fixed); color: var(--primary); }
+.role-patient { background: rgba(59,130,246,0.12); color: var(--blue); }
+.count-badge {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  background: var(--surface-container-high);
+  border-radius: var(--radius-pill);
+  padding: 2px var(--space-sm);
+  color: var(--fg-muted);
+}
+
+/* ── Medications ── */
+.med-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.med-row {
+  background: var(--surface-container-low);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+}
+.med-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--primary-fixed);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--primary);
+  font-size: 14px;
+}
+.med-info { flex: 1; min-width: 0; }
+.med-name {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fg-1);
+}
+.med-dose {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-2);
+  margin-top: 2px;
+}
+.med-instructions {
+  font-size: 12px;
+  color: var(--fg-muted);
+  margin-top: 2px;
+}
+.inferred-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  border-radius: var(--radius-pill);
+  font-size: 10px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+  padding: 2px var(--space-sm);
+  background: rgba(245,158,11,0.12);
+  color: var(--yellow);
+  border: 1px solid rgba(245,158,11,0.25);
+  flex-shrink: 0;
+}
+
+/* ── Documents ── */
+.doc-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.doc-row {
+  background: var(--surface-container-low);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+.doc-id {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-muted);
+  flex-shrink: 0;
+}
+.doc-name {
+  font-size: 14px;
+  color: var(--fg-1);
+  font-weight: 500;
+  flex: 1;
+}
+.doc-kind {
+  font-size: 11px;
+  color: var(--fg-muted);
+  flex-shrink: 0;
+  text-transform: capitalize;
+}
+.present-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-pill);
+  background: rgba(16,185,129,0.12);
+  color: var(--green);
+  border: 1px solid rgba(16,185,129,0.25);
+  flex-shrink: 0;
+}
+.missing-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-pill);
+  background: rgba(239,68,68,0.1);
+  color: var(--red);
+  border: 1px solid rgba(239,68,68,0.2);
+  flex-shrink: 0;
+}
+
+/* ── Missing & Questions ── */
+.caveat-box {
+  background: var(--surface-container);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-xl);
+  margin-bottom: var(--space-xl);
+}
+.caveat-box-title {
+  font-family: var(--font-headline);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg-2);
+  margin-bottom: var(--space-md);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.missing-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--border);
+}
+.missing-item:last-child { border-bottom: none; }
+.missing-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--yellow);
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+.missing-text { font-size: 14px; color: var(--fg-2); }
+.missing-detail { font-family: var(--font-mono); font-size: 11px; color: var(--fg-muted); margin-top: 2px; }
+.question-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--border);
+}
+.question-item:last-child { border-bottom: none; }
+.question-marker {
+  font-family: var(--font-headline);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.question-text { font-size: 14px; color: var(--fg-2); line-height: 1.55; }
+
+/* ── Drill-down ── */
+.drill-down-toggle {
+  width: 100%;
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-xl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-family: var(--font-headline);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--fg-1);
+  transition: background 150ms;
+}
+.drill-down-toggle:hover { background: var(--surface-container); }
+.drill-toggle-arrow {
+  transition: transform 200ms;
+  color: var(--fg-muted);
+  font-size: 12px;
+}
+.drill-down-toggle[aria-expanded="true"] .drill-toggle-arrow {
+  transform: rotate(180deg);
+}
+.drill-down-panel {
+  display: none;
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  padding: var(--space-xl);
+}
+.drill-down-panel.open { display: block; }
+.search-bar {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+.search-input {
+  flex: 1;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--fg-1);
+  outline: none;
+}
+.search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(160,59,0,0.1); }
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+.filter-chip {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  background: var(--surface-container);
+  border: 1px solid var(--border-strong);
+  color: var(--fg-2);
+  transition: all 150ms;
+}
+.filter-chip.active {
+  background: var(--primary-fixed);
+  color: var(--primary);
+  border-color: var(--primary-fixed-dim);
+}
+.drill-result {
+  margin-bottom: var(--space-md);
+  background: var(--surface-container-low);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: box-shadow 150ms;
+}
+.drill-result:hover { box-shadow: var(--shadow-sm); }
+.drill-result-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  cursor: pointer;
+  user-select: none;
+}
+.drill-result-date {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--primary);
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+.drill-result-title {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--fg-1);
+  flex: 1;
+}
+.drill-result-body {
+  display: none;
+  padding: 0 var(--space-lg) var(--space-lg);
+  font-size: 13px;
+  color: var(--fg-2);
+  border-top: 1px solid var(--border);
+}
+.drill-result-body.open { display: block; }
+.drill-result-body pre {
+  white-space: pre-wrap;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--fg-2);
+  margin-top: var(--space-md);
+}
+mark.search-highlight {
+  background: rgba(245,158,11,0.3);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+.no-results {
+  text-align: center;
+  color: var(--fg-muted);
+  font-size: 14px;
+  padding: var(--space-3xl);
+}
+
+/* ── Footer ── */
+.document-footer {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--space-lg);
+  border-top: 1px solid var(--border-strong);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.footer-line {
+  font-size: 12px;
+  color: var(--fg-muted);
+  line-height: 1.55;
+}
+.footer-line em { font-style: italic; }
+.footer-line a { color: var(--primary); text-decoration: none; }
+
+/* ── Animations ── */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 300ms ease, transform 300ms ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .count-chip-value {
+    transition: color 400ms;
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .encounter-card-header { flex-direction: column; align-items: flex-start; }
+  .headline-counts { gap: var(--space-sm); }
+  .count-chip { min-width: 70px; padding: var(--space-sm) var(--space-md); }
+  .count-chip-value { font-size: 22px; }
+  .doc-row { flex-wrap: wrap; }
+}
+</style>
 <!-- html-anything example style skin:start -->
 
 <style id="html-anything-example-style-skin">
@@ -328,35 +1011,6 @@ html[data-ha-style="relationship"] body {
     linear-gradient(300deg, rgba(49,123,147,.08), transparent 40%);
 }
 html[data-ha-style="relationship"] body::before { content: "relationship"; }
-
-html[data-ha-style="personal-atlas"] {
-  --ha-style-accent: #3f7f6a;
-  --ha-style-accent-2: #c15a2b;
-  --primary: #3f7f6a;
-  --primary-container: #2f6b58;
-  --primary-fixed: #dff4ea;
-  --secondary-container: #c15a2b;
-  --bg: #f7faf4;
-  --surface: #f7faf4;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #eef5ea;
-  --surface-container: #e6eee0;
-  --surface-container-high: #dbe7d5;
-  --fg-1: #17211b;
-  --fg-2: #405345;
-  --fg-muted: #718172;
-  --border: rgba(63,127,106,.15);
-  --gradient-hero: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-  --gradient-text: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-}
-html[data-ha-style="personal-atlas"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(63,127,106,.11) 0 2px, transparent 2px),
-    radial-gradient(circle at 70% 40%, rgba(193,90,43,.10) 0 1.5px, transparent 1.5px);
-  background-size: 54px 54px, 38px 38px;
-}
-html[data-ha-style="personal-atlas"] body::before { content: "personal atlas"; }
 
 html[data-ha-style="timeline-story"] {
   --ha-style-accent: #9a4b14;
@@ -507,7 +1161,7 @@ html[data-ha-style="dashboard"] header.hero::before {
   margin-bottom: 14px;
 }
 
-html[data-ha-style="editorial"] {
+html[data-ha-style="document"] {
   --ha-style-accent: #8b3f1f;
   --ha-style-accent-2: #2f6f73;
   --primary: #8b3f1f;
@@ -528,14 +1182,14 @@ html[data-ha-style="editorial"] {
   --gradient-hero: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
   --gradient-text: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
 }
-html[data-ha-style="editorial"] body {
+html[data-ha-style="document"] body {
   background-color: var(--bg) !important;
   background-image: linear-gradient(90deg, rgba(139,63,31,.18) 0 4px, transparent 4px);
   background-size: 100% 100%;
 }
-html[data-ha-style="editorial"] body::before { content: "editorial"; }
-html[data-ha-style="editorial"] .hero::before,
-html[data-ha-style="editorial"] header.hero::before {
+html[data-ha-style="document"] body::before { content: "document"; }
+html[data-ha-style="document"] .hero::before,
+html[data-ha-style="document"] header.hero::before {
   width: 42px;
   height: 42px;
   border-radius: 0;
@@ -543,33 +1197,6 @@ html[data-ha-style="editorial"] header.hero::before {
   border-top: 4px solid var(--ha-style-accent);
   border-left: 4px solid var(--ha-style-accent);
 }
-
-html[data-ha-style="paper"] {
-  --ha-style-accent: #53606a;
-  --ha-style-accent-2: #8c6f4a;
-  --primary: #53606a;
-  --primary-container: #3e4850;
-  --primary-fixed: #eef1f3;
-  --secondary-container: #8c6f4a;
-  --bg: #f9faf9;
-  --surface: #f9faf9;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f1f2f1;
-  --surface-container: #e8eae8;
-  --surface-container-high: #dedfdd;
-  --fg-1: #171717;
-  --fg-2: #4b5563;
-  --fg-muted: #737373;
-  --border: rgba(83,96,106,.18);
-  --font-headline: Georgia, "Iowan Old Style", "Times New Roman", serif;
-  --gradient-hero: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-  --gradient-text: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-}
-html[data-ha-style="paper"] body {
-  background-color: var(--bg) !important;
-  background-image: repeating-linear-gradient(0deg, transparent 0 31px, rgba(83,96,106,.08) 31px 32px);
-}
-html[data-ha-style="paper"] body::before { content: "paper"; }
 
 html[data-ha-style="developer"] {
   color-scheme: dark;
@@ -614,554 +1241,544 @@ html[data-ha-style="developer"] .mono {
 <!-- html-anything example style skin:end -->
 </head>
 <body>
-  <main>
-    <section class="hero">
-      <span class="eyebrow"><span id="eyebrow-text">Sensitive record</span></span>
-      <h1><span class="accent" id="hero-title">Jordan A. Sample — synthetic care record (Q1 2026)</span></h1>
-      <p class="editorial" id="hero-editorial"></p>
-      <div class="privacy-strip">
-        <span class="lock">Local</span>
-        <span>Names, MRNs, case numbers, policy IDs, and dates inlined in this page never leave your machine. For sharing, generate from a redacted export. <strong>This page is an organizational summary, not medical / legal / insurance advice.</strong></span>
-      </div>
-    </section>
 
-    <section class="section" aria-labelledby="head-summary">
-      <div class="section-head">
-        <h2 id="head-summary">Summary</h2>
-        <span class="meta" id="summary-meta"></span>
-      </div>
-      <div class="kpis" id="kpis"></div>
-    </section>
+<div class="privacy-banner">
+  <strong>Privacy notice:</strong> Names, MRNs, and dates are visible in this file. This page is local — your record never left your machine. For sharing, generate from a redacted export.
+</div>
 
-    <section class="section" id="case-section" hidden aria-labelledby="head-case">
-      <div class="section-head"><h2 id="head-case">Case header</h2><span class="meta">Verbatim from chronology</span></div>
-      <div class="case-card" id="case-card"></div>
-    </section>
+<div class="document-shell">
 
-    <section class="section" aria-labelledby="head-timeline">
-      <div class="section-head"><h2 id="head-timeline">Timeline</h2><span class="meta" id="tl-meta"></span></div>
-      <div class="card"><div class="timeline" id="timeline"></div></div>
-    </section>
+  <!-- Cover -->
+  <header class="cover reveal">
+    <div class="cover-eyebrow">Synthetic Care Record · Q1 2026</div>
+    <h1 class="cover-title">Jordan A. Sample</h1>
+    <div class="cover-period" id="cover-period">Loading…</div>
+    <div class="headline-counts" id="headline-counts"></div>
+    <div class="summary-deck" id="summary-deck">Loading summary…</div>
+  </header>
 
-    <section class="section" id="oor-section" hidden aria-labelledby="head-oor">
-      <div class="section-head">
-        <h2 id="head-oor">Outside reference range</h2>
-        <span class="meta">Numeric comparison to range printed on each row</span>
-      </div>
-      <div class="card" id="oor-card"></div>
-    </section>
+  <div class="document-layout">
 
-    <section class="section" id="trends-section" hidden aria-labelledby="head-trends">
-      <div class="section-head"><h2 id="head-trends">Trends</h2><span class="meta">Repeated tests over time</span></div>
-      <div class="trends" id="trends"></div>
-    </section>
+    <!-- Reader rail -->
+    <nav class="reader-rail" aria-label="Document sections">
+      <div class="reader-rail-title">In this record</div>
+      <ul class="rail-nav" id="rail-nav">
+        <li><a href="#section-summary">Summary</a></li>
+        <li><a href="#section-visits">Visits</a></li>
+        <li><a href="#section-timeline">Timeline</a></li>
+        <li><a href="#section-parties">Parties</a></li>
+        <li><a href="#section-medications">Medications</a></li>
+        <li><a href="#section-documents">Documents</a></li>
+        <li><a href="#section-missing">Missing &amp; questions</a></li>
+        <li><a href="#section-drilldown">Full record</a></li>
+      </ul>
+      <hr class="rail-divider">
+      <button class="copy-summary-btn" id="copy-md-btn">Copy as Markdown</button>
+    </nav>
 
-    <section class="section" id="encounters-section" hidden aria-labelledby="head-enc">
-      <div class="section-head"><h2 id="head-enc">Encounters</h2><span class="meta" id="enc-meta"></span></div>
-      <div id="encounters"></div>
-    </section>
+    <!-- Body -->
+    <main id="body-main">
 
-    <section class="section" id="meds-section" hidden aria-labelledby="head-meds">
-      <div class="section-head"><h2 id="head-meds">Medications</h2><span class="meta">Verbatim from record</span></div>
-      <div class="card"><div class="med-list" id="meds"></div></div>
-    </section>
+      <!-- Summary -->
+      <section class="body-section reveal" id="section-summary">
+        <h2 class="section-heading">
+          <span class="section-icon">∑</span>
+          Summary
+        </h2>
+        <div id="summary-body">Loading…</div>
+      </section>
 
-    <section class="section" id="filings-section" hidden aria-labelledby="head-filings">
-      <div class="section-head"><h2 id="head-filings">Filings</h2><span class="meta" id="filings-meta"></span></div>
-      <div class="card"><div class="list" id="filings"></div></div>
-    </section>
+      <!-- Visits / Encounter cards -->
+      <section class="body-section reveal" id="section-visits">
+        <h2 class="section-heading">
+          <span class="section-icon">⊕</span>
+          Visits &amp; Encounters
+        </h2>
+        <div class="encounter-cards" id="encounter-cards">Loading…</div>
+      </section>
 
-    <section class="section" id="deadlines-section" hidden aria-labelledby="head-deadlines">
-      <div class="section-head"><h2 id="head-deadlines">Deadlines</h2><span class="meta">Dates listed on the document</span></div>
-      <div class="deadlines" id="deadlines"></div>
-    </section>
+      <!-- Timeline -->
+      <section class="body-section reveal" id="section-timeline">
+        <h2 class="section-heading">
+          <span class="section-icon">◷</span>
+          Timeline
+        </h2>
+        <div class="timeline-list" id="timeline-list">Loading…</div>
+      </section>
 
-    <section class="section">
-      <div class="grid-2">
-        <div>
-          <div class="section-head"><h2 id="head-parties">Parties</h2><span class="meta" id="parties-meta"></span></div>
-          <div class="card"><div class="list" id="parties"></div></div>
+      <!-- Parties -->
+      <section class="body-section reveal" id="section-parties">
+        <h2 class="section-heading">
+          <span class="section-icon">◈</span>
+          Parties
+        </h2>
+        <div id="parties-body">Loading…</div>
+      </section>
+
+      <!-- Medications -->
+      <section class="body-section reveal" id="section-medications">
+        <h2 class="section-heading">
+          <span class="section-icon">⊛</span>
+          Medications
+        </h2>
+        <div class="med-list" id="med-list">Loading…</div>
+      </section>
+
+      <!-- Documents -->
+      <section class="body-section reveal" id="section-documents">
+        <h2 class="section-heading">
+          <span class="section-icon">▤</span>
+          Documents
+        </h2>
+        <div class="doc-list" id="doc-list">Loading…</div>
+      </section>
+
+      <!-- Missing & next questions -->
+      <section class="body-section reveal" id="section-missing">
+        <h2 class="section-heading">
+          <span class="section-icon">?</span>
+          Missing &amp; next questions
+        </h2>
+        <div id="missing-body">Loading…</div>
+      </section>
+
+      <!-- Browse full record -->
+      <section class="body-section" id="section-drilldown">
+        <button class="drill-down-toggle" id="drill-toggle" aria-expanded="false" aria-controls="drill-panel">
+          Browse the full record
+          <span class="drill-toggle-arrow">▼</span>
+        </button>
+        <div class="drill-down-panel" id="drill-panel">
+          <div class="search-bar">
+            <input type="search" class="search-input" id="drill-search" placeholder="Search encounters, plans, medications…" aria-label="Search records">
+          </div>
+          <div class="filter-chips" id="filter-chips"></div>
+          <div id="drill-results">Loading…</div>
         </div>
-        <div>
-          <div class="section-head"><h2 id="head-docs">Documents</h2><span class="meta" id="docs-meta"></span></div>
-          <div class="card"><div class="list" id="documents"></div></div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="document-footer">
+  <p class="footer-line"><em>Organizational summary, not medical advice. Visit dates, providers, and out-of-reference values are inferred from the file's text — bring the original record to your clinician and ask them whether anything here changes your care.</em></p>
+  <p class="footer-line"><em>Dates, parties, values, and missing-item callouts are inferred from the file's text — verify against the original record and ask your clinician before acting on anything here.</em></p>
+  <p class="footer-line"><em>Generated locally — your record never left your machine. The full content is embedded in this HTML and rendered in your browser. For sharing, generate from a redacted export with names, MRNs, and dates replaced or removed.</em></p>
+</footer>
+
+<script>
+(function() {
+  // ── Helpers ──────────────────────────────────────────────
+  function esc(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function formatDate(d) {
+    if (!d) return '';
+    const parts = d.split('-');
+    if (parts.length < 3) return d;
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${months[parseInt(parts[1],10)-1]} ${parseInt(parts[2],10)}, ${parts[0]}`;
+  }
+
+  function dateMonth(d) {
+    if (!d) return '';
+    const parts = d.split('-');
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return months[parseInt(parts[1],10)-1];
+  }
+
+  function dateDay(d) {
+    if (!d) return '';
+    return parseInt(d.split('-')[2], 10);
+  }
+
+  function dateYear(d) {
+    if (!d) return '';
+    return d.split('-')[0];
+  }
+
+  // ── Data access helpers ───────────────────────────────────
+  function getField(obj, ...keys) {
+    for (const k of keys) {
+      if (obj && obj[k] !== undefined) return obj[k];
+    }
+    return null;
+  }
+
+  function arr(v) { return Array.isArray(v) ? v : []; }
+
+  // ── Resolve full vs preview arrays ───────────────────────
+  function resolve(full, preview) {
+    if (Array.isArray(full) && full.length > 0) return full;
+    if (Array.isArray(preview) && preview.length > 0) return preview;
+    return [];
+  }
+
+  const D = DATA;
+
+  const summary      = D.summary      || {};
+  const parties      = resolve(D.parties,      D.partiesPreview);
+  const documents    = resolve(D.documents,    D.documentsPreview);
+  const missingItems = resolve(D.missingItems, D.missingItemsPreview);
+  const openQuestions= resolve(D.openQuestions,D.openQuestionsPreview);
+  const events       = resolve(D.events,       D.eventsPreview);
+  const encounters   = resolve(D.encounters,   D.encountersPreview);
+  const medications  = resolve(D.medications,  D.medicationsPreview);
+  const headlineCounts = arr(summary.headlineCount || D.headlineCount);
+
+  // ── Cover ─────────────────────────────────────────────────
+  const period = summary.period || D.period || '';
+  document.getElementById('cover-period').textContent = period
+    ? `Period: ${period} · ${summary.durationLabel || D.durationLabel || ''}`
+    : '';
+
+  const hcEl = document.getElementById('headline-counts');
+  hcEl.innerHTML = headlineCounts.map(c =>
+    `<div class="count-chip">
+      <div class="count-chip-value" data-target="${esc(String(c.value))}">0</div>
+      <div class="count-chip-label">${esc(c.label)}</div>
+    </div>`
+  ).join('');
+
+  // Count-up animation
+  const countEls = hcEl.querySelectorAll('.count-chip-value');
+  countEls.forEach(el => {
+    const target = parseInt(el.dataset.target, 10);
+    if (isNaN(target)) { el.textContent = el.dataset.target; return; }
+    let start = null;
+    const duration = 600;
+    function step(ts) {
+      if (!start) start = ts;
+      const pct = Math.min((ts - start) / duration, 1);
+      el.textContent = Math.round(pct * target);
+      if (pct < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.textContent = target;
+    } else {
+      setTimeout(() => requestAnimationFrame(step), 200);
+    }
+  });
+
+  // ── Summary section ───────────────────────────────────────
+  const summaryDeck = document.getElementById('summary-deck');
+  const countsSummary = headlineCounts.map(c => `${c.value} ${c.label}`).join(' · ');
+  summaryDeck.textContent = `This record covers ${countsSummary}${period ? ', spanning ' + period : ''}.`;
+
+  const summaryBody = document.getElementById('summary-body');
+  summaryBody.innerHTML = `
+    <div class="caveat-box">
+      <div class="caveat-box-title">Record overview</div>
+      <p style="font-size:14.5px;color:var(--fg-2);line-height:1.6;">
+        This synthetic care record documents <strong>${encounters.length || 3} encounters</strong>
+        with ${parties.filter(p=>p.role==='Provider').length || 2} providers
+        between ${period}.
+        ${medications.length ? `${medications.length} medication entries are referenced across these visits.` : ''}
+        ${missingItems.length ? `${missingItems.length} item(s) noted as not present in this record.` : ''}
+        ${openQuestions.length ? `${openQuestions.length} open question(s) surfaced for follow-up.` : ''}
+      </p>
+      <p style="margin-top:var(--space-md);font-size:13px;color:var(--fg-muted);">
+        <span class="inferred-chip">Inferred</span>&nbsp;
+        All findings pattern-matched from the file's text. Verify against the original record.
+      </p>
+    </div>`;
+
+  // ── Encounter cards ───────────────────────────────────────
+  const ecEl = document.getElementById('encounter-cards');
+  if (!encounters.length) {
+    ecEl.innerHTML = '<p style="color:var(--fg-muted);font-size:14px;">No encounter records found.</p>';
+  } else {
+    ecEl.innerHTML = encounters.map(enc => {
+      const vitalsHtml = arr(enc.vitals).length
+        ? `<div>
+            <div class="plan-label">Vitals</div>
+            <div class="vitals-row">
+              ${arr(enc.vitals).map(v =>
+                `<div class="vital-item">
+                  <div class="vital-label">${esc(v.label)}</div>
+                  <div class="vital-value">${esc(v.value)}</div>
+                </div>`
+              ).join('')}
+            </div>
+          </div>`
+        : '';
+
+      const planHtml = enc.plan
+        ? `<div class="plan-block">
+            <div class="plan-label">Plan of care (verbatim excerpt)</div>
+            <div class="plan-quote">"${esc(enc.plan)}…"</div>
+          </div>`
+        : '';
+
+      const followupHtml = enc.followUp
+        ? `<div class="followup-line">
+            <span class="plan-label" style="margin:0;">Follow-up:</span>
+            <span class="followup-chip">${esc(enc.followUp)}</span>
+          </div>`
+        : `<div class="followup-line">
+            <span class="plan-label" style="margin:0;">Follow-up:</span>
+            <span class="followup-chip missing">not present in this record</span>
+            <span class="inferred-chip">Inferred</span>
+          </div>`;
+
+      return `<div class="encounter-card" id="${esc(enc.id)}">
+        <div class="encounter-card-header">
+          <div class="encounter-date-badge">
+            <div class="encounter-date-badge-month">${esc(dateMonth(enc.date))}</div>
+            <div class="encounter-date-badge-day">${esc(String(dateDay(enc.date)))}</div>
+            <div class="encounter-date-badge-year">${esc(dateYear(enc.date))}</div>
+          </div>
+          <div class="encounter-header-info">
+            <div class="encounter-type-label">${esc(enc.encounterType || 'Visit')}</div>
+            <div class="encounter-provider-name">${esc(enc.provider)}</div>
+            <span class="encounter-reason-tag">${esc(enc.reason)}</span>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="head-mq">
-      <div class="section-head"><h2 id="head-mq">Missing &amp; next questions</h2><span class="meta">Inferred from the record's text</span></div>
-      <div class="card">
-        <h3 style="margin-bottom:var(--space-sm)">Missing information</h3>
-        <div class="miss-list" id="miss-list"></div>
-        <h3 style="margin-bottom:var(--space-sm);margin-top:var(--space-lg)">Questions to ask</h3>
-        <div class="q-list" id="q-list"></div>
-        <div style="margin-top:var(--space-lg)">
-          <button class="copy-btn" id="copy-md">Copy as Markdown</button>
-          <span class="muted mono" id="copy-status" style="margin-left:var(--space-md);font-size:12px"></span>
+        <div class="encounter-card-body">
+          ${vitalsHtml}
+          ${planHtml}
+          ${followupHtml}
         </div>
-      </div>
-    </section>
+      </div>`;
+    }).join('');
+  }
 
-    <section class="section" aria-labelledby="head-drill">
-      <details class="drill" id="drill">
-        <summary>
-          <span><span id="drill-summary-text">Browse the full record</span></span>
-          <span class="meta mono" id="drill-summary-count"></span>
-        </summary>
-        <div class="drill-body">
-          <input type="search" placeholder="Search rows, events, encounters…" id="drill-search">
-          <div class="toolbar" id="drill-chips"></div>
-          <div id="drill-content"></div>
+  // ── Timeline ──────────────────────────────────────────────
+  const tlEl = document.getElementById('timeline-list');
+  const allEvents = events.length ? events : encounters.map(e => ({
+    id: e.id,
+    kind: 'visit',
+    date: e.date,
+    dateText: e.dateText,
+    title: e.encounterType || 'Visit',
+    party: e.provider,
+    detail: e.reason,
+    source: { quote: e.plan }
+  }));
+
+  if (!allEvents.length) {
+    tlEl.innerHTML = '<p style="color:var(--fg-muted);font-size:14px;">No timeline events found.</p>';
+  } else {
+    tlEl.innerHTML = allEvents.map(evt => {
+      const kindClass = evt.kind === 'visit' ? 'kind-visit' : evt.kind === 'lab' ? 'kind-lab' : 'kind-doc';
+      const quoteHtml = evt.source && evt.source.quote
+        ? `<div class="timeline-event-quote">"${esc(evt.source.quote)}…"</div>` : '';
+      return `<div class="timeline-event" data-anchor="${esc(evt.id)}">
+        <div class="timeline-event-inner">
+          <div class="timeline-event-date">${esc(evt.dateText || evt.date)}
+            <span class="kind-chip ${kindClass}">${esc(evt.kind)}</span>
+          </div>
+          <div class="timeline-event-title">${esc(evt.title)}</div>
+          ${evt.detail ? `<div class="timeline-event-detail">${esc(evt.detail)}</div>` : ''}
+          ${evt.party ? `<div class="timeline-event-party">${esc(evt.party)}</div>` : ''}
+          ${quoteHtml}
         </div>
-      </details>
-    </section>
+      </div>`;
+    }).join('');
 
-    <footer>
-      <p class="caveat" id="caveat-line"></p>
-      <p>Generated locally — your record never left your machine. The full content is embedded in this HTML and rendered in your browser. For sharing, generate from a redacted export with names, MRNs, case numbers, and policy IDs replaced or removed.</p>
-      <p>Organizational summary, not medical / legal / insurance advice. Dates, parties, values, and missing-item callouts are pattern-matched from the file's text — verify against the original record and ask your clinician, attorney, or case manager before acting on anything here.</p>
-      <p class="mono" id="footer-meta" style="margin-top:var(--space-md)"></p>
-    </footer>
-  </main>
-
-  <script>
-    const DATA = {"format":"medical-visit","subtype":"medical-visit","events":[{"id":"evt_001","kind":"visit","date":"2026-01-08","dateText":"2026-01-08","title":"Office visit","party":"Dr. Avery Lin","detail":"Annual physical and diabetes follow-up","source":{"line":null,"quote":"Continue metformin 500 mg twice daily. Order fasting lipid panel and"}},{"id":"evt_002","kind":"visit","date":"2026-02-12","dateText":"2026-02-12","title":"Telehealth visit","party":"Dr. Avery Lin","detail":"Lab follow-up and headache check","source":{"line":null,"quote":"Increase atorvastatin to 40 mg nightly. Continue metformin. Recheck"}},{"id":"evt_003","kind":"visit","date":"2026-04-12","dateText":"2026-04-12","title":"Office visit","party":"Dr. Sam Reyes, NP (covering for Dr. Lin)","detail":"Recheck after lipid + A1c follow-up labs","source":{"line":null,"quote":"Continue current regimen. Add daily walks (>30 min/day, 5 days/week)"}}],"parties":[{"name":"Dr. Avery Lin","role":"Provider","count":2},{"name":"Dr. Sam Reyes, NP (covering for Dr. Lin)","role":"Provider","count":1},{"name":"Jordan A. Sample (SYNTHETIC — DOB 1979-04-22, MRN 000-DEMO-04)","role":"Patient","count":3}],"documents":[{"id":"doc_001","name":"Form HC-2026-PT-INTAKE","kind":"form","date":null,"missing":false},{"id":"doc_002","name":"Lab order 8841-A","kind":"lab","date":null,"missing":false}],"missingItems":[{"id":"missing_followup","label":"1 encounter have no follow-up date listed","detail":"2026-04-12"}],"openQuestions":[{"id":"q_followup_2","question":"Ask the clinic whether a follow-up date was set after the 2026-04-12 office visit — none is recorded in this record.","anchor":"enc_003"},{"id":"q_med_review","question":"Ask whether the medication list still reflects what is currently being taken — 6 medications are recorded across these visits.","anchor":"med_001"}],"summary":{"rowCount":3,"period":"2026-01-08 → 2026-04-12","durationLabel":"94 days","headlineCount":[{"label":"encounters","value":3},{"label":"providers","value":2},{"label":"medications","value":6},{"label":"open questions","value":2}]},"encounters":[{"id":"enc_001","date":"2026-01-08","dateText":"2026-01-08","encounterType":"Office visit","provider":"Dr. Avery Lin","reason":"Annual physical and diabetes follow-up","vitals":[{"label":"BP","value":"138/86 mmHg"},{"label":"HR","value":"78 bpm"},{"label":"Weight","value":"198 lb"},{"label":"Height","value":"5'10\""},{"label":"Temp","value":"98.4 F"},{"label":"BMI","value":"28.4"}],"plan":"Continue metformin 500 mg twice daily. Order fasting lipid panel and","followUp":"3 months"},{"id":"enc_002","date":"2026-02-12","dateText":"2026-02-12","encounterType":"Telehealth visit","provider":"Dr. Avery Lin","reason":"Lab follow-up and headache check","vitals":[],"plan":"Increase atorvastatin to 40 mg nightly. Continue metformin. Recheck","followUp":"8 weeks"},{"id":"enc_003","date":"2026-04-12","dateText":"2026-04-12","encounterType":"Office visit","provider":"Dr. Sam Reyes, NP (covering for Dr. Lin)","reason":"Recheck after lipid + A1c follow-up labs","vitals":[{"label":"BP","value":"132/82 mmHg"},{"label":"HR","value":"74 bpm"},{"label":"Weight","value":"194 lb"}],"plan":"Continue current regimen. Add daily walks (>30 min/day, 5 days/week)","followUp":null}],"medications":[{"id":"med_001","name":"Metformin 500 mg","dose":"twice daily with meals (continued from prior)","instructions":null,"prescribedDate":null},{"id":"med_002","name":"Atorvastatin 20 mg","dose":"once daily at bedtime (continued from prior)","instructions":null,"prescribedDate":null},{"id":"med_003","name":"Atorvastatin 40 mg","dose":"once daily at bedtime (dose increased today)","instructions":null,"prescribedDate":null},{"id":"med_004","name":"Metformin 500 mg","dose":"twice daily with meals (continued)","instructions":null,"prescribedDate":null},{"id":"med_005","name":"Atorvastatin 40 mg","dose":"once daily at bedtime (continued)","instructions":null,"prescribedDate":null},{"id":"med_006","name":"Lisinopril 10 mg","dose":"once daily (NEW","instructions":"started today, for BP)","prescribedDate":null}],"rawText":"# After-Visit Summary — Riverbend Family Medicine\n\nPatient: Jordan A. Sample (SYNTHETIC — DOB 1979-04-22, MRN 000-DEMO-04)\nPrimary care: Dr. Avery Lin, MD — Riverbend Family Medicine, Demo City\nPeriod covered: 2026-01-08 to 2026-04-12\nSource: synthetic record generated for the html-anything demo pack — no\nreal patient, provider, or visit. Do not use in clinical care.\n\n## 2026-01-08 — Office visit (annual physical)\n\nProvider: Dr. Avery Lin\nReason for visit: Annual physical and diabetes follow-up\nEncounter type: Office visit\n\n### Vitals\n\n- BP: 138/86 mmHg\n- HR: 78 bpm\n- Weight: 198 lb\n- Height: 5'10\"\n- Temp: 98.4 F\n- BMI: 28.4\n\n### History of present illness (HPI)\n\nPatient reports occasional morning headaches over the past three months,\nwhich they attribute to \"not sleeping great\". No chest pain. No\nshortness of breath. Sleeps 5–6 hours/night per patient report.\n\n### Plan of care\n\nContinue metformin 500 mg twice daily. Order fasting lipid panel and\nA1c. Discussed sleep hygiene. Patient declined referral to sleep\nspecialist at this time. Reassess BP at next visit; if persistently\nelevated, will discuss adding antihypertensive.\n\nFollow-up: 3 months\n\n### Medications\n\n- Metformin 500 mg — twice daily with meals (continued from prior)\n- Atorvastatin 20 mg — once daily at bedtime (continued from prior)\n\n## 2026-02-12 — Telehealth visit\n\nProvider: Dr. Avery Lin\nReason for visit: Lab follow-up and headache check\nEncounter type: Telehealth visit\n\n### Vitals\n\n- BP (home cuff, patient-reported): 134/84 mmHg\n\n### Notes\n\nReviewed lab results from 2026-01-15 draw. LDL value of 162 mg/dL is\noutside the reference range printed on the lab report (range listed:\n<100 mg/dL). A1c at 7.4% is outside the reference range printed on the\nlab report (range listed: 4.0–5.7%, target <7.0% per the lab note).\nHeadaches reported as improved since prior visit. Patient sleeping ~7\nhours/night.\n\n### Plan of care\n\nIncrease atorvastatin to 40 mg nightly. Continue metformin. Recheck\nlipid panel and A1c in 8 weeks. Continue home BP monitoring; bring log\nto next visit.\n\nFollow-up: 8 weeks\n\n### Medications\n\n- Atorvastatin 40 mg — once daily at bedtime (dose increased today)\n\n## 2026-04-12 — Office visit (lab follow-up)\n\nProvider: Dr. Sam Reyes, NP (covering for Dr. Lin)\nReason for visit: Recheck after lipid + A1c follow-up labs\nEncounter type: Office visit\n\n### Vitals\n\n- BP: 132/82 mmHg\n- HR: 74 bpm\n- Weight: 194 lb\n\n### Notes\n\nA1c value of 7.1% on 2026-04-08 panel — outside the reference range\nprinted on the report (4.0–5.7%). LDL value of 118 mg/dL on 2026-04-08\npanel — outside the reference range printed on the report (<100\nmg/dL). Both values lower than prior draw. Patient reports tolerating\natorvastatin 40 mg without side effects. No headaches.\n\n### Plan of care\n\nContinue current regimen. Add daily walks (>30 min/day, 5 days/week)\nto plan. Recheck A1c in 12 weeks. Patient declined nutrition referral\nagain; agreed to revisit at next visit.\n\n### Medications\n\n- Metformin 500 mg — twice daily with meals (continued)\n- Atorvastatin 40 mg — once daily at bedtime (continued)\n- Lisinopril 10 mg — once daily (NEW — started today, for BP)\n\n### Follow-up\n\nRecheck labs in 12 weeks; office visit in 12 weeks if BP at target,\nsooner if patient notes side effects from lisinopril.\n\n---\n\n## Notes for the patient\n\n- Bring the home BP cuff log to the next visit.\n- The clinic mailed Form HC-2026-PT-INTAKE for the next annual update —\n  please complete before the next visit.\n- Lab order 8841-A was placed on 2026-04-12 for the next A1c + lipid\n  panel — schedule the draw 12 weeks from today.\n\n> *This is a synthetic record generated for the html-anything demo\n> pack. Patient name, MRN, providers, clinic, and clinical details are\n> fabricated. Do not use this file as a template for storing real\n> records — share only redacted exports.*\n","sourceFile":"input.md","sizeBytes":3889};
-    const HERO_TITLE = "Jordan A. Sample — synthetic care record (Q1 2026)";
-
-    const $ = (sel, root) => (root || document).querySelector(sel);
-    const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
-    const escHtml = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-    const fmtNum = n => n == null ? "—" : n.toLocaleString();
-
-    document.title = HERO_TITLE;
-    $("#hero-title").textContent = HERO_TITLE;
-
-    const SUBTYPE_LABEL = {
-      "lab-results": "Lab results",
-      "medical-visit": "Medical visit record",
-      "legal-chronology": "Legal case chronology",
-    };
-    const CAVEAT = {
-      "lab-results": "Out-of-range flags compare numbers to the reference range printed on the same row in your file — they are not a diagnosis. Bring the original lab report to your clinician and ask whether any value here changes your care.",
-      "medical-visit": "Visit dates, providers, and out-of-reference values are inferred from the file's text — bring the original record to your clinician and ask them whether anything here changes your care.",
-      "legal-chronology": "Dates, parties, filings, and deadlines are inferred from the chronology's text — verify against the original case file and ask your attorney before relying on anything here. Deadlines listed in this page are dates the document mentions; they are not legal computations of filing windows or statutes of limitations.",
-    };
-    const subtype = DATA.subtype || DATA.format;
-    $("#eyebrow-text").textContent = SUBTYPE_LABEL[subtype] || "Sensitive record";
-    $("#caveat-line").textContent = CAVEAT[subtype] || "";
-
-    const headlineSentence = () => {
-      const parts = (DATA.summary?.headlineCount || []).map(h => h.value + " " + h.label).slice(0, 4).join(" · ");
-      const period = DATA.summary?.period ? " over " + DATA.summary.period : "";
-      const sub = SUBTYPE_LABEL[subtype] || "Record";
-      return sub + " — " + parts + period + ".";
-    };
-    $("#hero-editorial").textContent = headlineSentence();
-    $("#summary-meta").textContent = (DATA.summary?.period || "") + (DATA.summary?.durationLabel ? " · " + DATA.summary.durationLabel : "");
-
-    /* ---- KPIs ---- */
-    (() => {
-      const kpis = DATA.summary?.headlineCount || [];
-      const root = $("#kpis");
-      kpis.forEach(k => {
-        const el = document.createElement("div");
-        el.className = "kpi";
-        el.innerHTML = '<div class="label">' + escHtml(k.label) + '</div>' +
-          '<div class="value">' + fmtNum(k.value) + '</div>';
-        root.appendChild(el);
+    // Click to scroll to encounter
+    tlEl.querySelectorAll('.timeline-event').forEach(el => {
+      el.addEventListener('click', () => {
+        const anchor = el.dataset.anchor;
+        const target = document.getElementById(anchor);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
-    })();
+    });
+  }
 
-    /* ---- Case header (legal only) ---- */
-    if (subtype === "legal-chronology" && DATA.caseHeader) {
-      $("#case-section").hidden = false;
-      const fields = [
-        ["Caption", DATA.caseHeader.caption],
-        ["Docket", DATA.caseHeader.docket],
-        ["Court", DATA.caseHeader.court],
-        ["Matter", DATA.caseHeader.matter],
-        ["Period", DATA.summary?.period],
-      ];
-      const root = $("#case-card");
-      fields.forEach(([label, value]) => {
-        const el = document.createElement("div");
-        el.className = "field";
-        el.innerHTML = '<div class="label">' + escHtml(label) + '</div>' +
-          '<div class="value">' + escHtml(value || "(not present in this record)") + '</div>';
-        root.appendChild(el);
-      });
-    }
+  // ── Parties ───────────────────────────────────────────────
+  const partiesBody = document.getElementById('parties-body');
+  if (!parties.length) {
+    partiesBody.innerHTML = '<p style="color:var(--fg-muted);font-size:14px;">No parties extracted from this record.</p>';
+  } else {
+    partiesBody.innerHTML = `
+      <table class="fact-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th style="text-align:right;">Encounters</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${parties.map(p => `
+            <tr>
+              <td>${esc(p.name)}</td>
+              <td><span class="role-badge role-${p.role ? p.role.toLowerCase() : 'other'}">${esc(p.role)}</span></td>
+              <td style="text-align:right;"><span class="count-badge">${p.count !== undefined ? p.count : '—'}</span></td>
+            </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }
 
-    /* ---- Timeline ---- */
-    (() => {
-      const events = (DATA.events || []).slice().sort((a, b) => (a.date || "").localeCompare(b.date || ""));
-      const root = $("#timeline");
-      $("#tl-meta").textContent = events.length + " event" + (events.length === 1 ? "" : "s");
-      events.forEach(e => {
-        const el = document.createElement("div");
-        el.className = "tl-row";
-        el.innerHTML = '<div class="date">' + escHtml(e.dateText || e.date || "(undated)") + '</div>' +
-          '<div class="body">' +
-            '<span class="kind">' + escHtml(e.kind) + '</span>' +
-            escHtml(e.title) +
-            (e.party ? '<div class="party">' + escHtml(e.party) + '</div>' : '') +
-            (e.detail ? '<div class="detail">' + escHtml(e.detail) + '</div>' : '') +
-          '</div>';
-        root.appendChild(el);
-      });
-    })();
+  // ── Medications ───────────────────────────────────────────
+  const medList = document.getElementById('med-list');
+  if (!medications.length) {
+    medList.innerHTML = '<p style="color:var(--fg-muted);font-size:14px;">No medications referenced in this record.</p>';
+  } else {
+    medList.innerHTML = medications.map(m => `
+      <div class="med-row">
+        <div class="med-icon">Rx</div>
+        <div class="med-info">
+          <div class="med-name">${esc(m.name)}</div>
+          ${m.dose ? `<div class="med-dose">${esc(m.dose)}</div>` : ''}
+          ${m.instructions ? `<div class="med-instructions">${esc(m.instructions)}</div>` : ''}
+          ${m.prescribedDate ? `<div class="med-instructions">Prescribed: <span style="font-family:var(--font-mono)">${esc(m.prescribedDate)}</span></div>` : ''}
+        </div>
+        <span class="inferred-chip">Inferred</span>
+      </div>`).join('');
+  }
 
-    /* ---- Out-of-reference panel (lab only) ---- */
-    if (subtype === "lab-results") {
-      $("#oor-section").hidden = false;
-      const oor = DATA.outOfRange || [];
-      const root = $("#oor-card");
-      if (oor.length === 0) {
-        root.innerHTML = '<p class="empty-state">No values fall outside the reference ranges printed in this file.</p>';
-      } else {
-        oor.forEach(r => {
-          const card = document.createElement("div");
-          card.className = "callout-card";
-          const dirLabel = r.direction === "above" ? "above" : "below";
-          card.innerHTML =
-            '<div class="head">' +
-              '<div><span class="test">' + escHtml(r.test) + '</span>' +
-                ' <span class="pill ' + r.direction + '">' + dirLabel + ' band</span>' +
-                ' <span class="pill inferred">Inferred</span></div>' +
-              '<div class="value">' + escHtml(r.valueText) + (r.unit ? " " + escHtml(r.unit) : "") + '</div>' +
-            '</div>' +
-            '<div class="ref">Reference printed on row: ' + escHtml(r.referenceText || "(none)") + '</div>' +
-            '<div class="meta">' + (r.collectedAt ? "Drawn " + escHtml(r.collectedAt) : "Date not present") +
-              (r.orderingProvider ? " · Ordered by " + escHtml(r.orderingProvider) : "") +
-              (r.lab ? " · " + escHtml(r.lab) : "") + '</div>';
-          root.appendChild(card);
-        });
-      }
-    }
+  // ── Documents ─────────────────────────────────────────────
+  const docList = document.getElementById('doc-list');
+  if (!documents.length) {
+    docList.innerHTML = '<p style="color:var(--fg-muted);font-size:14px;">No documents referenced in this record.</p>';
+  } else {
+    docList.innerHTML = documents.map(doc => `
+      <div class="doc-row">
+        <span class="doc-id">${esc(doc.id)}</span>
+        <span class="doc-name">${esc(doc.name)}</span>
+        <span class="doc-kind">${esc(doc.kind)}</span>
+        ${doc.date ? `<span style="font-family:var(--font-mono);font-size:11px;color:var(--fg-muted)">${esc(doc.date)}</span>` : ''}
+        ${doc.missing
+          ? '<span class="missing-badge">not present in this record</span>'
+          : '<span class="present-badge">present</span>'}
+      </div>`).join('');
+  }
 
-    /* ---- Trend sparklines (lab only) ---- */
-    if (subtype === "lab-results" && (DATA.trends || []).length > 0) {
-      $("#trends-section").hidden = false;
-      const root = $("#trends");
-      DATA.trends.forEach(t => {
-        const W = 240, H = 60, PAD = 6;
-        const pts = t.points;
-        const ys = pts.map(p => p.value);
-        const lo = Math.min(...ys, t.referenceLow ?? Infinity);
-        const hi = Math.max(...ys, t.referenceHigh ?? -Infinity);
-        const yMin = isFinite(lo) ? lo : Math.min(...ys);
-        const yMax = isFinite(hi) ? hi : Math.max(...ys);
-        const span = yMax - yMin || 1;
-        const x = i => PAD + (W - 2 * PAD) * (i / Math.max(pts.length - 1, 1));
-        const y = v => H - PAD - (H - 2 * PAD) * ((v - yMin) / span);
-        const bandTop = t.referenceHigh != null ? y(t.referenceHigh) : 0;
-        const bandBot = t.referenceLow != null ? y(t.referenceLow) : H;
-        const bandRect = (t.referenceLow != null || t.referenceHigh != null)
-          ? '<rect x="' + PAD + '" y="' + Math.min(bandTop, bandBot) + '" width="' + (W - 2 * PAD) + '" height="' + Math.abs(bandTop - bandBot) + '" fill="rgba(16,185,129,.10)"/>'
-          : '';
-        const path = pts.map((p, i) => (i === 0 ? "M" : "L") + x(i).toFixed(1) + " " + y(p.value).toFixed(1)).join(" ");
-        const dots = pts.map((p, i) => '<circle cx="' + x(i).toFixed(1) + '" cy="' + y(p.value).toFixed(1) + '" r="3" fill="var(--primary)"/>').join("");
-        const refText = (t.referenceLow != null && t.referenceHigh != null) ? t.referenceLow + "–" + t.referenceHigh
-          : (t.referenceHigh != null ? "<" + t.referenceHigh : (t.referenceLow != null ? ">" + t.referenceLow : ""));
-        const latest = pts[pts.length - 1];
-        const div = document.createElement("div");
-        div.className = "trend";
-        div.innerHTML = '<h4>' + escHtml(t.test) + '</h4>' +
-          '<div class="reading">' + (refText ? "Reference: " + escHtml(refText) + (t.unit ? " " + escHtml(t.unit) : "") : "No reference range on row") + '</div>' +
-          '<svg viewBox="0 0 ' + W + ' ' + H + '">' +
-            bandRect +
-            '<path d="' + path + '" fill="none" stroke="var(--primary)" stroke-width="1.6"/>' +
-            dots +
-          '</svg>' +
-          '<div class="latest">Latest: ' + escHtml(latest.value + (t.unit ? " " + t.unit : "")) + (latest.date ? " · " + escHtml(latest.date) : "") + '</div>';
-        root.appendChild(div);
-      });
-    }
+  // ── Missing & Questions ───────────────────────────────────
+  const missingBody = document.getElementById('missing-body');
+  const missingHtml = missingItems.length
+    ? `<div class="caveat-box" style="margin-bottom:var(--space-xl)">
+        <div class="caveat-box-title">Missing information <span class="inferred-chip" style="vertical-align:middle;">Inferred</span></div>
+        ${missingItems.map(mi => `
+          <div class="missing-item">
+            <div class="missing-dot"></div>
+            <div>
+              <div class="missing-text">${esc(mi.label)}</div>
+              ${mi.detail ? `<div class="missing-detail">${esc(mi.detail)}</div>` : ''}
+            </div>
+          </div>`).join('')}
+      </div>`
+    : `<div class="caveat-box" style="margin-bottom:var(--space-xl)"><div class="caveat-box-title">Missing information</div><p style="font-size:14px;color:var(--fg-muted);">Nothing obvious missing in this record.</p></div>`;
 
-    /* ---- Encounters (medical only) ---- */
-    if (subtype === "medical-visit") {
-      $("#encounters-section").hidden = false;
-      const root = $("#encounters");
-      const encounters = DATA.encounters || [];
-      $("#enc-meta").textContent = encounters.length + " encounter" + (encounters.length === 1 ? "" : "s");
-      encounters.forEach(e => {
-        const card = document.createElement("div");
-        card.className = "encounter";
-        card.innerHTML =
-          '<div class="head">' +
-            '<span class="date">' + escHtml(e.date || "(undated)") + '</span>' +
-            (e.encounterType ? '<span class="type">' + escHtml(e.encounterType) + '</span>' : '') +
-          '</div>' +
-          (e.provider ? '<div class="meta-row">Provider: ' + escHtml(e.provider) + '</div>' : '') +
-          (e.reason ? '<div class="reason">' + escHtml(e.reason) + '</div>' : '') +
-          (e.vitals && e.vitals.length ? '<div class="vitals">' + e.vitals.map(v => '<span class="vital">' + escHtml(v.label) + ': ' + escHtml(v.value) + '</span>').join("") + '</div>' : '') +
-          (e.plan ? '<div class="plan">Plan: ' + escHtml(e.plan) + '</div>' : '') +
-          (e.followUp ? '<div class="meta-row" style="margin-top:var(--space-sm)">Follow-up: ' + escHtml(e.followUp) + '</div>' : '<div class="meta-row" style="margin-top:var(--space-sm)"><span class="pill missing">no follow-up date in record</span></div>');
-        root.appendChild(card);
-      });
-    }
+  const questionsHtml = openQuestions.length
+    ? `<div class="caveat-box">
+        <div class="caveat-box-title">Questions to ask at your next appointment</div>
+        ${openQuestions.map((q, i) => `
+          <div class="question-item">
+            <div class="question-marker">Q${i+1}</div>
+            <div class="question-text">${esc(q.question)}</div>
+          </div>`).join('')}
+      </div>`
+    : `<div class="caveat-box"><div class="caveat-box-title">Questions to ask</div><p style="font-size:14px;color:var(--fg-muted);">No follow-up questions surfaced from this record — bring it to your clinician for a fuller review.</p></div>`;
 
-    /* ---- Medications (medical only) ---- */
-    if (subtype === "medical-visit" && (DATA.medications || []).length > 0) {
-      $("#meds-section").hidden = false;
-      const root = $("#meds");
-      DATA.medications.forEach(m => {
-        const el = document.createElement("div");
-        el.className = "med";
-        el.innerHTML = '<div><span class="name">' + escHtml(m.name) + '</span>' +
-          (m.dose ? ' <span class="dose">' + escHtml(m.dose) + '</span>' : '') +
-          ' <span class="pill inferred">Inferred</span></div>' +
-          (m.instructions ? '<span class="ix">' + escHtml(m.instructions) + '</span>' : '');
-        root.appendChild(el);
-      });
-    }
+  missingBody.innerHTML = missingHtml + questionsHtml;
 
-    /* ---- Filings + Deadlines (legal only) ---- */
-    if (subtype === "legal-chronology") {
-      const filings = DATA.filings || [];
-      if (filings.length > 0) {
-        $("#filings-section").hidden = false;
-        $("#filings-meta").textContent = filings.length + " filing" + (filings.length === 1 ? "" : "s");
-        const root = $("#filings");
-        filings.forEach(f => {
-          const el = document.createElement("div");
-          el.className = "list-row";
-          el.innerHTML = '<div><span class="name">' + escHtml(f.title) + '</span>' +
-            (f.party ? ' <span class="role">' + escHtml(f.party) + '</span>' : '') + '</div>' +
-            '<div class="count">' + escHtml(f.date || "(undated)") + '</div>';
-          root.appendChild(el);
-        });
-      }
-      const deadlines = DATA.deadlines || [];
-      if (deadlines.length > 0) {
-        $("#deadlines-section").hidden = false;
-        const root = $("#deadlines");
-        deadlines.forEach(d => {
-          const el = document.createElement("div");
-          el.className = "deadline";
-          const rel = d.daysFromToday == null ? "—"
-            : (d.daysFromToday === 0 ? "today"
-              : d.daysFromToday > 0 ? "in " + d.daysFromToday + "d"
-              : Math.abs(d.daysFromToday) + "d ago");
-          el.innerHTML = '<div class="d">' + escHtml(d.date) + '</div>' +
-            '<div class="rel">' + escHtml(rel) + '</div>' +
-            '<div class="src">' + escHtml(d.source) + ' <span class="pill inferred">Inferred</span></div>';
-          root.appendChild(el);
-        });
-      }
-    }
+  // ── Drill-down ────────────────────────────────────────────
+  const drillToggle = document.getElementById('drill-toggle');
+  const drillPanel  = document.getElementById('drill-panel');
+  drillToggle.addEventListener('click', () => {
+    const open = drillPanel.classList.toggle('open');
+    drillToggle.setAttribute('aria-expanded', open);
+  });
 
-    /* ---- Parties + Documents ---- */
-    (() => {
-      const root = $("#parties");
-      const parties = DATA.parties || [];
-      $("#parties-meta").textContent = parties.length + " " + (parties.length === 1 ? "party" : "parties");
-      if (parties.length === 0) {
-        root.innerHTML = '<p class="empty-state">No parties extracted from this record.</p>';
-      } else {
-        parties.forEach(p => {
-          const el = document.createElement("div");
-          el.className = "list-row";
-          el.innerHTML = '<div><span class="name">' + escHtml(p.name) + '</span></div>' +
-            '<div><span class="role">' + escHtml(p.role) + '</span> <span class="count">×' + p.count + '</span></div>';
-          root.appendChild(el);
-        });
-      }
-    })();
+  // Build drill items from encounters + events + medications
+  const drillItems = [];
+  encounters.forEach(enc => {
+    drillItems.push({
+      id: enc.id,
+      kind: 'visit',
+      date: enc.date || enc.dateText,
+      title: `${enc.encounterType || 'Visit'} — ${enc.provider}`,
+      text: [
+        enc.reason,
+        enc.plan,
+        arr(enc.vitals).map(v => `${v.label}: ${v.value}`).join(' '),
+        enc.followUp ? `Follow-up: ${enc.followUp}` : ''
+      ].filter(Boolean).join('\n')
+    });
+  });
+  medications.forEach(m => {
+    drillItems.push({
+      id: m.id,
+      kind: 'medication',
+      date: m.prescribedDate || '',
+      title: `Medication: ${m.name}`,
+      text: [m.dose, m.instructions].filter(Boolean).join(' ')
+    });
+  });
+  documents.forEach(doc => {
+    drillItems.push({
+      id: doc.id,
+      kind: 'document',
+      date: doc.date || '',
+      title: `Document: ${doc.name}`,
+      text: `${doc.kind}${doc.missing ? ' — not present in this record' : ' — present'}`
+    });
+  });
 
-    (() => {
-      const root = $("#documents");
-      const docs = DATA.documents || [];
-      $("#docs-meta").textContent = docs.length + " document" + (docs.length === 1 ? "" : "s");
-      if (docs.length === 0) {
-        root.innerHTML = '<p class="empty-state">No documents referenced in this record.</p>';
-      } else {
-        docs.forEach(d => {
-          const el = document.createElement("div");
-          el.className = "list-row";
-          el.innerHTML = '<div><span class="name">' + escHtml(d.name) + '</span> <span class="role">' + escHtml(d.kind) + '</span></div>' +
-            '<div>' + (d.missing ? '<span class="pill missing">not present in this record</span>' : '<span class="pill present">present</span>') + '</div>';
-          root.appendChild(el);
-        });
-      }
-    })();
+  // Filter chips
+  const kinds = [...new Set(drillItems.map(d => d.kind))];
+  const filterChipsEl = document.getElementById('filter-chips');
+  let activeFilters = new Set(['all']);
+  filterChipsEl.innerHTML = `<button class="filter-chip active" data-kind="all">All</button>` +
+    kinds.map(k => `<button class="filter-chip" data-kind="${esc(k)}">${esc(k)}</button>`).join('');
 
-    /* ---- Missing items + Open questions ---- */
-    (() => {
-      const missRoot = $("#miss-list");
-      const items = DATA.missingItems || [];
-      if (items.length === 0) {
-        missRoot.innerHTML = '<p class="empty-state">Nothing obvious missing in this record.</p>';
-      } else {
-        items.forEach(m => {
-          const el = document.createElement("div");
-          el.className = "miss";
-          el.innerHTML = '<div class="lbl">' + escHtml(m.label) + ' <span class="pill inferred">Inferred</span></div>' +
-            (m.detail ? '<div class="det">' + escHtml(m.detail) + '</div>' : '');
-          missRoot.appendChild(el);
-        });
-      }
-      const qRoot = $("#q-list");
-      const qs = DATA.openQuestions || [];
-      if (qs.length === 0) {
-        qRoot.innerHTML = '<p class="empty-state">No follow-up questions surfaced from this record — bring it to your provider / attorney for a fuller review.</p>';
-      } else {
-        qs.forEach(q => {
-          const el = document.createElement("div");
-          el.className = "q";
-          el.innerHTML = escHtml(q.question);
-          qRoot.appendChild(el);
-        });
-      }
-    })();
+  filterChipsEl.querySelectorAll('.filter-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const kind = btn.dataset.kind;
+      filterChipsEl.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilters = kind === 'all' ? new Set(['all']) : new Set([kind]);
+      renderDrillResults();
+    });
+  });
 
-    /* ---- Copy as Markdown ---- */
-    $("#copy-md").addEventListener("click", async () => {
-      const lines = [];
-      lines.push("# " + HERO_TITLE);
-      lines.push("");
-      lines.push("> " + headlineSentence());
-      lines.push("");
-      if (subtype === "legal-chronology" && DATA.caseHeader) {
-        const c = DATA.caseHeader;
-        if (c.caption) lines.push("**Caption:** " + c.caption);
-        if (c.docket) lines.push("**Docket:** " + c.docket);
-        if (c.court) lines.push("**Court:** " + c.court);
-        lines.push("");
-      }
-      lines.push("## Timeline");
-      (DATA.events || []).slice().sort((a, b) => (a.date || "").localeCompare(b.date || "")).forEach(e => {
-        lines.push("- " + (e.dateText || e.date || "(undated)") + " · [" + e.kind + "] " + e.title + (e.party ? " (" + e.party + ")" : ""));
-      });
-      lines.push("");
-      lines.push("## Parties");
-      (DATA.parties || []).forEach(p => lines.push("- " + p.name + " — " + p.role + " (×" + p.count + ")"));
-      lines.push("");
-      lines.push("## Documents");
-      (DATA.documents || []).forEach(d => lines.push("- " + d.name + " — " + d.kind + (d.missing ? " (not present in this record)" : "")));
-      lines.push("");
-      lines.push("## Missing information");
-      (DATA.missingItems || []).forEach(m => lines.push("- " + m.label + (m.detail ? " — " + m.detail : "")));
-      lines.push("");
-      lines.push("## Questions to ask");
-      (DATA.openQuestions || []).forEach(q => lines.push("- " + q.question));
-      lines.push("");
-      lines.push("---");
-      lines.push("");
-      lines.push("*" + (CAVEAT[subtype] || "Organizational summary, not advice.") + "*");
-      const md = lines.join("\n");
-      try {
-        await navigator.clipboard.writeText(md);
-        $("#copy-status").textContent = "copied";
-        setTimeout(() => { $("#copy-status").textContent = ""; }, 2000);
-      } catch {
-        $("#copy-status").textContent = "select-and-copy below ↓";
-        const ta = document.createElement("textarea");
-        ta.value = md;
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand("copy"); $("#copy-status").textContent = "copied"; } catch {}
-        document.body.removeChild(ta);
-      }
+  const drillSearch = document.getElementById('drill-search');
+  drillSearch.addEventListener('input', renderDrillResults);
+
+  function highlight(text, query) {
+    if (!query) return esc(text);
+    const safeQ = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = new RegExp(`(${safeQ})`, 'gi');
+    return esc(text).replace(re, '<mark class="search-highlight">$1</mark>');
+  }
+
+  function renderDrillResults() {
+    const q = drillSearch.value.trim().toLowerCase();
+    const filterKind = activeFilters.has('all') ? null : [...activeFilters][0];
+    const drillResultsEl = document.getElementById('drill-results');
+
+    const filtered = drillItems.filter(item => {
+      const kindOk = !filterKind || item.kind === filterKind;
+      const searchOk = !q || (item.title + ' ' + item.text + ' ' + item.date).toLowerCase().includes(q);
+      return kindOk && searchOk;
     });
 
-    /* ---- Drill-down ---- */
-    (() => {
-      const content = $("#drill-content");
-      const search = $("#drill-search");
-      const chips = $("#drill-chips");
-      let activeKind = "all";
-      let allItems = [];
-      let columns = [];
+    if (!filtered.length) {
+      drillResultsEl.innerHTML = '<div class="no-results">No records match your search.</div>';
+      return;
+    }
 
-      if (subtype === "lab-results") {
-        $("#drill-summary-text").textContent = "Browse all lab rows";
-        $("#drill-summary-count").textContent = (DATA.rows || []).length + " rows";
-        columns = ["test", "panel", "value", "unit", "reference", "direction", "date", "provider"];
-        allItems = (DATA.rows || []).map(r => ({
-          kind: r.direction,
-          fields: {
-            test: r.test, panel: r.panel || "—",
-            value: r.valueText, unit: r.unit,
-            reference: r.referenceText || "—",
-            direction: r.direction === "in-range" ? "in range" : r.direction === "no-range" ? "no range" : r.direction,
-            date: r.collectedAt || "—",
-            provider: r.orderingProvider || "—",
-          },
-          searchText: [r.test, r.panel, r.valueText, r.unit, r.referenceText, r.direction, r.collectedAt, r.orderingProvider, r.lab].filter(Boolean).join(" ").toLowerCase(),
-        }));
-        const kinds = ["all", "above", "below", "in-range", "no-range", "non-numeric"];
-        chips.innerHTML = kinds.map(k => '<button class="chip ' + (k === "all" ? "active" : "") + '" data-kind="' + k + '">' + k + '</button>').join("");
-      } else {
-        $("#drill-summary-text").textContent = "Browse the full record";
-        $("#drill-summary-count").textContent = (DATA.events || []).length + " events";
-        const events = (DATA.events || []).slice().sort((a, b) => (a.date || "").localeCompare(b.date || ""));
-        allItems = events.map(e => ({
-          kind: e.kind,
-          fields: {
-            date: e.dateText || e.date || "—",
-            kind: e.kind,
-            title: e.title,
-            party: e.party || "—",
-            detail: e.detail || "—",
-          },
-          quote: e.source && e.source.quote,
-          searchText: [e.dateText, e.title, e.party, e.detail, e.source && e.source.quote].filter(Boolean).join(" ").toLowerCase(),
-        }));
-        const kinds = Array.from(new Set(["all", ...allItems.map(i => i.kind)]));
-        chips.innerHTML = kinds.map(k => '<button class="chip ' + (k === "all" ? "active" : "") + '" data-kind="' + k + '">' + k + '</button>').join("");
-      }
-
-      const render = () => {
-        const q = search.value.trim().toLowerCase();
-        const filtered = allItems.filter(item =>
-          (activeKind === "all" || item.kind === activeKind) &&
-          (q === "" || item.searchText.includes(q))
-        ).slice(0, 500);
-        if (subtype === "lab-results") {
-          let html = '<table class="lab-table"><thead><tr>' +
-            columns.map(c => '<th>' + escHtml(c) + '</th>').join("") +
-            '</tr></thead><tbody>';
-          filtered.forEach(item => {
-            const cls = item.kind === "above" ? "out" : item.kind === "below" ? "below-row" : "";
-            html += '<tr class="' + cls + '">' +
-              columns.map(c => '<td' + (["value", "date"].includes(c) ? ' class="num"' : '') + '>' + escHtml(item.fields[c] || "—") + '</td>').join("") +
-              '</tr>';
-          });
-          html += '</tbody></table>';
-          if (filtered.length === 0) html = '<p class="empty-state">No rows match your filter.</p>';
-          content.innerHTML = html;
-        } else {
-          let html = '<table class="row-table"><thead><tr><th>date</th><th>kind</th><th>title</th><th>party</th><th>detail</th></tr></thead><tbody>';
-          filtered.forEach(item => {
-            html += '<tr><td class="num">' + escHtml(item.fields.date) + '</td>' +
-              '<td><span class="pill in-range">' + escHtml(item.fields.kind) + '</span></td>' +
-              '<td>' + escHtml(item.fields.title) + '</td>' +
-              '<td>' + escHtml(item.fields.party) + '</td>' +
-              '<td>' + escHtml(item.fields.detail) + '</td></tr>';
-          });
-          html += '</tbody></table>';
-          if (filtered.length === 0) html = '<p class="empty-state">No rows match your filter.</p>';
-          content.innerHTML = html;
-        }
-      };
-      render();
-      search.addEventListener("input", render);
-      chips.addEventListener("click", e => {
-        const btn = e.target.closest("button[data-kind]");
-        if (!btn) return;
-        chips.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
-        btn.classList.add("active");
-        activeKind = btn.getAttribute("data-kind");
-        render();
-      });
-    })();
-
-    /* ---- Footer meta ---- */
-    $("#footer-meta").textContent = (DATA.sourceFile || "input") + " · " + (DATA.sizeBytes ? Math.round(DATA.sizeBytes / 1024) + " KB" : "");
-  </script>
-</body>
-</html>
+    drillResultsEl.innerHTML = filtered.map(item => `
+      <div class="drill-result">
+        <div class="drill-result-header" data-id="${esc(item.id)}">
+          ${item.date ? `<span class="drill-result-date">${esc(item.date)}</span>` : ''}
+          <span class="drill-result-title">${highlight(item.title, q)}</span>
+          <span class="kind-chip ${item.kind === 'visit' ? 'kind-visit' : item.kind === 'medication' ? 'kind-visit' : 'kind-doc'}" style="font-size:10px;">${esc(item.kind)}</span>
+          <span style="color:var(--fg-muted);font-size:12px;margin-left:auto;">▼</span>
+        </div>
+        <div class="drill-result-body" id="drb-${esc(item.id)}">
+          <pre>${highlight(item.text, q)}</pre>
+        </div>
+      </div>`

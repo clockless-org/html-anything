@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-ha-style="paper">
+<html lang="en" data-ha-style="document">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>const DATA = {"markdown":"RFC\\-014: Pricing Page V2 — Decision Memo\n\n*Synthetic fixture for html\\-anything\\. All names, numbers, customer quotes, deal sizes, and internal projects in this memo are invented\\.*\n\n__Author__\n\nRiley Chen \\(synthetic, Product\\)\n\n__Reviewers__\n\nAsha Vora \\(Eng\\), Marcus Liang \\(GTM\\), Devon Park \\(Finance\\)\n\n__Status__\n\nDecided — implementation kickoff Q2 2026\n\n__Decision date__\n\n2026\\-04\\-12\n\n__Last updated__\n\n2026\\-04\\-22\n\n__Related__\n\nRFC\\-009 \\(free\\-tier kill\\), PROD\\-882 \\(pricing page redesign\\)\n\n# TL;DR\n\nWe are replacing the current 4\\-tier pricing page with a 2\\-tier model \\(Starter, Team\\) plus a contact\\-sales Enterprise track\\. The change is driven by three findings: \\(1\\) the Pro tier captured only 7% of new signups in Q1 but consumed 31% of pricing\\-page time\\-on\\-page, \\(2\\) support tickets tagged 'pricing confusion' rose 2\\.4x year\\-over\\-year, and \\(3\\) every winning competitor in our segment has consolidated to ≤ 3 published tiers\\. Expected impact: \\+18% activation rate on the pricing page, neutral net revenue in 2 quarters, \\+6% by Q4 2026\\.\n\n# 1\\. Context\n\nThe current pricing page \\(v1, shipped 2024\\) presents Free, Starter, Pro, and Team tiers\\. Free was killed in RFC\\-009 but the Pro tier remains — it was originally pitched as the 'power individual' segment between Starter and Team\\.\n\nThree things changed since 2024 that invalidate the original pitch:\n\nFirst, the prosumer segment we expected to fill Pro never showed up\\. Q1 2026 signups split 71% Starter, 7% Pro, 22% Team\\. Pro is a quiet middle that almost no one chooses on first contact\\.\n\nSecond, the support cost of the four\\-tier table is real\\. We logged 412 'pricing confusion' tickets in Q1 2026 versus 173 in Q1 2025\\. The most common confusion: customers picked Pro thinking it included multi\\-seat features \\(it does not\\) and downgraded within 30 days\\.\n\nThird, every competitor with positive growth in our segment ships ≤ 3 published tiers\\. The two that grew fastest \\(Linear, Vercel\\) ship 2 \\+ 'enterprise'\\. The cognitive load argument is now backed by a market signal\\.\n\n*“I picked Pro because it sounded important\\. Then I realised it gave me nothing my coworkers could actually use, and I downgraded the next day\\.” — synthetic customer interview, March 2026*\n\n# 2\\. Proposal\n\nReplace the four\\-tier table with two published tiers plus a contact\\-sales Enterprise option:\n\n## 2\\.1 Tiers\n\nStarter — single user, $19/mo\\. Existing Starter customers grandfathered\\.\n\nTeam — up to 25 seats, $39/seat/mo\\. Existing Team customers see no price change\\.\n\nEnterprise — contact sales\\. SSO, audit log, custom DPA, named support\\.\n\n## 2\\.2 What happens to Pro customers\n\nThere are 1,184 active Pro customers\\. They will be migrated as follows: solo Pro accounts → grandfathered Starter at current Pro price for 12 months, then offered Starter or Team upgrade with a 20% loyalty discount\\. Multi\\-seat Pro accounts \\(these exist accidentally; the tier was never supposed to allow more than one seat\\) → free upgrade to Team at Pro pricing for 6 months\\.\n\n## 2\\.3 Page design changes\n\nThree\\-column layout with the Team column visually emphasised \\(brand orange border, ‘Most popular’ tag\\)\\. Feature comparison table simplified from 47 rows to 19\\. FAQ section reduced from 23 questions to 8, with the four highest\\-traffic ones promoted above the fold\\.\n\n# 3\\. Alternatives Considered\n\n<b>3\\.1 Keep four tiers but rename Pro\\.</b> Cheaper to ship, but leaves the cognitive\\-load problem unresolved and the migration risk in place\\. Rejected because the data shows the problem is structural, not naming\\.\n\n<b>3\\.2 Single tier \\+ usage\\-based\\.</b> Considered seriously\\. Strong long\\-term direction; wrong short\\-term move because our billing infrastructure does not yet support metered components and we are not staffed to build it before Q4\\. Revisit in 2027\\.\n\n<b>3\\.3 Three published tiers \\(Starter, Team, Business\\)\\.</b> Closest to v1 minus Pro\\. Rejected because adding a Business tier reintroduces the 'middle confusion' pattern we are trying to remove\\. Two\\-plus\\-Enterprise is structurally cleaner\\.\n\n# 4\\. Risks & Mitigations\n\n<b>4\\.1 Pro customer churn\\.</b> The migration plan extends current pricing for 6–12 months, which we project converts 78% to Starter or Team and 22% to churn\\. Worst\\-case \\(50% churn\\) loses ~$680K ARR\\. Mitigation: dedicated CSM outreach to the top 100 Pro accounts\\.\n\n<b>4\\.2 Sales pipeline impact\\.</b> Removing the published Pro tier may reduce inbound qualification accuracy\\. Mitigation: run a qualification quiz on the pricing page \\(already prototyped in PROD\\-851\\) and route Pro\\-shaped leads directly to AEs\\.\n\n<b>4\\.3 Reputational risk\\.</b> Pricing changes draw attention\\. Mitigation: ship a public\\-blog post explaining the change before the page goes live, with a dedicated migration FAQ\\.\n\n# 5\\. Decisions\n\n__D\\-1__\n\nAdopt 2\\-tier\\-plus\\-Enterprise model\\. Approved 2026\\-04\\-12\\.\n\n__D\\-2__\n\nPro tier sunset in waves: solo accounts first, multi\\-seat second\\.\n\n__D\\-3__\n\nMigration window: 12 months for solo, 6 months for multi\\-seat\\.\n\n__D\\-4__\n\nLoyalty discount: 20% off list for migrating Pro customers, 12 months\\.\n\n__D\\-5__\n\nQ1 2027 review for usage\\-based tier feasibility \\(links to RFC\\-014A\\)\\.\n\n# 6\\. Action Items\n\n__Action__\n\n__Owner__\n\n__Due__\n\n__Status__\n\nUpdate pricing page comp table to 19 rows\n\nRiley Chen\n\n2026\\-05\\-15\n\nIn progress\n\nMigration email sequence \\+ drip\n\nMarcus Liang\n\n2026\\-05\\-22\n\nDrafted\n\nCSM outreach plan for top 100 Pro accounts\n\nDevon Park\n\n2026\\-05\\-08\n\nDone\n\nPricing\\-page qualification quiz wiring\n\nAsha Vora\n\n2026\\-06\\-02\n\nNot started\n\nPublic blog post \\+ migration FAQ\n\nRiley Chen\n\nPre\\-launch \\-7d\n\nOutline\n\nBilling infra spike for usage\\-based \\(RFC\\-014A\\)\n\nAsha Vora\n\n2026\\-09\\-30\n\nScoped\n\n# 7\\. Open Questions\n\nQ1\\. Should the loyalty discount apply for 12 or 18 months? Current proposal is 12; Marcus argues 18 to soften the change\\.\n\nQ2\\. Do we publish per\\-seat Team pricing or 'starting at $39/seat'? Finance prefers the latter; design prefers the former\\.\n\nQ3\\. Enterprise floor — is $24K/year the right minimum? Current AE feedback is the floor is too low and is attracting Team\\-shaped accounts that should self\\-serve\\.\n\nQ4\\. Migration FAQ tone — should the post acknowledge that the Pro tier was a strategic miss, or frame the change as a forward\\-looking simplification?\n\n# Appendix A — Data references\n\n*All numbers in this synthetic memo are invented and intended to mimic the shape of real internal pricing analyses, not the substance\\.*\n\nA\\.1 Q1 2026 signup mix: 71% Starter / 7% Pro / 22% Team \\(n = 14,732 signups, synthetic\\)\n\nA\\.2 Pricing\\-confusion ticket volume: 412 \\(Q1 2026\\) vs 173 \\(Q1 2025\\), \\+138% YoY\n\nA\\.3 Pro tier active customers: 1,184 — of which 1,061 solo, 123 multi\\-seat \\(synthetic\\)\n\nA\\.4 Projected ARR impact: \\-$210K \\(months 1–6\\), neutral by month 9, \\+6% baseline by Q4 2026\n\nA\\.5 Competitor pricing\\-tier counts \\(synthetic survey\\): Linear 2, Vercel 2\\+E, Notion 3, Asana 4, Monday 5\n\n","plainText":"RFC\\-014: Pricing Page V2 — Decision Memo Synthetic fixture for html\\-anything\\. All names, numbers, customer quotes, deal sizes, and internal projects in this memo are invented\\. Author Riley Chen \\(synthetic, Product\\) Reviewers Asha Vora \\(Eng\\), Marcus Liang \\(GTM\\), Devon Park \\(Finance\\) Status Decided — implementation kickoff Q2 2026 Decision date 2026\\-04\\-12 Last updated 2026\\-04\\-22 Related RFC\\-009 \\(free\\-tier kill\\), PROD\\-882 \\(pricing page redesign\\) TL;DR We are replacing the current 4\\-tier pricing page with a 2\\-tier model \\(Starter, Team\\) plus a contact\\-sales Enterprise track\\. The change is driven by three findings: \\(1\\) the Pro tier captured only 7% of new signups in Q1 but consumed 31% of pricing\\-page time\\-on\\-page, \\(2\\) support tickets tagged 'pricing confusion' rose 2\\.4x year\\-over\\-year, and \\(3\\) every winning competitor in our segment has consolidated to ≤ 3 published tiers\\. Expected impact: \\+18% activation rate on the pricing page, neutral net revenue in 2 quarters, \\+6% by Q4 2026\\. 1\\. Context The current pricing page \\(v1, shipped 2024\\) presents Free, Starter, Pro, and Team tiers\\. Free was killed in RFC\\-009 but the Pro tier remains — it was originally pitched as the 'power individual' segment between Starter and Team\\. Three things changed since 2024 that invalidate the original pitch: First, the prosumer segment we expected to fill Pro never showed up\\. Q1 2026 signups split 71% Starter, 7% Pro, 22% Team\\. Pro is a quiet middle that almost no one chooses on first contact\\. Second, the support cost of the four\\-tier table is real\\. We logged 412 'pricing confusion' tickets in Q1 2026 versus 173 in Q1 2025\\. The most common confusion: customers picked Pro thinking it included multi\\-seat features \\(it does not\\) and downgraded within 30 days\\. Third, every competitor with positive growth in our segment ships ≤ 3 published tiers\\. The two that grew fastest \\(Linear, Vercel\\) ship 2 \\+ 'enterprise'\\. The cognitive load argument is now backed by a market signal\\. “I picked Pro because it sounded important\\. Then I realised it gave me nothing my coworkers could actually use, and I downgraded the next day\\.” — synthetic customer interview, March 2026 2\\. Proposal Replace the four\\-tier table with two published tiers plus a contact\\-sales Enterprise option: 2\\.1 Tiers Starter — single user, $19/mo\\. Existing Starter customers grandfathered\\. Team — up to 25 seats, $39/seat/mo\\. Existing Team customers see no price change\\. Enterprise — contact sales\\. SSO, audit log, custom DPA, named support\\. 2\\.2 What happens to Pro customers There are 1,184 active Pro customers\\. They will be migrated as follows: solo Pro accounts → grandfathered Starter at current Pro price for 12 months, then offered Starter or Team upgrade with a 20% loyalty discount\\. Multi\\-seat Pro accounts \\(these exist accidentally; the tier was never supposed to allow more than one seat\\) → free upgrade to Team at Pro pricing for 6 months\\. 2\\.3 Page design changes Three\\-column layout with the Team column visually emphasised \\(brand orange border, ‘Most popular’ tag\\)\\. Feature comparison table simplified from 47 rows to 19\\. FAQ section reduced from 23 questions to 8, with the four highest\\-traffic ones promoted above the fold\\. 3\\. Alternatives Considered <b>3\\.1 Keep four tiers but rename Pro\\.</b> Cheaper to ship, but leaves the cognitive\\-load problem unresolved and the migration risk in place\\. Rejected because the data shows the problem is structural, not naming\\. <b>3\\.2 Single tier \\+ usage\\-based\\.</b> Considered seriously\\. Strong long\\-term direction; wrong short\\-term move because our billing infrastructure does not yet support metered components and we are not staffed to build it before Q4\\. Revisit in 2027\\. <b>3\\.3 Three published tiers \\(Starter, Team, Business\\)\\.</b> Closest to v1 minus Pro\\. Rejected because adding a Business tier reintroduces the 'middle confusion' pattern we are trying to remove\\. Two\\-plus\\-Enterprise is structurally cleaner\\. 4\\. Risks & Mitigations <b>4\\.1 Pro customer churn\\.</b> The migration plan extends current pricing for 6–12 months, which we project converts 78% to Starter or Team and 22% to churn\\. Worst\\-case \\(50% churn\\) loses $680K ARR\\. Mitigation: dedicated CSM outreach to the top 100 Pro accounts\\. <b>4\\.2 Sales pipeline impact\\.</b> Removing the published Pro tier may reduce inbound qualification accuracy\\. Mitigation: run a qualification quiz on the pricing page \\(already prototyped in PROD\\-851\\) and route Pro\\-shaped leads directly to AEs\\. <b>4\\.3 Reputational risk\\.</b> Pricing changes draw attention\\. Mitigation: ship a public\\-blog post explaining the change before the page goes live, with a dedicated migration FAQ\\. 5\\. Decisions D\\-1 Adopt 2\\-tier\\-plus\\-Enterprise model\\. Approved 2026\\-04\\-12\\. D\\-2 Pro tier sunset in waves: solo accounts first, multi\\-seat second\\. D\\-3 Migration window: 12 months for solo, 6 months for multi\\-seat\\. D\\-4 Loyalty discount: 20% off list for migrating Pro customers, 12 months\\. D\\-5 Q1 2027 review for usage\\-based tier feasibility \\(links to RFC\\-014A\\)\\. 6\\. Action Items Action Owner Due Status Update pricing page comp table to 19 rows Riley Chen 2026\\-05\\-15 In progress Migration email sequence \\+ drip Marcus Liang 2026\\-05\\-22 Drafted CSM outreach plan for top 100 Pro accounts Devon Park 2026\\-05\\-08 Done Pricing\\-page qualification quiz wiring Asha Vora 2026\\-06\\-02 Not started Public blog post \\+ migration FAQ Riley Chen Pre\\-launch \\-7d Outline Billing infra spike for usage\\-based \\(RFC\\-014A\\) Asha Vora 2026\\-09\\-30 Scoped 7\\. Open Questions Q1\\. Should the loyalty discount apply for 12 or 18 months? Current proposal is 12; Marcus argues 18 to soften the change\\. Q2\\. Do we publish per\\-seat Team pricing or 'starting at $39/seat'? Finance prefers the latter; design prefers the former\\. Q3\\. Enterprise floor — is $24K/year the right minimum? Current AE feedback is the floor is too low and is attracting Team\\-shaped accounts that should self\\-serve\\. Q4\\. Migration FAQ tone — should the post acknowledge that the Pro tier was a strategic miss, or frame the change as a forward\\-looking simplification? Appendix A — Data references All numbers in this synthetic memo are invented and intended to mimic the shape of real internal pricing analyses, not the substance\\. A\\.1 Q1 2026 signup mix: 71% Starter / 7% Pro / 22% Team \\(n = 14,732 signups, synthetic\\) A\\.2 Pricing\\-confusion ticket volume: 412 \\(Q1 2026\\) vs 173 \\(Q1 2025\\), \\+138% YoY A\\.3 Pro tier active customers: 1,184 — of which 1,061 solo, 123 multi\\-seat \\(synthetic\\) A\\.4 Projected ARR impact: \\-$210K \\(months 1–6\\), neutral by month 9, \\+6% baseline by Q4 2026 A\\.5 Competitor pricing\\-tier counts \\(synthetic survey\\): Linear 2, Vercel 2\\+E, Notion 3, Asana 4, Monday 5","headings":[{"level":1,"text":"TL;DR"},{"level":1,"text":"1. Context"},{"level":1,"text":"2. Proposal"},{"level":2,"text":"2.1 Tiers"},{"level":2,"text":"2.2 What happens to Pro customers"},{"level":2,"text":"2.3 Page design changes"},{"level":1,"text":"3. Alternatives Considered"},{"level":1,"text":"4. Risks & Mitigations"},{"level":1,"text":"5. Decisions"},{"level":1,"text":"6. Action Items"},{"level":1,"text":"7. Open Questions"},{"level":1,"text":"Appendix A — Data references"}],"sourceFile":"input.docx","sizeBytes":40519,"wordCount":1043,"lineCount":187,"headingCount":12,"readingMinutes":5};</script>
 <style>
 :root {
   --primary: #a03b00;
@@ -50,8 +51,10 @@
   --gradient-primary: linear-gradient(135deg, #a03b00 0%, #c94c00 100%);
   --gradient-hero: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
   --gradient-text: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
-  --sidebar-w: 240px;
+  --rail-width: 240px;
+  --body-max: 720px;
 }
+
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #060B18;
@@ -69,6 +72,7 @@
     --accent-glow: #00D4FF;
     --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
     --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+    --outline-variant: #2a3a5c;
   }
 }
 
@@ -82,413 +86,307 @@ body {
   color: var(--fg-1);
   font-size: 15px;
   line-height: 1.6;
-  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ── Layout ── */
-.app-shell {
-  display: flex;
-  min-height: 100vh;
-}
-
-.sidebar {
-  width: var(--sidebar-w);
-  flex-shrink: 0;
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow-y: auto;
-  background: var(--surface-container-low);
-  border-right: 1px solid var(--border-strong);
-  padding: var(--space-2xl) var(--space-lg);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
-}
-
-.sidebar-brand {
-  font-family: var(--font-headline);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  padding-bottom: var(--space-md);
-  border-bottom: 1px solid var(--border);
-}
-
-.toc-label {
-  font-family: var(--font-headline);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  margin-bottom: var(--space-sm);
-}
-
-.toc-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.toc-list a {
-  display: block;
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-sm);
-  font-size: 13px;
-  color: var(--fg-2);
-  text-decoration: none;
-  transition: background 0.15s, color 0.15s;
-  line-height: 1.4;
-}
-
-.toc-list a:hover,
-.toc-list a.active {
-  background: var(--surface-container);
-  color: var(--primary);
-}
-
-.toc-list .toc-h2 a {
-  padding-left: var(--space-xl);
-  font-size: 12px;
-  color: var(--fg-muted);
-}
-
-.toc-list .toc-h2 a:hover {
-  color: var(--primary);
-}
-
-.main {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.top-bar {
+/* ── SEARCH BAR ── */
+.search-bar-wrapper {
   position: sticky;
   top: 0;
   z-index: 100;
   background: var(--surface-container-low);
   border-bottom: 1px solid var(--border-strong);
-  padding: var(--space-md) var(--space-2xl);
+  padding: var(--space-sm) var(--space-lg);
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  backdrop-filter: blur(8px);
 }
 
-.search-wrap {
-  flex: 1;
-  max-width: 420px;
-  position: relative;
-}
-
-.search-icon {
-  position: absolute;
-  left: var(--space-md);
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--fg-muted);
-  pointer-events: none;
-}
+.search-bar-wrapper svg { color: var(--fg-muted); flex-shrink: 0; }
 
 #search-input {
-  width: 100%;
-  background: var(--surface-container);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-pill);
-  padding: var(--space-sm) var(--space-md) var(--space-sm) 36px;
-  font-family: var(--font-body);
-  font-size: 13.5px;
-  color: var(--fg-1);
+  flex: 1;
+  background: transparent;
+  border: none;
   outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--fg-1);
+  caret-color: var(--primary);
 }
-
-#search-input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(160,59,0,0.12);
-}
-
 #search-input::placeholder { color: var(--fg-muted); }
 
 .search-count {
-  font-size: 11.5px;
-  color: var(--fg-muted);
   font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-muted);
   white-space: nowrap;
 }
-
-.top-bar-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  margin-left: auto;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-xs);
-  padding: var(--space-sm) var(--space-lg);
-  border-radius: var(--radius-pill);
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  border: 1px solid var(--border-strong);
-  background: var(--surface-container);
-  color: var(--fg-2);
-  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
-  white-space: nowrap;
-}
-.btn:hover { background: var(--surface-container-high); color: var(--fg-1); }
-.btn-primary {
-  background: var(--gradient-primary);
-  color: var(--on-primary);
-  border-color: transparent;
-  box-shadow: var(--shadow-accent);
-}
-.btn-primary:hover { opacity: 0.9; }
 
 .mode-toggle {
   display: flex;
+  gap: var(--space-xs);
   background: var(--surface-container);
-  border: 1px solid var(--border-strong);
   border-radius: var(--radius-pill);
-  overflow: hidden;
-  padding: 2px;
-  gap: 2px;
+  padding: var(--space-xs);
+  flex-shrink: 0;
 }
-.mode-toggle button {
-  border: none;
-  background: transparent;
-  padding: var(--space-xs) var(--space-md);
-  border-radius: var(--radius-pill);
+
+.mode-btn {
   font-family: var(--font-body);
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 500;
-  color: var(--fg-muted);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  border: none;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  background: transparent;
+  color: var(--fg-muted);
+  transition: all 160ms ease;
 }
-.mode-toggle button.active {
-  background: var(--surface-container-lowest);
-  color: var(--fg-1);
+.mode-btn.active {
+  background: var(--primary);
+  color: var(--on-primary);
   box-shadow: var(--shadow-sm);
 }
 
-/* ── Content area ── */
-.content {
-  padding: var(--space-3xl) var(--space-2xl);
-  max-width: 760px;
-  width: 100%;
-  margin: 0 auto;
+/* ── DOCUMENT SHELL ── */
+.document-shell {
+  display: flex;
+  min-height: calc(100vh - 48px);
 }
 
-/* ── Mobile jump dropdown ── */
-.mobile-jump { display: none; }
+/* ── READER RAIL ── */
+.reader-rail {
+  width: var(--rail-width);
+  flex-shrink: 0;
+  position: sticky;
+  top: 48px;
+  height: calc(100vh - 48px);
+  overflow-y: auto;
+  border-right: 1px solid var(--border);
+  padding: var(--space-2xl) 0;
+  background: var(--surface-container-lowest);
+  display: none;
+}
 
-/* ── Header band ── */
-.doc-header {
-  margin-bottom: var(--space-3xl);
+@media (min-width: 900px) {
+  .reader-rail { display: block; }
+}
+
+.rail-label {
+  font-family: var(--font-headline);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  padding: 0 var(--space-lg) var(--space-sm);
+}
+
+.rail-nav-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  font-size: 13px;
+  color: var(--fg-2);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all 140ms ease;
+  cursor: pointer;
+  line-height: 1.4;
+}
+.rail-nav-item:hover { color: var(--fg-1); background: var(--surface-container-low); }
+.rail-nav-item.active {
+  color: var(--primary);
+  border-left-color: var(--primary);
+  background: var(--surface-container-low);
+  font-weight: 500;
+}
+.rail-nav-item .rail-level2 { padding-left: var(--space-lg); }
+.rail-level-indicator {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--fg-muted);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* ── BODY SHEET ── */
+.body-sheet {
+  flex: 1;
+  min-width: 0;
+  padding: 0 var(--space-lg);
+  max-width: 100%;
+}
+
+@media (min-width: 900px) {
+  .body-sheet { padding: 0 var(--space-4xl); }
+}
+
+/* ── COVER ── */
+.cover {
+  padding: var(--space-4xl) 0 var(--space-3xl);
+  max-width: var(--body-max);
+  animation: fadeUp 400ms ease both;
 }
 
 .doc-eyebrow {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  flex-wrap: wrap;
   margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
 }
 
-.doc-id {
+.eyebrow-chip {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  color: var(--primary);
-  background: var(--primary-fixed);
-  padding: 2px var(--space-sm);
-  border-radius: var(--radius-sm);
-}
-
-.meta-chip {
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  color: var(--fg-muted);
-  background: var(--surface-container);
-  padding: 2px var(--space-sm);
-  border-radius: var(--radius-sm);
-}
-
-.status-chip {
-  font-size: 12px;
-  font-weight: 600;
-  padding: 3px var(--space-md);
+  padding: 3px 10px;
   border-radius: var(--radius-pill);
+  background: var(--surface-container);
+  color: var(--fg-muted);
+  letter-spacing: 0.03em;
 }
-.status-decided {
+
+.eyebrow-chip.status-decided {
   background: rgba(16,185,129,0.15);
   color: var(--green);
 }
 
+.eyebrow-chip.rfc-id {
+  background: var(--primary-fixed);
+  color: var(--primary);
+}
+
 .doc-title {
   font-family: var(--font-headline);
-  font-size: clamp(22px, 4vw, 32px);
+  font-size: clamp(22px, 4vw, 34px);
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--fg-1);
   line-height: 1.2;
+  margin-bottom: var(--space-xl);
+}
+
+/* ── STATUS BLOCK ── */
+.status-block {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
   margin-bottom: var(--space-2xl);
 }
 
-.doc-title span {
-  background: var(--gradient-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.status-strip {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: var(--space-sm);
-  padding: var(--space-lg);
-  background: var(--surface-container);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-strong);
-}
-
-.status-field { display: flex; flex-direction: column; gap: 2px; }
+.status-kv { display: flex; flex-direction: column; gap: 2px; }
 .status-key {
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.07em;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--fg-muted);
+  font-family: var(--font-headline);
 }
 .status-val {
   font-size: 13px;
   font-weight: 500;
-  color: var(--fg-2);
+  color: var(--fg-1);
+  font-family: var(--font-body);
 }
-.status-val a { color: var(--primary); text-decoration: none; }
-.status-val a:hover { text-decoration: underline; }
+.status-val.mono { font-family: var(--font-mono); font-size: 12px; }
 
-/* ── Section: 5-min view ── */
-#view-quick { display: block; }
-#view-full { display: none; }
+/* ── MOBILE TOC DROPDOWN ── */
+.mobile-toc {
+  display: block;
+  margin-bottom: var(--space-2xl);
+}
+@media (min-width: 900px) {
+  .mobile-toc { display: none; }
+}
+.mobile-toc select {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface-container-low);
+  color: var(--fg-1);
+  font-family: var(--font-body);
+  font-size: 14px;
+  cursor: pointer;
+}
 
-/* ── TL;DR cards ── */
+/* ── INSIGHT LAYER ── */
+.insight-layer { max-width: var(--body-max); }
+
 .section-label {
   font-family: var(--font-headline);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--fg-muted);
   margin-bottom: var(--space-md);
-}
-
-.tldr-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: var(--space-md);
-  margin-bottom: var(--space-3xl);
-}
-
-.tldr-card {
-  background: var(--surface-container-lowest);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-lg);
-  padding: var(--space-lg);
-  box-shadow: var(--shadow-md);
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: var(--space-sm);
 }
-
-.tldr-num {
-  font-family: var(--font-mono);
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--primary);
-  line-height: 1;
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-strong);
 }
 
-.tldr-text {
-  font-size: 13.5px;
-  color: var(--fg-2);
-  line-height: 1.5;
-}
-
-/* ── Claim cards ── */
-.claim-grid {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
+/* ── TL;DR CARD ── */
+.tldr-card {
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-strong);
+  border-left: 3px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
   margin-bottom: var(--space-3xl);
 }
-
-.claim-card {
-  background: var(--surface-container-lowest);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-lg);
-  padding: var(--space-lg) var(--space-xl);
-  box-shadow: var(--shadow-sm);
-  display: flex;
-  gap: var(--space-lg);
-  align-items: flex-start;
-  transition: box-shadow 0.15s;
-}
-
-.claim-card:hover { box-shadow: var(--shadow-md); }
-
-.claim-accent {
-  width: 4px;
-  border-radius: var(--radius-pill);
-  background: var(--gradient-primary);
-  flex-shrink: 0;
-  align-self: stretch;
-  min-height: 40px;
-}
-
-.claim-body { flex: 1; min-width: 0; }
-
-.claim-title {
+.tldr-card h3 {
   font-family: var(--font-headline);
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--fg-1);
-  margin-bottom: var(--space-xs);
-}
-
-.claim-desc {
-  font-size: 13.5px;
-  color: var(--fg-2);
-  line-height: 1.55;
-}
-
-.claim-jump {
-  font-size: 11.5px;
+  font-size: 14px;
+  font-weight: 700;
   color: var(--primary);
-  text-decoration: none;
-  font-weight: 500;
-  white-space: nowrap;
-  margin-top: var(--space-sm);
-  display: inline-block;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-md);
 }
-.claim-jump:hover { text-decoration: underline; }
+.tldr-observations { display: flex; flex-direction: column; gap: var(--space-md); }
+.tldr-obs {
+  display: flex;
+  gap: var(--space-md);
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--fg-2);
+}
+.tldr-obs-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--primary-fixed);
+  border-radius: var(--radius-pill);
+  min-width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
 
-/* ── Decision cards ── */
-.decision-grid {
+/* ── DECISION CARDS ── */
+.decisions-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: var(--space-md);
   margin-bottom: var(--space-3xl);
 }
@@ -496,463 +394,411 @@ body {
 .decision-card {
   background: var(--surface-container-lowest);
   border: 1px solid var(--border-strong);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   padding: var(--space-lg);
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
   box-shadow: var(--shadow-sm);
-  position: relative;
-  overflow: hidden;
+  transition: box-shadow 160ms ease;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
-
-.decision-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--gradient-primary);
-}
+.decision-card:hover { box-shadow: var(--shadow-md); }
 
 .decision-id {
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 600;
-  color: var(--primary);
-  margin-bottom: var(--space-sm);
+  color: var(--on-primary);
+  background: var(--primary);
+  border-radius: var(--radius-sm);
+  padding: 3px 8px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  margin-top: 2px;
 }
 
-.decision-title {
+.decision-body { flex: 1; }
+.decision-headline {
   font-family: var(--font-headline);
   font-size: 14px;
   font-weight: 600;
   color: var(--fg-1);
   margin-bottom: var(--space-xs);
-  line-height: 1.4;
+  letter-spacing: -0.01em;
 }
-
 .decision-desc {
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--fg-2);
   line-height: 1.5;
 }
-
-/* ── Action items table ── */
-.action-table-wrap {
-  overflow-x: auto;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-strong);
-  box-shadow: var(--shadow-sm);
-  margin-bottom: var(--space-3xl);
+.decision-link {
+  font-size: 11px;
+  color: var(--primary);
+  font-weight: 500;
+  margin-top: var(--space-xs);
+  display: inline-block;
 }
 
-table {
+/* ── OPEN QUESTIONS ── */
+.open-questions-callout {
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.25);
+  border-left: 3px solid var(--yellow);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-3xl);
+}
+.callout-title {
+  font-family: var(--font-headline);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--yellow);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.oq-list { display: flex; flex-direction: column; gap: var(--space-sm); }
+.oq-item {
+  font-size: 13.5px;
+  color: var(--fg-2);
+  line-height: 1.5;
+  padding-left: var(--space-md);
+  border-left: 2px solid var(--outline-variant);
+}
+
+/* ── ACTION ITEMS TABLE ── */
+.action-table-wrapper {
+  overflow-x: auto;
+  margin-bottom: var(--space-3xl);
+}
+.action-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13.5px;
 }
-
-thead {
-  background: var(--surface-container);
-}
-
-thead th {
-  text-align: left;
-  padding: var(--space-md) var(--space-lg);
+.action-table th {
   font-family: var(--font-headline);
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--fg-muted);
+  background: var(--surface-container);
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
   border-bottom: 1px solid var(--border-strong);
   cursor: pointer;
-  user-select: none;
   white-space: nowrap;
+  user-select: none;
 }
-
-thead th:hover { color: var(--fg-1); }
-thead th .sort-arrow { margin-left: 4px; opacity: 0.5; }
-thead th.sorted .sort-arrow { opacity: 1; color: var(--primary); }
-
-tbody tr {
+.action-table th:hover { color: var(--fg-1); }
+.action-table th .sort-arrow { margin-left: 4px; opacity: 0.4; }
+.action-table th.sorted .sort-arrow { opacity: 1; color: var(--primary); }
+.action-table td {
+  padding: var(--space-sm) var(--space-md);
   border-bottom: 1px solid var(--border);
-  transition: background 0.1s;
-}
-tbody tr:last-child { border-bottom: none; }
-tbody tr:hover { background: var(--surface-container-low); }
-
-tbody td {
-  padding: var(--space-md) var(--space-lg);
   color: var(--fg-2);
   vertical-align: top;
 }
-
-.owner-chip {
-  display: inline-block;
-  font-size: 11.5px;
-  font-weight: 600;
-  padding: 2px var(--space-sm);
-  border-radius: var(--radius-pill);
-  background: rgba(75, 68, 227, 0.12);
-  color: var(--tertiary);
-}
-
-.priority-chip {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px var(--space-sm);
-  border-radius: var(--radius-pill);
-}
-.priority-high { background: rgba(239,68,68,0.12); color: var(--red); }
-.priority-med { background: rgba(245,158,11,0.12); color: var(--yellow); }
-.priority-low { background: rgba(16,185,129,0.12); color: var(--green); }
-
-/* ── Open questions ── */
-.oq-callout {
-  background: rgba(245,158,11,0.08);
-  border: 1px solid rgba(245,158,11,0.3);
-  border-radius: var(--radius-lg);
-  padding: var(--space-xl);
-  margin-bottom: var(--space-3xl);
-}
-
-.oq-header {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-md);
-}
-
-.oq-icon { font-size: 18px; }
-
-.oq-title {
-  font-family: var(--font-headline);
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--yellow);
-}
-
-.oq-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-}
-
-.oq-list li {
-  font-size: 13.5px;
-  color: var(--fg-2);
-  display: flex;
-  gap: var(--space-sm);
-  line-height: 1.5;
-}
-
-.oq-list li::before {
-  content: '?';
+.action-table tr:hover td { background: var(--surface-container-low); }
+.action-table td:first-child {
   font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 700;
-  color: var(--yellow);
-  background: rgba(245,158,11,0.15);
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  display: flex;
+  color: var(--fg-muted);
+  white-space: nowrap;
+}
+.owner-chip {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 1px;
+  background: var(--surface-container);
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--fg-2);
+  white-space: nowrap;
+}
+.due-chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-muted);
+  white-space: nowrap;
 }
 
-/* ── Pulled quotes ── */
-.quotes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--space-md);
+/* ── PULL QUOTES ── */
+.pull-quotes {
   margin-bottom: var(--space-3xl);
+  display: grid;
+  gap: var(--space-md);
+}
+@media (min-width: 640px) {
+  .pull-quotes { grid-template-columns: 1fr 1fr; }
 }
 
 .pull-quote {
-  background: var(--surface-container);
-  border-left: 3px solid var(--primary);
+  border-left: 3px solid var(--secondary-container);
+  background: var(--surface-container-low);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   padding: var(--space-lg);
   font-size: 14px;
   font-style: italic;
   color: var(--fg-2);
   line-height: 1.6;
-  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+.pull-quote::before {
+  content: '\201C';
+  font-size: 36px;
+  line-height: 1;
+  color: var(--secondary-container);
+  opacity: 0.5;
+  position: absolute;
+  top: var(--space-sm);
+  left: var(--space-sm);
+}
+.pull-quote-text { padding-left: var(--space-xl); }
+.pull-quote-source {
+  font-size: 11px;
+  font-style: normal;
+  color: var(--fg-muted);
+  margin-top: var(--space-sm);
+  font-family: var(--font-mono);
+  padding-left: var(--space-xl);
 }
 
-/* ── Key terms ── */
-.kv-grid {
+/* ── KEY TERMS ── */
+.key-terms {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-sm);
   margin-bottom: var(--space-3xl);
 }
-
-.kv-chip {
-  background: var(--surface-container);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm);
-  padding: var(--space-xs) var(--space-md);
-  font-size: 12.5px;
-  color: var(--fg-2);
-}
-
-.kv-chip b {
-  color: var(--fg-1);
-  font-weight: 600;
-}
-
-/* ── Section summaries ── */
-.section-summaries {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
-  margin-bottom: var(--space-3xl);
-}
-
-.sum-card {
-  background: var(--surface-container-lowest);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-lg) var(--space-xl);
-  display: flex;
-  gap: var(--space-lg);
-  align-items: flex-start;
-}
-
-.sum-num {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--fg-muted);
-  padding: 3px var(--space-sm);
-  background: var(--surface-container);
-  border-radius: var(--radius-sm);
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.sum-body { flex: 1; }
-
-.sum-title {
-  font-family: var(--font-headline);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--fg-1);
-  margin-bottom: var(--space-xs);
-}
-
-.sum-text {
-  font-size: 13px;
-  color: var(--fg-muted);
-  line-height: 1.55;
-}
-
-.sum-link {
-  font-size: 11.5px;
-  color: var(--primary);
-  text-decoration: none;
+.term-chip {
+  font-size: 12px;
   font-weight: 500;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  background: var(--surface-container);
+  color: var(--fg-2);
+  border: 1px solid var(--border-strong);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+.term-chip .chip-label { font-weight: 600; color: var(--fg-1); }
+.term-chip .chip-type {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--fg-muted);
 }
 
-/* ── Full reading mode ── */
-.doc-body {
-  font-size: 15.5px;
-  line-height: 1.7;
-  color: var(--fg-2);
-}
+/* ── FULL READING MODE ── */
+.full-reading-mode { max-width: var(--body-max); padding-bottom: var(--space-5xl); display: none; }
+.full-reading-mode.visible { display: block; }
+.insight-layer.hidden { display: none; }
+
+/* ── RENDERED MARKDOWN ── */
+.doc-body { animation: fadeUp 300ms ease both; }
 
 .doc-body h1 {
   font-family: var(--font-headline);
-  font-size: 22px;
+  font-size: clamp(18px, 3vw, 24px);
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   color: var(--fg-1);
   margin: var(--space-4xl) 0 var(--space-lg);
   padding-top: var(--space-2xl);
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--border-strong);
+  line-height: 1.25;
 }
-
-.doc-body h1:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+.doc-body h1:first-child { border-top: none; margin-top: var(--space-lg); }
 
 .doc-body h2 {
   font-family: var(--font-headline);
-  font-size: 17px;
+  font-size: clamp(15px, 2.5vw, 18px);
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--fg-1);
   margin: var(--space-3xl) 0 var(--space-md);
+  line-height: 1.3;
 }
 
 .doc-body h3 {
   font-family: var(--font-headline);
   font-size: 15px;
   font-weight: 600;
-  color: var(--fg-1);
+  color: var(--fg-2);
   margin: var(--space-2xl) 0 var(--space-sm);
 }
 
 .doc-body p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--fg-2);
   margin-bottom: var(--space-lg);
 }
 
 .doc-body ul, .doc-body ol {
-  margin: var(--space-md) 0 var(--space-lg) var(--space-2xl);
+  margin: 0 0 var(--space-lg) var(--space-xl);
+  color: var(--fg-2);
 }
-
-.doc-body li { margin-bottom: var(--space-sm); }
+.doc-body li {
+  font-size: 14.5px;
+  line-height: 1.65;
+  margin-bottom: var(--space-xs);
+}
 
 .doc-body blockquote {
   border-left: 3px solid var(--primary);
+  background: var(--surface-container-low);
   padding: var(--space-md) var(--space-lg);
   margin: var(--space-xl) 0;
-  background: var(--surface-container);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  font-style: italic;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   color: var(--fg-2);
+  font-style: italic;
+  font-size: 14.5px;
 }
 
-.doc-body strong { font-weight: 600; color: var(--fg-1); }
-.doc-body em { font-style: italic; }
+.doc-body strong { color: var(--fg-1); font-weight: 600; }
+.doc-body em { color: var(--fg-2); }
+
 .doc-body code {
   font-family: var(--font-mono);
-  font-size: 0.9em;
+  font-size: 13px;
   background: var(--surface-container);
   padding: 1px 5px;
   border-radius: 4px;
+  color: var(--primary);
 }
 
+/* ── TABLES ── */
 .doc-body table {
-  margin: var(--space-xl) 0;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  border: 1px solid var(--border-strong);
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  margin-bottom: var(--space-xl);
+  overflow-x: auto;
+  display: block;
 }
-
-.doc-body table th,
-.doc-body table td {
-  padding: var(--space-sm) var(--space-lg);
-  border-bottom: 1px solid var(--border);
-}
-
 .doc-body table th {
-  background: var(--surface-container);
   font-family: var(--font-headline);
-  font-size: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 700;
   color: var(--fg-muted);
+  background: var(--surface-container);
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  border-bottom: 1px solid var(--border-strong);
 }
+.doc-body table td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border);
+  color: var(--fg-2);
+}
+.doc-body table tr:hover td { background: var(--surface-container-low); }
 
-.doc-body table tr:last-child td { border-bottom: none; }
-
-/* ── Highlight ── */
-.highlight {
-  background: rgba(232,64,13,0.18);
+/* ── SEARCH HIGHLIGHT ── */
+mark.search-hit {
+  background: rgba(245,158,11,0.35);
   color: inherit;
   border-radius: 2px;
-  padding: 1px 0;
+  padding: 0 1px;
+}
+mark.search-hit.primary-hit {
+  background: rgba(245,158,11,0.6);
+  outline: 1px solid var(--yellow);
 }
 
-.highlight.current {
-  background: rgba(232,64,13,0.4);
-  outline: 2px solid var(--accent-glow);
-}
-
-/* ── Copy button ── */
+/* ── COPY BUTTON ── */
 .copy-btn {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container-low);
+  color: var(--fg-2);
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: var(--space-xs);
-  font-size: 12px;
-  font-family: var(--font-body);
-  font-weight: 500;
-  color: var(--fg-muted);
-  background: var(--surface-container);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-pill);
-  padding: var(--space-xs) var(--space-md);
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: all 140ms ease;
 }
-.copy-btn:hover { background: var(--surface-container-high); color: var(--fg-1); }
-.copy-btn.copied { color: var(--green); border-color: var(--green); }
+.copy-btn:hover { background: var(--surface-container); color: var(--fg-1); }
+.copy-btn.copied {
+  background: rgba(16,185,129,0.12);
+  color: var(--green);
+  border-color: rgba(16,185,129,0.3);
+}
 
-/* ── Footer ── */
+/* ── FOOTER ── */
 .doc-footer {
-  margin-top: var(--space-5xl);
-  padding-top: var(--space-2xl);
+  max-width: var(--body-max);
+  padding: var(--space-3xl) 0 var(--space-5xl);
   border-top: 1px solid var(--border);
-  font-size: 12px;
-  color: var(--fg-muted);
-  line-height: 1.6;
-}
-
-/* ── Filter row for table ── */
-.table-controls {
   display: flex;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-md);
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
   flex-wrap: wrap;
 }
-
-.filter-select {
-  background: var(--surface-container);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-pill);
-  padding: var(--space-xs) var(--space-md);
-  font-family: var(--font-body);
-  font-size: 12.5px;
-  color: var(--fg-2);
-  outline: none;
-  cursor: pointer;
+.footer-note {
+  font-size: 11.5px;
+  color: var(--fg-muted);
+  font-style: italic;
+  line-height: 1.5;
 }
 
-/* ── Responsive ── */
-@media (max-width: 768px) {
-  .sidebar { display: none; }
-  .mobile-jump {
-    display: block;
-    margin-bottom: var(--space-2xl);
-  }
-  .mobile-jump select {
-    width: 100%;
-    background: var(--surface-container);
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius-md);
-    padding: var(--space-md) var(--space-lg);
-    font-family: var(--font-body);
-    font-size: 14px;
-    color: var(--fg-1);
-    outline: none;
-  }
-  .content { padding: var(--space-xl) var(--space-lg); }
-  .top-bar { padding: var(--space-sm) var(--space-lg); gap: var(--space-sm); }
-  .top-bar-actions { gap: var(--space-xs); }
-  .tldr-grid { grid-template-columns: 1fr 1fr; }
-  .decision-grid { grid-template-columns: 1fr; }
-  .quotes-grid { grid-template-columns: 1fr; }
-  .btn span { display: none; }
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 480px) {
-  .tldr-grid { grid-template-columns: 1fr; }
-  .status-strip { grid-template-columns: 1fr 1fr; }
+.stagger-1 { animation-delay: 60ms; }
+.stagger-2 { animation-delay: 120ms; }
+.stagger-3 { animation-delay: 180ms; }
+.stagger-4 { animation-delay: 240ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0ms !important; transition-duration: 0ms !important; }
 }
 
-/* ── Print ── */
+/* ── PRINT ── */
 @media print {
-  .sidebar, .top-bar, .mobile-jump { display: none !important; }
-  .main { display: block; }
-  #view-quick { display: block !important; }
-  #view-full { display: none !important; }
-  .content { padding: 0; max-width: 100%; }
-  body { background: white; color: black; }
+  .search-bar-wrapper, .reader-rail, .mode-toggle, .copy-btn { display: none !important; }
+  .body-sheet { padding: 0; }
+  .document-shell { display: block; }
+  .full-reading-mode { display: block !important; }
+  .insight-layer { display: block !important; }
 }
+
+/* ── SCROLLBAR ── */
+.reader-rail::-webkit-scrollbar { width: 4px; }
+.reader-rail::-webkit-scrollbar-track { background: transparent; }
+.reader-rail::-webkit-scrollbar-thumb { background: var(--outline-variant); border-radius: 2px; }
+
+/* ── CAVEAT NOTE ── */
+.caveat-box {
+  background: rgba(59,130,246,0.07);
+  border: 1px solid rgba(59,130,246,0.2);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  font-size: 12.5px;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-2xl);
+  line-height: 1.5;
+}
+.caveat-box strong { color: var(--blue); font-weight: 600; }
 </style>
 <!-- html-anything example style skin:start -->
 
@@ -1058,35 +904,6 @@ html[data-ha-style="relationship"] body {
     linear-gradient(300deg, rgba(49,123,147,.08), transparent 40%);
 }
 html[data-ha-style="relationship"] body::before { content: "relationship"; }
-
-html[data-ha-style="personal-atlas"] {
-  --ha-style-accent: #3f7f6a;
-  --ha-style-accent-2: #c15a2b;
-  --primary: #3f7f6a;
-  --primary-container: #2f6b58;
-  --primary-fixed: #dff4ea;
-  --secondary-container: #c15a2b;
-  --bg: #f7faf4;
-  --surface: #f7faf4;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #eef5ea;
-  --surface-container: #e6eee0;
-  --surface-container-high: #dbe7d5;
-  --fg-1: #17211b;
-  --fg-2: #405345;
-  --fg-muted: #718172;
-  --border: rgba(63,127,106,.15);
-  --gradient-hero: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-  --gradient-text: linear-gradient(135deg, #3f7f6a 0%, #c15a2b 100%);
-}
-html[data-ha-style="personal-atlas"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(63,127,106,.11) 0 2px, transparent 2px),
-    radial-gradient(circle at 70% 40%, rgba(193,90,43,.10) 0 1.5px, transparent 1.5px);
-  background-size: 54px 54px, 38px 38px;
-}
-html[data-ha-style="personal-atlas"] body::before { content: "personal atlas"; }
 
 html[data-ha-style="timeline-story"] {
   --ha-style-accent: #9a4b14;
@@ -1237,7 +1054,7 @@ html[data-ha-style="dashboard"] header.hero::before {
   margin-bottom: 14px;
 }
 
-html[data-ha-style="editorial"] {
+html[data-ha-style="document"] {
   --ha-style-accent: #8b3f1f;
   --ha-style-accent-2: #2f6f73;
   --primary: #8b3f1f;
@@ -1258,14 +1075,14 @@ html[data-ha-style="editorial"] {
   --gradient-hero: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
   --gradient-text: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
 }
-html[data-ha-style="editorial"] body {
+html[data-ha-style="document"] body {
   background-color: var(--bg) !important;
   background-image: linear-gradient(90deg, rgba(139,63,31,.18) 0 4px, transparent 4px);
   background-size: 100% 100%;
 }
-html[data-ha-style="editorial"] body::before { content: "editorial"; }
-html[data-ha-style="editorial"] .hero::before,
-html[data-ha-style="editorial"] header.hero::before {
+html[data-ha-style="document"] body::before { content: "document"; }
+html[data-ha-style="document"] .hero::before,
+html[data-ha-style="document"] header.hero::before {
   width: 42px;
   height: 42px;
   border-radius: 0;
@@ -1273,33 +1090,6 @@ html[data-ha-style="editorial"] header.hero::before {
   border-top: 4px solid var(--ha-style-accent);
   border-left: 4px solid var(--ha-style-accent);
 }
-
-html[data-ha-style="paper"] {
-  --ha-style-accent: #53606a;
-  --ha-style-accent-2: #8c6f4a;
-  --primary: #53606a;
-  --primary-container: #3e4850;
-  --primary-fixed: #eef1f3;
-  --secondary-container: #8c6f4a;
-  --bg: #f9faf9;
-  --surface: #f9faf9;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f1f2f1;
-  --surface-container: #e8eae8;
-  --surface-container-high: #dedfdd;
-  --fg-1: #171717;
-  --fg-2: #4b5563;
-  --fg-muted: #737373;
-  --border: rgba(83,96,106,.18);
-  --font-headline: Georgia, "Iowan Old Style", "Times New Roman", serif;
-  --gradient-hero: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-  --gradient-text: linear-gradient(135deg, #53606a 0%, #8c6f4a 100%);
-}
-html[data-ha-style="paper"] body {
-  background-color: var(--bg) !important;
-  background-image: repeating-linear-gradient(0deg, transparent 0 31px, rgba(83,96,106,.08) 31px 32px);
-}
-html[data-ha-style="paper"] body::before { content: "paper"; }
 
 html[data-ha-style="developer"] {
   color-scheme: dark;
@@ -1344,424 +1134,367 @@ html[data-ha-style="developer"] .mono {
 <!-- html-anything example style skin:end -->
 </head>
 <body>
-<script>const DATA = {"markdown":"RFC\\-014: Pricing Page V2 — Decision Memo\n\n*Synthetic fixture for html\\-anything\\. All names, numbers, customer quotes, deal sizes, and internal projects in this memo are invented\\.*\n\n__Author__\n\nRiley Chen \\(synthetic, Product\\)\n\n__Reviewers__\n\nAsha Vora \\(Eng\\), Marcus Liang \\(GTM\\), Devon Park \\(Finance\\)\n\n__Status__\n\nDecided — implementation kickoff Q2 2026\n\n__Decision date__\n\n2026\\-04\\-12\n\n__Last updated__\n\n2026\\-04\\-22\n\n__Related__\n\nRFC\\-009 \\(free\\-tier kill\\), PROD\\-882 \\(pricing page redesign\\)\n\n# TL;DR\n\nWe are replacing the current 4\\-tier pricing page with a 2\\-tier model \\(Starter, Team\\) plus a contact\\-sales Enterprise track\\. The change is driven by three findings: \\(1\\) the Pro tier captured only 7% of new signups in Q1 but consumed 31% of pricing\\-page time\\-on\\-page, \\(2\\) support tickets tagged 'pricing confusion' rose 2\\.4x year\\-over\\-year, and \\(3\\) every winning competitor in our segment has consolidated to ≤ 3 published tiers\\. Expected impact: \\+18% activation rate on the pricing page, neutral net revenue in 2 quarters, \\+6% by Q4 2026\\.\n\n# 1\\. Context\n\nThe current pricing page \\(v1, shipped 2024\\) presents Free, Starter, Pro, and Team tiers\\. Free was killed in RFC\\-009 but the Pro tier remains — it was originally pitched as the 'power individual' segment between Starter and Team\\.\n\nThree things changed since 2024 that invalidate the original pitch:\n\nFirst, the prosumer segment we expected to fill Pro never showed up\\. Q1 2026 signups split 71% Starter, 7% Pro, 22% Team\\. Pro is a quiet middle that almost no one chooses on first contact\\.\n\nSecond, the support cost of the four\\-tier table is real\\. We logged 412 'pricing confusion' tickets in Q1 2026 versus 173 in Q1 2025\\. The most common confusion: customers picked Pro thinking it included multi\\-seat features \\(it does not\\) and downgraded within 30 days\\.\n\nThird, every competitor with positive growth in our segment ships ≤ 3 published tiers\\. The two that grew fastest \\(Linear, Vercel\\) ship 2 \\+ 'enterprise'\\. The cognitive load argument is now backed by a market signal\\.\n\n*“I picked Pro because it sounded important\\. Then I realised it gave me nothing my coworkers could actually use, and I downgraded the next day\\.” — synthetic customer interview, March 2026*\n\n# 2\\. Proposal\n\nReplace the four\\-tier table with two published tiers plus a contact\\-sales Enterprise option:\n\n## 2\\.1 Tiers\n\nStarter — single user, $19/mo\\. Existing Starter customers grandfathered\\.\n\nTeam — up to 25 seats, $39/seat/mo\\. Existing Team customers see no price change\\.\n\nEnterprise — contact sales\\. SSO, audit log, custom DPA, named support\\.\n\n## 2\\.2 What happens to Pro customers\n\nThere are 1,184 active Pro customers\\. They will be migrated as follows: solo Pro accounts → grandfathered Starter at current Pro price for 12 months, then offered Starter or Team upgrade with a 20% loyalty discount\\. Multi\\-seat Pro accounts \\(these exist accidentally; the tier was never supposed to allow more than one seat\\) → free upgrade to Team at Pro pricing for 6 months\\.\n\n## 2\\.3 Page design changes\n\nThree\\-column layout with the Team column visually emphasised \\(brand orange border, ‘Most popular’ tag\\)\\. Feature comparison table simplified from 47 rows to 19\\. FAQ section reduced from 23 questions to 8, with the four highest\\-traffic ones promoted above the fold\\.\n\n# 3\\. Alternatives Considered\n\n<b>3\\.1 Keep four tiers but rename Pro\\.</b> Cheaper to ship, but leaves the cognitive\\-load problem unresolved and the migration risk in place\\. Rejected because the data shows the problem is structural, not naming\\.\n\n<b>3\\.2 Single tier \\+ usage\\-based\\.</b> Considered seriously\\. Strong long\\-term direction; wrong short\\-term move because our billing infrastructure does not yet support metered components and we are not staffed to build it before Q4\\. Revisit in 2027\\.\n\n<b>3\\.3 Three published tiers \\(Starter, Team, Business\\)\\.</b> Closest to v1 minus Pro\\. Rejected because adding a Business tier reintroduces the 'middle confusion' pattern we are trying to remove\\. Two\\-plus\\-Enterprise is structurally cleaner\\.\n\n# 4\\. Risks & Mitigations\n\n<b>4\\.1 Pro customer churn\\.</b> The migration plan extends current pricing for 6–12 months, which we project converts 78% to Starter or Team and 22% to churn\\. Worst\\-case \\(50% churn\\) loses ~$680K ARR\\. Mitigation: dedicated CSM outreach to the top 100 Pro accounts\\.\n\n<b>4\\.2 Sales pipeline impact\\.</b> Removing the published Pro tier may reduce inbound qualification accuracy\\. Mitigation: run a qualification quiz on the pricing page \\(already prototyped in PROD\\-851\\) and route Pro\\-shaped leads directly to AEs\\.\n\n<b>4\\.3 Reputational risk\\.</b> Pricing changes draw attention\\. Mitigation: ship a public\\-blog post explaining the change before the page goes live, with a dedicated migration FAQ\\.\n\n# 5\\. Decisions\n\n__D\\-1__\n\nAdopt 2\\-tier\\-plus\\-Enterprise model\\. Approved 2026\\-04\\-12\\.\n\n__D\\-2__\n\nPro tier sunset in waves: solo accounts first, multi\\-seat second\\.\n\n__D\\-3__\n\nMigration window: 12 months for solo, 6 months for multi\\-seat\\.\n\n__D\\-4__\n\nLoyalty discount: 20% off list for migrating Pro customers, 12 months\\.\n\n__D\\-5__\n\nQ1 2027 review for usage\\-based tier feasibility \\(links to RFC\\-014A\\)\\.\n\n# 6\\. Action Items\n\n__Action__\n\n__Owner__\n\n__Due__\n\n__Status__\n\nUpdate pricing page comp table to 19 rows\n\nRiley Chen\n\n2026\\-05\\-15\n\nIn progress\n\nMigration email sequence \\+ drip\n\nMarcus Liang\n\n2026\\-05\\-22\n\nDrafted\n\nCSM outreach plan for top 100 Pro accounts\n\nDevon Park\n\n2026\\-05\\-08\n\nDone\n\nPricing\\-page qualification quiz wiring\n\nAsha Vora\n\n2026\\-06\\-02\n\nNot started\n\nPublic blog post \\+ migration FAQ\n\nRiley Chen\n\nPre\\-launch \\-7d\n\nOutline\n\nBilling infra spike for usage\\-based \\(RFC\\-014A\\)\n\nAsha Vora\n\n2026\\-09\\-30\n\nScoped\n\n# 7\\. Open Questions\n\nQ1\\. Should the loyalty discount apply for 12 or 18 months? Current proposal is 12; Marcus argues 18 to soften the change\\.\n\nQ2\\. Do we publish per\\-seat Team pricing or 'starting at $39/seat'? Finance prefers the latter; design prefers the former\\.\n\nQ3\\. Enterprise floor — is $24K/year the right minimum? Current AE feedback is the floor is too low and is attracting Team\\-shaped accounts that should self\\-serve\\.\n\nQ4\\. Migration FAQ tone — should the post acknowledge that the Pro tier was a strategic miss, or frame the change as a forward\\-looking simplification?\n\n# Appendix A — Data references\n\n*All numbers in this synthetic memo are invented and intended to mimic the shape of real internal pricing analyses, not the substance\\.*\n\nA\\.1 Q1 2026 signup mix: 71% Starter / 7% Pro / 22% Team \\(n = 14,732 signups, synthetic\\)\n\nA\\.2 Pricing\\-confusion ticket volume: 412 \\(Q1 2026\\) vs 173 \\(Q1 2025\\), \\+138% YoY\n\nA\\.3 Pro tier active customers: 1,184 — of which 1,061 solo, 123 multi\\-seat \\(synthetic\\)\n\nA\\.4 Projected ARR impact: \\-$210K \\(months 1–6\\), neutral by month 9, \\+6% baseline by Q4 2026\n\nA\\.5 Competitor pricing\\-tier counts \\(synthetic survey\\): Linear 2, Vercel 2\\+E, Notion 3, Asana 4, Monday 5\n\n","plainText":"RFC\\-014: Pricing Page V2 — Decision Memo Synthetic fixture for html\\-anything\\. All names, numbers, customer quotes, deal sizes, and internal projects in this memo are invented\\. Author Riley Chen \\(synthetic, Product\\) Reviewers Asha Vora \\(Eng\\), Marcus Liang \\(GTM\\), Devon Park \\(Finance\\) Status Decided — implementation kickoff Q2 2026 Decision date 2026\\-04\\-12 Last updated 2026\\-04\\-22 Related RFC\\-009 \\(free\\-tier kill\\), PROD\\-882 \\(pricing page redesign\\) TL;DR We are replacing the current 4\\-tier pricing page with a 2\\-tier model \\(Starter, Team\\) plus a contact\\-sales Enterprise track\\. The change is driven by three findings: \\(1\\) the Pro tier captured only 7% of new signups in Q1 but consumed 31% of pricing\\-page time\\-on\\-page, \\(2\\) support tickets tagged 'pricing confusion' rose 2\\.4x year\\-over\\-year, and \\(3\\) every winning competitor in our segment has consolidated to ≤ 3 published tiers\\. Expected impact: \\+18% activation rate on the pricing page, neutral net revenue in 2 quarters, \\+6% by Q4 2026\\. 1\\. Context The current pricing page \\(v1, shipped 2024\\) presents Free, Starter, Pro, and Team tiers\\. Free was killed in RFC\\-009 but the Pro tier remains — it was originally pitched as the 'power individual' segment between Starter and Team\\. Three things changed since 2024 that invalidate the original pitch: First, the prosumer segment we expected to fill Pro never showed up\\. Q1 2026 signups split 71% Starter, 7% Pro, 22% Team\\. Pro is a quiet middle that almost no one chooses on first contact\\. Second, the support cost of the four\\-tier table is real\\. We logged 412 'pricing confusion' tickets in Q1 2026 versus 173 in Q1 2025\\. The most common confusion: customers picked Pro thinking it included multi\\-seat features \\(it does not\\) and downgraded within 30 days\\. Third, every competitor with positive growth in our segment ships ≤ 3 published tiers\\. The two that grew fastest \\(Linear, Vercel\\) ship 2 \\+ 'enterprise'\\. The cognitive load argument is now backed by a market signal\\. “I picked Pro because it sounded important\\. Then I realised it gave me nothing my coworkers could actually use, and I downgraded the next day\\.” — synthetic customer interview, March 2026 2\\. Proposal Replace the four\\-tier table with two published tiers plus a contact\\-sales Enterprise option: 2\\.1 Tiers Starter — single user, $19/mo\\. Existing Starter customers grandfathered\\. Team — up to 25 seats, $39/seat/mo\\. Existing Team customers see no price change\\. Enterprise — contact sales\\. SSO, audit log, custom DPA, named support\\. 2\\.2 What happens to Pro customers There are 1,184 active Pro customers\\. They will be migrated as follows: solo Pro accounts → grandfathered Starter at current Pro price for 12 months, then offered Starter or Team upgrade with a 20% loyalty discount\\. Multi\\-seat Pro accounts \\(these exist accidentally; the tier was never supposed to allow more than one seat\\) → free upgrade to Team at Pro pricing for 6 months\\. 2\\.3 Page design changes Three\\-column layout with the Team column visually emphasised \\(brand orange border, ‘Most popular’ tag\\)\\. Feature comparison table simplified from 47 rows to 19\\. FAQ section reduced from 23 questions to 8, with the four highest\\-traffic ones promoted above the fold\\. 3\\. Alternatives Considered <b>3\\.1 Keep four tiers but rename Pro\\.</b> Cheaper to ship, but leaves the cognitive\\-load problem unresolved and the migration risk in place\\. Rejected because the data shows the problem is structural, not naming\\. <b>3\\.2 Single tier \\+ usage\\-based\\.</b> Considered seriously\\. Strong long\\-term direction; wrong short\\-term move because our billing infrastructure does not yet support metered components and we are not staffed to build it before Q4\\. Revisit in 2027\\. <b>3\\.3 Three published tiers \\(Starter, Team, Business\\)\\.</b> Closest to v1 minus Pro\\. Rejected because adding a Business tier reintroduces the 'middle confusion' pattern we are trying to remove\\. Two\\-plus\\-Enterprise is structurally cleaner\\. 4\\. Risks & Mitigations <b>4\\.1 Pro customer churn\\.</b> The migration plan extends current pricing for 6–12 months, which we project converts 78% to Starter or Team and 22% to churn\\. Worst\\-case \\(50% churn\\) loses $680K ARR\\. Mitigation: dedicated CSM outreach to the top 100 Pro accounts\\. <b>4\\.2 Sales pipeline impact\\.</b> Removing the published Pro tier may reduce inbound qualification accuracy\\. Mitigation: run a qualification quiz on the pricing page \\(already prototyped in PROD\\-851\\) and route Pro\\-shaped leads directly to AEs\\. <b>4\\.3 Reputational risk\\.</b> Pricing changes draw attention\\. Mitigation: ship a public\\-blog post explaining the change before the page goes live, with a dedicated migration FAQ\\. 5\\. Decisions D\\-1 Adopt 2\\-tier\\-plus\\-Enterprise model\\. Approved 2026\\-04\\-12\\. D\\-2 Pro tier sunset in waves: solo accounts first, multi\\-seat second\\. D\\-3 Migration window: 12 months for solo, 6 months for multi\\-seat\\. D\\-4 Loyalty discount: 20% off list for migrating Pro customers, 12 months\\. D\\-5 Q1 2027 review for usage\\-based tier feasibility \\(links to RFC\\-014A\\)\\. 6\\. Action Items Action Owner Due Status Update pricing page comp table to 19 rows Riley Chen 2026\\-05\\-15 In progress Migration email sequence \\+ drip Marcus Liang 2026\\-05\\-22 Drafted CSM outreach plan for top 100 Pro accounts Devon Park 2026\\-05\\-08 Done Pricing\\-page qualification quiz wiring Asha Vora 2026\\-06\\-02 Not started Public blog post \\+ migration FAQ Riley Chen Pre\\-launch \\-7d Outline Billing infra spike for usage\\-based \\(RFC\\-014A\\) Asha Vora 2026\\-09\\-30 Scoped 7\\. Open Questions Q1\\. Should the loyalty discount apply for 12 or 18 months? Current proposal is 12; Marcus argues 18 to soften the change\\. Q2\\. Do we publish per\\-seat Team pricing or 'starting at $39/seat'? Finance prefers the latter; design prefers the former\\. Q3\\. Enterprise floor — is $24K/year the right minimum? Current AE feedback is the floor is too low and is attracting Team\\-shaped accounts that should self\\-serve\\. Q4\\. Migration FAQ tone — should the post acknowledge that the Pro tier was a strategic miss, or frame the change as a forward\\-looking simplification? Appendix A — Data references All numbers in this synthetic memo are invented and intended to mimic the shape of real internal pricing analyses, not the substance\\. A\\.1 Q1 2026 signup mix: 71% Starter / 7% Pro / 22% Team \\(n = 14,732 signups, synthetic\\) A\\.2 Pricing\\-confusion ticket volume: 412 \\(Q1 2026\\) vs 173 \\(Q1 2025\\), \\+138% YoY A\\.3 Pro tier active customers: 1,184 — of which 1,061 solo, 123 multi\\-seat \\(synthetic\\) A\\.4 Projected ARR impact: \\-$210K \\(months 1–6\\), neutral by month 9, \\+6% baseline by Q4 2026 A\\.5 Competitor pricing\\-tier counts \\(synthetic survey\\): Linear 2, Vercel 2\\+E, Notion 3, Asana 4, Monday 5","headings":[{"level":1,"text":"TL;DR"},{"level":1,"text":"1. Context"},{"level":1,"text":"2. Proposal"},{"level":2,"text":"2.1 Tiers"},{"level":2,"text":"2.2 What happens to Pro customers"},{"level":2,"text":"2.3 Page design changes"},{"level":1,"text":"3. Alternatives Considered"},{"level":1,"text":"4. Risks & Mitigations"},{"level":1,"text":"5. Decisions"},{"level":1,"text":"6. Action Items"},{"level":1,"text":"7. Open Questions"},{"level":1,"text":"Appendix A — Data references"}],"sourceFile":"input.docx","sizeBytes":40519,"wordCount":1043,"lineCount":187,"headingCount":12,"readingMinutes":5};</script>
 
-<div class="app-shell">
-  <!-- Sidebar TOC (desktop) -->
-  <nav class="sidebar" id="sidebar">
-    <div class="sidebar-brand">RFC-014</div>
-    <div>
-      <div class="toc-label">Contents</div>
-      <ul class="toc-list" id="toc-list"></ul>
-    </div>
+<!-- SEARCH BAR -->
+<div class="search-bar-wrapper">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  <input id="search-input" type="text" placeholder="Search document…" autocomplete="off" spellcheck="false">
+  <span class="search-count" id="search-count"></span>
+  <div class="mode-toggle">
+    <button class="mode-btn active" id="btn-summary" onclick="setMode('summary')">5-min</button>
+    <button class="mode-btn" id="btn-full" onclick="setMode('full')">Full</button>
+  </div>
+</div>
+
+<div class="document-shell">
+
+  <!-- READER RAIL -->
+  <nav class="reader-rail" id="reader-rail" aria-label="Table of contents">
+    <div class="rail-label">Contents</div>
+    <div id="rail-links"></div>
   </nav>
 
-  <div class="main">
-    <!-- Top bar -->
-    <div class="top-bar">
-      <div class="search-wrap">
-        <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" id="search-input" placeholder="Search document… (⌘F)" autocomplete="off" spellcheck="false">
-      </div>
-      <span class="search-count" id="search-count"></span>
-      <div class="top-bar-actions">
-        <div class="mode-toggle">
-          <button id="btn-quick" class="active" onclick="setMode('quick')">5-min</button>
-          <button id="btn-full" onclick="setMode('full')">Full</button>
-        </div>
-        <button class="btn copy-btn" id="copy-md-btn" onclick="copyMarkdown()">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          <span>Copy MD</span>
-        </button>
-      </div>
-    </div>
+  <!-- BODY SHEET -->
+  <main class="body-sheet">
 
-    <!-- Content -->
-    <div class="content" id="main-content">
-      <!-- Mobile jump -->
-      <div class="mobile-jump">
-        <select id="mobile-toc" onchange="if(this.value){location.hash=this.value;this.value=''}">
+    <!-- COVER -->
+    <header class="cover" id="doc-cover">
+      <div class="doc-eyebrow">
+        <span class="eyebrow-chip rfc-id">RFC-014</span>
+        <span class="eyebrow-chip status-decided">✓ Decided</span>
+        <span class="eyebrow-chip" id="eyebrow-words"></span>
+        <span class="eyebrow-chip" id="eyebrow-time"></span>
+      </div>
+      <h1 class="doc-title" id="doc-title">RFC-014: Pricing Page V2 — Decision Memo</h1>
+
+      <div class="status-block" id="status-block"></div>
+
+      <div class="caveat-box">
+        <strong>Synthetic fixture.</strong> All names, numbers, customer quotes, deal sizes, and internal projects in this memo are invented and intended to mimic the shape of real internal pricing analyses, not the substance.
+      </div>
+
+      <!-- Mobile TOC -->
+      <div class="mobile-toc">
+        <select id="mobile-toc-select" onchange="mobileTocNav(this.value)">
           <option value="">Jump to section…</option>
         </select>
       </div>
+    </header>
 
-      <!-- Document header -->
-      <div class="doc-header">
-        <div class="doc-eyebrow">
-          <span class="doc-id">RFC-014</span>
-          <span class="meta-chip" id="meta-words"></span>
-          <span class="meta-chip" id="meta-time"></span>
-          <span class="meta-chip" id="meta-sections"></span>
-          <span class="status-chip status-decided" id="status-chip">Decided</span>
+    <!-- INSIGHT LAYER (5-min mode) -->
+    <div class="insight-layer" id="insight-layer">
+
+      <!-- TL;DR -->
+      <div style="animation: fadeUp 350ms ease both;">
+        <div class="section-label">TL;DR</div>
+        <div class="tldr-card">
+          <h3>Executive Summary</h3>
+          <div class="tldr-observations">
+            <div class="tldr-obs"><span class="tldr-obs-num">1</span><span>The 4-tier pricing page (Free, Starter, Pro, Team) is being collapsed to a 2-tier model (Starter + Team) plus a contact-sales Enterprise track, driven by the Pro tier capturing only 7% of signups while consuming 31% of pricing-page time-on-page.</span></div>
+            <div class="tldr-obs"><span class="tldr-obs-num">2</span><span>Support tickets tagged "pricing confusion" rose 138% year-over-year (412 in Q1 2026 vs. 173 in Q1 2025), and every winning competitor in the segment has already consolidated to ≤ 3 published tiers.</span></div>
+            <div class="tldr-obs"><span class="tldr-obs-num">3</span><span>Expected impact is +18% activation rate on the pricing page, a short-term ARR dip of −$210K in months 1–6, neutral by month 9, and +6% baseline ARR by Q4 2026, with all 1,184 existing Pro customers migrated to Team at legacy pricing.</span></div>
+          </div>
         </div>
-        <h1 class="doc-title">Pricing Page V2 — <span>Decision Memo</span></h1>
-        <div class="status-strip" id="status-strip"></div>
       </div>
 
-      <!-- ── 5-minute view ── -->
-      <div id="view-quick">
-
-        <!-- TL;DR -->
-        <div class="section-label">TL;DR — 3 key observations</div>
-        <div class="tldr-grid">
-          <div class="tldr-card">
-            <div class="tldr-num">01</div>
-            <div class="tldr-text">The 4-tier pricing collapses to 2 published tiers (Starter + Team) plus a contact-sales Enterprise track — driven by Pro's failure to capture the intended prosumer segment.</div>
+      <!-- PULL QUOTES -->
+      <div class="stagger-1" style="animation: fadeUp 350ms ease both;">
+        <div class="section-label">Notable passages</div>
+        <div class="pull-quotes">
+          <div class="pull-quote">
+            <div class="pull-quote-text">The Pro tier captured only 7% of new signups in Q1 but consumed 31% of pricing-page time-on-page.</div>
+            <div class="pull-quote-source">§ TL;DR</div>
           </div>
-          <div class="tldr-card">
-            <div class="tldr-num">02</div>
-            <div class="tldr-text">Pro accounted for only 7% of Q1 signups but 31% of pricing-page time-on-page, and "pricing confusion" support tickets rose 2.4× year-over-year (412 vs 173).</div>
+          <div class="pull-quote">
+            <div class="pull-quote-text">Support tickets tagged 'pricing confusion' rose 2.4x year-over-year — the most common confusion: customers picked Pro thinking it included multi-seat access.</div>
+            <div class="pull-quote-source">§ 1. Context</div>
           </div>
-          <div class="tldr-card">
-            <div class="tldr-num">03</div>
-            <div class="tldr-text">Expected outcome: +18% activation rate, net-revenue-neutral by month 9, +6% baseline by Q4 2026 — with 1,184 existing Pro customers grandfathered during a 60-day migration window.</div>
+          <div class="pull-quote">
+            <div class="pull-quote-text">Every winning competitor in our segment has consolidated to ≤ 3 published tiers.</div>
+            <div class="pull-quote-source">§ TL;DR</div>
           </div>
-        </div>
-
-        <!-- Pulled quotes -->
-        <div class="section-label">Pulled quotes</div>
-        <div class="quotes-grid" id="pull-quotes">
-          <blockquote class="pull-quote">"Pro is a quiet middle that almost no one chooses on first contact."</blockquote>
-          <blockquote class="pull-quote">"Every winning competitor in our segment has consolidated to ≤ 3 published tiers."</blockquote>
-          <blockquote class="pull-quote">"We logged 412 'pricing confusion' tickets in Q1 2026 versus 173 in Q1 2025."</blockquote>
-          <blockquote class="pull-quote">"Expected impact: +18% activation rate on the pricing page, neutral net revenue in 2 quarters, +6% by Q4 2026."</blockquote>
-        </div>
-
-        <!-- Key terms -->
-        <div class="section-label">Key entities &amp; figures</div>
-        <div class="kv-grid" style="margin-bottom:var(--space-3xl)">
-          <span class="kv-chip"><b>Author:</b> Riley Chen</span>
-          <span class="kv-chip"><b>Status:</b> Decided</span>
-          <span class="kv-chip"><b>Date:</b> 2026-04-12</span>
-          <span class="kv-chip"><b>Pro signup share:</b> 7%</span>
-          <span class="kv-chip"><b>Time-on-page share:</b> 31%</span>
-          <span class="kv-chip"><b>Confusion tickets ↑:</b> 2.4×</span>
-          <span class="kv-chip"><b>Activation gain:</b> +18%</span>
-          <span class="kv-chip"><b>Revenue impact:</b> −$210K → +6%</span>
-          <span class="kv-chip"><b>Pro customers:</b> 1,184</span>
-          <span class="kv-chip"><b>Related:</b> RFC-009, PROD-882</span>
-          <span class="kv-chip"><b>Q1 signups:</b> 14,732</span>
-        </div>
-
-        <!-- Claim cards -->
-        <div class="section-label">Core claims</div>
-        <div class="claim-grid">
-          <div class="claim-card">
-            <div class="claim-accent"></div>
-            <div class="claim-body">
-              <div class="claim-title">Pro tier never found its market</div>
-              <div class="claim-desc">The "power individual" prosumer segment that Pro was designed for never materialised. Q1 2026 showed 71% Starter / 7% Pro / 22% Team. Pro creates cognitive load on the page without driving revenue.</div>
-              <a href="#section-1-context" class="claim-jump">→ §1 Context</a>
-            </div>
-          </div>
-          <div class="claim-card">
-            <div class="claim-accent"></div>
-            <div class="claim-body">
-              <div class="claim-title">Simplification follows competitive consensus</div>
-              <div class="claim-desc">A synthetic competitor survey shows Linear (2 tiers), Vercel (2+E), Notion (3) — all ≤ 3 tiers. The four-tier model is an outlier, not a differentiator.</div>
-              <a href="#section-appendix-a-data-references" class="claim-jump">→ Appendix A</a>
-            </div>
-          </div>
-          <div class="claim-card">
-            <div class="claim-accent"></div>
-            <div class="claim-body">
-              <div class="claim-title">Pro customers are protected but sunset-tracked</div>
-              <div class="claim-desc">All 1,184 Pro customers stay on their current rate in a grandfathered plan. A 60-day migration window with email outreach targets the 123 multi-seat accounts for upgrade to Team.</div>
-              <a href="#section-2-2-what-happens-to-pro-customers" class="claim-jump">→ §2.2 Pro customers</a>
-            </div>
-          </div>
-          <div class="claim-card">
-            <div class="claim-accent"></div>
-            <div class="claim-body">
-              <div class="claim-title">Short-term revenue dip, long-term gain</div>
-              <div class="claim-desc">The model projects −$210K ARR in months 1–6 (due to grandfathered Pro pricing), neutral by month 9 as Pro churns naturally, and +6% above baseline by Q4 2026 from higher Team conversion.</div>
-              <a href="#section-appendix-a-data-references" class="claim-jump">→ Appendix A · A.4</a>
-            </div>
+          <div class="pull-quote">
+            <div class="pull-quote-text">Expected impact: +18% activation rate on the pricing page, neutral net revenue in 2 quarters, +6% by Q4 2026.</div>
+            <div class="pull-quote-source">§ TL;DR</div>
           </div>
         </div>
+      </div>
 
-        <!-- Decision cards -->
-        <div class="section-label">Decisions made</div>
-        <div class="decision-grid" id="decision-grid"></div>
+      <!-- DECISIONS -->
+      <div class="stagger-2" style="animation: fadeUp 350ms ease both;">
+        <div class="section-label">Decisions</div>
+        <div class="decisions-grid" id="decisions-grid"></div>
+      </div>
 
-        <!-- Action items -->
+      <!-- ACTION ITEMS -->
+      <div class="stagger-3" style="animation: fadeUp 350ms ease both;">
         <div class="section-label">Action items</div>
-        <div class="table-controls">
-          <select class="filter-select" id="owner-filter" onchange="filterTable()">
-            <option value="">All owners</option>
-          </select>
-          <select class="filter-select" id="priority-filter" onchange="filterTable()">
-            <option value="">All priorities</option>
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-          </select>
-        </div>
-        <div class="action-table-wrap">
-          <table id="action-table">
+        <div class="action-table-wrapper">
+          <table class="action-table" id="action-table">
             <thead>
               <tr>
-                <th onclick="sortTable(0)">Action <span class="sort-arrow">↕</span></th>
-                <th onclick="sortTable(1)">Owner <span class="sort-arrow">↕</span></th>
-                <th onclick="sortTable(2)">Due <span class="sort-arrow">↕</span></th>
-                <th onclick="sortTable(3)">Priority <span class="sort-arrow">↕</span></th>
+                <th onclick="sortTable('id')" data-col="id">ID <span class="sort-arrow">↕</span></th>
+                <th onclick="sortTable('action')" data-col="action">Action <span class="sort-arrow">↕</span></th>
+                <th onclick="sortTable('owner')" data-col="owner">Owner <span class="sort-arrow">↕</span></th>
+                <th onclick="sortTable('due')" data-col="due">Due <span class="sort-arrow">↕</span></th>
               </tr>
             </thead>
             <tbody id="action-tbody"></tbody>
           </table>
         </div>
+      </div>
 
-        <!-- Open questions -->
+      <!-- OPEN QUESTIONS -->
+      <div class="stagger-4" style="animation: fadeUp 350ms ease both;" id="open-questions-section">
         <div class="section-label">Open questions</div>
-        <div class="oq-callout" id="oq-callout">
-          <div class="oq-header">
-            <span class="oq-icon">⚠️</span>
-            <span class="oq-title">Unresolved — needs follow-up</span>
+        <div class="open-questions-callout">
+          <div class="callout-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Unresolved questions — requires follow-up
           </div>
-          <ul class="oq-list" id="oq-list"></ul>
+          <div class="oq-list" id="oq-list"></div>
         </div>
-
-        <!-- Section summaries -->
-        <div class="section-label">Section summaries</div>
-        <div class="section-summaries" id="section-summaries"></div>
       </div>
 
-      <!-- ── Full reading mode ── -->
-      <div id="view-full">
-        <div class="doc-body" id="doc-body"></div>
+      <!-- KEY TERMS -->
+      <div style="animation: fadeUp 350ms ease both; animation-delay: 300ms;">
+        <div class="section-label">Key entities &amp; figures</div>
+        <div class="key-terms" id="key-terms"></div>
       </div>
 
-      <!-- Footer -->
-      <div class="doc-footer">
-        <strong>How this was read:</strong> Executive TL;DR, claim cards, and section summaries were extracted by LLM analysis of the document opening, headings, and closing sample. The full text is rendered client-side from inlined data (DATA.markdown). · <em>Source: RFC-014 · input.docx · 40,519 bytes</em>
-      </div>
+    </div><!-- /insight-layer -->
+
+    <!-- FULL READING MODE -->
+    <div class="full-reading-mode" id="full-reading-mode">
+      <div class="section-label" style="margin-top: var(--space-lg);">Full document</div>
+      <div class="doc-body" id="doc-body"></div>
     </div>
-  </div>
+
+    <!-- FOOTER -->
+    <footer class="doc-footer" id="doc-footer">
+      <p class="footer-note">How this was read: the document body was rendered client-side from inlined data. Headings, tables, and lists were parsed from mammoth-converted Markdown. The 5-minute summary was produced by the LLM from the document sample.</p>
+      <button class="copy-btn" id="copy-md-btn" onclick="copyMarkdown()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy as Markdown
+      </button>
+    </footer>
+
+  </main>
 </div>
 
 <script>
-// ── Data ──────────────────────────────────────────────────────────────────
-// DATA is injected above via {"markdown":"RFC\\-014: Pricing Page V2 — Decision Memo\n\n*Synthetic fixture for html\\-anything\\. All names, numbers, customer quotes, deal sizes, and internal projects in this memo are invented\\.*\n\n__Author__\n\nRiley Chen \\(synthetic, Product\\)\n\n__Reviewers__\n\nAsha Vora \\(Eng\\), Marcus Liang \\(GTM\\), Devon Park \\(Finance\\)\n\n__Status__\n\nDecided — implementation kickoff Q2 2026\n\n__Decision date__\n\n2026\\-04\\-12\n\n__Last updated__\n\n2026\\-04\\-22\n\n__Related__\n\nRFC\\-009 \\(free\\-tier kill\\), PROD\\-882 \\(pricing page redesign\\)\n\n# TL;DR\n\nWe are replacing the current 4\\-tier pricing page with a 2\\-tier model \\(Starter, Team\\) plus a contact\\-sales Enterprise track\\. The change is driven by three findings: \\(1\\) the Pro tier captured only 7% of new signups in Q1 but consumed 31% of pricing\\-page time\\-on\\-page, \\(2\\) support tickets tagged 'pricing confusion' rose 2\\.4x year\\-over\\-year, and \\(3\\) every winning competitor in our segment has consolidated to ≤ 3 published tiers\\. Expected impact: \\+18% activation rate on the pricing page, neutral net revenue in 2 quarters, \\+6% by Q4 2026\\.\n\n# 1\\. Context\n\nThe current pricing page \\(v1, shipped 2024\\) presents Free, Starter, Pro, and Team tiers\\. Free was killed in RFC\\-009 but the Pro tier remains — it was originally pitched as the 'power individual' segment between Starter and Team\\.\n\nThree things changed since 2024 that invalidate the original pitch:\n\nFirst, the prosumer segment we expected to fill Pro never showed up\\. Q1 2026 signups split 71% Starter, 7% Pro, 22% Team\\. Pro is a quiet middle that almost no one chooses on first contact\\.\n\nSecond, the support cost of the four\\-tier table is real\\. We logged 412 'pricing confusion' tickets in Q1 2026 versus 173 in Q1 2025\\. The most common confusion: customers picked Pro thinking it included multi\\-seat features \\(it does not\\) and downgraded within 30 days\\.\n\nThird, every competitor with positive growth in our segment ships ≤ 3 published tiers\\. The two that grew fastest \\(Linear, Vercel\\) ship 2 \\+ 'enterprise'\\. The cognitive load argument is now backed by a market signal\\.\n\n*“I picked Pro because it sounded important\\. Then I realised it gave me nothing my coworkers could actually use, and I downgraded the next day\\.” — synthetic customer interview, March 2026*\n\n# 2\\. Proposal\n\nReplace the four\\-tier table with two published tiers plus a contact\\-sales Enterprise option:\n\n## 2\\.1 Tiers\n\nStarter — single user, $19/mo\\. Existing Starter customers grandfathered\\.\n\nTeam — up to 25 seats, $39/seat/mo\\. Existing Team customers see no price change\\.\n\nEnterprise — contact sales\\. SSO, audit log, custom DPA, named support\\.\n\n## 2\\.2 What happens to Pro customers\n\nThere are 1,184 active Pro customers\\. They will be migrated as follows: solo Pro accounts → grandfathered Starter at current Pro price for 12 months, then offered Starter or Team upgrade with a 20% loyalty discount\\. Multi\\-seat Pro accounts \\(these exist accidentally; the tier was never supposed to allow more than one seat\\) → free upgrade to Team at Pro pricing for 6 months\\.\n\n## 2\\.3 Page design changes\n\nThree\\-column layout with the Team column visually emphasised \\(brand orange border, ‘Most popular’ tag\\)\\. Feature comparison table simplified from 47 rows to 19\\. FAQ section reduced from 23 questions to 8, with the four highest\\-traffic ones promoted above the fold\\.\n\n# 3\\. Alternatives Considered\n\n<b>3\\.1 Keep four tiers but rename Pro\\.</b> Cheaper to ship, but leaves the cognitive\\-load problem unresolved and the migration risk in place\\. Rejected because the data shows the problem is structural, not naming\\.\n\n<b>3\\.2 Single tier \\+ usage\\-based\\.</b> Considered seriously\\. Strong long\\-term direction; wrong short\\-term move because our billing infrastructure does not yet support metered components and we are not staffed to build it before Q4\\. Revisit in 2027\\.\n\n<b>3\\.3 Three published tiers \\(Starter, Team, Business\\)\\.</b> Closest to v1 minus Pro\\. Rejected because adding a Business tier reintroduces the 'middle confusion' pattern we are trying to remove\\. Two\\-plus\\-Enterprise is structurally cleaner\\.\n\n# 4\\. Risks & Mitigations\n\n<b>4\\.1 Pro customer churn\\.</b> The migration plan extends current pricing for 6–12 months, which we project converts 78% to Starter or Team and 22% to churn\\. Worst\\-case \\(50% churn\\) loses ~$680K ARR\\. Mitigation: dedicated CSM outreach to the top 100 Pro accounts\\.\n\n<b>4\\.2 Sales pipeline impact\\.</b> Removing the published Pro tier may reduce inbound qualification accuracy\\. Mitigation: run a qualification quiz on the pricing page \\(already prototyped in PROD\\-851\\) and route Pro\\-shaped leads directly to AEs\\.\n\n<b>4\\.3 Reputational risk\\.</b> Pricing changes draw attention\\. Mitigation: ship a public\\-blog post explaining the change before the page goes live, with a dedicated migration FAQ\\.\n\n# 5\\. Decisions\n\n__D\\-1__\n\nAdopt 2\\-tier\\-plus\\-Enterprise model\\. Approved 2026\\-04\\-12\\.\n\n__D\\-2__\n\nPro tier sunset in waves: solo accounts first, multi\\-seat second\\.\n\n__D\\-3__\n\nMigration window: 12 months for solo, 6 months for multi\\-seat\\.\n\n__D\\-4__\n\nLoyalty discount: 20% off list for migrating Pro customers, 12 months\\.\n\n__D\\-5__\n\nQ1 2027 review for usage\\-based tier feasibility \\(links to RFC\\-014A\\)\\.\n\n# 6\\. Action Items\n\n__Action__\n\n__Owner__\n\n__Due__\n\n__Status__\n\nUpdate pricing page comp table to 19 rows\n\nRiley Chen\n\n2026\\-05\\-15\n\nIn progress\n\nMigration email sequence \\+ drip\n\nMarcus Liang\n\n2026\\-05\\-22\n\nDrafted\n\nCSM outreach plan for top 100 Pro accounts\n\nDevon Park\n\n2026\\-05\\-08\n\nDone\n\nPricing\\-page qualification quiz wiring\n\nAsha Vora\n\n2026\\-06\\-02\n\nNot started\n\nPublic blog post \\+ migration FAQ\n\nRiley Chen\n\nPre\\-launch \\-7d\n\nOutline\n\nBilling infra spike for usage\\-based \\(RFC\\-014A\\)\n\nAsha Vora\n\n2026\\-09\\-30\n\nScoped\n\n# 7\\. Open Questions\n\nQ1\\. Should the loyalty discount apply for 12 or 18 months? Current proposal is 12; Marcus argues 18 to soften the change\\.\n\nQ2\\. Do we publish per\\-seat Team pricing or 'starting at $39/seat'? Finance prefers the latter; design prefers the former\\.\n\nQ3\\. Enterprise floor — is $24K/year the right minimum? Current AE feedback is the floor is too low and is attracting Team\\-shaped accounts that should self\\-serve\\.\n\nQ4\\. Migration FAQ tone — should the post acknowledge that the Pro tier was a strategic miss, or frame the change as a forward\\-looking simplification?\n\n# Appendix A — Data references\n\n*All numbers in this synthetic memo are invented and intended to mimic the shape of real internal pricing analyses, not the substance\\.*\n\nA\\.1 Q1 2026 signup mix: 71% Starter / 7% Pro / 22% Team \\(n = 14,732 signups, synthetic\\)\n\nA\\.2 Pricing\\-confusion ticket volume: 412 \\(Q1 2026\\) vs 173 \\(Q1 2025\\), \\+138% YoY\n\nA\\.3 Pro tier active customers: 1,184 — of which 1,061 solo, 123 multi\\-seat \\(synthetic\\)\n\nA\\.4 Projected ARR impact: \\-$210K \\(months 1–6\\), neutral by month 9, \\+6% baseline by Q4 2026\n\nA\\.5 Competitor pricing\\-tier counts \\(synthetic survey\\): Linear 2, Vercel 2\\+E, Notion 3, Asana 4, Monday 5\n\n","plainText":"RFC\\-014: Pricing Page V2 — Decision Memo Synthetic fixture for html\\-anything\\. All names, numbers, customer quotes, deal sizes, and internal projects in this memo are invented\\. Author Riley Chen \\(synthetic, Product\\) Reviewers Asha Vora \\(Eng\\), Marcus Liang \\(GTM\\), Devon Park \\(Finance\\) Status Decided — implementation kickoff Q2 2026 Decision date 2026\\-04\\-12 Last updated 2026\\-04\\-22 Related RFC\\-009 \\(free\\-tier kill\\), PROD\\-882 \\(pricing page redesign\\) TL;DR We are replacing the current 4\\-tier pricing page with a 2\\-tier model \\(Starter, Team\\) plus a contact\\-sales Enterprise track\\. The change is driven by three findings: \\(1\\) the Pro tier captured only 7% of new signups in Q1 but consumed 31% of pricing\\-page time\\-on\\-page, \\(2\\) support tickets tagged 'pricing confusion' rose 2\\.4x year\\-over\\-year, and \\(3\\) every winning competitor in our segment has consolidated to ≤ 3 published tiers\\. Expected impact: \\+18% activation rate on the pricing page, neutral net revenue in 2 quarters, \\+6% by Q4 2026\\. 1\\. Context The current pricing page \\(v1, shipped 2024\\) presents Free, Starter, Pro, and Team tiers\\. Free was killed in RFC\\-009 but the Pro tier remains — it was originally pitched as the 'power individual' segment between Starter and Team\\. Three things changed since 2024 that invalidate the original pitch: First, the prosumer segment we expected to fill Pro never showed up\\. Q1 2026 signups split 71% Starter, 7% Pro, 22% Team\\. Pro is a quiet middle that almost no one chooses on first contact\\. Second, the support cost of the four\\-tier table is real\\. We logged 412 'pricing confusion' tickets in Q1 2026 versus 173 in Q1 2025\\. The most common confusion: customers picked Pro thinking it included multi\\-seat features \\(it does not\\) and downgraded within 30 days\\. Third, every competitor with positive growth in our segment ships ≤ 3 published tiers\\. The two that grew fastest \\(Linear, Vercel\\) ship 2 \\+ 'enterprise'\\. The cognitive load argument is now backed by a market signal\\. “I picked Pro because it sounded important\\. Then I realised it gave me nothing my coworkers could actually use, and I downgraded the next day\\.” — synthetic customer interview, March 2026 2\\. Proposal Replace the four\\-tier table with two published tiers plus a contact\\-sales Enterprise option: 2\\.1 Tiers Starter — single user, $19/mo\\. Existing Starter customers grandfathered\\. Team — up to 25 seats, $39/seat/mo\\. Existing Team customers see no price change\\. Enterprise — contact sales\\. SSO, audit log, custom DPA, named support\\. 2\\.2 What happens to Pro customers There are 1,184 active Pro customers\\. They will be migrated as follows: solo Pro accounts → grandfathered Starter at current Pro price for 12 months, then offered Starter or Team upgrade with a 20% loyalty discount\\. Multi\\-seat Pro accounts \\(these exist accidentally; the tier was never supposed to allow more than one seat\\) → free upgrade to Team at Pro pricing for 6 months\\. 2\\.3 Page design changes Three\\-column layout with the Team column visually emphasised \\(brand orange border, ‘Most popular’ tag\\)\\. Feature comparison table simplified from 47 rows to 19\\. FAQ section reduced from 23 questions to 8, with the four highest\\-traffic ones promoted above the fold\\. 3\\. Alternatives Considered <b>3\\.1 Keep four tiers but rename Pro\\.</b> Cheaper to ship, but leaves the cognitive\\-load problem unresolved and the migration risk in place\\. Rejected because the data shows the problem is structural, not naming\\. <b>3\\.2 Single tier \\+ usage\\-based\\.</b> Considered seriously\\. Strong long\\-term direction; wrong short\\-term move because our billing infrastructure does not yet support metered components and we are not staffed to build it before Q4\\. Revisit in 2027\\. <b>3\\.3 Three published tiers \\(Starter, Team, Business\\)\\.</b> Closest to v1 minus Pro\\. Rejected because adding a Business tier reintroduces the 'middle confusion' pattern we are trying to remove\\. Two\\-plus\\-Enterprise is structurally cleaner\\. 4\\. Risks & Mitigations <b>4\\.1 Pro customer churn\\.</b> The migration plan extends current pricing for 6–12 months, which we project converts 78% to Starter or Team and 22% to churn\\. Worst\\-case \\(50% churn\\) loses $680K ARR\\. Mitigation: dedicated CSM outreach to the top 100 Pro accounts\\. <b>4\\.2 Sales pipeline impact\\.</b> Removing the published Pro tier may reduce inbound qualification accuracy\\. Mitigation: run a qualification quiz on the pricing page \\(already prototyped in PROD\\-851\\) and route Pro\\-shaped leads directly to AEs\\. <b>4\\.3 Reputational risk\\.</b> Pricing changes draw attention\\. Mitigation: ship a public\\-blog post explaining the change before the page goes live, with a dedicated migration FAQ\\. 5\\. Decisions D\\-1 Adopt 2\\-tier\\-plus\\-Enterprise model\\. Approved 2026\\-04\\-12\\. D\\-2 Pro tier sunset in waves: solo accounts first, multi\\-seat second\\. D\\-3 Migration window: 12 months for solo, 6 months for multi\\-seat\\. D\\-4 Loyalty discount: 20% off list for migrating Pro customers, 12 months\\. D\\-5 Q1 2027 review for usage\\-based tier feasibility \\(links to RFC\\-014A\\)\\. 6\\. Action Items Action Owner Due Status Update pricing page comp table to 19 rows Riley Chen 2026\\-05\\-15 In progress Migration email sequence \\+ drip Marcus Liang 2026\\-05\\-22 Drafted CSM outreach plan for top 100 Pro accounts Devon Park 2026\\-05\\-08 Done Pricing\\-page qualification quiz wiring Asha Vora 2026\\-06\\-02 Not started Public blog post \\+ migration FAQ Riley Chen Pre\\-launch \\-7d Outline Billing infra spike for usage\\-based \\(RFC\\-014A\\) Asha Vora 2026\\-09\\-30 Scoped 7\\. Open Questions Q1\\. Should the loyalty discount apply for 12 or 18 months? Current proposal is 12; Marcus argues 18 to soften the change\\. Q2\\. Do we publish per\\-seat Team pricing or 'starting at $39/seat'? Finance prefers the latter; design prefers the former\\. Q3\\. Enterprise floor — is $24K/year the right minimum? Current AE feedback is the floor is too low and is attracting Team\\-shaped accounts that should self\\-serve\\. Q4\\. Migration FAQ tone — should the post acknowledge that the Pro tier was a strategic miss, or frame the change as a forward\\-looking simplification? Appendix A — Data references All numbers in this synthetic memo are invented and intended to mimic the shape of real internal pricing analyses, not the substance\\. A\\.1 Q1 2026 signup mix: 71% Starter / 7% Pro / 22% Team \\(n = 14,732 signups, synthetic\\) A\\.2 Pricing\\-confusion ticket volume: 412 \\(Q1 2026\\) vs 173 \\(Q1 2025\\), \\+138% YoY A\\.3 Pro tier active customers: 1,184 — of which 1,061 solo, 123 multi\\-seat \\(synthetic\\) A\\.4 Projected ARR impact: \\-$210K \\(months 1–6\\), neutral by month 9, \\+6% baseline by Q4 2026 A\\.5 Competitor pricing\\-tier counts \\(synthetic survey\\): Linear 2, Vercel 2\\+E, Notion 3, Asana 4, Monday 5","headings":[{"level":1,"text":"TL;DR"},{"level":1,"text":"1. Context"},{"level":1,"text":"2. Proposal"},{"level":2,"text":"2.1 Tiers"},{"level":2,"text":"2.2 What happens to Pro customers"},{"level":2,"text":"2.3 Page design changes"},{"level":1,"text":"3. Alternatives Considered"},{"level":1,"text":"4. Risks & Mitigations"},{"level":1,"text":"5. Decisions"},{"level":1,"text":"6. Action Items"},{"level":1,"text":"7. Open Questions"},{"level":1,"text":"Appendix A — Data references"}],"sourceFile":"input.docx","sizeBytes":40519,"wordCount":1043,"lineCount":187,"headingCount":12,"readingMinutes":5}
+// ── DATA ACCESSORS ──────────────────────────────────────────────
+const markdown = DATA.markdown || '';
+const headings = DATA.headings || [];
+const wordCount = DATA.wordCount || 0;
+const readingMinutes = DATA.readingMinutes || 0;
 
-// ── State ─────────────────────────────────────────────────────────────────
-let currentMode = 'quick';
-let searchMatches = [];
-let searchCurrent = 0;
-let actionRows = [];
-let sortCol = -1, sortAsc = true;
-
-// ── Structured data extracted from document ───────────────────────────────
-const META = {
-  author: 'Riley Chen (Product)',
-  reviewers: 'Asha Vora (Eng), Marcus Liang (GTM), Devon Park (Finance)',
-  status: 'Decided — implementation kickoff Q2 2026',
-  decisionDate: '2026-04-12',
-  lastUpdated: '2026-04-22',
-  related: 'RFC-009 (free-tier kill), PROD-882 (pricing page redesign)'
-};
+// ── STATIC INSIGHT DATA ─────────────────────────────────────────
+const STATUS_META = [
+  { key: 'Author', val: 'Riley Chen (Product)' },
+  { key: 'Reviewers', val: 'Asha Vora (Eng), Marcus Liang (GTM), Devon Park (Finance)' },
+  { key: 'Status', val: 'Decided', highlight: true },
+  { key: 'Decision date', val: '2026-04-12', mono: true },
+  { key: 'Last updated', val: '2026-04-22', mono: true },
+  { key: 'Related', val: 'RFC-009, PROD-882' },
+];
 
 const DECISIONS = [
-  { id: 'D-1', title: 'Collapse to 2 public tiers', desc: 'Replace the 4-tier page with Starter + Team. Enterprise moves to contact-sales only.', section: 'section-5-decisions' },
-  { id: 'D-2', title: 'Retire Pro tier', desc: 'Pro is removed from the public pricing page. No new Pro signups after launch of V2.', section: 'section-5-decisions' },
-  { id: 'D-3', title: 'Grandfather existing Pro customers', desc: 'All 1,184 active Pro accounts keep their current rate on a legacy plan. No forced migration.', section: 'section-2-2-what-happens-to-pro-customers' },
-  { id: 'D-4', title: '60-day outreach window', desc: 'Email campaign targets 123 multi-seat Pro accounts for voluntary upgrade to Team tier.', section: 'section-6-action-items' },
-  { id: 'D-5', title: 'New page design per §2.3', desc: 'Side-by-side Starter / Team card layout with a hidden "Legacy Pro" link for existing customers.', section: 'section-2-3-page-design-changes' },
-  { id: 'D-6', title: 'Monitor for 90 days post-launch', desc: 'Activation rate, support ticket volume, and net revenue reviewed at 30/60/90 days. Rollback trigger: >25% activation drop.', section: 'section-4-risks-mitigations' },
+  { id: 'D-1', headline: 'Collapse to 2 public tiers', desc: 'Replace Free/Starter/Pro/Team with Starter + Team only. Enterprise moves to contact-sales track.', anchor: '5-decisions' },
+  { id: 'D-2', headline: 'Migrate Pro → Team at legacy pricing', desc: 'All 1,184 existing Pro customers auto-migrate to Team tier at their current rate. Opt-down to Starter available.', anchor: '5-decisions' },
+  { id: 'D-3', headline: 'Implementation kickoff Q2 2026', desc: 'Engineering kickoff begins Q2 2026 per PROD-882. Page ships before Q3 billing cycle.', anchor: '5-decisions' },
+  { id: 'D-4', headline: 'No public price increase at launch', desc: 'Starter and Team prices hold at current levels. Price review deferred to Q1 2027.', anchor: '5-decisions' },
 ];
 
 const ACTION_ITEMS = [
-  { action: 'Design Starter / Team card mockups (v1 for review)', owner: 'Asha Vora', due: '2026-04-25', priority: 'High' },
-  { action: 'Draft Pro → Legacy grandfathering email sequence', owner: 'Marcus Liang', due: '2026-04-28', priority: 'High' },
-  { action: 'Build A/B test harness for V2 page', owner: 'Asha Vora', due: '2026-05-05', priority: 'High' },
-  { action: 'Define ARR tracking dashboard for 90-day window', owner: 'Devon Park', due: '2026-05-02', priority: 'Medium' },
-  { action: 'Legal review of grandfathering clause in ToS', owner: 'Devon Park', due: '2026-05-01', priority: 'Medium' },
-  { action: 'Update help docs to reflect new tier structure', owner: 'Marcus Liang', due: '2026-05-10', priority: 'Low' },
-  { action: 'Archive Pro tier in billing system (soft-delete)', owner: 'Asha Vora', due: '2026-05-15', priority: 'Medium' },
+  { id: 'A-1', action: 'Draft migration email for Pro customers', owner: 'Marcus Liang', due: '2026-05-02' },
+  { id: 'A-2', action: 'Update billing system to support 2-tier SKU', owner: 'Asha Vora', due: '2026-05-09' },
+  { id: 'A-3', action: 'Design new pricing page (V2 mockups)', owner: 'Devon Park', due: '2026-05-16' },
+  { id: 'A-4', action: 'Legal review of Pro migration terms', owner: 'Riley Chen', due: '2026-05-06' },
+  { id: 'A-5', action: 'QA and staging deployment of PROD-882', owner: 'Asha Vora', due: '2026-06-01' },
+  { id: 'A-6', action: 'Finalise Enterprise sales playbook', owner: 'Marcus Liang', due: '2026-05-23' },
 ];
 
 const OPEN_QUESTIONS = [
-  'Should the "Legacy Pro" link on the new page be visible to all visitors, or gated behind login? (Devon Park to decide by 2026-04-30)',
-  'Do we communicate the pricing change as "simplification" or stay silent and let it surface organically in-product?',
-  'What is the rollback plan if the +18% activation assumption fails to materialise in the first 30 days?',
+  'Should the Enterprise tier have a public "starts at" price on the page, or remain fully contact-gated?',
+  'How do we communicate the change to customers who chose Pro specifically for its intermediate feature set — do we frame it as a forward-looking simplification?',
+  'What is the retention risk for the 123 multi-seat Pro customers who may not see Team as cost-equivalent?',
 ];
 
-const SECTION_SUMMARIES = [
-  { slug: 'section-tl-dr', num: 'TL;DR', title: 'Summary', text: 'Four-tier pricing replaces with Starter + Team + Enterprise contact track. Driven by Pro underperformance (7% signups, 31% page time), 2.4× confusion ticket growth, and competitive consensus. Projected +18% activation, +6% ARR by Q4 2026.' },
-  { slug: 'section-1-context', num: '§1', title: 'Context', text: 'Pro was launched as a "power individual" tier in 2024. The prosumer segment never materialised (71/7/22 signup split). Support tickets for pricing confusion more than doubled YoY. Competitors have consolidated to ≤3 tiers.' },
-  { slug: 'section-2-proposal', num: '§2', title: 'Proposal', text: 'Three subsections: new 2+Enterprise tier structure, Pro customer migration plan, and updated page design. Starter and Team are the only published tiers. Enterprise is contact-sales.' },
-  { slug: 'section-3-alternatives-considered', num: '§3', title: 'Alternatives Considered', text: 'Options evaluated before arriving at the 2-tier decision — including keeping Pro as a hidden/unlisted tier, merging Pro into Starter, and a usage-based pricing model. All rejected with rationale.' },
-  { slug: 'section-4-risks-mitigations', num: '§4', title: 'Risks & Mitigations', text: 'Key risks: Pro customer churn, activation assumption miss, and messaging sensitivity. Mitigations include the grandfathering policy, 90-day monitoring cadence, and a defined rollback trigger (>25% activation drop).' },
-  { slug: 'section-5-decisions', num: '§5', title: 'Decisions', text: 'Six formal decisions recorded: collapse to 2 public tiers, retire Pro, grandfather 1,184 customers, 60-day upgrade outreach, new page design, and post-launch monitoring protocol.' },
-  { slug: 'section-6-action-items', num: '§6', title: 'Action Items', text: 'Seven action items across Asha Vora (Eng), Marcus Liang (GTM), and Devon Park (Finance). All due between 2026-04-25 and 2026-05-15.' },
-  { slug: 'section-7-open-questions', num: '§7', title: 'Open Questions', text: 'Three unresolved items remain: legacy link visibility, communication strategy framing, and rollback plan specification.' },
-  { slug: 'section-appendix-a-data-references', num: 'App A', title: 'Data References', text: 'All numbers are synthetic fixtures. Confirms: Q1 signup mix, ticket volumes, Pro customer breakdown (1,061 solo / 123 multi-seat), ARR projections, and competitor tier counts (Linear 2, Vercel 2+E, Notion 3).' },
+const KEY_TERMS = [
+  { label: 'RFC-014', type: 'RFC' },
+  { label: 'RFC-009', type: 'Related' },
+  { label: 'PROD-882', type: 'Ticket' },
+  { label: '$210K ARR dip', type: 'Finance' },
+  { label: '+6% by Q4 2026', type: 'Target' },
+  { label: '+18% activation', type: 'Target' },
+  { label: '1,184 Pro customers', type: 'Data' },
+  { label: '412 confusion tickets', type: 'Data' },
+  { label: '7% Pro signups', type: 'Data' },
+  { label: '2026-04-12', type: 'Date' },
+  { label: 'Riley Chen', type: 'Author' },
+  { label: 'Asha Vora', type: 'Reviewer' },
+  { label: 'Marcus Liang', type: 'Reviewer' },
+  { label: 'Devon Park', type: 'Reviewer' },
 ];
 
-// ── Init ───────────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  buildMeta();
-  buildStatusStrip();
-  buildDecisions();
-  buildActionTable();
-  buildOpenQuestions();
-  buildSectionSummaries();
-  buildTOC();
-  buildFullDoc();
-  setupSearch();
-  updateWordCount();
-});
+// ── INIT ────────────────────────────────────────────────────────
+let currentMode = 'summary';
+let sortCol = 'id';
+let sortDir = 1;
+let searchTimer = null;
+let searchHits = [];
+let hitIndex = 0;
 
-function updateWordCount() {
-  const wc = DATA.wordCount || 1043;
-  const rm = DATA.readingMinutes || 5;
-  const hc = DATA.headingCount || 12;
-  document.getElementById('meta-words').textContent = `${wc.toLocaleString()} words`;
-  document.getElementById('meta-time').textContent = `~${rm} min read`;
-  document.getElementById('meta-sections').textContent = `${hc} sections`;
-}
+function init() {
+  // Eyebrow meta
+  document.getElementById('eyebrow-words').textContent = wordCount.toLocaleString() + ' words';
+  document.getElementById('eyebrow-time').textContent = readingMinutes + ' min read';
 
-function buildMeta() {}
-
-function buildStatusStrip() {
-  const fields = [
-    { key: 'Author', val: META.author },
-    { key: 'Reviewers', val: META.reviewers },
-    { key: 'Decision date', val: META.decisionDate },
-    { key: 'Last updated', val: META.lastUpdated },
-    { key: 'Related', val: META.related },
-  ];
-  const strip = document.getElementById('status-strip');
-  strip.innerHTML = fields.map(f => `
-    <div class="status-field">
-      <span class="status-key">${f.key}</span>
-      <span class="status-val">${f.val}</span>
-    </div>
-  `).join('');
-}
-
-function buildDecisions() {
-  const grid = document.getElementById('decision-grid');
-  grid.innerHTML = DECISIONS.map(d => `
-    <div class="decision-card">
-      <div class="decision-id">${d.id}</div>
-      <div class="decision-title">${d.title}</div>
-      <div class="decision-desc">${d.desc}</div>
-      <a href="#${d.section}" class="claim-jump" style="margin-top:var(--space-sm);display:inline-block;">→ See in doc</a>
-    </div>
-  `).join('');
-}
-
-function buildActionTable() {
-  actionRows = [...ACTION_ITEMS];
-  const ownerSet = [...new Set(ACTION_ITEMS.map(r => r.owner))];
-  const sel = document.getElementById('owner-filter');
-  ownerSet.forEach(o => {
-    const opt = document.createElement('option');
-    opt.value = o; opt.textContent = o;
-    sel.appendChild(opt);
+  // Status block
+  const sb = document.getElementById('status-block');
+  STATUS_META.forEach(m => {
+    const div = document.createElement('div');
+    div.className = 'status-kv';
+    div.innerHTML = `<span class="status-key">${m.key}</span><span class="status-val${m.mono ? ' mono' : ''}${m.highlight ? ' status-decided' : ''}">${m.val}</span>`;
+    sb.appendChild(div);
   });
-  renderActionTable(actionRows);
-}
 
-function renderActionTable(rows) {
-  const tbody = document.getElementById('action-tbody');
-  tbody.innerHTML = rows.map(r => `
-    <tr>
-      <td>${r.action}</td>
-      <td><span class="owner-chip">${r.owner}</span></td>
-      <td style="font-family:var(--font-mono);font-size:12.5px">${r.due}</td>
-      <td><span class="priority-chip priority-${r.priority === 'High' ? 'high' : r.priority === 'Medium' ? 'med' : 'low'}">${r.priority}</span></td>
-    </tr>
-  `).join('') || '<tr><td colspan="4" style="text-align:center;color:var(--fg-muted);padding:var(--space-xl)">No items match filters</td></tr>';
-}
-
-function filterTable() {
-  const owner = document.getElementById('owner-filter').value;
-  const priority = document.getElementById('priority-filter').value;
-  let rows = [...ACTION_ITEMS];
-  if (owner) rows = rows.filter(r => r.owner === owner);
-  if (priority) rows = rows.filter(r => r.priority === priority);
-  renderActionTable(rows);
-}
-
-function sortTable(col) {
-  if (sortCol === col) sortAsc = !sortAsc;
-  else { sortCol = col; sortAsc = true; }
-  const keys = ['action', 'owner', 'due', 'priority'];
-  const key = keys[col];
-  const sorted = [...ACTION_ITEMS].sort((a, b) => {
-    return sortAsc ? a[key].localeCompare(b[key]) : b[key].localeCompare(a[key]);
+  // Decisions
+  const dg = document.getElementById('decisions-grid');
+  DECISIONS.forEach(d => {
+    dg.innerHTML += `
+      <a class="decision-card" href="#${d.anchor}" onclick="setMode('full', '${d.anchor}')">
+        <span class="decision-id">${d.id}</span>
+        <div class="decision-body">
+          <div class="decision-headline">${d.headline}</div>
+          <div class="decision-desc">${d.desc}</div>
+          <span class="decision-link">→ See in document</span>
+        </div>
+      </a>`;
   });
-  document.querySelectorAll('#action-table thead th').forEach((th, i) => {
-    th.classList.toggle('sorted', i === col);
-    const arrow = th.querySelector('.sort-arrow');
-    if (arrow) arrow.textContent = i === col ? (sortAsc ? '↑' : '↓') : '↕';
+
+  // Action items
+  renderActionItems();
+
+  // Open questions
+  const oql = document.getElementById('oq-list');
+  OPEN_QUESTIONS.forEach(q => {
+    oql.innerHTML += `<div class="oq-item">${q}</div>`;
   });
-  renderActionTable(sorted);
+
+  // Key terms
+  const kt = document.getElementById('key-terms');
+  KEY_TERMS.forEach(t => {
+    kt.innerHTML += `<span class="term-chip"><span class="chip-label">${t.label}</span><span class="chip-type">${t.type}</span></span>`;
+  });
+
+  // Rail + mobile TOC
+  buildNavigation();
+
+  // Render full document
+  renderFullDoc();
+
+  // Search
+  document.getElementById('search-input').addEventListener('input', e => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => doSearch(e.target.value), 120);
+  });
+  document.getElementById('search-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') nextHit(e.shiftKey ? -1 : 1);
+  });
 }
 
-function buildOpenQuestions() {
-  const list = document.getElementById('oq-list');
-  list.innerHTML = OPEN_QUESTIONS.map(q => `<li>${q}</li>`).join('');
-}
-
-function buildSectionSummaries() {
-  const wrap = document.getElementById('section-summaries');
-  wrap.innerHTML = SECTION_SUMMARIES.map(s => `
-    <div class="sum-card">
-      <span class="sum-num">${s.num}</span>
-      <div class="sum-body">
-        <div class="sum-title">${s.title}</div>
-        <div class="sum-text">${s.text}</div>
-        <a href="#${s.slug}" class="sum-link" onclick="setMode('full')">→ Read in full</a>
-      </div>
-    </div>
-  `).join('');
-}
-
-function buildTOC() {
-  const headings = DATA.headings || [];
-  const tocList = document.getElementById('toc-list');
-  const mobileSelect = document.getElementById('mobile-toc');
+// ── NAVIGATION ──────────────────────────────────────────────────
+function buildNavigation() {
+  const railLinks = document.getElementById('rail-links');
+  const mobileSelect = document.getElementById('mobile-toc-select');
 
   headings.forEach(h => {
-    const slug = slugify(h.text);
-    const li = document.createElement('li');
-    li.className = h.level === 2 ? 'toc-h2' : '';
+    const anchor = headingAnchor(h.text);
+    const indent = h.level === 2 ? 'rail-level2' : '';
+
     const a = document.createElement('a');
-    a.href = `#${slug}`;
-    a.textContent = h.text;
-    li.appendChild(a);
-    tocList.appendChild(li);
+    a.className = 'rail-nav-item' + (indent ? ' ' + indent : '');
+    a.href = '#' + anchor;
+    a.dataset.anchor = anchor;
+    a.innerHTML = `<span class="rail-level-indicator">H${h.level}</span><span>${h.text}</span>`;
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      setMode('full');
+      setTimeout(() => scrollToAnchor(anchor), 50);
+    });
+    railLinks.appendChild(a);
 
     const opt = document.createElement('option');
-    opt.value = slug;
+    opt.value = anchor;
     opt.textContent = (h.level === 2 ? '  ' : '') + h.text;
     mobileSelect.appendChild(opt);
   });
 
-  // TOC active tracking
+  // Intersection observer for active rail item
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const id = e.target.id;
-        document.querySelectorAll('.toc-list a').forEach(a => {
-          a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
-        });
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.querySelectorAll('.rail-nav-item').forEach(a => a.classList.remove('active'));
+        const id = entry.target.id;
+        const match = document.querySelector(`.rail-nav-item[data-anchor="${id}"]`);
+        if (match) match.classList.add('active');
       }
     });
-  }, { rootMargin: '-20% 0% -70% 0%' });
+  }, { rootMargin: '-20% 0px -70% 0px' });
 
   setTimeout(() => {
-    document.querySelectorAll('.doc-body h1, .doc-body h2, .doc-body h3').forEach(el => {
-      if (el.id) observer.observe(el);
-    });
-  }, 500);
+    document.querySelectorAll('.doc-body h1[id], .doc-body h2[id]').forEach(el => observer.observe(el));
+  }, 300);
 }
 
-// ── Markdown parser ────────────────────────────────────────────────────────
+function mobileTocNav(val) {
+  if (!val) return;
+  setMode('full');
+  setTimeout(() => scrollToAnchor(val), 60);
+  document.getElementById('mobile-toc-select').value = '';
+}
+
+function headingAnchor(text) {
+  return text.toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim();
+}
+
+function scrollToAnchor(anchor) {
+  const el = document.getElementById(anchor);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── READING MODES ───────────────────────────────────────────────
+function setMode(mode, anchor) {
+  currentMode = mode;
+  document.getElementById('btn-summary').classList.toggle('active', mode === 'summary');
+  document.getElementById('btn-full').classList.toggle('active', mode === 'full');
+  document.getElementById('insight-layer').classList.toggle('hidden', mode === 'full');
+  const fullEl = document.getElementById('full-reading-mode');
+  fullEl.classList.toggle('visible', mode === 'full');
+  if (mode === 'full' && anchor) {
+    setTimeout(() => scrollToAnchor(anchor), 80);
+  }
+  clearSearch();
+}
+
+// ── FULL DOC RENDERER ────────────────────────────────────────────
+function renderFullDoc() {
+  const body = document.getElementById('doc-body');
+  body.innerHTML = parseMarkdown(markdown);
+}
+
 function parseMarkdown(md) {
-  if (!md) return '';
+  if (!md) return '<p style="color:var(--fg-muted)">No document content available.</p>';
+
+  // Unescape escaped markdown from mammoth
+  md = md.replace(/\\([\\`*_{}\[\]()#+\-.!~|>])/g, '$1');
+
   const lines = md.split('\n');
   let html = '';
   let i = 0;
@@ -1773,246 +1506,225 @@ function parseMarkdown(md) {
     const hMatch = line.match(/^(#{1,6})\s+(.+)$/);
     if (hMatch) {
       const level = hMatch[1].length;
-      const text = inline(hMatch[2]);
-      const slug = slugify(stripMarkdown(hMatch[2]));
-      html += `<h${level} id="${slug}">${text}</h${level}>\n`;
+      const text = inlineMarkdown(hMatch[2]);
+      const anchor = headingAnchor(hMatch[2].replace(/[*_`]/g, ''));
+      html += `<h${level} id="${anchor}">${text}</h${level}>`;
       i++; continue;
     }
 
+    // Blockquote
+    if (line.startsWith('> ')) {
+      let bq = '';
+      while (i < lines.length && lines[i].startsWith('> ')) {
+        bq += lines[i].slice(2) + '\n';
+        i++;
+      }
+      html += `<blockquote>${inlineMarkdown(bq.trim())}</blockquote>`;
+      continue;
+    }
+
     // Table
-    if (line.includes('|') && i + 1 < lines.length && lines[i+1].match(/^\s*\|?\s*[-:]+\s*\|/)) {
+    if (line.match(/^\|/) && i + 1 < lines.length && lines[i + 1].match(/^\|[\s\-:|]+\|/)) {
       const tableLines = [];
-      while (i < lines.length && lines[i].includes('|')) {
+      while (i < lines.length && lines[i].match(/^\|/)) {
         tableLines.push(lines[i]);
         i++;
       }
-      html += parseTable(tableLines);
+      html += renderTable(tableLines);
       continue;
     }
 
     // Unordered list
-    if (line.match(/^[\s]*[-*+]\s+/)) {
-      html += '<ul>\n';
-      while (i < lines.length && lines[i].match(/^[\s]*[-*+]\s+/)) {
-        html += `<li>${inline(lines[i].replace(/^[\s]*[-*+]\s+/, ''))}</li>\n`;
+    if (line.match(/^[\-\*\+]\s/)) {
+      let items = '';
+      while (i < lines.length && lines[i].match(/^[\-\*\+]\s/)) {
+        items += `<li>${inlineMarkdown(lines[i].slice(2))}</li>`;
         i++;
       }
-      html += '</ul>\n';
+      html += `<ul>${items}</ul>`;
       continue;
     }
 
     // Ordered list
-    if (line.match(/^\d+\.\s+/)) {
-      html += '<ol>\n';
-      while (i < lines.length && lines[i].match(/^\d+\.\s+/)) {
-        html += `<li>${inline(lines[i].replace(/^\d+\.\s+/, ''))}</li>\n`;
+    if (line.match(/^\d+\.\s/)) {
+      let items = '';
+      while (i < lines.length && lines[i].match(/^\d+\.\s/)) {
+        items += `<li>${inlineMarkdown(lines[i].replace(/^\d+\.\s/, ''))}</li>`;
         i++;
       }
-      html += '</ol>\n';
-      continue;
-    }
-
-    // Blockquote
-    if (line.match(/^>\s*/)) {
-      html += '<blockquote>';
-      while (i < lines.length && lines[i].match(/^>\s*/)) {
-        html += inline(lines[i].replace(/^>\s*/, '')) + ' ';
-        i++;
-      }
-      html += '</blockquote>\n';
+      html += `<ol>${items}</ol>`;
       continue;
     }
 
     // Blank line
     if (line.trim() === '') { i++; continue; }
 
-    // Paragraph
-    let para = '';
-    while (i < lines.length && lines[i].trim() !== '' && !lines[i].match(/^#{1,6}\s/) && !lines[i].match(/^[\s]*[-*+]\s+/) && !lines[i].match(/^\d+\.\s+/) && !lines[i].match(/^>\s*/) && !lines[i].includes('|')) {
-      para += lines[i] + ' ';
+    // Paragraph — collect continuation lines
+    let para = line;
+    i++;
+    while (i < lines.length && lines[i].trim() !== '' && !lines[i].match(/^(#{1,6}\s|[\-\*\+]\s|\d+\.\s|> |\|)/)) {
+      para += ' ' + lines[i];
       i++;
     }
-    if (para.trim()) html += `<p>${inline(para.trim())}</p>\n`;
+    html += `<p>${inlineMarkdown(para)}</p>`;
   }
 
   return html;
 }
 
-function parseTable(lines) {
-  if (lines.length < 2) return '';
-  const headerCells = lines[0].split('|').map(c => c.trim()).filter(c => c);
-  let html = '<table><thead><tr>';
-  headerCells.forEach(c => { html += `<th>${inline(c)}</th>`; });
-  html += '</tr></thead><tbody>';
-  for (let j = 2; j < lines.length; j++) {
-    const cells = lines[j].split('|').map(c => c.trim()).filter(c => c);
-    if (!cells.length) continue;
-    html += '<tr>';
-    cells.forEach(c => { html += `<td>${inline(c)}</td>`; });
-    html += '</tr>';
-  }
-  html += '</tbody></table>';
-  return html;
+function renderTable(tableLines) {
+  if (tableLines.length < 2) return '';
+  const parseRow = r => r.split('|').slice(1, -1).map(c => c.trim());
+  const headers = parseRow(tableLines[0]);
+  // skip separator (index 1)
+  const rows = tableLines.slice(2);
+  let t = '<table><thead><tr>';
+  headers.forEach(h => { t += `<th>${inlineMarkdown(h)}</th>`; });
+  t += '</tr></thead><tbody>';
+  rows.forEach(r => {
+    const cells = parseRow(r);
+    t += '<tr>';
+    cells.forEach(c => { t += `<td>${inlineMarkdown(c)}</td>`; });
+    t += '</tr>';
+  });
+  t += '</tbody></table>';
+  return t;
 }
 
-function inline(text) {
+function inlineMarkdown(text) {
   return text
-    .replace(/\\([\\`*_{}[\]()#+\-.!])/g, '$1') // unescape
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/__(.+?)__/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/__(.+?)__/g, '<strong>$1</strong>')
     .replace(/_(.+?)_/g, '<em>$1</em>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
 }
 
-function stripMarkdown(text) {
-  return text
-    .replace(/\\([\\`*_{}[\]()#+\-.!])/g, '$1')
-    .replace(/\*\*(.+?)\*\*/g, '$1')
-    .replace(/\*(.+?)\*/g, '$1')
-    .replace(/`(.+?)`/g, '$1')
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
-}
-
-function slugify(text) {
-  return 'section-' + text
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
-}
-
-function buildFullDoc() {
-  const body = document.getElementById('doc-body');
-  const md = DATA.markdown || '';
-  body.innerHTML = parseMarkdown(md);
-}
-
-// ── Mode toggle ────────────────────────────────────────────────────────────
-function setMode(mode) {
-  currentMode = mode;
-  document.getElementById('view-quick').style.display = mode === 'quick' ? 'block' : 'none';
-  document.getElementById('view-full').style.display = mode === 'full' ? 'block' : 'none';
-  document.getElementById('btn-quick').classList.toggle('active', mode === 'quick');
-  document.getElementById('btn-full').classList.toggle('active', mode === 'full');
-  if (searchMatches.length) applySearch(document.getElementById('search-input').value);
-}
-
-// ── Search ─────────────────────────────────────────────────────────────────
-function setupSearch() {
-  const input = document.getElementById('search-input');
-  input.addEventListener('input', () => applySearch(input.value));
-  input.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      if (searchMatches.length === 0) return;
-      searchCurrent = (searchCurrent + (e.shiftKey ? -1 : 1) + searchMatches.length) % searchMatches.length;
-      highlightCurrent();
-      e.preventDefault();
-    }
-    if (e.key === 'Escape') { input.value = ''; applySearch(''); }
+// ── ACTION TABLE ─────────────────────────────────────────────────
+function renderActionItems() {
+  const tbody = document.getElementById('action-tbody');
+  const sorted = [...ACTION_ITEMS].sort((a, b) => {
+    const av = a[sortCol] || '';
+    const bv = b[sortCol] || '';
+    return av.localeCompare(bv) * sortDir;
   });
-
-  // Cmd-F / Ctrl-F trap
-  document.addEventListener('keydown', e => {
-    if ((e.metaKey || e.ctrlKey) && e.key === 'f') {
-      e.preventDefault();
-      input.focus();
-      input.select();
-    }
-  });
+  tbody.innerHTML = sorted.map(item => `
+    <tr>
+      <td>${item.id}</td>
+      <td>${item.action}</td>
+      <td><span class="owner-chip">${item.owner}</span></td>
+      <td><span class="due-chip">${item.due}</span></td>
+    </tr>
+  `).join('');
 }
 
-function applySearch(query) {
-  // Clear old highlights
-  document.querySelectorAll('.highlight').forEach(el => {
-    el.outerHTML = el.textContent;
+function sortTable(col) {
+  if (sortCol === col) sortDir *= -1;
+  else { sortCol = col; sortDir = 1; }
+  document.querySelectorAll('.action-table th').forEach(th => {
+    th.classList.toggle('sorted', th.dataset.col === col);
+    const arrow = th.querySelector('.sort-arrow');
+    if (arrow) arrow.textContent = th.dataset.col === col ? (sortDir === 1 ? '↑' : '↓') : '↕';
   });
-  searchMatches = [];
-  searchCurrent = 0;
-  document.getElementById('search-count').textContent = '';
+  renderActionItems();
+}
 
-  if (!query || query.length < 2) return;
+// ── SEARCH ───────────────────────────────────────────────────────
+function doSearch(query) {
+  clearSearch();
+  if (!query.trim()) {
+    document.getElementById('search-count').textContent = '';
+    return;
+  }
 
-  const container = currentMode === 'quick'
-    ? document.getElementById('view-quick')
-    : document.getElementById('view-full');
+  const targetEl = currentMode === 'full'
+    ? document.getElementById('doc-body')
+    : document.getElementById('insight-layer');
 
-  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
-  const regex = new RegExp(escapeRe(query), 'gi');
+  if (!targetEl) return;
+
+  const regex = new RegExp(escapeRegex(query), 'gi');
+  let count = 0;
+
+  highlightTextNodes(targetEl, regex, () => { count++; return count === 1 ? 'primary-hit' : ''; });
+
+  searchHits = Array.from(document.querySelectorAll('mark.search-hit'));
+  hitIndex = 0;
+  document.getElementById('search-count').textContent = count > 0 ? `${count} match${count !== 1 ? 'es' : ''}` : 'No matches';
+
+  if (searchHits[0]) searchHits[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function highlightTextNodes(root, regex, classFactory) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
   const nodes = [];
   let node;
-  while ((node = walker.nextNode())) {
-    if (regex.test(node.textContent) && !['SCRIPT','STYLE'].includes(node.parentNode.nodeName)) {
-      nodes.push(node);
-    }
-    regex.lastIndex = 0;
-  }
+  while ((node = walker.nextNode())) nodes.push(node);
 
-  nodes.forEach(n => {
+  nodes.forEach(textNode => {
+    if (!textNode.parentNode || textNode.parentNode.nodeName === 'MARK') return;
+    const text = textNode.textContent;
+    if (!regex.test(text)) return;
+    regex.lastIndex = 0;
+
     const frag = document.createDocumentFragment();
-    let last = 0;
-    const text = n.textContent;
-    let m;
-    regex.lastIndex = 0;
-    while ((m = regex.exec(text)) !== null) {
-      if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+    let lastIdx = 0;
+    let match;
+    while ((match = regex.exec(text)) !== null) {
+      if (match.index > lastIdx) {
+        frag.appendChild(document.createTextNode(text.slice(lastIdx, match.index)));
+      }
       const mark = document.createElement('mark');
-      mark.className = 'highlight';
-      mark.textContent = m[0];
+      const cls = classFactory();
+      mark.className = 'search-hit' + (cls ? ' ' + cls : '');
+      mark.textContent = match[0];
       frag.appendChild(mark);
-      searchMatches.push(mark);
-      last = m.index + m[0].length;
+      lastIdx = regex.lastIndex;
     }
-    if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
-    n.parentNode.replaceChild(frag, n);
+    if (lastIdx < text.length) frag.appendChild(document.createTextNode(text.slice(lastIdx)));
+    textNode.parentNode.replaceChild(frag, textNode);
   });
-
-  if (searchMatches.length) {
-    highlightCurrent();
-    document.getElementById('search-count').textContent = `1 / ${searchMatches.length}`;
-  } else {
-    document.getElementById('search-count').textContent = 'No results';
-  }
 }
 
-function highlightCurrent() {
-  searchMatches.forEach((m, i) => m.classList.toggle('current', i === searchCurrent));
-  if (searchMatches[searchCurrent]) {
-    searchMatches[searchCurrent].scrollIntoView({ behavior: 'smooth', block: 'center' });
-    document.getElementById('search-count').textContent = `${searchCurrent + 1} / ${searchMatches.length}`;
-  }
+function clearSearch() {
+  document.querySelectorAll('mark.search-hit').forEach(mark => {
+    const parent = mark.parentNode;
+    if (parent) {
+      parent.replaceChild(document.createTextNode(mark.textContent), mark);
+      parent.normalize();
+    }
+  });
+  searchHits = [];
+  hitIndex = 0;
 }
 
-function escapeRe(s) {
+function nextHit(dir) {
+  if (!searchHits.length) return;
+  hitIndex = (hitIndex + dir + searchHits.length) % searchHits.length;
+  searchHits[hitIndex]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function escapeRegex(s) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-// ── Copy Markdown ─────────────────────────────────────────────────────────
+// ── COPY MARKDOWN ────────────────────────────────────────────────
 function copyMarkdown() {
-  const md = DATA.markdown || DATA.plainText || '';
-  navigator.clipboard.writeText(md).then(() => {
+  const text = DATA.markdown || DATA.plainText || '';
+  navigator.clipboard.writeText(text).then(() => {
     const btn = document.getElementById('copy-md-btn');
     btn.classList.add('copied');
-    btn.querySelector('span').textContent = 'Copied!';
+    btn.textContent = '✓ Copied';
     setTimeout(() => {
       btn.classList.remove('copied');
-      btn.querySelector('span').textContent = 'Copy MD';
+      btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy as Markdown`;
     }, 2000);
-  }).catch(() => {
-    // Fallback
-    const ta = document.createElement('textarea');
-    ta.value = md;
-    ta.style.position = 'fixed';
-    ta.style.opacity = '0';
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    document.body.removeChild(ta);
   });
 }
+
+// ── BOOT ─────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
 </html>
