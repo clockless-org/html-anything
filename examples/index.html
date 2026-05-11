@@ -4,385 +4,512 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<title>html-anything — preview</title>
+<title>html-anything — example gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #faf8f5;
-  --fg: #1f1c19;
-  --muted: #6b665e;
+  --bg: #fff8f6;
   --surface: #ffffff;
-  --border: #e9e4dc;
-  --accent: #c0552a;
-  --accent-soft: #fdeee5;
-  --serif: "Iowan Old Style", "Apple Garamond", Baskerville, "Times New Roman", serif;
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --surface-2: #fbf2ef;
+  --border: rgba(0,0,0,.07);
+  --border-strong: rgba(0,0,0,.14);
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --primary: #a03b00;
+  --primary-soft: #ffdbcd;
+  --shadow-sm: 0 1px 2px rgba(30,27,25,.04);
+  --shadow-md: 0 8px 28px rgba(160,59,0,.07);
+  --shadow-lg: 0 16px 48px rgba(160,59,0,.10);
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', Menlo, ui-monospace, monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #14110e;
-    --fg: #f1ece5;
-    --muted: #9d958a;
-    --surface: #1f1c19;
-    --border: #2e2925;
-    --accent: #ee8a5b;
-    --accent-soft: #2c1d14;
+    --bg: #15110e;
+    --surface: #1e1814;
+    --surface-2: #25201a;
+    --border: rgba(255,255,255,.07);
+    --border-strong: rgba(255,255,255,.14);
+    --fg-1: #f1ece5;
+    --fg-2: #c5b9ad;
+    --fg-muted: #9d958a;
+    --primary: #ee8a5b;
+    --primary-soft: #3a1f10;
   }
 }
+
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 body {
-  font-family: var(--sans);
-  font-size: 16px;
+  font-family: var(--font-body);
+  font-size: 15px;
   line-height: 1.55;
-  color: var(--fg);
+  color: var(--fg-1);
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(1200px 600px at 90% -200px, rgba(160,59,0,0.06), transparent),
+    radial-gradient(900px 500px at 10% 800px, rgba(123,64,224,0.04), transparent);
+  background-attachment: fixed;
 }
-.wrap { max-width: 720px; margin: 0 auto; padding: 64px 24px 96px; }
-h1 {
-  font-family: var(--serif);
-  font-size: 40px;
-  line-height: 1.1;
-  margin: 0 0 8px;
-}
-h1 span { color: var(--accent); }
-.tagline { color: var(--muted); font-size: 17px; margin: 0 0 48px; }
-.lede {
-  background: var(--accent-soft);
-  border-left: 3px solid var(--accent);
-  border-radius: 6px;
-  padding: 14px 18px;
-  margin-bottom: 40px;
-}
-.lede p { margin: 0; font-size: 14.5px; }
-h2 {
-  font-family: var(--serif);
-  font-size: 13px;
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 56px 24px 120px; }
+
+header.hero { margin-bottom: 56px; }
+header.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
   font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin: 48px 0 16px;
+  margin: 0 0 16px;
 }
-h2 .emoji { margin-right: 8px; letter-spacing: 0; }
-.demo {
+header.hero h1 .gradient {
+  background: linear-gradient(135deg, var(--primary) 0%, #7b40e0 60%, #4d44e3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+header.hero .tagline {
+  font-size: clamp(17px, 2vw, 21px);
+  color: var(--fg-2);
+  max-width: 660px;
+  margin: 0 0 28px;
+  line-height: 1.45;
+}
+header.hero .meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--fg-muted);
+}
+header.hero .meta .stat strong {
   display: block;
+  font-family: var(--font-display);
+  font-size: 26px;
+  color: var(--fg-1);
+  line-height: 1;
+}
+header.hero .meta .sep { width: 1px; height: 32px; background: var(--border-strong); }
+header.hero .cta-row {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+header.hero .cta {
+  display: inline-block;
+  padding: 10px 16px;
+  background: var(--primary);
+  color: #fff !important;
+  text-decoration: none;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: transform .15s, box-shadow .15s;
+}
+header.hero .cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+header.hero .cta.secondary {
+  background: transparent;
+  color: var(--fg-1) !important;
+  border: 1px solid var(--border-strong);
+}
+
+.style-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 64px;
+  padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+.style-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--fg-2);
+  font-size: 13px;
+  font-weight: 500;
+  transition: background .15s, color .15s, transform .15s;
+}
+.style-nav a:hover { color: var(--fg-1); background: var(--surface-2); transform: translateY(-1px); }
+.style-nav a .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent, var(--primary));
+}
+
+.section { margin-bottom: 80px; scroll-margin-top: 24px; }
+.section-head {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.section-head .accent-bar {
+  width: 4px;
+  align-self: stretch;
+  min-height: 64px;
+  background: var(--accent, var(--primary));
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+.section-head .text { flex: 1; min-width: 0; }
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.section-head h2 .chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent, var(--primary));
+  background: color-mix(in srgb, var(--accent, var(--primary)) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent, var(--primary)) 25%, transparent);
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+}
+.section-head p { margin: 0; color: var(--fg-2); font-size: 15px; max-width: 720px; line-height: 1.55; }
+.section-head .count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-muted);
+  margin-top: 6px;
+}
+
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { .grid { grid-template-columns: 1fr; gap: 16px; } }
+
+.card {
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   color: inherit;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 22px 24px;
-  margin-bottom: 14px;
-  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
-  box-shadow: 0 1px 2px rgba(30, 27, 25, 0.04);
-}
-.demo:hover {
-  transform: translateY(-1px);
-  border-color: var(--accent);
-  box-shadow: 0 8px 24px rgba(192, 85, 42, 0.1);
-}
-.demo h3 {
-  margin: 0 0 4px;
-  font-family: var(--serif);
-  font-size: 22px;
-  font-weight: 600;
-}
-.demo h3 .emoji {
-  display: inline-block;
-  width: 1.45em;
-  margin-right: 2px;
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
-}
-.demo h3 .arrow { color: var(--accent); margin-left: 8px; }
-.demo .meta {
-  font-family: ui-monospace, "SF Mono", Menlo, monospace;
-  font-size: 12px;
-  color: var(--muted);
-  margin: 0 0 10px;
-}
-.demo p { margin: 0; color: var(--muted); font-size: 14.5px; }
-.cmd {
-  font-family: ui-monospace, "SF Mono", Menlo, monospace;
-  font-size: 13px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 14px 16px;
-  margin: 0 0 32px;
-  color: var(--accent);
-  white-space: pre;
-  overflow-x: auto;
-}
-.systems {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin: 0 0 36px;
-}
-.system-card {
-  position: relative;
-  min-height: 134px;
+  border-radius: 16px;
   overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  background: var(--surface);
-  padding: 18px 18px 16px;
-  box-shadow: 0 1px 2px rgba(30, 27, 25, 0.04);
-  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+  box-shadow: var(--shadow-sm);
+  transition: transform .15s, box-shadow .25s, border-color .15s;
 }
-.system-card:hover {
-  transform: translateY(-1px);
-  border-color: var(--accent);
-  box-shadow: 0 8px 24px rgba(192, 85, 42, 0.09);
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: color-mix(in srgb, var(--accent, var(--primary)) 40%, var(--border-strong));
 }
-.system-card::after {
+
+.card .thumb {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.card .thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .35s ease;
+  display: block;
+}
+.card:hover .thumb img { transform: scale(1.03); }
+
+.card .thumb.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-muted);
+  letter-spacing: 0.1em;
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--accent, var(--primary)) 8%, var(--surface-2)) 0%,
+      var(--surface-2) 100%);
+}
+.card .thumb.placeholder::before {
   content: "";
   position: absolute;
-  z-index: 0;
-  inset: auto 14px 14px auto;
-  width: 76px;
-  height: 54px;
-  opacity: 0.12;
-  background: var(--accent);
-  pointer-events: none;
+  inset: 12%;
+  border: 1.5px dashed color-mix(in srgb, var(--accent, var(--primary)) 35%, transparent);
+  border-radius: 10px;
 }
-.system-card.timeline::after {
-  width: 3px;
-  height: 92px;
-  border-radius: 999px;
-  box-shadow: -18px 15px 0 -1px var(--accent), 18px -9px 0 -1px var(--accent);
+.card .thumb.placeholder span { position: relative; z-index: 1; }
+
+.card .body {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
 }
-.system-card.map::after {
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 58% 38%, var(--accent) 0 6px, transparent 7px),
-    linear-gradient(45deg, transparent 47%, var(--accent) 48% 52%, transparent 53%);
-  border: 2px solid var(--accent);
-}
-.system-card.network::after {
-  border-radius: 999px;
-  background:
-    radial-gradient(circle at 14px 32px, var(--accent) 0 8px, transparent 9px),
-    radial-gradient(circle at 38px 12px, var(--accent) 0 7px, transparent 8px),
-    radial-gradient(circle at 64px 38px, var(--accent) 0 8px, transparent 9px),
-    linear-gradient(24deg, transparent 0 32%, var(--accent) 33% 38%, transparent 39%),
-    linear-gradient(150deg, transparent 0 44%, var(--accent) 45% 50%, transparent 51%);
-}
-.system-card.console::after {
-  width: 96px;
-  height: 46px;
-  border-radius: 6px;
-  background:
-    linear-gradient(var(--accent) 0 0) 0 0 / 100% 4px no-repeat,
-    repeating-linear-gradient(90deg, var(--accent) 0 10px, transparent 10px 16px);
-}
-.system-card strong {
-  position: relative;
-  z-index: 1;
-  display: block;
-  font-family: var(--serif);
-  font-size: 20px;
-  line-height: 1.15;
-  margin: 0 0 4px;
-}
-.system-card code {
-  position: relative;
-  z-index: 1;
-  display: inline-block;
-  margin-bottom: 10px;
-  color: var(--accent);
-  font-size: 12px;
-}
-.system-card p {
-  position: relative;
-  z-index: 1;
+.card .body h3 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
   margin: 0;
-  color: var(--muted);
-  font-size: 13.5px;
+  color: var(--fg-1);
+  line-height: 1.25;
 }
-.footer {
-  margin-top: 60px;
+.card .body p {
   font-size: 13px;
-  color: var(--muted);
-  text-align: center;
+  color: var(--fg-muted);
+  margin: 0;
+  line-height: 1.45;
 }
-.footer a { color: var(--accent); }
-@media (max-width: 640px) {
-  .systems { grid-template-columns: 1fr; }
+.card .meta {
+  margin-top: auto;
+  padding-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent, var(--primary));
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
+.card .meta::before {
+  content: "";
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+footer.foot {
+  margin-top: 96px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: var(--fg-muted);
+  font-size: 13px;
+}
+footer.foot a { color: var(--primary); }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>html-<span>anything</span></h1>
-  <p class="tagline">Turn an idea, file, folder, or URL into a polished live HTML page — designed automatically for the source.</p>
 
-  <div class="lede">
-    <p>Give the skill a prompt or export. It figures out the source, chooses the page style, builds the interaction, and returns a shareable <code>.html</code> page.</p>
+<header class="hero">
+  <h1>html-<span class="gradient">anything</span></h1>
+  <p class="tagline">Turn an idea, file, folder, or URL into a polished live HTML page — designed by an LLM for each source.</p>
+  <div class="meta">
+    <div class="stat"><strong>49</strong>live example demos</div>
+    <div class="sep"></div>
+    <div class="stat"><strong>9</strong>auto-routed page styles</div>
+    <div class="sep"></div>
+    <div class="stat"><strong>34</strong>parsers</div>
   </div>
+  <div class="cta-row">
+    <a class="cta" href="https://github.com/clockless-org/html-anything">View on GitHub →</a>
+    <a class="cta secondary" href="https://github.com/clockless-org/html-anything#install">Install the skill</a>
+  </div>
+</header>
 
-  <pre class="cmd">Use html-anything to create an interactive teaching site about the solar system
-→ output.html  (opens in any browser)</pre>
+<nav class="style-nav" aria-label="Jump to style">
+  <a href="#teaching"        style="--accent:#0f766e"><span class="dot"></span>teaching</a>
+  <a href="#relationship"    style="--accent:#be3455"><span class="dot"></span>relationship</a>
+  <a href="#timeline-story"  style="--accent:#9a4b14"><span class="dot"></span>timeline-story</a>
+  <a href="#map-atlas"       style="--accent:#17695a"><span class="dot"></span>map-atlas</a>
+  <a href="#network-map"     style="--accent:#355f91"><span class="dot"></span>network-map</a>
+  <a href="#document"        style="--accent:#8b3f1f"><span class="dot"></span>document</a>
+  <a href="#dashboard"       style="--accent:#0f5f6f"><span class="dot"></span>dashboard</a>
+  <a href="#developer"       style="--accent:#38bdf8"><span class="dot"></span>developer</a>
+</nav>
 
-  <h2><span class="emoji">🧭</span>Auto style systems</h2>
-
-  <div class="systems">
-    <div class="system-card timeline">
-      <strong>Timeline Story</strong>
-      <code>orders · media · reading · health · AI chats</code>
-      <p>Personal histories become scrollytelling pages with a time lens, chapter panels, rhythm strips, and a searchable memory drawer.</p>
-    </div>
-    <div class="system-card map">
-      <strong>Map Atlas</strong>
-      <code>places · trips · routes · rideshare · photo metadata</code>
-      <p>Spatial sources open on an offline SVG/canvas stage with place drawers, period filters, route layers, and linked waypoint browsers.</p>
-    </div>
-    <div class="system-card network">
-      <strong>Network Map</strong>
-      <code>contacts · email · Slack · Discord · LinkedIn · payments</code>
-      <p>People-shaped data becomes a graph, cluster map, or matrix with entity inspectors, bridge cards, privacy masks, and linked records.</p>
-    </div>
-    <div class="system-card console">
-      <strong>Ops Console</strong>
-      <code>finance · logs · queues · spreadsheets · incidents</code>
-      <p>Dashboard layout is reserved for operational work: dense filters, KPI rails, anomaly queues, searchable tables, and copyable handoffs.</p>
+<section class="section" id="teaching" style="--accent:#0f766e">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <div class="text">
+      <h2>Lesson Lab <span class="chip">teaching</span></h2>
+      <p>Tutorials, lessons, "teach me", and interactive object/system/spec exploration. Visual stage first, step rail or entity selector, try-it controls, optional check-yourself.</p>
+      <div class="count">1 demo</div>
     </div>
   </div>
+  <div class="grid">
+    <a class="card" href="solar-system-studio/output.html">
+      <div class="thumb"><img loading="lazy" src="../docs/example-previews/solar-system-studio.jpg" alt="Solar system lesson"></div>
+      <div class="body"><h3>Solar system — interactive lesson</h3><p>Built from a single prompt. Orbit speed, scale toggles, planet explainers, check-yourself quiz.</p><div class="meta">teaching · object mode</div></div>
+    </a>
+  </div>
+</section>
 
-  <h2><span class="emoji">✨</span>Personal / experiential exports</h2>
+<section class="section" id="relationship" style="--accent:#be3455">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <div class="text">
+      <h2>Rhythm Report <span class="chip">relationship</span></h2>
+      <p>1:1 chats and intimate message exports — WhatsApp, WeChat, iMessage. Aggregate-first rhythm story: who initiates, response times, peak hours, mood cadence. No raw private text by default.</p>
+      <div class="count">2 demos</div>
+    </div>
+  </div>
+  <div class="grid">
+    <a class="card" href="wechat-couple/output.html">
+      <div class="thumb"><img loading="lazy" src="../docs/example-previews/wechat-couple.jpg" alt="Couple chat report"></div>
+      <div class="body"><h3>Couple chat — rhythm report</h3><p>A multi-year WeChat-style export distilled into pulse calendar, initiation lanes, quiet-period callouts.</p><div class="meta">relationship</div></div>
+    </a>
+    <a class="card" href="whatsapp/output.html">
+      <div class="thumb"><img loading="lazy" src="../docs/example-previews/whatsapp.jpg" alt="WhatsApp relationship"></div>
+      <div class="body"><h3>WhatsApp — friends relationship</h3><p>Two-sender WhatsApp export, one month. Bubble timeline + relationship rhythm without exposing content.</p><div class="meta">relationship</div></div>
+    </a>
+  </div>
+</section>
 
-  <a class="demo" href="google-maps-stars/output.html">
-    <h3><span class="emoji">🌍</span>Google Maps — saved places <span class="arrow">→</span></h3>
-    <p class="meta">Starred places.csv (34 places across 4 continents, synthetic) → personal world atlas</p>
-    <p>The skill walked the user through a Google Takeout export, then designed a scrollable map of every place they cared enough to save. Pins drop in on first load, click for the note they wrote at the time. The output is a story of intent — not a CSV.</p>
-  </a>
+<section class="section" id="timeline-story" style="--accent:#9a4b14">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <div class="text">
+      <h2>Timeline Story <span class="chip">timeline-story</span></h2>
+      <p>Personal histories — both chronological (orders, listening, reading, health, AI chats) and topical (Notion/Obsidian vaults). Time lens, timeline spine, chapter panels, rhythm strip, searchable drawer.</p>
+      <div class="count">10 demos</div>
+    </div>
+  </div>
+  <div class="grid">
+    <a class="card" href="amazon-orders/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/amazon-orders.jpg" alt="Amazon orders"></div><div class="body"><h3>Amazon — order history</h3><p>3 years of orders → commerce memory. Cadence, categories, gifting, returns.</p><div class="meta">timeline-story</div></div></a>
+    <a class="card" href="spotify-history/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/spotify-history.jpg" alt="Spotify history"></div><div class="body"><h3>Spotify — listening history</h3><p>Lifetime plays as a scroll-driven year-by-year story with top tracks and listening rhythm.</p><div class="meta">timeline-story</div></div></a>
+    <a class="card" href="youtube-watch-history/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/youtube-watch-history.jpg" alt="YouTube watch history"></div><div class="body"><h3>YouTube — watch history</h3><p>Months of watches as an attention mirror — channels, binges, late-night patterns.</p><div class="meta">timeline-story</div></div></a>
+    <a class="card" href="iphone-health/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/iphone-health.jpg" alt="Apple Health"></div><div class="body"><h3>Apple Health — body rhythm</h3><p>Activity rings, sleep arc, workouts, resting HR — Strava-style joy, not a clinical chart.</p><div class="meta">timeline-story</div></div></a>
+    <a class="card" href="kindle-highlights/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/kindle-highlights.jpg" alt="Kindle highlights"></div><div class="body"><h3>Kindle — highlights yearbook</h3><p>2 years of clippings across 8 books, organized as a personal reading-memory atlas.</p><div class="meta">timeline-story</div></div></a>
+    <a class="card" href="twitch-history/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/twitch-history.jpg" alt="Twitch viewing"></div><div class="body"><h3>Twitch — viewing history</h3><p>Top streamers wall + when-you-watched heatmap. Fan-shrine vibe, not parental dashboard.</p><div class="meta">timeline-story</div></div></a>
+    <a class="card" href="browser-history/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/browser-history.jpg" alt="Browser history"></div><div class="body"><h3>Browser — attention trail</h3><p>Days of browser history clustered into 11 topic threads with returners and search patterns.</p><div class="meta">timeline-story</div></div></a>
+    <a class="card" href="chatgpt-export/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/chatgpt-export.jpg" alt="ChatGPT export"></div><div class="body"><h3>ChatGPT — conversation archive</h3><p>Months of ChatGPT conversations clustered into topics, projects, and recurring threads.</p><div class="meta">timeline-story</div></div></a>
+    <a class="card" href="ai-chat-log/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/ai-chat-log.jpg" alt="AI chat log"></div><div class="body"><h3>Generic AI chat log</h3><p>A working chat session as structured back-and-forth with tool calls and revision history.</p><div class="meta">timeline-story</div></div></a>
+    <a class="card" href="notes-vault/output.html"><div class="thumb placeholder"><span>NOTES VAULT</span></div><div class="body"><h3>Markdown notes vault</h3><p>14 founder notes as a knowledge atlas — topic clusters and last-edited rhythm strip.</p><div class="meta">timeline-story · topical</div></div></a>
+  </div>
+</section>
 
-  <a class="demo" href="spotify-history/output.html">
-    <h3><span class="emoji">🎧</span>Spotify — listening history <span class="arrow">→</span></h3>
-    <p class="meta">Streaming_History_Music_*.json (1,100 plays, 18 artists, 4 years, synthetic) → year-by-year scroll</p>
-    <p>The skill explained how to request the privacy export, then designed a "your life in Spotify" reveal-on-scroll page — top tracks per year, listening rhythm heatmap, count-up totals. Spotify Wrapped goes a year at a time; this is the lifetime view.</p>
-  </a>
+<section class="section" id="map-atlas" style="--accent:#17695a">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <div class="text">
+      <h2>Map Atlas <span class="chip">map-atlas</span></h2>
+      <p>Places, routes, trips, rideshare, location history, geotagged photos. Spatial stage, place drawer, period filters, waypoint browser. Offline SVG world map — no map tiles.</p>
+      <div class="count">5 demos</div>
+    </div>
+  </div>
+  <div class="grid">
+    <a class="card" href="google-maps-stars/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/google-maps-stars.jpg" alt="Google Maps saved"></div><div class="body"><h3>Google Maps — saved places</h3><p>Starred places across 4 continents pinned on a personal world atlas with notes-on-hover.</p><div class="meta">map-atlas</div></div></a>
+    <a class="card" href="google-photos-takeout/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/google-photos-takeout.jpg" alt="Google Photos atlas"></div><div class="body"><h3>Google Photos — takeout atlas</h3><p>EXIF metadata becomes a place-driven memory map — no Google CDN, no photos uploaded.</p><div class="meta">map-atlas</div></div></a>
+    <a class="card" href="rideshare-history/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/rideshare-history.jpg" alt="Rideshare"></div><div class="body"><h3>Uber / Lyft — rideshare history</h3><p>Rides clustered into routines: commute lanes, late-night returns, airport runs, one-offs.</p><div class="meta">map-atlas</div></div></a>
+    <a class="card" href="run-route/output.html"><div class="thumb placeholder"><span>GPX ROUTE</span></div><div class="body"><h3>Morning run — GPX route</h3><p>A 7.6 km Prospect Park loop with splits, elevation, and an inline SVG route polyline.</p><div class="meta">map-atlas</div></div></a>
+    <a class="card" href="itinerary-trip/output.html"><div class="thumb placeholder"><span>ITINERARY</span></div><div class="body"><h3>Tokyo + Kyoto — trip itinerary</h3><p>An 8-day itinerary CSV → day-by-day plan with conflicts, neighborhoods, costs.</p><div class="meta">map-atlas</div></div></a>
+  </div>
+</section>
 
-  <a class="demo" href="twitch-history/output.html">
-    <h3><span class="emoji">🟣</span>Twitch — viewing history <span class="arrow">→</span></h3>
-    <p class="meta">viewing_history.csv (480 sessions, 14 streamers, 3 years, synthetic) → top-streamers wall</p>
-    <p>Top streamers by hours, when-you-watched heatmap, category drift over time. Caedrel's name in display type. Fan shrine vibe — not a parental-control dashboard.</p>
-  </a>
+<section class="section" id="network-map" style="--accent:#355f91">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <div class="text">
+      <h2>Network Map <span class="chip">network-map</span></h2>
+      <p>People, senders, contacts, communities, payments, professional networks. Relationship graph with entity inspector, clusters, hubs, linked records.</p>
+      <div class="count">7 demos</div>
+    </div>
+  </div>
+  <div class="grid">
+    <a class="card" href="linkedin-connections/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/linkedin-connections.jpg" alt="LinkedIn network"></div><div class="body"><h3>LinkedIn — connections graph</h3><p>12 years of connections clustered by company, role, and era. Hub leaderboards.</p><div class="meta">network-map</div></div></a>
+    <a class="card" href="vcard-contacts/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/vcard-contacts.jpg" alt="vCard contacts"></div><div class="body"><h3>Address book audit</h3><p>34 contacts clustered into domains and life-stages. Duplicate detection and stale-relationship surfacing.</p><div class="meta">network-map</div></div></a>
+    <a class="card" href="slack/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/slack.jpg" alt="Slack channel"></div><div class="body"><h3>Slack — channel export</h3><p>A multi-sender Slack channel folded by sender with decisions and action-item callouts.</p><div class="meta">network-map</div></div></a>
+    <a class="card" href="discord/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/discord.jpg" alt="Discord community"></div><div class="body"><h3>Discord — community export</h3><p>Server messages clustered into channels and contributors with activity rhythm.</p><div class="meta">network-map</div></div></a>
+    <a class="card" href="telegram/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/telegram.jpg" alt="Telegram"></div><div class="body"><h3>Telegram — chat export</h3><p>Result.json export turned into a multi-sender chat report with hub leaderboard.</p><div class="meta">network-map</div></div></a>
+    <a class="card" href="email/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/email.jpg" alt="Email archive"></div><div class="body"><h3>Email — mailbox snapshot</h3><p>13 messages across 3 threads → thread browser, sender leaderboard, "open loops" callout.</p><div class="meta">network-map</div></div></a>
+    <a class="card" href="venmo-paypal-payments/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/venmo-paypal-payments.jpg" alt="Venmo PayPal"></div><div class="body"><h3>Venmo / PayPal payments</h3><p>Consumer payment activity by counterparty, category, and time — who owes whom.</p><div class="meta">network-map</div></div></a>
+  </div>
+</section>
 
-  <a class="demo" href="iphone-health/output.html">
-    <h3><span class="emoji">❤️</span>Apple Health — your body, year by year <span class="arrow">→</span></h3>
-    <p class="meta">export.xml (10K records + 245 workouts, 18 months, synthetic) → personal health story</p>
-    <p>Activity rings, sleep arc, workout calendar, resting-HR sparkline, hike-day outliers preserved. The skill is showing you your data, not diagnosing — Strava-style joy, no clinical voice.</p>
-  </a>
+<section class="section" id="document" style="--accent:#8b3f1f">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <div class="text">
+      <h2>Document Review <span class="chip">document</span></h2>
+      <p>Essays, articles, reading lists, bookmarks, PDFs, DOCX, legal/medical/lab records. Cover, reading rail, body sheet, evidence margin, drill-down. Narrative or formal tone picked from the source.</p>
+      <div class="count">9 demos</div>
+    </div>
+  </div>
+  <div class="grid">
+    <a class="card" href="markdown/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/markdown.jpg" alt="Markdown essay"></div><div class="body"><h3>Long-form essay</h3><p>A 3 KB markdown essay → reading view with anchored navigation and typographic rhythm.</p><div class="meta">document · narrative</div></div></a>
+    <a class="card" href="bookmarks-market-research/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/bookmarks-market-research.jpg" alt="Market bookmarks"></div><div class="body"><h3>Founder market-research bookmarks</h3><p>HTML bookmarks export clustered into themes — domain leaderboard, duplicate detection.</p><div class="meta">document · narrative</div></div></a>
+    <a class="card" href="reading-list-academic/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/reading-list-academic.jpg" alt="Academic reading list"></div><div class="body"><h3>Academic reading list</h3><p>BibTeX → research dossier with topic clusters, author leaderboard, and queue cards.</p><div class="meta">document · narrative</div></div></a>
+    <a class="card" href="pdf/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/pdf.jpg" alt="PDF report"></div><div class="body"><h3>PDF — industry outlook</h3><p>A long-form PDF report distilled into executive summary, claims, and evidence margin.</p><div class="meta">document · formal</div></div></a>
+    <a class="card" href="docx/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/docx.jpg" alt="DOCX memo"></div><div class="body"><h3>DOCX — decision memo</h3><p>A pricing RFC distilled into decision, rationale, alternatives, and follow-ups.</p><div class="meta">document · formal</div></div></a>
+    <a class="card" href="medical-visit/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/medical-visit.jpg" alt="Medical visit"></div><div class="body"><h3>Medical visit note (synthetic)</h3><p>Organizational summary with caveats and "ask a clinician" questions. Not medical advice.</p><div class="meta">document · formal</div></div></a>
+    <a class="card" href="lab-results/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/lab-results.jpg" alt="Lab results"></div><div class="body"><h3>Lab results (synthetic)</h3><p>Panels with reference ranges, trends, and observation-only context.</p><div class="meta">document · formal</div></div></a>
+    <a class="card" href="legal-chronology/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/legal-chronology.jpg" alt="Legal chronology"></div><div class="body"><h3>Legal chronology (synthetic)</h3><p>Case timeline with parties, exhibits, and observational summary — not legal advice.</p><div class="meta">document · formal</div></div></a>
+    <a class="card" href="goodreads/output.html"><div class="thumb placeholder"><span>GOODREADS</span></div><div class="body"><h3>Goodreads — reading export</h3><p>Books read, rated, shelved → reading-life dossier with patterns and standouts.</p><div class="meta">document · narrative</div></div></a>
+  </div>
+</section>
 
-  <a class="demo" href="amazon-orders/output.html">
-    <h3><span class="emoji">📦</span>Amazon — order history <span class="arrow">→</span></h3>
-    <p class="meta">Retail.OrderHistory CSV (178 items across 3 years, 3 recipients, synthetic) → personal commerce memory</p>
-    <p>The skill walked the user through requesting their data, then designed a money-and-memory page: spend by year and month, "reorder DNA" panel with cadence inferred per item, category breakdown, recipient share, returns / refunds / cancellations callouts, and a searchable item drill-down. No product images, no Amazon CDN — completely offline.</p>
-  </a>
+<section class="section" id="dashboard" style="--accent:#0f5f6f">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <div class="text">
+      <h2>Ops Console <span class="chip">dashboard</span></h2>
+      <p>Operational, tabular, finance, admin, log, planning data. KPI rail, charts, filters, flag queue, searchable data grid.</p>
+      <div class="count">11 demos</div>
+    </div>
+  </div>
+  <div class="grid">
+    <a class="card" href="csv/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/csv.jpg" alt="CSV sales"></div><div class="body"><h3>CSV — coffee equipment sales</h3><p>46 rows, 8 columns → sortable table + summary. Different size CSVs skew to charts.</p><div class="meta">dashboard</div></div></a>
+    <a class="card" href="jsonl/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/jsonl.jpg" alt="JSONL events"></div><div class="body"><h3>JSONL — application event stream</h3><p>Payments service event stream with severity histogram and outlier callouts.</p><div class="meta">dashboard</div></div></a>
+    <a class="card" href="log-access/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/log-access.jpg" alt="Access log"></div><div class="body"><h3>Nginx — access log (90 min)</h3><p>shop.example access log → traffic by status, hot paths, slow requests, ip-pattern flags.</p><div class="meta">dashboard</div></div></a>
+    <a class="card" href="log-error/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/log-error.jpg" alt="Error log"></div><div class="body"><h3>Orders service — error log</h3><p>Payment incident error log: root-cause stack groups, severity timeline, recovery path.</p><div class="meta">dashboard</div></div></a>
+    <a class="card" href="transcript-sales-call/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/transcript-sales-call.jpg" alt="Sales call"></div><div class="body"><h3>Sales-call transcript</h3><p>Pilot-scoping call → talk-time bars, decisions, action items, searchable transcript.</p><div class="meta">dashboard</div></div></a>
+    <a class="card" href="transcript-product-meeting/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/transcript-product-meeting.jpg" alt="Product meeting"></div><div class="body"><h3>Product-meeting transcript</h3><p>Sprint review SRT → decisions, owners, open questions, risk register.</p><div class="meta">dashboard</div></div></a>
+    <a class="card" href="bank-transactions/output.html"><div class="thumb placeholder"><span>BANK TXNS</span></div><div class="body"><h3>Bank statement — Q1 2026</h3><p>Cashflow timeline, category breakdown, recurring vendors, anomaly callouts.</p><div class="meta">dashboard</div></div></a>
+    <a class="card" href="invoices/output.html"><div class="thumb placeholder"><span>INVOICES</span></div><div class="body"><h3>Invoices & receivables</h3><p>Outstanding invoices aged by bucket with customer-side breakdowns.</p><div class="meta">dashboard</div></div></a>
+    <a class="card" href="quickbooks/output.html"><div class="thumb placeholder"><span>QUICKBOOKS</span></div><div class="body"><h3>QuickBooks — general ledger</h3><p>P&L view + category breakdown + recurring vendors + anomaly flags.</p><div class="meta">dashboard</div></div></a>
+    <a class="card" href="calendar-founder/output.html"><div class="thumb placeholder"><span>CALENDAR</span></div><div class="body"><h3>Founder calendar (2 weeks)</h3><p>Time allocation by category, stale follow-ups, conflicts, owner-status filters.</p><div class="meta">dashboard</div></div></a>
+    <a class="card" href="backlog-product/output.html"><div class="thumb placeholder"><span>BACKLOG</span></div><div class="body"><h3>Product backlog — 39 issues</h3><p>Issue tracker CSV → epic clusters, blocked items, stale tickets, owner workload.</p><div class="meta">dashboard</div></div></a>
+  </div>
+</section>
 
-  <a class="demo" href="browser-history/output.html">
-    <h3><span class="emoji">🧭</span>Browser — attention history <span class="arrow">→</span></h3>
-    <p class="meta">history_export.csv (6 months, synthetic) → Timeline Story</p>
-    <p>The skill turns raw browser visits into a private attention trail: domain returners, research sessions, repeated searches, late-night share, topic clusters, and a searchable drill-down with URLs kept out of the headline. No favicons, no external calls, no trackers.</p>
-  </a>
+<section class="section" id="developer" style="--accent:#38bdf8">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <div class="text">
+      <h2>Evidence Workbench <span class="chip">developer</span></h2>
+      <p>Diffs, PR patches, CI logs, stack traces, repos. Risk-annotated review brief with hotspots, raw evidence, copyable handoff.</p>
+      <div class="count">4 demos</div>
+    </div>
+  </div>
+  <div class="grid">
+    <a class="card" href="git-diff/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/git-diff.jpg" alt="Git diff"></div><div class="body"><h3>Git diff — session expiry fix</h3><p>checkout-service diff → hunks with risk callouts and evidence-margin annotations.</p><div class="meta">developer</div></div></a>
+    <a class="card" href="pr-review/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/pr-review.jpg" alt="PR review"></div><div class="body"><h3>PR — webhook drain</h3><p>Patch review with risk hotspots, review checklist, and copyable summary.</p><div class="meta">developer</div></div></a>
+    <a class="card" href="ci-log/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/ci-log.jpg" alt="CI log"></div><div class="body"><h3>CI failure — run #482</h3><p>Failure log grouped by step + stack with rerun candidates and likely-cause hypothesis.</p><div class="meta">developer</div></div></a>
+    <a class="card" href="stack-trace/output.html"><div class="thumb"><img loading="lazy" src="../docs/example-previews/stack-trace.jpg" alt="Stack trace"></div><div class="body"><h3>Stack trace — tax-rate KeyError</h3><p>Trace with raw frames, deduplicated by signature, and likely-cause hypothesis.</p><div class="meta">developer</div></div></a>
+  </div>
+</section>
 
-  <a class="demo" href="youtube-watch-history/output.html">
-    <h3><span class="emoji">▶️</span>YouTube — watch history <span class="arrow">→</span></h3>
-    <p class="meta">watch-history.json (242 watches across 29 channels, 14 months, synthetic) → personal attention mirror</p>
-    <p>The skill explained the Google Takeout flow, then designed an attention page: monthly + weekly bars with peak callouts, day-of-week × hour heatmap, binge clusters with sample titles, channel leaderboard, heuristic topic mix, an attention audit (late-night share, learning vs entertainment, rediscoveries, surprising streaks), and a searchable watch table. No video thumbnails, no iframes, no YouTube CDN — completely offline.</p>
-  </a>
+<footer class="foot">
+  <div><a href="https://github.com/clockless-org/html-anything">github.com/clockless-org/html-anything</a> · Apache 2.0</div>
+  <div>49 demos · contributions welcome (write a parser or a style)</div>
+</footer>
 
-  <a class="demo" href="kindle-highlights/output.html">
-    <h3><span class="emoji">📖</span>Kindle highlights <span class="arrow">→</span></h3>
-    <p class="meta">My Clippings.txt (96 records across 8 books, 2 years, synthetic) → personal reading-memory atlas</p>
-    <p>The skill walked the user through copying <code>My Clippings.txt</code> from a Kindle over USB, then designed a reading-memory page: stacked highlights / notes / bookmarks per year and month, hour-of-day strip, bookshelf cards with monthly sparklines, heuristic theme clusters, and a quote browser with Copy-as-Markdown. Duplicates from extended highlights are collapsed; notes attached to highlights get a badge. No Goodreads, no Amazon CDN — completely offline.</p>
-  </a>
-
-  <a class="demo" href="google-photos-takeout/output.html">
-    <h3><span class="emoji">📷</span>Google Photos — library atlas <span class="arrow">→</span></h3>
-    <p class="meta">Takeout/Google Photos folder (~430 sidecars, 7 albums, 5 devices, 16 months, synthetic) → personal photo-memory atlas</p>
-    <p>The skill walked the user through the Google Takeout flow, then designed a photo-memory page entirely from sidecar JSON — never opening the actual photos or videos. Hero strip with media / album / geotag / device counts, monthly bars stacked by photo+video, year × month heatmap, day-of-week × hour heatmap, inline-SVG places scatter (no map tiles, no geocoding), album cards with hashed-from-filename mosaic and overlap signals, device leaderboard with monthly sparklines, plus an audit row for burst clusters, edited / original pairs, possible duplicates, and missing metadata. Searchable drill-down with raw sidecar expand. No real photos, no Google Photos CDN, no Maps tiles — fully offline.</p>
-  </a>
-
-  <a class="demo" href="linkedin-connections/output.html">
-    <h3><span class="emoji">🤝</span>LinkedIn — professional network atlas <span class="arrow">→</span></h3>
-    <p class="meta">Connections.csv (114 connections across 12 years, 14 companies, 12 industries, synthetic) → professional network atlas</p>
-    <p>The skill walked the user through requesting their LinkedIn data, then designed an observational network atlas: hero coverage strip (with-company / with-role / with-email), yearly growth bars + cumulative line with an October 2024 conference-week spike callout, top-companies + role-keyword + industry + email-domain panels, a heuristic <strong>reconnect queue</strong> ranked by staleness × missing-current-company × has-email × just-connected (read-only — no auto-drafted outreach), and an audit row for missing-company / missing-email / stale 5y+ / very-recent / duplicate-name / duplicate-URL clusters. Searchable contact grid with email <strong>masked by default</strong> (per-card reveal + page-wide toggle) and LinkedIn URLs shown but never clickable. Fully offline — no LinkedIn calls, no avatars, no analytics.</p>
-  </a>
-
-  <a class="demo" href="vcard-contacts/output.html">
-    <h3><span class="emoji">👥</span>Contacts — address book audit <span class="arrow">→</span></h3>
-    <p class="meta">Contacts.vcf (34 contacts, vCard 3.0 + 4.0 mix, synthetic) → address book audit + relationship atlas</p>
-    <p>The skill walked the user through exporting from Apple Contacts / Google Contacts / iCloud, then designed a quiet, observational audit page: reachability KPIs, health-audit cards (missing phone / email / both, malformed emails, stale revisions, repeated phones / emails, note-only and nameless cards, legacy vCard 2.1), an organizations + email-domain + city + birthday + tag relationship atlas, a read-only duplicate merge worksheet that surfaces shared-phone / shared-email / normalized-name clusters side-by-side, and a searchable contact grid with phone &amp; email <strong>masked by default</strong> (per-card reveal + page-wide toggle, both local-only). Photos are flagged but never embedded. Fully offline — no avatars, no Gravatar, no geocoding.</p>
-  </a>
-
-  <a class="demo" href="rideshare-history/output.html">
-    <h3><span class="emoji">🚗</span>Uber / Lyft — ride history <span class="arrow">→</span></h3>
-    <p class="meta">trips_data.csv (661 Uber rides across 28 months, 2 cities, synthetic) → mobility + spending atlas</p>
-    <p>The skill walked the user through the Uber DSAR (or Lyft data request) flow, then designed a private mobility page: source-aware hero with rides / spend / miles / hours-in-cars KPIs, monthly twin-bar spend timeline, weekday × hour heatmap with the late-night weekend band annotated, top pickups + dropoffs (masked by default), cities, distance buckets, money split into fare / tip / fees / refund, product types (UberX / Comfort / Pool / Black), offline SVG places scatter (no map tiles, no geocoding) and flag panel for cancellations, refunds, surge outliers, long trips, airport runs, late-night weekend clusters, and commute loops. Drill-down ride table with chips, search, and mask-by-default labels and coordinates. Fully offline — no map providers, no geocoding, no analytics.</p>
-  </a>
-
-  <a class="demo" href="venmo-paypal-payments/output.html">
-    <h3><span class="emoji">🤝</span>Venmo / PayPal — social payments <span class="arrow">→</span></h3>
-    <p class="meta">Venmo statement CSV (180 transactions across 28 months, 5 housemates &amp; friends, synthetic) → human layer of money</p>
-    <p>Bank statements show merchants; Venmo shows people. The skill designed a social-payments page: source-aware hero (sent / received / net), monthly twin-bar cashflow with a net line, a counterparty leaderboard with loop ↻ markers, heuristic story clusters from payment notes (rent / food / travel / utilities / gifts / subscriptions), recurring reimbursement patterns, and round-trip + refund + fee + held + cash-out flag cards. Notes are styled like private quotes; transaction IDs are masked outside the row-expand. Fully offline — no avatars, no payment-rail logos, no network calls.</p>
-  </a>
-
-  <a class="demo" href="solar-system-studio/output.html">
-    <h3><span class="emoji">🪐</span>Solar system — teaching studio <span class="arrow">→</span></h3>
-    <p class="meta">planet facts JSON (8 planets, rounded NASA metrics) → guided object-lab lesson</p>
-    <p>A prototype for the teaching style: a visual lesson stage, planet selector, live inspector, scale toggle, motion control, and comparison bars. The source is educational content, and the output behaves like a small lesson you can manipulate.</p>
-  </a>
-
-  <h2><span class="emoji">🧩</span>Documents, code, communication</h2>
-
-  <a class="demo" href="markdown/output.html">
-    <h3><span class="emoji">📄</span>Markdown <span class="arrow">→</span></h3>
-    <p class="meta">input.md (3 KB, long-form essay) → LLM-designed reading view</p>
-    <p>The LLM saw the headings + opening + length, picked typography that fits the tone, and decided what navigation this length deserves. Different essay → different design.</p>
-  </a>
-
-  <a class="demo" href="whatsapp/output.html">
-    <h3><span class="emoji">💬</span>WhatsApp export <span class="arrow">→</span></h3>
-    <p class="meta">_chat.txt (~80 messages between 2 senders) → bubble timeline</p>
-    <p>The LLM saw "2 senders, 80 messages, 1-month range" and designed a 2-column bubble timeline. Same parser on a 200-person channel would get a different UI — the LLM picks per-content.</p>
-  </a>
-
-  <a class="demo" href="wechat-couple/output.html">
-    <h3><span class="emoji">💞</span>WeChat couple chat — realistic report <span class="arrow">→</span></h3>
-    <p class="meta">WeChat-style CSV (52K messages, 2 years, synthetic) → messy relationship rhythm analysis</p>
-    <p>An event-driven boyfriend/girlfriend chat demo with quiet days, work delays, short replies, small arguments, repairs, images, voice notes, and transfers. The report focuses on reality checks, daily rhythm, topic mix, language fingerprints, and tiny anonymized evidence snippets instead of a raw message appendix.</p>
-  </a>
-
-  <a class="demo" href="csv/output.html">
-    <h3><span class="emoji">📊</span>CSV <span class="arrow">→</span></h3>
-    <p class="meta">input.csv (46 rows, 8 columns, 3 numeric) → sortable table + summary</p>
-    <p>The LLM saw the schema and decided this size deserves a full sortable table. A 50K-row CSV would skew toward charts + virtualization instead.</p>
-  </a>
-
-  <a class="demo" href="email/output.html">
-    <h3><span class="emoji">📬</span>Email archive <span class="arrow">→</span></h3>
-    <p class="meta">input.mbox (13 messages, 3 threads, 5 senders) → conversation analysis</p>
-    <p>The LLM saw a small mailbox with one resolved support thread, one quick internal exchange, and one open client thread — and designed a thread browser, sender leaderboard, and an "open loops" callout for the question waiting on a reply. Gmail Takeout exports use the same .mbox format.</p>
-  </a>
-
-  <a class="demo" href="transcript-sales-call/output.html">
-    <h3><span class="emoji">🎙️</span>Meeting transcript — sales call <span class="arrow">→</span></h3>
-    <p class="meta">input.vtt (43 cues, 4 speakers, pilot-scoping call) → meeting scorecard</p>
-    <p>The LLM saw a 4-speaker WebVTT transcript with a clear decision (pilot agreed) and a follow-up commitment, and designed talk-time bars, a decisions panel, an action-items table grouped by owner, and a searchable transcript with timestamp chips. A standup with 6 quick speakers would render as a different shape.</p>
-  </a>
-
-  <a class="demo" href="transcript-product-meeting/output.html">
-    <h3><span class="emoji">🗒️</span>Meeting transcript — product review <span class="arrow">→</span></h3>
-    <p class="meta">input.srt (39 cues, 4 speakers, sprint review) → meeting scorecard</p>
-    <p>An SRT-format internal review with three decisions, six action items, two open questions, and one risk. The LLM picked the speaker timeline + decisions cards + action-items-by-owner table for this shape — the same parser on a 1:1 sync would produce something tighter.</p>
-  </a>
-
-  <p class="footer">
-    <a href="https://github.com/clockless-org/html-anything">github.com/clockless-org/html-anything</a> · Apache 2.0 · contributions welcome (write a parser)
-  </p>
 </div>
 </body>
 </html>
