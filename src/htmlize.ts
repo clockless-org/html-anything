@@ -36,6 +36,7 @@ Produce a complete \`<!doctype html>\` document with these properties:
 3. **Light + dark mode** via prefers-color-scheme. Tasteful, modern type.
 4. **Search and copy by default.** Cmd-F-style search box that filters or highlights. Copy buttons where they help.
 5. **Self-contained.** Must work offline by double-clicking the file.
+6. **Style fidelity.** The selected style is a design system + layout system, not a palette. Reproduce the style's first viewport, component vocabulary, layout scaffold, interaction model, and motion grammar. Do not generate a generic report and recolor it.
 
 The full data is given to you as a JSON object, but **embed it via the literal placeholder \`__DATA__\`** inside a <script> tag:
 \`\`\`
@@ -44,6 +45,20 @@ The full data is given to you as a JSON object, but **embed it via the literal p
 The host program will substitute \`__DATA__\` with the full data after you respond. You only see a sample, but write JS that handles the *full* shape using the schema in the user message.
 
 Return ONLY the HTML, starting with \`<!doctype html>\`. No markdown fences, no commentary.`
+
+const STYLE_COMPLIANCE_PROMPT = `## Final style-compliance gate
+
+Before returning the HTML, silently audit the page against the selected style:
+
+- The root tag is \`<html ... data-ha-style="{selectedStyle}">\`.
+- The first viewport visibly matches the selected style's scaffold, not a generic \`hero + KPI cards + chart cards\` shell.
+- The HTML uses the selected style's component vocabulary and class names.
+- Source-required modules are present, but translated into the selected style's native layout system.
+- The primary interaction is style-native and backed by the inlined \`DATA\`.
+- Motion follows the style's motion grammar and respects \`prefers-reduced-motion\`.
+- The page is complete, offline-capable, mobile-responsive, and includes \`<script>const DATA = __DATA__;</script>\`.
+
+If any check fails, rewrite the HTML before answering.`
 
 export async function htmlize(
   parsed: ParsedFile,
@@ -100,6 +115,8 @@ function buildUserPrompt(
     "",
     "## Style-specific guidance",
     stylePrompt,
+    "",
+    STYLE_COMPLIANCE_PROMPT.replaceAll("{selectedStyle}", selectedStyle),
     "",
     "## Source-specific guidance",
     sourcePrompt,

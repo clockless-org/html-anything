@@ -134,6 +134,12 @@ You do not need to choose a style. The default is `auto`.
 Styles are design systems + layout systems, not CSS skins. The skill picks
 the system from the content, then builds the page inside that system:
 
+Style fidelity is part of the contract: when a style is based on a reference
+HTML or screenshot, the generated page should reproduce the reference's first
+viewport, component vocabulary, interaction model, motion grammar, and visual
+absence rules. Source modules are translated into the style instead of forcing
+every output into the same dashboard/report shape.
+
 | Content | Style |
 |---|---|
 | Unknown or mixed inputs | `default` (Insight Brief) |

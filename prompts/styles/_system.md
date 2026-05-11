@@ -18,13 +18,49 @@ The selected style must decide the generated page's:
 Do not create one generic report and then recolor it. Build from the
 selected system's skeleton first, then fill it with source-specific analysis.
 
+## Style Fidelity Contract
+
+Style fidelity is a hard requirement. A generated page is wrong if it satisfies
+the source prompt but does not visibly inhabit the selected style.
+
+When a style is derived from a reference HTML, design, screenshot, or motion
+study, preserve the reference's core invariants:
+
+- first viewport geometry,
+- dominant layout scaffold,
+- typography roles,
+- color/surface palette,
+- component vocabulary,
+- spacing rhythm,
+- interaction model,
+- motion grammar,
+- negative space,
+- what is deliberately absent.
+
+Do not "improve" a style by adding generic product chrome, hero blocks, KPI
+cards, dashboards, or grids unless that exact style calls for them. If the
+reference is sparse, the generated page must stay sparse. If the reference is
+an app/workbench, the generated page must feel like an app/workbench. If the
+reference is a manuscript, the generated page must begin as a manuscript.
+
+Before writing the final HTML, internally answer:
+
+1. What are the 5-8 visual/structural invariants of this style?
+2. Which source-required modules must be translated into that system?
+3. What generic html-anything/default pattern would violate the style?
+
+The final HTML must pass that self-check.
+
 ## Required Generation Order
 
 1. Choose the page system from the selected style.
-2. Sketch the first viewport around that system.
-3. Choose modules from the source prompt.
-4. Translate those modules into the style's component vocabulary.
-5. Write HTML/CSS/JS with style-specific class names and layout primitives.
+2. Extract or recall the style invariants, especially any reference-derived
+   first viewport and motion grammar.
+3. Sketch the first viewport around that system.
+4. Choose modules from the source prompt.
+5. Translate those modules into the style's component vocabulary.
+6. Write HTML/CSS/JS with style-specific class names and layout primitives.
+7. Audit the generated HTML against the selected style before returning it.
 
 ## What Counts As A Real Style
 
@@ -120,10 +156,17 @@ When they conflict:
 - Adapt labels and modules so the result still feels native to the selected
   style.
 
+Source modules may move, shrink, or change component shape to fit the style.
+For example, a required "quote browser" in a manuscript style can be a quiet
+ruled appendix, while the same source module in a dashboard style might become
+a searchable table. The source requirement is satisfied by the information and
+interaction, not by a generic component form.
+
 ## Implementation Rules
 
 - Use Clockless tokens from `prompts/_design.md` as the brand base, but do not
   let those tokens flatten all styles into one look.
+- Put `data-ha-style="<selected-style>"` on the root `<html>` element.
 - Use semantic, style-specific classes such as `.lesson-stage`,
   `.atlas-timeline`, `.ops-command-bar`, `.evidence-workbench`,
   `.dossier-sheet`, not only generic `.hero`, `.card`, `.grid`.
@@ -131,6 +174,24 @@ When they conflict:
   scrolls.
 - The primary interaction should be native to the system: a lesson stepper for
   `teaching`, selector/inspector for `interactive-studio`, filters/table for
-  `dashboard`, quote/evidence browser for `editorial`, etc.
+  `dashboard`, margin-spore links for `living-essay`, quote/evidence browser
+  for `editorial`, etc.
 - Do not include a visible "style badge" in real generated outputs. The style
   should be obvious from the structure.
+
+## Final HTML Style Audit
+
+Before returning the HTML, verify:
+
+- The root HTML declares the selected style with `data-ha-style`.
+- The first viewport matches the style's scaffold and does not use a generic
+  fallback shell.
+- At least four style-specific class names/components from the style prompt
+  appear in the HTML.
+- Source-required modules are present, but translated into the style's native
+  component vocabulary.
+- The primary interaction is style-native and works with the inlined `DATA`.
+- Motion, if present, follows the style's motion grammar and respects
+  `prefers-reduced-motion`.
+- The output is still a complete offline HTML file with inline CSS/JS and
+  the `__DATA__` placeholder.
