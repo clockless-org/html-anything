@@ -33,7 +33,7 @@
       "id": "files-work",
       "title": "Files & Work Data",
       "summary": "Transform spreadsheets, CSV exports, PDFs, DOCX, Markdown, records, logs, calendars, work artifacts, and slide-style carousel outputs into polished live HTML.",
-      "styles": ["dashboard", "soft-saas", "document", "digital-eguide", "editorial-carousel", "paper-trail", "living-essay"],
+      "styles": ["dashboard", "soft-saas", "document", "architectural-spread", "digital-eguide", "editorial-carousel", "paper-trail", "living-essay"],
       "examples": ["email", "bank-transactions", "pdf", "markdown", "editorial-carousel", "log-error"]
     },
     {
@@ -254,12 +254,27 @@
       "useCases": ["files-work"],
       "triggers": ["document", "essay", "article", "research", "records", "policy", "memo"],
       "bestSources": ["markdown-document", "docx-document", "medical-visit", "lab-results", "legal-chronology", "bookmarks-html", "bibliography", "url-list", "reading-list"],
-      "example": "markdown",
-      "preview": "docs/example-previews/markdown.jpg",
+      "example": "legal-chronology",
+      "preview": "docs/example-previews/legal-chronology.jpg",
       "accent": "#8b3f1f",
       "coreScaffold": ["cover", "reader rail", "body sheet", "evidence margin", "question panel"],
       "requiredPrimitives": [".document-shell", ".reader-rail", ".body-section", ".evidence-margin", ".question-panel"],
       "avoid": ["generic blog", "over-quoting", "diagnosis or legal/tax advice"]
+    },
+    {
+      "id": "architectural-spread",
+      "system": "Architectural Editorial Spread",
+      "mode": "explicit-or-auto-for-visual-longform",
+      "summary": "Reference-faithful split-screen editorial spread with a large visual object and restrained architectural copy panel.",
+      "useCases": ["files-work"],
+      "triggers": ["architectural spread", "split screen editorial", "visual essay", "object-focused article", "like the Mars HTML", "full-screen magazine spread"],
+      "bestSources": ["markdown-document", "url-article", "plain-text", "docx-document"],
+      "example": "markdown",
+      "preview": "docs/example-previews/markdown.jpg",
+      "accent": "#6B655F",
+      "coreScaffold": ["left visual bay", "right editorial panel", "serif italic emphasis", "absolute nav anchors", "pagination dots"],
+      "requiredPrimitives": [".architectural-viewport", ".col-visual", ".col-content", ".visual-object", ".nav-anchor", ".pagination"],
+      "avoid": ["scrolling blog", "dashboard cards", "top navigation bar", "generic document review shell"]
     },
     {
       "id": "digital-eguide",

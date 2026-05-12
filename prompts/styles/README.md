@@ -30,6 +30,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `paper-trail` | Explicit tactile/printed-collateral requests: itineraries, hotel folios, receipts, tickets, reservation bundles | Artifact desk with folio tabs, receipt tape, stamp callouts, source drawer |
 | `network-map` | Personal/professional networks, senders, contacts, communities, payments | Relationship graph with entity inspector, clusters, hubs, linked records |
 | `document` | Essays, articles, reading lists, research collections, PDFs, DOCX, legal/medical/lab records, policy docs | Document review with cover, reading rail, body sheet, evidence/citations, drill-down |
+| `architectural-spread` | Visual long-form essays, object-focused articles, manifestos, and split-screen editorial requests | Full-screen architectural split spread with visual object, cream content panel, serif italic emphasis, anchors, and dots |
 | `digital-eguide` | E-guides, PDF guides, creator guides, playbooks, lead magnets, downloadable course previews | Two-page guide spread with cover, TOC, inside lesson, pull quote, steps, exercise strip |
 | `editorial-carousel` | Brand strategy essays, founder letters, article takeaways, lightweight reports meant to be shared as a sequence | Magazine-like issue with cover, spread rail, 4-8 argument spreads, evidence drawer, copy actions |
 | `terminal-cli` | Explicit terminal, CLI, shell, mainframe, hacker-console, or tmux requests | Dark-only shell work surface with prompt, status rail, terminal panes, command controls, and raw console |
@@ -52,6 +53,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `paper-trail` | Paper Trail |
 | `network-map` | Network Map |
 | `document` | Document Review |
+| `architectural-spread` | Architectural Editorial Spread |
 | `digital-eguide` | Digital E-Guide Spread |
 | `editorial-carousel` | Editorial Carousel |
 | `terminal-cli` | Terminal CLI |
@@ -87,6 +89,7 @@ override. Borrow archetypes, not brand identities:
 - tactile printed-artifact systems → `paper-trail`
 - graph / network systems → `network-map`
 - broadsheet / media systems → `document`
+- architectural split-screen editorial systems → `architectural-spread`
 - creator guide / PDF guide systems → `digital-eguide`
 - premium carousel / manifesto systems → `editorial-carousel`
 - terminal / CLI / shell systems → `terminal-cli`
@@ -123,7 +126,7 @@ choose from.
 | Use case | Includes | Prefer |
 |---|---|
 | Teaching Studios | Tutorials, explainers, lessons, object/system studios | `teaching`, `interactive-learning` |
-| Files & Work Data | CSV/spreadsheet-style exports, PDFs, DOCX, Markdown, logs, finance, calendars, issue trackers, email/support archives, research records, slide-style carousel outputs | `dashboard`, `soft-saas`, `document`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
+| Files & Work Data | CSV/spreadsheet-style exports, PDFs, DOCX, Markdown, logs, finance, calendars, issue trackers, email/support archives, research records, slide-style carousel outputs | `dashboard`, `soft-saas`, `document`, `architectural-spread`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
 | Conversation Analysis | Couple/friend chats, WhatsApp/WeChat, team channels, message streams | `relationship`, `kinetic-scoreboard`, `network-map` |
 | Personal Data Recaps | Orders, health, browsing, media history, reading, payments, professional network, notes, AI chats | `timeline-story`, `living-essay`, `network-map` |
 | Places & Trips | Photos with EXIF, saved places, rideshare, GPX/KML, itineraries | `map-atlas`, `paper-trail` |
@@ -146,6 +149,13 @@ Use [`examples/pdf/input.pdf`](../../examples/pdf/input.pdf) as the first
 recommendations, glossary, and citations, so the style can turn a formal PDF
 into a cover page plus actionable inside spread without falling back to a
 dashboard or memo.
+
+## Example Source For Architectural Spread
+
+Use [`examples/markdown/input.md`](../../examples/markdown/input.md) as the
+first `architectural-spread` example. It is a short narrative essay with a
+single strong metaphor, so the style can turn the thesis into a large visual
+object and the sections into full-screen editorial spreads.
 
 ## Example Source For Terminal CLI
 

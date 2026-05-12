@@ -131,7 +131,7 @@ the style system. Source prompts can be many; use cases should stay stable.
 | Use case | User means | Likely styles |
 |---|---|---|
 | Teaching Studios | Turn an idea, article, lesson, or concept into an interactive learning surface, not a scrolling article. | `teaching`, `interactive-learning` |
-| Files & Work Data | Transform files and work artifacts: CSV/spreadsheet-style exports, PDFs, DOCX, Markdown, logs, email/support archives, finance, calendars, issue trackers, research records, and slide-style carousel outputs. | `dashboard`, `soft-saas`, `document`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
+| Files & Work Data | Transform files and work artifacts: CSV/spreadsheet-style exports, PDFs, DOCX, Markdown, logs, email/support archives, finance, calendars, issue trackers, research records, and slide-style carousel outputs. | `dashboard`, `soft-saas`, `document`, `architectural-spread`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
 | Conversation Analysis | Analyze private chats, relationship exports, team channels, or message archives. | `relationship`, `kinetic-scoreboard`, `network-map` |
 | Personal Data Recaps | Make a recap/timeline/story from personal exports: orders, health, browsing, media, payments, professional networks, notes, AI chats. | `timeline-story`, `living-essay`, `network-map` |
 | Places & Trips | Make a map, route atlas, travel dossier, photo-location view, or trip paper trail. | `map-atlas`, `paper-trail` |
@@ -164,6 +164,7 @@ model, density, chart grammar, and voice.
 | `map-atlas` | Places, trips, routes, rideshare, location history, geotagged photo metadata | **Map Atlas**: spatial stage, place drawer, period/place filters, waypoint browser |
 | `network-map` | Contacts, LinkedIn, Venmo/PayPal, people/org graphs, community relationship maps | **Network Map**: graph canvas, entity inspector, cluster controls, hub cards, linked records |
 | `document` | Essays, articles, reading lists, bookmarks, research collections, PDFs, DOCX, legal/medical/lab/academic records | **Document Review**: cover, reading rail, body sheet, evidence margin, drill-down. Tone shifts narrative ↔ formal based on source. |
+| `architectural-spread` | Visual long-form essays, object-focused articles, manifestos, and reference requests that look like the split Mars architectural HTML | **Architectural Editorial Spread**: left visual bay, right cream content panel, serif italic emphasis, corner anchors, pagination dots |
 | `digital-eguide` | E-guides, PDF guides, creator guides, playbooks, lead magnets, downloadable course previews | **Digital E-Guide Spread**: two paper pages on a warm desk, cover + TOC, inside lesson, pull quote, steps, exercise strip |
 | `editorial-carousel` | Brand strategy essays, founder letters, article takeaways, lightweight reports meant to be shared as a sequence | **Editorial Carousel**: issue cover, spread rail, 4-8 argument spreads, evidence drawer, copy actions |
 | `developer` | Diffs, PR patches, CI logs, stack traces, repos | **Terminal Evidence Workbench**: prompt line, hotspots, risk checklist, raw artifact navigator, copyable handoff |
@@ -187,6 +188,9 @@ Honor explicit style direction in natural language:
   "onboarding dashboard" → lean `soft-saas`.
 - "more dashboard-like" → increase density, filters, charts.
 - "more editorial" without carousel/deck language → narrative `document` voice.
+- "make it like this Mars architectural HTML" / "split-screen editorial" /
+  "architectural spread" → use `architectural-spread` and follow
+  `prompts/styles/architectural-spread.md` exactly.
 - "make it a map" / "spatial" → lean `map-atlas`.
 - "show relationships/network" → lean `network-map`.
 - "who contributed most" / "make it feel like a race" → lean `kinetic-scoreboard`.

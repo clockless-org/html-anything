@@ -73,6 +73,7 @@ export type HtmlAnythingStyle =
   | "document"
   | "digital-eguide"
   | "editorial-carousel"
+  | "architectural-spread"
   | "terminal-cli"
   | "developer"
 

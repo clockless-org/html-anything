@@ -9,7 +9,7 @@ is actually a page, not a chat message.**
 answers into self-contained HTML artifacts — analyses, reports, recaps,
 dashboards, atlases, teaching sites, comparison studies, decision memos,
 year-in-review pages. The skill picks the right design system from a
-16-style catalog, builds a single-file `.html`, verifies it in a browser,
+18-style catalog, builds a single-file `.html`, verifies it in a browser,
 and hands it back. Short conversational answers stay short — you just stop
 scrolling 4,000-word replies whenever the content was always going to be a
 page.
@@ -17,7 +17,7 @@ page.
 It also works **on demand** for any file, folder, URL, or service export
 (Amazon orders, Kindle highlights, Spotify history, WhatsApp / WeChat,
 Google Photos Takeout, LinkedIn connections, CSV / PDF / DOCX, logs, GPX, …) —
-the skill figures out the source, chooses one of the 16 design systems, and
+the skill figures out the source, chooses one of the 18 design systems, and
 ships the HTML.
 
 ## Preview
@@ -59,6 +59,7 @@ A small selection across the rest of the style catalog. Each links to the live p
 | [Brand positioning carousel →](https://clockless-org.github.io/html-anything/examples/editorial-carousel/output.html) | A strategy essay becomes a 5-spread magazine carousel with source evidence. | `editorial-carousel` |
 | [Email support console →](https://clockless-org.github.io/html-anything/examples/email/output.html) | A mailbox archive becomes a soft SaaS console for thread health, open loops, and handoffs. | `soft-saas` |
 | [Google Photos atlas →](https://clockless-org.github.io/html-anything/examples/google-photos-takeout/output.html) | Takeout EXIF metadata becomes a place-driven memory map. | `map-atlas` |
+| [Long-form architectural essay →](https://clockless-org.github.io/html-anything/examples/markdown/output.html) | A narrative essay becomes a split-screen editorial object with chapter pagination. | `architectural-spread` |
 | [CI terminal console →](https://clockless-org.github.io/html-anything/examples/ci-log/output.html) | A failed GitHub Actions run becomes a shell-native debugging console. | `terminal-cli` |
 | [PR review →](https://clockless-org.github.io/html-anything/examples/pr-review/output.html) | A patch becomes a risk-annotated review brief with evidence. | `developer` |
 
@@ -201,6 +202,7 @@ every output into the same dashboard/report shape.
 | Support mailboxes, email campaigns, onboarding, customer-success queues | `soft-saas` (Soft SaaS Console) |
 | Finance, spreadsheets, logs, backlog, operational data | `dashboard` (Ops Console) |
 | Essays, articles, reading lists, bookmarks, PDFs, DOCX, legal/medical/lab records | `document` (Document Review) |
+| Visual long-form essays, object-focused articles, architectural split-screen editorial requests | `architectural-spread` (Architectural Editorial Spread) |
 | E-guides, PDF guides, creator guides, playbooks, lead magnets | `digital-eguide` (Digital E-Guide Spread) |
 | Brand strategy essays, founder letters, article takeaways, lightweight reports meant to be shared as a sequence | `editorial-carousel` (Editorial Carousel) |
 | Explicit terminal, CLI, shell, mainframe, hacker-console requests | `terminal-cli` (Terminal CLI, explicit override) |
@@ -217,11 +219,11 @@ style catalog lives in [`prompts/styles/catalog.json`](./prompts/styles/catalog.
 it records the six use cases plus each style's triggers, best sources,
 example, preview, required primitives, and avoid rules so generation can stay
 style-faithful without asking users to pick options. There is a fallback
-`default` style plus 13
+`default` style plus 14
 auto-selected styles (`teaching`,
 `interactive-learning`, `relationship`, `living-essay`, `dashboard`, `soft-saas`,
 `kinetic-scoreboard`, `timeline-story`, `map-atlas`, `network-map`,
-`document`, `editorial-carousel`, and `developer`), plus explicit overrides
+`document`, `architectural-spread`, `editorial-carousel`, and `developer`), plus explicit overrides
 such as `paper-trail`, `digital-eguide`, and `terminal-cli`.
 
 Example explicit style override:
@@ -245,7 +247,7 @@ Each use case can use one or more style systems.
 | Use case | Example sources | Likely styles |
 |---|---|---|
 | Teaching Studios | A short teaching brief, article, lesson outline, concept note, URL | `teaching`, `interactive-learning` |
-| Files & Work Data | CSV / TSV, spreadsheet-style exports, JSON, JSONL, logs, email/support archives, bank transactions, invoices, QuickBooks, calendars, issue trackers, Markdown, PDF, DOCX, bookmarks, URL lists, bibliographies, research records, slide-style carousel outputs | `dashboard`, `soft-saas`, `document`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
+| Files & Work Data | CSV / TSV, spreadsheet-style exports, JSON, JSONL, logs, email/support archives, bank transactions, invoices, QuickBooks, calendars, issue trackers, Markdown, PDF, DOCX, bookmarks, URL lists, bibliographies, research records, slide-style carousel outputs | `dashboard`, `soft-saas`, `document`, `architectural-spread`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
 | Conversation Analysis | WeChat, WhatsApp, iMessage-style CSV, Slack, Discord, Telegram, email-style threads | `relationship`, `kinetic-scoreboard`, `network-map` |
 | Personal Data Recaps | Amazon orders, Apple Health, browser history, YouTube, Spotify, Twitch, Kindle highlights, LinkedIn, Venmo / PayPal, AI chat exports, notes vaults | `timeline-story`, `living-essay`, `network-map` |
 | Places & Trips | Google Photos Takeout, Google Maps saved places, rideshare history, GPX, KML, itinerary CSV, location history | `map-atlas`, `paper-trail` |
