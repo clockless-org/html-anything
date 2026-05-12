@@ -33,8 +33,8 @@
       "id": "files-work",
       "title": "Files & Work Data",
       "summary": "Transform spreadsheets, CSV exports, PDFs, DOCX, Markdown, records, logs, calendars, work artifacts, and slide-style carousel outputs into polished live HTML.",
-      "styles": ["dashboard", "soft-saas", "document", "architectural-spread", "digital-eguide", "editorial-carousel", "paper-trail", "living-essay"],
-      "examples": ["email", "csv", "pdf", "markdown", "editorial-carousel"]
+      "styles": ["dashboard", "soft-saas", "document", "kami-reading", "architectural-spread", "digital-eguide", "editorial-carousel", "paper-trail", "living-essay"],
+      "examples": ["email", "csv", "pdf", "docx", "markdown", "editorial-carousel"]
     },
     {
       "id": "conversation",
@@ -283,6 +283,21 @@
       "coreScaffold": ["cover", "reader rail", "body sheet", "evidence margin", "question panel"],
       "requiredPrimitives": [".document-shell", ".reader-rail", ".body-section", ".evidence-margin", ".question-panel"],
       "avoid": ["generic blog", "over-quoting", "diagnosis or legal/tax advice"]
+    },
+    {
+      "id": "kami-reading",
+      "system": "Kami Longform Reader",
+      "mode": "auto-for-docx-or-explicit-long-reading",
+      "summary": "Warm parchment longform reader inspired by tw93/Kami for sustained reading of essays, articles, DOCX memos, and manuscripts.",
+      "useCases": ["files-work"],
+      "triggers": ["kami", "long-form reading", "long text", "make it easy to read", "readable article", "paper reader"],
+      "bestSources": ["docx-document", "markdown-document", "pdf-document", "url-article", "plain-text"],
+      "example": "docx",
+      "preview": "docs/example-previews/docx.jpg",
+      "accent": "#1B365D",
+      "coreScaffold": ["parchment reader shell", "serif cover", "sticky reading rail", "central article paper", "source appendix"],
+      "requiredPrimitives": [".kami-reader", ".kami-cover", ".kami-layout", ".kami-rail", ".kami-paper", ".kami-progress", ".kami-source-drawer"],
+      "avoid": ["dashboard-first layout", "pure white canvas", "cool grays", "italic quotes", "multi-color palettes"]
     },
     {
       "id": "architectural-spread",

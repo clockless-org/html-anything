@@ -32,6 +32,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `paper-trail` | Explicit tactile/printed-collateral requests: itineraries, hotel folios, receipts, tickets, reservation bundles | Artifact desk with folio tabs, receipt tape, stamp callouts, source drawer |
 | `network-map` | Personal/professional networks, senders, contacts, communities, payments | Relationship graph with entity inspector, clusters, hubs, linked records |
 | `document` | Essays, articles, reading lists, research collections, PDFs, DOCX, legal/medical/lab records, policy docs | Document review with cover, reading rail, body sheet, evidence/citations, drill-down |
+| `kami-reading` | Long prose, DOCX memos, articles, essays, and manuscripts that should feel calm and easy to read | Warm parchment longform reader with serif cover, sticky contents, progress, density controls, and source appendix |
 | `architectural-spread` | Visual long-form essays, object-focused articles, manifestos, and split-screen editorial requests | Full-screen architectural split spread with visual object, cream content panel, serif italic emphasis, anchors, and dots |
 | `digital-eguide` | E-guides, PDF guides, creator guides, playbooks, lead magnets, downloadable course previews | Two-page guide spread with cover, TOC, inside lesson, pull quote, steps, exercise strip |
 | `editorial-carousel` | Brand strategy essays, founder letters, article takeaways, lightweight reports meant to be shared as a sequence | Magazine-like issue with cover, spread rail, 4-8 argument spreads, evidence drawer, copy actions |
@@ -57,6 +58,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `paper-trail` | Paper Trail |
 | `network-map` | Network Map |
 | `document` | Document Review |
+| `kami-reading` | Kami Longform Reader |
 | `architectural-spread` | Architectural Editorial Spread |
 | `digital-eguide` | Digital E-Guide Spread |
 | `editorial-carousel` | Editorial Carousel |
@@ -93,6 +95,7 @@ override. Borrow archetypes, not brand identities:
 - tactile printed-artifact systems → `paper-trail`
 - graph / network systems → `network-map`
 - broadsheet / media systems → `document`
+- parchment longform reader systems → `kami-reading`
 - architectural split-screen editorial systems → `architectural-spread`
 - creator guide / PDF guide systems → `digital-eguide`
 - premium carousel / manifesto systems → `editorial-carousel`
@@ -130,7 +133,7 @@ choose from.
 | Use case | Includes | Prefer |
 |---|---|
 | Teaching Studios | Tutorials, explainers, lessons, object/system studios, comic explainers | `teaching`, `interactive-learning`, `comic-book` |
-| Files & Work Data | CSV/spreadsheet-style exports, PDFs, DOCX, Markdown, logs, finance, calendars, issue trackers, email/support archives, research records, slide-style carousel outputs | `dashboard`, `soft-saas`, `document`, `architectural-spread`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
+| Files & Work Data | CSV/spreadsheet-style exports, PDFs, DOCX, Markdown, logs, finance, calendars, issue trackers, email/support archives, research records, slide-style carousel outputs | `dashboard`, `soft-saas`, `document`, `kami-reading`, `architectural-spread`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
 | Conversation Analysis | Couple/friend chats, WhatsApp/WeChat, team channels, message streams | `relationship`, `love-romance-3d`, `kinetic-scoreboard`, `network-map` |
 | Personal Data Recaps | Orders, health, browsing, media history, reading, payments, professional network, notes, AI chats | `timeline-story`, `living-essay`, `network-map` |
 | Places & Trips | Photos with EXIF, saved places, rideshare, GPX/KML, itineraries | `map-atlas`, `paper-trail` |
@@ -153,6 +156,13 @@ Use [`examples/pdf/input.pdf`](../../examples/pdf/input.pdf) as the first
 recommendations, glossary, and citations, so the style can turn a formal PDF
 into a cover page plus actionable inside spread without falling back to a
 dashboard or memo.
+
+## Example Source For Kami Reading
+
+Use [`examples/docx/input.docx`](../../examples/docx/input.docx) as the first
+`kami-reading` example. It is a long internal decision memo with hierarchy,
+risks, open questions, dates, and appendix references, so the style can prove
+that long work text becomes a calm reader rather than a dashboard.
 
 ## Example Source For Architectural Spread
 

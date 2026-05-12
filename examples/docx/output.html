@@ -1,1730 +1,598 @@
 <!doctype html>
-<html lang="en" data-ha-style="document">
+<html lang="en" data-ha-style="kami-reading">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RFC-014: Pricing Page V2 — Decision Memo</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script>const DATA = {"markdown":"RFC\\-014: Pricing Page V2 — Decision Memo\n\n*Synthetic fixture for html\\-anything\\. All names, numbers, customer quotes, deal sizes, and internal projects in this memo are invented\\.*\n\n__Author__\n\nRiley Chen \\(synthetic, Product\\)\n\n__Reviewers__\n\nAsha Vora \\(Eng\\), Marcus Liang \\(GTM\\), Devon Park \\(Finance\\)\n\n__Status__\n\nDecided — implementation kickoff Q2 2026\n\n__Decision date__\n\n2026\\-04\\-12\n\n__Last updated__\n\n2026\\-04\\-22\n\n__Related__\n\nRFC\\-009 \\(free\\-tier kill\\), PROD\\-882 \\(pricing page redesign\\)\n\n# TL;DR\n\nWe are replacing the current 4\\-tier pricing page with a 2\\-tier model \\(Starter, Team\\) plus a contact\\-sales Enterprise track\\. The change is driven by three findings: \\(1\\) the Pro tier captured only 7% of new signups in Q1 but consumed 31% of pricing\\-page time\\-on\\-page, \\(2\\) support tickets tagged 'pricing confusion' rose 2\\.4x year\\-over\\-year, and \\(3\\) every winning competitor in our segment has consolidated to ≤ 3 published tiers\\. Expected impact: \\+18% activation rate on the pricing page, neutral net revenue in 2 quarters, \\+6% by Q4 2026\\.\n\n# 1\\. Context\n\nThe current pricing page \\(v1, shipped 2024\\) presents Free, Starter, Pro, and Team tiers\\. Free was killed in RFC\\-009 but the Pro tier remains — it was originally pitched as the 'power individual' segment between Starter and Team\\.\n\nThree things changed since 2024 that invalidate the original pitch:\n\nFirst, the prosumer segment we expected to fill Pro never showed up\\. Q1 2026 signups split 71% Starter, 7% Pro, 22% Team\\. Pro is a quiet middle that almost no one chooses on first contact\\.\n\nSecond, the support cost of the four\\-tier table is real\\. We logged 412 'pricing confusion' tickets in Q1 2026 versus 173 in Q1 2025\\. The most common confusion: customers picked Pro thinking it included multi\\-seat features \\(it does not\\) and downgraded within 30 days\\.\n\nThird, every competitor with positive growth in our segment ships ≤ 3 published tiers\\. The two that grew fastest \\(Linear, Vercel\\) ship 2 \\+ 'enterprise'\\. The cognitive load argument is now backed by a market signal\\.\n\n*“I picked Pro because it sounded important\\. Then I realised it gave me nothing my coworkers could actually use, and I downgraded the next day\\.” — synthetic customer interview, March 2026*\n\n# 2\\. Proposal\n\nReplace the four\\-tier table with two published tiers plus a contact\\-sales Enterprise option:\n\n## 2\\.1 Tiers\n\nStarter — single user, $19/mo\\. Existing Starter customers grandfathered\\.\n\nTeam — up to 25 seats, $39/seat/mo\\. Existing Team customers see no price change\\.\n\nEnterprise — contact sales\\. SSO, audit log, custom DPA, named support\\.\n\n## 2\\.2 What happens to Pro customers\n\nThere are 1,184 active Pro customers\\. They will be migrated as follows: solo Pro accounts → grandfathered Starter at current Pro price for 12 months, then offered Starter or Team upgrade with a 20% loyalty discount\\. Multi\\-seat Pro accounts \\(these exist accidentally; the tier was never supposed to allow more than one seat\\) → free upgrade to Team at Pro pricing for 6 months\\.\n\n## 2\\.3 Page design changes\n\nThree\\-column layout with the Team column visually emphasised \\(brand orange border, ‘Most popular’ tag\\)\\. Feature comparison table simplified from 47 rows to 19\\. FAQ section reduced from 23 questions to 8, with the four highest\\-traffic ones promoted above the fold\\.\n\n# 3\\. Alternatives Considered\n\n<b>3\\.1 Keep four tiers but rename Pro\\.</b> Cheaper to ship, but leaves the cognitive\\-load problem unresolved and the migration risk in place\\. Rejected because the data shows the problem is structural, not naming\\.\n\n<b>3\\.2 Single tier \\+ usage\\-based\\.</b> Considered seriously\\. Strong long\\-term direction; wrong short\\-term move because our billing infrastructure does not yet support metered components and we are not staffed to build it before Q4\\. Revisit in 2027\\.\n\n<b>3\\.3 Three published tiers \\(Starter, Team, Business\\)\\.</b> Closest to v1 minus Pro\\. Rejected because adding a Business tier reintroduces the 'middle confusion' pattern we are trying to remove\\. Two\\-plus\\-Enterprise is structurally cleaner\\.\n\n# 4\\. Risks & Mitigations\n\n<b>4\\.1 Pro customer churn\\.</b> The migration plan extends current pricing for 6–12 months, which we project converts 78% to Starter or Team and 22% to churn\\. Worst\\-case \\(50% churn\\) loses ~$680K ARR\\. Mitigation: dedicated CSM outreach to the top 100 Pro accounts\\.\n\n<b>4\\.2 Sales pipeline impact\\.</b> Removing the published Pro tier may reduce inbound qualification accuracy\\. Mitigation: run a qualification quiz on the pricing page \\(already prototyped in PROD\\-851\\) and route Pro\\-shaped leads directly to AEs\\.\n\n<b>4\\.3 Reputational risk\\.</b> Pricing changes draw attention\\. Mitigation: ship a public\\-blog post explaining the change before the page goes live, with a dedicated migration FAQ\\.\n\n# 5\\. Decisions\n\n__D\\-1__\n\nAdopt 2\\-tier\\-plus\\-Enterprise model\\. Approved 2026\\-04\\-12\\.\n\n__D\\-2__\n\nPro tier sunset in waves: solo accounts first, multi\\-seat second\\.\n\n__D\\-3__\n\nMigration window: 12 months for solo, 6 months for multi\\-seat\\.\n\n__D\\-4__\n\nLoyalty discount: 20% off list for migrating Pro customers, 12 months\\.\n\n__D\\-5__\n\nQ1 2027 review for usage\\-based tier feasibility \\(links to RFC\\-014A\\)\\.\n\n# 6\\. Action Items\n\n__Action__\n\n__Owner__\n\n__Due__\n\n__Status__\n\nUpdate pricing page comp table to 19 rows\n\nRiley Chen\n\n2026\\-05\\-15\n\nIn progress\n\nMigration email sequence \\+ drip\n\nMarcus Liang\n\n2026\\-05\\-22\n\nDrafted\n\nCSM outreach plan for top 100 Pro accounts\n\nDevon Park\n\n2026\\-05\\-08\n\nDone\n\nPricing\\-page qualification quiz wiring\n\nAsha Vora\n\n2026\\-06\\-02\n\nNot started\n\nPublic blog post \\+ migration FAQ\n\nRiley Chen\n\nPre\\-launch \\-7d\n\nOutline\n\nBilling infra spike for usage\\-based \\(RFC\\-014A\\)\n\nAsha Vora\n\n2026\\-09\\-30\n\nScoped\n\n# 7\\. Open Questions\n\nQ1\\. Should the loyalty discount apply for 12 or 18 months? Current proposal is 12; Marcus argues 18 to soften the change\\.\n\nQ2\\. Do we publish per\\-seat Team pricing or 'starting at $39/seat'? Finance prefers the latter; design prefers the former\\.\n\nQ3\\. Enterprise floor — is $24K/year the right minimum? Current AE feedback is the floor is too low and is attracting Team\\-shaped accounts that should self\\-serve\\.\n\nQ4\\. Migration FAQ tone — should the post acknowledge that the Pro tier was a strategic miss, or frame the change as a forward\\-looking simplification?\n\n# Appendix A — Data references\n\n*All numbers in this synthetic memo are invented and intended to mimic the shape of real internal pricing analyses, not the substance\\.*\n\nA\\.1 Q1 2026 signup mix: 71% Starter / 7% Pro / 22% Team \\(n = 14,732 signups, synthetic\\)\n\nA\\.2 Pricing\\-confusion ticket volume: 412 \\(Q1 2026\\) vs 173 \\(Q1 2025\\), \\+138% YoY\n\nA\\.3 Pro tier active customers: 1,184 — of which 1,061 solo, 123 multi\\-seat \\(synthetic\\)\n\nA\\.4 Projected ARR impact: \\-$210K \\(months 1–6\\), neutral by month 9, \\+6% baseline by Q4 2026\n\nA\\.5 Competitor pricing\\-tier counts \\(synthetic survey\\): Linear 2, Vercel 2\\+E, Notion 3, Asana 4, Monday 5\n\n","plainText":"RFC\\-014: Pricing Page V2 — Decision Memo Synthetic fixture for html\\-anything\\. All names, numbers, customer quotes, deal sizes, and internal projects in this memo are invented\\. Author Riley Chen \\(synthetic, Product\\) Reviewers Asha Vora \\(Eng\\), Marcus Liang \\(GTM\\), Devon Park \\(Finance\\) Status Decided — implementation kickoff Q2 2026 Decision date 2026\\-04\\-12 Last updated 2026\\-04\\-22 Related RFC\\-009 \\(free\\-tier kill\\), PROD\\-882 \\(pricing page redesign\\) TL;DR We are replacing the current 4\\-tier pricing page with a 2\\-tier model \\(Starter, Team\\) plus a contact\\-sales Enterprise track\\. The change is driven by three findings: \\(1\\) the Pro tier captured only 7% of new signups in Q1 but consumed 31% of pricing\\-page time\\-on\\-page, \\(2\\) support tickets tagged 'pricing confusion' rose 2\\.4x year\\-over\\-year, and \\(3\\) every winning competitor in our segment has consolidated to ≤ 3 published tiers\\. Expected impact: \\+18% activation rate on the pricing page, neutral net revenue in 2 quarters, \\+6% by Q4 2026\\. 1\\. Context The current pricing page \\(v1, shipped 2024\\) presents Free, Starter, Pro, and Team tiers\\. Free was killed in RFC\\-009 but the Pro tier remains — it was originally pitched as the 'power individual' segment between Starter and Team\\. Three things changed since 2024 that invalidate the original pitch: First, the prosumer segment we expected to fill Pro never showed up\\. Q1 2026 signups split 71% Starter, 7% Pro, 22% Team\\. Pro is a quiet middle that almost no one chooses on first contact\\. Second, the support cost of the four\\-tier table is real\\. We logged 412 'pricing confusion' tickets in Q1 2026 versus 173 in Q1 2025\\. The most common confusion: customers picked Pro thinking it included multi\\-seat features \\(it does not\\) and downgraded within 30 days\\. Third, every competitor with positive growth in our segment ships ≤ 3 published tiers\\. The two that grew fastest \\(Linear, Vercel\\) ship 2 \\+ 'enterprise'\\. The cognitive load argument is now backed by a market signal\\. “I picked Pro because it sounded important\\. Then I realised it gave me nothing my coworkers could actually use, and I downgraded the next day\\.” — synthetic customer interview, March 2026 2\\. Proposal Replace the four\\-tier table with two published tiers plus a contact\\-sales Enterprise option: 2\\.1 Tiers Starter — single user, $19/mo\\. Existing Starter customers grandfathered\\. Team — up to 25 seats, $39/seat/mo\\. Existing Team customers see no price change\\. Enterprise — contact sales\\. SSO, audit log, custom DPA, named support\\. 2\\.2 What happens to Pro customers There are 1,184 active Pro customers\\. They will be migrated as follows: solo Pro accounts → grandfathered Starter at current Pro price for 12 months, then offered Starter or Team upgrade with a 20% loyalty discount\\. Multi\\-seat Pro accounts \\(these exist accidentally; the tier was never supposed to allow more than one seat\\) → free upgrade to Team at Pro pricing for 6 months\\. 2\\.3 Page design changes Three\\-column layout with the Team column visually emphasised \\(brand orange border, ‘Most popular’ tag\\)\\. Feature comparison table simplified from 47 rows to 19\\. FAQ section reduced from 23 questions to 8, with the four highest\\-traffic ones promoted above the fold\\. 3\\. Alternatives Considered <b>3\\.1 Keep four tiers but rename Pro\\.</b> Cheaper to ship, but leaves the cognitive\\-load problem unresolved and the migration risk in place\\. Rejected because the data shows the problem is structural, not naming\\. <b>3\\.2 Single tier \\+ usage\\-based\\.</b> Considered seriously\\. Strong long\\-term direction; wrong short\\-term move because our billing infrastructure does not yet support metered components and we are not staffed to build it before Q4\\. Revisit in 2027\\. <b>3\\.3 Three published tiers \\(Starter, Team, Business\\)\\.</b> Closest to v1 minus Pro\\. Rejected because adding a Business tier reintroduces the 'middle confusion' pattern we are trying to remove\\. Two\\-plus\\-Enterprise is structurally cleaner\\. 4\\. Risks & Mitigations <b>4\\.1 Pro customer churn\\.</b> The migration plan extends current pricing for 6–12 months, which we project converts 78% to Starter or Team and 22% to churn\\. Worst\\-case \\(50% churn\\) loses $680K ARR\\. Mitigation: dedicated CSM outreach to the top 100 Pro accounts\\. <b>4\\.2 Sales pipeline impact\\.</b> Removing the published Pro tier may reduce inbound qualification accuracy\\. Mitigation: run a qualification quiz on the pricing page \\(already prototyped in PROD\\-851\\) and route Pro\\-shaped leads directly to AEs\\. <b>4\\.3 Reputational risk\\.</b> Pricing changes draw attention\\. Mitigation: ship a public\\-blog post explaining the change before the page goes live, with a dedicated migration FAQ\\. 5\\. Decisions D\\-1 Adopt 2\\-tier\\-plus\\-Enterprise model\\. Approved 2026\\-04\\-12\\. D\\-2 Pro tier sunset in waves: solo accounts first, multi\\-seat second\\. D\\-3 Migration window: 12 months for solo, 6 months for multi\\-seat\\. D\\-4 Loyalty discount: 20% off list for migrating Pro customers, 12 months\\. D\\-5 Q1 2027 review for usage\\-based tier feasibility \\(links to RFC\\-014A\\)\\. 6\\. Action Items Action Owner Due Status Update pricing page comp table to 19 rows Riley Chen 2026\\-05\\-15 In progress Migration email sequence \\+ drip Marcus Liang 2026\\-05\\-22 Drafted CSM outreach plan for top 100 Pro accounts Devon Park 2026\\-05\\-08 Done Pricing\\-page qualification quiz wiring Asha Vora 2026\\-06\\-02 Not started Public blog post \\+ migration FAQ Riley Chen Pre\\-launch \\-7d Outline Billing infra spike for usage\\-based \\(RFC\\-014A\\) Asha Vora 2026\\-09\\-30 Scoped 7\\. Open Questions Q1\\. Should the loyalty discount apply for 12 or 18 months? Current proposal is 12; Marcus argues 18 to soften the change\\. Q2\\. Do we publish per\\-seat Team pricing or 'starting at $39/seat'? Finance prefers the latter; design prefers the former\\. Q3\\. Enterprise floor — is $24K/year the right minimum? Current AE feedback is the floor is too low and is attracting Team\\-shaped accounts that should self\\-serve\\. Q4\\. Migration FAQ tone — should the post acknowledge that the Pro tier was a strategic miss, or frame the change as a forward\\-looking simplification? Appendix A — Data references All numbers in this synthetic memo are invented and intended to mimic the shape of real internal pricing analyses, not the substance\\. A\\.1 Q1 2026 signup mix: 71% Starter / 7% Pro / 22% Team \\(n = 14,732 signups, synthetic\\) A\\.2 Pricing\\-confusion ticket volume: 412 \\(Q1 2026\\) vs 173 \\(Q1 2025\\), \\+138% YoY A\\.3 Pro tier active customers: 1,184 — of which 1,061 solo, 123 multi\\-seat \\(synthetic\\) A\\.4 Projected ARR impact: \\-$210K \\(months 1–6\\), neutral by month 9, \\+6% baseline by Q4 2026 A\\.5 Competitor pricing\\-tier counts \\(synthetic survey\\): Linear 2, Vercel 2\\+E, Notion 3, Asana 4, Monday 5","headings":[{"level":1,"text":"TL;DR"},{"level":1,"text":"1. Context"},{"level":1,"text":"2. Proposal"},{"level":2,"text":"2.1 Tiers"},{"level":2,"text":"2.2 What happens to Pro customers"},{"level":2,"text":"2.3 Page design changes"},{"level":1,"text":"3. Alternatives Considered"},{"level":1,"text":"4. Risks & Mitigations"},{"level":1,"text":"5. Decisions"},{"level":1,"text":"6. Action Items"},{"level":1,"text":"7. Open Questions"},{"level":1,"text":"Appendix A — Data references"}],"sourceFile":"input.docx","sizeBytes":40519,"wordCount":1043,"lineCount":187,"headingCount":12,"readingMinutes":5};</script>
+<script>const DATA = {"markdown":"RFC\\-014: Pricing Page V2 — Decision Memo\n\n*Synthetic fixture for html\\-anything\\. All names, numbers, customer quotes, deal sizes, and internal projects in this memo are invented\\.*\n\n__Author__\n\nRiley Chen \\(synthetic, Product\\)\n\n__Reviewers__\n\nAsha Vora \\(Eng\\), Marcus Liang \\(GTM\\), Devon Park \\(Finance\\)\n\n__Status__\n\nDecided — implementation kickoff Q2 2026\n\n__Decision date__\n\n2026\\-04\\-12\n\n__Last updated__\n\n2026\\-04\\-22\n\n__Related__\n\nRFC\\-009 \\(free\\-tier kill\\), PROD\\-882 \\(pricing page redesign\\)\n\n# TL;DR\n\nWe are replacing the current 4\\-tier pricing page with a 2\\-tier model \\(Starter, Team\\) plus a contact\\-sales Enterprise track\\. The change is driven by three findings: \\(1\\) the Pro tier captured only 7% of new signups in Q1 but consumed 31% of pricing\\-page time\\-on\\-page, \\(2\\) support tickets tagged 'pricing confusion' rose 2\\.4x year\\-over\\-year, and \\(3\\) every winning competitor in our segment has consolidated to ≤ 3 published tiers\\. Expected impact: \\+18% activation rate on the pricing page, neutral net revenue in 2 quarters, \\+6% by Q4 2026\\.\n\n# 1\\. Context\n\nThe current pricing page \\(v1, shipped 2024\\) presents Free, Starter, Pro, and Team tiers\\. Free was killed in RFC\\-009 but the Pro tier remains — it was originally pitched as the 'power individual' segment between Starter and Team\\.\n\nThree things changed since 2024 that invalidate the original pitch:\n\nFirst, the prosumer segment we expected to fill Pro never showed up\\. Q1 2026 signups split 71% Starter, 7% Pro, 22% Team\\. Pro is a quiet middle that almost no one chooses on first contact\\.\n\nSecond, the support cost of the four\\-tier table is real\\. We logged 412 'pricing confusion' tickets in Q1 2026 versus 173 in Q1 2025\\. The most common confusion: customers picked Pro thinking it included multi\\-seat features \\(it does not\\) and downgraded within 30 days\\.\n\nThird, every competitor with positive growth in our segment ships ≤ 3 published tiers\\. The two that grew fastest \\(Linear, Vercel\\) ship 2 \\+ 'enterprise'\\. The cognitive load argument is now backed by a market signal\\.\n\n*“I picked Pro because it sounded important\\. Then I realised it gave me nothing my coworkers could actually use, and I downgraded the next day\\.” — synthetic customer interview, March 2026*\n\n# 2\\. Proposal\n\nReplace the four\\-tier table with two published tiers plus a contact\\-sales Enterprise option:\n\n## 2\\.1 Tiers\n\nStarter — single user, $19/mo\\. Existing Starter customers grandfathered\\.\n\nTeam — up to 25 seats, $39/seat/mo\\. Existing Team customers see no price change\\.\n\nEnterprise — contact sales\\. SSO, audit log, custom DPA, named support\\.\n\n## 2\\.2 What happens to Pro customers\n\nThere are 1,184 active Pro customers\\. They will be migrated as follows: solo Pro accounts → grandfathered Starter at current Pro price for 12 months, then offered Starter or Team upgrade with a 20% loyalty discount\\. Multi\\-seat Pro accounts \\(these exist accidentally; the tier was never supposed to allow more than one seat\\) → free upgrade to Team at Pro pricing for 6 months\\.\n\n## 2\\.3 Page design changes\n\nThree\\-column layout with the Team column visually emphasised \\(brand orange border, ‘Most popular’ tag\\)\\. Feature comparison table simplified from 47 rows to 19\\. FAQ section reduced from 23 questions to 8, with the four highest\\-traffic ones promoted above the fold\\.\n\n# 3\\. Alternatives Considered\n\n<b>3\\.1 Keep four tiers but rename Pro\\.<\/b> Cheaper to ship, but leaves the cognitive\\-load problem unresolved and the migration risk in place\\. Rejected because the data shows the problem is structural, not naming\\.\n\n<b>3\\.2 Single tier \\+ usage\\-based\\.<\/b> Considered seriously\\. Strong long\\-term direction; wrong short\\-term move because our billing infrastructure does not yet support metered components and we are not staffed to build it before Q4\\. Revisit in 2027\\.\n\n<b>3\\.3 Three published tiers \\(Starter, Team, Business\\)\\.<\/b> Closest to v1 minus Pro\\. Rejected because adding a Business tier reintroduces the 'middle confusion' pattern we are trying to remove\\. Two\\-plus\\-Enterprise is structurally cleaner\\.\n\n# 4\\. Risks & Mitigations\n\n<b>4\\.1 Pro customer churn\\.<\/b> The migration plan extends current pricing for 6–12 months, which we project converts 78% to Starter or Team and 22% to churn\\. Worst\\-case \\(50% churn\\) loses ~$680K ARR\\. Mitigation: dedicated CSM outreach to the top 100 Pro accounts\\.\n\n<b>4\\.2 Sales pipeline impact\\.<\/b> Removing the published Pro tier may reduce inbound qualification accuracy\\. Mitigation: run a qualification quiz on the pricing page \\(already prototyped in PROD\\-851\\) and route Pro\\-shaped leads directly to AEs\\.\n\n<b>4\\.3 Reputational risk\\.<\/b> Pricing changes draw attention\\. Mitigation: ship a public\\-blog post explaining the change before the page goes live, with a dedicated migration FAQ\\.\n\n# 5\\. Decisions\n\n__D\\-1__\n\nAdopt 2\\-tier\\-plus\\-Enterprise model\\. Approved 2026\\-04\\-12\\.\n\n__D\\-2__\n\nPro tier sunset in waves: solo accounts first, multi\\-seat second\\.\n\n__D\\-3__\n\nMigration window: 12 months for solo, 6 months for multi\\-seat\\.\n\n__D\\-4__\n\nLoyalty discount: 20% off list for migrating Pro customers, 12 months\\.\n\n__D\\-5__\n\nQ1 2027 review for usage\\-based tier feasibility \\(links to RFC\\-014A\\)\\.\n\n# 6\\. Action Items\n\n__Action__\n\n__Owner__\n\n__Due__\n\n__Status__\n\nUpdate pricing page comp table to 19 rows\n\nRiley Chen\n\n2026\\-05\\-15\n\nIn progress\n\nMigration email sequence \\+ drip\n\nMarcus Liang\n\n2026\\-05\\-22\n\nDrafted\n\nCSM outreach plan for top 100 Pro accounts\n\nDevon Park\n\n2026\\-05\\-08\n\nDone\n\nPricing\\-page qualification quiz wiring\n\nAsha Vora\n\n2026\\-06\\-02\n\nNot started\n\nPublic blog post \\+ migration FAQ\n\nRiley Chen\n\nPre\\-launch \\-7d\n\nOutline\n\nBilling infra spike for usage\\-based \\(RFC\\-014A\\)\n\nAsha Vora\n\n2026\\-09\\-30\n\nScoped\n\n# 7\\. Open Questions\n\nQ1\\. Should the loyalty discount apply for 12 or 18 months? Current proposal is 12; Marcus argues 18 to soften the change\\.\n\nQ2\\. Do we publish per\\-seat Team pricing or 'starting at $39/seat'? Finance prefers the latter; design prefers the former\\.\n\nQ3\\. Enterprise floor — is $24K/year the right minimum? Current AE feedback is the floor is too low and is attracting Team\\-shaped accounts that should self\\-serve\\.\n\nQ4\\. Migration FAQ tone — should the post acknowledge that the Pro tier was a strategic miss, or frame the change as a forward\\-looking simplification?\n\n# Appendix A — Data references\n\n*All numbers in this synthetic memo are invented and intended to mimic the shape of real internal pricing analyses, not the substance\\.*\n\nA\\.1 Q1 2026 signup mix: 71% Starter / 7% Pro / 22% Team \\(n = 14,732 signups, synthetic\\)\n\nA\\.2 Pricing\\-confusion ticket volume: 412 \\(Q1 2026\\) vs 173 \\(Q1 2025\\), \\+138% YoY\n\nA\\.3 Pro tier active customers: 1,184 — of which 1,061 solo, 123 multi\\-seat \\(synthetic\\)\n\nA\\.4 Projected ARR impact: \\-$210K \\(months 1–6\\), neutral by month 9, \\+6% baseline by Q4 2026\n\nA\\.5 Competitor pricing\\-tier counts \\(synthetic survey\\): Linear 2, Vercel 2\\+E, Notion 3, Asana 4, Monday 5\n\n","plainText":"RFC\\-014: Pricing Page V2 — Decision Memo Synthetic fixture for html\\-anything\\. All names, numbers, customer quotes, deal sizes, and internal projects in this memo are invented\\. Author Riley Chen \\(synthetic, Product\\) Reviewers Asha Vora \\(Eng\\), Marcus Liang \\(GTM\\), Devon Park \\(Finance\\) Status Decided — implementation kickoff Q2 2026 Decision date 2026\\-04\\-12 Last updated 2026\\-04\\-22 Related RFC\\-009 \\(free\\-tier kill\\), PROD\\-882 \\(pricing page redesign\\) TL;DR We are replacing the current 4\\-tier pricing page with a 2\\-tier model \\(Starter, Team\\) plus a contact\\-sales Enterprise track\\. The change is driven by three findings: \\(1\\) the Pro tier captured only 7% of new signups in Q1 but consumed 31% of pricing\\-page time\\-on\\-page, \\(2\\) support tickets tagged 'pricing confusion' rose 2\\.4x year\\-over\\-year, and \\(3\\) every winning competitor in our segment has consolidated to ≤ 3 published tiers\\. Expected impact: \\+18% activation rate on the pricing page, neutral net revenue in 2 quarters, \\+6% by Q4 2026\\. 1\\. Context The current pricing page \\(v1, shipped 2024\\) presents Free, Starter, Pro, and Team tiers\\. Free was killed in RFC\\-009 but the Pro tier remains — it was originally pitched as the 'power individual' segment between Starter and Team\\. Three things changed since 2024 that invalidate the original pitch: First, the prosumer segment we expected to fill Pro never showed up\\. Q1 2026 signups split 71% Starter, 7% Pro, 22% Team\\. Pro is a quiet middle that almost no one chooses on first contact\\. Second, the support cost of the four\\-tier table is real\\. We logged 412 'pricing confusion' tickets in Q1 2026 versus 173 in Q1 2025\\. The most common confusion: customers picked Pro thinking it included multi\\-seat features \\(it does not\\) and downgraded within 30 days\\. Third, every competitor with positive growth in our segment ships ≤ 3 published tiers\\. The two that grew fastest \\(Linear, Vercel\\) ship 2 \\+ 'enterprise'\\. The cognitive load argument is now backed by a market signal\\. “I picked Pro because it sounded important\\. Then I realised it gave me nothing my coworkers could actually use, and I downgraded the next day\\.” — synthetic customer interview, March 2026 2\\. Proposal Replace the four\\-tier table with two published tiers plus a contact\\-sales Enterprise option: 2\\.1 Tiers Starter — single user, $19/mo\\. Existing Starter customers grandfathered\\. Team — up to 25 seats, $39/seat/mo\\. Existing Team customers see no price change\\. Enterprise — contact sales\\. SSO, audit log, custom DPA, named support\\. 2\\.2 What happens to Pro customers There are 1,184 active Pro customers\\. They will be migrated as follows: solo Pro accounts → grandfathered Starter at current Pro price for 12 months, then offered Starter or Team upgrade with a 20% loyalty discount\\. Multi\\-seat Pro accounts \\(these exist accidentally; the tier was never supposed to allow more than one seat\\) → free upgrade to Team at Pro pricing for 6 months\\. 2\\.3 Page design changes Three\\-column layout with the Team column visually emphasised \\(brand orange border, ‘Most popular’ tag\\)\\. Feature comparison table simplified from 47 rows to 19\\. FAQ section reduced from 23 questions to 8, with the four highest\\-traffic ones promoted above the fold\\. 3\\. Alternatives Considered <b>3\\.1 Keep four tiers but rename Pro\\.<\/b> Cheaper to ship, but leaves the cognitive\\-load problem unresolved and the migration risk in place\\. Rejected because the data shows the problem is structural, not naming\\. <b>3\\.2 Single tier \\+ usage\\-based\\.<\/b> Considered seriously\\. Strong long\\-term direction; wrong short\\-term move because our billing infrastructure does not yet support metered components and we are not staffed to build it before Q4\\. Revisit in 2027\\. <b>3\\.3 Three published tiers \\(Starter, Team, Business\\)\\.<\/b> Closest to v1 minus Pro\\. Rejected because adding a Business tier reintroduces the 'middle confusion' pattern we are trying to remove\\. Two\\-plus\\-Enterprise is structurally cleaner\\. 4\\. Risks & Mitigations <b>4\\.1 Pro customer churn\\.<\/b> The migration plan extends current pricing for 6–12 months, which we project converts 78% to Starter or Team and 22% to churn\\. Worst\\-case \\(50% churn\\) loses $680K ARR\\. Mitigation: dedicated CSM outreach to the top 100 Pro accounts\\. <b>4\\.2 Sales pipeline impact\\.<\/b> Removing the published Pro tier may reduce inbound qualification accuracy\\. Mitigation: run a qualification quiz on the pricing page \\(already prototyped in PROD\\-851\\) and route Pro\\-shaped leads directly to AEs\\. <b>4\\.3 Reputational risk\\.<\/b> Pricing changes draw attention\\. Mitigation: ship a public\\-blog post explaining the change before the page goes live, with a dedicated migration FAQ\\. 5\\. Decisions D\\-1 Adopt 2\\-tier\\-plus\\-Enterprise model\\. Approved 2026\\-04\\-12\\. D\\-2 Pro tier sunset in waves: solo accounts first, multi\\-seat second\\. D\\-3 Migration window: 12 months for solo, 6 months for multi\\-seat\\. D\\-4 Loyalty discount: 20% off list for migrating Pro customers, 12 months\\. D\\-5 Q1 2027 review for usage\\-based tier feasibility \\(links to RFC\\-014A\\)\\. 6\\. Action Items Action Owner Due Status Update pricing page comp table to 19 rows Riley Chen 2026\\-05\\-15 In progress Migration email sequence \\+ drip Marcus Liang 2026\\-05\\-22 Drafted CSM outreach plan for top 100 Pro accounts Devon Park 2026\\-05\\-08 Done Pricing\\-page qualification quiz wiring Asha Vora 2026\\-06\\-02 Not started Public blog post \\+ migration FAQ Riley Chen Pre\\-launch \\-7d Outline Billing infra spike for usage\\-based \\(RFC\\-014A\\) Asha Vora 2026\\-09\\-30 Scoped 7\\. Open Questions Q1\\. Should the loyalty discount apply for 12 or 18 months? Current proposal is 12; Marcus argues 18 to soften the change\\. Q2\\. Do we publish per\\-seat Team pricing or 'starting at $39/seat'? Finance prefers the latter; design prefers the former\\. Q3\\. Enterprise floor — is $24K/year the right minimum? Current AE feedback is the floor is too low and is attracting Team\\-shaped accounts that should self\\-serve\\. Q4\\. Migration FAQ tone — should the post acknowledge that the Pro tier was a strategic miss, or frame the change as a forward\\-looking simplification? Appendix A — Data references All numbers in this synthetic memo are invented and intended to mimic the shape of real internal pricing analyses, not the substance\\. A\\.1 Q1 2026 signup mix: 71% Starter / 7% Pro / 22% Team \\(n = 14,732 signups, synthetic\\) A\\.2 Pricing\\-confusion ticket volume: 412 \\(Q1 2026\\) vs 173 \\(Q1 2025\\), \\+138% YoY A\\.3 Pro tier active customers: 1,184 — of which 1,061 solo, 123 multi\\-seat \\(synthetic\\) A\\.4 Projected ARR impact: \\-$210K \\(months 1–6\\), neutral by month 9, \\+6% baseline by Q4 2026 A\\.5 Competitor pricing\\-tier counts \\(synthetic survey\\): Linear 2, Vercel 2\\+E, Notion 3, Asana 4, Monday 5","headings":[{"level":1,"text":"TL;DR"},{"level":1,"text":"1. Context"},{"level":1,"text":"2. Proposal"},{"level":2,"text":"2.1 Tiers"},{"level":2,"text":"2.2 What happens to Pro customers"},{"level":2,"text":"2.3 Page design changes"},{"level":1,"text":"3. Alternatives Considered"},{"level":1,"text":"4. Risks & Mitigations"},{"level":1,"text":"5. Decisions"},{"level":1,"text":"6. Action Items"},{"level":1,"text":"7. Open Questions"},{"level":1,"text":"Appendix A — Data references"}],"sourceFile":"input.docx","sizeBytes":40519,"wordCount":1043,"lineCount":187,"headingCount":12,"readingMinutes":5};</script>
 <style>
 :root {
-  --primary: #a03b00;
-  --primary-container: #c94c00;
-  --primary-fixed: #ffdbcd;
-  --primary-fixed-dim: #ffb597;
-  --on-primary: #ffffff;
-  --accent-glow: #E8400D;
-  --secondary: #d5baff;
-  --secondary-container: #7b40e0;
-  --tertiary: #4d44e3;
-  --accent-cyan: #00D4FF;
-  --bg: #fff8f6;
-  --surface: #fff8f6;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #fbf2ef;
-  --surface-container: #f5ece9;
-  --surface-container-high: #efe6e3;
-  --fg-1: #1e1b19;
-  --fg-2: #594138;
-  --fg-muted: #8d7166;
-  --border: rgba(0,0,0,0.06);
-  --border-strong: rgba(0,0,0,0.12);
-  --outline-variant: #e1bfb2;
-  --green: #10b981;
-  --blue: #3b82f6;
-  --yellow: #f59e0b;
-  --red: #ef4444;
-  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
-  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
-  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
-  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
-  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
-  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
-  --shadow-sm: 0 1px 2px rgba(30,27,25,0.04);
-  --shadow-md: 0 4px 12px rgba(30,27,25,0.08);
-  --shadow-lg: 0 8px 24px rgba(30,27,25,0.12);
-  --shadow-accent: 0 8px 24px rgba(160,59,0,0.15);
-  --gradient-primary: linear-gradient(135deg, #a03b00 0%, #c94c00 100%);
-  --gradient-hero: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
-  --gradient-text: linear-gradient(135deg, #a03b00 0%, #7b40e0 100%);
-  --rail-width: 240px;
-  --body-max: 720px;
+  --parchment: #f5f4ed;
+  --ivory: #faf9f5;
+  --sand: #e8e6dc;
+  --border: #e8e6dc;
+  --border-soft: #e5e3d8;
+  --brand: #1B365D;
+  --brand-light: #2D5A8A;
+  --brand-tint: #EEF2F7;
+  --brand-tint-strong: #E4ECF5;
+  --near-black: #141413;
+  --dark-warm: #3d3d3a;
+  --olive: #504e49;
+  --stone: #6b6a64;
+  --reader-scale: 1;
+  --reader-leading: 1.54;
+  --serif: Charter, Georgia, Palatino, "Times New Roman", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", serif;
+  --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "SF Mono", Menlo, Consolas, "JetBrains Mono", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #060B18;
-    --surface: #0B1426;
-    --surface-container-lowest: #101D35;
-    --surface-container-low: #101D35;
-    --surface-container: #162544;
-    --surface-container-high: #1c2d52;
-    --fg-1: #F8FAFC;
-    --fg-2: #CBD5E1;
-    --fg-muted: #64748B;
-    --border: rgba(255,255,255,0.08);
-    --border-strong: rgba(255,255,255,0.14);
-    --primary: #FF6B35;
-    --accent-glow: #00D4FF;
-    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
-    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
-    --outline-variant: #2a3a5c;
-  }
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+*, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-
 body {
-  font-family: var(--font-body);
-  background: var(--bg);
-  color: var(--fg-1);
-  font-size: 15px;
-  line-height: 1.6;
+  margin: 0;
+  min-height: 100vh;
+  background:
+    linear-gradient(90deg, transparent 0, transparent 23px, #e8e6dc 24px, transparent 25px),
+    linear-gradient(var(--parchment), var(--parchment));
+  background-size: 24px 24px, auto;
+  color: var(--near-black);
+  font-family: var(--serif);
   -webkit-font-smoothing: antialiased;
 }
-
-/* ── SEARCH BAR ── */
-.search-bar-wrapper {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--surface-container-low);
-  border-bottom: 1px solid var(--border-strong);
-  padding: var(--space-sm) var(--space-lg);
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-}
-
-.search-bar-wrapper svg { color: var(--fg-muted); flex-shrink: 0; }
-
-#search-input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--fg-1);
-  caret-color: var(--primary);
-}
-#search-input::placeholder { color: var(--fg-muted); }
-
-.search-count {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--fg-muted);
-  white-space: nowrap;
-}
-
-.mode-toggle {
-  display: flex;
-  gap: var(--space-xs);
-  background: var(--surface-container);
-  border-radius: var(--radius-pill);
-  padding: var(--space-xs);
-  flex-shrink: 0;
-}
-
-.mode-btn {
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 500;
-  padding: 4px 12px;
-  border-radius: var(--radius-pill);
-  border: none;
-  cursor: pointer;
-  background: transparent;
-  color: var(--fg-muted);
-  transition: all 160ms ease;
-}
-.mode-btn.active {
-  background: var(--primary);
-  color: var(--on-primary);
-  box-shadow: var(--shadow-sm);
-}
-
-/* ── DOCUMENT SHELL ── */
-.document-shell {
-  display: flex;
-  min-height: calc(100vh - 48px);
-}
-
-/* ── READER RAIL ── */
-.reader-rail {
-  width: var(--rail-width);
-  flex-shrink: 0;
-  position: sticky;
-  top: 48px;
-  height: calc(100vh - 48px);
-  overflow-y: auto;
-  border-right: 1px solid var(--border);
-  padding: var(--space-2xl) 0;
-  background: var(--surface-container-lowest);
-  display: none;
-}
-
-@media (min-width: 900px) {
-  .reader-rail { display: block; }
-}
-
-.rail-label {
-  font-family: var(--font-headline);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  padding: 0 var(--space-lg) var(--space-sm);
-}
-
-.rail-nav-item {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-sm);
-  padding: var(--space-sm) var(--space-lg);
-  font-size: 13px;
-  color: var(--fg-2);
-  text-decoration: none;
-  border-left: 2px solid transparent;
-  transition: all 140ms ease;
-  cursor: pointer;
-  line-height: 1.4;
-}
-.rail-nav-item:hover { color: var(--fg-1); background: var(--surface-container-low); }
-.rail-nav-item.active {
-  color: var(--primary);
-  border-left-color: var(--primary);
-  background: var(--surface-container-low);
-  font-weight: 500;
-}
-.rail-nav-item .rail-level2 { padding-left: var(--space-lg); }
-.rail-level-indicator {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--fg-muted);
-  margin-top: 2px;
-  flex-shrink: 0;
-}
-
-/* ── BODY SHEET ── */
-.body-sheet {
-  flex: 1;
-  min-width: 0;
-  padding: 0 var(--space-lg);
-  max-width: 100%;
-}
-
-@media (min-width: 900px) {
-  .body-sheet { padding: 0 var(--space-4xl); }
-}
-
-/* ── COVER ── */
-.cover {
-  padding: var(--space-4xl) 0 var(--space-3xl);
-  max-width: var(--body-max);
-  animation: fadeUp 400ms ease both;
-}
-
-.doc-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-lg);
-  flex-wrap: wrap;
-}
-
-.eyebrow-chip {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 10px;
-  border-radius: var(--radius-pill);
-  background: var(--surface-container);
-  color: var(--fg-muted);
-  letter-spacing: 0.03em;
-}
-
-.eyebrow-chip.status-decided {
-  background: rgba(16,185,129,0.15);
-  color: var(--green);
-}
-
-.eyebrow-chip.rfc-id {
-  background: var(--primary-fixed);
-  color: var(--primary);
-}
-
-.doc-title {
-  font-family: var(--font-headline);
-  font-size: clamp(22px, 4vw, 34px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--fg-1);
-  line-height: 1.2;
-  margin-bottom: var(--space-xl);
-}
-
-/* ── STATUS BLOCK ── */
-.status-block {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: var(--space-md);
-  padding: var(--space-lg);
-  background: var(--surface-container-low);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-md);
-  margin-bottom: var(--space-2xl);
-}
-
-.status-kv { display: flex; flex-direction: column; gap: 2px; }
-.status-key {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  font-family: var(--font-headline);
-}
-.status-val {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--fg-1);
-  font-family: var(--font-body);
-}
-.status-val.mono { font-family: var(--font-mono); font-size: 12px; }
-
-/* ── MOBILE TOC DROPDOWN ── */
-.mobile-toc {
-  display: block;
-  margin-bottom: var(--space-2xl);
-}
-@media (min-width: 900px) {
-  .mobile-toc { display: none; }
-}
-.mobile-toc select {
-  width: 100%;
-  padding: var(--space-sm) var(--space-md);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm);
-  background: var(--surface-container-low);
-  color: var(--fg-1);
-  font-family: var(--font-body);
-  font-size: 14px;
-  cursor: pointer;
-}
-
-/* ── INSIGHT LAYER ── */
-.insight-layer { max-width: var(--body-max); }
-
-.section-label {
-  font-family: var(--font-headline);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  margin-bottom: var(--space-md);
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-}
-.section-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border-strong);
-}
-
-/* ── TL;DR CARD ── */
-.tldr-card {
-  background: var(--surface-container-low);
-  border: 1px solid var(--border-strong);
-  border-left: 3px solid var(--primary);
-  border-radius: var(--radius-md);
-  padding: var(--space-xl);
-  margin-bottom: var(--space-3xl);
-}
-.tldr-card h3 {
-  font-family: var(--font-headline);
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--primary);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-bottom: var(--space-md);
-}
-.tldr-observations { display: flex; flex-direction: column; gap: var(--space-md); }
-.tldr-obs {
-  display: flex;
-  gap: var(--space-md);
-  font-size: 14.5px;
-  line-height: 1.55;
-  color: var(--fg-2);
-}
-.tldr-obs-num {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--primary);
-  background: var(--primary-fixed);
-  border-radius: var(--radius-pill);
-  min-width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-/* ── DECISION CARDS ── */
-.decisions-grid {
-  display: grid;
-  gap: var(--space-md);
-  margin-bottom: var(--space-3xl);
-}
-
-.decision-card {
-  background: var(--surface-container-lowest);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-md);
-  padding: var(--space-lg);
-  display: flex;
-  gap: var(--space-md);
-  align-items: flex-start;
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow 160ms ease;
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
-}
-.decision-card:hover { box-shadow: var(--shadow-md); }
-
-.decision-id {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--on-primary);
-  background: var(--primary);
-  border-radius: var(--radius-sm);
-  padding: 3px 8px;
-  flex-shrink: 0;
-  white-space: nowrap;
-  margin-top: 2px;
-}
-
-.decision-body { flex: 1; }
-.decision-headline {
-  font-family: var(--font-headline);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--fg-1);
-  margin-bottom: var(--space-xs);
-  letter-spacing: -0.01em;
-}
-.decision-desc {
-  font-size: 13px;
-  color: var(--fg-2);
-  line-height: 1.5;
-}
-.decision-link {
-  font-size: 11px;
-  color: var(--primary);
-  font-weight: 500;
-  margin-top: var(--space-xs);
-  display: inline-block;
-}
-
-/* ── OPEN QUESTIONS ── */
-.open-questions-callout {
-  background: rgba(245,158,11,0.08);
-  border: 1px solid rgba(245,158,11,0.25);
-  border-left: 3px solid var(--yellow);
-  border-radius: var(--radius-md);
-  padding: var(--space-xl);
-  margin-bottom: var(--space-3xl);
-}
-.callout-title {
-  font-family: var(--font-headline);
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--yellow);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  margin-bottom: var(--space-md);
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-}
-.oq-list { display: flex; flex-direction: column; gap: var(--space-sm); }
-.oq-item {
-  font-size: 13.5px;
-  color: var(--fg-2);
-  line-height: 1.5;
-  padding-left: var(--space-md);
-  border-left: 2px solid var(--outline-variant);
-}
-
-/* ── ACTION ITEMS TABLE ── */
-.action-table-wrapper {
-  overflow-x: auto;
-  margin-bottom: var(--space-3xl);
-}
-.action-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13.5px;
-}
-.action-table th {
-  font-family: var(--font-headline);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  background: var(--surface-container);
-  padding: var(--space-sm) var(--space-md);
-  text-align: left;
-  border-bottom: 1px solid var(--border-strong);
-  cursor: pointer;
-  white-space: nowrap;
-  user-select: none;
-}
-.action-table th:hover { color: var(--fg-1); }
-.action-table th .sort-arrow { margin-left: 4px; opacity: 0.4; }
-.action-table th.sorted .sort-arrow { opacity: 1; color: var(--primary); }
-.action-table td {
-  padding: var(--space-sm) var(--space-md);
-  border-bottom: 1px solid var(--border);
-  color: var(--fg-2);
-  vertical-align: top;
-}
-.action-table tr:hover td { background: var(--surface-container-low); }
-.action-table td:first-child {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--fg-muted);
-  white-space: nowrap;
-}
-.owner-chip {
-  display: inline-flex;
-  align-items: center;
-  background: var(--surface-container);
-  border-radius: var(--radius-pill);
-  padding: 2px 8px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--fg-2);
-  white-space: nowrap;
-}
-.due-chip {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--fg-muted);
-  white-space: nowrap;
-}
-
-/* ── PULL QUOTES ── */
-.pull-quotes {
-  margin-bottom: var(--space-3xl);
-  display: grid;
-  gap: var(--space-md);
-}
-@media (min-width: 640px) {
-  .pull-quotes { grid-template-columns: 1fr 1fr; }
-}
-
-.pull-quote {
-  border-left: 3px solid var(--secondary-container);
-  background: var(--surface-container-low);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  padding: var(--space-lg);
-  font-size: 14px;
-  font-style: italic;
-  color: var(--fg-2);
-  line-height: 1.6;
-  position: relative;
-}
-.pull-quote::before {
-  content: '\201C';
-  font-size: 36px;
-  line-height: 1;
-  color: var(--secondary-container);
-  opacity: 0.5;
-  position: absolute;
-  top: var(--space-sm);
-  left: var(--space-sm);
-}
-.pull-quote-text { padding-left: var(--space-xl); }
-.pull-quote-source {
-  font-size: 11px;
-  font-style: normal;
-  color: var(--fg-muted);
-  margin-top: var(--space-sm);
-  font-family: var(--font-mono);
-  padding-left: var(--space-xl);
-}
-
-/* ── KEY TERMS ── */
-.key-terms {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-3xl);
-}
-.term-chip {
-  font-size: 12px;
-  font-weight: 500;
-  padding: var(--space-xs) var(--space-md);
-  border-radius: var(--radius-pill);
-  background: var(--surface-container);
-  color: var(--fg-2);
-  border: 1px solid var(--border-strong);
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-}
-.term-chip .chip-label { font-weight: 600; color: var(--fg-1); }
-.term-chip .chip-type {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--fg-muted);
-}
-
-/* ── FULL READING MODE ── */
-.full-reading-mode { max-width: var(--body-max); padding-bottom: var(--space-5xl); display: none; }
-.full-reading-mode.visible { display: block; }
-.insight-layer.hidden { display: none; }
-
-/* ── RENDERED MARKDOWN ── */
-.doc-body { animation: fadeUp 300ms ease both; }
-
-.doc-body h1 {
-  font-family: var(--font-headline);
-  font-size: clamp(18px, 3vw, 24px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--fg-1);
-  margin: var(--space-4xl) 0 var(--space-lg);
-  padding-top: var(--space-2xl);
-  border-top: 1px solid var(--border-strong);
-  line-height: 1.25;
-}
-.doc-body h1:first-child { border-top: none; margin-top: var(--space-lg); }
-
-.doc-body h2 {
-  font-family: var(--font-headline);
-  font-size: clamp(15px, 2.5vw, 18px);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--fg-1);
-  margin: var(--space-3xl) 0 var(--space-md);
-  line-height: 1.3;
-}
-
-.doc-body h3 {
-  font-family: var(--font-headline);
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--fg-2);
-  margin: var(--space-2xl) 0 var(--space-sm);
-}
-
-.doc-body p {
-  font-size: 15px;
-  line-height: 1.7;
-  color: var(--fg-2);
-  margin-bottom: var(--space-lg);
-}
-
-.doc-body ul, .doc-body ol {
-  margin: 0 0 var(--space-lg) var(--space-xl);
-  color: var(--fg-2);
-}
-.doc-body li {
-  font-size: 14.5px;
-  line-height: 1.65;
-  margin-bottom: var(--space-xs);
-}
-
-.doc-body blockquote {
-  border-left: 3px solid var(--primary);
-  background: var(--surface-container-low);
-  padding: var(--space-md) var(--space-lg);
-  margin: var(--space-xl) 0;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  color: var(--fg-2);
-  font-style: italic;
-  font-size: 14.5px;
-}
-
-.doc-body strong { color: var(--fg-1); font-weight: 600; }
-.doc-body em { color: var(--fg-2); }
-
-.doc-body code {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  background: var(--surface-container);
-  padding: 1px 5px;
-  border-radius: 4px;
-  color: var(--primary);
-}
-
-/* ── TABLES ── */
-.doc-body table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13.5px;
-  margin-bottom: var(--space-xl);
-  overflow-x: auto;
-  display: block;
-}
-.doc-body table th {
-  font-family: var(--font-headline);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  background: var(--surface-container);
-  padding: var(--space-sm) var(--space-md);
-  text-align: left;
-  border-bottom: 1px solid var(--border-strong);
-}
-.doc-body table td {
-  padding: var(--space-sm) var(--space-md);
-  border-bottom: 1px solid var(--border);
-  color: var(--fg-2);
-}
-.doc-body table tr:hover td { background: var(--surface-container-low); }
-
-/* ── SEARCH HIGHLIGHT ── */
-mark.search-hit {
-  background: rgba(245,158,11,0.35);
-  color: inherit;
-  border-radius: 2px;
-  padding: 0 1px;
-}
-mark.search-hit.primary-hit {
-  background: rgba(245,158,11,0.6);
-  outline: 1px solid var(--yellow);
-}
-
-/* ── COPY BUTTON ── */
-.copy-btn {
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 500;
-  padding: 5px 12px;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border-strong);
-  background: var(--surface-container-low);
-  color: var(--fg-2);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-xs);
-  transition: all 140ms ease;
-}
-.copy-btn:hover { background: var(--surface-container); color: var(--fg-1); }
-.copy-btn.copied {
-  background: rgba(16,185,129,0.12);
-  color: var(--green);
-  border-color: rgba(16,185,129,0.3);
-}
-
-/* ── FOOTER ── */
-.doc-footer {
-  max-width: var(--body-max);
-  padding: var(--space-3xl) 0 var(--space-5xl);
-  border-top: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-lg);
-  flex-wrap: wrap;
-}
-.footer-note {
-  font-size: 11.5px;
-  color: var(--fg-muted);
-  font-style: italic;
-  line-height: 1.5;
-}
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.stagger-1 { animation-delay: 60ms; }
-.stagger-2 { animation-delay: 120ms; }
-.stagger-3 { animation-delay: 180ms; }
-.stagger-4 { animation-delay: 240ms; }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0ms !important; transition-duration: 0ms !important; }
-}
-
-/* ── PRINT ── */
-@media print {
-  .search-bar-wrapper, .reader-rail, .mode-toggle, .copy-btn { display: none !important; }
-  .body-sheet { padding: 0; }
-  .document-shell { display: block; }
-  .full-reading-mode { display: block !important; }
-  .insight-layer { display: block !important; }
-}
-
-/* ── SCROLLBAR ── */
-.reader-rail::-webkit-scrollbar { width: 4px; }
-.reader-rail::-webkit-scrollbar-track { background: transparent; }
-.reader-rail::-webkit-scrollbar-thumb { background: var(--outline-variant); border-radius: 2px; }
-
-/* ── CAVEAT NOTE ── */
-.caveat-box {
-  background: rgba(59,130,246,0.07);
-  border: 1px solid rgba(59,130,246,0.2);
-  border-radius: var(--radius-md);
-  padding: var(--space-md) var(--space-lg);
-  font-size: 12.5px;
-  color: var(--fg-muted);
-  margin-bottom: var(--space-2xl);
-  line-height: 1.5;
-}
-.caveat-box strong { color: var(--blue); font-weight: 600; }
-</style>
-<!-- html-anything example style skin:start -->
-
-<style id="html-anything-example-style-skin">
-html[data-ha-style] {
-  --ha-style-accent: var(--primary, #a03b00);
-  --ha-style-accent-2: var(--secondary-container, #7b40e0);
-  --ha-style-badge-bg: rgba(255,255,255,.78);
-  --ha-style-badge-fg: var(--fg-1, #1e1b19);
-}
-html[data-ha-style] body {
-  position: relative;
-  background-attachment: fixed;
-}
-html[data-ha-style] body::before {
-  position: fixed;
-  z-index: 9999;
-  top: 12px;
-  right: 12px;
-  padding: 7px 10px;
-  border: 1px solid color-mix(in srgb, var(--ha-style-accent) 26%, transparent);
-  border-radius: 999px;
-  background: var(--ha-style-badge-bg);
-  color: var(--ha-style-badge-fg);
-  box-shadow: 0 6px 24px rgba(0,0,0,.10);
-  font: 700 10px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  backdrop-filter: blur(16px);
-}
-html[data-ha-style] .hero,
-html[data-ha-style] header.hero,
-html[data-ha-style] .top,
-html[data-ha-style] .header {
-  position: relative;
-}
-html[data-ha-style] .hero::before,
-html[data-ha-style] header.hero::before {
+body::before {
   content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(900px 480px at 50% -160px, #faf9f5 0, transparent 70%);
+  opacity: 0.82;
+}
+a { color: var(--brand); }
+button, input { font: inherit; }
+
+.kami-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--sand);
+  z-index: 30;
+}
+.kami-progress span {
   display: block;
-  width: 64px;
-  height: 6px;
-  margin-bottom: 18px;
-  border-radius: 999px;
-  background: var(--ha-style-accent);
+  width: 0%;
+  height: 100%;
+  background: var(--brand);
+  transition: width 120ms linear;
 }
-
-html[data-ha-style="teaching"] {
-  --ha-style-accent: #0f766e;
-  --ha-style-accent-2: #f59e0b;
-  --primary: #0f766e;
-  --primary-container: #115e59;
-  --primary-fixed: #ccfbf1;
-  --secondary-container: #f59e0b;
-  --bg: #f6fbfb;
-  --surface: #f6fbfb;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #edf7f5;
-  --surface-container: #e5f1ee;
-  --surface-container-high: #d8e8e4;
-  --fg-1: #10201f;
-  --fg-2: #304c49;
-  --fg-muted: #647b78;
-  --border: rgba(15,118,110,.14);
-  --gradient-hero: linear-gradient(135deg, #0f766e 0%, #f59e0b 100%);
-  --gradient-text: linear-gradient(135deg, #0f766e 0%, #f59e0b 100%);
+.kami-reader {
+  position: relative;
+  z-index: 1;
+  width: min(1480px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 40px 0 72px;
 }
-html[data-ha-style="teaching"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    linear-gradient(rgba(15,118,110,.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15,118,110,.07) 1px, transparent 1px);
-  background-size: 32px 32px;
+.kami-cover {
+  min-height: 68vh;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(280px, 0.42fr);
+  gap: clamp(32px, 7vw, 104px);
+  align-items: end;
+  padding: clamp(48px, 8vw, 112px) 0 44px;
+  border-bottom: 1px solid var(--border);
 }
-html[data-ha-style="teaching"] body::before { content: "teaching"; }
-
-html[data-ha-style="relationship"] {
-  --ha-style-accent: #be3455;
-  --ha-style-accent-2: #317b93;
-  --primary: #be3455;
-  --primary-container: #a52d4b;
-  --primary-fixed: #ffe1e8;
-  --secondary-container: #317b93;
-  --bg: #fff7f8;
-  --surface: #fff7f8;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #fff0f3;
-  --surface-container: #f8e7eb;
-  --surface-container-high: #efdde3;
-  --fg-1: #28181c;
-  --fg-2: #5f3e48;
-  --fg-muted: #8d6b75;
-  --border: rgba(190,52,85,.14);
-  --rose: #e25b74;
-  --blue: #4f95a8;
-  --gradient-hero: linear-gradient(135deg, #be3455 0%, #317b93 100%);
-  --gradient-text: linear-gradient(135deg, #be3455 0%, #317b93 100%);
+.cover-kicker,
+.rail-label,
+.meta-label,
+.control-label,
+.source-label {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--brand);
 }
-html[data-ha-style="relationship"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    linear-gradient(120deg, rgba(190,52,85,.08), transparent 36%),
-    linear-gradient(300deg, rgba(49,123,147,.08), transparent 40%);
+.kami-cover h1 {
+  max-width: 920px;
+  margin: 18px 0 22px;
+  font-size: clamp(44px, 8.2vw, 116px);
+  line-height: 1.03;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+  color: var(--near-black);
 }
-html[data-ha-style="relationship"] body::before { content: "relationship"; }
-
-html[data-ha-style="timeline-story"] {
-  --ha-style-accent: #9a4b14;
-  --ha-style-accent-2: #2f6f73;
-  --primary: #9a4b14;
-  --primary-container: #7a3b10;
-  --primary-fixed: #ffe8cf;
-  --secondary-container: #2f6f73;
-  --bg: #fbf8f1;
-  --surface: #fbf8f1;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f4ecdf;
-  --surface-container: #eee3d3;
-  --surface-container-high: #e4d7c4;
-  --fg-1: #241b12;
-  --fg-2: #5c4b3d;
-  --fg-muted: #8a7968;
-  --border: rgba(154,75,20,.16);
-  --gradient-hero: linear-gradient(135deg, #9a4b14 0%, #2f6f73 100%);
-  --gradient-text: linear-gradient(135deg, #9a4b14 0%, #2f6f73 100%);
+.cover-lede {
+  max-width: 770px;
+  margin: 0;
+  color: var(--dark-warm);
+  font-size: clamp(19px, 2.2vw, 28px);
+  line-height: 1.38;
 }
-html[data-ha-style="timeline-story"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    linear-gradient(90deg, transparent 0 calc(50% - 1px), rgba(154,75,20,.16) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)),
-    radial-gradient(circle at 50% 72px, rgba(154,75,20,.20) 0 4px, transparent 5px);
-  background-size: 100% 100%, 100% 96px;
+.cover-aside {
+  border-left: 1px solid var(--border);
+  padding-left: 28px;
+  color: var(--olive);
 }
-html[data-ha-style="timeline-story"] body::before { content: "timeline story"; }
-html[data-ha-style="timeline-story"] .hero::before,
-html[data-ha-style="timeline-story"] header.hero::before {
-  width: 8px;
-  height: 72px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, var(--ha-style-accent), var(--ha-style-accent-2));
+.cover-aside p {
+  margin: 8px 0 20px;
+  line-height: 1.5;
+  font-size: 15px;
 }
-
-html[data-ha-style="map-atlas"] {
-  --ha-style-accent: #17695a;
-  --ha-style-accent-2: #2f66a8;
-  --primary: #17695a;
-  --primary-container: #115346;
-  --primary-fixed: #daf5ec;
-  --secondary-container: #2f66a8;
-  --bg: #f4faf7;
-  --surface: #f4faf7;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #eaf4ef;
-  --surface-container: #e0eee8;
-  --surface-container-high: #d4e6de;
-  --fg-1: #10221d;
-  --fg-2: #365149;
-  --fg-muted: #6e837b;
-  --border: rgba(23,105,90,.16);
-  --gradient-hero: linear-gradient(135deg, #17695a 0%, #2f66a8 100%);
-  --gradient-text: linear-gradient(135deg, #17695a 0%, #2f66a8 100%);
+.meta-grid {
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--border);
+  background: var(--border);
 }
-html[data-ha-style="map-atlas"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    repeating-linear-gradient(24deg, rgba(23,105,90,.09) 0 1px, transparent 1px 34px),
-    repeating-linear-gradient(116deg, rgba(47,102,168,.08) 0 1px, transparent 1px 42px);
+.meta-cell {
+  background: var(--ivory);
+  padding: 14px 16px;
 }
-html[data-ha-style="map-atlas"] body::before { content: "map atlas"; }
-html[data-ha-style="map-atlas"] .hero::before,
-html[data-ha-style="map-atlas"] header.hero::before {
-  width: 78px;
-  height: 78px;
-  border: 2px solid var(--ha-style-accent);
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 55% 42%, var(--ha-style-accent) 0 4px, transparent 5px),
-    linear-gradient(45deg, transparent 47%, rgba(47,102,168,.55) 48% 52%, transparent 53%);
+.meta-cell strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--near-black);
 }
-
-html[data-ha-style="network-map"] {
-  --ha-style-accent: #355f91;
-  --ha-style-accent-2: #a34d67;
-  --primary: #355f91;
-  --primary-container: #294b75;
-  --primary-fixed: #deebff;
-  --secondary-container: #a34d67;
-  --bg: #f7f8fb;
-  --surface: #f7f8fb;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #eef1f7;
-  --surface-container: #e6ebf3;
-  --surface-container-high: #dbe2ee;
-  --fg-1: #151b24;
-  --fg-2: #3f4a5b;
-  --fg-muted: #737e8f;
-  --border: rgba(53,95,145,.16);
-  --gradient-hero: linear-gradient(135deg, #355f91 0%, #a34d67 100%);
-  --gradient-text: linear-gradient(135deg, #355f91 0%, #a34d67 100%);
+.kami-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr) 250px;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: start;
+  padding-top: 42px;
 }
-html[data-ha-style="network-map"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    radial-gradient(circle at 20% 20%, rgba(53,95,145,.22) 0 3px, transparent 4px),
-    radial-gradient(circle at 68% 34%, rgba(163,77,103,.18) 0 3px, transparent 4px),
-    linear-gradient(38deg, transparent 0 48%, rgba(53,95,145,.10) 49% 51%, transparent 52%);
-  background-size: 88px 88px, 118px 118px, 132px 132px;
+.kami-rail,
+.kami-notes {
+  position: sticky;
+  top: 28px;
+  max-height: calc(100vh - 56px);
+  overflow: auto;
 }
-html[data-ha-style="network-map"] body::before { content: "network map"; }
-html[data-ha-style="network-map"] .hero::before,
-html[data-ha-style="network-map"] header.hero::before {
-  width: 86px;
-  height: 46px;
-  border-radius: 999px;
-  background:
-    radial-gradient(circle at 18px 24px, var(--ha-style-accent) 0 7px, transparent 8px),
-    radial-gradient(circle at 44px 12px, var(--ha-style-accent-2) 0 6px, transparent 7px),
-    radial-gradient(circle at 70px 30px, var(--ha-style-accent) 0 7px, transparent 8px),
-    linear-gradient(22deg, transparent 0 31%, color-mix(in srgb, var(--ha-style-accent) 60%, transparent) 32% 36%, transparent 37%),
-    linear-gradient(160deg, transparent 0 43%, color-mix(in srgb, var(--ha-style-accent-2) 60%, transparent) 44% 48%, transparent 49%);
+.rail-card,
+.note-card,
+.search-box {
+  border: 1px solid var(--border);
+  background: var(--ivory);
+  box-shadow: 0 0 0 1px #faf9f5 inset, 0 12px 32px #e8e6dc;
 }
-
-html[data-ha-style="dashboard"] {
-  --ha-style-accent: #0f5f6f;
-  --ha-style-accent-2: #8a5a16;
-  --primary: #0f5f6f;
-  --primary-container: #0b4c59;
-  --primary-fixed: #d8f2f5;
-  --secondary-container: #8a5a16;
-  --bg: #f5f7f9;
-  --surface: #f5f7f9;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #eef2f5;
-  --surface-container: #e7edf1;
-  --surface-container-high: #dce5ea;
-  --fg-1: #111827;
-  --fg-2: #374151;
-  --fg-muted: #6b7280;
-  --border: rgba(15,95,111,.16);
-  --gradient-hero: linear-gradient(135deg, #0f5f6f 0%, #083344 100%);
-  --gradient-text: linear-gradient(135deg, #0f5f6f 0%, #083344 100%);
+.rail-card { padding: 18px; }
+.rail-label { margin-bottom: 14px; }
+.toc {
+  display: grid;
+  gap: 2px;
+  margin-bottom: 22px;
 }
-html[data-ha-style="dashboard"] body {
-  background-color: var(--bg) !important;
-  background-image: linear-gradient(90deg, rgba(15,95,111,.08) 0 1px, transparent 1px);
-  background-size: 18px 100%;
+.toc a {
+  display: block;
+  padding: 8px 10px;
+  border-left: 2px solid transparent;
+  color: var(--olive);
+  text-decoration: none;
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.28;
 }
-html[data-ha-style="dashboard"] body::before { content: "dashboard"; }
-html[data-ha-style="dashboard"] .hero::before,
-html[data-ha-style="dashboard"] header.hero::before {
+.toc a:hover,
+.toc a.active {
+  color: var(--brand);
+  background: var(--brand-tint);
+  border-left-color: var(--brand);
+}
+.toc a[data-level="2"] { padding-left: 24px; font-size: 12px; }
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  margin: 16px 0;
+}
+.search-box input {
   width: 100%;
-  height: 3px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--near-black);
+  font-family: var(--sans);
+  font-size: 13px;
+}
+.search-box span { color: var(--stone); font-family: var(--mono); font-size: 12px; }
+.controls {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+.control-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.kami-button {
+  min-height: 34px;
+  border: 1px solid var(--border);
+  background: var(--sand);
+  color: var(--brand);
+  padding: 0 12px;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+}
+.kami-button:hover,
+.kami-button[aria-pressed="true"] {
+  background: var(--brand);
+  color: var(--ivory);
+  border-color: var(--brand);
+}
+.rail-stat {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  color: var(--stone);
+  font-family: var(--sans);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.rail-stat strong { color: var(--near-black); font-weight: 600; }
+.kami-paper {
+  width: min(100%, 820px);
+  margin: 0 auto;
+  padding: clamp(34px, 5vw, 72px) clamp(28px, 5vw, 76px);
+  background: var(--ivory);
+  border: 1px solid var(--border);
+  box-shadow: 0 0 0 1px #faf9f5 inset, 0 22px 54px #e8e6dc;
+}
+.kami-paper h1,
+.kami-paper h2,
+.kami-paper h3 {
+  font-weight: 500;
+  color: var(--near-black);
+  letter-spacing: -0.015em;
+}
+.kami-paper h1 {
+  margin: 2.3em 0 0.7em;
+  padding-top: 0.9em;
+  border-top: 1px solid var(--border);
+  font-size: calc(31px * var(--reader-scale));
+  line-height: 1.15;
+}
+.kami-paper h1:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.kami-paper h2 {
+  margin: 2em 0 0.7em;
+  font-size: calc(22px * var(--reader-scale));
+  line-height: 1.2;
+}
+.kami-paper p,
+.kami-paper li {
+  font-size: calc(18px * var(--reader-scale));
+  line-height: var(--reader-leading);
+  color: var(--dark-warm);
+}
+.kami-paper p { margin: 0 0 1.05em; }
+.kami-paper strong { font-weight: 500; color: var(--near-black); }
+.kami-paper .lead:first-letter {
+  float: left;
+  padding: 0.08em 0.12em 0 0;
+  color: var(--brand);
+  font-size: 3.4em;
+  line-height: 0.78;
+}
+.kami-paper .quiet-note,
+.kami-paper blockquote {
+  margin: 1.5em 0;
+  padding: 16px 18px;
+  border-left: 3px solid var(--brand);
+  background: var(--brand-tint);
+  color: var(--dark-warm);
+  font-size: calc(16px * var(--reader-scale));
+  line-height: 1.45;
+}
+.kami-paper mark {
+  background: var(--brand-tint-strong);
+  color: var(--near-black);
+  padding: 0 0.12em;
+}
+.kami-paper code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--sand);
+  padding: 0.08em 0.3em;
+}
+.note-card {
+  padding: 18px;
   margin-bottom: 14px;
 }
+.note-card h3 {
+  margin: 0 0 10px;
+  font-size: 17px;
+  line-height: 1.25;
+  font-weight: 500;
+}
+.note-card p {
+  margin: 0;
+  color: var(--olive);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.note-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+.note-item {
+  padding-top: 10px;
+  border-top: 1px solid var(--border-soft);
+  color: var(--dark-warm);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.kami-source-drawer {
+  grid-column: 2 / 3;
+  margin: 34px auto 0;
+  width: min(100%, 820px);
+  border: 1px solid var(--border);
+  background: var(--ivory);
+  box-shadow: 0 0 0 1px #faf9f5 inset;
+}
+.kami-source-drawer summary {
+  cursor: pointer;
+  padding: 18px 22px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand);
+}
+.source-body {
+  border-top: 1px solid var(--border);
+  padding: 18px 22px 22px;
+}
+.source-body pre {
+  max-height: 360px;
+  overflow: auto;
+  margin: 0;
+  white-space: pre-wrap;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--olive);
+}
+body.focus-mode .kami-rail,
+body.focus-mode .kami-notes,
+body.focus-mode .cover-aside { display: none; }
+body.focus-mode .kami-layout { grid-template-columns: 1fr; }
+body.focus-mode .kami-source-drawer { grid-column: 1; }
+body.focus-mode .kami-cover { grid-template-columns: 1fr; min-height: 48vh; }
 
-html[data-ha-style="document"] {
-  --ha-style-accent: #8b3f1f;
-  --ha-style-accent-2: #2f6f73;
-  --primary: #8b3f1f;
-  --primary-container: #703319;
-  --primary-fixed: #ffe4d5;
-  --secondary-container: #2f6f73;
-  --bg: #fbfaf7;
-  --surface: #fbfaf7;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f2efe8;
-  --surface-container: #e9e4da;
-  --surface-container-high: #ded7c9;
-  --fg-1: #211d18;
-  --fg-2: #554d44;
-  --fg-muted: #82786c;
-  --border: rgba(139,63,31,.16);
-  --font-headline: Georgia, "Iowan Old Style", "Times New Roman", serif;
-  --gradient-hero: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
-  --gradient-text: linear-gradient(135deg, #8b3f1f 0%, #2f6f73 100%);
+@media (max-width: 1180px) {
+  .kami-layout { grid-template-columns: 220px minmax(0, 1fr); }
+  .kami-notes { position: static; grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-height: none; }
+  .kami-source-drawer { grid-column: 2 / 3; }
 }
-html[data-ha-style="document"] body {
-  background-color: var(--bg) !important;
-  background-image: linear-gradient(90deg, rgba(139,63,31,.18) 0 4px, transparent 4px);
-  background-size: 100% 100%;
+@media (max-width: 860px) {
+  .kami-reader { width: min(100% - 24px, 720px); padding-top: 18px; }
+  .kami-cover { grid-template-columns: 1fr; min-height: auto; padding-top: 56px; }
+  .cover-aside { border-left: 0; padding-left: 0; border-top: 1px solid var(--border); padding-top: 20px; }
+  .kami-layout { display: block; padding-top: 24px; }
+  .kami-rail { position: static; max-height: none; margin-bottom: 18px; }
+  .toc { max-height: 180px; overflow: auto; }
+  .kami-paper { padding: 30px 22px; }
+  .kami-notes { display: block; margin-top: 18px; }
+  .kami-source-drawer { width: 100%; }
 }
-html[data-ha-style="document"] body::before { content: "document"; }
-html[data-ha-style="document"] .hero::before,
-html[data-ha-style="document"] header.hero::before {
-  width: 42px;
-  height: 42px;
-  border-radius: 0;
-  background: transparent;
-  border-top: 4px solid var(--ha-style-accent);
-  border-left: 4px solid var(--ha-style-accent);
-}
-
-html[data-ha-style="developer"] {
-  color-scheme: dark;
-  --ha-style-accent: #38bdf8;
-  --ha-style-accent-2: #f97316;
-  --ha-style-badge-bg: rgba(8,16,31,.82);
-  --ha-style-badge-fg: #dbeafe;
-  --primary: #38bdf8;
-  --primary-container: #0e7490;
-  --primary-fixed: #0f2942;
-  --secondary-container: #f97316;
-  --bg: #07111f;
-  --surface: #07111f;
-  --surface-container-lowest: #0b1426;
-  --surface-container-low: #0f1b31;
-  --surface-container: #13233d;
-  --surface-container-high: #1b2f50;
-  --fg-1: #f8fafc;
-  --fg-2: #cbd5e1;
-  --fg-muted: #94a3b8;
-  --border: rgba(148,163,184,.18);
-  --green: #34d399;
-  --red: #fb7185;
-  --yellow: #fbbf24;
-  --gradient-hero: linear-gradient(135deg, #0f172a 0%, #0e7490 100%);
-  --gradient-text: linear-gradient(135deg, #38bdf8 0%, #f97316 100%);
-}
-html[data-ha-style="developer"] body {
-  background-color: var(--bg) !important;
-  background-image:
-    linear-gradient(rgba(56,189,248,.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56,189,248,.05) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-html[data-ha-style="developer"] body::before { content: "developer"; }
-html[data-ha-style="developer"] pre,
-html[data-ha-style="developer"] code,
-html[data-ha-style="developer"] .mono {
-  color: inherit;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
 }
 </style>
-<!-- html-anything example style skin:end -->
 </head>
 <body>
-
-<!-- SEARCH BAR -->
-<div class="search-bar-wrapper">
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-  <input id="search-input" type="text" placeholder="Search document…" autocomplete="off" spellcheck="false">
-  <span class="search-count" id="search-count"></span>
-  <div class="mode-toggle">
-    <button class="mode-btn active" id="btn-summary" onclick="setMode('summary')">5-min</button>
-    <button class="mode-btn" id="btn-full" onclick="setMode('full')">Full</button>
-  </div>
-</div>
-
-<div class="document-shell">
-
-  <!-- READER RAIL -->
-  <nav class="reader-rail" id="reader-rail" aria-label="Table of contents">
-    <div class="rail-label">Contents</div>
-    <div id="rail-links"></div>
-  </nav>
-
-  <!-- BODY SHEET -->
-  <main class="body-sheet">
-
-    <!-- COVER -->
-    <header class="cover" id="doc-cover">
-      <div class="doc-eyebrow">
-        <span class="eyebrow-chip rfc-id">RFC-014</span>
-        <span class="eyebrow-chip status-decided">✓ Decided</span>
-        <span class="eyebrow-chip" id="eyebrow-words"></span>
-        <span class="eyebrow-chip" id="eyebrow-time"></span>
-      </div>
-      <h1 class="doc-title" id="doc-title">RFC-014: Pricing Page V2 — Decision Memo</h1>
-
-      <div class="status-block" id="status-block"></div>
-
-      <div class="caveat-box">
-        <strong>Synthetic fixture.</strong> All names, numbers, customer quotes, deal sizes, and internal projects in this memo are invented and intended to mimic the shape of real internal pricing analyses, not the substance.
-      </div>
-
-      <!-- Mobile TOC -->
-      <div class="mobile-toc">
-        <select id="mobile-toc-select" onchange="mobileTocNav(this.value)">
-          <option value="">Jump to section…</option>
-        </select>
-      </div>
-    </header>
-
-    <!-- INSIGHT LAYER (5-min mode) -->
-    <div class="insight-layer" id="insight-layer">
-
-      <!-- TL;DR -->
-      <div style="animation: fadeUp 350ms ease both;">
-        <div class="section-label">TL;DR</div>
-        <div class="tldr-card">
-          <h3>Executive Summary</h3>
-          <div class="tldr-observations">
-            <div class="tldr-obs"><span class="tldr-obs-num">1</span><span>The 4-tier pricing page (Free, Starter, Pro, Team) is being collapsed to a 2-tier model (Starter + Team) plus a contact-sales Enterprise track, driven by the Pro tier capturing only 7% of signups while consuming 31% of pricing-page time-on-page.</span></div>
-            <div class="tldr-obs"><span class="tldr-obs-num">2</span><span>Support tickets tagged "pricing confusion" rose 138% year-over-year (412 in Q1 2026 vs. 173 in Q1 2025), and every winning competitor in the segment has already consolidated to ≤ 3 published tiers.</span></div>
-            <div class="tldr-obs"><span class="tldr-obs-num">3</span><span>Expected impact is +18% activation rate on the pricing page, a short-term ARR dip of −$210K in months 1–6, neutral by month 9, and +6% baseline ARR by Q4 2026, with all 1,184 existing Pro customers migrated to Team at legacy pricing.</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- PULL QUOTES -->
-      <div class="stagger-1" style="animation: fadeUp 350ms ease both;">
-        <div class="section-label">Notable passages</div>
-        <div class="pull-quotes">
-          <div class="pull-quote">
-            <div class="pull-quote-text">The Pro tier captured only 7% of new signups in Q1 but consumed 31% of pricing-page time-on-page.</div>
-            <div class="pull-quote-source">§ TL;DR</div>
-          </div>
-          <div class="pull-quote">
-            <div class="pull-quote-text">Support tickets tagged 'pricing confusion' rose 2.4x year-over-year — the most common confusion: customers picked Pro thinking it included multi-seat access.</div>
-            <div class="pull-quote-source">§ 1. Context</div>
-          </div>
-          <div class="pull-quote">
-            <div class="pull-quote-text">Every winning competitor in our segment has consolidated to ≤ 3 published tiers.</div>
-            <div class="pull-quote-source">§ TL;DR</div>
-          </div>
-          <div class="pull-quote">
-            <div class="pull-quote-text">Expected impact: +18% activation rate on the pricing page, neutral net revenue in 2 quarters, +6% by Q4 2026.</div>
-            <div class="pull-quote-source">§ TL;DR</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- DECISIONS -->
-      <div class="stagger-2" style="animation: fadeUp 350ms ease both;">
-        <div class="section-label">Decisions</div>
-        <div class="decisions-grid" id="decisions-grid"></div>
-      </div>
-
-      <!-- ACTION ITEMS -->
-      <div class="stagger-3" style="animation: fadeUp 350ms ease both;">
-        <div class="section-label">Action items</div>
-        <div class="action-table-wrapper">
-          <table class="action-table" id="action-table">
-            <thead>
-              <tr>
-                <th onclick="sortTable('id')" data-col="id">ID <span class="sort-arrow">↕</span></th>
-                <th onclick="sortTable('action')" data-col="action">Action <span class="sort-arrow">↕</span></th>
-                <th onclick="sortTable('owner')" data-col="owner">Owner <span class="sort-arrow">↕</span></th>
-                <th onclick="sortTable('due')" data-col="due">Due <span class="sort-arrow">↕</span></th>
-              </tr>
-            </thead>
-            <tbody id="action-tbody"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- OPEN QUESTIONS -->
-      <div class="stagger-4" style="animation: fadeUp 350ms ease both;" id="open-questions-section">
-        <div class="section-label">Open questions</div>
-        <div class="open-questions-callout">
-          <div class="callout-title">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            Unresolved questions — requires follow-up
-          </div>
-          <div class="oq-list" id="oq-list"></div>
-        </div>
-      </div>
-
-      <!-- KEY TERMS -->
-      <div style="animation: fadeUp 350ms ease both; animation-delay: 300ms;">
-        <div class="section-label">Key entities &amp; figures</div>
-        <div class="key-terms" id="key-terms"></div>
-      </div>
-
-    </div><!-- /insight-layer -->
-
-    <!-- FULL READING MODE -->
-    <div class="full-reading-mode" id="full-reading-mode">
-      <div class="section-label" style="margin-top: var(--space-lg);">Full document</div>
-      <div class="doc-body" id="doc-body"></div>
+<div class="kami-progress" aria-hidden="true"><span id="progressBar"></span></div>
+<main class="kami-reader">
+  <section class="kami-cover" aria-labelledby="coverTitle">
+    <div>
+      <div class="cover-kicker">DOCX memo / Kami longform reader</div>
+      <h1 id="coverTitle">RFC-014: Pricing Page V2 — Decision Memo</h1>
+      <p class="cover-lede">A pricing-page decision memo rendered as a calm reading surface: original hierarchy preserved, navigation close at hand, and the source text tucked into an appendix instead of taking over the page.</p>
     </div>
+    <aside class="cover-aside" aria-label="Document metadata">
+      <div class="source-label">Source summary</div>
+      <p>Internal decision memo with decisions, risks, owner dates, open questions, and appendix references. The page is optimized for sustained reading rather than dashboard scanning.</p>
+      <div class="meta-grid">
+        <div class="meta-cell"><span class="meta-label">Source</span><strong id="sourceFile">input.docx</strong></div>
+        <div class="meta-cell"><span class="meta-label">Length</span><strong id="readingMeta">5 min · 1,043 words</strong></div>
+        <div class="meta-cell"><span class="meta-label">Sections</span><strong id="sectionMeta">12 headings</strong></div>
+      </div>
+    </aside>
+  </section>
 
-    <!-- FOOTER -->
-    <footer class="doc-footer" id="doc-footer">
-      <p class="footer-note">How this was read: the document body was rendered client-side from inlined data. Headings, tables, and lists were parsed from mammoth-converted Markdown. The 5-minute summary was produced by the LLM from the document sample.</p>
-      <button class="copy-btn" id="copy-md-btn" onclick="copyMarkdown()">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        Copy as Markdown
-      </button>
-    </footer>
-
-  </main>
-</div>
-
-<script>
-// ── DATA ACCESSORS ──────────────────────────────────────────────
-const markdown = DATA.markdown || '';
-const headings = DATA.headings || [];
-const wordCount = DATA.wordCount || 0;
-const readingMinutes = DATA.readingMinutes || 0;
-
-// ── STATIC INSIGHT DATA ─────────────────────────────────────────
-const STATUS_META = [
-  { key: 'Author', val: 'Riley Chen (Product)' },
-  { key: 'Reviewers', val: 'Asha Vora (Eng), Marcus Liang (GTM), Devon Park (Finance)' },
-  { key: 'Status', val: 'Decided', highlight: true },
-  { key: 'Decision date', val: '2026-04-12', mono: true },
-  { key: 'Last updated', val: '2026-04-22', mono: true },
-  { key: 'Related', val: 'RFC-009, PROD-882' },
-];
-
-const DECISIONS = [
-  { id: 'D-1', headline: 'Collapse to 2 public tiers', desc: 'Replace Free/Starter/Pro/Team with Starter + Team only. Enterprise moves to contact-sales track.', anchor: '5-decisions' },
-  { id: 'D-2', headline: 'Migrate Pro → Team at legacy pricing', desc: 'All 1,184 existing Pro customers auto-migrate to Team tier at their current rate. Opt-down to Starter available.', anchor: '5-decisions' },
-  { id: 'D-3', headline: 'Implementation kickoff Q2 2026', desc: 'Engineering kickoff begins Q2 2026 per PROD-882. Page ships before Q3 billing cycle.', anchor: '5-decisions' },
-  { id: 'D-4', headline: 'No public price increase at launch', desc: 'Starter and Team prices hold at current levels. Price review deferred to Q1 2027.', anchor: '5-decisions' },
-];
-
-const ACTION_ITEMS = [
-  { id: 'A-1', action: 'Draft migration email for Pro customers', owner: 'Marcus Liang', due: '2026-05-02' },
-  { id: 'A-2', action: 'Update billing system to support 2-tier SKU', owner: 'Asha Vora', due: '2026-05-09' },
-  { id: 'A-3', action: 'Design new pricing page (V2 mockups)', owner: 'Devon Park', due: '2026-05-16' },
-  { id: 'A-4', action: 'Legal review of Pro migration terms', owner: 'Riley Chen', due: '2026-05-06' },
-  { id: 'A-5', action: 'QA and staging deployment of PROD-882', owner: 'Asha Vora', due: '2026-06-01' },
-  { id: 'A-6', action: 'Finalise Enterprise sales playbook', owner: 'Marcus Liang', due: '2026-05-23' },
-];
-
-const OPEN_QUESTIONS = [
-  'Should the Enterprise tier have a public "starts at" price on the page, or remain fully contact-gated?',
-  'How do we communicate the change to customers who chose Pro specifically for its intermediate feature set — do we frame it as a forward-looking simplification?',
-  'What is the retention risk for the 123 multi-seat Pro customers who may not see Team as cost-equivalent?',
-];
-
-const KEY_TERMS = [
-  { label: 'RFC-014', type: 'RFC' },
-  { label: 'RFC-009', type: 'Related' },
-  { label: 'PROD-882', type: 'Ticket' },
-  { label: '$210K ARR dip', type: 'Finance' },
-  { label: '+6% by Q4 2026', type: 'Target' },
-  { label: '+18% activation', type: 'Target' },
-  { label: '1,184 Pro customers', type: 'Data' },
-  { label: '412 confusion tickets', type: 'Data' },
-  { label: '7% Pro signups', type: 'Data' },
-  { label: '2026-04-12', type: 'Date' },
-  { label: 'Riley Chen', type: 'Author' },
-  { label: 'Asha Vora', type: 'Reviewer' },
-  { label: 'Marcus Liang', type: 'Reviewer' },
-  { label: 'Devon Park', type: 'Reviewer' },
-];
-
-// ── INIT ────────────────────────────────────────────────────────
-let currentMode = 'summary';
-let sortCol = 'id';
-let sortDir = 1;
-let searchTimer = null;
-let searchHits = [];
-let hitIndex = 0;
-
-function init() {
-  // Eyebrow meta
-  document.getElementById('eyebrow-words').textContent = wordCount.toLocaleString() + ' words';
-  document.getElementById('eyebrow-time').textContent = readingMinutes + ' min read';
-
-  // Status block
-  const sb = document.getElementById('status-block');
-  STATUS_META.forEach(m => {
-    const div = document.createElement('div');
-    div.className = 'status-kv';
-    div.innerHTML = `<span class="status-key">${m.key}</span><span class="status-val${m.mono ? ' mono' : ''}${m.highlight ? ' status-decided' : ''}">${m.val}</span>`;
-    sb.appendChild(div);
-  });
-
-  // Decisions
-  const dg = document.getElementById('decisions-grid');
-  DECISIONS.forEach(d => {
-    dg.innerHTML += `
-      <a class="decision-card" href="#${d.anchor}" onclick="setMode('full', '${d.anchor}')">
-        <span class="decision-id">${d.id}</span>
-        <div class="decision-body">
-          <div class="decision-headline">${d.headline}</div>
-          <div class="decision-desc">${d.desc}</div>
-          <span class="decision-link">→ See in document</span>
+  <section class="kami-layout">
+    <aside class="kami-rail" aria-label="Reading controls">
+      <div class="rail-card">
+        <div class="rail-label">Contents</div>
+        <nav class="toc" id="toc"></nav>
+        <label class="search-box" aria-label="Search document">
+          <span>/</span>
+          <input id="searchInput" type="search" placeholder="Search memo">
+        </label>
+        <div class="controls">
+          <div class="control-label">Reading controls</div>
+          <div class="control-row">
+            <button class="kami-button" type="button" id="smallerText" aria-label="Decrease text size">A-</button>
+            <button class="kami-button" type="button" id="largerText" aria-label="Increase text size">A+</button>
+            <button class="kami-button" type="button" id="densityToggle" aria-pressed="false">Dense</button>
+            <button class="kami-button" type="button" id="focusToggle" aria-pressed="false">Focus</button>
+          </div>
         </div>
-      </a>`;
-  });
+        <div class="rail-stat"><strong id="progressText">0%</strong> read · <span id="matchText">no search</span></div>
+      </div>
+    </aside>
 
-  // Action items
-  renderActionItems();
+    <article class="kami-paper" id="article" aria-label="Document body"></article>
 
-  // Open questions
-  const oql = document.getElementById('oq-list');
-  OPEN_QUESTIONS.forEach(q => {
-    oql.innerHTML += `<div class="oq-item">${q}</div>`;
-  });
+    <aside class="kami-notes" aria-label="Reading notes">
+      <div class="note-card">
+        <div class="source-label">Reader note</div>
+        <h3>Why this style</h3>
+        <p>Kami is for text that deserves a quiet room: less chrome, warmer paper, stronger hierarchy, and controls that help you keep your place.</p>
+      </div>
+      <div class="note-card">
+        <div class="source-label">Key claims</div>
+        <div class="note-list" id="keyClaims"></div>
+      </div>
+      <div class="note-card">
+        <div class="source-label">Source handling</div>
+        <p>The article uses extracted DOCX text. Appendix stays available for checking without interrupting the reading flow.</p>
+      </div>
+    </aside>
 
-  // Key terms
-  const kt = document.getElementById('key-terms');
-  KEY_TERMS.forEach(t => {
-    kt.innerHTML += `<span class="term-chip"><span class="chip-label">${t.label}</span><span class="chip-type">${t.type}</span></span>`;
-  });
+    <details class="kami-source-drawer">
+      <summary>Open source appendix</summary>
+      <div class="source-body">
+        <pre id="sourceText"></pre>
+      </div>
+    </details>
+  </section>
+</main>
+<script>
+(() => {
+  const article = document.getElementById('article');
+  const toc = document.getElementById('toc');
+  const progressBar = document.getElementById('progressBar');
+  const progressText = document.getElementById('progressText');
+  const matchText = document.getElementById('matchText');
+  const searchInput = document.getElementById('searchInput');
+  const sourceText = document.getElementById('sourceText');
+  const keyClaims = document.getElementById('keyClaims');
+  const root = document.documentElement;
+  let scale = 1;
+  let dense = false;
+  const blocks = parseMarkdown(DATA.markdown || '');
+  const headingIds = [];
 
-  // Rail + mobile TOC
-  buildNavigation();
+  document.getElementById('sourceFile').textContent = DATA.sourceFile || DATA.meta?.sourceFile || 'input.docx';
+  document.getElementById('readingMeta').textContent = (DATA.wordCount || DATA.meta?.wordCount || 1043).toLocaleString() + ' words · ' + (DATA.readingMinutes || DATA.meta?.readingMinutes || 5) + ' min';
+  document.getElementById('sectionMeta').textContent = (DATA.headingCount || DATA.meta?.headingCount || DATA.headings?.length || 12) + ' headings';
+  sourceText.textContent = normalize(DATA.plainText || '');
 
-  // Render full document
-  renderFullDoc();
+  renderArticle(blocks);
+  renderToc();
+  renderClaims();
+  wireControls();
+  updateProgress();
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
 
-  // Search
-  document.getElementById('search-input').addEventListener('input', e => {
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => doSearch(e.target.value), 120);
-  });
-  document.getElementById('search-input').addEventListener('keydown', e => {
-    if (e.key === 'Enter') nextHit(e.shiftKey ? -1 : 1);
-  });
-}
-
-// ── NAVIGATION ──────────────────────────────────────────────────
-function buildNavigation() {
-  const railLinks = document.getElementById('rail-links');
-  const mobileSelect = document.getElementById('mobile-toc-select');
-
-  headings.forEach(h => {
-    const anchor = headingAnchor(h.text);
-    const indent = h.level === 2 ? 'rail-level2' : '';
-
-    const a = document.createElement('a');
-    a.className = 'rail-nav-item' + (indent ? ' ' + indent : '');
-    a.href = '#' + anchor;
-    a.dataset.anchor = anchor;
-    a.innerHTML = `<span class="rail-level-indicator">H${h.level}</span><span>${h.text}</span>`;
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      setMode('full');
-      setTimeout(() => scrollToAnchor(anchor), 50);
+  function normalize(text) {
+    return String(text || '')
+      .replace(/\\([\\.*_+\-#()[\]{}!>])/g, '$1')
+      .replace(/<b>/g, '')
+      .replace(/<\/b>/g, '')
+      .trim();
+  }
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+  }
+  function inlineFormat(text) {
+    const safe = escapeHtml(normalize(text));
+    return safe
+      .replace(/__([^_]+?)__/g, '<strong>$1</strong>')
+      .replace(/\*([^*]+?)\*/g, '<strong>$1</strong>');
+  }
+  function slugify(text, index) {
+    const base = normalize(text).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 42);
+    return (base || 'section') + '-' + index;
+  }
+  function parseMarkdown(md) {
+    const rawBlocks = String(md || '').split(/\n\s*\n/).map(part => part.trim()).filter(Boolean);
+    return rawBlocks.map(part => {
+      const clean = normalize(part);
+      const heading = clean.match(/^(#{1,3})\s+(.+)$/);
+      if (heading) return { type: 'heading', level: Math.min(2, heading[1].length), text: heading[2] };
+      if (/^\*[^*]+\*$/.test(clean)) return { type: 'note', text: clean.replace(/^\*|\*$/g, '') };
+      return { type: 'paragraph', text: clean };
+    }).filter(block => block.text && !/^RFC-014: Pricing Page V2/.test(block.text));
+  }
+  function renderArticle(items) {
+    let hIndex = 0;
+    let firstParagraph = true;
+    headingIds.length = 0;
+    article.innerHTML = items.map(block => {
+      if (block.type === 'heading') {
+        hIndex += 1;
+        const id = slugify(block.text, hIndex);
+        headingIds.push({ id, text: normalize(block.text), level: block.level });
+        return '<h' + block.level + ' id="' + id + '">' + inlineFormat(block.text) + '</h' + block.level + '>';
+      }
+      if (block.type === 'note') return '<div class="quiet-note">' + inlineFormat(block.text) + '</div>';
+      const cls = firstParagraph ? ' class="lead"' : '';
+      firstParagraph = false;
+      return '<p' + cls + '>' + inlineFormat(block.text) + '</p>';
+    }).join('');
+  }
+  function renderToc() {
+    toc.innerHTML = headingIds.map(item => '<a href="#' + item.id + '" data-level="' + item.level + '">' + escapeHtml(item.text) + '</a>').join('');
+  }
+  function renderClaims() {
+    const claims = [
+      '+18% activation expected from the new pricing page.',
+      'Pro captured 7% of Q1 signups but created outsized confusion.',
+      'Migration keeps Pro pricing for 6-12 months to reduce churn.'
+    ];
+    keyClaims.innerHTML = claims.map(claim => '<div class="note-item">' + escapeHtml(claim) + '</div>').join('');
+  }
+  function wireControls() {
+    document.getElementById('smallerText').addEventListener('click', () => setScale(scale - 0.05));
+    document.getElementById('largerText').addEventListener('click', () => setScale(scale + 0.05));
+    document.getElementById('densityToggle').addEventListener('click', event => {
+      dense = !dense;
+      event.currentTarget.setAttribute('aria-pressed', String(dense));
+      root.style.setProperty('--reader-leading', dense ? '1.42' : '1.54');
     });
-    railLinks.appendChild(a);
-
-    const opt = document.createElement('option');
-    opt.value = anchor;
-    opt.textContent = (h.level === 2 ? '  ' : '') + h.text;
-    mobileSelect.appendChild(opt);
-  });
-
-  // Intersection observer for active rail item
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        document.querySelectorAll('.rail-nav-item').forEach(a => a.classList.remove('active'));
-        const id = entry.target.id;
-        const match = document.querySelector(`.rail-nav-item[data-anchor="${id}"]`);
-        if (match) match.classList.add('active');
-      }
+    document.getElementById('focusToggle').addEventListener('click', event => {
+      const on = !document.body.classList.contains('focus-mode');
+      document.body.classList.toggle('focus-mode', on);
+      event.currentTarget.setAttribute('aria-pressed', String(on));
     });
-  }, { rootMargin: '-20% 0px -70% 0px' });
-
-  setTimeout(() => {
-    document.querySelectorAll('.doc-body h1[id], .doc-body h2[id]').forEach(el => observer.observe(el));
-  }, 300);
-}
-
-function mobileTocNav(val) {
-  if (!val) return;
-  setMode('full');
-  setTimeout(() => scrollToAnchor(val), 60);
-  document.getElementById('mobile-toc-select').value = '';
-}
-
-function headingAnchor(text) {
-  return text.toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .trim();
-}
-
-function scrollToAnchor(anchor) {
-  const el = document.getElementById(anchor);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-// ── READING MODES ───────────────────────────────────────────────
-function setMode(mode, anchor) {
-  currentMode = mode;
-  document.getElementById('btn-summary').classList.toggle('active', mode === 'summary');
-  document.getElementById('btn-full').classList.toggle('active', mode === 'full');
-  document.getElementById('insight-layer').classList.toggle('hidden', mode === 'full');
-  const fullEl = document.getElementById('full-reading-mode');
-  fullEl.classList.toggle('visible', mode === 'full');
-  if (mode === 'full' && anchor) {
-    setTimeout(() => scrollToAnchor(anchor), 80);
+    searchInput.addEventListener('input', () => applySearch(searchInput.value));
   }
-  clearSearch();
-}
-
-// ── FULL DOC RENDERER ────────────────────────────────────────────
-function renderFullDoc() {
-  const body = document.getElementById('doc-body');
-  body.innerHTML = parseMarkdown(markdown);
-}
-
-function parseMarkdown(md) {
-  if (!md) return '<p style="color:var(--fg-muted)">No document content available.</p>';
-
-  // Unescape escaped markdown from mammoth
-  md = md.replace(/\\([\\`*_{}\[\]()#+\-.!~|>])/g, '$1');
-
-  const lines = md.split('\n');
-  let html = '';
-  let i = 0;
-
-  while (i < lines.length) {
-    const line = lines[i];
-
-    // Heading
-    const hMatch = line.match(/^(#{1,6})\s+(.+)$/);
-    if (hMatch) {
-      const level = hMatch[1].length;
-      const text = inlineMarkdown(hMatch[2]);
-      const anchor = headingAnchor(hMatch[2].replace(/[*_`]/g, ''));
-      html += `<h${level} id="${anchor}">${text}</h${level}>`;
-      i++; continue;
-    }
-
-    // Blockquote
-    if (line.startsWith('> ')) {
-      let bq = '';
-      while (i < lines.length && lines[i].startsWith('> ')) {
-        bq += lines[i].slice(2) + '\n';
-        i++;
-      }
-      html += `<blockquote>${inlineMarkdown(bq.trim())}</blockquote>`;
-      continue;
-    }
-
-    // Table
-    if (line.match(/^\|/) && i + 1 < lines.length && lines[i + 1].match(/^\|[\s\-:|]+\|/)) {
-      const tableLines = [];
-      while (i < lines.length && lines[i].match(/^\|/)) {
-        tableLines.push(lines[i]);
-        i++;
-      }
-      html += renderTable(tableLines);
-      continue;
-    }
-
-    // Unordered list
-    if (line.match(/^[\-\*\+]\s/)) {
-      let items = '';
-      while (i < lines.length && lines[i].match(/^[\-\*\+]\s/)) {
-        items += `<li>${inlineMarkdown(lines[i].slice(2))}</li>`;
-        i++;
-      }
-      html += `<ul>${items}</ul>`;
-      continue;
-    }
-
-    // Ordered list
-    if (line.match(/^\d+\.\s/)) {
-      let items = '';
-      while (i < lines.length && lines[i].match(/^\d+\.\s/)) {
-        items += `<li>${inlineMarkdown(lines[i].replace(/^\d+\.\s/, ''))}</li>`;
-        i++;
-      }
-      html += `<ol>${items}</ol>`;
-      continue;
-    }
-
-    // Blank line
-    if (line.trim() === '') { i++; continue; }
-
-    // Paragraph — collect continuation lines
-    let para = line;
-    i++;
-    while (i < lines.length && lines[i].trim() !== '' && !lines[i].match(/^(#{1,6}\s|[\-\*\+]\s|\d+\.\s|> |\|)/)) {
-      para += ' ' + lines[i];
-      i++;
-    }
-    html += `<p>${inlineMarkdown(para)}</p>`;
+  function setScale(next) {
+    scale = Math.max(0.9, Math.min(1.18, Number(next.toFixed(2))));
+    root.style.setProperty('--reader-scale', scale);
   }
-
-  return html;
-}
-
-function renderTable(tableLines) {
-  if (tableLines.length < 2) return '';
-  const parseRow = r => r.split('|').slice(1, -1).map(c => c.trim());
-  const headers = parseRow(tableLines[0]);
-  // skip separator (index 1)
-  const rows = tableLines.slice(2);
-  let t = '<table><thead><tr>';
-  headers.forEach(h => { t += `<th>${inlineMarkdown(h)}</th>`; });
-  t += '</tr></thead><tbody>';
-  rows.forEach(r => {
-    const cells = parseRow(r);
-    t += '<tr>';
-    cells.forEach(c => { t += `<td>${inlineMarkdown(c)}</td>`; });
-    t += '</tr>';
-  });
-  t += '</tbody></table>';
-  return t;
-}
-
-function inlineMarkdown(text) {
-  return text
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/__(.+?)__/g, '<strong>$1</strong>')
-    .replace(/_(.+?)_/g, '<em>$1</em>')
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-}
-
-// ── ACTION TABLE ─────────────────────────────────────────────────
-function renderActionItems() {
-  const tbody = document.getElementById('action-tbody');
-  const sorted = [...ACTION_ITEMS].sort((a, b) => {
-    const av = a[sortCol] || '';
-    const bv = b[sortCol] || '';
-    return av.localeCompare(bv) * sortDir;
-  });
-  tbody.innerHTML = sorted.map(item => `
-    <tr>
-      <td>${item.id}</td>
-      <td>${item.action}</td>
-      <td><span class="owner-chip">${item.owner}</span></td>
-      <td><span class="due-chip">${item.due}</span></td>
-    </tr>
-  `).join('');
-}
-
-function sortTable(col) {
-  if (sortCol === col) sortDir *= -1;
-  else { sortCol = col; sortDir = 1; }
-  document.querySelectorAll('.action-table th').forEach(th => {
-    th.classList.toggle('sorted', th.dataset.col === col);
-    const arrow = th.querySelector('.sort-arrow');
-    if (arrow) arrow.textContent = th.dataset.col === col ? (sortDir === 1 ? '↑' : '↓') : '↕';
-  });
-  renderActionItems();
-}
-
-// ── SEARCH ───────────────────────────────────────────────────────
-function doSearch(query) {
-  clearSearch();
-  if (!query.trim()) {
-    document.getElementById('search-count').textContent = '';
-    return;
+  function escapeRegExp(value) {
+    const specials = '\\^$.*+?()[]{}|';
+    return String(value).split('').map(ch => specials.includes(ch) ? '\\' + ch : ch).join('');
   }
-
-  const targetEl = currentMode === 'full'
-    ? document.getElementById('doc-body')
-    : document.getElementById('insight-layer');
-
-  if (!targetEl) return;
-
-  const regex = new RegExp(escapeRegex(query), 'gi');
-  let count = 0;
-
-  highlightTextNodes(targetEl, regex, () => { count++; return count === 1 ? 'primary-hit' : ''; });
-
-  searchHits = Array.from(document.querySelectorAll('mark.search-hit'));
-  hitIndex = 0;
-  document.getElementById('search-count').textContent = count > 0 ? `${count} match${count !== 1 ? 'es' : ''}` : 'No matches';
-
-  if (searchHits[0]) searchHits[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
-function highlightTextNodes(root, regex, classFactory) {
-  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
-  const nodes = [];
-  let node;
-  while ((node = walker.nextNode())) nodes.push(node);
-
-  nodes.forEach(textNode => {
-    if (!textNode.parentNode || textNode.parentNode.nodeName === 'MARK') return;
-    const text = textNode.textContent;
-    if (!regex.test(text)) return;
-    regex.lastIndex = 0;
-
-    const frag = document.createDocumentFragment();
-    let lastIdx = 0;
-    let match;
-    while ((match = regex.exec(text)) !== null) {
-      if (match.index > lastIdx) {
-        frag.appendChild(document.createTextNode(text.slice(lastIdx, match.index)));
-      }
-      const mark = document.createElement('mark');
-      const cls = classFactory();
-      mark.className = 'search-hit' + (cls ? ' ' + cls : '');
-      mark.textContent = match[0];
-      frag.appendChild(mark);
-      lastIdx = regex.lastIndex;
+  function applySearch(term) {
+    const query = String(term || '').trim();
+    renderArticle(blocks);
+    renderToc();
+    if (!query) {
+      matchText.textContent = 'no search';
+      return;
     }
-    if (lastIdx < text.length) frag.appendChild(document.createTextNode(text.slice(lastIdx)));
-    textNode.parentNode.replaceChild(frag, textNode);
-  });
-}
-
-function clearSearch() {
-  document.querySelectorAll('mark.search-hit').forEach(mark => {
-    const parent = mark.parentNode;
-    if (parent) {
-      parent.replaceChild(document.createTextNode(mark.textContent), mark);
-      parent.normalize();
+    const regex = new RegExp(escapeRegExp(query), 'gi');
+    let count = 0;
+    article.querySelectorAll('p, .quiet-note').forEach(node => {
+      node.innerHTML = node.innerHTML.replace(regex, match => {
+        count += 1;
+        return '<mark>' + escapeHtml(match) + '</mark>';
+      });
+    });
+    matchText.textContent = count ? count + ' matches' : 'no matches';
+  }
+  function updateProgress() {
+    const doc = document.documentElement;
+    const max = Math.max(1, doc.scrollHeight - window.innerHeight);
+    const pct = Math.max(0, Math.min(1, window.scrollY / max));
+    const percent = Math.round(pct * 100);
+    progressBar.style.width = percent + '%';
+    progressText.textContent = percent + '%';
+    const midpoint = window.scrollY + window.innerHeight * 0.34;
+    let activeId = headingIds[0]?.id;
+    for (const item of headingIds) {
+      const el = document.getElementById(item.id);
+      if (el && el.offsetTop <= midpoint) activeId = item.id;
     }
-  });
-  searchHits = [];
-  hitIndex = 0;
-}
-
-function nextHit(dir) {
-  if (!searchHits.length) return;
-  hitIndex = (hitIndex + dir + searchHits.length) % searchHits.length;
-  searchHits[hitIndex]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
-function escapeRegex(s) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-// ── COPY MARKDOWN ────────────────────────────────────────────────
-function copyMarkdown() {
-  const text = DATA.markdown || DATA.plainText || '';
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.getElementById('copy-md-btn');
-    btn.classList.add('copied');
-    btn.textContent = '✓ Copied';
-    setTimeout(() => {
-      btn.classList.remove('copied');
-      btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy as Markdown`;
-    }, 2000);
-  });
-}
-
-// ── BOOT ─────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', init);
+    toc.querySelectorAll('a').forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + activeId));
+  }
+})();
 </script>
 </body>
 </html>

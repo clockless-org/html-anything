@@ -251,8 +251,13 @@ export function selectStyleForContent(contentType: string, options: ConverterOpt
   }
 
   if (
+    contentType === "docx-document"
+  ) {
+    return "kami-reading"
+  }
+
+  if (
     contentType === "pdf-document" ||
-    contentType === "docx-document" ||
     contentType === "medical-visit" ||
     contentType === "lab-results" ||
     contentType === "legal-chronology" ||
