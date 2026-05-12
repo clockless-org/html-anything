@@ -1,24 +1,26 @@
 # html-anything
 
-[![skills.sh](https://skills.sh/b/clockless-org/html-anything)](https://skills.sh/clockless-org/html-anything)
+> **The agent skill that turns anything into a beautiful, shareable HTML page.**
+> Rich answers, files, folders, URLs, and messy service exports become verified
+> single-file `.html` artifacts with source-aware parsing, automatic style
+> routing, **60 source prompts**, and **17 concrete style systems**. Short chats
+> stay short; page-worthy answers become pages.
 
-**Install once. Your agent answers as polished web pages whenever the content
-is actually a page, not a chat message.**
+<p align="center">
+  <a href="https://skills.sh/clockless-org/html-anything"><img alt="skills.sh" src="https://skills.sh/b/clockless-org/html-anything"></a>
+  <a href="https://github.com/clockless-org/html-anything/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/clockless-org/html-anything?style=flat-square"></a>
+  <a href="https://github.com/clockless-org/html-anything/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/clockless-org/html-anything?style=flat-square"></a>
+  <a href="./prompts/sources"><img alt="60 source prompts" src="https://img.shields.io/badge/sources-60%20prompts-7b40e0?style=flat-square"></a>
+  <a href="./prompts/styles"><img alt="17 style systems" src="https://img.shields.io/badge/styles-17%20systems-a03b00?style=flat-square"></a>
+  <a href="https://clockless-org.github.io/html-anything/examples/"><img alt="11 demos" src="https://img.shields.io/badge/examples-11%20demos-0f766e?style=flat-square"></a>
+</p>
 
-`html-anything` is a Codex / Claude Code skill that turns the agent's rich
-answers into self-contained HTML artifacts — analyses, reports, recaps,
-dashboards, atlases, teaching sites, comparison studies, decision memos,
-year-in-review pages. The skill auto-routes to the right design system,
-builds a single-file `.html`, verifies it in a browser, and hands it back.
-Short conversational answers stay short — you just stop
-scrolling 4,000-word replies whenever the content was always going to be a
-page.
-
-It also works **on demand** for any file, folder, URL, or service export
-(Amazon orders, Kindle highlights, Spotify history, WeChat / iMessage,
-Google Photos Takeout, CSV / PDF / DOCX, logs, GPX, …) —
-the skill figures out the source, chooses a concrete style system or the
-default fallback, and ships the HTML.
+`html-anything` works inside Codex and Claude Code. Ask for a teaching site,
+drop in a PDF, upload a CSV, point it at a folder, or hand it an export like
+Amazon orders, Kindle highlights, Spotify history, WeChat / iMessage,
+Google Photos Takeout, logs, GPX, and more. The skill figures out the source,
+chooses the right use case and style, builds the page, checks it in a browser,
+and hands back a live HTML artifact instead of a long Markdown reply.
 
 ## Preview
 
