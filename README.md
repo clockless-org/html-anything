@@ -93,6 +93,21 @@ To update a manual install later:
 git -C ~/.claude/skills/html-anything pull
 ```
 
+### Publish To ClawHub
+
+This repo includes `.clawhubignore` so ClawHub publishes only the skill bundle:
+`SKILL.md` plus `prompts/`. It intentionally excludes examples, screenshots,
+fixtures, generated outputs, source code, and the repo license file.
+
+```bash
+npm i -g clawhub
+clawhub login
+clawhub skill publish . \
+  --owner YOUR_HANDLE_OR_ORG \
+  --version 0.1.0 \
+  --clawscan-note "Creates local HTML pages from user-provided prompts, files, folders, and URLs. Reads local files only when the user asks."
+```
+
 ## Use
 
 Ask in plain language:

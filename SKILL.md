@@ -1,7 +1,13 @@
 ---
 name: html-anything
 description: Turn an idea, file, folder, or URL into a polished live HTML page. Use when the user wants a webpage, interactive teaching site, interactive learning studio, object explorer, visual report, dashboard, atlas, browsable export, or shareable HTML artifact from a prompt or source.
+version: 0.1.0
+homepage: https://github.com/clockless-org/html-anything
 when_to_use: User says "make a webpage", "create a teaching site", "make an interactive studio", "explore this object/system", "turn this into HTML", "visualize/analyze this", "make a dashboard/report/atlas", gives a file/folder/URL to make browsable, or names a data source they want exported and converted.
+metadata:
+  openclaw:
+    emoji: "🧩"
+    homepage: https://github.com/clockless-org/html-anything
 ---
 
 # html-anything
@@ -93,7 +99,7 @@ the style system. Source prompts can be many; use cases should stay stable.
 | Use case | User means | Likely styles |
 |---|---|---|
 | Teaching Studios | Turn an idea, article, lesson, or concept into an interactive learning surface, not a scrolling article. | `teaching`, `interactive-learning` |
-| Files & Work Data | Transform files and work artifacts: CSV/spreadsheet-style exports, PDFs, DOCX, Markdown, logs, finance, calendars, issue trackers, research records, and slide-style carousel outputs. | `dashboard`, `document`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
+| Files & Work Data | Transform files and work artifacts: CSV/spreadsheet-style exports, PDFs, DOCX, Markdown, logs, email/support archives, finance, calendars, issue trackers, research records, and slide-style carousel outputs. | `dashboard`, `soft-saas`, `document`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
 | Conversation Analysis | Analyze private chats, relationship exports, team channels, or message archives. | `relationship`, `kinetic-scoreboard`, `network-map` |
 | Personal Data Recaps | Make a recap/timeline/story from personal exports: orders, health, browsing, media, payments, professional networks, notes, AI chats. | `timeline-story`, `living-essay`, `network-map` |
 | Places & Trips | Make a map, route atlas, travel dossier, photo-location view, or trip paper trail. | `map-atlas`, `paper-trail` |
@@ -120,10 +126,11 @@ model, density, chart grammar, and voice.
 | `relationship` | 1:1 chats, couple/friend/family chats, WhatsApp/WeChat/iMessage relationship exports | **Rhythm Report**: aggregate-first pulse calendar, comparison lanes, evidence snippets, no raw appendix by default |
 | `living-essay` | Kindle highlights, reflective essays, idea notes, concept-heavy reading archives | **Mycelium Writing Environment**: paper manuscript, vertical margin question, inline spore words, living SVG threads, quiet appendix |
 | `dashboard` | Finance/admin data, logs, operational data, issue trackers, dense tabular queues | **Ops Console**: command bar, KPI rail, work surface, flag queue, searchable data grid |
+| `soft-saas` | Support mailboxes, email campaigns, onboarding programs, customer-success queues, lightweight SaaS metrics | **Soft SaaS Console**: pale app canvas, profile/source card, central metric bloom, campaign panels, leaderboard, activity strip |
 | `kinetic-scoreboard` | Multi-participant activity streams, team chats, ranked contributors, owners/reps/players by contribution or workload | **Kinetic Championship**: full-viewport lanes, live ranks, big counters, kinetic activity body, telemetry footer, linked evidence pits |
 | `timeline-story` | Personal histories — chronological (Amazon, browser, Spotify, YouTube, Twitch, Health, AI chats) **and** topical (Notion exports, Obsidian vaults, markdown folders) | **Timeline Story**: time lens, timeline spine, chapter panels, rhythm strip, memory drawer (or cluster cards for topical sources) |
 | `map-atlas` | Places, trips, routes, rideshare, location history, geotagged photo metadata | **Map Atlas**: spatial stage, place drawer, period/place filters, waypoint browser |
-| `network-map` | Contacts, LinkedIn, email, Venmo/PayPal, people/org graphs, community relationship maps | **Network Map**: graph canvas, entity inspector, cluster controls, hub cards, linked records |
+| `network-map` | Contacts, LinkedIn, Venmo/PayPal, people/org graphs, community relationship maps | **Network Map**: graph canvas, entity inspector, cluster controls, hub cards, linked records |
 | `document` | Essays, articles, reading lists, bookmarks, research collections, PDFs, DOCX, legal/medical/lab/academic records | **Document Review**: cover, reading rail, body sheet, evidence margin, drill-down. Tone shifts narrative ↔ formal based on source. |
 | `digital-eguide` | E-guides, PDF guides, creator guides, playbooks, lead magnets, downloadable course previews | **Digital E-Guide Spread**: two paper pages on a warm desk, cover + TOC, inside lesson, pull quote, steps, exercise strip |
 | `editorial-carousel` | Brand strategy essays, founder letters, article takeaways, lightweight reports meant to be shared as a sequence | **Editorial Carousel**: issue cover, spread rail, 4-8 argument spreads, evidence drawer, copy actions |
@@ -143,6 +150,8 @@ Honor explicit style direction in natural language:
 - "make it a carousel" / "magazine feel" / "social post" → lean `editorial-carousel`.
 - "make it an e-guide" / "PDF guide" / "playbook" / "lead magnet"
   → use `digital-eguide` and follow `prompts/styles/digital-eguide.md` exactly.
+- "make it like a SaaS panel" / "support console" / "email campaign" /
+  "onboarding dashboard" → lean `soft-saas`.
 - "more dashboard-like" → increase density, filters, charts.
 - "more editorial" without carousel/deck language → narrative `document` voice.
 - "make it a map" / "spatial" → lean `map-atlas`.
@@ -316,7 +325,7 @@ the use-case taxonomy above:
 
 - Teaching Studios: `url-article`, `markdown`, `default`.
 - Conversation Analysis: `wechat`, `whatsapp`, `slack`, `discord`,
-  `telegram`, `imessage`, `multi-sender-chat`, `email`.
+  `telegram`, `imessage`, `multi-sender-chat`.
 - Personal Data Recaps: `amazon-orders`, `youtube-watch-history`,
   `spotify-history`, `iphone-health`, `kindle-highlights`, `twitch-history`,
   `browser-history`, `venmo-paypal-payments`, `linkedin-connections`,
@@ -324,7 +333,7 @@ the use-case taxonomy above:
   `notion-export`, `obsidian-vault`, `markdown-folder`.
 - Places & Trips: `google-maps-stars`, `google-photos-takeout`,
   `rideshare-history`, `gpx`, `kml`, `travel-itinerary`, `location-history`.
-- Files & Work Data: `csv`, `json`, `jsonl`, `log`, `bank-transactions`,
+- Files & Work Data: `csv`, `json`, `jsonl`, `log`, `email`, `bank-transactions`,
   `invoices`, `quickbooks`, `ics-calendar`, `issue-tracker`, `trello-board`,
   `markdown`, `pdf`, `docx`, `bookmarks`, `url-list`, `reading-list`,
   `bibliography`, `medical-visit`, `lab-results`, `legal-chronology`.
@@ -337,7 +346,7 @@ brief.
 
 Style prompts under [`prompts/styles/`](./prompts/styles/) define reusable page
 systems such as `Timeline Story`, `Map Atlas`, `Network Map`, `Lesson Lab`,
-`Learning Studio`, `Ops Console`, `Mycelium Writing Environment`
+`Learning Studio`, `Ops Console`, `Soft SaaS Console`, `Mycelium Writing Environment`
 (`living-essay`), `Editorial Carousel`, `Digital E-Guide Spread`, and
 `Paper Trail` (explicit tactile printed-artifact override). They complement
 source prompts; they do not replace source-specific analysis. The style prompt

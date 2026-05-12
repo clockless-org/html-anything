@@ -1,0 +1,15 @@
+# ClawHub publishes the agent skill bundle, not this whole repo.
+# Keep the public bundle lean and text-only:
+#   - SKILL.md contains the runnable agent instructions.
+#   - prompts/ contains source and style guidance loaded by the skill.
+#
+# Exclude README.md because the GitHub repo is Apache-2.0, while ClawHub
+# published skills use MIT-0 terms. Avoid shipping conflicting license text
+# inside the ClawHub skill package.
+
+*
+
+!SKILL.md
+!prompts/
+!prompts/**
+!.clawhubignore
