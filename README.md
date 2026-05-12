@@ -57,6 +57,8 @@ more interactive, and easier to share when the answer is really a page.
 
 <p align="center">
   <a href="https://clockless-org.github.io/html-anything/examples/"><strong>Open gallery →</strong></a>
+  <br>
+  <sub>Install the skill, then try the prompt under any card to reproduce that usage pattern.</sub>
 </p>
 
 ### Teaching Studios
@@ -66,19 +68,22 @@ more interactive, and easier to share when the answer is really a page.
 <td width="50%" valign="top">
 <a href="https://clockless-org.github.io/html-anything/examples/solar-system-studio/output.html"><img src="./docs/example-demos/solar-system-studio.gif" alt="Teach a concept demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/solar-system-studio/output.html">Teach a concept →</a></strong><br>
-<sub>Source: teaching brief · Style: <code>teaching</code></sub>
+<sub>Source: teaching brief · Style: <code>teaching</code></sub><br>
+<sub><strong>Prompt:</strong> <code>Create an interactive teaching site about the solar system.</code></sub>
 </td>
 <td width="50%" valign="top">
 <a href="https://clockless-org.github.io/html-anything/examples/markdown/output.html"><img src="./docs/example-demos/markdown.gif" alt="Learn from long-form text demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/markdown/output.html">Learn from long-form text →</a></strong><br>
-<sub>Source: Markdown file · Style: <code>architectural-spread</code></sub>
+<sub>Source: Markdown file · Style: <code>architectural-spread</code></sub><br>
+<sub><strong>Prompt:</strong> <code>Turn this Markdown essay into a visual long-form HTML explainer.</code></sub>
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
 <a href="https://clockless-org.github.io/html-anything/examples/docx/output.html"><img src="./docs/example-demos/docx.gif" alt="Learn from a document demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/docx/output.html">Learn from a document →</a></strong><br>
-<sub>Source: DOCX file · Style: <code>kami-reading</code></sub>
+<sub>Source: DOCX file · Style: <code>kami-reading</code></sub><br>
+<sub><strong>Prompt:</strong> <code>Turn this DOCX memo into a calm HTML reading page.</code></sub>
 </td>
 <td width="50%" valign="top"></td>
 </tr>
@@ -92,24 +97,28 @@ more interactive, and easier to share when the answer is really a page.
 <td width="50%" valign="top">
 <a href="https://clockless-org.github.io/html-anything/examples/editorial-carousel/output.html"><img src="./docs/example-demos/editorial-carousel.gif" alt="Argument as sequence demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/editorial-carousel/output.html">Argument as sequence →</a></strong><br>
-<sub>Source: strategy essay · Style: <code>editorial-carousel</code></sub>
+<sub>Source: strategy essay · Style: <code>editorial-carousel</code></sub><br>
+<sub><strong>Prompt:</strong> <code>Turn this strategy essay into a shareable editorial carousel.</code></sub>
 </td>
 <td width="50%" valign="top">
 <a href="https://clockless-org.github.io/html-anything/examples/pdf/output.html"><img src="./docs/example-demos/pdf.gif" alt="Guide from dense document demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/pdf/output.html">Guide from dense document →</a></strong><br>
-<sub>Source: PDF report · Style: <code>digital-eguide</code></sub>
+<sub>Source: PDF report · Style: <code>digital-eguide</code></sub><br>
+<sub><strong>Prompt:</strong> <code>Turn this PDF guide into an interactive e-guide.</code></sub>
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
 <a href="https://clockless-org.github.io/html-anything/examples/email/output.html"><img src="./docs/example-demos/email.gif" alt="Inbox or workstream audit demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/email/output.html">Inbox or workstream audit →</a></strong><br>
-<sub>Source: Mbox archive · Style: <code>soft-saas</code></sub>
+<sub>Source: Mbox archive · Style: <code>soft-saas</code></sub><br>
+<sub><strong>Prompt:</strong> <code>Turn this mbox archive into a beautiful email workstream dashboard.</code></sub>
 </td>
 <td width="50%" valign="top">
 <a href="https://clockless-org.github.io/html-anything/examples/ci-log/output.html"><img src="./docs/example-demos/ci-log.gif" alt="Debugging evidence demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/ci-log/output.html">Debugging evidence →</a></strong><br>
-<sub>Source: CI log · Style: <code>terminal-cli</code></sub>
+<sub>Source: CI log · Style: <code>terminal-cli</code></sub><br>
+<sub><strong>Prompt:</strong> <code>Turn this CI log into a terminal-style debugging evidence page.</code></sub>
 </td>
 </tr>
 </table>
@@ -122,12 +131,14 @@ more interactive, and easier to share when the answer is really a page.
 <td width="50%" valign="top">
 <a href="https://clockless-org.github.io/html-anything/examples/wechat-couple/output.html"><img src="./docs/example-demos/wechat-couple.gif" alt="Private chat recap demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/wechat-couple/output.html">Private chat recap →</a></strong><br>
-<sub>Source: 1:1 chat export · Style: <code>love-romance-3d</code></sub>
+<sub>Source: 1:1 chat export · Style: <code>love-romance-3d</code></sub><br>
+<sub><strong>Prompt:</strong> <code>Analyze this 1:1 chat export as a private relationship recap. Mask names.</code></sub>
 </td>
 <td width="50%" valign="top">
 <a href="https://clockless-org.github.io/html-anything/examples/slack/output.html"><img src="./docs/example-demos/slack.gif" alt="Group contribution analysis demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/slack/output.html">Group contribution analysis →</a></strong><br>
-<sub>Source: team chat export · Style: <code>kinetic-scoreboard</code></sub>
+<sub>Source: team chat export · Style: <code>kinetic-scoreboard</code></sub><br>
+<sub><strong>Prompt:</strong> <code>Turn this Slack export into a kinetic team contribution scoreboard.</code></sub>
 </td>
 </tr>
 </table>
@@ -140,12 +151,14 @@ more interactive, and easier to share when the answer is really a page.
 <td width="50%" valign="top">
 <a href="https://clockless-org.github.io/html-anything/examples/kindle-highlights/output.html"><img src="./docs/example-demos/kindle-highlights.gif" alt="Reflective reading archive demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/kindle-highlights/output.html">Reflective reading archive →</a></strong><br>
-<sub>Source: My Clippings.txt · Style: <code>living-essay</code></sub>
+<sub>Source: My Clippings.txt · Style: <code>living-essay</code></sub><br>
+<sub><strong>Prompt:</strong> <code>Turn my Kindle highlights into a reflective reading archive.</code></sub>
 </td>
 <td width="50%" valign="top">
 <a href="https://clockless-org.github.io/html-anything/examples/travel-history/output.html"><img src="./docs/example-demos/travel-history.gif" alt="Mobility recap demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/travel-history/output.html">Mobility recap →</a></strong><br>
-<sub>Source: Uber/Lyft CSV · Style: <code>global-travel</code></sub>
+<sub>Source: Uber/Lyft CSV · Style: <code>global-travel</code></sub><br>
+<sub><strong>Prompt:</strong> <code>Turn this Uber/Lyft ride history CSV into a personal mobility recap.</code></sub>
 </td>
 </tr>
 </table>

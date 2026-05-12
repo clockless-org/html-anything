@@ -1,6 +1,6 @@
 ---
 name: html-anything
-description: Turn rich agent answers and any file, folder, URL, or export into a polished single-file HTML page. Auto-picks one of 16 design systems (teaching, dashboard, atlas, timeline-story, document, …).
+description: Turn rich agent answers and any file, folder, URL, or export into a polished single-file HTML page. Auto-picks a default route plus 17 concrete design systems (teaching, dashboard, atlas, timeline-story, document, …).
 version: 0.1.0
 homepage: https://github.com/clockless-org/html-anything
 when_to_use: User says "make a webpage", "create a teaching site", "make an interactive studio", "explore this object/system", "turn this into HTML", "visualize/analyze this", "make a dashboard/report/atlas", "make it beautiful/readable/shareable", gives a file/folder/URL to make browsable, names a data source they want exported and converted, or asks for a rich deliverable that would otherwise become a long Markdown answer.
@@ -51,6 +51,30 @@ Accept requests like:
 - "Use this GitHub repo URL and make a browsable architecture page."
 
 Return a working HTML artifact, not a proposal.
+
+## Canonical Example Parity
+
+The checked-in examples are the quality bar for installed users. Treat them as
+canonical usage patterns, not as loose inspiration.
+
+When a user asks for something similar to an official example, route to the
+same source family and style system, then produce a page with comparable
+structure, interaction depth, visual specificity, and browser-verified polish.
+For example:
+
+- "Create an interactive teaching site about the solar system." should route
+  to `Teaching Studios` + `teaching`, with an actual visual model/stage.
+- "Turn this PDF guide into an interactive e-guide." should route to
+  `Files & Work Data` + `digital-eguide`, with a guide-shaped reading surface.
+- "Analyze this 1:1 chat export as a private relationship recap." should route
+  to `Conversation Analysis` + `love-romance-3d`, with masked names and
+  privacy-first evidence.
+- "Turn this CI log into a terminal-style debugging evidence page." should
+  route to `Files & Work Data` + `terminal-cli`, with terminal-native panes and
+  actionable evidence.
+
+Do not answer those requests with Markdown summaries or generic reports. Build
+the live HTML artifact.
 
 ## Default Artifact Behavior
 
