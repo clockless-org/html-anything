@@ -22,46 +22,46 @@ default fallback, and ships the HTML.
 
 ## Preview
 
-→ **[Open the usage gallery](https://clockless-org.github.io/html-anything/examples/)** — 11 usage patterns, organized by use case. Each card labels the source and style.
+→ **[Open the usage gallery](https://clockless-org.github.io/html-anything/examples/)** — 11 usage patterns across 4 use cases. Gallery cards use video thumbnails when a demo is available.
 
-### Featured
+### Teaching Studios
 
-#### [Interactive teaching site →](https://clockless-org.github.io/html-anything/examples/solar-system-studio/output.html)
+<video src="https://raw.githubusercontent.com/clockless-org/html-anything/main/docs/example-videos/solar-system-studio.mp4" controls muted loop playsinline width="100%"></video>
 
-[![Solar system teaching style screenshot](./docs/solar-system-studio-preview.png)](https://clockless-org.github.io/html-anything/examples/solar-system-studio/output.html)
+| Usage | Source | Style | Live | Demo |
+|---|---|---|---|---|
+| Teach a concept | Teaching brief | `teaching` | [Open →](https://clockless-org.github.io/html-anything/examples/solar-system-studio/output.html) | [mp4](./docs/example-videos/solar-system-studio.mp4) |
+| Learn from long-form text | Markdown file | `architectural-spread` | [Open →](https://clockless-org.github.io/html-anything/examples/markdown/output.html) | [mp4](./docs/example-videos/markdown.mp4) |
+| Learn from a document | DOCX file | `kami-reading` | [Open →](https://clockless-org.github.io/html-anything/examples/docx/output.html) | [mp4](./docs/example-videos/docx.mp4) |
 
-A self-contained interactive lesson built from a single teaching brief — *"create an interactive teaching site about the solar system"*. Each planet has its own stage with orbit controls, comparison tools, and a try-it quiz. No tutoring software, no slides, no setup. Style: `teaching`.
+### Files & Work Data
 
-#### [Couple chat relationship report →](https://clockless-org.github.io/html-anything/examples/wechat-couple/output.html)
+<video src="https://raw.githubusercontent.com/clockless-org/html-anything/main/docs/example-videos/pdf.mp4" controls muted loop playsinline width="100%"></video>
 
-[![Realistic couple chat report screenshot](./docs/relationship-preview.png)](https://clockless-org.github.io/html-anything/examples/wechat-couple/output.html)
+| Usage | Source | Style | Live | Demo |
+|---|---|---|---|---|
+| Argument as sequence | Strategy essay | `editorial-carousel` | [Open →](https://clockless-org.github.io/html-anything/examples/editorial-carousel/output.html) | [mp4](./docs/example-videos/editorial-carousel.mp4) |
+| Guide from dense document | PDF report | `digital-eguide` | [Open →](https://clockless-org.github.io/html-anything/examples/pdf/output.html) | [mp4](./docs/example-videos/pdf.mp4) |
+| Inbox or workstream audit | Mbox archive | `soft-saas` | [Open →](https://clockless-org.github.io/html-anything/examples/email/output.html) | [mp4](./docs/example-videos/email.mp4) |
+| Debugging evidence | CI log | `terminal-cli` | [Open →](https://clockless-org.github.io/html-anything/examples/ci-log/output.html) | [mp4](./docs/example-videos/ci-log.mp4) |
 
-A 1:1 chat export reduced to its **rhythm story** — who initiates, response times, peak-hour patterns, mood cadence — without ever exposing private text. Aggregate-first, anonymized evidence. Style: `love-romance-3d`.
+### Conversation Analysis
 
-#### [Mobility recap →](https://clockless-org.github.io/html-anything/examples/travel-history/output.html)
+<video src="https://raw.githubusercontent.com/clockless-org/html-anything/main/docs/example-videos/wechat-couple.mp4" controls muted loop playsinline width="100%"></video>
 
-[![Mobility recap screenshot](./docs/example-previews/travel-history.jpg)](https://clockless-org.github.io/html-anything/examples/travel-history/output.html)
+| Usage | Source | Style | Live | Demo |
+|---|---|---|---|---|
+| Private chat recap | 1:1 chat export | `love-romance-3d` | [Open →](https://clockless-org.github.io/html-anything/examples/wechat-couple/output.html) | [mp4](./docs/example-videos/wechat-couple.mp4) |
+| Group contribution analysis | Team chat export | `kinetic-scoreboard` | [Open →](https://clockless-org.github.io/html-anything/examples/slack/output.html) | [mp4](./docs/example-videos/slack.mp4) |
 
-Uber / Lyft history becomes a personal movement story: cities, routes, cadence, late nights, and airport patterns. Style: `global-travel`.
+### Personal Data & Places
 
-### More demos
+<video src="https://raw.githubusercontent.com/clockless-org/html-anything/main/docs/example-videos/travel-history.mp4" controls muted loop playsinline width="100%"></video>
 
-A small selection across the rest of the style catalog. Think of each row as a
-usage pattern: what kind of answer should become HTML, and which style should
-shape it.
-
-| Usage | Live example | When it triggers | Style |
-|---|---|---|---|
-| Reflective reading archive | [Kindle highlights →](https://clockless-org.github.io/html-anything/examples/kindle-highlights/output.html) | Highlights, notes, quotes, idea archives, reading themes | `living-essay` |
-| Learn from long-form text | [Article learning page →](https://clockless-org.github.io/html-anything/examples/markdown/output.html) | Essays, articles, manifestos, and long-form explainers that need guided pacing | `architectural-spread` |
-| Learn from a document | [Structured document reader →](https://clockless-org.github.io/html-anything/examples/docx/output.html) | Memos, manuscripts, long DOCX files, and documents meant for sustained reading | `kami-reading` |
-| Team contribution analysis | [Slack championship →](https://clockless-org.github.io/html-anything/examples/slack/output.html) | Group chats, team activity, ranked contributors, burst patterns | `kinetic-scoreboard` |
-| Guide from dense document | [PDF e-guide →](https://clockless-org.github.io/html-anything/examples/pdf/output.html) | Reports, playbooks, lead magnets, PDF guides, course previews | `digital-eguide` |
-| Argument as sequence | [Brand positioning carousel →](https://clockless-org.github.io/html-anything/examples/editorial-carousel/output.html) | Strategy essays, founder letters, article takeaways, shareable sequences | `editorial-carousel` |
-| Inbox or workstream audit | [Email support console →](https://clockless-org.github.io/html-anything/examples/email/output.html) | Support inboxes, email campaigns, onboarding, customer-success queues | `soft-saas` |
-| Debugging evidence | [CI terminal console →](https://clockless-org.github.io/html-anything/examples/ci-log/output.html) | CI logs, build output, terminal evidence, failing tests | `terminal-cli` |
-
-→ **[See the usage gallery (11 patterns) →](https://clockless-org.github.io/html-anything/examples/)**
+| Usage | Source | Style | Live | Demo |
+|---|---|---|---|---|
+| Reflective reading archive | My Clippings.txt | `living-essay` | [Open →](https://clockless-org.github.io/html-anything/examples/kindle-highlights/output.html) | [mp4](./docs/example-videos/kindle-highlights.mp4) |
+| Mobility recap | Uber/Lyft CSV | `global-travel` | [Open →](https://clockless-org.github.io/html-anything/examples/travel-history/output.html) | [mp4](./docs/example-videos/travel-history.mp4) |
 
 ## Install
 
