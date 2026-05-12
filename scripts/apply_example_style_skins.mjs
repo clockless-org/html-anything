@@ -17,7 +17,7 @@ const ROOT = path.resolve(__dirname, "..")
 
 const STYLE_BY_EXAMPLE = {
   "solar-system-studio": "teaching",
-  "wechat-couple": "relationship",
+  "wechat-couple": "love-romance-3d",
   "whatsapp": "relationship",
 
   "amazon-orders": "timeline-story",
@@ -216,6 +216,51 @@ html[data-ha-style="relationship"] body {
     linear-gradient(300deg, rgba(49,123,147,.08), transparent 40%);
 }
 html[data-ha-style="relationship"] body::before { content: "relationship"; }
+
+html[data-ha-style="love-romance-3d"] {
+  --ha-style-accent: #f04d72;
+  --ha-style-accent-2: #45a6b7;
+  --primary: #d9355d;
+  --primary-container: #b72b4e;
+  --primary-fixed: #ffe2ea;
+  --secondary-container: #45a6b7;
+  --bg: #fff5f7;
+  --surface: #fff7f9;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #ffeef3;
+  --surface-container: #f9dfe7;
+  --surface-container-high: #efcbd7;
+  --fg-1: #29161c;
+  --fg-2: #663744;
+  --fg-muted: #906b75;
+  --border: rgba(217,53,93,.16);
+  --rose: #f04d72;
+  --blue: #45a6b7;
+  --gold: #f4bd55;
+  --gradient-hero: linear-gradient(135deg, #ff7d9c 0%, #f04d72 46%, #45a6b7 100%);
+  --gradient-text: linear-gradient(135deg, #d9355d 0%, #8f2b5d 58%, #2b7e8c 100%);
+}
+html[data-ha-style="love-romance-3d"] body {
+  background-color: var(--bg) !important;
+  background-image:
+    linear-gradient(120deg, rgba(240,77,114,.10), transparent 42%),
+    linear-gradient(300deg, rgba(69,166,183,.09), transparent 44%),
+    linear-gradient(rgba(217,53,93,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(217,53,93,.035) 1px, transparent 1px);
+  background-size: auto, auto, 28px 28px, 28px 28px;
+}
+html[data-ha-style="love-romance-3d"] body::before { content: "love romance 3d"; }
+html[data-ha-style="love-romance-3d"] .hero::before,
+html[data-ha-style="love-romance-3d"] header.hero::before {
+  width: 82px;
+  height: 82px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 30% 24%, rgba(255,255,255,.86) 0 7px, transparent 8px),
+    linear-gradient(135deg, #ff9bb2 0%, #f04d72 58%, #b72b4e 100%);
+  box-shadow: inset -12px -14px 20px rgba(115,14,45,.18), inset 10px 9px 18px rgba(255,255,255,.48), 0 18px 36px rgba(217,53,93,.22);
+  transform: rotate(-8deg);
+}
 
 html[data-ha-style="timeline-story"] {
   --ha-style-accent: #9a4b14;

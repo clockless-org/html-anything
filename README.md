@@ -224,7 +224,7 @@ auto-selected styles (`teaching`,
 `interactive-learning`, `relationship`, `living-essay`, `dashboard`, `soft-saas`,
 `kinetic-scoreboard`, `timeline-story`, `map-atlas`, `network-map`,
 `document`, `architectural-spread`, `editorial-carousel`, and `developer`), plus explicit overrides
-such as `paper-trail`, `digital-eguide`, and `terminal-cli`.
+such as `paper-trail`, `digital-eguide`, `love-romance-3d`, and `terminal-cli`.
 
 Example explicit style override:
 

@@ -61,6 +61,7 @@ const STYLES = new Set<HtmlAnythingStyle | "auto">([
   "teaching",
   "interactive-learning",
   "relationship",
+  "love-romance-3d",
   "living-essay",
   "dashboard",
   "soft-saas",
@@ -108,7 +109,7 @@ Default style is auto. Auto injects one of the built-in style prompts
 kinetic-scoreboard, timeline-story, map-atlas, network-map, document,
 editorial-carousel, developer, or default) based on the parsed content type.
 Explicit overrides also include paper-trail, digital-eguide,
-architectural-spread, and terminal-cli.
+architectural-spread, love-romance-3d, and terminal-cli.
 `
 
 async function main() {

@@ -40,7 +40,7 @@
       "id": "conversation",
       "title": "Conversation Analysis",
       "summary": "Analyze private chats, relationship threads, team channels, and message exports through rhythm, contribution, and evidence.",
-      "styles": ["relationship", "kinetic-scoreboard", "network-map"],
+      "styles": ["relationship", "love-romance-3d", "kinetic-scoreboard", "network-map"],
       "examples": ["wechat-couple", "whatsapp", "slack"]
     },
     {
@@ -125,6 +125,21 @@
       "coreScaffold": ["pulse calendar", "comparison lanes", "selected insight tooltips", "evidence snippets", "privacy-first drill-down"],
       "requiredPrimitives": [".rhythm-shell", ".pulse-calendar", ".comparison-lane", ".insight-tooltip", ".evidence-chip"],
       "avoid": ["raw message appendix by default", "absolute claims about who loves more", "overly sweet toy metrics"]
+    },
+    {
+      "id": "love-romance-3d",
+      "system": "Keepsake 3D Rhythm",
+      "mode": "explicit-or-demo",
+      "summary": "A soft 3D keepsake interface for couple chats and romance-themed relationship recaps.",
+      "useCases": ["conversation"],
+      "triggers": ["love and romance 3d", "romance icons", "valentine style", "couple chat", "cute 3d"],
+      "bestSources": ["wechat-chat", "whatsapp-chat", "imessage-chat"],
+      "example": "wechat-couple",
+      "preview": "docs/example-previews/wechat-couple.jpg",
+      "accent": "#f04d72",
+      "coreScaffold": ["3D keepsake cover", "icon-stage metrics", "message pulse board", "soft comparison lanes", "privacy evidence drawer"],
+      "requiredPrimitives": [".romance-3d-shell", ".icon-stage", ".keepsake-metric", ".message-pulse", ".memory-token", ".evidence-card"],
+      "avoid": ["raw transcript as decoration", "emoji-only romance icons", "who loves more claims", "generic pink dashboard"]
     },
     {
       "id": "living-essay",

@@ -99,6 +99,7 @@ test("htmlize auto style selector routes major source families", async () => {
   assert.equal(selectStyleForContent("csv-tabular", { style: "interactive-learning" }), "interactive-learning")
   assert.equal(selectStyleForContent("pdf-document", { style: "digital-eguide" }), "digital-eguide")
   assert.equal(selectStyleForContent("markdown-document", { style: "architectural-spread" }), "architectural-spread")
+  assert.equal(selectStyleForContent("wechat-chat", { style: "love-romance-3d" }), "love-romance-3d")
   assert.equal(selectStyleForContent("ci-log", { style: "terminal-cli" }), "terminal-cli")
 })
 
