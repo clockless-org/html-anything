@@ -134,7 +134,7 @@ the style system. Source prompts can be many; use cases should stay stable.
 | Files & Work Data | Transform files and work artifacts: CSV/spreadsheet-style exports, PDFs, DOCX, Markdown, logs, email/support archives, finance, calendars, issue trackers, research records, and slide-style carousel outputs. | `dashboard`, `soft-saas`, `document`, `architectural-spread`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
 | Conversation Analysis | Analyze private chats, relationship exports, team channels, or message archives. | `relationship`, `love-romance-3d`, `kinetic-scoreboard`, `network-map` |
 | Personal Data Recaps | Make a recap/timeline/story from personal exports: orders, health, browsing, media, payments, professional networks, notes, AI chats. | `timeline-story`, `living-essay`, `network-map` |
-| Places & Trips | Make a map, route atlas, travel dossier, photo-location view, or trip paper trail. | `map-atlas`, `paper-trail` |
+| Places & Trips | Make a map, route atlas, travel dossier, photo-location view, travel history, or trip paper trail. | `global-travel`, `map-atlas`, `paper-trail` |
 | Developer Evidence | Review, explain, or debug code artifacts: diffs, PRs, CI logs, stack traces, repos. | `developer`, `terminal-cli` |
 
 Do not expose this as a required choice to the user. Use it internally to make
@@ -162,7 +162,8 @@ model, density, chart grammar, and voice.
 | `soft-saas` | Support mailboxes, email campaigns, onboarding programs, customer-success queues, lightweight SaaS metrics | **Soft SaaS Console**: pale app canvas, profile/source card, central metric bloom, campaign panels, leaderboard, activity strip |
 | `kinetic-scoreboard` | Multi-participant activity streams, team chats, ranked contributors, owners/reps/players by contribution or workload | **Kinetic Championship**: full-viewport lanes, live ranks, big counters, kinetic activity body, telemetry footer, linked evidence pits |
 | `timeline-story` | Personal histories — chronological (Amazon, browser, Spotify, YouTube, Twitch, Health, AI chats) **and** topical (Notion exports, Obsidian vaults, markdown folders) | **Timeline Story**: time lens, timeline spine, chapter panels, rhythm strip, memory drawer (or cluster cards for topical sources) |
-| `map-atlas` | Places, trips, routes, rideshare, location history, geotagged photo metadata | **Map Atlas**: spatial stage, place drawer, period/place filters, waypoint browser |
+| `global-travel` | Travel history, Uber/Lyft trip exports, airport patterns, and personal mobility recaps | **Global Travel Map**: centered headline, source selector, dotted world map, warm pins, metric runway, itinerary browser |
+| `map-atlas` | Places, trips, routes, location history, geotagged photo metadata | **Map Atlas**: spatial stage, place drawer, period/place filters, waypoint browser |
 | `network-map` | Contacts, LinkedIn, Venmo/PayPal, people/org graphs, community relationship maps | **Network Map**: graph canvas, entity inspector, cluster controls, hub cards, linked records |
 | `document` | Essays, articles, reading lists, bookmarks, research collections, PDFs, DOCX, legal/medical/lab/academic records | **Document Review**: cover, reading rail, body sheet, evidence margin, drill-down. Tone shifts narrative ↔ formal based on source. |
 | `architectural-spread` | Visual long-form essays, object-focused articles, manifestos, and reference requests that look like the split Mars architectural HTML | **Architectural Editorial Spread**: left visual bay, right cream content panel, serif italic emphasis, corner anchors, pagination dots |
@@ -194,6 +195,7 @@ Honor explicit style direction in natural language:
   "architectural spread" → use `architectural-spread` and follow
   `prompts/styles/architectural-spread.md` exactly.
 - "make it a map" / "spatial" → lean `map-atlas`.
+- "travel history" / "Uber history" / "Lyft history" → lean `global-travel`.
 - "show relationships/network" → lean `network-map`.
 - "who contributed most" / "make it feel like a race" → lean `kinetic-scoreboard`.
 - "make it a year-in-review" / "story over time" → lean `timeline-story`.
@@ -373,7 +375,8 @@ the use-case taxonomy above:
   `vcard-contacts`, `chatgpt-export`, `claude-chat-export`, `ai-chat-export`,
   `notion-export`, `obsidian-vault`, `markdown-folder`.
 - Places & Trips: `google-maps-stars`, `google-photos-takeout`,
-  `rideshare-history`, `gpx`, `kml`, `travel-itinerary`, `location-history`.
+  `rideshare-history` / travel history, `gpx`, `kml`, `travel-itinerary`,
+  `location-history`.
 - Files & Work Data: `csv`, `json`, `jsonl`, `log`, `email`, `bank-transactions`,
   `invoices`, `quickbooks`, `ics-calendar`, `issue-tracker`, `trello-board`,
   `markdown`, `pdf`, `docx`, `bookmarks`, `url-list`, `reading-list`,

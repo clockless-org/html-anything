@@ -28,6 +28,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `soft-saas` | Support inboxes, email campaigns, onboarding, customer-success queues, and lightweight SaaS metrics | Airy SaaS app canvas with profile/source card, central metric bloom, campaign panels, leaderboard, and activity strip |
 | `kinetic-scoreboard` | Multi-participant activity streams, team chats, work races, ranked contributors | Full-viewport championship lanes with kinetic bodies, live ranks, telemetry, and linked evidence pits |
 | `timeline-story` | Personal histories — chronological (orders, listening, health) and topical (Notion / Obsidian vaults) | Scroll-driven story with timeline spine, chapters, rhythm strip, drawer |
+| `global-travel` | Travel history, Uber/Lyft trip exports, and personal mobility recaps that should open on an airy dotted world map | Centered travel section with selector, dotted map, warm pins, callout, and metric runway |
 | `map-atlas` | Places, routes, trips, rideshare, location/photo geodata | Spatial atlas with map/route stage, place drawer, filters, waypoint browser |
 | `paper-trail` | Explicit tactile/printed-collateral requests: itineraries, hotel folios, receipts, tickets, reservation bundles | Artifact desk with folio tabs, receipt tape, stamp callouts, source drawer |
 | `network-map` | Personal/professional networks, senders, contacts, communities, payments | Relationship graph with entity inspector, clusters, hubs, linked records |
@@ -54,6 +55,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `soft-saas` | Soft SaaS Console |
 | `kinetic-scoreboard` | Kinetic Championship |
 | `timeline-story` | Timeline Story |
+| `global-travel` | Global Travel Map |
 | `map-atlas` | Map Atlas |
 | `paper-trail` | Paper Trail |
 | `network-map` | Network Map |
@@ -90,6 +92,7 @@ override. Borrow archetypes, not brand identities:
 - cinematic lesson stages → `teaching`
 - app-like object/system studios → `interactive-learning`
 - temporal / scrollytelling systems → `timeline-story`
+- travel-history world-map sections → `global-travel`
 - kinetic lane / race / scoreboard systems → `kinetic-scoreboard`
 - spatial atlas systems → `map-atlas`
 - tactile printed-artifact systems → `paper-trail`
@@ -136,7 +139,7 @@ choose from.
 | Files & Work Data | CSV/spreadsheet-style exports, PDFs, DOCX, Markdown, logs, finance, calendars, issue trackers, email/support archives, research records, slide-style carousel outputs | `dashboard`, `soft-saas`, `document`, `kami-reading`, `architectural-spread`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
 | Conversation Analysis | Couple/friend chats, WhatsApp/WeChat, team channels, message streams | `relationship`, `love-romance-3d`, `kinetic-scoreboard`, `network-map` |
 | Personal Data Recaps | Orders, health, browsing, media history, reading, payments, professional network, notes, AI chats | `timeline-story`, `living-essay`, `network-map` |
-| Places & Trips | Photos with EXIF, saved places, rideshare, GPX/KML, itineraries | `map-atlas`, `paper-trail` |
+| Places & Trips | Photos with EXIF, saved places, rideshare, GPX/KML, itineraries | `global-travel`, `map-atlas`, `paper-trail` |
 | Developer Evidence | Diffs, PRs, CI logs, stack traces, repos | `developer`, `terminal-cli` |
 
 Do not ask users to pick from these by default. Choose internally unless the

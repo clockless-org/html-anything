@@ -80,7 +80,7 @@ test("htmlize fallback: source-prompt resolution covers pdf-document + docx-docu
 test("htmlize auto style selector routes major source families", async () => {
   const { selectStyleForContent } = await import("../../dist/htmlize.js")
   assert.equal(selectStyleForContent("wechat-chat"), "relationship")
-  assert.equal(selectStyleForContent("rideshare-history"), "map-atlas")
+  assert.equal(selectStyleForContent("rideshare-history"), "global-travel")
   assert.equal(selectStyleForContent("spotify-history"), "timeline-story")
   assert.equal(selectStyleForContent("browser-history"), "timeline-story")
   assert.equal(selectStyleForContent("kindle-highlights"), "living-essay")
@@ -1771,7 +1771,7 @@ test("rideshare-history prompt is present on disk", async () => {
   assert.ok(stat.isFile(), "missing prompt file: rideshare-history.md")
   const body = await fs.readFile(p, "utf8")
   for (const needle of ["Export instructions", "Uber", "Lyft",
-                        "Spend timeline", "When you ride", "Top places",
+                        "Spend timeline", "When you travel", "Top places",
                         "Trip lengths", "Money", "Flags",
                         "Browse all", "Privacy", "no map tiles", "no geocoding"]) {
     assert.ok(body.includes(needle), `prompts/sources/rideshare-history.md missing: ${needle}`)

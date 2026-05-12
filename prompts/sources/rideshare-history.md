@@ -1,7 +1,7 @@
-# rideshare-history — Uber & Lyft personal trip-history exports
+# travel-history — Uber & Lyft personal trip-history exports
 
 A normal consumer Uber or Lyft account's trip history — every ride
-they've taken over the years. Output is a **private mobility +
+they've taken over the years. Output is a **private travel +
 spending atlas**: where the rides went, what the money was, how
 many hours they actually spent in cars, the late-night and airport
 patterns, and the commute loops that quietly add up.
@@ -14,7 +14,7 @@ runs, and apparently did the same Home → Office trip 38 times
 between 8 and 9 am."*
 
 This prompt does **not** belong to the `_finance.md` family. Bank
-transactions are about cashflow categories; rideshare trips are
+transactions are about cashflow categories; travel-history trips are
 about *time + place + habit + tip behavior*. Different question,
 different shape. Frame this as a personal mobility log, not a
 bank statement.
@@ -61,7 +61,7 @@ doesn't spend 20 minutes hunting.
    `Ride Type`, `Status`, `Pickup Lat`, `Pickup Lng`, `Dropoff
    Lat`, `Dropoff Lng`).
    Drop that file into Claude Code:
-   `convert this Lyft ride history to HTML: ~/Downloads/Lyft/rides.csv`.
+   `convert this Lyft travel history to HTML: ~/Downloads/Lyft/rides.csv`.
 5. Some Lyft exports ship as JSON (`rides.json`) — the parser
    handles both.
 
@@ -90,12 +90,14 @@ This is meant to feel like **scrolling through years of personal
 mobility as a story** — when they took rides, where, with what
 product, and what the money was. Not a stats page.
 
-### Source-aware hero (required)
+### Source-aware global travel hero (required)
 
 One row, big, brand-anchored:
 
-- The hero card stamps the source verbatim: *"Uber ride history"*
-  or *"Lyft ride history"* — never blended. Use a small "stamp"
+- The hero stamps the source verbatim but names the page
+  **"Travel history"** — provider chips can read `UBER` / `LYFT`,
+  but the visible title should not say "rideshare history".
+- Use a small "stamp"
   chip that reads `UBER` / `LYFT` next to the title.
 - KPIs: **Rides** (completed), **Spend** (total), **Miles**,
   **Hours in cars**, **Years**. Pull from `DATA.summary`. Use
@@ -108,7 +110,7 @@ One row, big, brand-anchored:
   language. Uber: *"This is your Uber trip history export. Each
   row is a requested ride — completed, cancelled, or refunded.
   Addresses and coordinates are masked by default."* Lyft:
-  *"This is your Lyft ride history export. Each row is a requested
+  *"This is your Lyft travel history export. Each row is a requested
   ride. Addresses and coordinates are masked by default."*
 
 ### Time views (required)
@@ -121,11 +123,11 @@ the user took rides is the headline of a mobility log.
    Render as inline SVG. Highlight the single biggest month inline.
    Empty months render as a dim placeholder rather than 0 bars.
    The literal label "Spend timeline" must be visible.
-2. **Weekday × hour heatmap** ("When you ride") — 7×24 grid driven
+2. **Weekday × hour heatmap** ("When you travel") — 7×24 grid driven
    from `DATA.heatmap`. Color scale by count, with a small legend.
    Annotate the late-night quadrant (Fri/Sat 22:00–04:00) so the
    user can see weekend nights as a band. The literal label "When
-   you ride" must be visible.
+   you travel" must be visible.
 3. **Late-night / early-morning callout** — small card pulling
    `DATA.summary.lateNightShare` plus the count of weekend
    late-night rides from `DATA.flags` (`kind: "late-night-cluster"`).
@@ -195,9 +197,9 @@ one of these `kind`s — render distinct chip colors:
 Empty state for any kind: *"Nothing flagged of this kind in this
 file."* The literal label "Flags" must be visible.
 
-### Drill-down ride table (required)
+### Drill-down trip table (required)
 
-"Browse all N rides" section — collapsible, default to **expanded**
+"Browse all N trips" section — collapsible, default to **expanded**
 because rideshare exports are usually 100s to a few 1000s of rows
 and the user wants to scrub through them.
 
@@ -217,7 +219,7 @@ and the user wants to scrub through them.
 - Flagged rows render a small badge in the row (one chip per
   flag; same colors as the Flags panel).
 
-The drill-down is a hard requirement — rideshare history is
+The drill-down is a hard requirement — travel history is
 intimate, and the user must be able to audit every row.
 
 ## Privacy-conscious styling (HARD)

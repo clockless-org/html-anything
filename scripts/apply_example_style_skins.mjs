@@ -32,7 +32,7 @@ const STYLE_BY_EXAMPLE = {
 
   "google-photos-takeout": "map-atlas",
   "google-maps-stars": "map-atlas",
-  "rideshare-history": "map-atlas",
+  "rideshare-history": "global-travel",
 
   "vcard-contacts": "network-map",
   "linkedin-connections": "network-map",
@@ -333,6 +333,47 @@ html[data-ha-style="living-essay"] header.hero::before {
     linear-gradient(180deg, transparent 0 14px, color-mix(in srgb, var(--ha-style-accent) 55%, transparent) 15px 74px, transparent 75px);
   border: 1px solid #e0ded5;
   box-shadow: 0 4px 20px rgba(0,0,0,.03);
+}
+
+html[data-ha-style="global-travel"] {
+  --ha-style-accent: #ff5b2e;
+  --ha-style-accent-2: #9fb8b5;
+  --primary: #ff5b2e;
+  --primary-container: #e84a20;
+  --primary-fixed: #ffe2d6;
+  --secondary-container: #9fb8b5;
+  --bg: #eef7f6;
+  --surface: #eef7f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f7fbfa;
+  --surface-container: #e2eeee;
+  --surface-container-high: #d4e4e2;
+  --fg-1: #20262b;
+  --fg-2: #4f5e61;
+  --fg-muted: #839294;
+  --border: rgba(58,85,86,.13);
+  --gradient-hero: linear-gradient(135deg, #ff5b2e 0%, #5f8f8a 100%);
+  --gradient-text: linear-gradient(135deg, #20262b 0%, #20262b 100%);
+}
+html[data-ha-style="global-travel"] body {
+  background-color: var(--bg) !important;
+  background-image:
+    radial-gradient(circle at 50% 44%, rgba(255,255,255,.72), transparent 34rem),
+    linear-gradient(180deg, #eef7f6 0%, #f6fbfa 100%);
+}
+html[data-ha-style="global-travel"] body::before { content: "global travel"; }
+html[data-ha-style="global-travel"] .hero::before,
+html[data-ha-style="global-travel"] header.hero::before {
+  width: 92px;
+  height: 52px;
+  border-radius: 4px;
+  background:
+    radial-gradient(circle at 18% 62%, var(--ha-style-accent) 0 5px, transparent 6px),
+    radial-gradient(circle at 52% 38%, var(--ha-style-accent) 0 5px, transparent 6px),
+    radial-gradient(circle at 78% 68%, var(--ha-style-accent) 0 5px, transparent 6px),
+    radial-gradient(circle, color-mix(in srgb, #7f9696 45%, transparent) 1px, transparent 1.5px);
+  background-size: auto, auto, auto, 8px 8px;
+  box-shadow: none;
 }
 
 html[data-ha-style="map-atlas"] {

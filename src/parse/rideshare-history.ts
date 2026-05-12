@@ -1102,7 +1102,7 @@ function buildSummaryLine(s: RideshareSummary): string {
   const fmt = (n: number) => `${s.currencySymbol}${Math.abs(n).toLocaleString("en-US", { maximumFractionDigits: 0 })}`
   const label = s.source === "uber" ? "Uber" : "Lyft"
   const place = s.busiestCity && s.busiestCity !== "—" ? `, busiest ${s.busiestCity}` : ""
-  return `${label} ride history: ${s.rideCount} rides${s.cancelledCount ? ` + ${s.cancelledCount} cancelled` : ""}, ${fmt(s.totalSpend)} spent, ${Math.round(s.totalMiles).toLocaleString()} mi, ${Math.round(s.totalHours)} hr in cars over ${s.period}${place}.`
+  return `${label} travel history: ${s.rideCount} trips${s.cancelledCount ? ` + ${s.cancelledCount} cancelled` : ""}, ${fmt(s.totalSpend)} spent, ${Math.round(s.totalMiles).toLocaleString()} mi, ${Math.round(s.totalHours)} hr in cars over ${s.period}${place}.`
 }
 
 function stripBigRow(r: Ride): Ride {

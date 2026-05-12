@@ -297,13 +297,19 @@ export function selectStyleForContent(contentType: string, options: ConverterOpt
   if (
     contentType === "google-maps-stars" ||
     contentType === "google-photos-takeout" ||
-    contentType === "rideshare-history" ||
     contentType === "gpx-route" ||
     contentType === "kml-route" ||
     contentType === "travel-itinerary" ||
     contentType === "location-history"
   ) {
     return "map-atlas"
+  }
+
+  if (
+    contentType === "rideshare-history" ||
+    contentType === "travel-history"
+  ) {
+    return "global-travel"
   }
 
   if (

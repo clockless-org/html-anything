@@ -47,7 +47,7 @@ Motion grammar:
 Use-case variants:
 
 - **Saved-place atlas** — Google Maps stars, bookmark-like place lists.
-- **Mobility receipt** — Uber/Lyft ride history, commute loops.
+- **Mobility receipt** — Uber/Lyft travel history, commute loops.
 - **Trip board** — itinerary with day lanes and city anchors.
 - **Route lab** — GPX/KML with elevation/pace/segment overlays.
 - **Photo place field** — Google Photos metadata without rendering private

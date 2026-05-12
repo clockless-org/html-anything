@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 /**
- * Offline fallback renderer for rideshare-history.
+ * Offline fallback renderer for travel-history (Uber/Lyft trip exports).
  *
  * The canonical pipeline is `dist/cli.js → htmlize → LLM`, but example
  * regeneration may run on machines without an Anthropic / OpenAI key.
  * This script reuses the same parser, then applies a hand-tuned template
  * that satisfies the `prompts/sources/rideshare-history.md` contract:
  *
- *   1. Source-aware hero card (Uber/Lyft · rides / spend / miles / hours)
+ *   1. Source-aware global travel hero (Uber/Lyft · trips / spend / miles / hours)
  *   2. Privacy banner
  *   3. Spend timeline (monthly twin bars: count + spend)
- *   4. When you ride (weekday × hour heatmap)
+ *   4. When you travel (weekday × hour heatmap)
  *   5. Top places (pickup + dropoff, masked by default)
  *   6. Cities
  *   7. Trip lengths (distance buckets)
@@ -18,7 +18,7 @@
  *   9. Money (fare / tip / fees / refund split + product breakdown)
  *  10. Flags (cancelled / refund / expensive / long / airport / late-night
  *      cluster / commute-loop / no-fare)
- *  11. Drill-down ride table with chips + privacy-styled labels
+ *  11. Drill-down trip table with chips + privacy-styled labels
  *  12. Privacy + analytical-only footer
  *
  * The page renders the FULL data (the `rows` array is inlined), so the
@@ -32,50 +32,42 @@ import * as path from "node:path"
 import { pickParser } from "../dist/parse/index.js"
 
 const TEMPLATE = String.raw`<!doctype html>
-<html lang="en">
+<html lang="en" data-ha-style="global-travel">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>__TITLE__</title>
   <style>
 :root {
-  --primary:#a03b00; --primary-container:#c94c00; --primary-fixed:#ffdbcd;
-  --primary-fixed-dim:#ffb597; --on-primary:#fff; --accent-glow:#E8400D;
-  --secondary:#d5baff; --secondary-container:#7b40e0; --tertiary:#4d44e3; --accent-cyan:#00D4FF;
-  --bg:#fff8f6; --surface:#fff8f6; --surface-container-lowest:#fff;
-  --surface-container-low:#fbf2ef; --surface-container:#f5ece9; --surface-container-high:#efe6e3;
-  --fg-1:#1e1b19; --fg-2:#594138; --fg-muted:#8d7166;
-  --border:rgba(0,0,0,.06); --border-strong:rgba(0,0,0,.12); --outline-variant:#e1bfb2;
+  --primary:#ff5b2e; --primary-container:#e84a20; --primary-fixed:#ffe2d6;
+  --primary-fixed-dim:#ffb59f; --on-primary:#fff; --accent-glow:#ff5b2e;
+  --secondary:#c7d8d5; --secondary-container:#6f9690; --tertiary:#4f767a; --accent-cyan:#83c7d3;
+  --bg:#eef7f6; --surface:#eef7f6; --surface-container-lowest:#fff;
+  --surface-container-low:#f8fbfb; --surface-container:#e3eeee; --surface-container-high:#d5e5e3;
+  --fg-1:#20262b; --fg-2:#4f5e61; --fg-muted:#849295;
+  --border:rgba(48,78,80,.12); --border-strong:rgba(48,78,80,.22); --outline-variant:#c8d9d6;
   --green:#10b981; --blue:#3b82f6; --yellow:#f59e0b; --red:#ef4444;
   --font-headline:'Space Grotesk',ui-sans-serif,system-ui,sans-serif;
   --font-body:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;
   --font-mono:'SF Mono','Menlo',ui-monospace,monospace;
   --space-xs:4px; --space-sm:8px; --space-md:12px; --space-lg:16px;
   --space-xl:20px; --space-2xl:24px; --space-3xl:32px; --space-4xl:48px; --space-5xl:64px;
-  --radius-sm:8px; --radius-md:12px; --radius-lg:16px; --radius-xl:20px; --radius-2xl:28px; --radius-pill:9999px;
-  --shadow-sm:0 1px 2px rgba(30,27,25,.04); --shadow-md:0 4px 12px rgba(30,27,25,.08);
-  --shadow-lg:0 8px 24px rgba(30,27,25,.12); --shadow-accent:0 8px 24px rgba(160,59,0,.15);
-  --gradient-primary:linear-gradient(135deg,#a03b00 0%,#c94c00 100%);
-  --gradient-hero:linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
-  --gradient-text:linear-gradient(135deg,#a03b00 0%,#7b40e0 100%);
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg:#060B18; --surface:#0B1426; --surface-container-lowest:#101D35;
-    --surface-container-low:#101D35; --surface-container:#162544; --surface-container-high:#1c2d52;
-    --fg-1:#F8FAFC; --fg-2:#CBD5E1; --fg-muted:#64748B;
-    --border:rgba(255,255,255,.08); --border-strong:rgba(255,255,255,.14);
-    --primary:#FF6B35; --accent-glow:#00D4FF;
-    --shadow-md:0 4px 12px rgba(0,0,0,.4); --shadow-lg:0 8px 24px rgba(0,0,0,.5);
-  }
+  --radius-sm:4px; --radius-md:6px; --radius-lg:8px; --radius-xl:8px; --radius-2xl:8px; --radius-pill:9999px;
+  --shadow-sm:0 1px 2px rgba(32,38,43,.04); --shadow-md:0 12px 32px rgba(44,69,71,.08);
+  --shadow-lg:0 22px 54px rgba(44,69,71,.12); --shadow-accent:0 14px 28px rgba(255,91,46,.16);
+  --gradient-primary:linear-gradient(135deg,#ff5b2e 0%,#ff7a50 100%);
+  --gradient-hero:linear-gradient(135deg,#ff5b2e 0%,#5f8f8a 100%);
+  --gradient-text:linear-gradient(135deg,#20262b 0%,#20262b 100%);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0}
 html,body{background:var(--bg);color:var(--fg-1);font-family:var(--font-body);
   font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
-body{min-height:100vh}
-main{max-width:1240px;margin:0 auto;padding:var(--space-2xl) var(--space-xl) var(--space-5xl)}
+body{min-height:100vh;background:
+  radial-gradient(circle at 50% 28%, rgba(255,255,255,.9), transparent 34rem),
+  linear-gradient(180deg,#eef7f6 0%,#f7fbfb 100%)}
+main.travel-shell{width:100%;max-width:1180px;margin:0 auto;padding:var(--space-3xl) var(--space-xl) var(--space-5xl)}
 h1,h2,h3,h4{font-family:var(--font-headline);letter-spacing:-.01em;font-weight:600;color:var(--fg-1)}
-h1{font-size:clamp(28px,5vw,46px);font-weight:700;line-height:1.05;letter-spacing:-.02em}
+h1{font-size:clamp(28px,5vw,46px);font-weight:700;line-height:1.05;letter-spacing:-.02em;text-wrap:balance;overflow-wrap:break-word}
 h2{font-size:clamp(20px,2.4vw,24px);margin-bottom:var(--space-md)}
 h3{font-size:17px;margin-bottom:var(--space-sm)}
 .muted{color:var(--fg-muted)}
@@ -87,26 +79,61 @@ input,select{font:inherit;color:var(--fg-1)}
 a{color:var(--primary);text-decoration:none}
 a:hover{text-decoration:underline}
 
-.hero{padding:var(--space-3xl) 0 var(--space-2xl);border-bottom:1px solid var(--border)}
+.global-travel-hero{min-height:calc(100dvh - 56px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:var(--space-2xl) 0 var(--space-xl);text-align:center}
+.travel-heading{width:100%;max-width:720px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
 .hero .eyebrow{display:inline-flex;gap:var(--space-sm);align-items:center;
-  background:var(--surface-container);color:var(--primary);
-  padding:var(--space-xs) var(--space-md);border-radius:var(--radius-pill);
-  font-family:var(--font-mono);font-size:11.5px;font-weight:500;
-  text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-lg)}
-.hero h1{background:var(--gradient-text);-webkit-background-clip:text;background-clip:text;color:transparent;max-width:24ch}
-.hero .editorial{margin-top:var(--space-lg);max-width:64ch;color:var(--fg-2);font-size:17px;line-height:1.55}
-.hero .source-caption{margin-top:var(--space-md);max-width:60ch;font-size:13.5px;color:var(--fg-muted);font-style:italic}
-.privacy-banner{display:inline-flex;align-items:center;gap:var(--space-sm);margin-top:var(--space-lg);
-  padding:var(--space-sm) var(--space-md);background:var(--surface-container-low);
+  color:var(--fg-muted);font-family:var(--font-mono);font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.14em;margin-bottom:var(--space-md)}
+.hero .eyebrow #src-stamp{color:var(--primary)}
+.hero h1{width:100%;max-width:680px;background:var(--gradient-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .editorial{margin-top:var(--space-md);max-width:58ch;color:var(--fg-2);font-size:15px;line-height:1.55;text-wrap:balance}
+.hero .source-caption{margin-top:var(--space-sm);max-width:60ch;font-size:12.5px;color:var(--fg-muted)}
+.travel-selector{margin-top:var(--space-xl);display:grid;grid-template-columns:minmax(210px,1fr) auto;gap:0;width:100%;max-width:430px;filter:drop-shadow(0 18px 32px rgba(48,78,80,.08))}
+.travel-select{display:flex;align-items:center;gap:10px;min-height:48px;padding:0 16px;background:#fff;border:1px solid rgba(48,78,80,.08);border-right:0;text-align:left}
+.travel-select svg{width:20px;height:20px;flex:0 0 auto;color:var(--primary)}
+.travel-select svg path{stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round}
+.travel-select label{display:block;font-family:var(--font-mono);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--fg-muted)}
+.travel-select select{width:100%;border:0;background:transparent;color:var(--fg-1);font-weight:700;outline:none;appearance:none;padding-right:16px}
+.travel-action{min-height:48px;padding:0 24px;background:var(--primary);color:var(--on-primary);font-weight:700;font-size:12px}
+.travel-action:focus-visible,.travel-select select:focus-visible,.map-pin:focus-visible,.btn:focus-visible,.chip:focus-visible{outline:3px solid color-mix(in srgb,var(--primary) 35%, transparent);outline-offset:3px}
+.privacy-banner{display:flex;align-items:center;justify-content:center;gap:var(--space-sm);margin-top:var(--space-md);width:100%;
+  padding:var(--space-sm) var(--space-md);background:rgba(255,255,255,.58);
   border:1px solid var(--border);border-radius:var(--radius-pill);
-  font-family:var(--font-mono);font-size:11.5px;color:var(--fg-muted);max-width:max-content}
+  font-family:var(--font-mono);font-size:11px;color:var(--fg-muted);max-width:620px;white-space:normal;overflow-wrap:anywhere}
 .privacy-banner .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
 
-.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--space-md);margin-top:var(--space-2xl)}
-.kpi{background:var(--surface-container-low);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-lg)}
-.kpi .label{font-size:11.5px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.07em;color:var(--fg-muted)}
-.kpi .value{font-family:var(--font-headline);font-size:clamp(22px,3.4vw,30px);font-weight:600;font-variant-numeric:tabular-nums;color:var(--fg-1);margin-top:var(--space-xs)}
-.kpi .sub{font-size:12.5px;color:var(--fg-muted);margin-top:var(--space-xs);font-variant-numeric:tabular-nums}
+.global-map-stage{position:relative;width:100%;max-width:940px;height:clamp(210px,26vw,270px);margin:var(--space-xl) auto 0}
+.dotted-world-map{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:.88}
+.map-dots circle{fill:#a9b9b8;opacity:.45}
+.map-pin{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--primary);border:2px solid rgba(255,255,255,.86);box-shadow:0 0 0 6px rgba(255,91,46,.14),0 8px 18px rgba(255,91,46,.22);transform:translate(-50%,-50%);cursor:pointer}
+.map-pin.dropoff{background:#ff7148}
+.map-pin.selected{box-shadow:0 0 0 9px rgba(255,91,46,.18),0 12px 28px rgba(255,91,46,.28)}
+@media (prefers-reduced-motion: no-preference){.map-pin.selected{animation:travelPulse 1.8s ease-out infinite}@keyframes travelPulse{0%{box-shadow:0 0 0 0 rgba(255,91,46,.26),0 12px 28px rgba(255,91,46,.28)}100%{box-shadow:0 0 0 14px rgba(255,91,46,0),0 12px 28px rgba(255,91,46,.28)}}}
+.location-callout{position:absolute;left:18%;top:48%;min-width:160px;max-width:230px;padding:12px 18px;background:#fff;border-radius:6px;text-align:left;box-shadow:0 18px 38px rgba(56,82,84,.14);border:1px solid rgba(48,78,80,.08)}
+.location-callout::after{content:"";position:absolute;left:24px;bottom:-8px;width:16px;height:16px;background:#fff;transform:rotate(45deg);border-right:1px solid rgba(48,78,80,.08);border-bottom:1px solid rgba(48,78,80,.08)}
+.location-callout .city{font-size:12px;line-height:1.1;text-transform:uppercase;font-weight:800;color:var(--primary);letter-spacing:.04em}
+.location-callout .detail{font-size:12px;color:var(--fg-2);margin-top:3px}
+.travel-stat-row{display:grid;grid-template-columns:repeat(5,minmax(108px,1fr));gap:clamp(14px,4vw,48px);width:100%;max-width:880px;margin:var(--space-xl) auto 0}
+.travel-stat{background:transparent;border:0;border-radius:0;padding:0;text-align:center}
+.travel-stat .kpi-icon{display:flex;align-items:center;justify-content:center;width:30px;height:30px;margin:0 auto 6px;color:var(--primary);opacity:.72}
+.travel-stat .kpi-icon svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.7}
+.travel-stat .label{font-size:10px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--fg-1);font-weight:800;margin-top:2px}
+.travel-stat .value{font-family:var(--font-headline);font-size:clamp(28px,4.8vw,48px);line-height:1;font-weight:800;font-variant-numeric:tabular-nums;color:var(--fg-1)}
+.travel-stat .sub{display:none}
+@media (max-width:780px){
+  main.travel-shell{padding-top:var(--space-xl)}
+  .global-travel-hero{min-height:auto;justify-content:flex-start}
+  .travel-heading{width:calc(100vw - 40px);max-width:calc(100vw - 40px)}
+  .hero h1{max-width:100%}
+  .travel-selector,.privacy-banner,.global-map-stage,.travel-stat-row{max-width:100%}
+  .travel-selector{grid-template-columns:1fr}
+  .travel-select{border-right:1px solid rgba(48,78,80,.08)}
+  .travel-action{width:100%}
+  .privacy-banner{border-radius:18px;text-align:left;align-items:flex-start}
+  .global-map-stage{height:250px}
+  .location-callout{left:8%;top:54%;transform:scale(.9);transform-origin:left top}
+  .travel-stat-row{grid-template-columns:repeat(2,minmax(120px,1fr));gap:22px 28px}
+}
 
 section{margin-top:var(--space-5xl)}
 .section-header{display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-md);margin-bottom:var(--space-lg);flex-wrap:wrap}
@@ -247,14 +274,47 @@ footer p + p{margin-top:var(--space-md)}
   </style>
 </head>
 <body>
-  <main>
-    <header class="hero">
-      <span class="eyebrow"><span id="src-stamp">UBER</span> · ride history</span>
-      <h1 id="hero-title">__TITLE__</h1>
-      <p class="editorial" id="hero-editorial">__EDITORIAL__</p>
-      <p class="source-caption" id="src-caption"></p>
-      <div class="privacy-banner"><span class="dot"></span>This page never sent a network request. Addresses and coordinates are masked by default.</div>
-      <div class="kpi-grid" id="kpi-grid"></div>
+  <main class="travel-shell">
+    <header class="hero global-travel-hero">
+      <div class="travel-heading">
+        <span class="eyebrow"><span id="src-stamp">UBER</span> · travel history</span>
+        <h1 id="hero-title">__TITLE__</h1>
+        <p class="editorial" id="hero-editorial">__EDITORIAL__</p>
+        <form class="travel-selector" aria-label="Travel history controls">
+          <div class="travel-select">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/><path d="M7 5v14M17 5v14"/></svg>
+            <div>
+              <label for="source-select">Source</label>
+              <select id="source-select" aria-label="Travel source"></select>
+            </div>
+          </div>
+          <button class="travel-action" type="button" id="see-trips">See trips</button>
+        </form>
+        <p class="source-caption" id="src-caption"></p>
+        <div class="privacy-banner"><span class="dot"></span>This page never sent a network request. Addresses and coordinates are masked by default.</div>
+      </div>
+      <div class="global-map-stage" aria-label="Travel map summary">
+        <svg class="dotted-world-map" viewBox="0 0 1000 420" role="img" aria-label="Dotted world map background" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <pattern id="travel-dot" width="12" height="12" patternUnits="userSpaceOnUse">
+              <circle cx="3" cy="3" r="2.1" fill="#a9b9b8"></circle>
+            </pattern>
+          </defs>
+          <g class="map-dots" fill="url(#travel-dot)" opacity=".56">
+            <path d="M142 120c45-36 126-43 184-22 33 12 58 33 78 60 19 26 56 31 76 58 22 30-1 70-34 78-41 10-59-30-90-42-36-14-67 8-96 22-46 23-103 17-134-24-29-39-24-95 16-130z"/>
+            <path d="M306 266c23 2 44 18 54 40 13 29 1 71-27 92-21 16-47 18-69 5-26-15-37-43-31-72 7-33 35-68 73-65z"/>
+            <path d="M498 100c51-26 128-25 184 3 44 22 73 58 113 83 39 24 94 26 127 56 24 22 27 58 6 77-29 26-80 9-113-6-46-20-74-8-110 18-32 24-91 31-125-2-27-27-22-63-42-91-19-27-58-32-75-62-17-29 6-59 35-76z"/>
+            <path d="M520 204c27 5 59 30 72 56 19 38 8 95-25 121-30 24-70 12-87-24-15-31 4-58 11-87 6-26 2-48 29-66z"/>
+            <path d="M708 293c30-14 75-6 103 14 25 18 30 52 6 68-31 22-80 4-109-15-26-18-29-51 0-67z"/>
+          </g>
+        </svg>
+        <div id="map-pins"></div>
+        <div class="location-callout" id="hero-callout">
+          <div class="city" id="callout-city">Travel</div>
+          <div class="detail" id="callout-detail">Loading trip anchors...</div>
+        </div>
+      </div>
+      <div class="travel-stat-row" id="kpi-grid"></div>
     </header>
 
     <section id="timeline-section">
@@ -262,7 +322,7 @@ footer p + p{margin-top:var(--space-md)}
       <div class="card">
         <div class="timeline" id="timeline"></div>
         <div class="timeline-legend">
-          <span><span class="swatch" style="background:var(--primary-fixed-dim)"></span>Rides</span>
+          <span><span class="swatch" style="background:var(--primary-fixed-dim)"></span>Trips</span>
           <span><span class="swatch" style="background:var(--primary)"></span>Spend</span>
         </div>
         <p class="peak-callout muted" id="peak-callout"></p>
@@ -270,7 +330,7 @@ footer p + p{margin-top:var(--space-md)}
     </section>
 
     <section id="heatmap-section">
-      <div class="section-header"><h2>When you ride</h2><span class="meta" id="heatmap-meta"></span></div>
+      <div class="section-header"><h2>When you travel</h2><span class="meta" id="heatmap-meta"></span></div>
       <div class="card">
         <div class="heatmap-wrap"><div class="heatmap" id="heatmap"></div></div>
         <div class="heatmap-legend">
@@ -340,8 +400,8 @@ footer p + p{margin-top:var(--space-md)}
       <div class="flag-grid" id="flag-grid"></div>
     </section>
 
-    <section id="rides-section">
-      <div class="section-header"><h2 id="rides-title">Browse all rides</h2>
+    <section id="rides-section" class="itinerary-browser">
+      <div class="section-header"><h2 id="rides-title">Browse all trips</h2>
         <label class="toggle"><input type="checkbox" id="show-labels"> Show full pickup / dropoff labels</label>
       </div>
       <div class="card">
@@ -375,7 +435,7 @@ footer p + p{margin-top:var(--space-md)}
     <div class="copy-area"><button class="btn primary" id="copy-md">Copy as Markdown</button></div>
 
     <footer>
-      <p>Generated locally — your Uber / Lyft export never left your machine. The full ride list is embedded in this HTML and rendered offline in your browser. Pickup / dropoff addresses and coordinates are inlined as-is from the file you opened. For sharing, prefer an anonymized export.</p>
+      <p>Generated locally — your Uber / Lyft export never left your machine. The full trip list is embedded in this HTML and rendered offline in your browser. Pickup / dropoff addresses and coordinates are inlined as-is from the file you opened. For sharing, prefer an anonymized export.</p>
       <p class="disclaimer">Analytical summary, not tax, accounting, or insurance advice. Airport runs, commute loops, and late-night clusters are inferred from your trip labels and timestamps — verify against your records before acting on anything here.</p>
     </footer>
   </main>
@@ -390,30 +450,40 @@ footer p + p{margin-top:var(--space-md)}
   const WEEKDAYS = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
   const SOURCE_LABEL = DATA.source === "uber" ? "Uber" : "Lyft";
   const SOURCE_STAMP = DATA.source.toUpperCase();
+  const REDUCE_MOTION = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const iconSvg = {
+    trips: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4v14l5-3 5 3 4-2V2l-4 2-5-3-5 3z"/><path d="M10 1v14M15 4v14"/></svg>',
+    spend: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h15a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4z"/><path d="M4 7V5a2 2 0 0 1 2-2h11"/><path d="M17 13h.01"/></svg>',
+    miles: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17c4-8 12-12 16-10"/><path d="M5 18h14"/><path d="M8 14l3 3 5-7"/></svg>',
+    hours: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg>',
+    cities: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><path d="M6 20V8h5v12"/><path d="M13 20V4h5v16"/><path d="M8 11h1M8 15h1M15 8h1M15 12h1M15 16h1"/></svg>',
+    night: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 15.5A7 7 0 0 1 8.5 6 8 8 0 1 0 18 15.5z"/></svg>'
+  };
 
   // ---- Hero ----
   $("src-stamp").textContent = SOURCE_STAMP;
+  const sourceSelect = $("source-select");
+  sourceSelect.innerHTML = '<option>' + SOURCE_LABEL + ' travel history</option>';
+  $("see-trips").addEventListener("click", () => $("rides-section").scrollIntoView({ behavior: REDUCE_MOTION ? "auto" : "smooth", block: "start" }));
   $("src-caption").textContent = DATA.source === "uber"
-    ? "This is your Uber trip history export. Each row is a requested ride — completed, cancelled, or refunded. Addresses and coordinates are masked by default."
-    : "This is your Lyft ride history export. Each row is a requested ride. Addresses and coordinates are masked by default.";
+    ? "This is your Uber trip history export. Each row is a requested trip — completed, cancelled, or refunded. Addresses and coordinates are masked by default."
+    : "This is your Lyft travel history export. Each row is a requested trip. Addresses and coordinates are masked by default.";
 
   const kpis = [
-    { label: "Rides", value: fmtNum(DATA.summary.rideCount), sub: DATA.summary.cancelledCount + " cancelled · " + DATA.summary.refundCount + " refunded" },
-    { label: "Spend", value: fmtMoneyShort(DATA.summary.totalSpend), sub: "avg " + fmtMoney(DATA.summary.avgFare) + " / ride" },
-    { label: "Miles", value: fmtNum(DATA.summary.totalMiles), sub: "avg " + DATA.summary.avgMiles.toFixed(1) + " mi / ride" },
-    { label: "Hours in cars", value: fmtNum(DATA.summary.totalHours), sub: "avg " + DATA.summary.avgDurationMin.toFixed(0) + " min / ride" },
-    { label: "Period", value: DATA.summary.durationLabel, sub: DATA.summary.period.replace(" → ", " → ") },
-    { label: "Late-night", value: DATA.summary.lateNightShare.toFixed(1) + "%", sub: "10pm–4am of all rides" },
-    { label: "Airport rides", value: DATA.summary.airportShare.toFixed(1) + "%", sub: "label heuristic" },
-    { label: "Top product", value: DATA.summary.topProduct, sub: "most-used vehicle type" },
+    { icon: "trips", label: "Trips", value: fmtNum(DATA.summary.rideCount), sub: DATA.summary.cancelledCount + " cancelled · " + DATA.summary.refundCount + " refunded" },
+    { icon: "spend", label: "Spend", value: fmtMoneyShort(DATA.summary.totalSpend), sub: "avg " + fmtMoney(DATA.summary.avgFare) + " / trip" },
+    { icon: "miles", label: "Miles", value: fmtNum(DATA.summary.totalMiles), sub: "avg " + DATA.summary.avgMiles.toFixed(1) + " mi / trip" },
+    { icon: "hours", label: "Hours", value: fmtNum(DATA.summary.totalHours), sub: "avg " + DATA.summary.avgDurationMin.toFixed(0) + " min / trip" },
+    { icon: "cities", label: "Cities", value: fmtNum(DATA.summary.distinctCities), sub: DATA.summary.busiestCity || "city data" },
   ];
   const kpiHost = $("kpi-grid");
   for (const k of kpis) {
     const el = document.createElement("div");
-    el.className = "kpi";
-    el.innerHTML = '<div class="label">' + k.label + '</div><div class="value">' + k.value + '</div><div class="sub">' + k.sub + '</div>';
+    el.className = "travel-stat kpi";
+    el.innerHTML = '<div class="kpi-icon">' + iconSvg[k.icon] + '</div><div class="value">' + k.value + '</div><div class="label">' + k.label + '</div><div class="sub">' + k.sub + '</div>';
     kpiHost.appendChild(el);
   }
+  renderHeroMap();
 
   // ---- Timeline ----
   const months = DATA.monthly;
@@ -432,7 +502,7 @@ footer p + p{margin-top:var(--space-md)}
       const cBar = document.createElement("div");
       cBar.className = "bar" + (m.count === 0 ? " empty" : "");
       cBar.style.height = m.count > 0 ? Math.max(2, (m.count / maxCount) * 200) + "px" : "2px";
-      cBar.title = m.month + " · " + m.count + " rides";
+      cBar.title = m.month + " · " + m.count + " trips";
       const sBar = document.createElement("div");
       sBar.className = "bar spend" + (m.spend === 0 ? " empty" : "");
       sBar.style.height = m.spend > 0 ? Math.max(2, (m.spend / maxSpend) * 200) + "px" : "2px";
@@ -444,7 +514,7 @@ footer p + p{margin-top:var(--space-md)}
       col.appendChild(stack); col.appendChild(lbl);
       tl.appendChild(col);
     });
-    $("peak-callout").textContent = "Biggest spend month: " + peakSpend.month + " (" + fmtMoney(peakSpend.spend) + ", " + peakSpend.count + " rides). Most rides: " + peakCount.month + " (" + peakCount.count + " rides).";
+    $("peak-callout").textContent = "Biggest spend month: " + peakSpend.month + " (" + fmtMoney(peakSpend.spend) + ", " + peakSpend.count + " trips). Most trips: " + peakCount.month + " (" + peakCount.count + " trips).";
   }
 
   // ---- Heatmap ----
@@ -465,9 +535,9 @@ footer p + p{margin-top:var(--space-md)}
         const t = c.count / maxC;
         cell.style.background = "color-mix(in oklab, var(--primary) " + Math.max(8, Math.round(t * 92)) + "%, var(--surface-container))";
         cell.dataset.count = c.count;
-        cell.title = WEEKDAYS[w] + " · " + String(h).padStart(2,"0") + ":00 — " + c.count + " ride" + (c.count === 1 ? "" : "s");
+        cell.title = WEEKDAYS[w] + " · " + String(h).padStart(2,"0") + ":00 — " + c.count + " trip" + (c.count === 1 ? "" : "s");
       } else {
-        cell.title = WEEKDAYS[w] + " · " + String(h).padStart(2,"0") + ":00 — no rides";
+        cell.title = WEEKDAYS[w] + " · " + String(h).padStart(2,"0") + ":00 — no trips";
       }
       heat.appendChild(cell);
     }
@@ -501,6 +571,50 @@ footer p + p{margin-top:var(--space-md)}
     if (!label) return "—";
     if (label.length <= 8) return label[0] + "…" + label[label.length - 1];
     return label.slice(0, 3) + "…" + label.slice(-3);
+  }
+  function renderHeroMap() {
+    const host = $("map-pins");
+    const calloutCity = $("callout-city");
+    const calloutDetail = $("callout-detail");
+    const anchors = new Map();
+    function addPoint(label, lat, lng, kind, spend) {
+      if (lat == null || lng == null || !Number.isFinite(lat) || !Number.isFinite(lng)) return;
+      const key = (label || "Unknown") + "|" + lat.toFixed(2) + "|" + lng.toFixed(2);
+      const item = anchors.get(key) || { label: label || "Unknown", lat, lng, kind, count: 0, spend: 0 };
+      item.count += 1;
+      item.spend += spend || 0;
+      anchors.set(key, item);
+    }
+    DATA.rows.forEach(r => {
+      addPoint(r.pickupLabel, r.pickupLat, r.pickupLng, "pickup", r.total);
+      addPoint(r.dropoffLabel, r.dropoffLat, r.dropoffLng, "dropoff", 0);
+    });
+    const points = Array.from(anchors.values()).sort((a, b) => b.count - a.count).slice(0, 9);
+    function placeCallout(p) {
+      if (!p) {
+        calloutCity.textContent = "Travel history";
+        calloutDetail.textContent = DATA.summary.period + " · " + DATA.summary.rideCount + " trips";
+        return;
+      }
+      calloutCity.textContent = p.label.replace(/\s*\(synthetic[^)]*\)/gi, "").slice(0, 28) || "Waypoint";
+      calloutDetail.textContent = p.count + " trips" + (p.spend > 0 ? " · " + fmtMoneyShort(p.spend) : "") + " · coarse " + p.lat.toFixed(2) + ", " + p.lng.toFixed(2);
+    }
+    points.forEach((p, i) => {
+      const pin = document.createElement("button");
+      pin.type = "button";
+      pin.className = "map-pin " + p.kind + (i === 0 ? " selected" : "");
+      pin.style.left = ((p.lng + 180) / 360 * 100).toFixed(2) + "%";
+      pin.style.top = ((90 - p.lat) / 180 * 100).toFixed(2) + "%";
+      pin.setAttribute("aria-label", p.label + ": " + p.count + " trips");
+      pin.title = p.label + " · " + p.count + " trips";
+      pin.addEventListener("click", () => {
+        document.querySelectorAll(".map-pin").forEach(el => el.classList.remove("selected"));
+        pin.classList.add("selected");
+        placeCallout(p);
+      });
+      host.appendChild(pin);
+    });
+    placeCallout(points[0]);
   }
   renderPlaceList($("pickup-list"), DATA.pickupPlaces);
   renderPlaceList($("dropoff-list"), DATA.dropoffPlaces);
@@ -625,7 +739,7 @@ footer p + p{margin-top:var(--space-md)}
 
   // ---- Filters + drill-down ----
   const rows = DATA.rows;
-  $("rides-title").textContent = "Browse all " + rows.length + " rides";
+  $("rides-title").textContent = "Browse all " + rows.length + " trips";
   const state = { source: SOURCE_STAMP, product: "ALL", city: "ALL", status: "ALL", year: "ALL", flag: "ALL", search: "", limit: 100 };
 
   function chipRow(host, label, values, key, allLabel = "All") {
@@ -697,7 +811,7 @@ footer p + p{margin-top:var(--space-md)}
   function renderLabel(label, showFull) {
     if (!label) return '<span class="muted">—</span>';
     if (showFull) return escapeHtml(label);
-    return '<span class="label-mask" title="Click to reveal">' + escapeHtml(maskLabel(label)) + '</span>';
+    return '<span class="label-mask" data-full="' + escapeHtml(label) + '" title="Click to reveal">' + escapeHtml(maskLabel(label)) + '</span>';
   }
 
   function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
@@ -747,9 +861,6 @@ footer p + p{margin-top:var(--space-md)}
       el.addEventListener("click", () => { el.textContent = (el.dataset.full || ""); });
     });
     // Inject data-full for masked cells (per-cell click reveal; page-wide toggle re-renders).
-    document.querySelectorAll("table.rides .label-mask").forEach((el) => {
-      el.dataset.full = el.dataset.full || el.textContent || "";
-    });
     $("row-count").textContent = "Showing " + Math.min(state.limit, filtered.length) + " of " + filtered.length + " match" + (filtered.length === 1 ? "" : "es") + " (out of " + rows.length + " total).";
     $("load-more").style.display = state.limit < filtered.length ? "" : "none";
   }
@@ -758,9 +869,9 @@ footer p + p{margin-top:var(--space-md)}
   // ---- Copy as Markdown ----
   $("copy-md").addEventListener("click", async () => {
     const lines = [];
-    lines.push("# " + SOURCE_LABEL + " ride history");
+    lines.push("# " + SOURCE_LABEL + " travel history");
     lines.push("");
-    lines.push("- " + DATA.summary.rideCount + " rides + " + DATA.summary.cancelledCount + " cancelled · " + fmtMoney(DATA.summary.totalSpend) + " spent · " + Math.round(DATA.summary.totalMiles).toLocaleString() + " mi · " + Math.round(DATA.summary.totalHours) + " hr in cars");
+    lines.push("- " + DATA.summary.rideCount + " trips + " + DATA.summary.cancelledCount + " cancelled · " + fmtMoney(DATA.summary.totalSpend) + " spent · " + Math.round(DATA.summary.totalMiles).toLocaleString() + " mi · " + Math.round(DATA.summary.totalHours) + " hr in cars");
     lines.push("- Period: " + DATA.summary.period + " (" + DATA.summary.durationLabel + ")");
     lines.push("- Busiest weekday: " + DATA.summary.busiestWeekday + " · busiest month: " + DATA.summary.busiestMonth);
     lines.push("- Late-night share: " + DATA.summary.lateNightShare.toFixed(1) + "% · airport share: " + DATA.summary.airportShare.toFixed(1) + "%");
@@ -810,7 +921,7 @@ async function main() {
 
   if (!editorial) {
     const s = data.summary
-    editorial = `${s.rideCount} ${s.source === "uber" ? "Uber" : "Lyft"} rides over ${s.durationLabel} — ${data.summary.currencySymbol}${Math.round(s.totalSpend).toLocaleString()} spent, ${Math.round(s.totalMiles).toLocaleString()} miles, ${Math.round(s.totalHours)} hours in cars. Busiest weekday ${s.busiestWeekday}; ${s.lateNightShare.toFixed(0)}% of rides between 10pm and 4am.`
+    editorial = `${s.rideCount} ${s.source === "uber" ? "Uber" : "Lyft"} trips over ${s.durationLabel} — ${data.summary.currencySymbol}${Math.round(s.totalSpend).toLocaleString()} spent, ${Math.round(s.totalMiles).toLocaleString()} miles, ${Math.round(s.totalHours)} hours in cars. Busiest weekday ${s.busiestWeekday}; ${s.lateNightShare.toFixed(0)}% of trips between 10pm and 4am.`
   }
 
   const json = JSON.stringify(data).replace(/<\/script/gi, "<\\/script")
@@ -820,7 +931,7 @@ async function main() {
     .replace(/__DATA__/g, json)
   await fs.mkdir(path.dirname(out), { recursive: true })
   await fs.writeFile(out, html, "utf8")
-  console.log("wrote " + out + " (" + (Buffer.byteLength(html, "utf8") / 1024).toFixed(1) + " KB · " + data.rows.length + " rides)")
+  console.log("wrote " + out + " (" + (Buffer.byteLength(html, "utf8") / 1024).toFixed(1) + " KB · " + data.rows.length + " trips)")
 }
 
 function escapeHtml(s) {
