@@ -379,4 +379,4 @@ npx tsx src/cli.ts examples/csv/input.csv --out /tmp/customers.html
 
 ## License
 
-[Apache 2.0](./LICENSE)
+[MIT-0](./LICENSE)

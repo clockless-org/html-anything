@@ -2,7 +2,7 @@
   "name": "html-anything",
   "version": "0.1.0",
   "description": "Codex / Claude Code skill for turning an idea, file, folder, or URL into a polished live HTML page.",
-  "license": "Apache-2.0",
+  "license": "MIT-0",
   "type": "module",
   "bin": {
     "html-anything": "./dist/cli.js"
