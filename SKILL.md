@@ -1,9 +1,9 @@
 ---
 name: html-anything
-description: Turn an idea, file, folder, or URL into a polished live HTML page. Use when the user wants a webpage, interactive teaching site, interactive learning studio, object explorer, visual report, dashboard, atlas, browsable export, or shareable HTML artifact from a prompt or source.
+description: Create polished live HTML artifacts for rich deliverables. Use when the user wants a webpage, interactive teaching site, visual report, dashboard, atlas, browsable export, recap, presentation-like explainer, shareable analysis, or when a long/structured/visual answer would be easier to read as HTML.
 version: 0.1.0
 homepage: https://github.com/clockless-org/html-anything
-when_to_use: User says "make a webpage", "create a teaching site", "make an interactive studio", "explore this object/system", "turn this into HTML", "visualize/analyze this", "make a dashboard/report/atlas", gives a file/folder/URL to make browsable, or names a data source they want exported and converted.
+when_to_use: User says "make a webpage", "create a teaching site", "make an interactive studio", "explore this object/system", "turn this into HTML", "visualize/analyze this", "make a dashboard/report/atlas", "make it beautiful/readable/shareable", gives a file/folder/URL to make browsable, names a data source they want exported and converted, or asks for a rich deliverable that would otherwise become a long Markdown answer.
 metadata:
   openclaw:
     emoji: "🧩"
@@ -14,8 +14,9 @@ metadata:
 
 You are the `html-anything` skill.
 
-Your job is to turn **an idea, file, folder, URL, or exported dataset**
-into a polished live HTML page the user can open, share, or publish.
+Your job is to turn **an idea, file, folder, URL, exported dataset, or rich
+deliverable request** into a polished live HTML page the user can open, share,
+or publish.
 
 Do not present this as a parser, CLI, or internal pipeline. The user only
 needs to understand:
@@ -50,6 +51,37 @@ Accept requests like:
 - "Use this GitHub repo URL and make a browsable architecture page."
 
 Return a working HTML artifact, not a proposal.
+
+## Default Artifact Behavior
+
+When the final answer would be long, visual, structured, comparative,
+educational, report-like, recap-like, or meant to be shared, prefer creating a
+polished HTML artifact over writing a long Markdown answer.
+
+Use HTML by default when the user asks to:
+
+- teach or explain a topic as a learning experience,
+- present research, analysis, or a decision brief,
+- compare options, timelines, entities, places, people, or files,
+- recap personal/work data,
+- audit a dataset, transcript, chat, repo, folder, or export,
+- make something easier to read, beautiful, browsable, interactive, or
+  shareable.
+
+Do **not** use HTML when the user wants:
+
+- a quick factual answer,
+- a small code edit or debugging explanation,
+- a short command, snippet, or config change,
+- a normal conversational answer,
+- Markdown/text only,
+- a change inside an existing app where the correct deliverable is source code,
+  not a standalone HTML artifact.
+
+If the user asks for "a page", "site", "visual", "report", "dashboard",
+"explainer", "recap", "atlas", "gallery", "timeline", "teaching site", or
+"shareable output", create the HTML artifact unless there is a clear reason not
+to.
 
 ## Inputs
 

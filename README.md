@@ -2,7 +2,7 @@
 
 [![skills.sh](https://skills.sh/b/clockless-org/html-anything)](https://skills.sh/clockless-org/html-anything)
 
-Turn an idea, file, folder, or URL into a polished live HTML page.
+Turn rich answers, ideas, files, folders, and URLs into polished live HTML pages.
 
 `html-anything` is a Codex / Claude Code skill. Give it a prompt like
 "create an interactive teaching site about the solar system", or give it
@@ -10,6 +10,11 @@ an export like Amazon orders, WhatsApp chat, a CSV, a transcript, a repo,
 or a folder of notes. The skill figures out the source, chooses the page
 style automatically, builds the HTML, checks it in a browser, and gives
 you something you can open, share, or publish.
+
+It is also an output layer for rich deliverables. When an answer would be long,
+visual, structured, educational, analytical, recap-like, or meant to be shared,
+the skill nudges the agent toward a beautiful HTML artifact instead of a long
+Markdown reply.
 
 ## Preview
 
@@ -117,6 +122,10 @@ Use html-anything to create an interactive teaching site about the solar system.
 ```
 
 ```text
+Explain the solar system as a beautiful interactive page.
+```
+
+```text
 Use html-anything on my Amazon order history. Walk me through the export first.
 ```
 
@@ -132,6 +141,10 @@ Use html-anything to make this CSV into a shareable dashboard.
 Use html-anything on this GitHub repo URL.
 ```
 
+You do not always need to say "HTML". Requests like "make this easier to read",
+"turn this into a visual report", "make a shareable explainer", "create a recap",
+or "present this beautifully" should trigger the skill.
+
 If you already have the file, folder, or URL, give it to the agent. If
 you only know the source type, such as "Amazon orders", "Spotify history",
 "WhatsApp chat", or "Google Photos Takeout", the skill first explains how
@@ -141,6 +154,7 @@ to export the data, then converts it after you provide the export.
 
 | Input | What you give | What you get |
 |---|---|---|
+| Rich answer | A topic, analysis request, comparison, recap, brief, or teaching goal | A readable, styled HTML artifact instead of a long Markdown answer |
 | Idea | A short brief, e.g. "make a solar system teaching site" | A generated educational / interactive HTML page |
 | File | CSV, JSON, Markdown, PDF, DOCX, chat export, log, transcript, statement | A live page designed for that file |
 | Folder | Notes vault, Google Photos Takeout, Notion export, repo, exported archive | A browsable atlas / dashboard / audit page |
