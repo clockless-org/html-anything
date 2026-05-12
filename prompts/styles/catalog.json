@@ -27,12 +27,10 @@
       "title": "Teaching Studios",
       "summary": "Turn an idea, lesson, article, or technical concept into an interactive learning studio instead of a scrolling article.",
       "styles": [
-        "teaching",
-        "comic-book"
+        "teaching"
       ],
       "examples": [
-        "solar-system-studio",
-        "ai-tokens-comic"
+        "solar-system-studio"
       ]
     },
     {
@@ -177,56 +175,6 @@
         "article-only output",
         "dashboard KPIs",
         "static slide deck"
-      ]
-    },
-    {
-      "id": "comic-book",
-      "system": "Comic Book Explainer",
-      "mode": "explicit-or-auto-when-brief-asks-for-comic",
-      "summary": "Six-to-seven-page Doraemon-style knowledge comic for simplifying concepts, PDFs, documents, and articles through a story-led teacher character.",
-      "useCases": [
-        "teaching"
-      ],
-      "triggers": [
-        "comic book",
-        "manga",
-        "explain simply",
-        "make it easy to understand",
-        "story explainer",
-        "cartoon lesson"
-      ],
-      "bestSources": [
-        "prompt",
-        "plain-text",
-        "markdown-document",
-        "pdf-document",
-        "docx-document",
-        "url-article"
-      ],
-      "example": "ai-tokens-comic",
-      "preview": "docs/example-previews/ai-tokens-comic.jpg",
-      "accent": "#1f8bcf",
-      "coreScaffold": [
-        "Doraemon-style comic reader",
-        "six or seven vertical pages",
-        "dynamic panel grid",
-        "Doraemon teacher character",
-        "pocket gadgets",
-        "recap page"
-      ],
-      "requiredPrimitives": [
-        ".comic-book-shell",
-        ".comic-page",
-        ".panel-grid",
-        ".speech-bubble",
-        ".pocket-gadget",
-        ".page-strip"
-      ],
-      "avoid": [
-        "single long article",
-        "generic slide deck",
-        "dashboards or KPI cards",
-        "generic robot-cat substitution when Doraemon is requested"
       ]
     },
     {

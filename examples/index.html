@@ -347,9 +347,9 @@ footer.foot a { color: var(--primary); }
     <div class="hero-panel">
       <p class="label">Example map</p>
       <div class="hero-stats">
-        <div class="hero-stat"><strong>14</strong><span>curated examples</span></div>
+        <div class="hero-stat"><strong>13</strong><span>curated examples</span></div>
         <div class="hero-stat"><strong>4</strong><span>use cases</span></div>
-        <div class="hero-stat"><strong>19</strong><span>style systems</span></div>
+        <div class="hero-stat"><strong>18</strong><span>style systems</span></div>
       </div>
     </div>
   </header>
@@ -358,7 +358,7 @@ footer.foot a { color: var(--primary); }
     <div class="intro">
       <div>
         <h2>Curated examples</h2>
-        <p>Each card is a real output page, grouped by use case. The card labels show only the source and the style system used to render it.</p>
+        <p>Each card is a usage pattern: when the agent should stop writing a long Markdown answer and create a live HTML artifact instead. Labels show the job, source, and style system.</p>
       </div>
     </div>
     <div id="groups"></div>
@@ -366,22 +366,21 @@ footer.foot a { color: var(--primary); }
 
   <footer class="foot">
     <div><a href="https://github.com/clockless-org/html-anything">github.com/clockless-org/html-anything</a> · Apache 2.0</div>
-    <div>14 curated demos · source + style on every card</div>
+    <div>13 curated demos · usage + source + style on every card</div>
   </footer>
 </div>
 
 <script>
 (() => {
   const useCases = [
-    ["teaching", "Teaching Studios", "#", "#0f766e", "One brief, article, or concept becomes an interactive learning studio with controls, stages, and checks."],
-    ["files", "Files & Work Data", "=", "#0f5f6f", "Spreadsheets, CSV exports, PDFs, DOCX, Markdown, logs, calendars, CI output, finance, work records, and slide-style outputs become polished live pages."],
-    ["conversation", "Conversation Analysis", "~", "#be3455", "Private chats, relationship exports, and team channels become rhythm, contribution, and evidence reports."],
-    ["personal", "Personal Data & Places", ">", "#17695a", "Orders, health, reading, routes, saved places, trips, payments, AI chats, and notes become personal atlases."]
+    ["teaching", "Teaching Studios", "#", "#0f766e", "For explainers, lessons, and concept walkthroughs where a visual learning surface beats a long answer."],
+    ["files", "Files & Work Data", "=", "#0f5f6f", "For files, reports, logs, inboxes, and work artifacts that need a readable interface or decision surface."],
+    ["conversation", "Conversation Analysis", "~", "#be3455", "For message exports where rhythm, actors, topics, contribution, and evidence matter more than raw transcript."],
+    ["personal", "Personal Data & Places", ">", "#17695a", "For personal exports that become timelines, recaps, maps, reading fields, mobility stories, or memory atlases."]
   ].map(([id, title, mark, accent, description]) => ({ id, title, mark, accent, description }));
 
   const styles = [
     ["teaching", "Teaching", "#0f766e"],
-    ["comic-book", "Comic", "#1f8bcf"],
     ["love-romance-3d", "Romance 3D", "#f04d72"],
     ["living-essay", "Essay", "#cfa86e"],
     ["timeline-story", "Timeline", "#9a4b14"],
@@ -401,25 +400,23 @@ footer.foot a { color: var(--primary); }
   ];
 
   const examples = [
-    ["solar-system-studio", "Solar system lesson", "Teaching brief", "teaching", "teaching", "A single request becomes an interactive lesson with orbit controls and planet explainers."],
-    ["ai-tokens-comic", "AI tokens comic", "Concept brief", "comic-book", "teaching", "A plain-language AI concept becomes a seven-page Doraemon-style knowledge comic with pocket gadgets and recap page."],
-    ["wechat-couple", "Couple chat rhythm", "WeChat export", "love-romance-3d", "conversation", "A two-year relationship report with soft 3D keepsake styling, activity rhythms, response patterns, and selected insights."],
-    ["slack", "Slack championship", "Slack export", "kinetic-scoreboard", "conversation", "Team activity becomes ranked kinetic lanes with decisions, topics, and linked evidence."],
-    ["amazon-orders", "Amazon orders", "Orders CSV", "timeline-story", "personal", "Three years of purchases as a commerce-memory timeline."],
-    ["iphone-health", "Apple Health", "Health export", "timeline-story", "personal", "Activity, sleep, workouts, and rhythm patterns as a personal timeline."],
-    ["kindle-highlights", "Kindle highlights", "My Clippings.txt", "living-essay", "personal", "Highlights become a mycelium writing field with a living margin question."],
-    ["travel-history", "Travel history map", "Uber/Lyft CSV", "global-travel", "personal", "Trips open as a calm dotted world map with provider, city, spend, and movement counters."],
-    ["editorial-carousel", "Brand positioning carousel", "Strategy essay", "editorial-carousel", "files", "A brand strategy essay compressed into a five-spread magazine carousel with evidence drawer and copy actions."],
-    ["markdown", "Long-form essay", "Markdown file", "architectural-spread", "files", "A markdown essay becomes a full-screen architectural spread with chapter pagination."],
-    ["docx", "Decision memo reader", "DOCX memo", "kami-reading", "files", "A long decision memo becomes a quiet parchment document with inline contents, chapter sections, and source appendix."],
-    ["pdf", "PDF e-guide", "PDF report", "digital-eguide", "files", "A sector report becomes a two-page guide preview with TOC, lesson spread, evidence drawer, and actions."],
-    ["email", "Email support console", "Mbox archive", "soft-saas", "files", "A support mailbox becomes a soft SaaS console with thread health, handoffs, and open-loop metrics."],
-    ["ci-log", "CI terminal console", "CI log", "terminal-cli", "files", "A failed GitHub Actions run becomes a shell-native debugging console with raw evidence."]
-  ].map(([slug, title, source, style, group, description]) => ({ slug, title, source, style, group, description }));
+    ["solar-system-studio", "Interactive lesson site", "Teach a concept", "Teaching brief", "teaching", "teaching", "Use when an answer should become a hands-on lesson with controls, stages, comparisons, and a quick check."],
+    ["wechat-couple", "Relationship rhythm report", "Private chat recap", "1:1 chat export", "love-romance-3d", "conversation", "Use when a personal conversation should become aggregate rhythms, response patterns, topic shifts, and privacy-first evidence."],
+    ["slack", "Team activity scoreboard", "Group contribution analysis", "Team chat export", "kinetic-scoreboard", "conversation", "Use when a multi-person stream needs ranked participation, bursts, decisions, and linked evidence."],
+    ["amazon-orders", "Personal purchase recap", "Personal history over time", "Orders CSV", "timeline-story", "personal", "Use when an export tells a person's story through purchases, seasons, habits, returns, or changing priorities."],
+    ["iphone-health", "Health rhythm timeline", "Personal metrics recap", "Health export", "timeline-story", "personal", "Use when activity, sleep, workouts, or other personal metrics need a careful time-based recap."],
+    ["kindle-highlights", "Reading highlights essay", "Reflective reading archive", "My Clippings.txt", "living-essay", "personal", "Use when notes or highlights should become a calm field for reading, themes, quotes, and reflection."],
+    ["travel-history", "Travel history map", "Mobility recap", "Uber/Lyft CSV", "global-travel", "personal", "Use when trips, cities, providers, and travel cadence should open as a spatial personal recap."],
+    ["editorial-carousel", "Shareable strategy carousel", "Argument as sequence", "Strategy essay", "editorial-carousel", "files", "Use when a strategy memo, founder note, or article takeaway should become a compact shareable sequence."],
+    ["markdown", "Visual long-form essay", "Editorial reading experience", "Markdown file", "architectural-spread", "files", "Use when a narrative or object-focused essay needs a designed first viewport and visual editorial pacing."],
+    ["docx", "Decision memo reader", "Long work document", "DOCX memo", "kami-reading", "files", "Use when a long memo or manuscript should become a quiet, readable document with contents and appendix."],
+    ["pdf", "PDF guide or playbook", "Guide from dense document", "PDF report", "digital-eguide", "files", "Use when a dense report should become a creator-style guide with cover, TOC, lesson spread, and actions."],
+    ["email", "Support mailbox console", "Inbox or workstream audit", "Mbox archive", "soft-saas", "files", "Use when support, campaign, onboarding, or customer-success threads need a soft product console."],
+    ["ci-log", "CI failure console", "Debugging evidence", "CI log", "terminal-cli", "files", "Use when build logs or terminal output should become a shell-native debugging surface with raw evidence."]
+  ].map(([slug, title, usage, source, style, group, description]) => ({ slug, title, usage, source, style, group, description }));
 
   const styleNames = new Map([
     ["teaching", "Teaching lab"],
-    ["comic-book", "Comic book explainer"],
     ["love-romance-3d", "Love romance 3D"],
     ["living-essay", "Living essay"],
     ["timeline-story", "Timeline story"],
@@ -461,6 +458,7 @@ footer.foot a { color: var(--primary); }
           <h4>${escapeHtml(item.title)}</h4>
           <p>${escapeHtml(item.description)}</p>
           <span class="chip-row">
+            <span class="chip"><span class="chip-label">Usage</span>${escapeHtml(item.usage)}</span>
             <span class="chip"><span class="chip-label">Source</span>${escapeHtml(item.source)}</span>
             <span class="chip"><span class="chip-label">Style</span>${escapeHtml(styleNames.get(item.style) || item.style)}</span>
           </span>

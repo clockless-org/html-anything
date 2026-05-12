@@ -125,17 +125,15 @@ Final response:
 
 ## Use-Case Taxonomy
 
-Route every request through one of six user-facing use cases before choosing
+Route every request through one of four user-facing use cases before choosing
 the style system. Source prompts can be many; use cases should stay stable.
 
 | Use case | User means | Likely styles |
 |---|---|---|
-| Teaching Studios | Turn an idea, article, lesson, or concept into an interactive learning surface, not a scrolling article. | `teaching`, `interactive-learning`, `comic-book` |
-| Files & Work Data | Transform files and work artifacts: CSV/spreadsheet-style exports, PDFs, DOCX, Markdown, logs, email/support archives, finance, calendars, issue trackers, research records, and slide-style carousel outputs. | `dashboard`, `soft-saas`, `document`, `architectural-spread`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
-| Conversation Analysis | Analyze private chats, relationship exports, team channels, or message archives. | `relationship`, `love-romance-3d`, `kinetic-scoreboard`, `network-map` |
-| Personal Data Recaps | Make a recap/timeline/story from personal exports: orders, health, browsing, media, payments, professional networks, notes, AI chats. | `timeline-story`, `living-essay`, `network-map` |
-| Places & Trips | Make a map, route atlas, travel dossier, photo-location view, travel history, or trip paper trail. | `global-travel`, `map-atlas`, `paper-trail` |
-| Developer Evidence | Review, explain, or debug code artifacts: diffs, PRs, CI logs, stack traces, repos. | `developer`, `terminal-cli` |
+| Teaching Studios | Turn an idea, article, lesson, or concept into an interactive learning surface, not a scrolling article. | `teaching` |
+| Files & Work Data | Transform files and work artifacts: CSV/spreadsheet-style exports, PDFs, DOCX, Markdown, logs, CI output, email/support archives, finance, calendars, issue trackers, repos, research records, and slide-style carousel outputs. | `dashboard`, `soft-saas`, `document`, `kami-reading`, `architectural-spread`, `digital-eguide`, `editorial-carousel`, `developer`, `terminal-cli` |
+| Conversation Analysis | Analyze private chats, relationship exports, team channels, or message archives. | `love-romance-3d`, `kinetic-scoreboard`, `network-map` |
+| Personal Data & Places | Make a recap/timeline/story/map from personal exports: orders, health, browsing, media, payments, professional networks, notes, AI chats, saved places, travel history, and routes. | `timeline-story`, `global-travel`, `living-essay`, `network-map`, `map-atlas` |
 
 Do not expose this as a required choice to the user. Use it internally to make
 auto-routing predictable.
@@ -154,18 +152,17 @@ model, density, chart grammar, and voice.
 |---|---|---|
 | `default` | Unknown, mixed, or weakly classified briefs/sources | **Insight Brief**: answer header, primary insight panel, evidence stack, local drill-down |
 | `teaching` | Tutorials, lessons, "teach me", interactive explainers, course-like pages | **Lesson Lab**: visual stage, step rail, try-it controls, concept cards, check-yourself, recap |
-| `interactive-learning` | App-like object/system/spec studios, anatomy/architecture/product exploration, manipulable learning models | **Learning Studio**: entity rail, central interactive stage, live inspector, layer/mode controls, comparison bench |
-| `comic-book` | Comic book, manga, cartoon, "explain simply", PDF/document/article simplification requests | **Comic Book Explainer**: six-to-seven-page comic, recurring teacher character, panel grid, speech bubbles, pocket gadgets, recap page |
-| `relationship` | 1:1 chats, couple/friend/family chats, WhatsApp/WeChat/iMessage relationship exports | **Rhythm Report**: aggregate-first pulse calendar, comparison lanes, evidence snippets, no raw appendix by default |
+| `love-romance-3d` | 1:1 chats, couple/friend/family chats, WhatsApp/WeChat/iMessage relationship exports | **Keepsake 3D Rhythm**: soft 3D cover, pulse boards, comparison lanes, privacy-first evidence |
 | `living-essay` | Kindle highlights, reflective essays, idea notes, concept-heavy reading archives | **Mycelium Writing Environment**: paper manuscript, vertical margin question, inline spore words, living SVG threads, quiet appendix |
 | `dashboard` | Finance/admin data, logs, operational data, issue trackers, dense tabular queues | **Ops Console**: command bar, KPI rail, work surface, flag queue, searchable data grid |
 | `soft-saas` | Support mailboxes, email campaigns, onboarding programs, customer-success queues, lightweight SaaS metrics | **Soft SaaS Console**: pale app canvas, profile/source card, central metric bloom, campaign panels, leaderboard, activity strip |
 | `kinetic-scoreboard` | Multi-participant activity streams, team chats, ranked contributors, owners/reps/players by contribution or workload | **Kinetic Championship**: full-viewport lanes, live ranks, big counters, kinetic activity body, telemetry footer, linked evidence pits |
 | `timeline-story` | Personal histories — chronological (Amazon, browser, Spotify, YouTube, Twitch, Health, AI chats) **and** topical (Notion exports, Obsidian vaults, markdown folders) | **Timeline Story**: time lens, timeline spine, chapter panels, rhythm strip, memory drawer (or cluster cards for topical sources) |
 | `global-travel` | Travel history, Uber/Lyft trip exports, airport patterns, and personal mobility recaps | **Global Travel Map**: centered headline, source selector, dotted world map, warm pins, metric runway, itinerary browser |
-| `map-atlas` | Places, trips, routes, location history, geotagged photo metadata | **Map Atlas**: spatial stage, place drawer, period/place filters, waypoint browser |
+| `map-atlas` | Saved places, routes, location history, geotagged photo metadata | **Map Atlas**: spatial stage, place drawer, period/place filters, waypoint browser |
 | `network-map` | Contacts, LinkedIn, Venmo/PayPal, people/org graphs, community relationship maps | **Network Map**: graph canvas, entity inspector, cluster controls, hub cards, linked records |
 | `document` | Essays, articles, reading lists, bookmarks, research collections, PDFs, DOCX, legal/medical/lab/academic records | **Document Review**: cover, reading rail, body sheet, evidence margin, drill-down. Tone shifts narrative ↔ formal based on source. |
+| `kami-reading` | Long prose, DOCX memos, articles, essays, and manuscripts meant for sustained reading | **Kami Longform Reader**: warm parchment document, serif cover, inline contents, printable chapters, source appendix |
 | `architectural-spread` | Visual long-form essays, object-focused articles, manifestos, and reference requests that look like the split Mars architectural HTML | **Architectural Editorial Spread**: left visual bay, right cream content panel, serif italic emphasis, corner anchors, pagination dots |
 | `digital-eguide` | E-guides, PDF guides, creator guides, playbooks, lead magnets, downloadable course previews | **Digital E-Guide Spread**: two paper pages on a warm desk, cover + TOC, inside lesson, pull quote, steps, exercise strip |
 | `editorial-carousel` | Brand strategy essays, founder letters, article takeaways, lightweight reports meant to be shared as a sequence | **Editorial Carousel**: issue cover, spread rail, 4-8 argument spreads, evidence drawer, copy actions |
@@ -175,14 +172,12 @@ Explicit override styles:
 
 | Style | Use for | Page shape |
 |---|---|---|
-| `paper-trail` | User asks for a tactile/vintage hotel, key-card, receipt, ticket, folio, passport, field-note, or printed-collateral feel | **Paper Trail**: left rail, Post Post-style overlapping receipt/guide/key-card artifact desk, folio tabs, receipt tape, stamp callouts, source drawer |
 | `terminal-cli` | User asks for a terminal, CLI, shell, mainframe, hacker, server-console, or tmux feel | **Terminal CLI**: shell prompt, status rail, terminal pane grid, command controls, raw console, scanline overlay |
 
 Honor explicit style direction in natural language:
 
 - "make it a tutorial" / "teach me" → lean `teaching`.
-- "make it more app-like" / "explore this object" / "interactive studio" → lean `interactive-learning`.
-- "make it a comic book" / "manga" / "cartoon explainer" / "explain this simply as a story" → lean `comic-book`.
+- "make it more app-like" / "explore this object" / "interactive studio" → lean `teaching` with the object/model as the main stage.
 - "less academic" → reduce formal `document` voice.
 - "make it a carousel" / "magazine feel" / "social post" → lean `editorial-carousel`.
 - "make it an e-guide" / "PDF guide" / "playbook" / "lead magnet"
@@ -199,8 +194,6 @@ Honor explicit style direction in natural language:
 - "show relationships/network" → lean `network-map`.
 - "who contributed most" / "make it feel like a race" → lean `kinetic-scoreboard`.
 - "make it a year-in-review" / "story over time" → lean `timeline-story`.
-- "make it like this hotel key-card HTML" / "ticket/receipt/hotel folio"
-  → use `paper-trail` and follow `prompts/styles/paper-trail.md` exactly.
 - "make it terminal/CLI/mainframe" / "like a shell" / "hacker console"
   → use `terminal-cli` and follow `prompts/styles/terminal-cli.md` exactly.
 - "more playful" → richer visuals, while keeping content accurate.
@@ -369,20 +362,18 @@ the use-case taxonomy above:
 - Teaching Studios: `url-article`, `markdown`, `default`.
 - Conversation Analysis: `wechat`, `whatsapp`, `slack`, `discord`,
   `telegram`, `imessage`, `multi-sender-chat`.
-- Personal Data Recaps: `amazon-orders`, `youtube-watch-history`,
+- Personal Data & Places: `amazon-orders`, `youtube-watch-history`,
   `spotify-history`, `iphone-health`, `kindle-highlights`, `twitch-history`,
   `browser-history`, `venmo-paypal-payments`, `linkedin-connections`,
   `vcard-contacts`, `chatgpt-export`, `claude-chat-export`, `ai-chat-export`,
-  `notion-export`, `obsidian-vault`, `markdown-folder`.
-- Places & Trips: `google-maps-stars`, `google-photos-takeout`,
-  `rideshare-history` / travel history, `gpx`, `kml`, `travel-itinerary`,
-  `location-history`.
+  `notion-export`, `obsidian-vault`, `markdown-folder`, `google-maps-stars`,
+  `google-photos-takeout`, `rideshare-history` / travel history, `gpx`, `kml`,
+  `travel-itinerary`, `location-history`.
 - Files & Work Data: `csv`, `json`, `jsonl`, `log`, `email`, `bank-transactions`,
   `invoices`, `quickbooks`, `ics-calendar`, `issue-tracker`, `trello-board`,
   `markdown`, `pdf`, `docx`, `bookmarks`, `url-list`, `reading-list`,
-  `bibliography`, `medical-visit`, `lab-results`, `legal-chronology`.
-- Developer Evidence: `git-diff`, `pr-review`, `ci-log`, `stack-trace`,
-  `github-repo`.
+  `bibliography`, `medical-visit`, `lab-results`, `legal-chronology`,
+  `git-diff`, `pr-review`, `ci-log`, `stack-trace`, `github-repo`.
 - General fallback: `default`.
 
 If no prompt fits, proceed from `prompts/sources/default.md` and the user's
@@ -390,8 +381,9 @@ brief.
 
 Style prompts under [`prompts/styles/`](./prompts/styles/) define reusable page
 systems such as `Timeline Story`, `Map Atlas`, `Network Map`, `Lesson Lab`,
-`Learning Studio`, `Ops Console`, `Soft SaaS Console`, `Mycelium Writing Environment`
-(`living-essay`), `Editorial Carousel`, `Digital E-Guide Spread`, and
-`Paper Trail` (explicit tactile printed-artifact override). They complement
-source prompts; they do not replace source-specific analysis. The style prompt
-is binding for the final HTML's layout and interaction system.
+`Keepsake 3D Rhythm`, `Global Travel Map`,
+`Ops Console`, `Soft SaaS Console`, `Kami Longform Reader`, `Terminal CLI`,
+`Terminal Evidence Workbench`, `Mycelium Writing Environment` (`living-essay`),
+`Editorial Carousel`, and `Digital E-Guide Spread`. They complement source
+prompts; they do not replace source-specific analysis. The style prompt is
+binding for the final HTML's layout and interaction system.

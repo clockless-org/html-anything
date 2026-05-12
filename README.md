@@ -9,7 +9,7 @@ is actually a page, not a chat message.**
 answers into self-contained HTML artifacts — analyses, reports, recaps,
 dashboards, atlases, teaching sites, comparison studies, decision memos,
 year-in-review pages. The skill picks the right design system from an
-19-style catalog, builds a single-file `.html`, verifies it in a browser,
+18-style catalog, builds a single-file `.html`, verifies it in a browser,
 and hands it back. Short conversational answers stay short — you just stop
 scrolling 4,000-word replies whenever the content was always going to be a
 page.
@@ -17,12 +17,12 @@ page.
 It also works **on demand** for any file, folder, URL, or service export
 (Amazon orders, Kindle highlights, Spotify history, WeChat / iMessage,
 Google Photos Takeout, CSV / PDF / DOCX, logs, GPX, …) —
-the skill figures out the source, chooses one of the 19 style systems, and
+the skill figures out the source, chooses one of the 18 style systems, and
 ships the HTML.
 
 ## Preview
 
-→ **[Open the curated gallery](https://clockless-org.github.io/html-anything/examples/)** — 14 demos, organized by use case and style.
+→ **[Open the curated gallery](https://clockless-org.github.io/html-anything/examples/)** — 13 demos, organized by use case and style.
 
 ### Featured
 
@@ -46,25 +46,26 @@ Your Google Maps starred places on a personal world atlas. Hover for the note yo
 
 ### More demos
 
-A small selection across the rest of the style catalog. Each links to the live page.
+A small selection across the rest of the style catalog. Think of each row as a
+usage pattern: what kind of answer should become HTML, and which style should
+shape it.
 
-| Demo | One-line | Style |
-|---|---|---|
-| [Amazon order history →](https://clockless-org.github.io/html-anything/examples/amazon-orders/output.html) | 3 years of orders → personal commerce memory with cadence, returns, gifting. | `timeline-story` |
-| [Kindle highlights →](https://clockless-org.github.io/html-anything/examples/kindle-highlights/output.html) | Highlights become a mycelium writing field with a living margin question. | `living-essay` |
-| [AI tokens comic →](https://clockless-org.github.io/html-anything/examples/ai-tokens-comic/output.html) | A popular AI concept becomes a seven-page Doraemon-style knowledge comic with pocket gadgets. | `comic-book` |
-| [Apple Health →](https://clockless-org.github.io/html-anything/examples/iphone-health/output.html) | Activity, sleep, and workouts become a personal rhythm story. | `timeline-story` |
-| [Slack championship →](https://clockless-org.github.io/html-anything/examples/slack/output.html) | Team activity becomes ranked kinetic lanes with decisions, topics, and linked evidence. | `kinetic-scoreboard` |
-| [PDF e-guide →](https://clockless-org.github.io/html-anything/examples/pdf/output.html) | A sector report becomes a two-page guide preview with TOC, lesson spread, and source drawer. | `digital-eguide` |
-| [DOCX longform reader →](https://clockless-org.github.io/html-anything/examples/docx/output.html) | A decision memo becomes a quiet parchment document with inline contents and source appendix. | `kami-reading` |
-| [Brand positioning carousel →](https://clockless-org.github.io/html-anything/examples/editorial-carousel/output.html) | A strategy essay becomes a 5-spread magazine carousel with source evidence. | `editorial-carousel` |
-| [Email support console →](https://clockless-org.github.io/html-anything/examples/email/output.html) | A mailbox archive becomes a soft SaaS console for thread health, open loops, and handoffs. | `soft-saas` |
-| [Travel history →](https://clockless-org.github.io/html-anything/examples/travel-history/output.html) | Trips open as a calm dotted world map with provider, city, spend, and movement counters. | `global-travel` |
-| [Long-form architectural essay →](https://clockless-org.github.io/html-anything/examples/markdown/output.html) | A narrative essay becomes a split-screen editorial object with chapter pagination. | `architectural-spread` |
-| [CI terminal console →](https://clockless-org.github.io/html-anything/examples/ci-log/output.html) | A failed GitHub Actions run becomes a shell-native debugging console. | `terminal-cli` |
-| [PR review →](https://clockless-org.github.io/html-anything/examples/pr-review/output.html) | A patch becomes a risk-annotated review brief with evidence. | `developer` |
+| Usage | Live example | When it triggers | Style |
+|---|---|---|---|
+| Personal purchase recap | [Amazon order history →](https://clockless-org.github.io/html-anything/examples/amazon-orders/output.html) | Orders, subscriptions, returns, gifting, changing habits over time | `timeline-story` |
+| Reflective reading archive | [Kindle highlights →](https://clockless-org.github.io/html-anything/examples/kindle-highlights/output.html) | Highlights, notes, quotes, idea archives, reading themes | `living-essay` |
+| Personal metrics recap | [Apple Health →](https://clockless-org.github.io/html-anything/examples/iphone-health/output.html) | Health, activity, sleep, workouts, rhythms over time | `timeline-story` |
+| Team contribution analysis | [Slack championship →](https://clockless-org.github.io/html-anything/examples/slack/output.html) | Group chats, team activity, ranked contributors, burst patterns | `kinetic-scoreboard` |
+| Guide from dense document | [PDF e-guide →](https://clockless-org.github.io/html-anything/examples/pdf/output.html) | Reports, playbooks, lead magnets, PDF guides, course previews | `digital-eguide` |
+| Long work document | [DOCX longform reader →](https://clockless-org.github.io/html-anything/examples/docx/output.html) | Memos, manuscripts, long articles, documents meant for sustained reading | `kami-reading` |
+| Argument as sequence | [Brand positioning carousel →](https://clockless-org.github.io/html-anything/examples/editorial-carousel/output.html) | Strategy essays, founder letters, article takeaways, shareable sequences | `editorial-carousel` |
+| Inbox or workstream audit | [Email support console →](https://clockless-org.github.io/html-anything/examples/email/output.html) | Support inboxes, email campaigns, onboarding, customer-success queues | `soft-saas` |
+| Mobility recap | [Travel history →](https://clockless-org.github.io/html-anything/examples/travel-history/output.html) | Uber/Lyft exports, trip history, cities, airports, travel cadence | `global-travel` |
+| Visual long-form essay | [Long-form architectural essay →](https://clockless-org.github.io/html-anything/examples/markdown/output.html) | Object-focused essays, manifestos, split-screen editorial requests | `architectural-spread` |
+| Debugging evidence | [CI terminal console →](https://clockless-org.github.io/html-anything/examples/ci-log/output.html) | CI logs, build output, terminal evidence, failing tests | `terminal-cli` |
+| Code review artifact | [PR review →](https://clockless-org.github.io/html-anything/examples/pr-review/output.html) | PR patches, diffs, repo evidence, risk callouts | `developer` |
 
-→ **[See the curated gallery (14 demos) →](https://clockless-org.github.io/html-anything/examples/)**
+→ **[See the curated gallery (13 demos) →](https://clockless-org.github.io/html-anything/examples/)**
 
 ## Install
 
@@ -173,13 +174,21 @@ The output is a browser page, not a chat reply. Most outputs are a single
 assets, the skill returns `output.html + assets/`. Ask for "single-file"
 if you need everything in one HTML file.
 
-## Automatic Styles
+## Automatic Usage Routing
 
 You do not need to choose a style. The default is `auto`.
 
-Styles are design systems + layout systems, not CSS skins. The skill picks
-the system from the content, then builds the page inside that system. Every
-non-fallback style has a checked-in live example and screenshot preview.
+Routing has three layers:
+
+| Layer | Meaning |
+|---|---|
+| Use case | The user's job: teaching, files/work data, conversation analysis, or personal data/places |
+| Source | The input shape: prompt, CSV, PDF, DOCX, chat export, log, repo, folder, URL |
+| Style | The design system + layout system used to make the HTML readable |
+
+Styles are not CSS skins. The skill picks the system from the content, then
+builds the page inside that system. Every non-fallback style has a checked-in
+live example and screenshot preview.
 
 Style fidelity is part of the contract: when a style is based on a reference
 HTML or screenshot, the generated page should reproduce the reference's first
@@ -187,11 +196,10 @@ viewport, component vocabulary, interaction model, motion grammar, and visual
 absence rules. Source modules are translated into the style instead of forcing
 every output into the same dashboard/report shape.
 
-| Content | Style |
+| Usage pattern | Style |
 |---|---|
 | Unknown or mixed inputs | `default` (Insight Brief) |
 | Tutorials, lessons, explainers, "teach me" prompts | `teaching` (Lesson Lab) |
-| Comic book, manga, cartoon, "explain simply", PDF/document/article simplification requests | `comic-book` (Comic Book Explainer) |
 | 1:1 chats and intimate message exports | `love-romance-3d` (Keepsake 3D Rhythm) |
 | Reflective essays, Kindle highlights, idea notes, concept-heavy reading archives | `living-essay` (Mycelium Writing Environment) |
 | Multi-participant activity streams, team chats, ranked contributors, owner/reps/players by workload | `kinetic-scoreboard` (Kinetic Championship) |
@@ -220,7 +228,7 @@ style catalog lives in [`prompts/styles/catalog.json`](./prompts/styles/catalog.
 it records the four use cases plus each style's triggers, best sources,
 example, preview, required primitives, and avoid rules so generation can stay
 style-faithful without asking users to pick options. There is a fallback
-`default` style plus 18 concrete style systems, each with a live example and
+`default` style plus 17 concrete style systems, each with a live example and
 preview asset.
 
 Example explicit style override:
@@ -231,6 +239,7 @@ npx tsx src/cli.ts examples/pdf/input.pdf \
   --out /tmp/battery-storage-guide.html \
   --title "Mid-Market Battery Storage Field Guide"
 ```
+
 ## Use Cases And Sources
 
 Sources can be endless, but the skill routes them into four stable use cases.
@@ -238,7 +247,7 @@ Each use case can use one or more style systems.
 
 | Use case | Example sources | Likely styles |
 |---|---|---|
-| Teaching Studios | A short teaching brief, article, lesson outline, concept note, URL, PDF/document simplification request | `teaching`, `comic-book` |
+| Teaching Studios | A short teaching brief, article, lesson outline, concept note, URL, PDF/document simplification request | `teaching` |
 | Files & Work Data | CSV / TSV, spreadsheet-style exports, JSON, JSONL, logs, CI output, PR patches, stack traces, repos, email/support archives, bank transactions, invoices, QuickBooks, calendars, issue trackers, Markdown, PDF, DOCX, bookmarks, URL lists, bibliographies, research records, slide-style carousel outputs | `dashboard`, `soft-saas`, `document`, `kami-reading`, `architectural-spread`, `digital-eguide`, `editorial-carousel`, `developer`, `terminal-cli` |
 | Conversation Analysis | WeChat, iMessage-style CSV, Slack, Discord, Telegram, email-style threads | `love-romance-3d`, `kinetic-scoreboard`, `network-map` |
 | Personal Data & Places | Amazon orders, Apple Health, browser history, YouTube, Spotify, Twitch, Kindle highlights, Venmo / PayPal, AI chat exports, notes vaults, Google Maps saved places, travel history, GPX, KML, itinerary CSV, location history | `timeline-story`, `global-travel`, `living-essay`, `network-map`, `map-atlas` |
