@@ -158,14 +158,14 @@ to export the data, then converts it after you provide the export.
 
 | Input | What you give | What you get |
 |---|---|---|
-| Rich answer | A topic, analysis request, comparison, recap, brief, or teaching goal | A readable, styled HTML artifact instead of a long Markdown answer |
+| Rich answer | A topic, analysis request, comparison, recap, brief, or teaching goal | A readable, styled HTML artifact instead of a long written answer |
 | Idea | A short brief, e.g. "make a solar system teaching site" | A generated educational / interactive HTML page |
 | File | CSV, JSON, Markdown, PDF, DOCX, chat export, log, transcript, statement | A live page designed for that file |
 | Folder | Notes vault, Google Photos Takeout, Notion export, repo, exported archive | A browsable atlas / dashboard / audit page |
 | URL | Article, GitHub repo, public webpage | A shareable HTML reading or exploration page |
 | Export request | "My Amazon orders", "my Spotify history", "my WhatsApp chat" | Export instructions first, then a live HTML page |
 
-The output is a browser page, not markdown. Most outputs are a single
+The output is a browser page, not a chat reply. Most outputs are a single
 `output.html`. When the page needs generated images or other local
 assets, the skill returns `output.html + assets/`. Ask for "single-file"
 if you need everything in one HTML file.
