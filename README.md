@@ -9,7 +9,7 @@ is actually a page, not a chat message.**
 answers into self-contained HTML artifacts — analyses, reports, recaps,
 dashboards, atlases, teaching sites, comparison studies, decision memos,
 year-in-review pages. The skill picks the right design system from a
-18-style catalog, builds a single-file `.html`, verifies it in a browser,
+19-style catalog, builds a single-file `.html`, verifies it in a browser,
 and hands it back. Short conversational answers stay short — you just stop
 scrolling 4,000-word replies whenever the content was always going to be a
 page.
@@ -17,7 +17,7 @@ page.
 It also works **on demand** for any file, folder, URL, or service export
 (Amazon orders, Kindle highlights, Spotify history, WhatsApp / WeChat,
 Google Photos Takeout, LinkedIn connections, CSV / PDF / DOCX, logs, GPX, …) —
-the skill figures out the source, chooses one of the 18 design systems, and
+the skill figures out the source, chooses one of the 19 style systems, and
 ships the HTML.
 
 ## Preview
