@@ -2,19 +2,22 @@
 
 [![skills.sh](https://skills.sh/b/clockless-org/html-anything)](https://skills.sh/clockless-org/html-anything)
 
-Turn rich answers, ideas, files, folders, and URLs into polished live HTML pages.
+**Install once. Your agent answers as polished web pages whenever a Markdown
+reply would be a wall of text.**
 
-`html-anything` is a Codex / Claude Code skill. Give it a prompt like
-"create an interactive teaching site about the solar system", or give it
-an export like Amazon orders, WhatsApp chat, a CSV, a transcript, a repo,
-or a folder of notes. The skill figures out the source, chooses the page
-style automatically, builds the HTML, checks it in a browser, and gives
-you something you can open, share, or publish.
+`html-anything` is a Codex / Claude Code skill that flips the agent's default
+output layer from Markdown to HTML for rich deliverables — analyses, reports,
+recaps, dashboards, atlases, teaching sites, comparison studies, decision
+memos, year-in-review pages. The skill picks the right design system,
+builds a self-contained single-file `.html`, verifies it in a browser, and
+hands it back. Short conversational answers stay in plain text — you just
+stop scrolling 4,000-word replies whenever the content is actually a page.
 
-It is also an output layer for rich deliverables. When an answer would be long,
-visual, structured, educational, analytical, recap-like, or meant to be shared,
-the skill nudges the agent toward a beautiful HTML artifact instead of a long
-Markdown reply.
+It also works **on demand** for any file, folder, URL, or service export
+(Amazon orders, Kindle highlights, Spotify history, WhatsApp / WeChat,
+Google Photos Takeout, LinkedIn connections, CSV / PDF / DOCX, logs, GPX, …) —
+the skill figures out the source, chooses one of 16 design systems, and
+ships the HTML.
 
 ## Preview
 
