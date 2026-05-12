@@ -183,8 +183,7 @@ a { color: inherit; }
   overflow: hidden;
   background: var(--surface);
 }
-.shot img,
-.shot video {
+.shot img {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -192,18 +191,7 @@ a { color: inherit; }
   background: var(--surface);
   transition: transform 0.35s ease;
 }
-.shot video {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.2s ease, transform 0.35s ease;
-}
-.shot.has-video img { opacity: 0; }
-.shot.has-video video { opacity: 1; }
-.shot.has-video:hover video,
-.example-card:focus-visible .shot.has-video video { opacity: 1; }
-.example-card:hover .shot img,
-.example-card:hover .shot video { transform: scale(1.02); }
+.example-card:hover .shot img { transform: scale(1.02); }
 .media-badge {
   position: absolute;
   z-index: 2;
@@ -390,9 +378,6 @@ footer.foot a { color: var(--primary); }
     ["developer", "Developer review"]
   ]);
 
-  const videoSlugs = new Set(examples.map(item => item.slug));
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
   function escapeHtml(value) {
     return String(value).replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
   }
@@ -405,10 +390,9 @@ footer.foot a { color: var(--primary); }
   function renderCard(item) {
     return `
       <a class="example-card" href='${item.slug}/output.html' style="--accent:${styleAccent(item.style)}" data-slug="${item.slug}">
-        <span class="shot${videoSlugs.has(item.slug) ? " has-video" : ""}" data-slug="${item.slug}">
+        <span class="shot" data-slug="${item.slug}">
           <img loading="lazy" src="${img(item.slug)}" alt="${escapeHtml(item.usage)} screenshot">
-          ${videoSlugs.has(item.slug) ? `<video muted loop playsinline preload="metadata" poster="${img(item.slug)}" aria-label="${escapeHtml(item.usage)} demo video"><source src="../docs/example-videos/${item.slug}.mp4" type="video/mp4"></video>` : ""}
-          <span class="media-badge">${videoSlugs.has(item.slug) ? "Video" : "Screenshot"}</span>
+          <span class="media-badge">Screenshot</span>
         </span>
         <span class="example-body">
           <h4>${escapeHtml(item.usage)}</h4>
@@ -437,23 +421,6 @@ footer.foot a { color: var(--primary); }
         </section>`;
     }).join("");
     document.getElementById("groups").innerHTML = groupsHtml;
-    hydrateMedia();
-  }
-  function hydrateMedia() {
-    if (reduceMotion) return;
-    document.querySelectorAll(".shot.has-video[data-slug]").forEach(frame => {
-      if (frame.dataset.videoChecked) return;
-      frame.dataset.videoChecked = "true";
-      const video = frame.querySelector("video");
-      const card = frame.closest(".example-card");
-      if (!video) return;
-      const play = () => video.play().catch(() => {});
-      const reset = () => { video.pause(); video.currentTime = 0; };
-      frame.addEventListener("mouseenter", play);
-      frame.addEventListener("mouseleave", reset);
-      card?.addEventListener("focusin", play);
-      card?.addEventListener("focusout", reset);
-    });
   }
   renderGroups();
 })();

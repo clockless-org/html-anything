@@ -22,6 +22,29 @@ Google Photos Takeout, logs, GPX, and more. The skill figures out the source,
 chooses the right use case and style, builds the page, checks it in a browser,
 and hands back a live HTML artifact instead of a long Markdown reply.
 
+## Why this exists
+
+AI agents are outgrowing plain Markdown. Inspired by Claude Code team member
+Thariq Shihipar's viral
+[“The Unreasonable Effectiveness of HTML”](https://x.com/trq212/status/2052809885763747935),
+`html-anything` treats HTML as the richer response format: denser, more visual,
+more interactive, and easier to share when the answer is really a page.
+
+<table>
+<tr>
+<td width="50%" valign="top">
+<strong>Before: plain response</strong><br>
+<sub>A long scroll of text for “Teach me solar system”.</sub><br><br>
+<img src="./docs/plain-response-before.jpg" alt="Plain AI response about the solar system" width="100%">
+</td>
+<td width="50%" valign="top">
+<strong>After: live HTML artifact</strong><br>
+<sub>The same teaching goal becomes a visual, interactive learning page.</sub><br><br>
+<a href="https://clockless-org.github.io/html-anything/examples/solar-system-studio/output.html"><img src="./docs/example-previews/solar-system-studio.jpg" alt="html-anything solar system teaching studio" width="100%"></a>
+</td>
+</tr>
+</table>
+
 ## Preview
 
 <p align="center">
@@ -33,21 +56,21 @@ and hands back a live HTML artifact instead of a long Markdown reply.
 <table>
 <tr>
 <td width="50%" valign="top">
-<a href="https://clockless-org.github.io/html-anything/examples/solar-system-studio/output.html"><img src="./docs/example-demos/solar-system-studio.gif" alt="Teach a concept demo" width="100%"></a><br>
+<a href="https://clockless-org.github.io/html-anything/examples/solar-system-studio/output.html"><img src="./docs/example-previews/solar-system-studio.jpg" alt="Teach a concept demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/solar-system-studio/output.html">Teach a concept →</a></strong><br>
-<sub>Source: teaching brief · Style: <code>teaching</code> · <a href="./docs/example-videos/solar-system-studio.mp4">Demo mp4</a></sub>
+<sub>Source: teaching brief · Style: <code>teaching</code></sub>
 </td>
 <td width="50%" valign="top">
-<a href="https://clockless-org.github.io/html-anything/examples/markdown/output.html"><img src="./docs/example-demos/markdown.gif" alt="Learn from long-form text demo" width="100%"></a><br>
+<a href="https://clockless-org.github.io/html-anything/examples/markdown/output.html"><img src="./docs/example-previews/markdown.jpg" alt="Learn from long-form text demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/markdown/output.html">Learn from long-form text →</a></strong><br>
-<sub>Source: Markdown file · Style: <code>architectural-spread</code> · <a href="./docs/example-videos/markdown.mp4">Demo mp4</a></sub>
+<sub>Source: Markdown file · Style: <code>architectural-spread</code></sub>
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
-<a href="https://clockless-org.github.io/html-anything/examples/docx/output.html"><img src="./docs/example-demos/docx.gif" alt="Learn from a document demo" width="100%"></a><br>
+<a href="https://clockless-org.github.io/html-anything/examples/docx/output.html"><img src="./docs/example-previews/docx.jpg" alt="Learn from a document demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/docx/output.html">Learn from a document →</a></strong><br>
-<sub>Source: DOCX file · Style: <code>kami-reading</code> · <a href="./docs/example-videos/docx.mp4">Demo mp4</a></sub>
+<sub>Source: DOCX file · Style: <code>kami-reading</code></sub>
 </td>
 <td width="50%" valign="top"></td>
 </tr>
@@ -59,26 +82,26 @@ and hands back a live HTML artifact instead of a long Markdown reply.
 <table>
 <tr>
 <td width="50%" valign="top">
-<a href="https://clockless-org.github.io/html-anything/examples/editorial-carousel/output.html"><img src="./docs/example-demos/editorial-carousel.gif" alt="Argument as sequence demo" width="100%"></a><br>
+<a href="https://clockless-org.github.io/html-anything/examples/editorial-carousel/output.html"><img src="./docs/example-previews/editorial-carousel.jpg" alt="Argument as sequence demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/editorial-carousel/output.html">Argument as sequence →</a></strong><br>
-<sub>Source: strategy essay · Style: <code>editorial-carousel</code> · <a href="./docs/example-videos/editorial-carousel.mp4">Demo mp4</a></sub>
+<sub>Source: strategy essay · Style: <code>editorial-carousel</code></sub>
 </td>
 <td width="50%" valign="top">
-<a href="https://clockless-org.github.io/html-anything/examples/pdf/output.html"><img src="./docs/example-demos/pdf.gif" alt="Guide from dense document demo" width="100%"></a><br>
+<a href="https://clockless-org.github.io/html-anything/examples/pdf/output.html"><img src="./docs/example-previews/pdf.jpg" alt="Guide from dense document demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/pdf/output.html">Guide from dense document →</a></strong><br>
-<sub>Source: PDF report · Style: <code>digital-eguide</code> · <a href="./docs/example-videos/pdf.mp4">Demo mp4</a></sub>
+<sub>Source: PDF report · Style: <code>digital-eguide</code></sub>
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
-<a href="https://clockless-org.github.io/html-anything/examples/email/output.html"><img src="./docs/example-demos/email.gif" alt="Inbox or workstream audit demo" width="100%"></a><br>
+<a href="https://clockless-org.github.io/html-anything/examples/email/output.html"><img src="./docs/example-previews/email.jpg" alt="Inbox or workstream audit demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/email/output.html">Inbox or workstream audit →</a></strong><br>
-<sub>Source: Mbox archive · Style: <code>soft-saas</code> · <a href="./docs/example-videos/email.mp4">Demo mp4</a></sub>
+<sub>Source: Mbox archive · Style: <code>soft-saas</code></sub>
 </td>
 <td width="50%" valign="top">
-<a href="https://clockless-org.github.io/html-anything/examples/ci-log/output.html"><img src="./docs/example-demos/ci-log.gif" alt="Debugging evidence demo" width="100%"></a><br>
+<a href="https://clockless-org.github.io/html-anything/examples/ci-log/output.html"><img src="./docs/example-previews/ci-log.jpg" alt="Debugging evidence demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/ci-log/output.html">Debugging evidence →</a></strong><br>
-<sub>Source: CI log · Style: <code>terminal-cli</code> · <a href="./docs/example-videos/ci-log.mp4">Demo mp4</a></sub>
+<sub>Source: CI log · Style: <code>terminal-cli</code></sub>
 </td>
 </tr>
 </table>
@@ -89,14 +112,14 @@ and hands back a live HTML artifact instead of a long Markdown reply.
 <table>
 <tr>
 <td width="50%" valign="top">
-<a href="https://clockless-org.github.io/html-anything/examples/wechat-couple/output.html"><img src="./docs/example-demos/wechat-couple.gif" alt="Private chat recap demo" width="100%"></a><br>
+<a href="https://clockless-org.github.io/html-anything/examples/wechat-couple/output.html"><img src="./docs/example-previews/wechat-couple.jpg" alt="Private chat recap demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/wechat-couple/output.html">Private chat recap →</a></strong><br>
-<sub>Source: 1:1 chat export · Style: <code>love-romance-3d</code> · <a href="./docs/example-videos/wechat-couple.mp4">Demo mp4</a></sub>
+<sub>Source: 1:1 chat export · Style: <code>love-romance-3d</code></sub>
 </td>
 <td width="50%" valign="top">
-<a href="https://clockless-org.github.io/html-anything/examples/slack/output.html"><img src="./docs/example-demos/slack.gif" alt="Group contribution analysis demo" width="100%"></a><br>
+<a href="https://clockless-org.github.io/html-anything/examples/slack/output.html"><img src="./docs/example-previews/slack.jpg" alt="Group contribution analysis demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/slack/output.html">Group contribution analysis →</a></strong><br>
-<sub>Source: team chat export · Style: <code>kinetic-scoreboard</code> · <a href="./docs/example-videos/slack.mp4">Demo mp4</a></sub>
+<sub>Source: team chat export · Style: <code>kinetic-scoreboard</code></sub>
 </td>
 </tr>
 </table>
@@ -107,14 +130,14 @@ and hands back a live HTML artifact instead of a long Markdown reply.
 <table>
 <tr>
 <td width="50%" valign="top">
-<a href="https://clockless-org.github.io/html-anything/examples/kindle-highlights/output.html"><img src="./docs/example-demos/kindle-highlights.gif" alt="Reflective reading archive demo" width="100%"></a><br>
+<a href="https://clockless-org.github.io/html-anything/examples/kindle-highlights/output.html"><img src="./docs/example-previews/kindle-highlights.jpg" alt="Reflective reading archive demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/kindle-highlights/output.html">Reflective reading archive →</a></strong><br>
-<sub>Source: My Clippings.txt · Style: <code>living-essay</code> · <a href="./docs/example-videos/kindle-highlights.mp4">Demo mp4</a></sub>
+<sub>Source: My Clippings.txt · Style: <code>living-essay</code></sub>
 </td>
 <td width="50%" valign="top">
-<a href="https://clockless-org.github.io/html-anything/examples/travel-history/output.html"><img src="./docs/example-demos/travel-history.gif" alt="Mobility recap demo" width="100%"></a><br>
+<a href="https://clockless-org.github.io/html-anything/examples/travel-history/output.html"><img src="./docs/example-previews/travel-history.jpg" alt="Mobility recap demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/travel-history/output.html">Mobility recap →</a></strong><br>
-<sub>Source: Uber/Lyft CSV · Style: <code>global-travel</code> · <a href="./docs/example-videos/travel-history.mp4">Demo mp4</a></sub>
+<sub>Source: Uber/Lyft CSV · Style: <code>global-travel</code></sub>
 </td>
 </tr>
 </table>
