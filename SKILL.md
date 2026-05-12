@@ -62,7 +62,8 @@ same source family and style system, then produce a page with comparable
 structure, interaction depth, visual specificity, and browser-verified polish.
 For example:
 
-- "Create an interactive teaching site about the solar system." should route
+- "Create a three-panel interactive teaching studio about the solar system,
+  with a selectable model, compare controls, and live inspector." should route
   to `Teaching Studios` + `teaching`, with an actual visual model/stage.
 - "Turn this PDF guide into an interactive e-guide." should route to
   `Files & Work Data` + `digital-eguide`, with a guide-shaped reading surface.

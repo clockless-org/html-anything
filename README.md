@@ -69,13 +69,13 @@ more interactive, and easier to share when the answer is really a page.
 <a href="https://clockless-org.github.io/html-anything/examples/solar-system-studio/output.html"><img src="./docs/example-demos/solar-system-studio.gif" alt="Teach a concept demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/solar-system-studio/output.html">Teach a concept →</a></strong><br>
 <sub>Source: teaching brief · Style: <code>teaching</code></sub><br>
-<sub><strong>Prompt:</strong> <code>Create an interactive teaching site about the solar system.</code></sub>
+<sub><strong>Prompt:</strong> <code>Create a three-panel interactive teaching studio about the solar system, with a selectable model, compare controls, and live inspector.</code></sub>
 </td>
 <td width="50%" valign="top">
 <a href="https://clockless-org.github.io/html-anything/examples/markdown/output.html"><img src="./docs/example-demos/markdown.gif" alt="Learn from long-form text demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/markdown/output.html">Learn from long-form text →</a></strong><br>
 <sub>Source: Markdown file · Style: <code>architectural-spread</code></sub><br>
-<sub><strong>Prompt:</strong> <code>Turn this Markdown essay into a visual long-form HTML explainer.</code></sub>
+<sub><strong>Prompt:</strong> <code>Turn this Markdown essay into a split-screen architectural visual explainer.</code></sub>
 </td>
 </tr>
 <tr>
@@ -83,7 +83,7 @@ more interactive, and easier to share when the answer is really a page.
 <a href="https://clockless-org.github.io/html-anything/examples/docx/output.html"><img src="./docs/example-demos/docx.gif" alt="Learn from a document demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/docx/output.html">Learn from a document →</a></strong><br>
 <sub>Source: DOCX file · Style: <code>kami-reading</code></sub><br>
-<sub><strong>Prompt:</strong> <code>Turn this DOCX memo into a calm HTML reading page.</code></sub>
+<sub><strong>Prompt:</strong> <code>Turn this DOCX memo into a calm long-form reader with printable chapters.</code></sub>
 </td>
 <td width="50%" valign="top"></td>
 </tr>
@@ -112,7 +112,7 @@ more interactive, and easier to share when the answer is really a page.
 <a href="https://clockless-org.github.io/html-anything/examples/email/output.html"><img src="./docs/example-demos/email.gif" alt="Inbox or workstream audit demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/email/output.html">Inbox or workstream audit →</a></strong><br>
 <sub>Source: Mbox archive · Style: <code>soft-saas</code></sub><br>
-<sub><strong>Prompt:</strong> <code>Turn this mbox archive into a beautiful email workstream dashboard.</code></sub>
+<sub><strong>Prompt:</strong> <code>Turn this mbox archive into a soft SaaS email workstream console.</code></sub>
 </td>
 <td width="50%" valign="top">
 <a href="https://clockless-org.github.io/html-anything/examples/ci-log/output.html"><img src="./docs/example-demos/ci-log.gif" alt="Debugging evidence demo" width="100%"></a><br>
@@ -152,13 +152,13 @@ more interactive, and easier to share when the answer is really a page.
 <a href="https://clockless-org.github.io/html-anything/examples/kindle-highlights/output.html"><img src="./docs/example-demos/kindle-highlights.gif" alt="Reflective reading archive demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/kindle-highlights/output.html">Reflective reading archive →</a></strong><br>
 <sub>Source: My Clippings.txt · Style: <code>living-essay</code></sub><br>
-<sub><strong>Prompt:</strong> <code>Turn my Kindle highlights into a reflective reading archive.</code></sub>
+<sub><strong>Prompt:</strong> <code>Turn my Kindle highlights into a reflective living essay archive.</code></sub>
 </td>
 <td width="50%" valign="top">
 <a href="https://clockless-org.github.io/html-anything/examples/travel-history/output.html"><img src="./docs/example-demos/travel-history.gif" alt="Mobility recap demo" width="100%"></a><br>
 <strong><a href="https://clockless-org.github.io/html-anything/examples/travel-history/output.html">Mobility recap →</a></strong><br>
 <sub>Source: Uber/Lyft CSV · Style: <code>global-travel</code></sub><br>
-<sub><strong>Prompt:</strong> <code>Turn this Uber/Lyft ride history CSV into a personal mobility recap.</code></sub>
+<sub><strong>Prompt:</strong> <code>Turn this Uber/Lyft ride history CSV into a global travel map recap.</code></sub>
 </td>
 </tr>
 </table>

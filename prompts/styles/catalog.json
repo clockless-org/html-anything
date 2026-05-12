@@ -147,7 +147,10 @@
         "tutorial",
         "lesson",
         "explain",
-        "learning site"
+        "learning site",
+        "interactive teaching studio",
+        "object lab",
+        "live inspector"
       ],
       "bestSources": [
         "prompt",
@@ -166,11 +169,13 @@
         "recap"
       ],
       "requiredPrimitives": [
+        ".lesson-shell",
         ".lesson-stage",
         ".step-rail",
-        ".try-it",
-        ".concept-card",
-        ".quiz-panel"
+        ".try-control",
+        ".concept-drawer",
+        ".check-yourself",
+        ".recap-strip"
       ],
       "avoid": [
         "article-only output",
@@ -236,6 +241,7 @@
         "kindle highlights",
         "reflective notes",
         "essay",
+        "living essay",
         "idea archive",
         "reading notes"
       ],
@@ -256,11 +262,13 @@
         "quiet appendix"
       ],
       "requiredPrimitives": [
-        ".living-manuscript",
-        ".margin-question",
-        ".spore-word",
-        ".thread-svg",
-        ".quiet-appendix"
+        ".layout",
+        ".mycelium-layer",
+        ".question-zone",
+        ".question-capsule",
+        ".manuscript",
+        ".spore",
+        ".analysis-fields"
       ],
       "avoid": [
         "dense dashboard",
@@ -332,6 +340,8 @@
         "email campaign",
         "customer onboarding",
         "support inbox",
+        "workstream console",
+        "soft SaaS",
         "saas metrics",
         "performance panel",
         "customer success"
@@ -400,8 +410,8 @@
       ],
       "requiredPrimitives": [
         ".kinetic-arena",
-        ".rank-lane",
-        ".activity-body",
+        ".competitor-lane",
+        ".kinetic-body",
         ".telemetry-footer",
         ".evidence-pit"
       ],
@@ -452,7 +462,7 @@
         "memory drawer"
       ],
       "requiredPrimitives": [
-        ".timeline-shell",
+        ".story-shell",
         ".time-lens",
         ".timeline-spine",
         ".chapter-panel",
@@ -499,11 +509,12 @@
         "route stats"
       ],
       "requiredPrimitives": [
-        ".atlas-shell",
-        ".spatial-stage",
+        ".map-shell",
+        ".atlas-stage",
         ".place-drawer",
+        ".period-scrubber",
         ".waypoint-browser",
-        ".period-filter"
+        ".movement-note"
       ],
       "avoid": [
         "remote map tiles",
@@ -525,6 +536,8 @@
         "uber history",
         "lyft history",
         "trip history",
+        "mobility recap",
+        "global travel map recap",
         "global map"
       ],
       "bestSources": [
@@ -598,10 +611,11 @@
       ],
       "requiredPrimitives": [
         ".network-shell",
-        ".graph-canvas",
+        ".network-canvas",
         ".entity-inspector",
-        ".cluster-control",
-        ".hub-card"
+        ".cluster-controls",
+        ".hub-card",
+        ".linked-records"
       ],
       "avoid": [
         "unlabeled node cloud",
@@ -672,6 +686,7 @@
         "kami",
         "long-form reading",
         "long text",
+        "calm long-form reader",
         "make it easy to read",
         "readable article",
         "paper reader"
@@ -722,6 +737,7 @@
       "triggers": [
         "architectural spread",
         "split screen editorial",
+        "split-screen architectural visual explainer",
         "visual essay",
         "object-focused article",
         "like the Mars HTML",
@@ -937,11 +953,13 @@
         "copyable handoff"
       ],
       "requiredPrimitives": [
-        ".evidence-workbench",
-        ".prompt-line",
+        ".dev-shell",
+        ".terminal-prompt",
+        ".finding-bar",
+        ".terminal-pane",
         ".risk-checklist",
-        ".artifact-navigator",
-        ".handoff-block"
+        ".raw-artifact",
+        ".copy-handoff"
       ],
       "avoid": [
         "pretty product dashboard",

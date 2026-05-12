@@ -232,8 +232,11 @@ Then choose the style system:
 - **Mycelium Writing Environment** for reflective essays, Kindle highlights,
   idea notes, and reading archives where a vertical margin question connects to
   inline spore words in a slow-reading manuscript.
-- **Map Atlas** for places, trips, routes, rideshare, photo geodata, and
-  location history.
+- **Map Atlas** for saved places, routes, geotagged photos, location history,
+  and spatial datasets that need a local atlas.
+- **Global Travel Map** for travel history, Uber/Lyft exports, mobility
+  recaps, airport patterns, and trip logs where a calm world-map stage is the
+  clearest first read.
 - **Kinetic Championship** for multi-participant activity streams where rank,
   contribution, bursts, workload, or competitive rhythm is the clearest first
   read.

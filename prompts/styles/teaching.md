@@ -15,6 +15,21 @@ changing something, checking themselves, and moving to the next idea.
 For mixed briefs that need both a guided explanation and an object model, keep
 the step rail and use the object stage as the main teaching surface.
 
+Canonical object-lab example: `examples/solar-system-studio`. A prompt like
+"Create a three-panel interactive teaching studio about the solar system, with
+a selectable model, compare controls, and live inspector" should produce a
+first viewport with:
+
+1. a left lesson/control rail with the title, short objective, mode controls,
+   and object list;
+2. a central visual model stage that changes when the learner selects an
+   object or mode;
+3. a right inspector with selected-object facts, why-it-matters explanation,
+   and comparison controls.
+
+This object-lab pattern should generalize to anatomy, architecture, product,
+scientific, mechanical, or system-exploration briefs.
+
 ## Underlying System: Lesson Lab
 
 This is a classroom-lab system. The first screen is the lesson apparatus
@@ -36,6 +51,10 @@ Component vocabulary:
 
 - `.lesson-shell`, `.lesson-stage`, `.step-rail`, `.try-control`,
   `.annotation-layer`, `.concept-drawer`, `.check-yourself`, `.recap-strip`.
+- Object-lab variants may also use `.object-lab`, `.object-list`,
+  `.object-stage`, `.model-stage`, `.inspector-panel`, `.compare-control`, and
+  `.stage-note`, but keep at least four of the base lesson classes as aliases
+  or wrapper classes so style compliance remains easy to audit.
 - Use arrows, labels, callouts, progress, and stateful controls more than
   generic cards.
 

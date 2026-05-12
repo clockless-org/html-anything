@@ -32,6 +32,10 @@ async function walkFiles(dir) {
   return files
 }
 
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+}
+
 test("pdf parser extracts text + headings from the synthetic fixture", async () => {
   const fp = path.join(REPO, "examples/pdf/input.pdf")
   const parser = await pickParser(fp)
@@ -174,6 +178,14 @@ test("style catalog stays in sync with style types, prompts, examples, and previ
       new RegExp(`data-ha-style=["']${entry.id}["']`),
       `${entry.id} example must declare data-ha-style="${entry.id}"`,
     )
+    for (const primitive of entry.requiredPrimitives) {
+      const className = primitive.replace(/^\./, "")
+      assert.match(
+        outputHtml,
+        new RegExp(`class=["'][^"']*\\b${escapeRegExp(className)}\\b`),
+        `${entry.id} example must include required primitive ${primitive}`,
+      )
+    }
 
     const previewStat = await fs.stat(path.join(REPO, entry.preview))
     assert.ok(previewStat.isFile(), `${entry.id} preview asset missing`)
