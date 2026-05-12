@@ -1232,34 +1232,6 @@ test("browser-history prompt is present on disk", async () => {
   assert.ok(stat.isFile(), "missing prompt file: browser-history.md")
 })
 
-test("browser-history output.html renders the required family sections + offline rules", async () => {
-  const fs = await import("node:fs/promises")
-  const html = await fs.readFile(path.join(REPO, "examples/browser-history/output.html"), "utf8")
-  for (const needle of [
-    "Activity timeline",
-    "Domains",
-    "Topics",
-    "Sessions",
-    "Attention audit",
-    "Browse all visits",
-    "Late-night share",
-    "Returners",
-    "Repeated searches",
-    "Heuristic",
-    "Generated locally",
-    "browser-history",
-  ]) {
-    assert.ok(html.includes(needle), `examples/browser-history/output.html missing: ${needle}`)
-  }
-  assert.ok(!/fonts\.googleapis\.com|fonts\.gstatic\.com/.test(html),
-    "browser-history output must not link to Google Fonts")
-  assert.ok(!/s2\/favicons|t0\.gstatic\.com|favicon\.ico/.test(html),
-    "browser-history output must not fetch favicons")
-  assert.ok(!/<link\s+[^>]*\bhref=/i.test(html), "browser-history output must not include any <link> tags")
-  assert.ok(!/<iframe\b/i.test(html), "browser-history output must not embed iframes")
-  assert.ok(!/<img\s+[^>]*\bsrc=/i.test(html), "browser-history output must not include external <img> tags")
-})
-
 test("kindle-highlights output.html renders the required family sections", async () => {
   const fs = await import("node:fs/promises")
   const html = await fs.readFile(path.join(REPO, "examples/kindle-highlights/output.html"), "utf8")
@@ -1412,29 +1384,6 @@ test("google-photos-takeout output.html renders the required family sections + o
   assert.ok(!/<img\s+[^>]*\bsrc=/i.test(html), "google-photos-takeout output must not include any <img src> tags")
   assert.ok(!/fonts\.googleapis\.com|fonts\.gstatic\.com/.test(html),
     "google-photos-takeout output must not link to Google Fonts")
-})
-
-test("venmo-paypal-payments output.html renders the required family + social sections", async () => {
-  const fs = await import("node:fs/promises")
-  const html = await fs.readFile(path.join(REPO, "examples/venmo-paypal-payments/output.html"), "utf8")
-  for (const needle of [
-    "Monthly cashflow",
-    "People",
-    "Stories",
-    "Recurring",
-    "Flags",
-    "Browse all 0 transactions",
-    "Heuristic",
-    "Generated locally",
-    "venmo-paypal-payments",
-    "VENMO",
-    "not tax, accounting, or legal advice",
-  ]) {
-    assert.ok(html.includes(needle), `examples/venmo-paypal-payments/output.html missing: ${needle}`)
-  }
-  // Privacy: no external CDN beyond the shared Google Fonts import.
-  assert.ok(!/<img\s+[^>]*\bsrc=/i.test(html), "venmo-paypal-payments output must not include external <img> tags")
-  assert.ok(!/<iframe\b/i.test(html), "venmo-paypal-payments output must not embed iframes")
 })
 
 test("vcard parser routes a multi-card .vcf to vcard-contacts and pre-aggregates the family contract", async () => {
@@ -1883,40 +1832,5 @@ test("rideshare-history prompt is present on disk", async () => {
                         "Trip lengths", "Money", "Flags",
                         "Browse all", "Privacy", "no map tiles", "no geocoding"]) {
     assert.ok(body.includes(needle), `prompts/sources/rideshare-history.md missing: ${needle}`)
-  }
-})
-
-test("rideshare-history output.html renders the required sections + offline rules", async () => {
-  const fs = await import("node:fs/promises")
-  const html = await fs.readFile(path.join(REPO, "examples/rideshare-history/output.html"), "utf8")
-  for (const needle of [
-    "Spend timeline",
-    "When you ride",
-    "Top places",
-    "Cities",
-    "Trip lengths",
-    "Places",
-    "Money",
-    "Flags",
-    "Browse all",
-    "Heuristic",
-    "Generated locally",
-    "rideshare-history",
-    "UBER",
-    "not tax, accounting, or insurance advice",
-    "no map tiles",
-    "no geocoding",
-    "masked by default",
-  ]) {
-    assert.ok(html.includes(needle), `examples/rideshare-history/output.html missing: ${needle}`)
-  }
-  // Hard offline rules: no map providers, no geocoders, no embedded images,
-  // no iframes; only the shared Google Fonts link is allowed.
-  assert.ok(!/<iframe\b/i.test(html), "rideshare-history output must not embed iframes")
-  assert.ok(!/<img\s+[^>]*\bsrc=/i.test(html), "rideshare-history output must not include any <img src> tags")
-  for (const forbidden of ["mapbox", "leaflet", "tile.openstreetmap", "google.com/maps",
-                           "nominatim.openstreetmap", "geocod.io"]) {
-    assert.ok(!html.toLowerCase().includes(forbidden),
-      `rideshare-history output must not reference ${forbidden}`)
   }
 })

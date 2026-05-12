@@ -48,14 +48,14 @@
       "title": "Personal Data Recaps",
       "summary": "Turn personal exports into timelines, recaps, reading fields, spending stories, and relationship/network maps.",
       "styles": ["timeline-story", "living-essay", "network-map"],
-      "examples": ["amazon-orders", "iphone-health", "kindle-highlights", "browser-history", "linkedin-connections", "venmo-paypal-payments"]
+      "examples": ["amazon-orders", "iphone-health", "kindle-highlights", "linkedin-connections"]
     },
     {
       "id": "places-travel",
       "title": "Places & Trips",
       "summary": "Make maps, route atlases, travel dossiers, photo-location views, and trip paper trails from location-rich sources.",
       "styles": ["map-atlas", "paper-trail"],
-      "examples": ["google-photos-takeout", "rideshare-history", "itinerary-trip"]
+      "examples": ["google-photos-takeout", "itinerary-trip"]
     },
     {
       "id": "developer",
@@ -284,8 +284,8 @@
       "useCases": ["files-work"],
       "triggers": ["document", "essay", "article", "research", "records", "policy", "memo"],
       "bestSources": ["markdown-document", "docx-document", "medical-visit", "lab-results", "legal-chronology", "bookmarks-html", "bibliography", "url-list", "reading-list"],
-      "example": "legal-chronology",
-      "preview": "docs/example-previews/legal-chronology.jpg",
+      "example": "bookmarks-market-research",
+      "preview": "docs/example-previews/bookmarks-market-research.jpg",
       "accent": "#8b3f1f",
       "coreScaffold": ["cover", "reader rail", "body sheet", "evidence margin", "question panel"],
       "requiredPrimitives": [".document-shell", ".reader-rail", ".body-section", ".evidence-margin", ".question-panel"],
