@@ -1610,39 +1610,6 @@ test("linkedin-connections prompt is present on disk", async () => {
   assert.ok(stat.isFile(), "missing prompt file: linkedin-connections.md")
 })
 
-test("linkedin-connections output.html renders the required sections + offline rules", async () => {
-  const fs = await import("node:fs/promises")
-  const html = await fs.readFile(path.join(REPO, "examples/linkedin-connections/output.html"), "utf8")
-  for (const needle of [
-    "LINKEDIN CONNECTIONS",
-    "Network growth",
-    "Network atlas",
-    "Top companies",
-    "Role keyword clusters",
-    "Industries",
-    "Email domains",
-    "Reconnect queue",
-    "Network audit",
-    "Browse all connections",
-    "Generated locally",
-    "Heuristic",
-  ]) {
-    assert.ok(html.includes(needle), `examples/linkedin-connections/output.html missing: ${needle}`)
-  }
-  // Hard offline rules: no link tags, no iframes, no external imgs,
-  // no clickable anchors to linkedin.com.
-  assert.ok(!/<link\s+[^>]*\bhref=/i.test(html), "linkedin output must not include any <link> tags")
-  assert.ok(!/<iframe\b/i.test(html), "linkedin output must not embed iframes")
-  assert.ok(!/<img\s+[^>]*\bsrc=/i.test(html), "linkedin output must not include any <img src> tags")
-  assert.ok(!/fonts\.googleapis\.com|fonts\.gstatic\.com/.test(html),
-    "linkedin output must not link to Google Fonts")
-  assert.ok(!/href="https?:\/\/(?:www\.)?linkedin\.com/i.test(html),
-    "linkedin output must not include clickable links to linkedin.com")
-  // Privacy line + mask toggle text present.
-  assert.ok(/never left your machine/i.test(html), "expected privacy-line text in footer")
-  assert.ok(/masked by default/i.test(html), "expected masking-line text in footer")
-})
-
 test("vcard-contacts output.html renders the required family sections + offline rules", async () => {
   const fs = await import("node:fs/promises")
   const html = await fs.readFile(path.join(REPO, "examples/vcard-contacts/output.html"), "utf8")

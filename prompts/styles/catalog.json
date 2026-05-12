@@ -45,17 +45,10 @@
     },
     {
       "id": "personal-data",
-      "title": "Personal Data Recaps",
-      "summary": "Turn personal exports into timelines, recaps, reading fields, spending stories, and relationship/network maps.",
-      "styles": ["timeline-story", "living-essay", "network-map"],
-      "examples": ["amazon-orders", "iphone-health", "kindle-highlights", "linkedin-connections"]
-    },
-    {
-      "id": "places-travel",
-      "title": "Places & Trips",
-      "summary": "Make maps, route atlases, travel dossiers, photo-location views, and trip paper trails from location-rich sources.",
-      "styles": ["map-atlas", "paper-trail"],
-      "examples": ["rideshare-history", "itinerary-trip"]
+      "title": "Personal Data & Places",
+      "summary": "Turn personal exports, timelines, routes, saved places, trip records, reading fields, payments, and notes into personal stories and atlases.",
+      "styles": ["timeline-story", "living-essay", "network-map", "map-atlas", "paper-trail"],
+      "examples": ["amazon-orders", "iphone-health", "kindle-highlights", "rideshare-history"]
     },
     {
       "id": "developer",
@@ -236,7 +229,7 @@
       "system": "Map Atlas",
       "mode": "auto",
       "summary": "Spatial atlas for places, routes, trips, rideshare, and geotagged media.",
-      "useCases": ["places-travel"],
+      "useCases": ["personal-data"],
       "triggers": ["map", "places", "route", "trip", "rideshare", "geotagged photos", "location history"],
       "bestSources": ["google-maps-stars", "google-photos-takeout", "rideshare-history", "gpx-route", "kml-route", "travel-itinerary", "location-history"],
       "example": "rideshare-history",
@@ -251,7 +244,7 @@
       "system": "Paper Trail",
       "mode": "explicit",
       "summary": "Tactile artifact desk for itineraries, tickets, receipts, folios, and evidence packets.",
-      "useCases": ["places-travel", "files-work"],
+      "useCases": ["personal-data", "files-work"],
       "triggers": ["receipt", "ticket", "folio", "passport", "field notes", "paper trail", "hotel key-card"],
       "bestSources": ["travel-itinerary", "location-history", "legal-chronology", "invoices"],
       "example": "itinerary-trip",
@@ -269,8 +262,8 @@
       "useCases": ["personal-data", "conversation"],
       "triggers": ["network", "relationships", "contacts", "linkedin", "email", "payments", "community"],
       "bestSources": ["linkedin-connections", "vcard-contacts", "venmo-paypal-payments", "discord-chat", "telegram-chat", "imessage-chat"],
-      "example": "linkedin-connections",
-      "preview": "docs/example-previews/linkedin-connections.jpg",
+      "example": "vcard-contacts",
+      "preview": "docs/example-previews/vcard-contacts.jpg",
       "accent": "#355f91",
       "coreScaffold": ["graph canvas", "entity inspector", "cluster controls", "hub cards", "linked records"],
       "requiredPrimitives": [".network-shell", ".graph-canvas", ".entity-inspector", ".cluster-control", ".hub-card"],

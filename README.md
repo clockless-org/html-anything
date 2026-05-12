@@ -16,13 +16,13 @@ page.
 
 It also works **on demand** for any file, folder, URL, or service export
 (Amazon orders, Kindle highlights, Spotify history, WeChat / iMessage,
-Google Photos Takeout, LinkedIn connections, CSV / PDF / DOCX, logs, GPX, …) —
+Google Photos Takeout, CSV / PDF / DOCX, logs, GPX, …) —
 the skill figures out the source, chooses one of the 20 style systems, and
 ships the HTML.
 
 ## Preview
 
-→ **[Open the curated gallery](https://clockless-org.github.io/html-anything/examples/)** — 16 demos, organized by use case and style.
+→ **[Open the curated gallery](https://clockless-org.github.io/html-anything/examples/)** — 15 demos, organized by use case and style.
 
 ### Featured
 
@@ -55,7 +55,6 @@ A small selection across the rest of the style catalog. Each links to the live p
 | [AI tokens comic →](https://clockless-org.github.io/html-anything/examples/ai-tokens-comic/output.html) | A popular AI concept becomes a seven-page Doraemon-style knowledge comic with pocket gadgets. | `comic-book` |
 | [Apple Health →](https://clockless-org.github.io/html-anything/examples/iphone-health/output.html) | Activity, sleep, and workouts become a personal rhythm story. | `timeline-story` |
 | [Slack championship →](https://clockless-org.github.io/html-anything/examples/slack/output.html) | Team activity becomes ranked kinetic lanes with decisions, topics, and linked evidence. | `kinetic-scoreboard` |
-| [LinkedIn connections →](https://clockless-org.github.io/html-anything/examples/linkedin-connections/output.html) | 12 years of connections clustered by company, role, and era. | `network-map` |
 | [PDF e-guide →](https://clockless-org.github.io/html-anything/examples/pdf/output.html) | A sector report becomes a two-page guide preview with TOC, lesson spread, and source drawer. | `digital-eguide` |
 | [Brand positioning carousel →](https://clockless-org.github.io/html-anything/examples/editorial-carousel/output.html) | A strategy essay becomes a 5-spread magazine carousel with source evidence. | `editorial-carousel` |
 | [Email support console →](https://clockless-org.github.io/html-anything/examples/email/output.html) | A mailbox archive becomes a soft SaaS console for thread health, open loops, and handoffs. | `soft-saas` |
@@ -64,7 +63,7 @@ A small selection across the rest of the style catalog. Each links to the live p
 | [CI terminal console →](https://clockless-org.github.io/html-anything/examples/ci-log/output.html) | A failed GitHub Actions run becomes a shell-native debugging console. | `terminal-cli` |
 | [PR review →](https://clockless-org.github.io/html-anything/examples/pr-review/output.html) | A patch becomes a risk-annotated review brief with evidence. | `developer` |
 
-→ **[See the curated gallery (16 demos) →](https://clockless-org.github.io/html-anything/examples/)**
+→ **[See the curated gallery (15 demos) →](https://clockless-org.github.io/html-anything/examples/)**
 
 ## Install
 
@@ -200,7 +199,7 @@ every output into the same dashboard/report shape.
 | Personal histories — chronological (orders, history, listening, health) **and** topical (Notion / Obsidian vaults) | `timeline-story` (Timeline Story) |
 | Places, trips, routes, rideshare, geotagged photos | `map-atlas` (Map Atlas) |
 | Tactile trip folders, hotel folios, receipts, tickets, reservation bundles | `paper-trail` (Paper Trail, explicit override) |
-| Contacts, LinkedIn, communities, social payments | `network-map` (Network Map) |
+| Contacts, communities, social payments | `network-map` (Network Map) |
 | Support mailboxes, email campaigns, onboarding, customer-success queues | `soft-saas` (Soft SaaS Console) |
 | Finance, spreadsheets, logs, backlog, operational data | `dashboard` (Ops Console) |
 | Essays, articles, reading lists, bookmarks, PDFs, DOCX, legal/medical/lab records | `document` (Document Review) |
@@ -218,7 +217,7 @@ Reusable style prompts live in [`prompts/styles/`](./prompts/styles/).
 The shared structural contract is
 [`prompts/styles/_system.md`](./prompts/styles/_system.md). The internal
 style catalog lives in [`prompts/styles/catalog.json`](./prompts/styles/catalog.json):
-it records the six use cases plus each style's triggers, best sources,
+it records the five use cases plus each style's triggers, best sources,
 example, preview, required primitives, and avoid rules so generation can stay
 style-faithful without asking users to pick options. There is a fallback
 `default` style plus 15
@@ -243,7 +242,7 @@ npx tsx src/cli.ts examples/pdf/input.pdf \
 ```
 ## Use Cases And Sources
 
-Sources can be endless, but the skill routes them into six stable use cases.
+Sources can be endless, but the skill routes them into five stable use cases.
 Each use case can use one or more style systems.
 
 | Use case | Example sources | Likely styles |
@@ -251,8 +250,7 @@ Each use case can use one or more style systems.
 | Teaching Studios | A short teaching brief, article, lesson outline, concept note, URL, PDF/document simplification request | `teaching`, `interactive-learning`, `comic-book` |
 | Files & Work Data | CSV / TSV, spreadsheet-style exports, JSON, JSONL, logs, email/support archives, bank transactions, invoices, QuickBooks, calendars, issue trackers, Markdown, PDF, DOCX, bookmarks, URL lists, bibliographies, research records, slide-style carousel outputs | `dashboard`, `soft-saas`, `document`, `architectural-spread`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
 | Conversation Analysis | WeChat, iMessage-style CSV, Slack, Discord, Telegram, email-style threads | `relationship`, `love-romance-3d`, `kinetic-scoreboard`, `network-map` |
-| Personal Data Recaps | Amazon orders, Apple Health, browser history, YouTube, Spotify, Twitch, Kindle highlights, LinkedIn, Venmo / PayPal, AI chat exports, notes vaults | `timeline-story`, `living-essay`, `network-map` |
-| Places & Trips | Google Photos Takeout, Google Maps saved places, rideshare history, GPX, KML, itinerary CSV, location history | `map-atlas`, `paper-trail` |
+| Personal Data & Places | Amazon orders, Apple Health, browser history, YouTube, Spotify, Twitch, Kindle highlights, Venmo / PayPal, AI chat exports, notes vaults, Google Maps saved places, rideshare history, GPX, KML, itinerary CSV, location history | `timeline-story`, `living-essay`, `network-map`, `map-atlas`, `paper-trail` |
 | Developer Evidence | Git diff, PR patch, CI log, stack trace, GitHub repo URL | `developer`, `terminal-cli` |
 
 Use case is user-facing; style is internal. A user can simply say "make this
