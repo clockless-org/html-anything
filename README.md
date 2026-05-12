@@ -32,14 +32,22 @@ more interactive, and easier to share when the answer is really a page.
 
 <table>
 <tr>
-<td width="50%" valign="top">
-<strong>Before: plain response</strong><br>
-<sub>A long scroll of text for “Teach me solar system”.</sub><br><br>
+<td width="100%" valign="top">
+<h3>Before: plain response</h3>
+<p>A long scroll of text for “Teach me solar system”. Useful, but hard to explore.</p>
 <img src="./docs/plain-response-before.jpg" alt="Plain AI response about the solar system" width="100%">
 </td>
-<td width="50%" valign="top">
-<strong>After: live HTML artifact</strong><br>
-<sub>The same teaching goal becomes a visual, interactive learning page.</sub><br><br>
+</tr>
+<tr>
+<td align="center">
+<strong>↓</strong><br>
+<sub>Same intent, richer response format</sub>
+</td>
+</tr>
+<tr>
+<td width="100%" valign="top">
+<h3>After: live HTML artifact</h3>
+<p>The same teaching goal becomes a visual, interactive learning page.</p>
 <a href="https://clockless-org.github.io/html-anything/examples/solar-system-studio/output.html"><img src="./docs/example-previews/solar-system-studio.jpg" alt="html-anything solar system teaching studio" width="100%"></a>
 </td>
 </tr>
