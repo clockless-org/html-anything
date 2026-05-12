@@ -15,14 +15,14 @@ scrolling 4,000-word replies whenever the content was always going to be a
 page.
 
 It also works **on demand** for any file, folder, URL, or service export
-(Amazon orders, Kindle highlights, Spotify history, WhatsApp / WeChat,
+(Amazon orders, Kindle highlights, Spotify history, WeChat / iMessage,
 Google Photos Takeout, LinkedIn connections, CSV / PDF / DOCX, logs, GPX, …) —
 the skill figures out the source, chooses one of the 20 style systems, and
 ships the HTML.
 
 ## Preview
 
-→ **[Open the curated gallery](https://clockless-org.github.io/html-anything/examples/)** — 21 demos, organized by use case and style.
+→ **[Open the curated gallery](https://clockless-org.github.io/html-anything/examples/)** — 20 demos, organized by use case and style.
 
 ### Featured
 
@@ -36,7 +36,7 @@ A self-contained interactive lesson built from a single teaching brief — *"cre
 
 [![Realistic couple chat report screenshot](./docs/relationship-preview.png)](https://clockless-org.github.io/html-anything/examples/wechat-couple/output.html)
 
-A WhatsApp / WeChat export reduced to its **rhythm story** — who initiates, response times, peak-hour patterns, mood cadence — without ever exposing private text. Aggregate-first, anonymized evidence. Style: `relationship`.
+A 1:1 chat export reduced to its **rhythm story** — who initiates, response times, peak-hour patterns, mood cadence — without ever exposing private text. Aggregate-first, anonymized evidence. Style: `relationship`.
 
 #### [Saved places atlas →](https://clockless-org.github.io/html-anything/examples/google-maps-stars/output.html)
 
@@ -64,7 +64,7 @@ A small selection across the rest of the style catalog. Each links to the live p
 | [CI terminal console →](https://clockless-org.github.io/html-anything/examples/ci-log/output.html) | A failed GitHub Actions run becomes a shell-native debugging console. | `terminal-cli` |
 | [PR review →](https://clockless-org.github.io/html-anything/examples/pr-review/output.html) | A patch becomes a risk-annotated review brief with evidence. | `developer` |
 
-→ **[See the curated gallery (21 demos) →](https://clockless-org.github.io/html-anything/examples/)**
+→ **[See the curated gallery (20 demos) →](https://clockless-org.github.io/html-anything/examples/)**
 
 ## Install
 
@@ -154,7 +154,7 @@ or "present this beautifully" should trigger the skill.
 
 If you already have the file, folder, or URL, give it to the agent. If
 you only know the source type, such as "Amazon orders", "Spotify history",
-"WhatsApp chat", or "Google Photos Takeout", the skill first explains how
+"1:1 chat export", or "Google Photos Takeout", the skill first explains how
 to export the data, then converts it after you provide the export.
 
 ## Input And Output
@@ -166,7 +166,7 @@ to export the data, then converts it after you provide the export.
 | File | CSV, JSON, Markdown, PDF, DOCX, chat export, log, transcript, statement | A live page designed for that file |
 | Folder | Notes vault, Google Photos Takeout, Notion export, repo, exported archive | A browsable atlas / dashboard / audit page |
 | URL | Article, GitHub repo, public webpage | A shareable HTML reading or exploration page |
-| Export request | "My Amazon orders", "my Spotify history", "my WhatsApp chat" | Export instructions first, then a live HTML page |
+| Export request | "My Amazon orders", "my Spotify history", "my relationship chat" | Export instructions first, then a live HTML page |
 
 The output is a browser page, not a chat reply. Most outputs are a single
 `output.html`. When the page needs generated images or other local
@@ -250,7 +250,7 @@ Each use case can use one or more style systems.
 |---|---|---|
 | Teaching Studios | A short teaching brief, article, lesson outline, concept note, URL, PDF/document simplification request | `teaching`, `interactive-learning`, `comic-book` |
 | Files & Work Data | CSV / TSV, spreadsheet-style exports, JSON, JSONL, logs, email/support archives, bank transactions, invoices, QuickBooks, calendars, issue trackers, Markdown, PDF, DOCX, bookmarks, URL lists, bibliographies, research records, slide-style carousel outputs | `dashboard`, `soft-saas`, `document`, `architectural-spread`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
-| Conversation Analysis | WeChat, WhatsApp, iMessage-style CSV, Slack, Discord, Telegram, email-style threads | `relationship`, `love-romance-3d`, `kinetic-scoreboard`, `network-map` |
+| Conversation Analysis | WeChat, iMessage-style CSV, Slack, Discord, Telegram, email-style threads | `relationship`, `love-romance-3d`, `kinetic-scoreboard`, `network-map` |
 | Personal Data Recaps | Amazon orders, Apple Health, browser history, YouTube, Spotify, Twitch, Kindle highlights, LinkedIn, Venmo / PayPal, AI chat exports, notes vaults | `timeline-story`, `living-essay`, `network-map` |
 | Places & Trips | Google Photos Takeout, Google Maps saved places, rideshare history, GPX, KML, itinerary CSV, location history | `map-atlas`, `paper-trail` |
 | Developer Evidence | Git diff, PR patch, CI log, stack trace, GitHub repo URL | `developer`, `terminal-cli` |

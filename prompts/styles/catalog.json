@@ -41,7 +41,7 @@
       "title": "Conversation Analysis",
       "summary": "Analyze private chats, relationship threads, team channels, and message exports through rhythm, contribution, and evidence.",
       "styles": ["relationship", "love-romance-3d", "kinetic-scoreboard", "network-map"],
-      "examples": ["wechat-couple", "whatsapp", "slack"]
+      "examples": ["wechat-couple", "slack"]
     },
     {
       "id": "personal-data",
