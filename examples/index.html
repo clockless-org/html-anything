@@ -79,6 +79,7 @@ a { color: inherit; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   padding: 0 18px;
   border-radius: 999px;
   text-decoration: none;
@@ -96,6 +97,12 @@ a { color: inherit; }
   box-shadow: var(--shadow-sm);
 }
 .cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.github-icon {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  fill: currentColor;
+}
 
 .hero-panel {
   padding: 18px;
@@ -104,13 +111,6 @@ a { color: inherit; }
   background: rgba(255, 255, 255, 0.66);
   box-shadow: var(--shadow-md);
   backdrop-filter: blur(18px);
-}
-.hero-panel .label {
-  margin: 0 0 14px;
-  font: 700 11px/1 var(--font-mono);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--primary);
 }
 .hero-stats {
   display: grid;
@@ -342,12 +342,14 @@ footer.foot a { color: var(--primary); }
       <h1>html-<span>anything</span></h1>
       <p class="tagline">Give it a goal or a source. The skill picks the right use case, chooses a style system, and turns it into a shareable live HTML page.</p>
       <div class="cta-row">
-        <a class="cta" href="https://github.com/clockless-org/html-anything">View on GitHub -&gt;</a>
+        <a class="cta" href="https://github.com/clockless-org/html-anything" aria-label="View html-anything on GitHub">
+          <svg class="github-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.52-1.03 2.19-.82 2.19-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          <span>View on GitHub</span>
+        </a>
         <a class="cta secondary" href="https://github.com/clockless-org/html-anything#install">Install the skill</a>
       </div>
     </div>
     <div class="hero-panel">
-      <p class="label">Usage map</p>
       <div class="hero-stats">
         <div class="hero-stat"><strong>11</strong> <span>usage patterns</span></div>
         <div class="hero-stat"><strong>4</strong> <span>use-case groups</span></div>
