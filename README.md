@@ -56,16 +56,20 @@ A small selection across the rest of the style catalog. Each links to the live p
 
 ## Install
 
-### Codex
+### Recommended — Agent Skills CLI
+
+One command, works across Claude Code, Codex, Cursor, Cline, Windsurf
+and any other agent that follows the [open agent skills](https://skills.sh)
+spec:
 
 ```bash
-mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
-git clone https://github.com/clockless-org/html-anything "${CODEX_HOME:-$HOME/.codex}/skills/html-anything"
+npx skills add clockless-org/html-anything
 ```
 
-Restart Codex so it loads the skill.
+The CLI also pings the public skills directory, so installs feed the
+[skills.sh leaderboard](https://skills.sh/clockless-org/html-anything).
 
-### Claude Code
+### Manual install (Claude Code)
 
 ```bash
 mkdir -p ~/.claude/skills
@@ -74,16 +78,19 @@ git clone https://github.com/clockless-org/html-anything ~/.claude/skills/html-a
 
 Restart Claude Code so it loads `SKILL.md`.
 
-### Agent Skills CLI
+### Manual install (Codex)
 
 ```bash
-npx skills add clockless-org/html-anything
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+git clone https://github.com/clockless-org/html-anything "${CODEX_HOME:-$HOME/.codex}/skills/html-anything"
 ```
+
+Restart Codex so it loads the skill.
 
 To update a manual install later:
 
 ```bash
-git -C "${CODEX_HOME:-$HOME/.codex}/skills/html-anything" pull
+git -C ~/.claude/skills/html-anything pull
 ```
 
 ## Use
