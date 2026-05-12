@@ -62,6 +62,7 @@ export type HtmlAnythingStyle =
   | "teaching"
   | "interactive-learning"
   | "relationship"
+  | "love-romance-3d"
   | "living-essay"
   | "dashboard"
   | "soft-saas"

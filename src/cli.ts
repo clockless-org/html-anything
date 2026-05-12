@@ -61,6 +61,7 @@ const STYLES = new Set<HtmlAnythingStyle | "auto">([
   "teaching",
   "interactive-learning",
   "relationship",
+  "love-romance-3d",
   "living-essay",
   "dashboard",
   "soft-saas",
@@ -103,7 +104,8 @@ timeline; 200-person channel → folded by sender). The full data is inlined
 into the output; the LLM only ever sees a representative sample.
 
 Default style is auto. Auto injects one of the built-in style prompts
-(teaching, interactive-learning, relationship, living-essay, dashboard,
+(teaching, interactive-learning, relationship, love-romance-3d,
+living-essay, dashboard,
 kinetic-scoreboard, timeline-story, map-atlas, network-map, document,
 editorial-carousel, developer, or default) based on the parsed content type.
 Explicit overrides also include paper-trail, digital-eguide, and terminal-cli.

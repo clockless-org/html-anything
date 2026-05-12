@@ -21,6 +21,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `teaching` | Tutorial, lesson, "teach me", interactive explainers, course-like pages | Visual stage, step rail, try-it controls, concept cards, check-yourself, recap |
 | `interactive-learning` | App-like object/system studios, anatomy/architecture/spec exploration, manipulable learning models | Learning Studio with entity rail, central interactive stage, live inspector, layer/mode controls, comparison bench |
 | `relationship` | 1:1 chats and intimate message exports | Aggregate-first relationship rhythm report with anonymized evidence |
+| `love-romance-3d` | Couple chats or romance-themed relationship recaps that need a soft 3D keepsake look | 3D icon-stage cover, candy-glass metrics, pulse boards, and privacy-first evidence |
 | `living-essay` | Reflective essays, Kindle highlights, idea notes, and concept-heavy reading archives | Mycelium writing environment with a vertical question capsule, spore words, living SVG threads, and quiet appendix |
 | `dashboard` | Operational, tabular, finance, admin, log, planning data | Dense KPIs, charts, filters, flags, searchable table |
 | `soft-saas` | Support inboxes, email campaigns, onboarding, customer-success queues, and lightweight SaaS metrics | Airy SaaS app canvas with profile/source card, central metric bloom, campaign panels, leaderboard, and activity strip |
@@ -43,6 +44,7 @@ The default is `auto`: the agent picks a style from the request and source.
 | `teaching` | Lesson Lab |
 | `interactive-learning` | Learning Studio |
 | `relationship` | Rhythm Report |
+| `love-romance-3d` | Keepsake 3D Rhythm |
 | `living-essay` | Mycelium Writing Environment |
 | `dashboard` | Ops Console |
 | `soft-saas` | Soft SaaS Console |
@@ -124,7 +126,7 @@ choose from.
 |---|---|
 | Teaching Studios | Tutorials, explainers, lessons, object/system studios | `teaching`, `interactive-learning` |
 | Files & Work Data | CSV/spreadsheet-style exports, PDFs, DOCX, Markdown, logs, finance, calendars, issue trackers, email/support archives, research records, slide-style carousel outputs | `dashboard`, `soft-saas`, `document`, `digital-eguide`, `editorial-carousel`, `paper-trail` |
-| Conversation Analysis | Couple/friend chats, WhatsApp/WeChat, team channels, message streams | `relationship`, `kinetic-scoreboard`, `network-map` |
+| Conversation Analysis | Couple/friend chats, WhatsApp/WeChat, team channels, message streams | `relationship`, `love-romance-3d`, `kinetic-scoreboard`, `network-map` |
 | Personal Data Recaps | Orders, health, browsing, media history, reading, payments, professional network, notes, AI chats | `timeline-story`, `living-essay`, `network-map` |
 | Places & Trips | Photos with EXIF, saved places, rideshare, GPX/KML, itineraries | `map-atlas`, `paper-trail` |
 | Developer Evidence | Diffs, PRs, CI logs, stack traces, repos | `developer`, `terminal-cli` |
