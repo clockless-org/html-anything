@@ -8,21 +8,21 @@ is actually a page, not a chat message.**
 `html-anything` is a Codex / Claude Code skill that turns the agent's rich
 answers into self-contained HTML artifacts — analyses, reports, recaps,
 dashboards, atlases, teaching sites, comparison studies, decision memos,
-year-in-review pages. The skill picks the right design system from an
-18-style catalog, builds a single-file `.html`, verifies it in a browser,
-and hands it back. Short conversational answers stay short — you just stop
+year-in-review pages. The skill auto-routes to the right design system,
+builds a single-file `.html`, verifies it in a browser, and hands it back.
+Short conversational answers stay short — you just stop
 scrolling 4,000-word replies whenever the content was always going to be a
 page.
 
 It also works **on demand** for any file, folder, URL, or service export
 (Amazon orders, Kindle highlights, Spotify history, WeChat / iMessage,
 Google Photos Takeout, CSV / PDF / DOCX, logs, GPX, …) —
-the skill figures out the source, chooses one of the 18 style systems, and
-ships the HTML.
+the skill figures out the source, chooses a concrete style system or the
+default fallback, and ships the HTML.
 
 ## Preview
 
-→ **[Open the curated gallery](https://clockless-org.github.io/html-anything/examples/)** — 11 demos, organized by use case and style.
+→ **[Open the usage gallery](https://clockless-org.github.io/html-anything/examples/)** — 11 usage patterns, organized by use case. Each card labels the source and style.
 
 ### Featured
 
@@ -38,11 +38,11 @@ A self-contained interactive lesson built from a single teaching brief — *"cre
 
 A 1:1 chat export reduced to its **rhythm story** — who initiates, response times, peak-hour patterns, mood cadence — without ever exposing private text. Aggregate-first, anonymized evidence. Style: `love-romance-3d`.
 
-#### [Saved places atlas →](https://clockless-org.github.io/html-anything/examples/google-maps-stars/output.html)
+#### [Mobility recap →](https://clockless-org.github.io/html-anything/examples/travel-history/output.html)
 
-[![Saved places atlas screenshot](./docs/example-previews/google-maps-stars.jpg)](https://clockless-org.github.io/html-anything/examples/google-maps-stars/output.html)
+[![Mobility recap screenshot](./docs/example-previews/travel-history.jpg)](https://clockless-org.github.io/html-anything/examples/travel-history/output.html)
 
-Your Google Maps starred places on a personal world atlas. Hover for the note you wrote at the time, click to expand. Built from a Takeout CSV in seconds. Style: `map-atlas`.
+Uber / Lyft history becomes a personal movement story: cities, routes, cadence, late nights, and airport patterns. Style: `global-travel`.
 
 ### More demos
 
@@ -59,11 +59,9 @@ shape it.
 | Guide from dense document | [PDF e-guide →](https://clockless-org.github.io/html-anything/examples/pdf/output.html) | Reports, playbooks, lead magnets, PDF guides, course previews | `digital-eguide` |
 | Argument as sequence | [Brand positioning carousel →](https://clockless-org.github.io/html-anything/examples/editorial-carousel/output.html) | Strategy essays, founder letters, article takeaways, shareable sequences | `editorial-carousel` |
 | Inbox or workstream audit | [Email support console →](https://clockless-org.github.io/html-anything/examples/email/output.html) | Support inboxes, email campaigns, onboarding, customer-success queues | `soft-saas` |
-| Mobility recap | [Travel history →](https://clockless-org.github.io/html-anything/examples/travel-history/output.html) | Uber/Lyft exports, trip history, cities, airports, travel cadence | `global-travel` |
 | Debugging evidence | [CI terminal console →](https://clockless-org.github.io/html-anything/examples/ci-log/output.html) | CI logs, build output, terminal evidence, failing tests | `terminal-cli` |
-| Code review artifact | [PR review →](https://clockless-org.github.io/html-anything/examples/pr-review/output.html) | PR patches, diffs, repo evidence, risk callouts | `developer` |
 
-→ **[See the curated gallery (11 demos) →](https://clockless-org.github.io/html-anything/examples/)**
+→ **[See the usage gallery (11 patterns) →](https://clockless-org.github.io/html-anything/examples/)**
 
 ## Install
 

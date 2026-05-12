@@ -345,11 +345,11 @@ footer.foot a { color: var(--primary); }
       </div>
     </div>
     <div class="hero-panel">
-      <p class="label">Example map</p>
+      <p class="label">Usage map</p>
       <div class="hero-stats">
-        <div class="hero-stat"><strong>11</strong><span>curated examples</span></div>
-        <div class="hero-stat"><strong>4</strong><span>use cases</span></div>
-        <div class="hero-stat"><strong>18</strong><span>style systems</span></div>
+        <div class="hero-stat"><strong>11</strong> <span>usage patterns</span></div>
+        <div class="hero-stat"><strong>4</strong> <span>use-case groups</span></div>
+        <div class="hero-stat"><strong>auto</strong> <span>style routing</span></div>
       </div>
     </div>
   </header>
@@ -357,8 +357,8 @@ footer.foot a { color: var(--primary); }
   <main>
     <div class="intro">
       <div>
-        <h2>Curated examples</h2>
-        <p>Each card is a usage pattern: when the agent should stop writing a long Markdown answer and create a live HTML artifact instead. Labels show the job, source, and style system.</p>
+        <h2>Usage gallery</h2>
+        <p>Each card is named by the usage pattern: the moment an agent should stop writing a long Markdown answer and create a live HTML artifact. Labels show the source and style.</p>
       </div>
     </div>
     <div id="groups"></div>
@@ -366,7 +366,7 @@ footer.foot a { color: var(--primary); }
 
   <footer class="foot">
     <div><a href="https://github.com/clockless-org/html-anything">github.com/clockless-org/html-anything</a> · Apache 2.0</div>
-    <div>11 curated demos · usage + source + style on every card</div>
+    <div>11 usage patterns · source + style on every card</div>
   </footer>
 </div>
 
@@ -400,18 +400,18 @@ footer.foot a { color: var(--primary); }
   ];
 
   const examples = [
-    ["solar-system-studio", "Interactive lesson site", "Teach a concept", "Teaching brief", "teaching", "teaching", "Use when an answer should become a hands-on lesson with controls, stages, comparisons, and a quick check."],
-    ["markdown", "Article learning page", "Learn from long-form text", "Markdown file", "architectural-spread", "teaching", "Use when a long essay, article, or manifesto should become a guided visual explainer with section pacing."],
-    ["docx", "Structured document reader", "Learn from a document", "DOCX file", "kami-reading", "teaching", "Use when a memo, manuscript, or long document should become a calm guided reader with contents and appendix."],
-    ["wechat-couple", "Relationship rhythm report", "Private chat recap", "1:1 chat export", "love-romance-3d", "conversation", "Use when a personal conversation should become aggregate rhythms, response patterns, topic shifts, and privacy-first evidence."],
-    ["slack", "Team activity scoreboard", "Group contribution analysis", "Team chat export", "kinetic-scoreboard", "conversation", "Use when a multi-person stream needs ranked participation, bursts, decisions, and linked evidence."],
-    ["kindle-highlights", "Reading highlights essay", "Reflective reading archive", "My Clippings.txt", "living-essay", "personal", "Use when notes or highlights should become a calm field for reading, themes, quotes, and reflection."],
-    ["travel-history", "Travel history map", "Mobility recap", "Uber/Lyft CSV", "global-travel", "personal", "Use when trips, cities, providers, and travel cadence should open as a spatial personal recap."],
-    ["editorial-carousel", "Shareable strategy carousel", "Argument as sequence", "Strategy essay", "editorial-carousel", "files", "Use when a strategy memo, founder note, or article takeaway should become a compact shareable sequence."],
-    ["pdf", "PDF guide or playbook", "Guide from dense document", "PDF report", "digital-eguide", "files", "Use when a dense report should become a creator-style guide with cover, TOC, lesson spread, and actions."],
-    ["email", "Support mailbox console", "Inbox or workstream audit", "Mbox archive", "soft-saas", "files", "Use when support, campaign, onboarding, or customer-success threads need a soft product console."],
-    ["ci-log", "CI failure console", "Debugging evidence", "CI log", "terminal-cli", "files", "Use when build logs or terminal output should become a shell-native debugging surface with raw evidence."]
-  ].map(([slug, title, usage, source, style, group, description]) => ({ slug, title, usage, source, style, group, description }));
+    ["solar-system-studio", "Teach a concept", "Teaching brief", "teaching", "teaching", "Use when an answer should become a hands-on lesson with controls, stages, comparisons, and a quick check."],
+    ["markdown", "Learn from long-form text", "Markdown file", "architectural-spread", "teaching", "Use when a long essay, article, or manifesto should become a guided visual explainer with section pacing."],
+    ["docx", "Learn from a document", "DOCX file", "kami-reading", "teaching", "Use when a memo, manuscript, or long document should become a calm guided reader with contents and appendix."],
+    ["wechat-couple", "Private chat recap", "1:1 chat export", "love-romance-3d", "conversation", "Use when a personal conversation should become aggregate rhythms, response patterns, topic shifts, and privacy-first evidence."],
+    ["slack", "Group contribution analysis", "Team chat export", "kinetic-scoreboard", "conversation", "Use when a multi-person stream needs ranked participation, bursts, decisions, and linked evidence."],
+    ["kindle-highlights", "Reflective reading archive", "My Clippings.txt", "living-essay", "personal", "Use when notes or highlights should become a calm field for reading, themes, quotes, and reflection."],
+    ["travel-history", "Mobility recap", "Uber/Lyft CSV", "global-travel", "personal", "Use when trips, cities, providers, and travel cadence should open as a spatial personal recap."],
+    ["editorial-carousel", "Argument as sequence", "Strategy essay", "editorial-carousel", "files", "Use when a strategy memo, founder note, or article takeaway should become a compact shareable sequence."],
+    ["pdf", "Guide from dense document", "PDF report", "digital-eguide", "files", "Use when a dense report should become a creator-style guide with cover, TOC, lesson spread, and actions."],
+    ["email", "Inbox or workstream audit", "Mbox archive", "soft-saas", "files", "Use when support, campaign, onboarding, or customer-success threads need a soft product console."],
+    ["ci-log", "Debugging evidence", "CI log", "terminal-cli", "files", "Use when build logs or terminal output should become a shell-native debugging surface with raw evidence."]
+  ].map(([slug, usage, source, style, group, description]) => ({ slug, usage, source, style, group, description }));
 
   const styleNames = new Map([
     ["teaching", "Teaching lab"],
@@ -449,14 +449,13 @@ footer.foot a { color: var(--primary); }
     return `
       <a class="example-card" href='${item.slug}/output.html' style="--accent:${styleAccent(item.style)}" data-slug="${item.slug}">
         <span class="shot" data-slug="${item.slug}">
-          <img loading="lazy" src="${img(item.slug)}" alt="${escapeHtml(item.title)} screenshot">
+          <img loading="lazy" src="${img(item.slug)}" alt="${escapeHtml(item.usage)} screenshot">
           <span class="media-badge">Screenshot</span>
         </span>
         <span class="example-body">
-          <h4>${escapeHtml(item.title)}</h4>
+          <h4>${escapeHtml(item.usage)}</h4>
           <p>${escapeHtml(item.description)}</p>
           <span class="chip-row">
-            <span class="chip"><span class="chip-label">Usage</span>${escapeHtml(item.usage)}</span>
             <span class="chip"><span class="chip-label">Source</span>${escapeHtml(item.source)}</span>
             <span class="chip"><span class="chip-label">Style</span>${escapeHtml(styleNames.get(item.style) || item.style)}</span>
           </span>
