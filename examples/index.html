@@ -301,45 +301,6 @@ a { color: inherit; }
   text-transform: uppercase;
 }
 
-.matrix {
-  margin-top: 64px;
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.78);
-  box-shadow: var(--shadow-sm);
-}
-.matrix-head {
-  padding: 20px 22px;
-  border-bottom: 1px solid var(--border);
-}
-.matrix-head h2 {
-  margin: 0 0 6px;
-  font-family: var(--font-display);
-  font-size: 26px;
-  letter-spacing: -0.025em;
-}
-.matrix-head p { margin: 0; color: var(--fg-2); }
-.matrix-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr 0.8fr;
-}
-.matrix-grid div {
-  padding: 13px 16px;
-  border-top: 1px solid var(--border);
-  color: var(--fg-2);
-  font-size: 13px;
-}
-.matrix-grid .head {
-  border-top: 0;
-  color: var(--fg-1);
-  font: 700 11px/1 var(--font-mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  background: var(--surface-3);
-}
-.matrix-grid a { color: var(--primary); font-weight: 700; text-decoration: none; }
-
 footer.foot {
   margin-top: 84px;
   padding-top: 28px;
@@ -362,8 +323,6 @@ footer.foot a { color: var(--primary); }
   .hero-stats { grid-template-columns: 1fr; }
   .intro { align-items: flex-start; flex-direction: column; }
   .example-grid { grid-template-columns: 1fr; }
-  .matrix-grid { grid-template-columns: 1fr; }
-  .matrix-grid .head { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -404,14 +363,6 @@ footer.foot a { color: var(--primary); }
     </div>
     <div id="groups"></div>
   </main>
-
-  <section class="matrix">
-    <div class="matrix-head">
-      <h2>Use-case routing examples</h2>
-      <p>The user does not need to choose a style manually. The skill maps input intent to a stable use case, then picks one of that use case's style systems.</p>
-    </div>
-    <div class="matrix-grid" id="matrix-grid"></div>
-  </section>
 
   <footer class="foot">
     <div><a href="https://github.com/clockless-org/html-anything">github.com/clockless-org/html-anything</a> · Apache 2.0</div>
@@ -487,24 +438,6 @@ footer.foot a { color: var(--primary); }
     ["developer", "Developer review"]
   ]);
 
-  const matrixRows = [
-    ["Teaching brief: solar system", "Teaching lab", "solar-system-studio"],
-    ["Explain simply as a comic", "Comic book explainer", "ai-tokens-comic"],
-    ["1:1 relationship chat export", "Relationship report", "wechat-couple"],
-    ["Kindle highlights / reflective notes", "Living essay", "kindle-highlights"],
-    ["Amazon order history CSV", "Timeline story", "amazon-orders"],
-    ["Rideshare history CSV", "Map atlas", "rideshare-history"],
-    ["Slack / Discord activity stream", "Kinetic championship", "slack"],
-    ["PDF guide / playbook request", "Digital e-guide", "pdf"],
-    ["Long-form essay / visual article", "Architectural spread", "markdown"],
-    ["Research bookmarks / URL lists", "Document review", "bookmarks-market-research"],
-    ["Brand essay / article carousel", "Editorial carousel", "editorial-carousel"],
-    ["Customer support mailbox / email archive", "Soft SaaS console", "email"],
-    ["Spreadsheet / ledger CSV", "Ops console", "csv"],
-    ["Git diff / PR patch", "Developer review", "git-diff"],
-    ["CI log with terminal request", "Terminal CLI", "ci-log"]
-  ];
-
   const videoSlugs = new Set([]);
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -553,17 +486,6 @@ footer.foot a { color: var(--primary); }
     document.getElementById("groups").innerHTML = groupsHtml;
     hydrateMedia();
   }
-  function renderMatrix() {
-    const bySlug = new Map(examples.map(item => [item.slug, item]));
-    const rows = [
-      `<div class="head">Input intent</div><div class="head">Auto style</div><div class="head">Example</div>`,
-      ...matrixRows.map(([source, style, slug]) => {
-        const item = bySlug.get(slug);
-        return `<div>${escapeHtml(source)}</div><div>${escapeHtml(style)}</div><div><a href='${slug}/output.html'>${escapeHtml(item?.title || slug)}</a></div>`;
-      })
-    ];
-    document.getElementById("matrix-grid").innerHTML = rows.join("");
-  }
   function hydrateMedia() {
     if (reduceMotion) return;
     document.querySelectorAll(".shot[data-slug]").forEach(frame => {
@@ -592,7 +514,6 @@ footer.foot a { color: var(--primary); }
         .catch(() => {});
     });
   }
-  renderMatrix();
   renderGroups();
 })();
 </script>
