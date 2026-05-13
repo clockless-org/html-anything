@@ -48,7 +48,7 @@ more interactive, and easier to share when the answer is really a page.
 <td width="100%" valign="top">
 <h3>After: live HTML artifact</h3>
 <p>The same teaching goal becomes a visual, interactive learning page.</p>
-<a href="https://clockless-org.github.io/html-anything/examples/solar-system-studio/output.html"><img src="./docs/example-previews/solar-system-studio.jpg" alt="html-anything solar system teaching studio" width="100%"></a>
+<a href="https://clockless-org.github.io/html-anything/examples/solar-system-studio/output.html"><img src="./docs/example-demos/solar-system-studio.gif" alt="html-anything solar system teaching studio (animated demo)" width="100%"></a>
 </td>
 </tr>
 </table>
