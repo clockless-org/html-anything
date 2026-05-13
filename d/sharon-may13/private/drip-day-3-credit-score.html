@@ -1,0 +1,1665 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 3 — Understanding Your Credit Score · Sharon's First-Time Homebuyer Course</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0, 0, 0, 0.06);
+  --border-strong: rgba(0, 0, 0, 0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981;
+  --blue: #3b82f6;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 20px;
+  --space-2xl: 24px;
+  --space-3xl: 32px;
+  --space-4xl: 48px;
+  --space-5xl: 64px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
+  --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30, 27, 25, 0.04);
+  --shadow-md: 0 4px 12px rgba(30, 27, 25, 0.08);
+  --shadow-lg: 0 8px 24px rgba(30, 27, 25, 0.12);
+  --shadow-accent: 0 8px 24px rgba(160, 59, 0, 0.15);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg-1);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── TOP BANNER ─── */
+.top-banner {
+  background-color: var(--fg-1);
+  color: rgba(255,255,255,0.75);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding: var(--space-sm) var(--space-lg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.top-banner span.highlight {
+  color: var(--primary-fixed-dim);
+  font-weight: 700;
+}
+
+.top-banner span.pipe {
+  opacity: 0.3;
+  margin: 0 var(--space-sm);
+}
+
+/* ─── SITE HEADER ─── */
+.site-header {
+  background-color: var(--surface-container-lowest);
+  border-bottom: 1px solid var(--border);
+  padding: var(--space-lg) var(--space-2xl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 33px;
+  z-index: 99;
+}
+
+.wordmark {
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.wordmark-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-glow);
+  flex-shrink: 0;
+}
+
+.header-right {
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  font-weight: 500;
+}
+
+/* ─── MAIN CONTENT WRAPPER ─── */
+.content-wrap {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: var(--space-4xl) var(--space-2xl) var(--space-5xl);
+}
+
+/* ─── PROGRESS STRIP ─── */
+.progress-strip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-4xl);
+  padding: var(--space-lg) var(--space-xl);
+  background-color: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.progress-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.dots-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex: 1;
+  justify-content: center;
+}
+
+.day-dot-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: default;
+}
+
+.day-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  font-family: var(--font-headline);
+  transition: transform 0.15s ease;
+  position: relative;
+}
+
+.day-dot.done {
+  background-color: var(--primary-fixed);
+  color: var(--primary);
+  border: 2px solid var(--primary-fixed-dim);
+}
+
+.day-dot.done::after {
+  content: '✓';
+  position: absolute;
+  font-size: 0.6rem;
+  bottom: -2px;
+  right: -2px;
+  width: 13px;
+  height: 13px;
+  background-color: var(--green);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 13px;
+  text-align: center;
+}
+
+.day-dot.current {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border: 2px solid var(--accent-glow);
+  box-shadow: 0 0 0 4px rgba(160,59,0,0.12), var(--shadow-accent);
+  transform: scale(1.15);
+}
+
+.day-dot.upcoming {
+  background-color: var(--surface-container);
+  color: var(--fg-muted);
+  border: 2px solid var(--border-strong);
+}
+
+.dot-label {
+  font-size: 0.58rem;
+  font-weight: 600;
+  color: var(--fg-muted);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.dot-label.current {
+  color: var(--primary);
+}
+
+.dot-connector {
+  height: 2px;
+  flex: 1;
+  max-width: 20px;
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+.dot-connector.done {
+  background-color: var(--primary-fixed-dim);
+}
+
+.dot-connector.upcoming {
+  background-color: var(--border-strong);
+}
+
+/* ─── GREETING ─── */
+.greeting-block {
+  margin-bottom: var(--space-3xl);
+}
+
+.greeting-name {
+  font-family: 'Caveat', cursive;
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--primary);
+  line-height: 1.1;
+  margin-bottom: var(--space-md);
+  display: block;
+}
+
+.greeting-teaser {
+  font-size: 1.05rem;
+  color: var(--fg-2);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.greeting-teaser strong {
+  color: var(--fg-1);
+  font-weight: 700;
+}
+
+/* ─── H1 ─── */
+.article-h1 {
+  font-family: var(--font-headline);
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--fg-1);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--space-lg);
+}
+
+.article-h1 span.highlight {
+  color: var(--primary);
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-4xl);
+  padding-bottom: var(--space-3xl);
+  border-bottom: 1px solid var(--border);
+}
+
+.meta-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.meta-tag.credit {
+  background-color: var(--primary-fixed);
+  color: var(--primary);
+}
+
+.meta-tag.time {
+  background-color: var(--surface-container);
+  color: var(--fg-muted);
+}
+
+/* ─── SECTION HEADERS ─── */
+.section-h2 {
+  font-family: var(--font-headline);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--fg-1);
+  letter-spacing: -0.015em;
+  margin-top: var(--space-5xl);
+  margin-bottom: var(--space-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.section-h2::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 1.2em;
+  background: linear-gradient(180deg, var(--primary), var(--accent-glow));
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ─── BODY COPY ─── */
+p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--fg-2);
+  margin-bottom: var(--space-xl);
+}
+
+p strong {
+  color: var(--fg-1);
+  font-weight: 600;
+}
+
+/* ─── FICO LADDER DIAGRAM ─── */
+.fico-diagram {
+  margin: var(--space-4xl) 0;
+  background-color: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-3xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.fico-diagram-header {
+  margin-bottom: var(--space-3xl);
+}
+
+.fico-diagram-title {
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--fg-1);
+  margin-bottom: var(--space-xs);
+}
+
+.fico-diagram-subtitle {
+  font-size: 0.8rem;
+  color: var(--fg-muted);
+  font-weight: 500;
+}
+
+.fico-band {
+  margin-bottom: var(--space-lg);
+  position: relative;
+}
+
+.fico-band-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+}
+
+.fico-score-label {
+  font-family: var(--font-headline);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--fg-1);
+}
+
+.fico-score-label .band-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  margin-left: var(--space-sm);
+  vertical-align: middle;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.fico-band.top .band-tag { background-color: #d1fae5; color: #065f46; }
+.fico-band.good .band-tag { background-color: #dbeafe; color: #1e40af; }
+.fico-band.fair .band-tag { background-color: #fef3c7; color: #92400e; }
+.fico-band.low .band-tag { background-color: #fee2e2; color: #991b1b; }
+
+.fico-band-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.fico-rate-info {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.fico-rate {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--fg-1);
+}
+
+.fico-cost {
+  font-size: 0.72rem;
+  color: var(--fg-muted);
+  font-weight: 500;
+}
+
+.fico-bar-wrap {
+  flex: 1;
+  height: 12px;
+  background-color: var(--surface-container);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.fico-bar {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.fico-band.top .fico-bar { background: linear-gradient(90deg, #10b981, #34d399); width: 95%; }
+.fico-band.good .fico-bar { background: linear-gradient(90deg, #3b82f6, #60a5fa); width: 78%; }
+.fico-band.fair .fico-bar { background: linear-gradient(90deg, #f59e0b, #fbbf24); width: 60%; }
+.fico-band.low .fico-bar { background: linear-gradient(90deg, #ef4444, #f87171); width: 42%; }
+
+.fico-savings-note {
+  margin-top: var(--space-2xl);
+  padding: var(--space-lg) var(--space-xl);
+  background: linear-gradient(135deg, var(--primary-fixed), #ffe8e0);
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--primary);
+}
+
+.fico-savings-note p {
+  font-size: 0.88rem;
+  color: var(--fg-1);
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+.fico-savings-note strong {
+  color: var(--primary);
+}
+
+/* Marcus highlight band */
+.marcus-marker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--primary);
+  background-color: var(--primary-fixed);
+  border: 1px solid var(--primary-fixed-dim);
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  margin-left: var(--space-sm);
+  letter-spacing: 0.03em;
+}
+
+/* ─── NUMBERED STEPS ─── */
+.steps-list {
+  list-style: none;
+  margin: var(--space-3xl) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.step-item {
+  display: flex;
+  gap: var(--space-xl);
+  padding: var(--space-2xl);
+  background-color: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.step-item:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.step-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent-glow));
+  color: var(--on-primary);
+  font-family: var(--font-headline);
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-accent);
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-title {
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--fg-1);
+  margin-bottom: var(--space-sm);
+}
+
+.step-body {
+  font-size: 0.9rem;
+  color: var(--fg-2);
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+.step-body strong {
+  color: var(--fg-1);
+  font-weight: 600;
+}
+
+.step-timeline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+.step-timeline::before {
+  content: '⏱';
+  font-size: 0.8rem;
+}
+
+/* ─── CALLOUT BOXES ─── */
+.callout {
+  margin: var(--space-4xl) 0;
+  padding: var(--space-3xl);
+  border-radius: var(--radius-2xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.callout.sharon-voice {
+  background-color: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+}
+
+.callout.sharon-voice::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent-glow), var(--primary-fixed-dim));
+}
+
+.callout-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.callout-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-fixed-dim);
+}
+
+.callout-who {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+.callout-role {
+  font-size: 0.72rem;
+  color: var(--fg-muted);
+  font-weight: 500;
+}
+
+blockquote.sharon-quote {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--fg-1);
+  margin: 0;
+  font-style: italic;
+  position: relative;
+}
+
+blockquote.sharon-quote::before {
+  content: '\201C';
+  font-family: var(--font-headline);
+  font-size: 4rem;
+  color: var(--primary-fixed-dim);
+  line-height: 0;
+  vertical-align: -1.4rem;
+  margin-right: var(--space-xs);
+}
+
+/* ─── PERSONAL NEXT STEP ─── */
+.personal-card {
+  margin: var(--space-4xl) 0;
+  background: linear-gradient(145deg, var(--surface-container-lowest), var(--primary-fixed));
+  border: 2px solid var(--primary-fixed-dim);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-3xl);
+  box-shadow: var(--shadow-lg), var(--shadow-accent);
+  position: relative;
+  overflow: hidden;
+}
+
+.personal-card::after {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,64,13,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.personal-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-2xl);
+}
+
+.personal-card-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.personal-card-label::before {
+  content: '🔒';
+  font-size: 0.75rem;
+}
+
+.personal-intro {
+  font-size: 0.95rem;
+  color: var(--fg-2);
+  margin-bottom: var(--space-2xl);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+.data-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+
+@media (max-width: 480px) {
+  .data-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.data-cell {
+  padding: var(--space-lg) var(--space-xl);
+  background-color: rgba(255,255,255,0.7);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(4px);
+}
+
+.data-cell-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.data-cell-value {
+  font-family: var(--font-headline);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--fg-1);
+  line-height: 1.3;
+}
+
+.data-cell-value.gap {
+  color: var(--yellow);
+}
+
+.data-cell-value.target {
+  color: var(--green);
+}
+
+.data-cell-value.current {
+  color: var(--primary);
+}
+
+.action-items {
+  list-style: none;
+  margin-bottom: var(--space-3xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.action-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  font-size: 0.9rem;
+  color: var(--fg-1);
+  line-height: 1.6;
+}
+
+.action-item::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--primary-fixed);
+  border: 2px solid var(--primary-fixed-dim);
+  flex-shrink: 0;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-item strong {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.action-item .action-deadline {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--fg-muted);
+  display: block;
+  margin-top: 2px;
+}
+
+.cta-block {
+  padding-top: var(--space-2xl);
+  border-top: 1px solid var(--outline-variant);
+}
+
+.cta-prompt {
+  font-size: 0.95rem;
+  color: var(--fg-2);
+  margin-bottom: var(--space-xl);
+  line-height: 1.6;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-3xl);
+  background: linear-gradient(135deg, var(--primary), var(--accent-glow));
+  color: var(--on-primary);
+  font-family: var(--font-headline);
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: var(--shadow-accent);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  letter-spacing: -0.01em;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(160,59,0,0.25);
+  filter: brightness(1.05);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-primary .btn-arrow {
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.btn-primary:hover .btn-arrow {
+  transform: translateX(3px);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+  padding: var(--space-sm) 0;
+  background: none;
+  border: none;
+  color: var(--fg-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ─── NEXT DAY PREVIEW ─── */
+.next-day-card {
+  margin: var(--space-4xl) 0;
+  background-color: var(--surface-container);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-3xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.lock-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(245,236,233,0.95) 100%);
+  border-radius: var(--radius-2xl);
+  pointer-events: none;
+}
+
+.next-day-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-xl);
+}
+
+.next-day-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  background-color: var(--surface-container-high);
+  color: var(--fg-muted);
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid var(--border-strong);
+}
+
+.lock-icon {
+  font-size: 0.9rem;
+}
+
+.next-day-unlock {
+  font-size: 0.78rem;
+  color: var(--fg-muted);
+  font-weight: 600;
+}
+
+.next-day-title {
+  font-family: var(--font-headline);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--fg-1);
+  margin-bottom: var(--space-md);
+  filter: blur(0px);
+}
+
+.next-day-preview {
+  font-size: 0.9rem;
+  color: var(--fg-muted);
+  line-height: 1.6;
+  filter: blur(2px);
+  user-select: none;
+}
+
+/* ─── DIVIDER ─── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--outline-variant), transparent);
+  margin: var(--space-4xl) 0;
+}
+
+/* ─── KEY STAT CALLOUT ─── */
+.stat-callout {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-xl);
+  margin: var(--space-3xl) 0;
+  padding: var(--space-2xl);
+  background-color: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-callout-accent {
+  width: 6px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--primary), var(--accent-glow));
+  flex-shrink: 0;
+}
+
+.stat-callout-content {}
+
+.stat-callout-number {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+}
+
+.stat-callout-label {
+  font-size: 0.85rem;
+  color: var(--fg-2);
+  line-height: 1.5;
+}
+
+/* ─── FOOTER ─── */
+.article-footer {
+  margin-top: var(--space-5xl);
+  padding-top: var(--space-4xl);
+  border-top: 1px solid var(--border);
+}
+
+.footer-cta-text {
+  font-size: 1rem;
+  color: var(--fg-2);
+  margin-bottom: var(--space-3xl);
+  line-height: 1.7;
+}
+
+.footer-cta-text a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.sharon-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2xl);
+  padding: var(--space-3xl);
+  background-color: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--space-3xl);
+}
+
+.sharon-card-photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-fixed-dim);
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.sharon-card-info {}
+
+.sharon-card-name {
+  font-family: var(--font-headline);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--fg-1);
+  margin-bottom: 2px;
+}
+
+.sharon-card-title {
+  font-size: 0.8rem;
+  color: var(--fg-muted);
+  font-weight: 500;
+  margin-bottom: var(--space-md);
+}
+
+.sharon-card-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.sharon-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  padding: var(--space-xs) var(--space-md);
+  background-color: var(--primary-fixed);
+  border-radius: var(--radius-pill);
+  transition: background-color 0.15s ease;
+}
+
+.sharon-contact-link:hover {
+  background-color: var(--primary-fixed-dim);
+}
+
+.sharon-card-langs {
+  margin-top: var(--space-md);
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  font-weight: 500;
+}
+
+.footer-legal {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--fg-muted);
+  line-height: 2;
+}
+
+.footer-legal a {
+  color: var(--fg-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 640px) {
+  .site-header {
+    top: 29px;
+    padding: var(--space-md) var(--space-lg);
+  }
+  .content-wrap {
+    padding: var(--space-3xl) var(--space-lg) var(--space-5xl);
+  }
+  .progress-label {
+    display: none;
+  }
+  .fico-diagram {
+    padding: var(--space-2xl);
+  }
+  .personal-card {
+    padding: var(--space-2xl);
+  }
+  .sharon-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .sharon-card-contact {
+    justify-content: center;
+  }
+  .step-item {
+    padding: var(--space-xl);
+  }
+  .callout.sharon-voice {
+    padding: var(--space-2xl);
+  }
+  .top-banner {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .dots-row {
+    gap: 4px;
+  }
+  .day-dot {
+    width: 26px;
+    height: 26px;
+    font-size: 0.6rem;
+  }
+  .dot-connector {
+    max-width: 10px;
+  }
+  .dot-label {
+    font-size: 0.52rem;
+  }
+}
+
+/* ─── INLINE EMPHASIS STYLES ─── */
+.em-num {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--primary);
+  font-size: 0.95em;
+}
+
+.pill-inline {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78em;
+  font-weight: 700;
+  vertical-align: middle;
+  margin: 0 2px;
+}
+
+.pill-green { background: #d1fae5; color: #065f46; }
+.pill-yellow { background: #fef3c7; color: #92400e; }
+.pill-red { background: #fee2e2; color: #991b1b; }
+
+/* Subtle reading progress bar at very top */
+.reading-bar-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(0,0,0,0.06);
+  z-index: 200;
+}
+
+.reading-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--accent-glow));
+  width: 0%;
+  transition: width 0.1s linear;
+}
+</style>
+</head>
+<body>
+
+<!-- Reading progress bar -->
+<div class="reading-bar-wrap">
+  <div class="reading-bar-fill" id="readingBar"></div>
+</div>
+
+<!-- Top banner -->
+<div class="top-banner">
+  <span class="highlight">Day 3 of 7</span>
+  <span class="pipe">|</span>
+  Sharon's First-Time Homebuyer Course
+  <span class="pipe">|</span>
+  Private link for <span class="highlight">Marcus Thompson</span>
+</div>
+
+<!-- Site header -->
+<header class="site-header">
+  <a href="#" class="wordmark">
+    <span class="wordmark-dot"></span>
+    Sharon Wang Realty
+  </a>
+  <span class="header-right">🔒 Private · Do not share</span>
+</header>
+
+<!-- Main content -->
+<main class="content-wrap">
+
+  <!-- ─── PROGRESS STRIP ─── -->
+  <nav class="progress-strip" aria-label="Course progress">
+    <span class="progress-label">Your progress</span>
+    <div class="dots-row" role="list">
+
+      <div class="day-dot-wrap" role="listitem">
+        <div class="day-dot done" title="Day 1 — Complete">1</div>
+        <span class="dot-label">Done</span>
+      </div>
+
+      <div class="dot-connector done"></div>
+
+      <div class="day-dot-wrap" role="listitem">
+        <div class="day-dot done" title="Day 2 — Complete">2</div>
+        <span class="dot-label">Done</span>
+      </div>
+
+      <div class="dot-connector done"></div>
+
+      <div class="day-dot-wrap" role="listitem">
+        <div class="day-dot current" title="Day 3 — Today">3</div>
+        <span class="dot-label current">Today</span>
+      </div>
+
+      <div class="dot-connector upcoming"></div>
+
+      <div class="day-dot-wrap" role="listitem">
+        <div class="day-dot upcoming" title="Day 4 — Unlocks tomorrow">4</div>
+        <span class="dot-label">Thurs</span>
+      </div>
+
+      <div class="dot-connector upcoming"></div>
+
+      <div class="day-dot-wrap" role="listitem">
+        <div class="day-dot upcoming" title="Day 5">5</div>
+        <span class="dot-label">Fri</span>
+      </div>
+
+      <div class="dot-connector upcoming"></div>
+
+      <div class="day-dot-wrap" role="listitem">
+        <div class="day-dot upcoming" title="Day 6">6</div>
+        <span class="dot-label">Sat</span>
+      </div>
+
+      <div class="dot-connector upcoming"></div>
+
+      <div class="day-dot-wrap" role="listitem">
+        <div class="day-dot upcoming" title="Day 7">7</div>
+        <span class="dot-label">Sun</span>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ─── GREETING ─── -->
+  <div class="greeting-block">
+    <span class="greeting-name">Hi Marcus,</span>
+    <p class="greeting-teaser">
+      Yesterday we covered downpayment math — the 20% anchor, the PMI calculus, the reserves lenders want to see. Today: <strong>the most underrated number in your entire purchase timeline — your FICO score.</strong> It's the one variable you still control right now, and the delta between 720 and 740 on a $1.8M purchase is not trivial.
+    </p>
+  </div>
+
+  <!-- ─── H1 + META ─── -->
+  <h1 class="article-h1">Day 3 — Understanding Your Credit Score<br><span class="highlight">(And Why 740 Matters)</span></h1>
+
+  <div class="article-meta">
+    <span class="meta-tag credit">📊 Credit &amp; Financing</span>
+    <span class="meta-tag time">⏱ 8 min read</span>
+  </div>
+
+  <!-- ─── FICO LADDER ─── -->
+  <h2 class="section-h2">The 760 / 740 / 720 / 680 Ladder</h2>
+
+  <p>Most buyers think of credit as binary — "good" or "bad." Lenders don't. They price your mortgage rate in precise 20-point FICO bands. On a <span class="em-num">$2M</span> jumbo loan in 2026, each 20-point drop costs you approximately <span class="em-num">0.15%</span> in rate. That sounds minor. It is not.</p>
+
+  <div class="fico-diagram" role="figure" aria-label="FICO score band comparison for a $2M 30-year loan">
+    <div class="fico-diagram-header">
+      <div class="fico-diagram-title">FICO Band Impact — $2,000,000 30-Year Jumbo Loan (2026 est.)</div>
+      <div class="fico-diagram-subtitle">Rate and lifetime interest cost by score band · Assumes 20% down · Conventional jumbo</div>
+    </div>
+
+    <!-- Band: 760+ -->
+    <div class="fico-band top">
+      <div class="fico-band-header">
+        <div class="fico-score-label">
+          760+
+          <span class="band-tag">Excellent</span>
+        </div>
+      </div>
+      <div class="fico-band-meta">
+        <div class="fico-bar-wrap">
+          <div class="fico-bar"></div>
+        </div>
+        <div class="fico-rate-info">
+          <div class="fico-rate">~6.55% APR</div>
+          <div class="fico-cost">$951K lifetime interest</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Band: 740–759 -->
+    <div class="fico-band good">
+      <div class="fico-band-header">
+        <div class="fico-score-label">
+          740–759
+          <span class="band-tag">Strong</span>
+        </div>
+      </div>
+      <div class="fico-band-meta">
+        <div class="fico-bar-wrap">
+          <div class="fico-bar"></div>
+        </div>
+        <div class="fico-rate-info">
+          <div class="fico-rate">~6.70% APR</div>
+          <div class="fico-cost">$972K lifetime interest</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Band: 720–739 -->
+    <div class="fico-band fair">
+      <div class="fico-band-header">
+        <div class="fico-score-label">
+          720–739
+          <span class="band-tag">Good</span>
+          <span class="marcus-marker">📍 Marcus (self-reported)</span>
+        </div>
+      </div>
+      <div class="fico-band-meta">
+        <div class="fico-bar-wrap">
+          <div class="fico-bar"></div>
+        </div>
+        <div class="fico-rate-info">
+          <div class="fico-rate">~6.85% APR</div>
+          <div class="fico-cost">$993K lifetime interest</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Band: 680–719 -->
+    <div class="fico-band low">
+      <div class="fico-band-header">
+        <div class="fico-score-label">
+          680–719
+          <span class="band-tag">Fair</span>
+        </div>
+      </div>
+      <div class="fico-band-meta">
+        <div class="fico-bar-wrap">
+          <div class="fico-bar"></div>
+        </div>
+        <div class="fico-rate-info">
+          <div class="fico-rate">~7.15% APR</div>
+          <div class="fico-cost">$1.04M lifetime interest</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fico-savings-note">
+      <p><strong>The 760→720 spread:</strong> ~$42,000 in additional lifetime interest on a $2M loan. Moving from your current 720 to 740 saves an estimated <strong>$21,000 over 30 years</strong> and — more practically — may improve your debt-to-income ratio enough to qualify for the better jumbo tier. That alone is worth spending two months on.</p>
+    </div>
+  </div>
+
+  <!-- ─── WHY LENDERS WEIGHT FICO ─── -->
+  <h2 class="section-h2">Why Lenders Weight FICO So Heavily</h2>
+
+  <p>
+    It's not arbitrary. FICO is the single most predictive variable lenders have found for 90-day default risk. Every point on the score represents a statistically derived probability that you'll stop paying. When a jumbo lender is putting <span class="em-num">$1.6M</span> of their capital on the line for 30 years, they are extremely sensitive to that probability curve.
+  </p>
+
+  <p>
+    Here's the part most buyers miss: in the jumbo tier (loans above <span class="em-num">$1,149,825</span> in most Bay Area counties in 2026), you're not dealing with Fannie Mae's automated underwriting. You're dealing with the lender's own portfolio rules. Many of Sharon's preferred jumbo lenders in Santa Clara County have a hard tier break at <span class="em-num">740</span>. Below that, they either add a rate premium, require a larger reserve (think 24 months PITI rather than 12), or both.
+  </p>
+
+  <p>
+    The secondary factor is how FICO interacts with loan-to-value (LTV). At 80% LTV — which is exactly where you'd be on a $1.8M purchase with 20% down — a 720 score combined with high utilization can trigger what underwriters call a <strong>"risk layering" flag</strong>. It doesn't kill the loan. It slows it down, adds conditions, and occasionally kicks it to manual review. In a Cupertino seller's market where a 21-day close is competitive, a 45-day underwriting extension can cost you the house.
+  </p>
+
+  <div class="stat-callout">
+    <div class="stat-callout-accent"></div>
+    <div class="stat-callout-content">
+      <div class="stat-callout-number">21 days</div>
+      <div class="stat-callout-label">Typical closing expectation in Cupertino for a competitive offer in 2025–2026. Manual underwriting review often adds 10–18 days. Clean credit profile = faster clear-to-close.</div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ─── 3 FASTEST MOVES ─── -->
+  <h2 class="section-h2">The 3 Fastest Moves to Lift Your Score in 90 Days</h2>
+
+  <p>These aren't guesses. These are the levers Sharon's clients have pulled, validated with their lenders, and confirmed with score updates. Ranked by impact-to-effort ratio.</p>
+
+  <ol class="steps-list">
+    <li class="step-item">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <div class="step-title">Pay revolving balances down to under 30% utilization — aim for under 10% if possible</div>
+        <p class="step-body">
+          Credit utilization (how much of your available revolving credit you're using) accounts for <strong>30% of your FICO score</strong> and it's the fastest-moving variable. Unlike payment history or credit age, utilization is recalculated fresh every billing cycle. If you can pay down one or two cards significantly before the statement closes, your score will reflect it within <strong>30–45 days</strong>. The biggest bang comes from getting any single card below 30%, then targeting below 10% for the highest-utilization card. Don't spread the paydown evenly — attack the highest utilization account first.
+        </p>
+        <span class="step-timeline">Score impact visible in 30–45 days</span>
+      </div>
+    </li>
+
+    <li class="step-item">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <div class="step-title">Do not close old credit lines — length of history is 15% of your score</div>
+        <p class="step-body">
+          This is the most common mistake Sharon sees. A client pays off an old card, feels good about it, closes the account. Two things happen simultaneously: their available credit drops (utilization goes up) and their average account age decreases. <strong>Both hurt the score.</strong> If you have a card you haven't used in three years, leave it open with a $0 balance — or put one recurring subscription on it and set up autopay. The account keeps aging, the utilization stays near zero, and you preserve 15% of the scoring model that's working quietly in your favor.
+        </p>
+        <span class="step-timeline">Closing an old card can drop score 15–30 pts</span>
+      </div>
+    </li>
+
+    <li class="step-item">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <div class="step-title">Pull all three bureau reports and dispute any inaccurate hard inquiries or duplicate accounts</div>
+        <p class="step-body">
+          Go to <strong>annualcreditreport.com</strong> (the only federally mandated free source). Pull Equifax, Experian, and TransUnion separately. Look specifically for: (a) hard inquiries you don't recognize — these account for 10% of score and stay for 2 years, (b) accounts listed as open that you've closed, (c) any balance discrepancies versus your actual statements. A successful dispute removes inaccurate hard inquiries within <strong>30–45 days</strong> and can add 10–20 points depending on how many you remove. One client of Sharon's found a hard pull from a car dealership they'd visited two years earlier — three inquiries in one day for "rate shopping" they'd never authorized. Removing them moved the score from 731 to 749.
+        </p>
+        <span class="step-timeline">Dispute resolved in 30–45 days by law</span>
+      </div>
+    </li>
+  </ol>
+
+  <div class="section-divider"></div>
+
+  <!-- ─── SHARON'S TIMING ADVICE ─── -->
+  <h2 class="section-h2">What Sharon Tells Her Clients About Timing</h2>
+
+  <div class="callout sharon-voice">
+    <div class="callout-label">
+      <img class="callout-avatar" src="https://i.pravatar.cc/240?img=47" alt="Sharon Wang">
+      <div>
+        <div class="callout-who">Sharon Wang</div>
+        <div class="callout-role">Buyer's agent · Cupertino &amp; Palo Alto</div>
+      </div>
+    </div>
+    <blockquote class="sharon-quote">
+      The question I get most is "when should I apply for pre-approval?" The honest answer is: it depends on where your credit profile is today, and how far out your close date is. Those two variables determine whether you should be aggressively improving your score right now, or freezing your profile completely to protect it.
+    </blockquote>
+  </div>
+
+  <p>
+    If you're <strong>6 or more months from your target close date</strong>, this is your window. You have time to move the utilization needle, let disputes resolve, and see two or three billing cycles improve your average balance. Sharon tells clients in this window to treat credit improvement like a sprint with a known end date: set the target score, work backwards, and hit the specific paydown numbers that will get you there. A lender who runs a baseline soft-pull now can tell you exactly which account to target.
+  </p>
+
+  <p>
+    If you're <strong>inside 60 days from a planned offer</strong>, the calculus flips entirely. Now the priority is protecting what you have, not chasing points. That means: no new credit card applications, no car loans, no furniture financing, no co-signing anything for family. Every new account does two things that hurt a close: it adds a hard inquiry (immediate score drop of 5–10 points) and it lowers your average account age. Sharon has seen a <span class="em-num">$3.1M</span> Palo Alto transaction go sideways because the buyer leased a car two weeks before their final approval — the new hard pull and monthly obligation pushed their DTI over the lender's threshold.
+  </p>
+
+  <p>
+    There's a third scenario that's less discussed: <strong>if you're already above 760</strong>, stop optimizing. Sharon's seen clients open new cards to get utilization "even lower," triggering hard pulls that moved a 762 down to 754 and dropped them out of the best rate tier. Above 760, the marginal gain from further credit optimization is zero. Freeze the profile, start focusing on documentation — tax returns, RSU vesting schedules, stock account statements.
+  </p>
+
+  <p>
+    For Marcus specifically — you're targeting a July close, which puts you roughly <span class="em-num">5 months out</span> from offer and <span class="em-num">6 months out</span> from close. That's the sweet spot: enough time to do one targeted paydown, let it score, and still have a stable profile by the time the lender runs their final credit pull 72 hours before closing. The playbook is clear. Don't open anything new. Pay down the highest-utilization card. Get a baseline soft-pull from a trusted lender — the one Sharon works with in Sunnyvale won't ding your score and will give you a precise score-to-rate projection.
+  </p>
+
+  <div class="section-divider"></div>
+
+  <!-- ─── PERSONAL NEXT STEP ─── -->
+  <h2 class="section-h2">Your Personal Next Step, Marcus</h2>
+
+  <div class="personal-card">
+    <div class="personal-card-header">
+      <span class="personal-card-label">Personalized to you</span>
+    </div>
+
+    <p class="personal-intro">
+      Based on what you shared in the Day 1 intake — target home in Cupertino, budget around $1.8M, planning 20% down (~$360K), aiming for a July 2025 close date:
+    </p>
+
+    <div class="data-grid">
+      <div class="data-cell">
+        <div class="data-cell-label">Your target home</div>
+        <div class="data-cell-value">~$1.8M Cupertino<br>4BR, CUSD</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-cell-label">Target close</div>
+        <div class="data-cell-value">July 2025<br>~5 months out</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-cell-label">FICO (self-reported)</div>
+        <div class="data-cell-value current">720</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-cell-label">Target FICO</div>
+        <div class="data-cell-value target">740+ <span style="font-size:0.7em;color:var(--fg-muted);">(jumbo tier)</span></div>
+      </div>
+      <div class="data-cell">
+        <div class="data-cell-label">Gap to close</div>
+        <div class="data-cell-value gap">+20 pts needed</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-cell-label">Time to do it</div>
+        <div class="data-cell-value" style="color:var(--green);">✓ Enough runway</div>
+      </div>
+    </div>
+
+    <ul class="action-items">
+      <li class="action-item">
+        <div>
+          <strong>Action 1:</strong> Pay down your Capital One card balance to under <strong>$1,200</strong> (this will bring utilization below 28% based on your reported limit). Do it before the statement closing date in May.
+          <span class="action-deadline">⚑ Deadline: May 15 · Expected score lift: +12 to +18 pts</span>
+        </div>
+      </li>
+      <li class="action-item">
+        <div>
+          <strong>Action 2:</strong> Hold off on the car lease your wife mentioned until after closing. A new auto inquiry plus the monthly payment obligation could push your DTI from ~38% to ~43% — above the 42% ceiling Sharon's preferred jumbo lender uses for this loan tier.
+          <span class="action-deadline">⚑ Timing: Wait until after July close</span>
+        </div>
+      </li>
+      <li class="action-item">
+        <div>
+          <strong>Action 3:</strong> Pull your free tri-bureau report at annualcreditreport.com this week and forward any unfamiliar hard inquiries to Sharon. She'll flag which ones are worth disputing before your lender's initial pull.
+          <span class="action-deadline">⚑ This week · 15 minutes of work</span>
+        </div>
+      </li>
+    </ul>
+
+    <div class="cta-block">
+      <p class="cta-prompt">
+        Sharon works with a Sunnyvale-based lender who specializes in jumbo purchases for tech employees in Santa Clara County. They can run a <strong>soft-pull credit baseline this week</strong> — no score impact, full rate projection by score band, and a pre-qualification range you can use to calibrate your offer budget. Want an intro?
+      </p>
+      <a href="mailto:sharon@sharonwangrealtor.com?subject=Day%203%20Course%20-%20Marcus%20wants%20lender%20intro&body=Hi%20Sharon%2C%20I%27d%20like%20the%20intro%20to%20the%20Sunnyvale%20lender%20for%20a%20soft-pull%20baseline.%20Thanks%2C%20Marcus" class="btn-primary">
+        Yes, intro me to the lender
+        <span class="btn-arrow">→</span>
+      </a>
+      <br>
+      <button class="btn-secondary" onclick="this.textContent='Got it — Sharon will check in with you via email.'">Not yet — I'll sort it on my own for now</button>
+    </div>
+  </div>
+
+  <!-- ─── NEXT DAY PREVIEW ─── -->
+  <h2 class="section-h2">Coming Tomorrow</h2>
+
+  <div class="next-day-card">
+    <div class="lock-overlay"></div>
+    <div class="next-day-header">
+      <span class="next-day-badge"><span class="lock-icon">🔒</span> Day 4 — Unlocks tomorrow</span>
+      <span class="next-day-unlock">Wednesday · 9:00 am PT</span>
+    </div>
+    <div class="next-day-title">Day 4 — Touring with Intent: How Sharon's 8–12 Tour Shortlist Works</div>
+    <p class="next-day-preview">
+      Most buyers do 3 tours and make an offer. Sharon's clients do 8–12 before the shortlist even forms. That's not indecision — it's calibration. Tomorrow you'll learn how Sharon captures notes on the first walk-through, what the scoring rubric looks like, how to separate "I like this house" from "this house clears the bar," and why the shortlist method actually speeds up your final decision rather than slowing it down. We'll also cover the specific things to look for in Cupertino inventory that photos never show: lot slope, proximity to Lawrence Expressway noise corridors, and HVAC age markers.
+    </p>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="article-footer">
+    <p class="footer-cta-text">
+      Have a question about anything in today's lesson? <a href="mailto:sharon@sharonwangrealtor.com?subject=Day%203%20Question%20from%20Marcus">Reply directly to this email</a> — Sharon reads every message personally and typically responds within a few hours on weekdays. No support queue, no assistant filter.
+    </p>
+
+    <div class="sharon-card">
+      <img class="sharon-card-photo" src="https://i.pravatar.cc/240?img=47" alt="Sharon Wang, realtor">
+      <div class="sharon-card-info">
+        <div class="sharon-card-name">Sharon Wang</div>
+        <div class="sharon-card-title">Buyer's Agent · Cupertino · Palo Alto · Sunnyvale · Mountain View · Los Altos</div>
+        <div class="sharon-card-contact">
+          <a href="mailto:sharon@sharonwangrealtor.com" class="sharon-contact-link">✉ sharon@sharonwangrealtor.com</a>
+          <a href="tel:+16505550123" class="sharon-contact-link">📞 (650) 555-0123</a>
+          <a href="https://sharonwangrealtor.com" class="sharon-contact-link">🌐 sharonwangrealtor.com</a>
+        </div>
+        <div class="sharon-card-langs">Fluent in English &amp; Mandarin Chinese · DRE #02187641</div>
+      </div>
+    </div>
+
+    <div class="footer-legal">
+      Sharon Wang Realty · 20807 Stevens Creek Blvd, Suite 110, Cupertino, CA 95014<br>
+      This email and its private link were sent to Marcus Thompson as part of the First-Time Homebuyer 7-Day Course.<br>
+      <a href="#">Unsubscribe</a> · <a href="#">Privacy Policy</a> · <a href="#">View in browser</a><br>
+      © 2025 Sharon Wang Realty. All figures are estimates for educational purposes and not a guarantee of financing terms.
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  // Reading progress bar
+  const bar = document.getElementById('readingBar');
+  function updateBar() {
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = window.scrollY;
+    const pct = docH > 0 ? Math.min((scrolled / docH) * 100, 100) : 0;
+    bar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateBar, { passive: true });
+  updateBar();
+
+  // Animate FICO bars on scroll into view
+  const ficoBars = document.querySelectorAll('.fico-bar');
+  const originalWidths = [];
+  ficoBars.forEach(b => {
+    originalWidths.push(b.style.width || getComputedStyle(b).width);
+    b.style.width = '0%';
+  });
+
+  const diagramEl = document.querySelector('.fico-diagram');
+  if (diagramEl && 'IntersectionObserver' in window) {
+    let animated = false;
+    const obs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !animated) {
+        animated = true;
+        ficoBars.forEach((b, i) => {
+          setTimeout(() => {
+            b.style.transition = 'width 0.8s cubic-bezier(0.34, 1.2, 0.64, 1)';
+            b.style.width = originalWidths[i];
+          }, i * 120);
+        });
+        obs.disconnect();
+      }
+    }, { threshold: 0.3 });
+    obs.observe(diagramEl);
+  } else {
+    ficoBars.forEach((b, i) => { b.style.width = originalWidths[i]; });
+  }
+</script>
+
+</body>
+</html>

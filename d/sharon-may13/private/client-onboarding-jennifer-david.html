@@ -1,0 +1,1829 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Portal · Jennifer + David · Sharon Wang Realty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0, 0, 0, 0.06);
+  --border-strong: rgba(0, 0, 0, 0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981; --blue: #3b82f6; --yellow: #f59e0b; --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30, 27, 25, 0.04);
+  --shadow-md: 0 4px 12px rgba(30, 27, 25, 0.08);
+  --shadow-lg: 0 8px 24px rgba(30, 27, 25, 0.12);
+  --shadow-accent: 0 8px 24px rgba(160, 59, 0, 0.15);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--fg-1);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── AUTH BANNER ─────────────────────────────────────────────── */
+.auth-banner {
+  background: var(--surface-container-high);
+  border-bottom: 1px solid var(--border-strong);
+  padding: var(--space-sm) var(--space-3xl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: var(--fg-muted);
+  font-family: var(--font-body);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.auth-banner a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 12px;
+  padding: 2px 10px;
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-pill);
+  transition: background 0.15s;
+}
+.auth-banner a:hover { background: var(--primary-fixed); }
+.auth-banner-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.auth-banner-left .lock-dot {
+  width: 7px; height: 7px;
+  background: var(--green);
+  border-radius: 50%;
+  display: inline-block;
+}
+@media (max-width: 600px) {
+  .auth-banner { padding: var(--space-sm) var(--space-lg); }
+  .auth-banner-email { display: none; }
+}
+
+/* ── TOP NAV ─────────────────────────────────────────────────── */
+.topnav {
+  background: var(--surface-container-lowest);
+  border-bottom: 1px solid var(--border);
+  padding: var(--space-lg) var(--space-3xl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 33px;
+  z-index: 99;
+}
+.wordmark {
+  font-family: var(--font-headline);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+}
+.wordmark-dot {
+  width: 6px; height: 6px;
+  background: var(--accent-glow);
+  border-radius: 50%;
+  display: inline-block;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+.nav-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-fixed);
+  object-fit: cover;
+}
+.nav-client-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg-2);
+}
+@media (max-width: 600px) {
+  .topnav { padding: var(--space-md) var(--space-lg); top: 31px; }
+  .nav-client-name { display: none; }
+}
+
+/* ── LAYOUT ──────────────────────────────────────────────────── */
+.page-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: var(--space-3xl);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--space-3xl) var(--space-5xl);
+}
+@media (max-width: 960px) {
+  .page-layout { grid-template-columns: 1fr; padding: var(--space-2xl) var(--space-lg) 120px; }
+}
+
+.main-col { display: flex; flex-direction: column; gap: var(--space-2xl); }
+.side-col { display: flex; flex-direction: column; gap: var(--space-2xl); }
+
+/* ── CARD BASE ───────────────────────────────────────────────── */
+.card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-sm);
+}
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-xl);
+  gap: var(--space-md);
+}
+.card-title {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.card-action-link {
+  font-size: 12.5px;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.card-action-link:hover { text-decoration: underline; }
+
+/* ── WELCOME CARD ────────────────────────────────────────────── */
+.welcome-card {
+  background: linear-gradient(135deg, var(--surface-container-lowest) 0%, var(--primary-fixed) 100%);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-3xl);
+  box-shadow: var(--shadow-accent);
+  position: relative;
+  overflow: hidden;
+}
+.welcome-card::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, var(--primary-fixed-dim) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.welcome-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-3xl);
+  gap: var(--space-lg);
+}
+.welcome-heading {
+  font-family: var(--font-headline);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--fg-1);
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+.welcome-sub {
+  font-size: 13.5px;
+  color: var(--fg-muted);
+  margin-top: var(--space-xs);
+  font-weight: 500;
+}
+.welcome-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-xs);
+  flex-shrink: 0;
+}
+.stage-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+}
+.stage-badge .pulse {
+  width: 6px; height: 6px;
+  background: var(--primary-fixed-dim);
+  border-radius: 50%;
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.75); }
+}
+.started-label {
+  font-size: 11.5px;
+  color: var(--fg-muted);
+  font-weight: 500;
+}
+
+/* Stepper */
+.stepper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: var(--space-3xl);
+  overflow-x: auto;
+  padding-bottom: var(--space-xs);
+}
+.stepper::-webkit-scrollbar { height: 3px; }
+.stepper::-webkit-scrollbar-track { background: transparent; }
+.stepper::-webkit-scrollbar-thumb { background: var(--outline-variant); border-radius: 2px; }
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 72px;
+  position: relative;
+}
+.step::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: calc(-50% + 14px);
+  right: calc(50% + 14px);
+  height: 2px;
+  background: var(--outline-variant);
+}
+.step:first-child::before { display: none; }
+.step.done::before { background: var(--primary); }
+.step.active::before { background: var(--primary); }
+
+.step-circle {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--surface-container);
+  border: 2px solid var(--outline-variant);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--fg-muted);
+  z-index: 1;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.step.done .step-circle {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
+.step.active .step-circle {
+  background: var(--primary);
+  border-color: var(--accent-glow);
+  color: var(--on-primary);
+  box-shadow: 0 0 0 4px rgba(232, 64, 13, 0.18), 0 0 0 8px rgba(232, 64, 13, 0.07);
+}
+.step-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--fg-muted);
+  margin-top: var(--space-xs);
+  text-align: center;
+  white-space: nowrap;
+}
+.step.active .step-label { color: var(--primary); font-weight: 700; }
+.step.done .step-label { color: var(--fg-2); }
+
+/* Next Action */
+.next-action {
+  background: var(--surface-container-lowest);
+  border: 1.5px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  box-shadow: var(--shadow-md);
+}
+.next-action-left { display: flex; flex-direction: column; gap: var(--space-xs); }
+.next-action-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--accent-glow);
+}
+.next-action-title {
+  font-family: var(--font-headline);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--fg-1);
+  line-height: 1.3;
+}
+.next-action-detail {
+  font-size: 13px;
+  color: var(--fg-muted);
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: var(--shadow-accent);
+  transition: background 0.15s, transform 0.1s;
+  flex-shrink: 0;
+}
+.btn-primary:hover { background: var(--primary-container); transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--surface-container-low);
+  color: var(--primary);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--outline-variant);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+.btn-secondary:hover { background: var(--primary-fixed); border-color: var(--primary-fixed-dim); }
+
+@media (max-width: 600px) {
+  .welcome-card { padding: var(--space-2xl); }
+  .welcome-heading { font-size: 22px; }
+  .next-action { flex-direction: column; align-items: flex-start; }
+  .welcome-top { flex-direction: column; gap: var(--space-md); }
+  .welcome-meta { align-items: flex-start; }
+}
+
+/* ── BRIEF CARD ──────────────────────────────────────────────── */
+.brief-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+@media (max-width: 640px) { .brief-grid { grid-template-columns: 1fr; } }
+
+.brief-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.brief-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--fg-muted);
+}
+.brief-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fg-1);
+  line-height: 1.4;
+}
+.brief-tag {
+  display: inline-flex;
+  align-items: center;
+  background: var(--primary-fixed);
+  color: var(--primary);
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: var(--radius-pill);
+  margin-right: 4px;
+  margin-top: 3px;
+}
+.brief-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 3px; }
+.brief-full-row {
+  grid-column: 1 / -1;
+}
+.brief-divider {
+  grid-column: 1 / -1;
+  height: 1px;
+  background: var(--border);
+  margin: var(--space-sm) 0;
+}
+.must-have-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--surface-container);
+  color: var(--fg-2);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+}
+.must-have-tag::before {
+  content: '✓';
+  font-size: 10px;
+  color: var(--green);
+  font-weight: 800;
+}
+.nice-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--surface-container-low);
+  color: var(--fg-muted);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px dashed var(--outline-variant);
+}
+.nice-tag::before {
+  content: '◇';
+  font-size: 10px;
+  color: var(--yellow);
+}
+
+/* ── ACTION ITEMS ────────────────────────────────────────────── */
+.action-items { display: flex; flex-direction: column; gap: var(--space-md); }
+.action-item {
+  background: var(--surface-container-low);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-xl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  transition: box-shadow 0.15s;
+}
+.action-item:hover { box-shadow: var(--shadow-md); }
+.action-item-left { display: flex; align-items: flex-start; gap: var(--space-md); flex: 1; min-width: 0; }
+.checkbox-mock {
+  width: 20px; height: 20px;
+  border-radius: 6px;
+  border: 2px solid var(--outline-variant);
+  background: var(--surface-container-lowest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.action-item-text { flex: 1; min-width: 0; }
+.action-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fg-1);
+  line-height: 1.3;
+}
+.action-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: 3px;
+  flex-wrap: wrap;
+}
+.action-status {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+}
+.status-urgent {
+  background: rgba(232, 64, 13, 0.1);
+  color: var(--accent-glow);
+}
+.status-plan {
+  background: var(--surface-container);
+  color: var(--fg-muted);
+}
+.status-optional {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--yellow);
+}
+.action-due {
+  font-size: 12px;
+  color: var(--fg-muted);
+  font-weight: 500;
+}
+@media (max-width: 600px) {
+  .action-item { flex-direction: column; align-items: flex-start; }
+}
+
+/* ── SHARON'S NOTE ───────────────────────────────────────────── */
+.note-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+.note-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--primary) 0%, var(--primary-fixed-dim) 100%);
+  border-radius: var(--radius-xl) 0 0 var(--radius-xl);
+}
+.note-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+.note-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-fixed);
+}
+.note-from { font-size: 13px; font-weight: 700; color: var(--fg-1); }
+.note-time { font-size: 11.5px; color: var(--fg-muted); font-weight: 500; }
+.note-body {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 14.5px;
+  color: var(--fg-2);
+  line-height: 1.7;
+  font-weight: 400;
+}
+.note-sig {
+  margin-top: var(--space-md);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fg-1);
+  font-style: normal;
+}
+
+/* ── LISTING DIGEST ──────────────────────────────────────────── */
+.digest-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-xl);
+  gap: var(--space-md);
+}
+.digest-meta { font-size: 13px; color: var(--fg-muted); margin-top: var(--space-xs); }
+.digest-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+.listings-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+@media (max-width: 640px) { .listings-preview { grid-template-columns: 1fr; } }
+.listing-card-mock {
+  background: var(--surface-container);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  filter: blur(3px);
+  pointer-events: none;
+  user-select: none;
+}
+.listing-img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  display: block;
+  opacity: 0.7;
+}
+.listing-body { padding: var(--space-md); }
+.listing-price {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--fg-1);
+}
+.listing-addr { font-size: 11.5px; color: var(--fg-muted); margin-top: 2px; }
+.listing-specs { font-size: 11px; color: var(--fg-2); margin-top: 4px; }
+.digest-notice {
+  background: var(--surface-container-low);
+  border: 1px dashed var(--outline-variant);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-xl);
+  text-align: center;
+  margin-top: var(--space-lg);
+}
+.digest-notice-text { font-size: 13px; color: var(--fg-muted); font-weight: 500; }
+.digest-notice-text strong { color: var(--fg-2); }
+
+/* ── DOCUMENTS ───────────────────────────────────────────────── */
+.doc-list { display: flex; flex-direction: column; gap: var(--space-sm); margin-bottom: var(--space-lg); }
+.doc-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--surface-container-low);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: background 0.12s;
+}
+.doc-row:hover { background: var(--primary-fixed); cursor: pointer; }
+.doc-icon {
+  width: 32px; height: 32px;
+  background: var(--surface-container);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.doc-icon svg { width: 16px; height: 16px; }
+.doc-info { flex: 1; min-width: 0; }
+.doc-name { font-size: 13.5px; font-weight: 600; color: var(--fg-1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.doc-meta { font-size: 11px; color: var(--fg-muted); margin-top: 1px; }
+.doc-dl {
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.doc-dl:hover { text-decoration: underline; }
+.upload-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  background: transparent;
+  border: 1.5px dashed var(--outline-variant);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font-body);
+}
+.upload-btn:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-fixed); }
+
+/* ── SHARON CONTACT CARD ─────────────────────────────────────── */
+.contact-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: calc(33px + 57px + 16px);
+}
+.contact-card-inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-lg); }
+.contact-photo {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-fixed);
+  box-shadow: var(--shadow-accent);
+}
+.contact-name {
+  font-family: var(--font-headline);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--fg-1);
+  line-height: 1.2;
+}
+.contact-title { font-size: 12.5px; color: var(--fg-muted); font-weight: 500; margin-top: 2px; }
+.contact-info { width: 100%; display: flex; flex-direction: column; gap: var(--space-sm); }
+.contact-line {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  background: var(--surface-container-low);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  text-align: left;
+}
+.contact-line-icon { font-size: 13px; flex-shrink: 0; }
+.contact-line-text { font-size: 12.5px; color: var(--fg-2); font-weight: 500; text-decoration: none; }
+.contact-line-text:hover { color: var(--primary); text-decoration: underline; }
+.btn-msg {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: var(--shadow-accent);
+  transition: background 0.15s, transform 0.1s;
+  width: 100%;
+  justify-content: center;
+}
+.btn-msg:hover { background: var(--primary-container); transform: translateY(-1px); }
+.bilingual-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--surface-container);
+  color: var(--fg-muted);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+}
+.response-note { font-size: 11.5px; color: var(--fg-muted); }
+
+/* ── STAGE STORIES (ACCORDION) ───────────────────────────────── */
+.accordion { display: flex; flex-direction: column; gap: var(--space-sm); }
+.accordion-item {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.accordion-item.active-stage {
+  border-color: var(--primary-fixed-dim);
+  box-shadow: var(--shadow-md);
+}
+.accordion-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg) var(--space-xl);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  font-family: var(--font-body);
+  text-align: left;
+  width: 100%;
+  transition: background 0.12s;
+}
+.accordion-trigger:hover { background: var(--surface-container-low); }
+.accordion-trigger-left { display: flex; align-items: center; gap: var(--space-md); }
+.stage-num {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--surface-container);
+  border: 2px solid var(--outline-variant);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--fg-muted);
+  flex-shrink: 0;
+}
+.accordion-item.active-stage .stage-num {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
+.accordion-trigger-title { font-size: 14px; font-weight: 700; color: var(--fg-1); }
+.accordion-trigger-summary { font-size: 12px; color: var(--fg-muted); margin-top: 1px; font-weight: 500; }
+.accordion-trigger-right { display: flex; align-items: center; gap: var(--space-md); flex-shrink: 0; }
+.stage-weeks {
+  font-size: 11.5px;
+  color: var(--fg-muted);
+  font-weight: 600;
+  background: var(--surface-container);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+.chevron {
+  width: 16px; height: 16px;
+  color: var(--fg-muted);
+  transition: transform 0.2s;
+}
+.accordion-item[open] .chevron,
+.accordion-item.open .chevron { transform: rotate(180deg); }
+
+.accordion-body { padding: 0 var(--space-xl) var(--space-xl); }
+.accordion-divider { height: 1px; background: var(--border); margin-bottom: var(--space-lg); }
+.stage-items { display: flex; flex-direction: column; gap: var(--space-sm); }
+.stage-task {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--surface-container-low);
+  border-radius: var(--radius-md);
+}
+.stage-task-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--outline-variant);
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.stage-task-text { font-size: 13px; color: var(--fg-2); font-weight: 500; line-height: 1.4; }
+.stage-task-sub { font-size: 11.5px; color: var(--fg-muted); margin-top: 2px; }
+.accordion-item .accordion-body { display: none; }
+.accordion-item.open .accordion-body { display: block; }
+
+/* ── MESSAGE MODAL ───────────────────────────────────────────── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 27, 25, 0.4);
+  z-index: 500;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: var(--space-3xl);
+}
+.modal-overlay.open { display: flex; }
+.message-modal {
+  background: var(--surface-container-lowest);
+  border-radius: var(--radius-2xl);
+  width: 380px;
+  max-width: 100%;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  max-height: 520px;
+}
+.msg-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-xl);
+  border-bottom: 1px solid var(--border);
+}
+.msg-header-left { display: flex; align-items: center; gap: var(--space-md); }
+.msg-photo { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
+.msg-name { font-size: 14px; font-weight: 700; color: var(--fg-1); }
+.msg-status { font-size: 11.5px; color: var(--green); font-weight: 600; }
+.close-btn {
+  background: var(--surface-container);
+  border: none;
+  border-radius: 50%;
+  width: 28px; height: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fg-muted);
+  font-size: 14px;
+  transition: background 0.12s;
+}
+.close-btn:hover { background: var(--surface-container-high); }
+.msg-thread {
+  flex: 1;
+  padding: var(--space-xl);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.msg-bubble {
+  max-width: 80%;
+  padding: var(--space-md) var(--space-lg);
+  border-radius: 16px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.msg-bubble.from-sharon {
+  background: var(--surface-container-low);
+  color: var(--fg-1);
+  border-bottom-left-radius: 4px;
+  align-self: flex-start;
+}
+.msg-bubble.from-client {
+  background: var(--primary);
+  color: var(--on-primary);
+  border-bottom-right-radius: 4px;
+  align-self: flex-end;
+}
+.msg-time { font-size: 10.5px; color: var(--fg-muted); margin-top: 3px; text-align: right; }
+.msg-compose {
+  border-top: 1px solid var(--border);
+  padding: var(--space-lg);
+  display: flex;
+  gap: var(--space-sm);
+}
+.msg-input {
+  flex: 1;
+  background: var(--surface-container-low);
+  border: 1.5px solid var(--outline-variant);
+  border-radius: var(--radius-pill);
+  padding: 8px 14px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--fg-1);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.msg-input:focus { border-color: var(--primary); }
+.msg-send {
+  background: var(--primary);
+  border: none;
+  border-radius: 50%;
+  width: 36px; height: 36px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.msg-send:hover { background: var(--primary-container); }
+@media (max-width: 600px) {
+  .modal-overlay { padding: 0; align-items: flex-end; }
+  .message-modal { width: 100%; border-radius: var(--radius-2xl) var(--radius-2xl) 0 0; }
+}
+
+/* ── MOBILE STICKY CONTACT ───────────────────────────────────── */
+.mobile-contact-bar {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--surface-container-lowest);
+  border-top: 1px solid var(--border);
+  padding: var(--space-md) var(--space-xl);
+  z-index: 200;
+  align-items: center;
+  gap: var(--space-md);
+  box-shadow: 0 -4px 16px rgba(30,27,25,0.08);
+}
+.mobile-contact-bar img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-fixed); }
+.mobile-contact-info { flex: 1; }
+.mobile-contact-name { font-size: 13px; font-weight: 700; color: var(--fg-1); }
+.mobile-contact-sub { font-size: 11.5px; color: var(--fg-muted); }
+@media (max-width: 960px) { .mobile-contact-bar { display: flex; } }
+
+/* ── SCROLLBAR ───────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--outline-variant); border-radius: 3px; }
+
+/* ── SECTION LABEL ───────────────────────────────────────────── */
+.section-label {
+  font-family: var(--font-headline);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-sm);
+}
+</style>
+</head>
+<body>
+
+<!-- AUTH BANNER -->
+<div class="auth-banner">
+  <div class="auth-banner-left">
+    <span class="lock-dot"></span>
+    <span>Private portal for <strong>Jennifer + David</strong></span>
+    <span class="auth-banner-email" style="color: var(--fg-muted);">·&nbsp; sharon@sharonwangrealtor.com</span>
+  </div>
+  <a href="#" onclick="return false;">Log out</a>
+</div>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <a class="wordmark" href="#" onclick="return false;">
+    <span class="wordmark-dot"></span>
+    Sharon Wang Realty
+  </a>
+  <div class="nav-right">
+    <span class="nav-client-name">Jennifer + David</span>
+    <img class="nav-avatar" src="https://i.pravatar.cc/240?img=47" alt="Sharon Wang">
+  </div>
+</nav>
+
+<!-- PAGE LAYOUT -->
+<div class="page-layout">
+
+  <!-- MAIN COLUMN -->
+  <div class="main-col">
+
+    <!-- 1. WELCOME CARD -->
+    <div class="welcome-card">
+      <div class="welcome-top">
+        <div>
+          <div class="welcome-heading">Welcome, Jennifer + David 👋</div>
+          <div class="welcome-sub">Started Apr 14, 2026 · Your path to close by July 2026</div>
+        </div>
+        <div class="welcome-meta">
+          <div class="stage-badge">
+            <span class="pulse"></span>
+            Discovery
+          </div>
+          <div class="started-label">~12 weeks to target close</div>
+        </div>
+      </div>
+
+      <!-- STEPPER -->
+      <div class="stepper">
+        <div class="step active">
+          <div class="step-circle">1</div>
+          <div class="step-label">Discovery</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">2</div>
+          <div class="step-label">Search</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">3</div>
+          <div class="step-label">Offer</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">4</div>
+          <div class="step-label">Escrow</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">5</div>
+          <div class="step-label">Closing</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">6</div>
+          <div class="step-label">Move-in</div>
+        </div>
+      </div>
+
+      <!-- NEXT ACTION -->
+      <div class="next-action">
+        <div class="next-action-left">
+          <div class="next-action-eyebrow">⚡ Next action</div>
+          <div class="next-action-title">Schedule your intake call with Sharon</div>
+          <div class="next-action-detail">45 min · This week · Sharon will walk through your brief, align on strategy, and set the search perimeter</div>
+        </div>
+        <a class="btn-primary" href="https://calendly.com/sharonwangrealtor/intake" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book intake
+        </a>
+      </div>
+    </div>
+
+    <!-- 2. YOUR BRIEF -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Your Brief</div>
+          <div style="font-size: 12.5px; color: var(--fg-muted); margin-top: 3px; font-weight: 500;">Sharon captured this during onboarding · read-only summary</div>
+        </div>
+        <a class="card-action-link" href="#" onclick="return false;">Update brief →</a>
+      </div>
+
+      <div class="brief-grid">
+        <div class="brief-row">
+          <div class="brief-label">Bedrooms / Baths</div>
+          <div class="brief-value">4+ bed · 2.5+ bath</div>
+        </div>
+        <div class="brief-row">
+          <div class="brief-label">Min. Square Footage</div>
+          <div class="brief-value">2,200+ sq ft</div>
+        </div>
+        <div class="brief-row">
+          <div class="brief-label">Budget Range</div>
+          <div class="brief-value">$2.6M – $3.2M</div>
+        </div>
+        <div class="brief-row">
+          <div class="brief-label">Target Close</div>
+          <div class="brief-value">July 2026 (~12 weeks)</div>
+        </div>
+
+        <div class="brief-divider"></div>
+
+        <div class="brief-row brief-full-row">
+          <div class="brief-label">Target Neighborhoods</div>
+          <div class="brief-tags">
+            <span class="brief-tag">Cupertino · Monta Vista</span>
+            <span class="brief-tag">Sunnyvale · Cherry Chase</span>
+            <span class="brief-tag">Los Altos · Loyola Corners</span>
+          </div>
+        </div>
+
+        <div class="brief-row brief-full-row">
+          <div class="brief-label">Schools (target pipeline)</div>
+          <div class="brief-value" style="font-size: 13px;">Lincoln Elementary (API 952) · Kennedy Middle (API 938) · Monta Vista High (API 945) — Cupertino Union School District</div>
+        </div>
+
+        <div class="brief-divider"></div>
+
+        <div class="brief-row">
+          <div class="brief-label">David → Apple Park</div>
+          <div class="brief-value">Target &lt;15 min drive</div>
+        </div>
+        <div class="brief-row">
+          <div class="brief-label">Jennifer → Google MV</div>
+          <div class="brief-value">Target &lt;20 min drive</div>
+        </div>
+
+        <div class="brief-divider"></div>
+
+        <div class="brief-row brief-full-row">
+          <div class="brief-label">Must-haves</div>
+          <div class="brief-tags" style="margin-top: var(--space-xs);">
+            <span class="must-have-tag">South-facing yard</span>
+            <span class="must-have-tag">2+ car garage</span>
+            <span class="must-have-tag">No busy street</span>
+          </div>
+        </div>
+        <div class="brief-row brief-full-row">
+          <div class="brief-label">Nice-to-haves</div>
+          <div class="brief-tags" style="margin-top: var(--space-xs);">
+            <span class="nice-tag">Open kitchen</span>
+            <span class="nice-tag">ADU potential</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. ACTION ITEMS -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">This week's action items</div>
+        </div>
+        <div style="font-size: 12px; color: var(--fg-muted); font-weight: 600;">3 items · 1 urgent</div>
+      </div>
+      <div class="action-items">
+
+        <div class="action-item">
+          <div class="action-item-left">
+            <div class="checkbox-mock"></div>
+            <div class="action-item-text">
+              <div class="action-title">Schedule your intake call with Sharon</div>
+              <div class="action-meta">
+                <span class="action-status status-urgent">Action needed</span>
+                <span class="action-due">Due this week</span>
+              </div>
+            </div>
+          </div>
+          <a class="btn-primary" href="https://calendly.com/sharonwangrealtor/intake" target="_blank" style="font-size: 12.5px; padding: 8px 16px;">Book</a>
+        </div>
+
+        <div class="action-item">
+          <div class="action-item-left">
+            <div class="checkbox-mock"></div>
+            <div class="action-item-text">
+              <div class="action-title">Get pre-approved with a local lender</div>
+              <div class="action-meta">
+                <span class="action-status status-plan">Plan</span>
+                <span class="action-due">Before first tours</span>
+              </div>
+              <div style="font-size: 12px; color: var(--fg-muted); margin-top: 4px;">Pre-approval letter required before Sharon submits any offer. Target: $2.8M–$3.2M loan amount.</div>
+            </div>
+          </div>
+          <a class="btn-secondary" href="#" onclick="return false;" style="font-size: 12px;">See 3 intros Sharon picked</a>
+        </div>
+
+        <div class="action-item">
+          <div class="action-item-left">
+            <div class="checkbox-mock"></div>
+            <div class="action-item-text">
+              <div class="action-title">Share lifestyle photos or a Pinterest board</div>
+              <div class="action-meta">
+                <span class="action-status status-optional">Optional</span>
+                <span class="action-due">No deadline</span>
+              </div>
+              <div style="font-size: 12px; color: var(--fg-muted); margin-top: 4px;">Helps Sharon calibrate on style — kitchen layout, yard vibe, finishes. Drop a link or upload a PDF.</div>
+            </div>
+          </div>
+          <a class="btn-secondary" href="#" onclick="return false;" style="font-size: 12px;">Drop link</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 4. SHARON'S NOTE -->
+    <div class="note-card">
+      <div class="note-header">
+        <img class="note-avatar" src="https://i.pravatar.cc/240?img=47" alt="Sharon Wang">
+        <div>
+          <div class="note-from">Sharon Wang</div>
+          <div class="note-time">2 hrs ago · Apr 14, 2026</div>
+        </div>
+      </div>
+      <div class="note-body">
+        "Saw your wishlist. Loyola Corners is going to be tight under $3.2M for 4-bed — inventory there is thin and the last 4/2.5 comp closed at $3.35M in March. Let's talk about whether we stretch budget slightly or shift focus to South Cupertino near Rainbow Drive, which gives you the same school pipeline with more runway. I'm already pulling candidates for the Apr 28 digest. Booking notes ready for our intake call."
+      </div>
+      <div class="note-sig">— Sharon</div>
+    </div>
+
+    <!-- 5. WEEKLY LISTING DIGEST -->
+    <div class="card">
+      <div class="digest-header-row">
+        <div>
+          <div class="card-title">Weekly Listing Digest</div>
+          <div class="digest-meta">Your first digest arrives <strong style="color: var(--fg-2);">Monday, Apr 28</strong> · Sharon has already pulled 11 candidates matching your brief</div>
+        </div>
+        <span class="digest-chip">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+          11 candidates
+        </span>
+      </div>
+
+      <div class="listings-preview">
+        <div class="listing-card-mock">
+          <img class="listing-img" src="https://source.unsplash.com/400x300/?cupertino,house" alt="">
+          <div class="listing-body">
+            <div class="listing-price">$2,795,000</div>
+            <div class="listing-addr">19xxx De Anza Blvd, Cupertino</div>
+            <div class="listing-specs">4 bd · 2.5 ba · 2,340 sq ft · 6,200 sq ft lot</div>
+          </div>
+        </div>
+        <div class="listing-card-mock">
+          <img class="listing-img" src="https://source.unsplash.com/400x300/?sunnyvale,home" alt="">
+          <div class="listing-body">
+            <div class="listing-price">$2,999,000</div>
+            <div class="listing-addr">Cherry Chase Dr, Sunnyvale</div>
+            <div class="listing-specs">4 bd · 3 ba · 2,510 sq ft · 7,000 sq ft lot</div>
+          </div>
+        </div>
+        <div class="listing-card-mock">
+          <img class="listing-img" src="https://source.unsplash.com/400x300/?losaltos,house" alt="">
+          <div class="listing-body">
+            <div class="listing-price">$3,150,000</div>
+            <div class="listing-addr">Loyola Ave, Los Altos</div>
+            <div class="listing-specs">4 bd · 2.5 ba · 2,280 sq ft · 8,100 sq ft lot</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="digest-notice" style="margin-top: var(--space-lg);">
+        <div class="digest-notice-text">
+          Full listings unlock Monday Apr 28 — you'll see all <strong>11 candidates</strong> with Sharon's notes, commute times to Apple Park and Google MV, and school zone confirmations.
+          Sharon does the first walk-through analysis with you and captures the shortlist notes.
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. DOCUMENTS -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Documents & Files</div>
+        </div>
+        <div style="font-size: 12px; color: var(--fg-muted); font-weight: 600;">3 files</div>
+      </div>
+
+      <div class="doc-list">
+        <div class="doc-row">
+          <div class="doc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+          </div>
+          <div class="doc-info">
+            <div class="doc-name">Sharon's intake checklist.pdf</div>
+            <div class="doc-meta">124 KB · Uploaded by Sharon · Apr 14, 2026</div>
+          </div>
+          <a class="doc-dl" href="#" onclick="return false;">↓ Download</a>
+        </div>
+        <div class="doc-row">
+          <div class="doc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+          </div>
+          <div class="doc-info">
+            <div class="doc-name">Bay Area lender intro list 2026.pdf</div>
+            <div class="doc-meta">88 KB · Uploaded by Sharon · Apr 14, 2026 · 3 lenders, local to Silicon Valley</div>
+          </div>
+          <a class="doc-dl" href="#" onclick="return false;">↓ Download</a>
+        </div>
+        <div class="doc-row">
+          <div class="doc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+          </div>
+          <div class="doc-info">
+            <div class="doc-name">Pre-approval template letter.pdf</div>
+            <div class="doc-meta">61 KB · Uploaded by Sharon · Apr 14, 2026 · Share with your lender</div>
+          </div>
+          <a class="doc-dl" href="#" onclick="return false;">↓ Download</a>
+        </div>
+      </div>
+
+      <button class="upload-btn" onclick="return false;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add a document (W2s, pre-approval, bank statements…)
+      </button>
+    </div>
+
+    <!-- 8. STAGE STORIES -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Your Road Ahead</div>
+          <div style="font-size: 12.5px; color: var(--fg-muted); margin-top: 3px; font-weight: 500;">6 stages · you're at Stage 1 of 6</div>
+        </div>
+      </div>
+
+      <div class="accordion">
+
+        <!-- Stage 1: Discovery (OPEN) -->
+        <div class="accordion-item active-stage open">
+          <button class="accordion-trigger" onclick="toggleAccordion(this)">
+            <div class="accordion-trigger-left">
+              <div class="stage-num">1</div>
+              <div>
+                <div class="accordion-trigger-title">Discovery <span style="background: var(--primary); color: var(--on-primary); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: var(--radius-pill); margin-left: 6px; vertical-align: middle;">Active</span></div>
+                <div class="accordion-trigger-summary">Intake, brief alignment, lender intro, search calibration</div>
+              </div>
+            </div>
+            <div class="accordion-trigger-right">
+              <span class="stage-weeks">Wk 1–2</span>
+              <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6,9 12,15 18,9"/></svg>
+            </div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-divider"></div>
+            <div class="stage-items">
+              <div class="stage-task">
+                <div class="stage-task-dot" style="background: var(--accent-glow);"></div>
+                <div>
+                  <div class="stage-task-text">45-min intake call with Sharon — align on brief, neighborhoods, budget flexibility</div>
+                  <div class="stage-task-sub">Sharon calibrates the search perimeter before pulling live inventory</div>
+                </div>
+              </div>
+              <div class="stage-task">
+                <div class="stage-task-dot"></div>
+                <div>
+                  <div class="stage-task-text">Pre-approval letter from local lender — required before any offer is submitted</div>
+                  <div class="stage-task-sub">Target range: $2.6M–$3.2M · Sharon has 3 introductions ready</div>
+                </div>
+              </div>
+              <div class="stage-task">
+                <div class="stage-task-dot"></div>
+                <div>
+                  <div class="stage-task-text">Share lifestyle photos or Pinterest board (optional)</div>
+                  <div class="stage-task-sub">Helps Sharon calibrate on finishes, kitchen layout, outdoor style</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 2: Search -->
+        <div class="accordion-item">
+          <button class="accordion-trigger" onclick="toggleAccordion(this)">
+            <div class="accordion-trigger-left">
+              <div class="stage-num">2</div>
+              <div>
+                <div class="accordion-trigger-title">Search</div>
+                <div class="accordion-trigger-summary">Weekly digests, 8–12 tours, shortlist formation</div>
+              </div>
+            </div>
+            <div class="accordion-trigger-right">
+              <span class="stage-weeks">Wk 3–8</span>
+              <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6,9 12,15 18,9"/></svg>
+            </div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-divider"></div>
+            <div class="stage-items">
+              <div class="stage-task">
+                <div class="stage-task-dot"></div>
+                <div>
+                  <div class="stage-task-text">Weekly listing digest every Monday — Sharon pulls matches against your brief</div>
+                  <div class="stage-task-sub">You'll see her notes, commute times, and school zone confirmation for each</div>
+                </div>
+              </div>
+              <div class="stage-task">
+                <div class="stage-task-dot"></div>
+                <div>
+                  <div class="stage-task-text">8–12 tours total — the shortlist surfaces from these, not the top few</div>
+                  <div class="stage-task-sub">Sharon does the first walk-through with you and captures notes on each property</div>
+                </div>
+              </div>
+              <div class="stage-task">
+                <div class="stage-task-dot"></div>
+                <div>
+                  <div class="stage-task-text">Shortlist narrowed to 2–3 properties with comparative market analysis</div>
+                  <div class="stage-task-sub">Median 4-bed sale in Cupertino/Los Altos: $3.2M (Q1 2026)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 3: Offer -->
+        <div class="accordion-item">
+          <button class="accordion-trigger" onclick="toggleAccordion(this)">
+            <div class="accordion-trigger-left">
+              <div class="stage-num">3</div>
+              <div>
+                <div class="accordion-trigger-title">Offer</div>
+                <div class="accordion-trigger-summary">Comp analysis, signal reading, offer strategy, submission</div>
+              </div>
+            </div>
+            <div class="accordion-trigger-right">
+              <span class="stage-weeks">Wk 7–9</span>
+              <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6,9 12,15 18,9"/></svg>
+            </div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-divider"></div>
+            <div class="stage-items">
+              <div class="stage-task">
+                <div class="stage-task-dot"></div>
+                <div>
+                  <div class="stage-task-text">Sharon calibrates with the listing agent's signals before submitting</div>
+                  <div class="stage-task-sub">Competing offer count, seller motivation, days on market, contingency norms</div>
+                </div>
+              </div>
+              <div class="stage-task">
+                <div class="stage-task-dot"></div>
+                <div>
+                  <div class="stage-task-text">CMA and offer pricing review — typically 1–3 rounds depending on competition</div>
+                  <div class="stage-task-sub">Pre-approval letter submitted alongside every offer — no exceptions</div>
+                </div>
+              </div>
+              <div class="stage-task">
+                <div class="stage-task-dot"></div>
+                <div>
+                  <div class="stage-task-text">Offer submitted with reviewed contingencies (inspection, appraisal, loan)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 4: Escrow -->
+        <div class="accordion-item">
+          <button class="accordion-trigger" onclick="toggleAccordion(this)">
+            <div class="accordion-trigger-left">
+              <div class="stage-num">4</div>
+              <div>
+                <div class="accordion-trigger-title">Escrow</div>
+                <div class="accordion-trigger-summary">Inspections, disclosures, appraisal, contingency removal</div>
+              </div>
+            </div>
+            <div class="accordion-trigger-right">
+              <span class="stage-weeks">Wk 9–11</span>
+              <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6,9 12,15 18,9"/></svg>
+            </div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-divider"></div>
+            <div class="stage-items">
+              <div class="stage-task">
+                <div class="stage-task-dot"></div>
+                <div>
+                  <div class="stage-task-text">Within 7 days of acceptance — home inspection, pest inspection, roof review</div>
+                  <div class="stage-task-sub">Sharon coordinates inspectors; you receive a plain-English summary</div>
+                </div>
+              </div>
+              <div class="stage-task">
+                <div class="stage-task-dot"></div>
+                <div>
+                  <div class="stage-task-text">Appraisal ordered by lender — Sharon monitors value gap risk</div>
+                </div>
+              </div>
+              <div class="stage-task">
+                <div class="stage-task-dot"></div>
+                <div>
+                  <div class="stage-task-text">Contingency removal decision — typically day 17–21</div>
+                  <div class="stage-task-sub">Sharon walks you through the go/no-go before any removal signature</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 5: Closing -->
+        <div class="accordion-item">
+          <button class="accordion-trigger" onclick="toggleAccordion(this)">
+            <div class="accordion-trigger-left">
+              <div class="stage-num">5</div>
+              <div>
+                <div class="accordion-trigger-title">Closing</div>
+                <div class="accordion-trigger-summary">Final walkthrough, signing, wire, keys</div>
+              </div>
+            </div>
+            <div class="accordion-trigger-right">
+              <span class="stage-weeks">Wk 11–12</span>
+              <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6,9 12,15 18,9"/></svg>
+            </div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-divider"></div>
+            <div class="stage-items">
+              <div class="stage-task">
+                <div class="stage-task-dot"></div>
+                <div>
+                  <div class="stage-task-text">Final walkthrough 1–2 days before close — confirm condition, repairs, inclusions</div>
+                </div>
+              </div>
+              <div class="stage-task">
+                <div class="stage-task-dot"></div>
+                <div>
+                  <div class="stage-task-text">Signing at title company or remote notary · down payment wire initiated</div>
+                  <div class="stage-task-sub">Sharon coordinates with escrow officer on exact wire timing — typically 24h before</div>
+                </div>
+              </div>
+              <div class="stage-task">
+                <div class="stage-task-dot"></div>
+                <div>
+                  <div class="stage-task-text">Recording confirmed · keys released · 90-day close path complete</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 6: Move-in -->
+        <div class="accordion-item">
+          <button class="accordion-trigger" onclick="toggleAccordion(this)">
+            <div class="accordion-trigger-left">
+              <div class="stage-num">6</div>
+              <div>
+                <div class="accordion-trigger-title">Move-in</div>
+                <div class="accordion-trigger-summary">Utilities, change of address, Sharon's local vendor list</div>
+              </div>
+            </div>
+            <div class="accordion-trigger-right">
+              <span class="stage-weeks">Wk 12+</span>
+              <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6,9 12,15 18,9"/></svg>
+            </div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-divider"></div>
+            <div class="stage-items">
+              <div class="stage-task">
+                <div class="stage-task-dot"></div>
+                <div>
+                  <div class="stage-task-text">Sharon sends her curated local vendor list — movers, contractors, landscapers, interior designers</div>
+                  <div class="stage-task-sub">All have worked with her past clients in Cupertino/Los Altos specifically</div>
+                </div>
+              </div>
+              <div class="stage-task">
+                <div class="stage-task-dot"></div>
+                <div>
+                  <div class="stage-task-text">30-day post-close check-in — any issues, HOA questions, permit follow-ups</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <!-- END MAIN COLUMN -->
+
+  <!-- SIDE COLUMN -->
+  <div class="side-col">
+
+    <!-- 7. SHARON CONTACT CARD -->
+    <div class="contact-card">
+      <div class="contact-card-inner">
+        <img class="contact-photo" src="https://i.pravatar.cc/240?img=47" alt="Sharon Wang">
+        <div>
+          <div class="contact-name">Sharon Wang</div>
+          <div class="contact-title">Bay Area Realtor · DRE #02134782</div>
+          <div style="margin-top: var(--space-sm); display: flex; justify-content: center;"><span class="bilingual-badge">🇺🇸 English · 🇨🇳 普通话</span></div>
+        </div>
+
+        <div class="contact-info">
+          <div class="contact-line">
+            <span class="contact-line-icon">📞</span>
+            <a class="contact-line-text" href="tel:6505550123">(650) 555-0123</a>
+          </div>
+          <div class="contact-line">
+            <span class="contact-line-icon">✉️</span>
+            <a class="contact-line-text" href="mailto:sharon@sharonwangrealtor.com">sharon@sharonwangrealtor.com</a>
+          </div>
+          <div class="contact-line">
+            <span class="contact-line-icon">🌐</span>
+            <a class="contact-line-text" href="https://sharonwangrealtor.com" target="_blank">sharonwangrealtor.com</a>
+          </div>
+        </div>
+
+        <button class="btn-msg" onclick="openMessageModal()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          Send Sharon a message
+        </button>
+        <div class="response-note">Typically responds within 2 hours on weekdays</div>
+      </div>
+    </div>
+
+    <!-- QUICK STATS -->
+    <div class="card" style="padding: var(--space-xl);">
+      <div class="card-title" style="margin-bottom: var(--space-lg);">Your search at a glance</div>
+      <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-md); background: var(--surface-container-low); border-radius: var(--radius-md);">
+          <div style="font-size: 12.5px; color: var(--fg-muted); font-weight: 500;">Candidates pulled</div>
+          <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 700; color: var(--primary);">11</div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-md); background: var(--surface-container-low); border-radius: var(--radius-md);">
+          <div style="font-size: 12.5px; color: var(--fg-muted); font-weight: 500;">Tours completed</div>
+          <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 700; color: var(--fg-2);">0</div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-md); background: var(--surface-container-low); border-radius: var(--radius-md);">
+          <div style="font-size: 12.5px; color: var(--fg-muted); font-weight: 500;">Weeks to target close</div>
+          <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 700; color: var(--fg-2);">~12</div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-md); background: var(--surface-container-low); border-radius: var(--radius-md);">
+          <div style="font-size: 12.5px; color: var(--fg-muted); font-weight: 500;">Budget range</div>
+          <div style="font-family: var(--font-headline); font-size: 13px; font-weight: 700; color: var(--fg-2);">$2.6–3.2M</div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-md); background: var(--surface-container-low); border-radius: var(--radius-md);">
+          <div style="font-size: 12.5px; color: var(--fg-muted); font-weight: 500;">Apple Park commute</div>
+          <div style="font-family: var(--font-headline); font-size: 13px; font-weight: 700; color: var(--green);">&lt;15 min</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARKET PULSE -->
+    <div class="card" style="padding: var(--space-xl);">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-lg);">
+        <div class="card-title">Market Pulse</div>
+        <span style="font-size: 11px; color: var(--fg-muted); font-weight: 600;">Q1 2026</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+        <div style="font-size: 12.5px; color: var(--fg-muted); padding-bottom: var(--space-sm); border-bottom: 1px solid var(--border);">Cupertino · 4-bed</div>
+        <div style="display: flex; justify-content: space-between;"><span style="font-size: 12.5px; color: var(--fg-2);">Median sale price</span><span style="font-size: 13px; font-weight: 700; color: var(--fg-1);">$3.2M</span></div>
+        <div style="display: flex; justify-content: space-between;"><span style="font-size: 12.5px; color: var(--fg-2);">Avg days on market</span><span style="font-size: 13px; font-weight: 700; color: var(--fg-1);">9 days</span></div>
+        <div style="display: flex; justify-content: space-between;"><span style="font-size: 12.5px; color: var(--fg-2);">Sale-to-list ratio</span><span style="font-size: 13px; font-weight: 700; color: var(--accent-glow);">106%</span></div>
+        <div style="font-size: 12.5px; color: var(--fg-muted); padding: var(--space-sm) 0 var(--space-sm); border-top: 1px solid var(--border); margin-top: var(--space-xs);">Los Altos · 4-bed</div>
+        <div style="display: flex; justify-content: space-between;"><span style="font-size: 12.5px; color: var(--fg-2);">Median sale price</span><span style="font-size: 13px; font-weight: 700; color: var(--fg-1);">$3.5M</span></div>
+        <div style="display: flex; justify-content: space-between;"><span style="font-size: 12.5px; color: var(--fg-2);">Active inventory</span><span style="font-size: 13px; font-weight: 700; color: var(--red);">4 listings</span></div>
+        <div style="margin-top: var(--space-sm); background: rgba(232,64,13,0.07); border: 1px solid rgba(232,64,13,0.15); border-radius: var(--radius-md); padding: var(--space-md); font-size: 12px; color: var(--fg-2); line-height: 1.5;">
+          <strong style="color: var(--accent-glow);">Sharon's read:</strong> Competition is high. Expect 3–6 offers on well-priced 4-beds in your target zones. Budget flex matters.
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- END SIDE COLUMN -->
+
+</div>
+<!-- END PAGE LAYOUT -->
+
+<!-- MOBILE STICKY CONTACT BAR -->
+<div class="mobile-contact-bar">
+  <img src="https://i.pravatar.cc/240?img=47" alt="Sharon Wang">
+  <div class="mobile-contact-info">
+    <div class="mobile-contact-name">Sharon Wang</div>
+    <div class="mobile-contact-sub">(650) 555-0123 · Responds within 2 hrs</div>
+  </div>
+  <button class="btn-msg" style="width: auto; padding: 9px 16px; font-size: 12.5px;" onclick="openMessageModal()">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    Message
+  </button>
+</div>
+
+<!-- MESSAGE MODAL -->
+<div class="modal-overlay" id="messageModal" onclick="handleModalClick(event)">
+  <div class="message-modal" onclick="event.stopPropagation()">
+    <div class="msg-header">
+      <div class="msg-header-left">
+        <img class="msg-photo" src="https://i.pravatar.cc/240?img=47" alt="Sharon Wang">
+        <div>
+          <div class="msg-name">Sharon Wang</div>
+          <div class="msg-status">● Available</div>
+        </div>
+      </div>
+      <button class="close-btn" onclick="closeMessageModal()">✕</button>
+    </div>
+    <div class="msg-thread" id="msgThread">
+      <div>
+        <div class="msg-bubble from-sharon">Hi Jennifer + David — welcome to the portal! I'm excited to work with you. Check out the brief summary I put together, and let's finalize everything on our intake call.</div>
+        <div class="msg-time">Sharon · Apr 14, 11:22 AM</div>
+      </div>
+      <div>
+        <div class="msg-bubble from-sharon">One early note: Loyola Corners inventory is tight. Worth discussing whether we shift some focus to South Cupertino. Talk more on the call!</div>
+        <div class="msg-time">Sharon · Apr 14, 1:04 PM</div>
+      </div>
+    </div>
+    <div class="msg-compose">
+      <input class="msg-input" id="msgInput" type="text" placeholder="Type a message…" onkeydown="handleMsgKey(event)">
+      <button class="msg-send" onclick="sendMessage()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Accordion
+  function toggleAccordion(trigger) {
+    const item = trigger.closest('.accordion-item');
+    item.classList.toggle('open');
+  }
+
+  // Message modal
+  function openMessageModal() {
+    document.getElementById('messageModal').classList.add('open');
+    document.getElementById('msgInput').focus();
+  }
+  function closeMessageModal() {
+    document.getElementById('messageModal').classList.remove('open');
+  }
+  function handleModalClick(e) {
+    if (e.target === document.getElementById('messageModal')) closeMessageModal();
+  }
+  function sendMessage() {
+    const input = document.getElementById('msgInput');
+    const text = input.value.trim();
+    if (!text) return;
+    const thread = document.getElementById('msgThread');
+    const bubble = document.createElement('div');
+    const now = new Date();
+    const time = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    bubble.innerHTML = `<div class="msg-bubble from-client">${escapeHtml(text)}</div><div class="msg-time" style="text-align:right;">You · Today ${time}</div>`;
+    thread.appendChild(bubble);
+    input.value = '';
+    thread.scrollTop = thread.scrollHeight;
+    setTimeout(() => {
+      const reply = document.createElement('div');
+      reply.innerHTML = `<div class="msg-bubble from-sharon">Got it — I'll note that for our intake call. Talk soon!</div><div class="msg-time">Sharon · Just now</div>`;
+      thread.appendChild(reply);
+      thread.scrollTop = thread.scrollHeight;
+    }, 1200);
+  }
+  function handleMsgKey(e) {
+    if (e.key === 'Enter') sendMessage();
+  }
+  function escapeHtml(text) {
+    const d = document.createElement('div');
+    d.appendChild(document.createTextNode(text));
+    return d.innerHTML;
+  }
+</script>
+
+</body>
+</html>

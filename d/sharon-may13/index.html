@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sharon Wang Realty — Sample Pages</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --secondary-container: #7b40e0;
+  --bg: #fff8f6;
+  --surface: #ffffff;
+  --surface-2: #fbf2ef;
+  --surface-3: #f5ece9;
+  --border: rgba(30, 27, 25, 0.08);
+  --border-strong: rgba(30, 27, 25, 0.14);
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --shadow-sm: 0 1px 2px rgba(30, 27, 25, 0.04);
+  --shadow-md: 0 4px 14px rgba(30, 27, 25, 0.08);
+  --shadow-lg: 0 12px 32px rgba(30, 27, 25, 0.12);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--fg-1);
+  line-height: 1.6;
+}
+.shell { max-width: 1180px; margin: 0 auto; padding: 56px 24px 120px; }
+
+.intro-strip {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 8px 14px;
+  background: var(--primary-fixed);
+  color: var(--primary);
+  border-radius: 999px;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.intro-strip::before {
+  content: "";
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 0 4px rgba(160, 59, 0, 0.18);
+}
+
+h1 {
+  font-family: var(--font-headline);
+  font-size: clamp(34px, 5vw, 54px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 18px 0 12px;
+  font-weight: 700;
+  color: var(--fg-1);
+}
+.subtitle {
+  font-size: 18px; color: var(--fg-2);
+  max-width: 720px; margin: 0 0 8px;
+}
+.note {
+  font-size: 14px; color: var(--fg-muted);
+  max-width: 720px; margin: 4px 0 0;
+}
+
+.section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin: 64px 0 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.section-head h2 {
+  font-family: var(--font-headline);
+  font-size: 22px;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.section-tag {
+  font-size: 12px;
+  color: var(--fg-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.section-tag.public { color: var(--primary); }
+.section-tag.private { color: var(--secondary-container); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 22px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  display: flex; flex-direction: column;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.card .preview {
+  aspect-ratio: 16 / 10;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.card iframe {
+  width: 200%;
+  height: 200%;
+  border: 0;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  pointer-events: none;
+  background: white;
+}
+.card .body {
+  padding: 22px 22px 24px;
+  flex: 1;
+  display: flex; flex-direction: column;
+}
+.card .label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.card .label.public { color: var(--primary); }
+.card .label.private { color: var(--secondary-container); }
+.card .title {
+  font-family: var(--font-headline);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 8px 0 6px;
+  color: var(--fg-1);
+}
+.card .desc {
+  font-size: 14px;
+  color: var(--fg-2);
+  flex: 1;
+  margin: 0 0 18px;
+}
+.card .cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--primary);
+  text-decoration: none;
+  align-self: flex-start;
+}
+.card .cta::after {
+  content: "→";
+  transition: transform 0.18s ease;
+}
+.card:hover .cta::after { transform: translateX(3px); }
+
+.framing {
+  margin-top: 80px;
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 32px 36px;
+}
+.framing h3 {
+  font-family: var(--font-headline);
+  font-size: 18px;
+  margin: 0 0 10px;
+  font-weight: 600;
+}
+.framing p { margin: 0; font-size: 15px; color: var(--fg-2); }
+.framing ul {
+  margin: 10px 0 0; padding-left: 22px;
+  font-size: 15px; color: var(--fg-2);
+}
+.framing li { margin: 6px 0; }
+
+.footer {
+  margin-top: 56px;
+  font-size: 13px;
+  color: var(--fg-muted);
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <span class="intro-strip">Demo · generated from 5 one-line prompts</span>
+  <h1>Sharon Wang Realty — sample Pages</h1>
+  <p class="subtitle">
+    What the new "Pages" section in Clockless's Assets tab could produce for Sharon.
+    Each page was generated end-to-end from a single prompt — no template selection, no manual layout.
+  </p>
+  <p class="note">
+    Three public (SEO + lead capture) and two private (client portal + drip course). All data is plausible-but-fictional.
+  </p>
+
+  <section>
+    <div class="section-head">
+      <h2>Public pages</h2>
+      <span class="section-tag public">SEO · lead capture · shareable</span>
+    </div>
+    <div class="grid">
+
+      <a class="card" href="public/homebuyer-toc.html" target="_blank">
+        <div class="preview"><iframe src="public/homebuyer-toc.html" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="body">
+          <span class="label public">Lead magnet · landing</span>
+          <h3 class="title">The First-Time Homebuyer's Guide to the Bay Area</h3>
+          <p class="desc">7-chapter TOC landing page with hero, chapter cards, by-the-numbers strip, testimonials, and lead capture form.</p>
+          <span class="cta">Open page</span>
+        </div>
+      </a>
+
+      <a class="card" href="public/neighborhood-cupertino.html" target="_blank">
+        <div class="preview"><iframe src="public/neighborhood-cupertino.html" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="body">
+          <span class="label public">Neighborhood · SEO</span>
+          <h3 class="title">Cupertino, CA — A Local's Field Guide</h3>
+          <p class="desc">Schools matrix, sub-neighborhood map, recent comps, commute reality, and Sharon's three contrarian takes.</p>
+          <span class="cta">Open page</span>
+        </div>
+      </a>
+
+      <a class="card" href="public/mortgage-101.html" target="_blank">
+        <div class="preview"><iframe src="public/mortgage-101.html" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="body">
+          <span class="label public">Teaching chapter</span>
+          <h3 class="title">How Much House Can You Actually Afford?</h3>
+          <p class="desc">Chapter 1 of the guide. Includes a working affordability calculator and Sharon's 28/32/36 rule walkthrough.</p>
+          <span class="cta">Open page</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Private pages</h2>
+      <span class="section-tag private">Signed-client portal · drip course</span>
+    </div>
+    <div class="grid">
+
+      <a class="card" href="private/client-onboarding-jennifer-david.html" target="_blank">
+        <div class="preview"><iframe src="private/client-onboarding-jennifer-david.html" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="body">
+          <span class="label private">Client portal · home</span>
+          <h3 class="title">Jennifer + David's path to the keys</h3>
+          <p class="desc">Personalized onboarding home: 6-stage stepper, action items, Sharon's handwritten note, brief, listing digest preview.</p>
+          <span class="cta">Open page</span>
+        </div>
+      </a>
+
+      <a class="card" href="private/drip-day-3-credit-score.html" target="_blank">
+        <div class="preview"><iframe src="private/drip-day-3-credit-score.html" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="body">
+          <span class="label private">Drip course · day 3 of 7</span>
+          <h3 class="title">Marcus's Day 3 — Understanding Your Credit Score</h3>
+          <p class="desc">Private-URL reading page sent to leads on day 3 of Sharon's 7-day email course. Personalized to Marcus's target band.</p>
+          <span class="cta">Open page</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="framing">
+    <h3>What this proves</h3>
+    <p>
+      Each of the 5 pages was generated from a single one-line prompt
+      (e.g., "Cupertino neighborhood deep dive with schools matrix and lead capture").
+      In the real product, this becomes a new "Pages" section inside the existing Assets tab:
+    </p>
+    <ul>
+      <li>Sharon picks a template type (lead magnet, neighborhood guide, drip chapter, client portal, …).</li>
+      <li>She types or speaks one prompt.</li>
+      <li>AI generates the full HTML using her brand voice and her real data (CRM stage, current listings, school zones).</li>
+      <li>One click publishes to <code>sharonwangrealtor.com/p/&lt;slug&gt;</code> (public) or her private client URL (drip + portal).</li>
+    </ul>
+  </section>
+
+  <p class="footer">
+    Internal demo for Kelvin · pages generated <span id="ts"></span>
+  </p>
+</main>
+<script>
+  document.getElementById('ts').textContent = new Date().toLocaleString('en-US', {timeZone:'America/Los_Angeles', dateStyle:'medium', timeStyle:'short'}) + ' PT';
+</script>
+</body>
+</html>

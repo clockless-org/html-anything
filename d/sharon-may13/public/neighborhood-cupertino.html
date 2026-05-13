@@ -1,0 +1,1954 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Cupertino real estate deep-dive: schools, sub-neighborhoods, recent comps, commute data, and what Sharon Wang tells buyers before their first tour.">
+<meta name="keywords" content="Cupertino real estate, Cupertino homes for sale, Cupertino schools, Monta Vista, buy home Cupertino">
+<title>Cupertino, CA — A Local's Field Guide | Sharon Wang, Realtor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0, 0, 0, 0.06);
+  --border-strong: rgba(0, 0, 0, 0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981; --blue: #3b82f6; --yellow: #f59e0b; --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30, 27, 25, 0.04);
+  --shadow-md: 0 4px 12px rgba(30, 27, 25, 0.08);
+  --shadow-lg: 0 8px 24px rgba(30, 27, 25, 0.12);
+  --shadow-accent: 0 8px 24px rgba(160, 59, 0, 0.15);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--fg-1);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NAV ─── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255, 248, 246, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 var(--space-3xl);
+  height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand {
+  font-family: var(--font-headline);
+  font-size: 15px; font-weight: 600;
+  color: var(--fg-1); text-decoration: none;
+  display: flex; align-items: center; gap: var(--space-sm);
+}
+.nav-brand span {
+  display: inline-block;
+  width: 28px; height: 28px; border-radius: var(--radius-pill);
+  background: var(--primary);
+  color: var(--on-primary);
+  font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-links {
+  display: flex; align-items: center; gap: var(--space-xl);
+  list-style: none;
+}
+.nav-links a {
+  font-size: 13px; font-weight: 500;
+  color: var(--fg-2); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--primary); }
+.nav-cta {
+  background: var(--primary);
+  color: var(--on-primary) !important;
+  padding: var(--space-sm) var(--space-lg) !important;
+  border-radius: var(--radius-pill) !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--primary-container) !important; color: var(--on-primary) !important; }
+.nav-mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: var(--space-sm); }
+.hamburger { display: flex; flex-direction: column; gap: 4px; }
+.hamburger span { display: block; width: 20px; height: 2px; background: var(--fg-1); border-radius: 2px; transition: all 0.3s; }
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding-top: 56px;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&q=80');
+  background-size: cover; background-position: center 40%;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(30, 27, 25, 0.18) 0%,
+    rgba(30, 27, 25, 0.22) 40%,
+    rgba(20, 10, 5, 0.78) 100%
+  );
+}
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 900px;
+  padding: var(--space-5xl) var(--space-3xl) 0;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: var(--space-sm);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-pill);
+  padding: var(--space-xs) var(--space-md);
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+  color: var(--primary-fixed); text-transform: uppercase;
+  margin-bottom: var(--space-xl);
+}
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block; width: 6px; height: 6px;
+  background: var(--accent-glow);
+  border-radius: 50%;
+}
+.hero h1 {
+  font-family: var(--font-headline);
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--space-xl);
+}
+.hero h1 em { color: var(--primary-fixed-dim); font-style: normal; }
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 600px;
+  line-height: 1.6;
+  margin-bottom: var(--space-3xl);
+}
+.hero-actions {
+  display: flex; flex-wrap: wrap; gap: var(--space-md);
+  margin-bottom: var(--space-4xl);
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: var(--space-sm);
+  background: var(--primary);
+  color: var(--on-primary);
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 15px; font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s;
+  box-shadow: var(--shadow-accent);
+  border: none; cursor: pointer;
+}
+.btn-primary:hover { background: var(--primary-container); transform: translateY(-1px); box-shadow: 0 12px 32px rgba(160,59,0,0.25); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: var(--space-sm);
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.28);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 15px; font-weight: 500;
+  text-decoration: none;
+  transition: all 0.25s;
+  cursor: pointer;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.2); }
+
+/* ─── STATS STRIP ─── */
+.stats-strip {
+  position: relative; z-index: 2;
+  background: rgba(20, 10, 5, 0.62);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding: var(--space-2xl) var(--space-3xl);
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+}
+.stat-item { text-align: center; padding: var(--space-md) var(--space-lg); }
+.stat-item + .stat-item {
+  border-left: 1px solid rgba(255,255,255,0.1);
+}
+.stat-value {
+  font-family: var(--font-headline);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--primary-fixed-dim);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.stat-label {
+  font-size: 12px; font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  margin-top: var(--space-xs);
+  letter-spacing: 0.02em;
+}
+.stat-note {
+  font-size: 11px;
+  color: rgba(255,255,255,0.38);
+  margin-top: 2px;
+}
+
+/* ─── SECTION COMMON ─── */
+.section {
+  max-width: 1200px; margin: 0 auto;
+  padding: var(--space-5xl) var(--space-3xl);
+}
+.section-header { margin-bottom: var(--space-4xl); }
+.section-tag {
+  display: inline-flex; align-items: center; gap: var(--space-sm);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--primary);
+  margin-bottom: var(--space-md);
+}
+.section-tag::before {
+  content: '';
+  display: block; width: 24px; height: 2px;
+  background: var(--primary);
+}
+h2.section-title {
+  font-family: var(--font-headline);
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  color: var(--fg-1);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin-bottom: var(--space-md);
+}
+.section-desc {
+  font-size: 16px; color: var(--fg-2);
+  max-width: 620px; line-height: 1.7;
+}
+
+/* ─── DIVIDER ─── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0 var(--space-3xl);
+}
+
+/* ─── MAP SECTION ─── */
+.map-section-wrap {
+  background: var(--surface-container-low);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.map-container {
+  display: grid; grid-template-columns: 1fr 340px;
+  gap: var(--space-3xl); align-items: start;
+}
+.map-svg-wrap {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+.map-svg-wrap svg { display: block; width: 100%; height: auto; }
+.map-legend { display: flex; flex-direction: column; gap: var(--space-lg); }
+.map-legend-title {
+  font-family: var(--font-headline);
+  font-size: 13px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--fg-muted);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border);
+}
+.legend-item {
+  display: flex; align-items: center; gap: var(--space-md);
+  cursor: pointer; padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  transition: background 0.2s;
+  text-decoration: none;
+}
+.legend-item:hover { background: var(--surface-container); }
+.legend-swatch {
+  width: 14px; height: 14px; border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+.legend-item-name {
+  font-family: var(--font-headline);
+  font-size: 14px; font-weight: 600; color: var(--fg-1);
+}
+.legend-item-sub {
+  font-size: 12px; color: var(--fg-muted);
+}
+.map-note {
+  margin-top: var(--space-2xl);
+  background: var(--primary-fixed);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  font-size: 12px; color: var(--fg-2); line-height: 1.6;
+}
+.map-note strong { color: var(--primary); }
+
+/* ─── SUB-NEIGHBORHOOD CARDS ─── */
+.neighborhood-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: var(--space-2xl);
+}
+.nbhd-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.nbhd-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.nbhd-card-img {
+  width: 100%; height: 200px;
+  object-fit: cover; display: block;
+}
+.nbhd-card-body { padding: var(--space-2xl); }
+.nbhd-card-top {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: var(--space-lg);
+}
+.nbhd-card-name {
+  font-family: var(--font-headline);
+  font-size: 18px; font-weight: 700; color: var(--fg-1);
+  line-height: 1.2;
+}
+.nbhd-card-slug {
+  font-size: 11px; font-weight: 500; color: var(--fg-muted);
+  font-family: var(--font-mono);
+  margin-top: 2px;
+}
+.vibe-tag {
+  display: inline-block;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+  white-space: nowrap; flex-shrink: 0;
+}
+.vibe-family { background: var(--primary-fixed); color: var(--primary); }
+.vibe-tech { background: rgba(77,68,227,0.1); color: var(--tertiary); }
+.vibe-midcentury { background: rgba(213,186,255,0.3); color: var(--secondary-container); }
+.vibe-green { background: rgba(16,185,129,0.1); color: var(--green); }
+.vibe-prestige { background: rgba(245,158,11,0.12); color: #b45309; }
+
+.nbhd-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  background: var(--surface-container);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+.nbhd-stat { text-align: center; }
+.nbhd-stat-val {
+  font-family: var(--font-headline);
+  font-size: 15px; font-weight: 700; color: var(--fg-1);
+  line-height: 1;
+}
+.nbhd-stat-key {
+  font-size: 10px; font-weight: 600; color: var(--fg-muted);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin-top: 2px;
+}
+.nbhd-desc {
+  font-size: 14px; color: var(--fg-2); line-height: 1.65;
+  margin-bottom: var(--space-lg);
+  font-style: italic;
+}
+.nbhd-cta {
+  display: inline-flex; align-items: center; gap: var(--space-sm);
+  font-size: 14px; font-weight: 600; color: var(--primary);
+  text-decoration: none;
+  padding: var(--space-sm) var(--space-lg);
+  border: 1.5px solid var(--primary);
+  border-radius: var(--radius-pill);
+  transition: all 0.22s;
+}
+.nbhd-cta:hover { background: var(--primary); color: var(--on-primary); }
+.nbhd-cta svg { width: 14px; height: 14px; }
+
+/* ─── SCHOOLS MATRIX ─── */
+.schools-section-wrap {
+  background: var(--surface-container-low);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.schools-layout {
+  display: grid; grid-template-columns: 1fr 260px;
+  gap: var(--space-4xl); align-items: start;
+}
+.table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-container-lowest);
+}
+table {
+  width: 100%; border-collapse: collapse;
+  font-size: 14px;
+}
+thead tr {
+  background: var(--surface-container-high);
+}
+th {
+  font-family: var(--font-headline);
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  color: var(--fg-muted);
+  padding: var(--space-md) var(--space-lg);
+  text-align: left;
+  white-space: nowrap;
+}
+td {
+  padding: var(--space-md) var(--space-lg);
+  border-top: 1px solid var(--border);
+  color: var(--fg-2);
+  vertical-align: middle;
+}
+tr:hover td { background: var(--surface-container-low); }
+.school-name { font-weight: 600; color: var(--fg-1); }
+.api-badge {
+  display: inline-flex; align-items: center;
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 12px; font-weight: 700;
+  background: rgba(16,185,129,0.12); color: #065f46;
+}
+.hs-row td { background: rgba(77,68,227,0.03); }
+.hs-row:hover td { background: rgba(77,68,227,0.07); }
+.school-type-label {
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  color: var(--fg-muted);
+  padding: var(--space-lg) var(--space-lg) var(--space-xs);
+}
+.schools-sidebar {
+  position: sticky; top: 80px;
+}
+.annotation-card {
+  background: var(--primary-fixed);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+}
+.annotation-author {
+  display: flex; align-items: center; gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+.annotation-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+}
+.annotation-byline {
+  font-size: 12px; font-weight: 700; color: var(--primary);
+}
+.annotation-byline span { display: block; font-weight: 400; color: var(--fg-muted); }
+.annotation-text {
+  font-size: 13px; color: var(--fg-1); line-height: 1.65;
+}
+.annotation-text strong { color: var(--primary); }
+
+/* ─── COMMUTE TABLE ─── */
+.commute-grid {
+  display: grid; grid-template-columns: 1fr 280px;
+  gap: var(--space-4xl); align-items: start;
+}
+.commute-note {
+  background: var(--surface-container);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  font-size: 13px; color: var(--fg-2); line-height: 1.7;
+  margin-top: var(--space-2xl);
+}
+.commute-note strong { color: var(--fg-1); }
+.time-cell { font-family: var(--font-mono); font-size: 13px; }
+.time-good { color: var(--green); font-weight: 700; }
+.time-ok { color: var(--yellow); font-weight: 700; }
+.time-bad { color: var(--red); font-weight: 700; }
+.commute-sidebar { }
+.commute-tip {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-lg);
+}
+.commute-tip-title {
+  font-family: var(--font-headline);
+  font-size: 13px; font-weight: 700; color: var(--fg-1);
+  margin-bottom: var(--space-sm);
+  display: flex; align-items: center; gap: var(--space-sm);
+}
+.commute-tip-icon {
+  width: 28px; height: 28px; border-radius: var(--radius-sm);
+  background: var(--surface-container-high);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.commute-tip-body { font-size: 13px; color: var(--fg-2); line-height: 1.6; }
+
+/* ─── COMPS TABLE ─── */
+.comps-section-wrap {
+  background: var(--surface-container-low);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.comps-label {
+  display: inline-flex; align-items: center; gap: var(--space-xs);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-pill);
+  background: rgba(16,185,129,0.1); color: #065f46;
+}
+.comps-over { color: var(--red); font-weight: 700; }
+.comps-under { color: var(--green); font-weight: 700; }
+td.address-cell { font-weight: 600; color: var(--fg-1); font-size: 13px; }
+td.price-cell {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+.comps-disclaimer {
+  margin-top: var(--space-lg);
+  font-size: 12px; color: var(--fg-muted);
+  font-style: italic;
+}
+
+/* ─── SHARON'S TAKES ─── */
+.takes-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2xl);
+}
+.take-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  padding: var(--space-3xl);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.25s;
+}
+.take-card:hover { box-shadow: var(--shadow-lg); }
+.take-card::before {
+  content: '"';
+  position: absolute; top: -12px; left: 20px;
+  font-family: var(--font-headline);
+  font-size: 120px; font-weight: 800;
+  color: var(--primary-fixed);
+  line-height: 1; z-index: 0; user-select: none;
+}
+.take-number {
+  position: relative; z-index: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  background: var(--primary);
+  color: var(--on-primary);
+  border-radius: 50%;
+  font-family: var(--font-headline);
+  font-size: 13px; font-weight: 700;
+  margin-bottom: var(--space-lg);
+}
+.take-headline {
+  position: relative; z-index: 1;
+  font-family: var(--font-headline);
+  font-size: 16px; font-weight: 700; color: var(--fg-1);
+  line-height: 1.35;
+  margin-bottom: var(--space-md);
+}
+.take-body {
+  position: relative; z-index: 1;
+  font-size: 14px; color: var(--fg-2); line-height: 1.7;
+}
+.take-body strong { color: var(--fg-1); }
+.take-tag {
+  position: relative; z-index: 1;
+  display: inline-block;
+  margin-top: var(--space-lg);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--fg-muted);
+  background: var(--surface-container);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+}
+
+/* ─── LEAD CAPTURE ─── */
+.lead-section-wrap {
+  background: linear-gradient(135deg, var(--fg-1) 0%, #2d1a14 100%);
+  border-top: 1px solid var(--border);
+}
+.lead-layout {
+  display: grid; grid-template-columns: 1fr 460px;
+  gap: var(--space-5xl); align-items: center;
+}
+.lead-left { }
+.lead-eyebrow {
+  display: inline-block;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary-fixed-dim);
+  margin-bottom: var(--space-lg);
+}
+.lead-title {
+  font-family: var(--font-headline);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700; color: #fff;
+  line-height: 1.2; letter-spacing: -0.025em;
+  margin-bottom: var(--space-lg);
+}
+.lead-desc { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.7; }
+.lead-promise {
+  display: flex; align-items: center; gap: var(--space-sm);
+  margin-top: var(--space-2xl);
+  font-size: 13px; font-weight: 600; color: var(--primary-fixed-dim);
+}
+.lead-promise::before {
+  content: '✓';
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: rgba(255, 181, 151, 0.2);
+  font-size: 11px; flex-shrink: 0;
+}
+.lead-form {
+  background: var(--surface-container-lowest);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-3xl);
+  box-shadow: var(--shadow-lg);
+}
+.lead-form-title {
+  font-family: var(--font-headline);
+  font-size: 18px; font-weight: 700; color: var(--fg-1);
+  margin-bottom: var(--space-xs);
+}
+.lead-form-sub {
+  font-size: 13px; color: var(--fg-muted);
+  margin-bottom: var(--space-2xl);
+}
+.form-group { margin-bottom: var(--space-lg); }
+.form-label {
+  display: block;
+  font-size: 13px; font-weight: 600; color: var(--fg-1);
+  margin-bottom: var(--space-sm);
+}
+.form-input {
+  width: 100%;
+  padding: 13px var(--space-lg);
+  border: 1.5px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 14px; color: var(--fg-1);
+  background: var(--surface-container-lowest);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  appearance: none;
+}
+.form-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(160, 59, 0, 0.12);
+}
+.form-input::placeholder { color: var(--fg-muted); }
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238d7166' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px; cursor: pointer;
+}
+.form-submit {
+  width: 100%;
+  padding: 15px;
+  background: var(--primary);
+  color: var(--on-primary);
+  border: none; border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 15px; font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: var(--shadow-accent);
+}
+.form-submit:hover { background: var(--primary-container); transform: translateY(-1px); }
+.form-privacy {
+  text-align: center;
+  margin-top: var(--space-md);
+  font-size: 11px; color: var(--fg-muted);
+}
+
+/* ─── STICKY BOTTOM BAR ─── */
+.sticky-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  z-index: 90;
+  background: var(--fg-1);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: var(--space-md) var(--space-3xl);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-lg);
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sticky-bar.visible { transform: translateY(0); }
+.sticky-bar-text {
+  font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.75);
+  display: flex; align-items: center; gap: var(--space-sm);
+}
+.sticky-bar-text strong { color: #fff; }
+.sticky-bar-actions { display: flex; gap: var(--space-md); align-items: center; flex-shrink: 0; }
+.sticky-btn-primary {
+  background: var(--primary);
+  color: var(--on-primary);
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+  font-size: 13px; font-weight: 600;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.sticky-btn-primary:hover { background: var(--primary-container); }
+.sticky-close {
+  background: none; border: none; cursor: pointer;
+  color: rgba(255,255,255,0.4); padding: var(--space-sm);
+  font-size: 18px; line-height: 1;
+  transition: color 0.2s;
+}
+.sticky-close:hover { color: rgba(255,255,255,0.8); }
+
+/* ─── FOOTER ─── */
+.footer-wrap {
+  background: var(--fg-1);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer {
+  max-width: 1200px; margin: 0 auto;
+  padding: var(--space-5xl) var(--space-3xl) var(--space-4xl);
+  display: grid; grid-template-columns: 320px 1fr; gap: var(--space-5xl);
+  align-items: start;
+}
+.footer-brand { }
+.footer-avatar {
+  width: 64px; height: 64px; border-radius: 50%;
+  object-fit: cover; border: 3px solid var(--primary);
+  margin-bottom: var(--space-lg);
+  display: block;
+}
+.footer-name {
+  font-family: var(--font-headline);
+  font-size: 20px; font-weight: 700; color: #fff;
+  margin-bottom: var(--space-xs);
+}
+.footer-title { font-size: 13px; color: var(--primary-fixed-dim); margin-bottom: var(--space-lg); }
+.footer-bio { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: var(--space-2xl); }
+.footer-contact-item {
+  display: flex; align-items: center; gap: var(--space-sm);
+  font-size: 13px; color: rgba(255,255,255,0.7);
+  text-decoration: none; margin-bottom: var(--space-sm);
+  transition: color 0.2s;
+}
+.footer-contact-item:hover { color: var(--primary-fixed-dim); }
+.footer-contact-icon {
+  width: 28px; height: 28px; border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; flex-shrink: 0;
+}
+.footer-right {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3xl);
+}
+.footer-col-title {
+  font-family: var(--font-headline);
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: var(--space-xl);
+}
+.footer-col-link {
+  display: block;
+  font-size: 14px; color: rgba(255,255,255,0.6);
+  text-decoration: none; margin-bottom: var(--space-md);
+  transition: color 0.2s;
+}
+.footer-col-link:hover { color: var(--primary-fixed-dim); }
+.footer-bottom {
+  max-width: 1200px; margin: 0 auto;
+  padding: var(--space-xl) var(--space-3xl);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-lg);
+}
+.footer-bottom-text { font-size: 12px; color: rgba(255,255,255,0.3); }
+.footer-badge {
+  display: inline-flex; align-items: center; gap: var(--space-sm);
+  font-size: 12px; color: rgba(255,255,255,0.3);
+}
+.footer-badge a { color: var(--primary-fixed-dim); text-decoration: none; }
+.bilingual-badge {
+  display: inline-flex; align-items: center; gap: var(--space-sm);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-pill);
+  padding: var(--space-xs) var(--space-md);
+  font-size: 12px; color: rgba(255,255,255,0.5);
+  margin-top: var(--space-lg);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .map-container { grid-template-columns: 1fr; }
+  .schools-layout { grid-template-columns: 1fr; }
+  .schools-sidebar { position: static; margin-top: var(--space-2xl); }
+  .commute-grid { grid-template-columns: 1fr; }
+  .lead-layout { grid-template-columns: 1fr; }
+  .footer { grid-template-columns: 1fr; }
+  .footer-right { grid-template-columns: repeat(2, 1fr); }
+  .takes-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-mobile-toggle { display: block; }
+  .stats-strip { grid-template-columns: repeat(2, 1fr); }
+  .stat-item + .stat-item { border-left: none; }
+  .stat-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.1); }
+  .neighborhood-grid { grid-template-columns: 1fr; }
+  .takes-grid { grid-template-columns: 1fr; }
+  .footer-right { grid-template-columns: 1fr; }
+  .section { padding: var(--space-4xl) var(--space-xl); }
+  .divider { margin: 0 var(--space-xl); }
+  .hero-content { padding: var(--space-4xl) var(--space-xl) 0; }
+  .sticky-bar { padding: var(--space-md) var(--space-lg); }
+  .sticky-bar-text { display: none; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+  .stats-strip { grid-template-columns: 1fr 1fr; padding: var(--space-xl); }
+  .hero h1 { font-size: 2rem; }
+}
+
+/* ─── SVG MAP STYLES ─── */
+.map-region {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.map-region:hover { opacity: 0.85; }
+.map-road-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  fill: rgba(30,27,25,0.7);
+}
+.map-region-label {
+  font-family: var(--font-headline);
+  font-size: 9px;
+  font-weight: 700;
+  fill: rgba(30,27,25,0.88);
+  pointer-events: none;
+}
+.map-pin-label {
+  font-size: 7px;
+  font-family: var(--font-body);
+  fill: rgba(30,27,25,0.7);
+  font-weight: 600;
+}
+
+/* scroll reveal */
+.reveal {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav class="nav">
+  <a class="nav-brand" href="/">
+    <span>SW</span>
+    Sharon Wang
+  </a>
+  <ul class="nav-links">
+    <li><a href="#map">Map</a></li>
+    <li><a href="#neighborhoods">Neighborhoods</a></li>
+    <li><a href="#schools">Schools</a></li>
+    <li><a href="#commute">Commute</a></li>
+    <li><a href="#comps">Comps</a></li>
+    <li><a href="#lead" class="nav-cta">Get Comps Report</a></li>
+  </ul>
+  <button class="nav-mobile-toggle" aria-label="Menu">
+    <div class="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </button>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Cupertino Field Guide · 2025 Edition</div>
+    <h1>Cupertino, CA —<br><em>A Local's Field Guide</em></h1>
+    <p class="hero-subtitle">Schools, sub-neighborhoods, comps, and what Sharon tells buyers before their first tour. No filler. All data, as of Q2 2025.</p>
+    <div class="hero-actions">
+      <a href="#lead" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Get Free Comps Report
+      </a>
+      <a href="#map" class="btn-ghost">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3,11 22,2 13,21 11,13"/></svg>
+        Explore the Map
+      </a>
+    </div>
+  </div>
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div class="stat-value">$3.4M</div>
+      <div class="stat-label">Median 4-Bed Sale 2025</div>
+      <div class="stat-note">+8.2% vs. 2024</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">$2.6M</div>
+      <div class="stat-label">Median 3-Bed Sale 2025</div>
+      <div class="stat-note">Avg 12 days on market</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">API 945+</div>
+      <div class="stat-label">Schools District-Wide</div>
+      <div class="stat-note">Cupertino Union USD</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">5 min</div>
+      <div class="stat-label">Avg to Apple HQ</div>
+      <div class="stat-note">Off-peak, via Wolfe Rd</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ MAP ═══════════════ -->
+<div class="map-section-wrap" id="map">
+<div class="section">
+  <div class="section-header reveal">
+    <div class="section-tag">Neighborhood Atlas</div>
+    <h2 class="section-title">Cupertino's Five Distinct Sub-Markets</h2>
+    <p class="section-desc">The city is 11.3 sq. miles but it's not uniform. Price per sqft varies by ~22% depending on which pocket you're in and which school feeder it falls within.</p>
+  </div>
+  <div class="map-container reveal">
+    <!-- SVG MAP -->
+    <div class="map-svg-wrap">
+      <svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background -->
+        <rect width="600" height="500" fill="#f5ece9"/>
+
+        <!-- ─── Roads (background first) ─── -->
+        <!-- I-280 (top edge, horizontal) -->
+        <rect x="0" y="28" width="600" height="14" fill="#c4a99e" rx="3"/>
+        <text x="10" y="38" class="map-road-label" font-weight="700" fill="white">I-280</text>
+
+        <!-- Highway 85 (right edge, vertical) -->
+        <rect x="562" y="0" width="14" height="500" fill="#c4a99e" rx="3"/>
+        <text x="564" y="260" class="map-road-label" font-weight="700" fill="white" transform="rotate(90,564,260)">HWY 85</text>
+
+        <!-- De Anza Blvd (vertical, center-ish) -->
+        <rect x="288" y="42" width="10" height="430" fill="#b09888"/>
+        <text x="280" y="480" class="map-road-label" transform="rotate(-90,280,340)">De Anza Blvd</text>
+
+        <!-- Stevens Creek Blvd (horizontal, mid) -->
+        <rect x="0" y="248" width="562" height="9" fill="#b09888"/>
+        <text x="20" y="262" class="map-road-label">Stevens Creek Blvd</text>
+
+        <!-- Homestead Rd (horizontal upper) -->
+        <rect x="0" y="152" width="562" height="6" fill="#c9b5ac"/>
+        <text x="20" y="162" class="map-road-label">Homestead Rd</text>
+
+        <!-- McClellan Rd (horizontal lower) -->
+        <rect x="0" y="340" width="562" height="6" fill="#c9b5ac"/>
+        <text x="20" y="350" class="map-road-label">McClellan Rd</text>
+
+        <!-- Foothill Expy (diagonal upper-left) -->
+        <line x1="0" y1="42" x2="180" y2="248" stroke="#c9b5ac" stroke-width="5"/>
+        <text x="30" y="140" class="map-road-label" transform="rotate(25,30,140)">Foothill Expy</text>
+
+        <!-- ─── SUB-NEIGHBORHOOD REGIONS ─── -->
+        <!-- Monta Vista (top-left, north of Stevens Creek, west of De Anza) -->
+        <a href="#monta-vista">
+          <polygon points="0,42 180,42 288,160 288,248 160,248 0,248" fill="#ffdbcd" fill-opacity="0.85" stroke="#a03b00" stroke-width="1.5" class="map-region" id="region-monta-vista"/>
+          <text x="90" y="140" class="map-region-label" text-anchor="middle">Monta Vista</text>
+          <text x="90" y="153" class="map-road-label" text-anchor="middle" fill="#8d7166">Top-tier schools</text>
+        </a>
+
+        <!-- Garden Gate (top-right, north of Stevens Creek, east of De Anza) -->
+        <a href="#garden-gate">
+          <rect x="298" y="42" width="264" height="202" fill="#d5baff" fill-opacity="0.4" stroke="#7b40e0" stroke-width="1.5" class="map-region" id="region-garden-gate"/>
+          <text x="430" y="140" class="map-region-label" text-anchor="middle">Garden Gate</text>
+          <text x="430" y="153" class="map-road-label" text-anchor="middle" fill="#8d7166">Tech-commuter favorite</text>
+        </a>
+
+        <!-- Cupertino West (bottom-left) -->
+        <a href="#cupertino-west">
+          <rect x="0" y="257" width="288" height="83" fill="#ffb597" fill-opacity="0.35" stroke="#c94c00" stroke-width="1.5" class="map-region" id="region-cupertino-west"/>
+          <text x="144" y="297" class="map-region-label" text-anchor="middle">Cupertino West</text>
+          <text x="144" y="310" class="map-road-label" text-anchor="middle" fill="#8d7166">Entry-point 3-beds</text>
+        </a>
+
+        <!-- Rancho Rinconada (bottom-right of center) -->
+        <a href="#rancho-rinconada">
+          <rect x="298" y="257" width="180" height="225" fill="#bbf7d0" fill-opacity="0.45" stroke="#10b981" stroke-width="1.5" class="map-region" id="region-rancho"/>
+          <text x="388" y="352" class="map-region-label" text-anchor="middle">Rancho</text>
+          <text x="388" y="365" class="map-region-label" text-anchor="middle">Rinconada</text>
+          <text x="388" y="380" class="map-road-label" text-anchor="middle" fill="#8d7166">Mid-century classic</text>
+        </a>
+
+        <!-- Inspiration Heights (bottom-left corner) -->
+        <a href="#inspiration-heights">
+          <rect x="0" y="348" width="288" height="134" fill="#fef3c7" fill-opacity="0.65" stroke="#f59e0b" stroke-width="1.5" class="map-region" id="region-inspiration"/>
+          <text x="144" y="415" class="map-region-label" text-anchor="middle">Inspiration Heights</text>
+          <text x="144" y="428" class="map-road-label" text-anchor="middle" fill="#8d7166">Hillside & larger lots</text>
+        </a>
+
+        <!-- ─── LANDMARKS ─── -->
+        <!-- Apple Park (top-right area) -->
+        <circle cx="490" cy="90" r="14" fill="#a03b00" fill-opacity="0.15" stroke="#a03b00" stroke-width="2"/>
+        <circle cx="490" cy="90" r="5" fill="#a03b00"/>
+        <text x="490" y="76" class="map-pin-label" text-anchor="middle" font-weight="700">Apple Park</text>
+        <text x="490" y="116" class="map-pin-label" text-anchor="middle">HQ: ~5 min</text>
+
+        <!-- De Anza College -->
+        <rect x="228" y="268" width="48" height="30" rx="4" fill="#4d44e3" fill-opacity="0.18" stroke="#4d44e3" stroke-width="1.5"/>
+        <text x="252" y="282" class="map-pin-label" text-anchor="middle" fill="#4d44e3" font-weight="700">De Anza</text>
+        <text x="252" y="292" class="map-pin-label" text-anchor="middle" fill="#4d44e3">College</text>
+
+        <!-- Cupertino High School -->
+        <rect x="310" y="170" width="56" height="28" rx="4" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-width="1.5"/>
+        <text x="338" y="182" class="map-pin-label" text-anchor="middle" fill="#065f46" font-weight="700">Cupertino</text>
+        <text x="338" y="192" class="map-pin-label" text-anchor="middle" fill="#065f46">High School</text>
+
+        <!-- Monta Vista High School -->
+        <rect x="30" y="64" width="58" height="28" rx="4" fill="#7b40e0" fill-opacity="0.12" stroke="#7b40e0" stroke-width="1.5"/>
+        <text x="59" y="76" class="map-pin-label" text-anchor="middle" fill="#4b2891" font-weight="700">Monta Vista</text>
+        <text x="59" y="86" class="map-pin-label" text-anchor="middle" fill="#4b2891">High School</text>
+
+        <!-- Compass rose simplified -->
+        <g transform="translate(548,460)">
+          <circle r="14" fill="white" stroke="#e1bfb2" stroke-width="1"/>
+          <text x="0" y="-5" text-anchor="middle" font-size="7" font-family="sans-serif" font-weight="700" fill="#1e1b19">N</text>
+          <line x1="0" y1="-3" x2="0" y2="-11" stroke="#1e1b19" stroke-width="1.5"/>
+          <polygon points="0,-12 -2.5,-6 2.5,-6" fill="#a03b00"/>
+        </g>
+
+        <!-- Scale bar -->
+        <rect x="20" y="468" width="60" height="3" fill="#8d7166"/>
+        <rect x="20" y="468" width="1" height="7" fill="#8d7166"/>
+        <rect x="80" y="468" width="1" height="7" fill="#8d7166"/>
+        <text x="50" y="484" class="map-pin-label" text-anchor="middle">0.5 mi</text>
+      </svg>
+    </div>
+
+    <!-- Legend -->
+    <div class="map-legend">
+      <div class="map-legend-title">Click to Jump</div>
+
+      <a class="legend-item" href="#monta-vista">
+        <div class="legend-swatch" style="background: var(--primary-fixed); border: 2px solid var(--primary);"></div>
+        <div>
+          <div class="legend-item-name">Monta Vista</div>
+          <div class="legend-item-sub">Prestige · $3.6M median 4-bed</div>
+        </div>
+      </a>
+
+      <a class="legend-item" href="#garden-gate">
+        <div class="legend-swatch" style="background: rgba(213,186,255,0.5); border: 2px solid var(--secondary-container);"></div>
+        <div>
+          <div class="legend-item-name">Garden Gate</div>
+          <div class="legend-item-sub">Tech-commuter · $3.2M median 4-bed</div>
+        </div>
+      </a>
+
+      <a class="legend-item" href="#cupertino-west">
+        <div class="legend-swatch" style="background: var(--primary-fixed-dim); border: 2px solid var(--primary-container); opacity:0.7;"></div>
+        <div>
+          <div class="legend-item-name">Cupertino West</div>
+          <div class="legend-item-sub">Entry-point · $2.9M median 4-bed</div>
+        </div>
+      </a>
+
+      <a class="legend-item" href="#rancho-rinconada">
+        <div class="legend-swatch" style="background: rgba(16,185,129,0.25); border: 2px solid var(--green);"></div>
+        <div>
+          <div class="legend-item-name">Rancho Rinconada</div>
+          <div class="legend-item-sub">Mid-century · $2.7M median 4-bed</div>
+        </div>
+      </a>
+
+      <a class="legend-item" href="#inspiration-heights">
+        <div class="legend-swatch" style="background: rgba(245,158,11,0.25); border: 2px solid var(--yellow);"></div>
+        <div>
+          <div class="legend-item-name">Inspiration Heights</div>
+          <div class="legend-item-sub">Hillside lots · $3.1M median 4-bed</div>
+        </div>
+      </a>
+
+      <div class="map-note">
+        <strong>Sharon's read:</strong> These boundaries aren't official city designations — they're how active agents segment inventory. School feeders matter more than neighborhood names for offer strategy.
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════ NEIGHBORHOODS ═══════════════ -->
+<div id="neighborhoods">
+<div class="section">
+  <div class="section-header reveal">
+    <div class="section-tag">Sub-Neighborhood Profiles</div>
+    <h2 class="section-title">Five Markets, Five Different Offer Strategies</h2>
+    <p class="section-desc">Sharon's breakdown of what differentiates each pocket — not the lifestyle brochure version, but what it means for your offer price and timeline.</p>
+  </div>
+  <div class="neighborhood-grid">
+
+    <!-- Monta Vista -->
+    <div class="nbhd-card reveal" id="monta-vista">
+      <img class="nbhd-card-img" src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80" alt="Monta Vista neighborhood homes" loading="lazy">
+      <div class="nbhd-card-body">
+        <div class="nbhd-card-top">
+          <div>
+            <div class="nbhd-card-name">Monta Vista</div>
+            <div class="nbhd-card-slug">monta-vista · northwest quadrant</div>
+          </div>
+          <span class="vibe-tag vibe-prestige">Prestige</span>
+        </div>
+        <div class="nbhd-stats">
+          <div class="nbhd-stat">
+            <div class="nbhd-stat-val">$3.6M</div>
+            <div class="nbhd-stat-key">4-bed median</div>
+          </div>
+          <div class="nbhd-stat">
+            <div class="nbhd-stat-val">9 days</div>
+            <div class="nbhd-stat-key">Avg DOM</div>
+          </div>
+          <div class="nbhd-stat">
+            <div class="nbhd-stat-val">$3.72M</div>
+            <div class="nbhd-stat-key">2024 sample close</div>
+          </div>
+        </div>
+        <p class="nbhd-desc">"Every buyer wants Monta Vista. That's priced in — expect 6–12 offers on anything under $3.5M. The Monta Vista High feeder is the real product you're buying."</p>
+        <a href="#lead" class="nbhd-cta">Tour with Sharon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+
+    <!-- Garden Gate -->
+    <div class="nbhd-card reveal" id="garden-gate">
+      <img class="nbhd-card-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Garden Gate suburban street" loading="lazy">
+      <div class="nbhd-card-body">
+        <div class="nbhd-card-top">
+          <div>
+            <div class="nbhd-card-name">Garden Gate</div>
+            <div class="nbhd-card-slug">garden-gate · northeast quadrant</div>
+          </div>
+          <span class="vibe-tag vibe-tech">Tech-commuter favorite</span>
+        </div>
+        <div class="nbhd-stats">
+          <div class="nbhd-stat">
+            <div class="nbhd-stat-val">$3.2M</div>
+            <div class="nbhd-stat-key">4-bed median</div>
+          </div>
+          <div class="nbhd-stat">
+            <div class="nbhd-stat-val">11 days</div>
+            <div class="nbhd-stat-key">Avg DOM</div>
+          </div>
+          <div class="nbhd-stat">
+            <div class="nbhd-stat-val">$3.28M</div>
+            <div class="nbhd-stat-key">2024 sample close</div>
+          </div>
+        </div>
+        <p class="nbhd-desc">"Apple Park's back entrance is 4 minutes away. These streets are quiet, mostly 1970s ranchers, and they move fast in spring. Feeds into Garden Gate Elementary (API 948) then Cupertino High."</p>
+        <a href="#lead" class="nbhd-cta">Tour with Sharon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+
+    <!-- Cupertino West -->
+    <div class="nbhd-card reveal" id="cupertino-west">
+      <img class="nbhd-card-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80" alt="Cupertino West homes" loading="lazy">
+      <div class="nbhd-card-body">
+        <div class="nbhd-card-top">
+          <div>
+            <div class="nbhd-card-name">Cupertino West</div>
+            <div class="nbhd-card-slug">cupertino-west · southwest of De Anza</div>
+          </div>
+          <span class="vibe-tag vibe-family">Family-first</span>
+        </div>
+        <div class="nbhd-stats">
+          <div class="nbhd-stat">
+            <div class="nbhd-stat-val">$2.9M</div>
+            <div class="nbhd-stat-key">4-bed median</div>
+          </div>
+          <div class="nbhd-stat">
+            <div class="nbhd-stat-val">14 days</div>
+            <div class="nbhd-stat-key">Avg DOM</div>
+          </div>
+          <div class="nbhd-stat">
+            <div class="nbhd-stat-val">$2.96M</div>
+            <div class="nbhd-stat-key">2024 sample close</div>
+          </div>
+        </div>
+        <p class="nbhd-desc">"Slightly longer DOM because buyers here are more price-sensitive. You get Cupertino Union elementaries and Homestead High feeder — strong schools, $700K less than Monta Vista. That delta is real."</p>
+        <a href="#lead" class="nbhd-cta">Tour with Sharon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+
+    <!-- Rancho Rinconada -->
+    <div class="nbhd-card reveal" id="rancho-rinconada">
+      <img class="nbhd-card-img" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80" alt="Rancho Rinconada mid-century homes" loading="lazy">
+      <div class="nbhd-card-body">
+        <div class="nbhd-card-top">
+          <div>
+            <div class="nbhd-card-name">Rancho Rinconada</div>
+            <div class="nbhd-card-slug">rancho-rinconada · southeast</div>
+          </div>
+          <span class="vibe-tag vibe-midcentury">Mid-century classic</span>
+        </div>
+        <div class="nbhd-stats">
+          <div class="nbhd-stat">
+            <div class="nbhd-stat-val">$2.7M</div>
+            <div class="nbhd-stat-key">4-bed median</div>
+          </div>
+          <div class="nbhd-stat">
+            <div class="nbhd-stat-val">17 days</div>
+            <div class="nbhd-stat-key">Avg DOM</div>
+          </div>
+          <div class="nbhd-stat">
+            <div class="nbhd-stat-val">$2.64M</div>
+            <div class="nbhd-stat-key">2024 sample close</div>
+          </div>
+        </div>
+        <p class="nbhd-desc">"This is where Sharon looks first for buyers under $2.8M. 1,600–2,000 sqft ranchers on 6,000+ sqft lots. Technically outside Cupertino's city limits — Santa Clara County jurisdiction — but still Cupertino Union USD."</p>
+        <a href="#lead" class="nbhd-cta">Tour with Sharon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+
+    <!-- Inspiration Heights -->
+    <div class="nbhd-card reveal" id="inspiration-heights">
+      <img class="nbhd-card-img" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80" alt="Inspiration Heights hillside home" loading="lazy">
+      <div class="nbhd-card-body">
+        <div class="nbhd-card-top">
+          <div>
+            <div class="nbhd-card-name">Inspiration Heights</div>
+            <div class="nbhd-card-slug">inspiration-heights · foothills</div>
+          </div>
+          <span class="vibe-tag vibe-green">Hillside & larger lots</span>
+        </div>
+        <div class="nbhd-stats">
+          <div class="nbhd-stat">
+            <div class="nbhd-stat-val">$3.1M</div>
+            <div class="nbhd-stat-key">4-bed median</div>
+          </div>
+          <div class="nbhd-stat">
+            <div class="nbhd-stat-val">22 days</div>
+            <div class="nbhd-stat-key">Avg DOM</div>
+          </div>
+          <div class="nbhd-stat">
+            <div class="nbhd-stat-val">$3.05M</div>
+            <div class="nbhd-stat-key">2024 sample close</div>
+          </div>
+        </div>
+        <p class="nbhd-desc">"Longer DOM because the buyer pool for hillside lots is narrower. Upside: 8,000–12,000 sqft lots, Santa Cruz Mountain views, and Fremont Union High feeder. Verify well water vs. city water per parcel."</p>
+        <a href="#lead" class="nbhd-cta">Tour with Sharon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════ SCHOOLS ═══════════════ -->
+<div class="schools-section-wrap" id="schools">
+<div class="section">
+  <div class="section-header reveal">
+    <div class="section-tag">Schools Matrix</div>
+    <h2 class="section-title">Cupertino Union USD + Fremont Union HS District</h2>
+    <p class="section-desc">API scores represent 2024 academic performance index estimates. Enrollment as of 2024–25 school year. Sharon verifies exact boundary maps before any offer in this market.</p>
+  </div>
+  <div class="schools-layout reveal">
+    <div>
+      <!-- Elementary Schools -->
+      <div class="table-wrap" style="margin-bottom: var(--space-2xl);">
+        <table>
+          <thead>
+            <tr>
+              <th>School</th>
+              <th>Type</th>
+              <th>API Score</th>
+              <th>Enrollment</th>
+              <th>Notable Program</th>
+              <th>Neighborhood Feeder</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="school-type-row">
+              <td colspan="6" style="padding: var(--space-md) var(--space-lg) var(--space-xs); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color: var(--fg-muted); background: var(--surface-container-high);">Cupertino Union School District — Elementary (K–5)</td>
+            </tr>
+            <tr>
+              <td class="school-name">Monta Vista Elementary</td>
+              <td><span style="font-size:11px; color:var(--fg-muted);">K–5</span></td>
+              <td><span class="api-badge">958</span></td>
+              <td>624</td>
+              <td>STEM focus, Mandarin immersion</td>
+              <td>Monta Vista</td>
+            </tr>
+            <tr>
+              <td class="school-name">Garden Gate Elementary</td>
+              <td><span style="font-size:11px; color:var(--fg-muted);">K–5</span></td>
+              <td><span class="api-badge">948</span></td>
+              <td>582</td>
+              <td>Science Olympiad pipeline</td>
+              <td>Garden Gate</td>
+            </tr>
+            <tr>
+              <td class="school-name">Lincoln Elementary</td>
+              <td><span style="font-size:11px; color:var(--fg-muted);">K–5</span></td>
+              <td><span class="api-badge">944</span></td>
+              <td>598</td>
+              <td>Arts integration program</td>
+              <td>Cupertino West</td>
+            </tr>
+            <tr>
+              <td class="school-name">Sedgwick Elementary</td>
+              <td><span style="font-size:11px; color:var(--fg-muted);">K–5</span></td>
+              <td><span class="api-badge">939</span></td>
+              <td>511</td>
+              <td>Project-based learning</td>
+              <td>Rancho Rinconada</td>
+            </tr>
+            <tr>
+              <td class="school-name">West Valley Elementary</td>
+              <td><span style="font-size:11px; color:var(--fg-muted);">K–5</span></td>
+              <td><span class="api-badge">952</span></td>
+              <td>543</td>
+              <td>Gifted GATE pull-out</td>
+              <td>Inspiration Heights</td>
+            </tr>
+            <tr>
+              <td class="school-name">Regnart Elementary</td>
+              <td><span style="font-size:11px; color:var(--fg-muted);">K–5</span></td>
+              <td><span class="api-badge">945</span></td>
+              <td>496</td>
+              <td>Dual-language pilot (Mandarin)</td>
+              <td>Foothill corridor</td>
+            </tr>
+            <tr style="background:var(--surface-container-high)">
+              <td colspan="6" style="padding: var(--space-md) var(--space-lg) var(--space-xs); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color: var(--fg-muted);">Cupertino Union — Middle School (6–8)</td>
+            </tr>
+            <tr>
+              <td class="school-name">Kennedy Middle School</td>
+              <td><span style="font-size:11px; color:var(--fg-muted);">6–8</span></td>
+              <td><span class="api-badge">941</span></td>
+              <td>994</td>
+              <td>Robotics & coding electives</td>
+              <td>Garden Gate / CW</td>
+            </tr>
+            <tr>
+              <td class="school-name">Hyde Middle School</td>
+              <td><span style="font-size:11px; color:var(--fg-muted);">6–8</span></td>
+              <td><span class="api-badge">947</span></td>
+              <td>872</td>
+              <td>Math acceleration track</td>
+              <td>Monta Vista / Insp. Hts.</td>
+            </tr>
+            <tr>
+              <td class="school-name">Miller Middle School</td>
+              <td><span style="font-size:11px; color:var(--fg-muted);">6–8</span></td>
+              <td><span class="api-badge">936</span></td>
+              <td>801</td>
+              <td>IB Middle Years Programme</td>
+              <td>Rancho Rinconada</td>
+            </tr>
+            <tr style="background:var(--surface-container-high)">
+              <td colspan="6" style="padding: var(--space-md) var(--space-lg) var(--space-xs); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color: var(--tertiary);">Fremont Union High School District — HS Feeders</td>
+            </tr>
+            <tr class="hs-row">
+              <td class="school-name">Monta Vista High School</td>
+              <td><span style="font-size:11px; color:var(--fg-muted);">9–12</span></td>
+              <td><span class="api-badge" style="background:rgba(77,68,227,0.12);color:#2d24a8">962</span></td>
+              <td>2,156</td>
+              <td>18 AP courses; DECA nationals</td>
+              <td>Monta Vista, Insp. Hts.</td>
+            </tr>
+            <tr class="hs-row">
+              <td class="school-name">Cupertino High School</td>
+              <td><span style="font-size:11px; color:var(--fg-muted);">9–12</span></td>
+              <td><span class="api-badge" style="background:rgba(77,68,227,0.12);color:#2d24a8">944</span></td>
+              <td>1,988</td>
+              <td>Engineering Academy (PLTW)</td>
+              <td>Garden Gate, CW</td>
+            </tr>
+            <tr class="hs-row">
+              <td class="school-name">Homestead High School</td>
+              <td><span style="font-size:11px; color:var(--fg-muted);">9–12</span></td>
+              <td><span class="api-badge" style="background:rgba(77,68,227,0.12);color:#2d24a8">937</span></td>
+              <td>2,040</td>
+              <td>Notable CS/AI electives</td>
+              <td>Cupertino West fringe</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Sidebar annotations -->
+    <div class="schools-sidebar">
+      <div class="annotation-card">
+        <div class="annotation-author">
+          <img class="annotation-avatar" src="https://i.pravatar.cc/240?img=47" alt="Sharon Wang">
+          <div>
+            <div class="annotation-byline">Sharon Wang<span>Cupertino Specialist</span></div>
+          </div>
+        </div>
+        <div class="annotation-text">
+          <strong>School boundaries change in 2026.</strong> Buyers in Monta Vista should verify with the district before offer — the Hyde/Kennedy split is expected to shift. Sharon pulls the current boundary map from the district website as part of every pre-offer packet.
+        </div>
+      </div>
+      <div class="annotation-card" style="background: rgba(77,68,227,0.06); border-left-color: var(--tertiary);">
+        <div class="annotation-author">
+          <img class="annotation-avatar" src="https://i.pravatar.cc/240?img=47" alt="Sharon Wang">
+          <div>
+            <div class="annotation-byline" style="color:var(--tertiary);">Sharon's note<span>on Monta Vista HS</span></div>
+          </div>
+        </div>
+        <div class="annotation-text">
+          The MVHS feeder carries a <strong>~$300K median premium</strong> vs. comparably sized homes in the Cupertino High feeder zone. That premium is durable but only fully captures if your child enters by 7th grade. Senior-year buyers should do the math carefully.
+        </div>
+      </div>
+      <div class="annotation-card" style="background: rgba(16,185,129,0.06); border-left-color: var(--green);">
+        <div class="annotation-text" style="font-size:12px;">
+          <strong style="color:var(--green);">Mandarin-speaking families:</strong> Regnart and Monta Vista Elementary both have active Mandarin dual-immersion programs. Enrollment is competitive — apply before escrow closes, not after.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════ COMMUTE ═══════════════ -->
+<div id="commute">
+<div class="section">
+  <div class="section-header reveal">
+    <div class="section-tag">Commute Reality</div>
+    <h2 class="section-title">Sharon's Real Commute Map</h2>
+    <p class="section-desc">From central Cupertino (De Anza &amp; Stevens Creek). Google Maps median travel time validated by Sharon's buyers who actually drive these routes. Not marketing estimates.</p>
+  </div>
+  <div class="commute-grid reveal">
+    <div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Destination</th>
+              <th>Route</th>
+              <th>Off-Peak</th>
+              <th>Peak (8–9am)</th>
+              <th>Return Peak (5–6pm)</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="school-name">Apple Park HQ</td>
+              <td><span style="font-size:12px;color:var(--fg-muted);">Via Wolfe Rd N</span></td>
+              <td class="time-cell time-good">4 min</td>
+              <td class="time-cell time-good">7 min</td>
+              <td class="time-cell time-ok">11 min</td>
+              <td style="font-size:12px;">Avoid Homestead at 5:30pm</td>
+            </tr>
+            <tr>
+              <td class="school-name">Google HQ, Mountain View</td>
+              <td><span style="font-size:12px;color:var(--fg-muted);">Via 85S then 237W</span></td>
+              <td class="time-cell time-good">14 min</td>
+              <td class="time-cell time-ok">26 min</td>
+              <td class="time-cell time-bad">34 min</td>
+              <td style="font-size:12px;">85S is better than Stelling</td>
+            </tr>
+            <tr>
+              <td class="school-name">Meta MPK (Menlo Park)</td>
+              <td><span style="font-size:12px;color:var(--fg-muted);">Via 280N</span></td>
+              <td class="time-cell time-good">22 min</td>
+              <td class="time-cell time-ok">32 min</td>
+              <td class="time-cell time-bad">44 min</td>
+              <td style="font-size:12px;">280N outperforms 101 by ~9 min peak</td>
+            </tr>
+            <tr>
+              <td class="school-name">Meta MPK (Menlo Park)</td>
+              <td><span style="font-size:12px;color:var(--fg-muted);">Via 85N + 101N</span></td>
+              <td class="time-cell time-ok">28 min</td>
+              <td class="time-cell time-bad">52 min</td>
+              <td class="time-cell time-bad">58 min</td>
+              <td style="font-size:12px;color:var(--red);">85N at 5pm: avoid</td>
+            </tr>
+            <tr>
+              <td class="school-name">Downtown San Francisco</td>
+              <td><span style="font-size:12px;color:var(--fg-muted);">Via 280N (drive)</span></td>
+              <td class="time-cell time-ok">44 min</td>
+              <td class="time-cell time-bad">62 min</td>
+              <td class="time-cell time-bad">70 min</td>
+              <td style="font-size:12px;">280N consistently 6 min faster than 101</td>
+            </tr>
+            <tr>
+              <td class="school-name">Downtown San Francisco</td>
+              <td><span style="font-size:12px;color:var(--fg-muted);">Caltrain from MTV station</span></td>
+              <td class="time-cell time-ok">52 min</td>
+              <td class="time-cell time-ok">52 min</td>
+              <td class="time-cell time-ok">52 min</td>
+              <td style="font-size:12px;">Drive to MTV station: +12 min</td>
+            </tr>
+            <tr>
+              <td class="school-name">Stanford University</td>
+              <td><span style="font-size:12px;color:var(--fg-muted);">Via Page Mill / 280N</span></td>
+              <td class="time-cell time-good">17 min</td>
+              <td class="time-cell time-ok">28 min</td>
+              <td class="time-cell time-ok">31 min</td>
+              <td style="font-size:12px;">Popular with post-doc families</td>
+            </tr>
+            <tr>
+              <td class="school-name">SJC Airport</td>
+              <td><span style="font-size:12px;color:var(--fg-muted);">Via 85S + 87N</span></td>
+              <td class="time-cell time-good">18 min</td>
+              <td class="time-cell time-ok">28 min</td>
+              <td class="time-cell time-ok">26 min</td>
+              <td style="font-size:12px;">Preferred over SFO for domestic</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="commute-note">
+        <strong>Sharon's routing note:</strong> 280N is consistently 6 min faster than 101N to San Francisco during peak — and more predictable. 85N at 5pm between Lawrence and De Anza is reliably bad (25–35 min for a 6-mile stretch). Buyers who commute to Palo Alto or beyond should factor that in; Monta Vista's northwest position saves 4–7 min vs. the southeast end of the city.
+      </div>
+    </div>
+    <div class="commute-sidebar">
+      <div class="commute-tip">
+        <div class="commute-tip-title">
+          <div class="commute-tip-icon">🍎</div>
+          Apple Park commuters
+        </div>
+        <div class="commute-tip-body">Infinite Loop + Apple Park are both under 5 min from Garden Gate. If you're an Apple employee, this is the most economically rational neighborhood in Cupertino — school quality is high and you're not paying the MVHS premium you may not need.</div>
+      </div>
+      <div class="commute-tip">
+        <div class="commute-tip-title">
+          <div class="commute-tip-icon">🚂</div>
+          Caltrain access
+        </div>
+        <div class="commute-tip-body">Mountain View Caltrain is the closest station — 12 min from central Cupertino by car. Sunnyvale station is 10 min. If you're SF-bound 3+ days/week, add $180–220/month for a Caltrain Zone 2 monthly pass to your housing cost model.</div>
+      </div>
+      <div class="commute-tip">
+        <div class="commute-tip-title">
+          <div class="commute-tip-icon">🔁</div>
+          WFH correction
+        </div>
+        <div class="commute-tip-body">Post-2022 return-to-office mandates have brought peak-hour congestion back to ~85% of 2019 levels on De Anza and Stevens Creek. Sharon's buyers who planned on 2-day WFH flexibility should still verify live with their employer before using commute time as a tiebreaker.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════ COMPS ═══════════════ -->
+<div class="comps-section-wrap" id="comps">
+<div class="section">
+  <div class="section-header reveal">
+    <div class="section-tag">Recent Comps</div>
+    <h2 class="section-title">What Actually Closed in 2024–2025</h2>
+    <p class="section-desc">Sample closed transactions compiled from MLS data. Addresses anonymized per MLS display rules. Sharon provides the full 12-comp report with exact addresses to qualified buyers — use the form below.</p>
+  </div>
+  <div class="reveal">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Address (partial)</th>
+            <th>Neighborhood</th>
+            <th>Bed / Bath / Sqft</th>
+            <th>List Price</th>
+            <th>Close Price</th>
+            <th>vs. List</th>
+            <th>DOM</th>
+            <th>Close Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="address-cell">218XX Miller Ave</td>
+            <td>Monta Vista</td>
+            <td>4 bd / 2.5 ba / 2,280 sqft</td>
+            <td class="price-cell">$3,288,000</td>
+            <td class="price-cell" style="font-weight:700;color:var(--fg-1);">$3,576,000</td>
+            <td><span class="comps-over">+8.8%</span></td>
+            <td>8</td>
+            <td>Mar 2025</td>
+          </tr>
+          <tr>
+            <td class="address-cell">105XX Oakview Dr</td>
+            <td>Garden Gate</td>
+            <td>4 bd / 2 ba / 1,940 sqft</td>
+            <td class="price-cell">$2,998,000</td>
+            <td class="price-cell" style="font-weight:700;color:var(--fg-1);">$3,215,000</td>
+            <td><span class="comps-over">+7.2%</span></td>
+            <td>11</td>
+            <td>Jan 2025</td>
+          </tr>
+          <tr>
+            <td class="address-cell">214XX Hazel Ct</td>
+            <td>Rancho Rinconada</td>
+            <td>3 bd / 2 ba / 1,620 sqft</td>
+            <td class="price-cell">$2,488,000</td>
+            <td class="price-cell" style="font-weight:700;color:var(--fg-1);">$2,598,000</td>
+            <td><span class="comps-over">+4.4%</span></td>
+            <td>14</td>
+            <td>Nov 2024</td>
+          </tr>
+          <tr>
+            <td class="address-cell">196XX Scenic Blvd</td>
+            <td>Inspiration Heights</td>
+            <td>4 bd / 3 ba / 2,640 sqft</td>
+            <td class="price-cell">$3,195,000</td>
+            <td class="price-cell" style="font-weight:700;color:var(--fg-1);">$3,080,000</td>
+            <td><span class="comps-under">−3.6%</span></td>
+            <td>27</td>
+            <td>Sep 2024</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="comps-disclaimer">
+      Data sourced from MLS. Sale prices are public record. Addresses partially redacted per MLS IDX rules. Sharon provides unredacted comps directly to clients. Last updated May 2025.
+    </p>
+  </div>
+  <div style="margin-top:var(--space-3xl); display:flex; align-items:center; gap:var(--space-lg); flex-wrap:wrap;" class="reveal">
+    <div style="background:var(--surface-container); border-radius:var(--radius-md); padding:var(--space-lg) var(--space-xl); font-size:13px; color:var(--fg-2); line-height:1.6; flex:1; min-width:240px;">
+      <strong style="color:var(--fg-1);">Pattern Sharon sees:</strong> Properties that sell under list price in Cupertino are almost always in Inspiration Heights (longer DOM, smaller buyer pool for hillside) or have deferred maintenance the listing photos hide. On the Monta Vista side, 7–12% over list is the current norm in spring.
+    </div>
+    <a href="#lead" class="btn-primary" style="flex-shrink:0;">Get Full 12-Comp Report →</a>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════ SHARON'S TAKES ═══════════════ -->
+<div id="takes">
+<div class="section">
+  <div class="section-header reveal">
+    <div class="section-tag">Sharon's Three Takes</div>
+    <h2 class="section-title">What Sharon Actually Tells Buyers</h2>
+    <p class="section-desc">Not consensus. Not safe. The things Sharon says in the car between tours that you won't read in the neighborhood brochure.</p>
+  </div>
+  <div class="takes-grid">
+    <div class="take-card reveal">
+      <div class="take-number">1</div>
+      <div class="take-headline">If you want under $2.8M, look at 3-bed in Rancho Rinconada — not 4-bed anywhere else.</div>
+      <div class="take-body">The 3-bed-in-RR vs. 4-bed-everywhere-else comparison almost always resolves to RR once you run the numbers. A 3-bed in Rancho Rinconada at <strong>$2.55–2.65M</strong> gets you the same school district as a 4-bed Garden Gate at $3.2M — and the 4th bedroom in GG is often a converted garage or a 9-foot box. Sharon's filter: if the 4th bed is under 100 sqft and has no closet, it's not a bedroom.</div>
+      <span class="take-tag">Buyer strategy</span>
+    </div>
+    <div class="take-card reveal" style="--delay:0.1s">
+      <div class="take-number">2</div>
+      <div class="take-headline">Monta Vista High is worth the $300K premium — IF your child is entering 7th grade or earlier.</div>
+      <div class="take-body">The MVHS premium is real and durable because the demand for it isn't going away. But if you're buying with a 10th grader, you're paying for 2.5 years of high school access. <strong>Do the per-year math:</strong> $300K ÷ 2.5 years = $120K/year. For a 1st grader, that same $300K buys 12 years. The premium is a better investment the earlier you buy. Sharon will do this calculation with you before you submit anything.</div>
+      <span class="take-tag">School premium math</span>
+    </div>
+    <div class="take-card reveal" style="--delay:0.2s">
+      <div class="take-number">3</div>
+      <div class="take-headline">New construction in Cupertino is rare — 92% of inventory is 1960s–1990s. Budget $80–150K for cosmetic refresh on day one.</div>
+      <div class="take-body">Don't let a seller's fresh paint and staged IKEA furniture absorb your renovation budget mentally. The bones are 40–60 years old: galvanized plumbing in anything pre-1980, single-pane in anything pre-1990, and R-13 insulation in most attics. Sharon's pre-offer walkthrough captures these items with photos. <strong>$80–90K gets you kitchen + primary bath.</strong> $130–150K gets you that plus windows and HVAC. Budget this before your offer, not after you've stretched the purchase price.</div>
+      <span class="take-tag">Renovation reality</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════ LEAD CAPTURE ═══════════════ -->
+<div class="lead-section-wrap" id="lead">
+<div class="section">
+  <div class="lead-layout">
+    <div class="lead-left reveal">
+      <div class="lead-eyebrow">Free Comps Report · No Obligation</div>
+      <h2 class="lead-title">Get a private Cupertino comps report for your target price band</h2>
+      <p class="lead-desc">Sharon will pull 12 closed comps from the past 90 days, filtered to your bedroom count, target neighborhood, and price band. You'll see what actually closed, at what price, and how many days it took.</p>
+      <div class="lead-promise">Sharon sends a custom 12-comp report within 48 hrs.</div>
+      <div class="lead-promise">Pre-approval letter requirements explained before first tour.</div>
+      <div class="lead-promise">Bilingual consultations available (English · 普通话).</div>
+      <div class="lead-promise">No spam. Sharon responds personally.</div>
+      <div style="margin-top: var(--space-3xl); display:flex; align-items:center; gap: var(--space-lg);">
+        <img src="https://i.pravatar.cc/240?img=47" alt="Sharon Wang" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:3px solid var(--primary-fixed-dim);">
+        <div>
+          <div style="font-family:var(--font-headline);font-size:15px;font-weight:700;color:#fff;">Sharon Wang</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.55);">Cupertino · Palo Alto · Sunnyvale · Los Altos</div>
+          <div style="font-size:13px;color:var(--primary-fixed-dim);margin-top:2px;">(650) 555-0123</div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="lead-form">
+        <div class="lead-form-title">Request Comps Report</div>
+        <div class="lead-form-sub">Sharon reviews every submission personally and responds within 48 hours.</div>
+        <form onsubmit="handleFormSubmit(event)">
+          <div class="form-group">
+            <label class="form-label" for="f-name">Your name</label>
+            <input class="form-input" type="text" id="f-name" placeholder="Wei Chen" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-email">Email address</label>
+            <input class="form-input" type="email" id="f-email" placeholder="you@example.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-phone">Phone (optional)</label>
+            <input class="form-input" type="tel" id="f-phone" placeholder="(650) 555-0100" autocomplete="tel">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-band">Target price band</label>
+            <select class="form-input form-select" id="f-band" required>
+              <option value="" disabled selected>Select price range…</option>
+              <option value="1.5-2">$1.5M – $2M</option>
+              <option value="2-2.5">$2M – $2.5M</option>
+              <option value="2.5-3">$2.5M – $3M</option>
+              <option value="3+">$3M+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-neighborhood">Neighborhood preference</label>
+            <select class="form-input form-select" id="f-neighborhood">
+              <option value="" disabled selected>Any / Not sure yet</option>
+              <option value="monta-vista">Monta Vista</option>
+              <option value="garden-gate">Garden Gate</option>
+              <option value="cupertino-west">Cupertino West</option>
+              <option value="rancho-rinconada">Rancho Rinconada</option>
+              <option value="inspiration-heights">Inspiration Heights</option>
+              <option value="any">Open to all</option>
+            </select>
+          </div>
+          <button type="submit" class="form-submit" id="form-submit-btn">Send My Comps Request →</button>
+        </form>
+        <p class="form-privacy">By submitting you agree to be contacted by Sharon Wang at (650) 555-0123. No third-party sharing. Unsubscribe any time.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<div class="footer-wrap">
+  <div class="footer">
+    <div class="footer-brand">
+      <img class="footer-avatar" src="https://i.pravatar.cc/240?img=47" alt="Sharon Wang, Cupertino Realtor">
+      <div class="footer-name">Sharon Wang</div>
+      <div class="footer-title">Realtor · DRE #02184773 · Cupertino Specialist</div>
+      <div class="footer-bio">Sharon has closed over $140M in residential transactions across Cupertino, Palo Alto, Sunnyvale, Mountain View, and Los Altos. She does the first walk-through with you and captures the notes — no assistants at this stage of the process.</div>
+      <a class="footer-contact-item" href="tel:6505550123">
+        <span class="footer-contact-icon">📞</span>
+        (650) 555-0123
+      </a>
+      <a class="footer-contact-item" href="mailto:sharon@sharonwangrealtor.com">
+        <span class="footer-contact-icon">✉️</span>
+        sharon@sharonwangrealtor.com
+      </a>
+      <a class="footer-contact-item" href="https://sharonwangrealtor.com">
+        <span class="footer-contact-icon">🌐</span>
+        sharonwangrealtor.com
+      </a>
+      <div class="bilingual-badge">
+        <span>🇺🇸</span> English
+        <span style="margin:0 4px;">·</span>
+        <span>🇨🇳</span> 普通话 (Mandarin)
+      </div>
+    </div>
+    <div class="footer-right">
+      <div>
+        <div class="footer-col-title">Neighborhoods</div>
+        <a class="footer-col-link" href="#monta-vista">Monta Vista</a>
+        <a class="footer-col-link" href="#garden-gate">Garden Gate</a>
+        <a class="footer-col-link" href="#cupertino-west">Cupertino West</a>
+        <a class="footer-col-link" href="#rancho-rinconada">Rancho Rinconada</a>
+        <a class="footer-col-link" href="#inspiration-heights">Inspiration Heights</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <a class="footer-col-link" href="#schools">Schools Matrix</a>
+        <a class="footer-col-link" href="#commute">Commute Data</a>
+        <a class="footer-col-link" href="#comps">Recent Comps</a>
+        <a class="footer-col-link" href="#lead">Free Comps Report</a>
+        <a class="footer-col-link" href="#takes">Sharon's Insights</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Service Areas</div>
+        <a class="footer-col-link" href="#">Cupertino</a>
+        <a class="footer-col-link" href="#">Palo Alto</a>
+        <a class="footer-col-link" href="#">Sunnyvale</a>
+        <a class="footer-col-link" href="#">Mountain View</a>
+        <a class="footer-col-link" href="#">Los Altos</a>
+        <div class="footer-col-link" style="cursor:default; margin-top:var(--space-lg); font-size:12px; color:rgba(255,255,255,0.3);">
+          Service area: Santa Clara County
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-text">© 2025 Sharon Wang, Realtor. All rights reserved. DRE #02184773. Information deemed reliable but not guaranteed. All data sourced from MLS and county records; verify independently before relying on for offer decisions.</div>
+    <div class="footer-badge">
+      <span>sharonwangrealtor.com</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ STICKY BAR ═══════════════ -->
+<div class="sticky-bar" id="sticky-bar">
+  <div class="sticky-bar-text">
+    <span>📍</span>
+    <span><strong>Cupertino Comps Report</strong> — Sharon sends 12 custom comps within 48 hrs.</span>
+  </div>
+  <div class="sticky-bar-actions">
+    <a href="#lead" class="sticky-btn-primary" onclick="hideStickyBar()">Get Free Report</a>
+    <button class="sticky-close" onclick="hideStickyBar()" aria-label="Dismiss">×</button>
+  </div>
+</div>
+
+<!-- ═══════════════ JS ═══════════════ -->
+<script>
+// Sticky bar visibility
+let stickyDismissed = false;
+const stickyBar = document.getElementById('sticky-bar');
+
+function hideStickyBar() {
+  stickyDismissed = true;
+  stickyBar.classList.remove('visible');
+}
+
+window.addEventListener('scroll', function() {
+  if (stickyDismissed) return;
+  if (window.scrollY > 600) {
+    stickyBar.classList.add('visible');
+  } else {
+    stickyBar.classList.remove('visible');
+  }
+});
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+revealEls.forEach(function(el) { revealObserver.observe(el); });
+
+// Form submission
+function handleFormSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('form-submit-btn');
+  const name = document.getElementById('f-name').value;
+  btn.textContent = '✓ Request received — Sharon will be in touch within 48 hrs';
+  btn.style.background = 'var(--green)';
+  btn.disabled = true;
+  hideStickyBar();
+}
+
+// Active nav highlighting
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', function() {
+  let current = '';
+  sections.forEach(function(section) {
+    if (window.scrollY >= section.offsetTop - 80) {
+      current = section.id;
+    }
+  });
+  navLinks.forEach(function(link) {
+    link.style.color = '';
+    if (link.getAttribute('href') === '#' + current) {
+      link.style.color = 'var(--primary)';
+    }
+  });
+}, { passive: true });
+
+// Mobile nav toggle (simple show/hide)
+const mobileToggle = document.querySelector('.nav-mobile-toggle');
+const navLinksList = document.querySelector('.nav-links');
+let mobileNavOpen = false;
+
+mobileToggle.addEventListener('click', function() {
+  mobileNavOpen = !mobileNavOpen;
+  if (mobileNavOpen) {
+    navLinksList.style.display = 'flex';
+    navLinksList.style.flexDirection = 'column';
+    navLinksList.style.position = 'absolute';
+    navLinksList.style.top = '56px';
+    navLinksList.style.left = '0';
+    navLinksList.style.right = '0';
+    navLinksList.style.background = 'var(--surface-container-lowest)';
+    navLinksList.style.borderBottom = '1px solid var(--border)';
+    navLinksList.style.padding = 'var(--space-lg) var(--space-xl)';
+    navLinksList.style.gap = 'var(--space-lg)';
+    navLinksList.style.boxShadow = 'var(--shadow-md)';
+    navLinksList.querySelectorAll('a').forEach(function(a) {
+      a.style.color = 'var(--fg-1)';
+      a.style.fontSize = '15px';
+    });
+  } else {
+    navLinksList.style.display = 'none';
+  }
+});
+
+// Close mobile nav on link click
+navLinksList.querySelectorAll('a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    if (window.innerWidth <= 768) {
+      mobileNavOpen = false;
+      navLinksList.style.display = 'none';
+    }
+  });
+});
+</script>
+</body>
+</html>

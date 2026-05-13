@@ -1,0 +1,2156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 1: How Much House Can You Actually Afford? — Sharon Wang's First-Time Homebuyer Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0, 0, 0, 0.06);
+  --border-strong: rgba(0, 0, 0, 0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981; --blue: #3b82f6; --yellow: #f59e0b; --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30, 27, 25, 0.04);
+  --shadow-md: 0 4px 12px rgba(30, 27, 25, 0.08);
+  --shadow-lg: 0 8px 24px rgba(30, 27, 25, 0.12);
+  --shadow-accent: 0 8px 24px rgba(160, 59, 0, 0.15);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--fg-1);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── LAYOUT ── */
+.site-header {
+  background: var(--surface-container-lowest);
+  border-bottom: 1px solid var(--border-strong);
+  padding: var(--space-lg) var(--space-2xl);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+
+.site-logo {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--primary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-logo span {
+  color: var(--fg-muted);
+  font-weight: 400;
+}
+
+.site-nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-headline);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 7px var(--space-lg);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.15s;
+}
+.site-nav-cta:hover { background: var(--primary-container); transform: translateY(-1px); }
+
+.page-wrap {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 var(--space-2xl) var(--space-5xl);
+}
+
+/* ── PROGRESS BAR ── */
+.chapter-progress {
+  background: var(--surface-container);
+  padding: var(--space-xl) var(--space-2xl);
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--border);
+}
+.progress-label {
+  font-family: var(--font-headline);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-sm);
+  display: flex;
+  justify-content: space-between;
+}
+.progress-track {
+  height: 4px;
+  background: var(--outline-variant);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 14.28%;
+  background: linear-gradient(90deg, var(--primary), var(--accent-glow));
+  border-radius: var(--radius-pill);
+}
+.chapter-dots {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+.chapter-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--surface-container-high);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-headline);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--fg-muted);
+  cursor: default;
+}
+.chapter-dot.active {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+.chapter-dot.done {
+  background: var(--primary-fixed);
+  color: var(--primary);
+}
+
+/* ── HERO ── */
+.article-hero {
+  padding: var(--space-5xl) 0 var(--space-4xl);
+  border-bottom: 1px solid var(--border);
+}
+
+.breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-xl);
+  font-family: var(--font-headline);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.breadcrumb a { color: var(--primary); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb-sep { color: var(--outline-variant); }
+.breadcrumb-current { color: var(--fg-2); }
+
+.article-chapter-tag {
+  display: inline-block;
+  background: var(--primary-fixed);
+  color: var(--primary);
+  font-family: var(--font-headline);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 4px var(--space-md);
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--space-xl);
+}
+
+h1.article-title {
+  font-family: var(--font-headline);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.12;
+  color: var(--fg-1);
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-xl);
+}
+
+.article-subtitle {
+  font-size: 1.15rem;
+  color: var(--fg-2);
+  line-height: 1.6;
+  font-weight: 400;
+  max-width: 620px;
+  margin-bottom: var(--space-3xl);
+}
+
+.byline-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-xl) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.byline-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-fixed);
+  flex-shrink: 0;
+}
+.byline-text { flex: 1; }
+.byline-name {
+  font-family: var(--font-headline);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--fg-1);
+}
+.byline-meta {
+  font-size: 0.78rem;
+  color: var(--fg-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+.byline-sep { color: var(--outline-variant); }
+.read-time-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--surface-container);
+  color: var(--fg-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-pill);
+}
+
+/* ── BODY PROSE ── */
+.prose {
+  padding: var(--space-4xl) 0;
+}
+
+.prose p {
+  font-size: 1.025rem;
+  line-height: 1.78;
+  color: var(--fg-2);
+  margin-bottom: var(--space-2xl);
+}
+
+.prose p strong {
+  color: var(--fg-1);
+  font-weight: 600;
+}
+
+.prose em {
+  font-style: italic;
+  color: var(--fg-1);
+}
+
+.section-label {
+  font-family: var(--font-headline);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--primary);
+  margin-bottom: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--primary);
+  border-radius: var(--radius-pill);
+}
+
+h2.section-title {
+  font-family: var(--font-headline);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--fg-1);
+  line-height: 1.25;
+  margin-bottom: var(--space-xl);
+}
+
+h3.sub-title {
+  font-family: var(--font-headline);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--fg-1);
+  margin-bottom: var(--space-lg);
+  letter-spacing: -0.01em;
+}
+
+.pull-quote {
+  border-left: 3px solid var(--primary);
+  padding: var(--space-xl) var(--space-2xl);
+  background: var(--surface-container-low);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  margin: var(--space-3xl) 0;
+}
+.pull-quote p {
+  font-family: var(--font-headline);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--fg-1);
+  line-height: 1.55;
+  margin: 0;
+  font-style: italic;
+}
+.pull-quote cite {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--fg-muted);
+  margin-top: var(--space-sm);
+  font-style: normal;
+}
+
+.two-numbers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin: var(--space-3xl) 0;
+}
+@media (max-width: 540px) { .two-numbers { grid-template-columns: 1fr; } }
+
+.number-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-sm);
+}
+.number-card-label {
+  font-family: var(--font-headline);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary);
+  margin-bottom: var(--space-sm);
+}
+.number-card-num {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--fg-1);
+  line-height: 1;
+  margin-bottom: var(--space-sm);
+}
+.number-card-desc {
+  font-size: 0.88rem;
+  color: var(--fg-muted);
+  line-height: 1.5;
+}
+
+/* ── DIVIDER ── */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: var(--space-4xl) 0;
+}
+
+/* ── CALCULATOR ── */
+.calc-section {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  margin: var(--space-4xl) 0;
+  box-shadow: var(--shadow-lg);
+}
+
+.calc-header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+  padding: var(--space-3xl);
+  color: var(--on-primary);
+}
+.calc-header-eyebrow {
+  font-family: var(--font-headline);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.75;
+  margin-bottom: var(--space-sm);
+}
+.calc-header h2 {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--space-sm);
+}
+.calc-header p {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  line-height: 1.5;
+}
+
+.calc-body {
+  padding: var(--space-3xl);
+}
+
+.calc-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+  margin-bottom: var(--space-3xl);
+}
+@media (max-width: 580px) { .calc-inputs { grid-template-columns: 1fr; } }
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.input-label {
+  font-family: var(--font-headline);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--fg-1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input-value-badge {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--primary-fixed);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--outline-variant);
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--primary);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(160,59,0,0.3);
+  transition: transform 0.15s;
+}
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+input[type="range"]::-moz-range-thumb {
+  width: 20px; height: 20px;
+  background: var(--primary);
+  border-radius: 50%; border: none;
+  cursor: pointer;
+}
+
+.range-bounds {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--fg-muted);
+  font-family: var(--font-mono);
+  margin-top: 2px;
+}
+
+.calc-results {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+@media (max-width: 640px) { .calc-results { grid-template-columns: 1fr; } }
+
+.result-card {
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.result-card:hover { box-shadow: var(--shadow-md); }
+
+.result-card.comfortable {
+  background: var(--surface-container-low);
+  border-color: var(--outline-variant);
+}
+.result-card.stretched {
+  background: #fff8f6;
+  border-color: var(--outline-variant);
+}
+.result-card.max {
+  background: #fff5f5;
+  border-color: rgba(239,68,68,0.2);
+}
+
+.result-card-tag {
+  font-family: var(--font-headline);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.result-card.comfortable .result-card-tag { color: var(--green); }
+.result-card.stretched .result-card-tag { color: var(--yellow); }
+.result-card.max .result-card-tag { color: var(--red); }
+
+.result-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.result-card.comfortable .result-dot { background: var(--green); }
+.result-card.stretched .result-dot { background: var(--yellow); }
+.result-card.max .result-dot { background: var(--red); }
+
+.result-price {
+  font-family: var(--font-headline);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--fg-1);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.result-dti {
+  font-size: 0.72rem;
+  color: var(--fg-muted);
+  font-family: var(--font-mono);
+  margin-bottom: var(--space-md);
+}
+.result-monthly {
+  font-family: var(--font-headline);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--fg-2);
+}
+.result-monthly-label {
+  font-size: 0.7rem;
+  color: var(--fg-muted);
+  margin-top: 2px;
+}
+
+.cash-needed-box {
+  background: var(--surface-container);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+@media (max-width: 600px) { .cash-needed-box { grid-template-columns: 1fr 1fr; } }
+
+.cash-item { text-align: center; }
+.cash-item-label {
+  font-size: 0.7rem;
+  font-family: var(--font-headline);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-xs);
+}
+.cash-item-value {
+  font-family: var(--font-headline);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--fg-1);
+}
+.cash-item-value.total {
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+.cash-divider {
+  font-size: 1.2rem;
+  color: var(--outline-variant);
+  text-align: center;
+  font-family: var(--font-headline);
+}
+@media (max-width: 600px) { .cash-divider { display: none; } }
+
+.calc-disclaimer {
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  text-align: center;
+  margin-top: var(--space-xl);
+  line-height: 1.5;
+}
+
+/* ── RATIO BARS ── */
+.ratio-section {
+  margin: var(--space-4xl) 0;
+}
+
+.ratio-income-group {
+  margin-bottom: var(--space-3xl);
+}
+
+.ratio-income-label {
+  font-family: var(--font-headline);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--fg-1);
+  margin-bottom: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.income-pill {
+  background: var(--surface-container);
+  color: var(--fg-2);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-pill);
+}
+
+.ratio-bars-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.ratio-bar-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.ratio-bar-label {
+  font-family: var(--font-headline);
+  font-size: 0.78rem;
+  font-weight: 600;
+  width: 90px;
+  flex-shrink: 0;
+  color: var(--fg-2);
+  text-align: right;
+}
+
+.ratio-bar-track {
+  flex: 1;
+  height: 28px;
+  background: var(--surface-container);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+}
+
+.ratio-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  padding-left: var(--space-sm);
+  font-family: var(--font-headline);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+  white-space: nowrap;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ratio-bar-fill.rule-28 { background: linear-gradient(90deg, var(--green), #34d399); }
+.ratio-bar-fill.rule-32 { background: linear-gradient(90deg, var(--yellow), #fbbf24); }
+.ratio-bar-fill.rule-36 { background: linear-gradient(90deg, var(--red), #f87171); }
+
+.ratio-bar-amount {
+  width: 90px;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--fg-1);
+}
+
+.ratio-legend {
+  display: flex;
+  gap: var(--space-xl);
+  margin-top: var(--space-xl);
+  flex-wrap: wrap;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.8rem;
+  color: var(--fg-2);
+  font-family: var(--font-headline);
+  font-weight: 500;
+}
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── LENDER CARDS ── */
+.lender-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-lg);
+  margin: var(--space-3xl) 0;
+}
+
+.lender-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.lender-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+.lender-logo-block {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--on-primary);
+}
+.lender-logo-block.fb { background: linear-gradient(135deg, var(--primary), var(--primary-container)); }
+.lender-logo-block.sc { background: linear-gradient(135deg, var(--tertiary), #6b63f0); }
+.lender-logo-block.pf { background: linear-gradient(135deg, var(--secondary-container), var(--tertiary)); }
+
+.lender-name {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--fg-1);
+}
+.lender-rate {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+.lender-rate-label {
+  font-size: 0.68rem;
+  color: var(--fg-muted);
+  font-family: var(--font-headline);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.lender-note {
+  font-size: 0.78rem;
+  color: var(--fg-muted);
+  line-height: 1.45;
+  flex: 1;
+}
+.lender-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-container);
+  color: var(--primary);
+  font-family: var(--font-headline);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 8px var(--space-lg);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  border: 1px solid var(--outline-variant);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.lender-cta:hover { background: var(--primary-fixed); border-color: var(--primary); }
+
+/* ── FACTOR CARDS ── */
+.factor-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin: var(--space-3xl) 0;
+}
+
+.factor-card {
+  display: flex;
+  gap: var(--space-xl);
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-sm);
+  align-items: flex-start;
+  transition: box-shadow 0.2s;
+}
+.factor-card:hover { box-shadow: var(--shadow-md); }
+
+.factor-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-lg);
+  background: var(--primary-fixed);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.factor-content { flex: 1; }
+.factor-name {
+  font-family: var(--font-headline);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--fg-1);
+  margin-bottom: var(--space-xs);
+}
+.factor-desc {
+  font-size: 0.88rem;
+  color: var(--fg-2);
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+.factor-sharon {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  background: var(--surface-container-low);
+  border-left: 2px solid var(--primary);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.8rem;
+  color: var(--fg-2);
+  font-style: italic;
+  line-height: 1.5;
+}
+.sharon-label {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--primary);
+  white-space: nowrap;
+  font-family: var(--font-headline);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 1px;
+}
+
+/* ── CASE STUDY ── */
+.case-study {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  margin: var(--space-4xl) 0;
+  box-shadow: var(--shadow-md);
+}
+
+.case-study-header {
+  background: var(--surface-container);
+  padding: var(--space-2xl) var(--space-3xl);
+  border-bottom: 1px solid var(--border);
+}
+.case-study-eyebrow {
+  font-family: var(--font-headline);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-xs);
+}
+.case-study-header h3 {
+  font-family: var(--font-headline);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--fg-1);
+  letter-spacing: -0.015em;
+}
+
+.case-study-body {
+  padding: var(--space-3xl);
+}
+
+.client-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  margin-bottom: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+  border-bottom: 1px solid var(--border);
+}
+@media (max-width: 480px) { .client-stats { grid-template-columns: 1fr 1fr; } }
+
+.client-stat-label {
+  font-size: 0.7rem;
+  font-family: var(--font-headline);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--fg-muted);
+  margin-bottom: 4px;
+}
+.client-stat-value {
+  font-family: var(--font-headline);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--fg-1);
+}
+
+.scenarios-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+@media (max-width: 540px) { .scenarios-grid { grid-template-columns: 1fr; } }
+
+.scenario-card {
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  border: 1px solid var(--border);
+}
+.scenario-card.option-a {
+  background: #fff8f5;
+  border-color: rgba(160,59,0,0.15);
+}
+.scenario-card.option-b {
+  background: #fff3f3;
+  border-color: rgba(239,68,68,0.2);
+}
+.scenario-card.recommended {
+  background: var(--surface-container-low);
+  border: 2px solid var(--green);
+}
+
+.scenario-label {
+  font-family: var(--font-headline);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-sm);
+}
+.scenario-card.option-a .scenario-label { color: var(--primary); }
+.scenario-card.option-b .scenario-label { color: var(--red); }
+.scenario-card.recommended .scenario-label { color: var(--green); }
+
+.scenario-price {
+  font-family: var(--font-headline);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--fg-1);
+  letter-spacing: -0.025em;
+  margin-bottom: var(--space-sm);
+}
+.scenario-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+.scenario-metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+}
+.scenario-metric-label { color: var(--fg-muted); }
+.scenario-metric-value { font-family: var(--font-mono); font-weight: 600; color: var(--fg-1); font-size: 0.82rem; }
+.scenario-metric-value.warn { color: var(--red); }
+.scenario-metric-value.ok { color: var(--green); }
+
+.sharon-verdict {
+  background: var(--primary-fixed);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+}
+.sharon-verdict-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid var(--on-primary);
+}
+.sharon-verdict-text {
+  font-size: 0.88rem;
+  color: var(--fg-1);
+  line-height: 1.6;
+}
+.sharon-verdict-text strong { color: var(--primary); }
+
+/* ── NEXT STEPS ── */
+.next-steps {
+  background: var(--surface-container);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-4xl) var(--space-3xl);
+  margin: var(--space-4xl) 0;
+  text-align: center;
+}
+.next-steps h2 {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--fg-1);
+  margin-bottom: var(--space-sm);
+  letter-spacing: -0.02em;
+}
+.next-steps > p {
+  color: var(--fg-muted);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-4xl);
+}
+
+.chapter-next-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  text-decoration: none;
+  transition: box-shadow 0.2s, transform 0.2s;
+  text-align: left;
+  margin-top: var(--space-2xl);
+}
+.chapter-next-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+.chapter-next-num {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-container));
+  color: var(--on-primary);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.chapter-next-content { flex: 1; }
+.chapter-next-eyebrow {
+  font-family: var(--font-headline);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--fg-muted);
+  margin-bottom: 4px;
+}
+.chapter-next-title {
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--fg-1);
+  margin-bottom: 4px;
+}
+.chapter-next-desc {
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+  line-height: 1.45;
+}
+.chapter-next-arrow {
+  font-size: 1.3rem;
+  color: var(--primary);
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--fg-1);
+  color: var(--on-primary);
+  padding: var(--space-5xl) var(--space-2xl) var(--space-4xl);
+}
+
+.footer-inner {
+  max-width: 780px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4xl);
+  align-items: start;
+}
+@media (max-width: 560px) { .footer-inner { grid-template-columns: 1fr; } }
+
+.footer-sharon {
+  display: flex;
+  gap: var(--space-xl);
+  align-items: flex-start;
+}
+.footer-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.15);
+  flex-shrink: 0;
+}
+.footer-name {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+.footer-title {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: var(--space-md);
+  line-height: 1.4;
+}
+.footer-langs {
+  display: flex;
+  gap: var(--space-sm);
+}
+.lang-badge {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.75);
+  font-family: var(--font-headline);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px var(--space-sm);
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.footer-contact-label {
+  font-family: var(--font-headline);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: var(--space-sm);
+}
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-contact-item:hover { color: var(--primary-fixed-dim); }
+.footer-contact-icon {
+  width: 28px;
+  height: 28px;
+  background: rgba(255,255,255,0.08);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.footer-bottom {
+  max-width: 780px;
+  margin: var(--space-4xl) auto 0;
+  padding-top: var(--space-2xl);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.3);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+.footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; }
+.footer-bottom a:hover { color: rgba(255,255,255,0.6); }
+
+/* ── TABLE OF CONTENTS ── */
+.toc-box {
+  background: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  margin: var(--space-3xl) 0;
+}
+.toc-title {
+  font-family: var(--font-headline);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-lg);
+}
+.toc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.toc-list li a {
+  font-size: 0.88rem;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  transition: color 0.15s;
+}
+.toc-list li a:hover { color: var(--primary-container); }
+.toc-list li a::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--outline-variant);
+  flex-shrink: 0;
+}
+
+/* ── UTILITIES ── */
+.text-muted { color: var(--fg-muted); }
+.mb-0 { margin-bottom: 0 !important; }
+
+/* Animate bars on scroll */
+.ratio-bar-fill { min-width: 60px; }
+
+/* ── INLINE TOOLTIP ── */
+.tooltip-inline {
+  display: inline-block;
+  background: var(--primary-fixed);
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  cursor: help;
+}
+
+/* ── CALLOUT BOX ── */
+.callout {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+  background: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  margin: var(--space-2xl) 0;
+}
+.callout-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+.callout-body { font-size: 0.88rem; color: var(--fg-2); line-height: 1.6; }
+.callout-body strong { color: var(--fg-1); }
+
+</style>
+</head>
+<body>
+
+<!-- ── STICKY HEADER ── -->
+<header class="site-header">
+  <a href="/" class="site-logo">Sharon Wang <span>Realty</span></a>
+  <a href="mailto:sharon@sharonwangrealtor.com" class="site-nav-cta">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+    Talk to Sharon
+  </a>
+</header>
+
+<!-- ── CHAPTER PROGRESS ── -->
+<div class="chapter-progress">
+  <div style="max-width:780px;margin:0 auto;">
+    <div class="progress-label">
+      <span>First-Time Homebuyer Guide</span>
+      <span>Chapter 1 of 7</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill"></div>
+    </div>
+    <div class="chapter-dots">
+      <div class="chapter-dot active">1</div>
+      <div class="chapter-dot">2</div>
+      <div class="chapter-dot">3</div>
+      <div class="chapter-dot">4</div>
+      <div class="chapter-dot">5</div>
+      <div class="chapter-dot">6</div>
+      <div class="chapter-dot">7</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<main>
+<div class="page-wrap">
+
+  <!-- ── HERO ── -->
+  <div class="article-hero" id="top">
+    <nav class="breadcrumb">
+      <a href="/guide">Homebuyer Guide</a>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Chapter 1 of 7</span>
+    </nav>
+    <div class="article-chapter-tag">Chapter 1 — Affordability</div>
+    <h1 class="article-title">How Much House Can&nbsp;You Actually Afford?</h1>
+    <p class="article-subtitle">Two numbers matter more than your maximum loan amount. Sharon walks through both — and shows why the bank's answer and your answer should never be the same.</p>
+    <div class="byline-row">
+      <img src="https://i.pravatar.cc/240?img=47" alt="Sharon Wang" class="byline-avatar">
+      <div class="byline-text">
+        <div class="byline-name">Sharon Wang</div>
+        <div class="byline-meta">
+          <span>Bay Area Realtor · Cupertino &amp; Silicon Valley</span>
+          <span class="byline-sep">·</span>
+          <span class="read-time-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            ~5 min read
+          </span>
+          <span class="byline-sep">·</span>
+          <span style="color:var(--fg-muted);font-size:0.78rem;">Updated Jan 2025</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TABLE OF CONTENTS ── -->
+  <div class="toc-box">
+    <div class="toc-title">In this chapter</div>
+    <ul class="toc-list">
+      <li><a href="#reframe">The opening reframe — why "max loan" is the wrong question</a></li>
+      <li><a href="#calculator">Interactive affordability calculator</a></li>
+      <li><a href="#rule">The 28/32/36 rule — with a visual</a></li>
+      <li><a href="#lenders">What lenders actually look at (5 factors)</a></li>
+      <li><a href="#downpayment">The downpayment myth</a></li>
+      <li><a href="#casestudy">Sharon's example: $320K income, $250K saved</a></li>
+      <li><a href="#nextsteps">Next steps &amp; lender introductions</a></li>
+    </ul>
+  </div>
+
+  <!-- ── SECTION 1: OPENING REFRAME ── -->
+  <section class="prose" id="reframe">
+    <div class="section-label">The Reframe</div>
+    <h2 class="section-title">The bank will tell you one number. That number is not your budget.</h2>
+
+    <p>Almost every first-time buyer walks into the process with the same question: <em>"What's the maximum I can borrow?"</em> It's a reasonable place to start — you need an upper bound before you can tour anything. But here's what Sharon sees happen, client after client: people treat the maximum loan amount as a target, not a ceiling. They find the house that hits their ceiling, fall in love with it, stretch to close, and then spend the next several years feeling the financial equivalent of wearing shoes one size too small.</p>
+
+    <p>The bank isn't calibrated to your life. It doesn't know that you're planning to have a second child in 18 months. It doesn't know that your parents are aging and you might need to cover $3,000 a month in care costs by 2027. It doesn't know that you value two international trips a year and a fully-funded 529. The bank's number is built on two inputs: your income and your existing debt. It is a legal limit, not a quality-of-life recommendation.</p>
+
+    <p>So what are the two numbers that actually matter?</p>
+
+    <div class="two-numbers">
+      <div class="number-card">
+        <div class="number-card-label">Number One</div>
+        <div class="number-card-num">①</div>
+        <div style="font-family:var(--font-headline);font-size:1rem;font-weight:700;color:var(--fg-1);margin-bottom:var(--space-sm);">Your comfortable monthly payment</div>
+        <div class="number-card-desc">The monthly all-in housing cost (principal + interest + property tax + insurance + HOA) that lets you still save, still live, still breathe. This is a lifestyle number, not a math number. Work it out before you talk to any lender.</div>
+      </div>
+      <div class="number-card">
+        <div class="number-card-label">Number Two</div>
+        <div class="number-card-num">②</div>
+        <div style="font-family:var(--font-headline);font-size:1rem;font-weight:700;color:var(--fg-1);margin-bottom:var(--space-sm);">Your downpayment + reserves cushion</div>
+        <div class="number-card-desc">The cash you can actually deploy — downpayment, closing costs (typically 2.5–3%), and six months of mortgage payments held in reserve after closing. Many buyers have enough for a down but not the full picture.</div>
+      </div>
+    </div>
+
+    <p>Sharon's rule of thumb: <strong>if your target monthly mortgage payment is more than 32% of pre-tax monthly household income, you're going to feel it every month for 30 years.</strong> Not every month is a vacation, a car repair, or a medical bill — but some months are all three. The 32% threshold is where financial stress starts to compound. In the Bay Area, where property taxes run 1.1–1.25%, HOA fees in many Cupertino communities exceed $500/month, and median sale prices for a 4-bedroom single-family home sit near $3.2M, that threshold matters more, not less.</p>
+
+    <div class="pull-quote">
+      <p>"The shortlist surfaces from 8–12 tours, not the top few. But the shortlist only works if you already know what you can absorb. Walk in with your number, not the bank's number."</p>
+      <cite>— Sharon Wang, on every first buyer consultation</cite>
+    </div>
+
+    <p>The calculator below does not require a login, an email address, or a sales call. Run it honestly. Adjust the interest rate slider to match what your lender quoted — the default reflects the approximate 30-year fixed rate for well-qualified buyers in Q1 2025. Then look at your three scenarios side by side, especially the cash-needed line at the bottom. That line is the one most buyers skip until it's too late.</p>
+  </section>
+
+  <!-- ── SECTION 2: CALCULATOR ── -->
+  <section id="calculator">
+    <div class="calc-section">
+      <div class="calc-header">
+        <div class="calc-header-eyebrow">Interactive Tool</div>
+        <h2>Affordability Calculator</h2>
+        <p>Adjust the sliders to your situation. All outputs update instantly. No login required.</p>
+      </div>
+      <div class="calc-body">
+        <div class="calc-inputs">
+          <div class="input-group">
+            <label class="input-label" for="income">
+              Annual Household Income
+              <span class="input-value-badge" id="income-display">$300,000</span>
+            </label>
+            <input type="range" id="income" min="80000" max="800000" step="5000" value="300000">
+            <div class="range-bounds"><span>$80K</span><span>$800K</span></div>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="downpayment">
+              Downpayment
+              <span class="input-value-badge" id="dp-display">$600,000</span>
+            </label>
+            <input type="range" id="downpayment" min="50000" max="2000000" step="10000" value="600000">
+            <div class="range-bounds"><span>$50K</span><span>$2M</span></div>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="rate">
+              Interest Rate (30-yr fixed)
+              <span class="input-value-badge" id="rate-display">6.75%</span>
+            </label>
+            <input type="range" id="rate" min="4.0" max="9.0" step="0.05" value="6.75">
+            <div class="range-bounds"><span>4.0%</span><span>9.0%</span></div>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="hoa">
+              HOA / Month
+              <span class="input-value-badge" id="hoa-display">$450/mo</span>
+            </label>
+            <input type="range" id="hoa" min="0" max="1500" step="25" value="450">
+            <div class="range-bounds"><span>$0</span><span>$1,500</span></div>
+          </div>
+        </div>
+
+        <!-- Results Cards -->
+        <div class="calc-results">
+          <div class="result-card comfortable">
+            <div class="result-card-tag"><span class="result-dot"></span> Comfortable</div>
+            <div class="result-price" id="res-comfortable-price">—</div>
+            <div class="result-dti" id="res-comfortable-dti">28% DTI</div>
+            <div class="result-monthly" id="res-comfortable-monthly">—</div>
+            <div class="result-monthly-label">est. monthly PITI + HOA</div>
+          </div>
+          <div class="result-card stretched">
+            <div class="result-card-tag"><span class="result-dot"></span> Stretched</div>
+            <div class="result-price" id="res-stretched-price">—</div>
+            <div class="result-dti" id="res-stretched-dti">32% DTI</div>
+            <div class="result-monthly" id="res-stretched-monthly">—</div>
+            <div class="result-monthly-label">est. monthly PITI + HOA</div>
+          </div>
+          <div class="result-card max">
+            <div class="result-card-tag"><span class="result-dot"></span> Bank Maximum</div>
+            <div class="result-price" id="res-max-price">—</div>
+            <div class="result-dti" id="res-max-dti">4.5× income rule</div>
+            <div class="result-monthly" id="res-max-monthly">—</div>
+            <div class="result-monthly-label">est. monthly PITI + HOA</div>
+          </div>
+        </div>
+
+        <!-- Cash Needed -->
+        <div class="cash-needed-box">
+          <div class="cash-item">
+            <div class="cash-item-label">Downpayment</div>
+            <div class="cash-item-value" id="cash-dp">—</div>
+          </div>
+          <div class="cash-divider">+</div>
+          <div class="cash-item">
+            <div class="cash-item-label">Closing Costs (~3%)</div>
+            <div class="cash-item-value" id="cash-closing">—</div>
+          </div>
+          <div class="cash-divider">+</div>
+          <div class="cash-item">
+            <div class="cash-item-label">6-mo Reserves</div>
+            <div class="cash-item-value" id="cash-reserves">—</div>
+          </div>
+          <div class="cash-item">
+            <div class="cash-item-label">Year-1 Cash Needed</div>
+            <div class="cash-item-value total" id="cash-total">—</div>
+          </div>
+        </div>
+
+        <p class="calc-disclaimer">Estimates assume 30-year fixed mortgage, 1.15% annual property tax (Santa Clara County), and PMI of 0.6% annually if downpayment is under 20% of comfortable purchase price. This is illustrative — not a loan commitment. Confirm with a licensed lender.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 3: 28/32/36 RULE ── -->
+  <section class="prose" id="rule">
+    <hr class="section-divider">
+    <div class="section-label">The Ratio Breakdown</div>
+    <h2 class="section-title">The 28/32/36 Rule — and What It Looks Like in Real Dollars</h2>
+
+    <p>You'll hear these percentages from every lender and every financial planner, but the numbers are meaningless until you translate them into actual monthly dollars at your income level. Here's the breakdown across three common Bay Area household income bands. The <strong style="color:var(--green);">28% line</strong> is where you're comfortable. The <strong style="color:var(--yellow);">32% line</strong> is where you're stretched but functional if your other variables are stable. The <strong style="color:var(--red);">36% line</strong> is the lender's hard limit for total debt obligations — if you cross it including car payments and student loans, most conventional lenders will decline you regardless of income.</p>
+
+    <div class="ratio-section">
+      <div class="ratio-income-group">
+        <div class="ratio-income-label">
+          <span class="income-pill">$200K/yr</span>
+          Household income · $16,667/mo pre-tax
+        </div>
+        <div class="ratio-bars-stack">
+          <div class="ratio-bar-row">
+            <div class="ratio-bar-label">28% rule</div>
+            <div class="ratio-bar-track">
+              <div class="ratio-bar-fill rule-28" style="width:70%">28% housing</div>
+            </div>
+            <div class="ratio-bar-amount">$4,667/mo</div>
+          </div>
+          <div class="ratio-bar-row">
+            <div class="ratio-bar-label">32% rule</div>
+            <div class="ratio-bar-track">
+              <div class="ratio-bar-fill rule-32" style="width:80%">32% housing</div>
+            </div>
+            <div class="ratio-bar-amount">$5,333/mo</div>
+          </div>
+          <div class="ratio-bar-row">
+            <div class="ratio-bar-label">36% total</div>
+            <div class="ratio-bar-track">
+              <div class="ratio-bar-fill rule-36" style="width:90%">36% all debt</div>
+            </div>
+            <div class="ratio-bar-amount">$6,000/mo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ratio-income-group">
+        <div class="ratio-income-label">
+          <span class="income-pill">$300K/yr</span>
+          Household income · $25,000/mo pre-tax
+        </div>
+        <div class="ratio-bars-stack">
+          <div class="ratio-bar-row">
+            <div class="ratio-bar-label">28% rule</div>
+            <div class="ratio-bar-track">
+              <div class="ratio-bar-fill rule-28" style="width:70%">28% housing</div>
+            </div>
+            <div class="ratio-bar-amount">$7,000/mo</div>
+          </div>
+          <div class="ratio-bar-row">
+            <div class="ratio-bar-label">32% rule</div>
+            <div class="ratio-bar-track">
+              <div class="ratio-bar-fill rule-32" style="width:80%">32% housing</div>
+            </div>
+            <div class="ratio-bar-amount">$8,000/mo</div>
+          </div>
+          <div class="ratio-bar-row">
+            <div class="ratio-bar-label">36% total</div>
+            <div class="ratio-bar-track">
+              <div class="ratio-bar-fill rule-36" style="width:90%">36% all debt</div>
+            </div>
+            <div class="ratio-bar-amount">$9,000/mo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ratio-income-group">
+        <div class="ratio-income-label">
+          <span class="income-pill">$400K/yr</span>
+          Household income · $33,333/mo pre-tax
+        </div>
+        <div class="ratio-bars-stack">
+          <div class="ratio-bar-row">
+            <div class="ratio-bar-label">28% rule</div>
+            <div class="ratio-bar-track">
+              <div class="ratio-bar-fill rule-28" style="width:70%">28% housing</div>
+            </div>
+            <div class="ratio-bar-amount">$9,333/mo</div>
+          </div>
+          <div class="ratio-bar-row">
+            <div class="ratio-bar-label">32% rule</div>
+            <div class="ratio-bar-track">
+              <div class="ratio-bar-fill rule-32" style="width:80%">32% housing</div>
+            </div>
+            <div class="ratio-bar-amount">$10,667/mo</div>
+          </div>
+          <div class="ratio-bar-row">
+            <div class="ratio-bar-label">36% total</div>
+            <div class="ratio-bar-track">
+              <div class="ratio-bar-fill rule-36" style="width:90%">36% all debt</div>
+            </div>
+            <div class="ratio-bar-amount">$12,000/mo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ratio-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--green);"></div> 28% — Comfortable housing ratio</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--yellow);"></div> 32% — Sharon's stretched ceiling</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--red);"></div> 36% — Lender's max total debt</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-icon">📌</div>
+      <div class="callout-body">Bay Area context: a $2.5M home in Cupertino with $500K down at 6.75% generates roughly <strong>$12,900/month</strong> in principal + interest alone — before the ~$2,400/month in property taxes and $500/month HOA. Total: ~$15,800/month. At $300K household income, that's <strong>63% of gross monthly income</strong>. Sharon's pre-approval requirement exists partly so neither party is surprised by this math during escrow.</div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 4: LENDER FACTORS ── -->
+  <section class="prose" id="lenders">
+    <hr class="section-divider">
+    <div class="section-label">Underwriting Reality</div>
+    <h2 class="section-title">What Lenders Actually Look At</h2>
+    <p>The pre-approval process feels like a black box, but there are really five variables that drive the outcome. Understanding them before you apply lets you correct anything correctable — and stops you from wasting a hard credit inquiry on a file that isn't ready.</p>
+
+    <div class="factor-cards">
+      <div class="factor-card">
+        <div class="factor-icon">📊</div>
+        <div class="factor-content">
+          <div class="factor-name">1 — Debt-to-Income Ratio (DTI)</div>
+          <div class="factor-desc">Lenders calculate two DTIs: "front-end" (housing costs ÷ gross income, cap 28–31%) and "back-end" (all monthly debt ÷ gross income, cap 36–43% for conventional loans, up to 50% for FHA). Your car payment, student loans, and minimum credit card payments all count. A $600/month car lease can eliminate $100K in home-buying power at 6.75%.</div>
+          <div class="factor-sharon">
+            <span class="sharon-label">Sharon</span>
+            "Before submitting any offer, Sharon pulls an updated copy of your liabilities. Buyers routinely forget that a co-signed auto loan or a deferred student loan shows up on your DTI even if you're not the primary payer."
+          </div>
+        </div>
+      </div>
+
+      <div class="factor-card">
+        <div class="factor-icon">🎯</div>
+        <div class="factor-content">
+          <div class="factor-name">2 — FICO Score</div>
+          <div class="factor-desc">Conventional loans typically require a minimum 620, but to get the best pricing tier you want 740+. The spread between a 680 score and a 760 score on a $1.5M loan can be 0.4–0.6% in rate, which at 6.75% baseline translates to roughly $350–$550 more per month for 30 years. Equifax, Experian, and TransUnion are all pulled; lenders use the middle score of all borrowers' middle scores.</div>
+          <div class="factor-sharon">
+            <span class="sharon-label">Sharon</span>
+            "Don't open a new credit card, lease a car, or close an old card in the 90 days before applying. All three move your score in ways that take months to recover."
+          </div>
+        </div>
+      </div>
+
+      <div class="factor-card">
+        <div class="factor-icon">🏢</div>
+        <div class="factor-content">
+          <div class="factor-name">3 — Employment History</div>
+          <div class="factor-desc">Lenders want 24 months of stable, documentable income. W-2 employees at Apple, Google, or Meta are straightforward — two years of pay stubs plus an offer letter if you changed jobs recently. Self-employed borrowers and contractors need two years of tax returns, and lenders use the average net income after expenses, not revenue. RSUs are only counted if they've been received and are likely to continue for at least 3 more years.</div>
+          <div class="factor-sharon">
+            <span class="sharon-label">Sharon</span>
+            "If you changed jobs in the last 6 months within the same field and at higher pay, most lenders are fine. If you went from W-2 to 1099, plan to wait 18–24 months before applying — or use a bank statement loan at a higher rate."
+          </div>
+        </div>
+      </div>
+
+      <div class="factor-card">
+        <div class="factor-icon">💰</div>
+        <div class="factor-content">
+          <div class="factor-name">4 — Downpayment Source</div>
+          <div class="factor-desc">Every dollar of your downpayment must be "sourced and seasoned." Sourced means you can document where it came from — brokerage account, HYSA, savings, 401(k) withdrawal, or a gift letter from a family member (gifts must be documented separately). Seasoned means it's been in your account long enough that underwriters aren't worried about undisclosed loans. Typically 60 days of bank statements are required to show the funds sitting there.</div>
+          <div class="factor-sharon">
+            <span class="sharon-label">Sharon</span>
+            "Large cash deposits or transfers in the 60 days before application get flagged. If a parent is contributing, do the transfer now — not during the week you're writing offers."
+          </div>
+        </div>
+      </div>
+
+      <div class="factor-card">
+        <div class="factor-icon">🛡️</div>
+        <div class="factor-content">
+          <div class="factor-name">5 — Reserves After Closing</div>
+          <div class="factor-desc">Most conventional lenders want to see 2–6 months of housing payments remaining in liquid accounts after you close. For jumbo loans above $766,550 — which covers nearly every purchase in Cupertino, Los Altos, or Palo Alto — lenders often require 12 months of reserves. This is not money you spend on the downpayment; it has to be left in your accounts after the wire goes out.</div>
+          <div class="factor-sharon">
+            <span class="sharon-label">Sharon</span>
+            "Reserves are where strong income earners get tripped up most often. They've been saving for the downpayment and used nearly everything. The calculator above shows you this number explicitly — run it honestly."
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 5: DOWNPAYMENT MYTH ── -->
+  <section class="prose" id="downpayment">
+    <hr class="section-divider">
+    <div class="section-label">Myth vs. Reality</div>
+    <h2 class="section-title">The 20% Downpayment Myth</h2>
+
+    <p>There is a persistent belief — often from parents who bought in a different era — that you need exactly 20% down to buy a home. <strong>That is not true.</strong> You can buy with 3% down (Fannie Mae HomeReady), 3.5% down (FHA), 5% down (conventional), or 10% down (many jumbo programs). The 20% threshold exists for a specific reason: it's the point at which Private Mortgage Insurance (PMI) drops off automatically.</p>
+
+    <p>PMI on a $1.8M purchase price at 10% down typically runs $0.4–0.6% annually on the loan balance — roughly $650–$950 per month that disappears once you hit 20% equity, either through appreciation or additional principal payments. On top of PMI, going under 20% on a jumbo loan (which most Bay Area purchases are) often means a slightly higher rate — usually 0.125–0.25% above the conforming rate, adding another $200–$400/month on a $1.5M loan. And with a smaller equity cushion, a 5–8% market correction can push you briefly underwater, which matters if you need to sell within 3–5 years.</p>
+
+    <p>Sharon's threshold is straightforward: <strong>"If you can hit 15%, go to 15. If 20% means tapping your 401(k) or leaving yourself with less than 3 months of reserves, stop at 15."</strong> The PMI cost is real but calculable. The cost of a depleted emergency fund when your HVAC fails in August, or when one partner's RSU vest gets delayed, is not calculable in advance — but it's always larger than you expect.</p>
+
+    <div class="callout">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body"><strong>One more thing about the 20% number:</strong> in California, property values have appreciated at an average of 5.2% annually over the last 20 years in the Cupertino–Sunnyvale corridor. A buyer who waits an extra two years to save the last 5% of a downpayment often finds that the target property has risen by more than their additional savings. Sharon doesn't give investment advice — but she does show you the math when you ask.</div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 6: CASE STUDY ── -->
+  <section class="prose" id="casestudy">
+    <hr class="section-divider">
+    <div class="section-label">Real Numbers, Anonymized</div>
+    <h2 class="section-title">A Walk-Through: $320K Income, $250K Saved. Which House?</h2>
+
+    <p>One of Sharon's clients in late 2024 — call them the Chens — came in pre-approved for $2.6M. They had a $320,000 household income (two engineers, one at Nvidia, one at Apple), $250,000 in savings earmarked for a downpayment, and a toddler starting kindergarten in Cupertino Union School District (API 945) in 2027. They'd been looking at 4-bedrooms in the $2M–$2.6M range in Cupertino and Sunnyvale. The question was simple: should they push to $2.6M for the extra space and a corner lot, or hold at the lower end?</p>
+
+    <div class="case-study">
+      <div class="case-study-header">
+        <div class="case-study-eyebrow">Anonymized Client Scenario — Q4 2024</div>
+        <h3>The Chens: Tech couple, one child, targeting Cupertino USD boundary</h3>
+      </div>
+      <div class="case-study-body">
+        <div class="client-stats">
+          <div>
+            <div class="client-stat-label">Annual Income</div>
+            <div class="client-stat-value">$320,000</div>
+          </div>
+          <div>
+            <div class="client-stat-label">Saved (liquid)</div>
+            <div class="client-stat-value">$250,000</div>
+          </div>
+          <div>
+            <div class="client-stat-label">Other Debt</div>
+            <div class="client-stat-value">$680/mo</div>
+          </div>
+          <div>
+            <div class="client-stat-label">Target School</div>
+            <div class="client-stat-value" style="font-size:0.95rem;">Cupertino USD</div>
+          </div>
+          <div>
+            <div class="client-stat-label">Pre-Approved To</div>
+            <div class="client-stat-value">$2,600,000</div>
+          </div>
+          <div>
+            <div class="client-stat-label">Rate Quoted</div>
+            <div class="client-stat-value">6.875%</div>
+          </div>
+        </div>
+
+        <div class="scenarios-grid">
+          <div class="scenario-card option-b">
+            <div class="scenario-label">❌ Option A — Pre-approval ceiling</div>
+            <div class="scenario-price">$2,600,000</div>
+            <div class="scenario-metrics">
+              <div class="scenario-metric">
+                <span class="scenario-metric-label">Downpayment (9.6%)</span>
+                <span class="scenario-metric-value warn">$250,000</span>
+              </div>
+              <div class="scenario-metric">
+                <span class="scenario-metric-label">Loan amount</span>
+                <span class="scenario-metric-value">$2,350,000</span>
+              </div>
+              <div class="scenario-metric">
+                <span class="scenario-metric-label">P+I monthly</span>
+                <span class="scenario-metric-value">$15,470</span>
+              </div>
+              <div class="scenario-metric">
+                <span class="scenario-metric-label">Property tax/mo</span>
+                <span class="scenario-metric-value">$2,492</span>
+              </div>
+              <div class="scenario-metric">
+                <span class="scenario-metric-label">Insurance + HOA</span>
+                <span class="scenario-metric-value">$950</span>
+              </div>
+              <div class="scenario-metric">
+                <span class="scenario-metric-label">PMI (~0.55%)</span>
+                <span class="scenario-metric-value warn">$1,077</span>
+              </div>
+              <div class="scenario-metric" style="padding-top:var(--space-sm);border-top:1px solid var(--border);margin-top:var(--space-sm);">
+                <span class="scenario-metric-label" style="font-weight:700;color:var(--fg-1);">Total monthly</span>
+                <span class="scenario-metric-value warn" style="font-size:1rem;">$19,989</span>
+              </div>
+              <div class="scenario-metric">
+                <span class="scenario-metric-label">% of gross income</span>
+                <span class="scenario-metric-value warn">75%</span>
+              </div>
+              <div class="scenario-metric">
+                <span class="scenario-metric-label">Reserves after close</span>
+                <span class="scenario-metric-value warn">~$0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="scenario-card recommended">
+            <div class="scenario-label">✅ Sharon's Recommendation</div>
+            <div class="scenario-price">$2,100,000</div>
+            <div class="scenario-metrics">
+              <div class="scenario-metric">
+                <span class="scenario-metric-label">Downpayment (11.9%)</span>
+                <span class="scenario-metric-value ok">$250,000</span>
+              </div>
+              <div class="scenario-metric">
+                <span class="scenario-metric-label">Loan amount</span>
+                <span class="scenario-metric-value">$1,850,000</span>
+              </div>
+              <div class="scenario-metric">
+                <span class="scenario-metric-label">P+I monthly</span>
+                <span class="scenario-metric-value">$12,171</span>
+              </div>
+              <div class="scenario-metric">
+                <span class="scenario-metric-label">Property tax/mo</span>
+                <span class="scenario-metric-value">$2,013</span>
+              </div>
+              <div class="scenario-metric">
+                <span class="scenario-metric-label">Insurance + HOA</span>
+                <span class="scenario-metric-value">$800</span>
+              </div>
+              <div class="scenario-metric">
+                <span class="scenario-metric-label">PMI (~0.55%)</span>
+                <span class="scenario-metric-value">$848</span>
+              </div>
+              <div class="scenario-metric" style="padding-top:var(--space-sm);border-top:1px solid var(--border);margin-top:var(--space-sm);">
+                <span class="scenario-metric-label" style="font-weight:700;color:var(--fg-1);">Total monthly</span>
+                <span class="scenario-metric-value ok" style="font-size:1rem;">$15,832</span>
+              </div>
+              <div class="scenario-metric">
+                <span class="scenario-metric-label">% of gross income</span>
+                <span class="scenario-metric-value ok">59%</span>
+              </div>
+              <div class="scenario-metric">
+                <span class="scenario-metric-label">Reserves after close</span>
+                <span class="scenario-metric-value ok">~$0*</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sharon-verdict">
+          <img src="https://i.pravatar.cc/240?img=47" alt="Sharon Wang" class="sharon-verdict-avatar">
+          <div class="sharon-verdict-text">
+            <strong>Sharon's reasoning on the $2.1M target:</strong> Even at $2.1M, the Chens are at 59% housing-to-gross — well above the 32% comfortable ceiling. The recommendation is $2.1M <em>not</em> because it's comfortable in the traditional sense, but because the two-engineer income is stable, the downside risk is bounded (both have senior titles at stable public companies), and the Cupertino USD boundary requirement eliminates lower-priced options anyway. The critical constraint is reserves: at $2.6M they close with effectively zero liquidity. <strong>Sharon required that the Chens have an additional $80K in untouched emergency reserves before submitting any offer above $2.1M.</strong> That condition was met four months after the initial consultation, and the final offer was submitted at $2.18M — within their calibrated range, and below the appraisal.
+          </div>
+        </div>
+
+        <p style="font-size:0.75rem;color:var(--fg-muted);margin-top:var(--space-lg);margin-bottom:0;">*The $2.1M scenario also leaves reserves near zero. Sharon's recommendation included a holding period of 4 months to build the $80K buffer. This is the "90-day close path" in practice — the timeline is set by financial readiness, not by desire.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 7: NEXT STEPS ── -->
+  <section id="nextsteps">
+    <hr class="section-divider">
+    <div class="section-label">Getting Moving</div>
+    <h2 class="section-title" style="font-family:var(--font-headline);font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700;letter-spacing:-0.025em;color:var(--fg-1);line-height:1.25;margin-bottom:var(--space-xl);">Talk to a Lender — Sharon's Introduced Partners</h2>
+
+    <p style="font-size:1.025rem;line-height:1.78;color:var(--fg-2);margin-bottom:var(--space-2xl);">Sharon requires a pre-approval letter before any offer. That's not bureaucracy — it's what protects you from falling in love with a home you can't close on. Sharon introduces buyers to one of three lender partners depending on their profile: straightforward W-2 buyers go to First Bay; self-employed or RSU-heavy income goes to Stevens Creek; anything jumbo above $2M in a competitive multiple-offer situation goes to Peninsula, whose underwriting speed Sharon trusts specifically in those situations.</p>
+
+    <div class="lender-cards-grid">
+      <div class="lender-card">
+        <div class="lender-logo-block fb">FB</div>
+        <div>
+          <div class="lender-name">First Bay Mortgage</div>
+          <div style="font-size:0.72rem;color:var(--fg-muted);font-family:var(--font-headline);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">San Jose, CA</div>
+        </div>
+        <div>
+          <div class="lender-rate">6.75%</div>
+          <div class="lender-rate-label">30-yr fixed this week</div>
+        </div>
+        <div class="lender-note">Best for W-2 tech employees with clean files. Fast 12-day pre-approval. Handles conforming and jumbo up to $3M. Sharon's go-to for straightforward profiles.</div>
+        <a href="mailto:sharon@sharonwangrealtor.com?subject=Intro to First Bay Mortgage" class="lender-cta">Sharon's Intro →</a>
+      </div>
+
+      <div class="lender-card">
+        <div class="lender-logo-block sc">SC</div>
+        <div>
+          <div class="lender-name">Stevens Creek Lending</div>
+          <div style="font-size:0.72rem;color:var(--fg-muted);font-family:var(--font-headline);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Cupertino, CA</div>
+        </div>
+        <div>
+          <div class="lender-rate">6.88%</div>
+          <div class="lender-rate-label">30-yr fixed this week</div>
+        </div>
+        <div class="lender-note">Specializes in self-employed borrowers, 1099 contractors, and RSU/bonus-heavy income. Bank statement loans available. Bilingual team (English + Mandarin). Slightly higher rate, worth it for complex files.</div>
+        <a href="mailto:sharon@sharonwangrealtor.com?subject=Intro to Stevens Creek Lending" class="lender-cta">Sharon's Intro →</a>
+      </div>
+
+      <div class="lender-card">
+        <div class="lender-logo-block pf">PF</div>
+        <div>
+          <div class="lender-name">Peninsula Funding</div>
+          <div style="font-size:0.72rem;color:var(--fg-muted);font-family:var(--font-headline);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Palo Alto, CA</div>
+        </div>
+        <div>
+          <div class="lender-rate">6.81%</div>
+          <div class="lender-rate-label">30-yr fixed this week</div>
+        </div>
+        <div class="lender-note">Sharon's pick for competitive multiple-offer situations on jumbo purchases above $2M. Known for issuing verified approval letters (not just pre-qual) within 48 hours. Preferred in Palo Alto and Los Altos listings.</div>
+        <a href="mailto:sharon@sharonwangrealtor.com?subject=Intro to Peninsula Funding" class="lender-cta">Sharon's Intro →</a>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-icon">ℹ️</div>
+      <div class="callout-body">Rates shown are indicative for well-qualified borrowers (FICO 740+, 20% down, conforming or super-conforming loans) as of the week of January 27, 2025. Your actual rate will vary based on loan amount, LTV, credit score, and lock period. Sharon does not earn any referral fee from these introductions — she refers based on match quality, not economics.</div>
+    </div>
+
+    <div class="next-steps">
+      <h2>Ready for Chapter 2?</h2>
+      <p>Once you've run the calculator and had an initial lender call, the next step is getting pre-approved — not pre-qualified. Sharon explains the difference, and why listing agents in Cupertino can tell within 30 seconds which one you have.</p>
+      <a href="#" class="chapter-next-card">
+        <div class="chapter-next-num">2</div>
+        <div class="chapter-next-content">
+          <div class="chapter-next-eyebrow">Up Next · Chapter 2 of 7</div>
+          <div class="chapter-next-title">Pre-Approval vs. Pre-Qualification: What Bay Area Sellers Actually Require</div>
+          <div class="chapter-next-desc">The 4-page Cupertino listing agent checklist. Why a DU approval beats a pre-qual letter in any competitive offer. Sharon's lender briefing script.</div>
+        </div>
+        <div class="chapter-next-arrow">→</div>
+      </a>
+    </div>
+  </section>
+
+</div><!-- /.page-wrap -->
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-sharon">
+      <img src="https://i.pravatar.cc/240?img=47" alt="Sharon Wang" class="footer-avatar">
+      <div>
+        <div class="footer-name">Sharon Wang</div>
+        <div class="footer-title">Bay Area Realtor · Cupertino · Palo Alto · Sunnyvale · Mountain View · Los Altos</div>
+        <div class="footer-langs">
+          <span class="lang-badge">English</span>
+          <span class="lang-badge">普通话</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-contact">
+      <div class="footer-contact-label">Get in touch</div>
+      <a href="mailto:sharon@sharonwangrealtor.com" class="footer-contact-item">
+        <span class="footer-contact-icon">✉</span>
+        sharon@sharonwangrealtor.com
+      </a>
+      <a href="tel:+16505550123" class="footer-contact-item">
+        <span class="footer-contact-icon">☎</span>
+        (650) 555-0123
+      </a>
+      <a href="https://sharonwangrealtor.com" class="footer-contact-item">
+        <span class="footer-contact-icon">🌐</span>
+        sharonwangrealtor.com
+      </a>
+      <a href="/guide" class="footer-contact-item">
+        <span class="footer-contact-icon">📖</span>
+        First-Time Buyer Guide (All 7 Chapters)
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Sharon Wang · DRE #02184751 · All rights reserved</span>
+    <span>
+      <a href="#">Privacy</a> · <a href="#">Disclosures</a> · <a href="#">Accessibility</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+(function() {
+  // ── CALCULATOR ──────────────────────────────────────────────────────────────
+  function calcMonthlyPayment(principal, annualRate, months) {
+    if (annualRate === 0) return principal / months;
+    var r = annualRate / 12;
+    var n = months;
+    return principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  }
+
+  function formatDollars(n) {
+    if (n >= 1000000) {
+      return '$' + (n / 1000000).toFixed(n % 1000000 === 0 ? 0 : 2) + 'M';
+    }
+    if (n >= 1000) {
+      return '$' + Math.round(n).toLocaleString();
+    }
+    return '$' + Math.round(n).toLocaleString();
+  }
+
+  function formatDollarsShort(n) {
+    if (n >= 1000000) return '$' + (n / 1000000).toFixed(2) + 'M';
+    return '$' + Math.round(n / 1000) + 'K';
+  }
+
+  function formatMonthly(n) {
+    return '$' + Math.round(n).toLocaleString() + '/mo';
+  }
+
+  function updateCalc() {
+    var income = parseFloat(document.getElementById('income').value);
+    var dp = parseFloat(document.getElementById('downpayment').value);
+    var rate = parseFloat(document.getElementById('rate').value) / 100;
+    var hoa = parseFloat(document.getElementById('hoa').value);
+
+    // Update display labels
+    document.getElementById('income-display').textContent = formatDollars(income);
+    document.getElementById('dp-display').textContent = formatDollars(dp);
+    document.getElementById('rate-display').textContent = (parseFloat(document.getElementById('rate').value)).toFixed(2) + '%';
+    document.getElementById('hoa-display').textContent = '$' + hoa.toLocaleString() + '/mo';
+
+    var monthlyIncome = income / 12;
+    var propTaxRate = 0.0115; // 1.15% Santa Clara County
+    var insuranceMonthly = 150; // rough homeowner's insurance
+    var n = 360; // 30 years
+
+    // Function to compute all-in monthly at a given purchase price
+    function allInMonthly(purchasePrice, loanAmount, usePMI) {
+      var pi = calcMonthlyPayment(loanAmount, rate, n);
+      var tax = (purchasePrice * propTaxRate) / 12;
+      var pmi = usePMI ? (loanAmount * 0.006) / 12 : 0;
+      return pi + tax + insuranceMonthly + hoa + pmi;
+    }
+
+    // ── COMFORTABLE (28% DTI) ──
+    // Target: allInMonthly = 0.28 * monthlyIncome
+    // We solve iteratively for purchase price (since PMI depends on LTV)
+    var targetComfort = 0.28 * monthlyIncome;
+    var comfortPrice = solveForPrice(targetComfort, dp, rate, n, propTaxRate, insuranceMonthly, hoa);
+    var comfortLoan = Math.max(comfortPrice - dp, 0);
+    var comfortLTV = comfortLoan / comfortPrice;
+    var comfortPMI = comfortLTV > 0.80;
+    var comfortMonthly = allInMonthly(comfortPrice, comfortLoan, comfortPMI);
+
+    // ── STRETCHED (32% DTI) ──
+    var targetStretch = 0.32 * monthlyIncome;
+    var stretchPrice = solveForPrice(targetStretch, dp, rate, n, propTaxRate, insuranceMonthly, hoa);
+    var stretchLoan = Math.max(stretchPrice - dp, 0);
+    var stretchLTV = stretchLoan / stretchPrice;
+    var stretchPMI = stretchLTV > 0.80;
+    var stretchMonthly = allInMonthly(stretchPrice, stretchLoan, stretchPMI);
+
+    // ── MAX (4.5× income) ──
+    var maxLoan = income * 4.5;
+    var maxPrice = maxLoan + dp;
+    var maxLTV = maxLoan / maxPrice;
+    var maxPMI = maxLTV > 0.80;
+    var maxMonthly = allInMonthly(maxPrice, maxLoan, maxPMI);
+
+    // Display comfortable
+    document.getElementById('res-comfortable-price').textContent = formatDollars(comfortPrice);
+    document.getElementById('res-comfortable-dti').textContent = '28% DTI · ' + (comfortPMI ? 'PMI applies' : 'No PMI');
+    document.getElementById('res-comfortable-monthly').textContent = formatMonthly(comfortMonthly);
+
+    // Display stretched
+    document.getElementById('res-stretched-price').textContent = formatDollars(stretchPrice);
+    document.getElementById('res-stretched-dti').textContent = '32% DTI · ' + (stretchPMI ? 'PMI applies' : 'No PMI');
+    document.getElementById('res-stretched-monthly').textContent = formatMonthly(stretchMonthly);
+
+    // Display max
+    document.getElementById('res-max-price').textContent = formatDollars(maxPrice);
+    document.getElementById('res-max-dti').textContent = '4.5× income · Loan $' + Math.round(maxLoan / 1000) + 'K';
+    document.getElementById('res-max-monthly').textContent = formatMonthly(maxMonthly);
+
+    // ── CASH NEEDED (based on comfortable scenario) ──
+    var closingCosts = comfortPrice * 0.03;
+    var sixMoReserves = comfortMonthly * 6;
+    var totalCash = dp + closingCosts + sixMoReserves;
+
+    document.getElementById('cash-dp').textContent = formatDollars(dp);
+    document.getElementById('cash-closing').textContent = formatDollars(closingCosts);
+    document.getElementById('cash-reserves').textContent = formatDollars(sixMoReserves);
+    document.getElementById('cash-total').textContent = formatDollars(totalCash);
+  }
+
+  // Iterative solver: given a monthly target, find the purchase price
+  function solveForPrice(targetMonthly, dp, rate, n, propTaxRate, insurance, hoa) {
+    // Start with rough estimate assuming no PMI
+    // total = PI + tax + insurance + hoa
+    // PI = f(loan, rate, n), tax = price * propTaxRate / 12
+    // Let's iterate with Newton-like approach
+    var price = 1000000; // initial guess
+    for (var i = 0; i < 60; i++) {
+      var loan = Math.max(price - dp, 1);
+      var ltv = loan / price;
+      var pmi = ltv > 0.80 ? (loan * 0.006) / 12 : 0;
+      var pi = calcMonthlyPayment(loan, rate, n);
+      var tax = (price * propTaxRate) / 12;
+      var totalMonthly = pi + tax + insurance + hoa + pmi;
+      var diff = totalMonthly - targetMonthly;
+      if (Math.abs(diff) < 10) break;
+      // Gradient: dTotal/dPrice ≈ (dPI/dLoan * dLoan/dPrice) + dTax/dPrice
+      // dLoan/dPrice = 1, dTax/dPrice = propTaxRate/12
+      var r = rate / 12;
+      var dPIdLoan = r > 0 ? (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1) : 1/n;
+      var grad = dPIdLoan + propTaxRate / 12;
+      price = price - diff / grad;
+      if (price < dp) price = dp + 1000;
+    }
+    return Math.max(Math.round(price / 1000) * 1000, dp);
+  }
+
+  // Bind events
+  var sliders = ['income', 'downpayment', 'rate', 'hoa'];
+  sliders.forEach(function(id) {
+    document.getElementById(id).addEventListener('input', updateCalc);
+  });
+
+  // Initial render
+  updateCalc();
+
+  // ── RATIO BARS ANIMATION ON SCROLL ──────────────────────────────────────────
+  var bars = document.querySelectorAll('.ratio-bar-fill');
+  var animated = false;
+  function animateBars() {
+    if (animated) return;
+    var ratioSection = document.getElementById('rule');
+    if (!ratioSection) return;
+    var rect = ratioSection.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.85) {
+      animated = true;
+      bars.forEach(function(bar) {
+        var target = bar.style.width;
+        bar.style.width = '0%';
+        setTimeout(function() {
+          bar.style.width = target;
+        }, 100);
+      });
+    }
+  }
+  window.addEventListener('scroll', animateBars, { passive: true });
+  animateBars(); // check on load
+})();
+</script>
+</body>
+</html>

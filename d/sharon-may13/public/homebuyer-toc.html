@@ -1,0 +1,1674 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The First-Time Homebuyer's Guide to the Bay Area — Sharon Wang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #a03b00;
+  --primary-container: #c94c00;
+  --primary-fixed: #ffdbcd;
+  --primary-fixed-dim: #ffb597;
+  --on-primary: #ffffff;
+  --accent-glow: #E8400D;
+  --secondary: #d5baff;
+  --secondary-container: #7b40e0;
+  --tertiary: #4d44e3;
+  --bg: #fff8f6;
+  --surface: #fff8f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf2ef;
+  --surface-container: #f5ece9;
+  --surface-container-high: #efe6e3;
+  --fg-1: #1e1b19;
+  --fg-2: #594138;
+  --fg-muted: #8d7166;
+  --border: rgba(0, 0, 0, 0.06);
+  --border-strong: rgba(0, 0, 0, 0.12);
+  --outline-variant: #e1bfb2;
+  --green: #10b981; --blue: #3b82f6; --yellow: #f59e0b; --red: #ef4444;
+  --font-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+  --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px;
+  --space-3xl: 32px; --space-4xl: 48px; --space-5xl: 64px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-2xl: 28px; --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px rgba(30, 27, 25, 0.04);
+  --shadow-md: 0 4px 12px rgba(30, 27, 25, 0.08);
+  --shadow-lg: 0 8px 24px rgba(30, 27, 25, 0.12);
+  --shadow-accent: 0 8px 24px rgba(160, 59, 0, 0.15);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--bg);
+  color: var(--fg-1);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NAV ─────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(255, 248, 246, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-2xl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  text-decoration: none;
+}
+.nav-brand-avatar {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-pill);
+  object-fit: cover;
+  border: 2px solid var(--primary-fixed-dim);
+}
+.nav-brand-name {
+  font-family: var(--font-headline);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--fg-1);
+  letter-spacing: -0.01em;
+}
+.nav-brand-sub {
+  font-size: 0.7rem;
+  color: var(--fg-muted);
+  display: block;
+  font-weight: 400;
+}
+.nav-cta {
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--primary-container); transform: translateY(-1px); }
+
+/* ─── HERO ────────────────────────────────────────── */
+.hero {
+  position: relative;
+  padding-top: 80px;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.hero-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 60vw;
+  max-height: 680px;
+  min-height: 340px;
+  overflow: hidden;
+}
+.hero-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  display: block;
+}
+.hero-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(255,248,246,0) 0%,
+    rgba(255,248,246,0.15) 55%,
+    rgba(255,248,246,0.75) 80%,
+    rgba(255,248,246,1) 100%
+  );
+}
+.hero-content {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: var(--space-4xl) var(--space-2xl) var(--space-5xl);
+  width: 100%;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--primary-fixed);
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--space-2xl);
+}
+.eyebrow-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  display: inline-block;
+}
+.hero h1 {
+  font-family: var(--font-headline);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--fg-1);
+  max-width: 820px;
+  margin-bottom: var(--space-2xl);
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--primary);
+}
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--fg-2);
+  max-width: 600px;
+  line-height: 1.65;
+  margin-bottom: var(--space-4xl);
+  font-weight: 400;
+}
+.hero-author {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-4xl);
+  padding: var(--space-lg) var(--space-xl);
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  width: fit-content;
+}
+.hero-author img {
+  width: 56px; height: 56px;
+  border-radius: var(--radius-pill);
+  object-fit: cover;
+  border: 2px solid var(--outline-variant);
+}
+.hero-author-name {
+  font-family: var(--font-headline);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--fg-1);
+  letter-spacing: -0.01em;
+}
+.hero-author-meta {
+  font-size: 0.78rem;
+  color: var(--fg-muted);
+  margin-top: var(--space-xs);
+}
+.hero-author-meta span {
+  display: inline-block;
+  margin-right: var(--space-sm);
+}
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  align-items: center;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: var(--space-lg) var(--space-3xl);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-accent);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.btn-primary:hover {
+  background: var(--primary-container);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(160, 59, 0, 0.25);
+}
+.btn-primary svg { flex-shrink: 0; }
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: transparent;
+  color: var(--primary);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: var(--space-lg) var(--space-2xl);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  border: 2px solid var(--outline-variant);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+}
+.btn-secondary:hover {
+  border-color: var(--primary-fixed-dim);
+  background: var(--primary-fixed);
+  transform: translateY(-2px);
+}
+
+/* ─── SECTION BASE ────────────────────────────────── */
+.section {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: var(--space-5xl) var(--space-2xl);
+}
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 1px;
+}
+.section-title {
+  font-family: var(--font-headline);
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: var(--fg-1);
+  margin-bottom: var(--space-2xl);
+}
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+/* ─── WHY THIS GUIDE ──────────────────────────────── */
+.why-section {
+  background: var(--surface-container-lowest);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4xl);
+}
+@media (min-width: 768px) {
+  .why-grid { grid-template-columns: 1.2fr 1fr; align-items: start; }
+}
+.why-body p {
+  color: var(--fg-2);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  margin-bottom: var(--space-xl);
+}
+.why-body p:last-child { margin-bottom: 0; }
+.why-body strong { color: var(--fg-1); font-weight: 600; }
+.why-aside {
+  background: var(--surface-container);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-3xl);
+  position: relative;
+  overflow: hidden;
+}
+.why-aside::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: var(--space-2xl);
+  font-size: 8rem;
+  font-family: var(--font-headline);
+  color: var(--primary-fixed-dim);
+  line-height: 1;
+  opacity: 0.5;
+}
+.why-quote {
+  font-family: var(--font-headline);
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--fg-1);
+  position: relative;
+  z-index: 1;
+  margin-bottom: var(--space-xl);
+}
+.why-quote-attr {
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.why-quote-attr img {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.why-stages {
+  margin-top: var(--space-3xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+.stage-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--border);
+}
+.stage-row:last-child { border-bottom: none; }
+.stage-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-headline);
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.stage-label {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--fg-2);
+}
+.stage-arrow {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  font-family: var(--font-mono);
+}
+
+/* ─── CHAPTERS ────────────────────────────────────── */
+.chapters-section { background: var(--bg); }
+.chapters-intro {
+  max-width: 560px;
+  color: var(--fg-2);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: var(--space-4xl);
+}
+.chapters-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+@media (min-width: 640px) {
+  .chapters-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 1024px) {
+  .chapters-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.chapter-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-3xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.chapter-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--outline-variant);
+}
+.chapter-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--primary);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.chapter-card:hover::after { opacity: 1; }
+.chapter-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+.chapter-icon {
+  width: 48px; height: 48px;
+  border-radius: var(--radius-lg);
+  background: var(--primary-fixed);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+.chapter-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  background: var(--surface-container);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+.chapter-num {
+  font-family: var(--font-headline);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: var(--space-xs);
+}
+.chapter-title {
+  font-family: var(--font-headline);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--fg-1);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+.chapter-desc {
+  font-size: 0.88rem;
+  color: var(--fg-muted);
+  line-height: 1.65;
+  flex: 1;
+}
+.chapter-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: gap 0.2s;
+  margin-top: auto;
+}
+.chapter-link:hover { gap: var(--space-md); }
+.chapter-link svg { transition: transform 0.2s; }
+.chapter-link:hover svg { transform: translateX(3px); }
+
+/* ─── STATS STRIP ─────────────────────────────────── */
+.stats-strip {
+  background: var(--primary);
+  color: var(--on-primary);
+  padding: var(--space-5xl) var(--space-2xl);
+}
+.stats-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.stats-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary-fixed-dim);
+  margin-bottom: var(--space-4xl);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.stats-label::before {
+  content: '';
+  display: block;
+  width: 16px; height: 1px;
+  background: var(--primary-fixed-dim);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4xl) var(--space-3xl);
+}
+@media (min-width: 768px) {
+  .stats-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.stat-item {}
+.stat-value {
+  font-family: var(--font-headline);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--on-primary);
+  line-height: 1;
+  margin-bottom: var(--space-sm);
+}
+.stat-value span {
+  font-size: 0.55em;
+  font-weight: 500;
+  vertical-align: super;
+  letter-spacing: 0;
+}
+.stat-label {
+  font-size: 0.88rem;
+  color: var(--primary-fixed-dim);
+  line-height: 1.4;
+  font-weight: 400;
+}
+.stat-sublabel {
+  font-size: 0.72rem;
+  color: rgba(255,219,205,0.55);
+  margin-top: var(--space-xs);
+  font-family: var(--font-mono);
+}
+
+/* ─── TESTIMONIALS ────────────────────────────────── */
+.testimonials-section {
+  background: var(--surface-container-low);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  margin-top: var(--space-4xl);
+}
+@media (min-width: 768px) {
+  .testimonials-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.testimonial-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-3xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+.testimonial-stars {
+  display: flex;
+  gap: var(--space-xs);
+}
+.star {
+  color: var(--yellow);
+  font-size: 0.9rem;
+}
+.testimonial-quote {
+  font-size: 0.95rem;
+  color: var(--fg-2);
+  line-height: 1.7;
+  font-style: italic;
+  flex: 1;
+}
+.testimonial-quote strong {
+  font-style: normal;
+  color: var(--fg-1);
+  font-weight: 600;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--border);
+}
+.testimonial-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--outline-variant);
+}
+.testimonial-name {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--fg-1);
+}
+.testimonial-meta {
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  margin-top: 2px;
+}
+
+/* ─── LEAD CAPTURE ────────────────────────────────── */
+.lead-section {
+  background: var(--bg);
+}
+.lead-wrap {
+  max-width: 680px;
+  margin: 0 auto;
+}
+.lead-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-2xl);
+  padding: clamp(var(--space-3xl), 5vw, 56px);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+.lead-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent-glow), var(--primary-container));
+}
+.lead-header {
+  margin-bottom: var(--space-3xl);
+}
+.lead-title {
+  font-family: var(--font-headline);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--fg-1);
+  margin-bottom: var(--space-md);
+  line-height: 1.2;
+}
+.lead-subtitle {
+  font-size: 0.95rem;
+  color: var(--fg-muted);
+  line-height: 1.6;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+@media (min-width: 500px) {
+  .form-grid { grid-template-columns: 1fr 1fr; }
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.form-field.full { grid-column: 1 / -1; }
+.form-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--fg-2);
+  letter-spacing: 0.01em;
+}
+.form-input,
+.form-select {
+  background: var(--surface-container-low);
+  border: 1.5px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--fg-1);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.form-input::placeholder { color: var(--fg-muted); }
+.form-input:focus,
+.form-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(160, 59, 0, 0.08);
+}
+.form-select-wrap {
+  position: relative;
+}
+.form-select-wrap::after {
+  content: '';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0; height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid var(--fg-muted);
+  pointer-events: none;
+}
+.form-submit {
+  width: 100%;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: var(--space-lg) var(--space-3xl);
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-accent);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+.form-submit:hover {
+  background: var(--primary-container);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(160, 59, 0, 0.3);
+}
+.form-note {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--fg-muted);
+  line-height: 1.5;
+}
+.form-note strong { color: var(--fg-2); font-weight: 600; }
+.form-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  margin: var(--space-2xl) 0;
+}
+.form-divider-line { flex: 1; height: 1px; background: var(--border); }
+.form-divider-text { font-size: 0.75rem; color: var(--fg-muted); white-space: nowrap; }
+.guide-preview {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  background: var(--primary-fixed);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+}
+.guide-preview-icon {
+  font-size: 2.2rem;
+  flex-shrink: 0;
+}
+.guide-preview-text {
+  font-size: 0.82rem;
+  color: var(--primary);
+  font-weight: 500;
+  line-height: 1.5;
+}
+.guide-preview-title {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--primary);
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* ─── FOOTER ──────────────────────────────────────── */
+.footer {
+  background: var(--fg-1);
+  color: rgba(255,255,255,0.85);
+  padding: var(--space-5xl) var(--space-2xl) var(--space-4xl);
+}
+.footer-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4xl);
+  margin-bottom: var(--space-4xl);
+  padding-bottom: var(--space-4xl);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+@media (min-width: 768px) {
+  .footer-top { grid-template-columns: 1.5fr 1fr 1fr; }
+}
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+.footer-brand-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+.footer-avatar {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.2);
+}
+.footer-name {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+.footer-dre {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.45);
+  margin-top: 3px;
+  font-family: var(--font-mono);
+}
+.footer-desc {
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.55);
+}
+.footer-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-contact-item:hover { color: #fff; }
+.footer-contact-item svg { flex-shrink: 0; opacity: 0.5; }
+.footer-section-title {
+  font-family: var(--font-headline);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: var(--space-xl);
+}
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.footer-link {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-link:hover { color: #fff; }
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xl);
+}
+.footer-legal {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.3);
+  line-height: 1.6;
+}
+.footer-eho {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+.footer-social {
+  display: flex;
+  gap: var(--space-md);
+}
+.footer-social-link {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.footer-social-link:hover {
+  border-color: rgba(255,255,255,0.3);
+  color: #fff;
+  background: rgba(255,255,255,0.05);
+}
+
+/* ─── SCROLL INDICATOR ────────────────────────────── */
+.scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-5xl);
+  color: var(--fg-muted);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+}
+.scroll-indicator-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--outline-variant), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.1); }
+}
+
+/* ─── MISC UTILITIES ──────────────────────────────── */
+.bilingual-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 0.7rem;
+  font-weight: 500;
+  background: var(--secondary-container);
+  color: #fff;
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-pill);
+  margin-left: var(--space-sm);
+}
+.highlight {
+  background: linear-gradient(180deg, transparent 60%, var(--primary-fixed) 60%);
+}
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-pill);
+  background: var(--surface-container);
+  color: var(--fg-muted);
+  border: 1px solid var(--border-strong);
+}
+
+/* ─── FADE IN ANIMATION ───────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fadeUp 0.6s ease both;
+}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+/* ─── RESPONSIVE TWEAKS ───────────────────────────── */
+@media (max-width: 600px) {
+  .hero-author {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+  .nav-brand-sub { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ───────────────────────────────────────── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <img src="https://i.pravatar.cc/240?img=47" alt="Sharon Wang" class="nav-brand-avatar">
+      <div>
+        <span class="nav-brand-name">Sharon Wang</span>
+        <span class="nav-brand-sub">Bay Area Realtor · DRE #02134872</span>
+      </div>
+    </a>
+    <a href="#get-guide" class="nav-cta">Get the full guide →</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ───────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-image-wrap">
+    <img
+      src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1600&q=80&fit=crop"
+      alt="Modern Bay Area home interior with warm natural light"
+      loading="eager"
+    >
+    <div class="hero-image-overlay"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="eyebrow fade-up">
+      <span class="eyebrow-dot"></span>
+      Free Guide · 7 chapters · ~25 min read
+    </div>
+
+    <h1 class="fade-up delay-1">
+      The First-Time<br>Homebuyer's Guide<br>to the <em>Bay Area</em>
+    </h1>
+
+    <p class="hero-subtitle fade-up delay-2">
+      Most buyers tour homes before they understand financing, contingencies, or what actually wins in a multi-offer market. This guide flips that order — budget first, keys last, no surprises in between.
+    </p>
+
+    <div class="hero-author fade-up delay-3">
+      <img src="https://i.pravatar.cc/240?img=47" alt="Sharon Wang, Bay Area Realtor">
+      <div>
+        <div class="hero-author-name">
+          Sharon Wang
+          <span class="bilingual-tag">中文 · EN</span>
+        </div>
+        <div class="hero-author-meta">
+          <span>Bay Area Realtor since 2018</span>
+          <span>·</span>
+          <span>60+ closes in Cupertino, Palo Alto & Sunnyvale</span>
+          <span>·</span>
+          <span>DRE #02134872</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-ctas fade-up delay-4">
+      <a href="#chapter-1" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Read Chapter 1
+      </a>
+      <a href="#get-guide" class="btn-secondary">
+        Get the full guide by email
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <div class="scroll-indicator">
+      <div class="scroll-indicator-line"></div>
+      scroll
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHY THIS GUIDE EXISTS ──────────────────────── -->
+<section class="why-section">
+  <div class="section" style="padding-top: var(--space-5xl); padding-bottom: var(--space-5xl);">
+    <div class="section-label">Why this guide exists</div>
+    <div class="why-grid">
+      <div class="why-body">
+        <div class="section-title">Most first-time buyers start in the wrong order.</div>
+        <p>
+          The typical Bay Area buyer finds a home on Zillow, falls in love with the kitchen, schedules a tour — and only then asks their bank what they can actually borrow. By the time they understand escrow timelines, contingency waivers, and why that $2.8M home listed $400K under comp isn't "a deal," they've already lost two offers and burned four weekends.
+        </p>
+        <p>
+          <strong>Sharon sees this pattern in almost every first-time buyer she meets.</strong> Not because they're careless — because no one hands them the right sequence up front. Lenders talk about rates. Listing agents talk about the market. Nobody maps the full 90-day path, start to keys.
+        </p>
+        <p>
+          This guide does that. It runs the same sequence Sharon walks every client through before their first tour: <strong>know your budget ceiling, get pre-approved, build your tour shortlist, submit a calibrated offer, survive escrow, and close on schedule.</strong> In that order. Nothing skipped.
+        </p>
+        <p>
+          The numbers in this guide are drawn from Sharon's closes in Cupertino, Palo Alto, Sunnyvale, Mountain View, and Los Altos — 2021 through 2024. Median prices, escrow lengths, and tour counts are real. School API scores, commute estimates, and neighborhood comps are sourced from CUSD and MLS data she uses in her own client briefings.
+        </p>
+        <p>
+          By the end, you won't be ready to win every offer. You'll be ready to compete — which is the actual job.
+        </p>
+
+        <div class="why-stages">
+          <div class="stage-row">
+            <div class="stage-num">1</div>
+            <span class="stage-label">Budget — what you can carry, not just what you're approved for</span>
+            <span class="stage-arrow">Ch. 1</span>
+          </div>
+          <div class="stage-row">
+            <div class="stage-num">2</div>
+            <span class="stage-label">Pre-approval — lender package locked before any offer</span>
+            <span class="stage-arrow">Ch. 2</span>
+          </div>
+          <div class="stage-row">
+            <div class="stage-num">3</div>
+            <span class="stage-label">Tour — 8–12 homes; the shortlist surfaces from the visits</span>
+            <span class="stage-arrow">Ch. 3–4</span>
+          </div>
+          <div class="stage-row">
+            <div class="stage-num">4</div>
+            <span class="stage-label">Offer — contingencies, escalation clauses, agent signals</span>
+            <span class="stage-arrow">Ch. 5</span>
+          </div>
+          <div class="stage-row">
+            <div class="stage-num">5</div>
+            <span class="stage-label">Escrow — inspection, appraisal, disclosures, no surprises</span>
+            <span class="stage-arrow">Ch. 6</span>
+          </div>
+          <div class="stage-row">
+            <div class="stage-num">6</div>
+            <span class="stage-label">Close — final walkthrough, wire, signing, keys</span>
+            <span class="stage-arrow">Ch. 7</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="why-aside">
+          <p class="why-quote">
+            "The shortlist surfaces from 8–12 tours, not the top few. Sharon does the first walk-through with you and captures the notes. By tour six, the picture becomes clear on its own."
+          </p>
+          <div class="why-quote-attr">
+            <img src="https://i.pravatar.cc/240?img=47" alt="Sharon Wang">
+            <span>Sharon Wang, to every first-time client before tour one</span>
+          </div>
+
+          <div style="margin-top: var(--space-3xl); padding-top: var(--space-3xl); border-top: 1px solid var(--outline-variant);">
+            <div style="font-family: var(--font-headline); font-size: 0.82rem; font-weight: 600; color: var(--fg-2); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: var(--space-xl);">What this guide covers</div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+              <div style="display: flex; align-items: center; gap: var(--space-md); font-size: 0.88rem; color: var(--fg-2);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                How to calculate your real ceiling (not lender max)
+              </div>
+              <div style="display: flex; align-items: center; gap: var(--space-md); font-size: 0.88rem; color: var(--fg-2);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Exactly what documents lenders pull — and when
+              </div>
+              <div style="display: flex; align-items: center; gap: var(--space-md); font-size: 0.88rem; color: var(--fg-2);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Cupertino vs. Sunnyvale vs. Palo Alto — neighborhood tradeoffs
+              </div>
+              <div style="display: flex; align-items: center; gap: var(--space-md); font-size: 0.88rem; color: var(--fg-2);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                What a winning offer looks like in 2024
+              </div>
+              <div style="display: flex; align-items: center; gap: var(--space-md); font-size: 0.88rem; color: var(--fg-2);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                The 47-day escrow calendar, day by day
+              </div>
+              <div style="display: flex; align-items: center; gap: var(--space-md); font-size: 0.88rem; color: var(--fg-2);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Wiring funds safely — fraud prevention checklist
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: var(--space-xl); display: flex; flex-wrap: wrap; gap: var(--space-sm);">
+          <span class="tag">Cupertino CUSD</span>
+          <span class="tag">Apple HQ: 8 min</span>
+          <span class="tag">Google: 14 min</span>
+          <span class="tag">API 945+</span>
+          <span class="tag">Median 4-bed: $3.2M</span>
+          <span class="tag">~90 day path</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 7 CHAPTERS ─────────────────────────────────── -->
+<section class="chapters-section" id="chapter-1">
+  <div class="section">
+    <div class="section-label">Table of contents</div>
+    <div class="section-title">Seven chapters. One clear path.</div>
+    <p class="chapters-intro">
+      Each chapter is self-contained — read straight through or jump to what's urgent. If you're three weeks out from your first offer, start at Chapter 5. If you haven't touched financing yet, start here.
+    </p>
+
+    <div class="chapters-grid">
+
+      <!-- Ch 1 -->
+      <div class="chapter-card" id="ch-1">
+        <div class="chapter-header">
+          <div class="chapter-icon">🏦</div>
+          <span class="chapter-badge">5 min read</span>
+        </div>
+        <div>
+          <div class="chapter-num">Chapter 01</div>
+          <div class="chapter-title">How much house can you actually afford?</div>
+        </div>
+        <p class="chapter-desc">
+          Lenders will approve you for more than you should spend. This chapter walks the math Sharon uses with every client — gross income, RSU vesting schedules, property tax (1.25% in Santa Clara County), HOA, and the 28/36 rule applied to Bay Area realities. You'll land on a ceiling number you can defend, not just a letter from a bank.
+        </p>
+        <a href="#chapter-1" class="chapter-link">
+          Read chapter
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <!-- Ch 2 -->
+      <div class="chapter-card" id="chapter-2">
+        <div class="chapter-header">
+          <div class="chapter-icon">📋</div>
+          <span class="chapter-badge">4 min read</span>
+        </div>
+        <div>
+          <div class="chapter-num">Chapter 02</div>
+          <div class="chapter-title">Pre-approval: what lenders ask for and why</div>
+        </div>
+        <p class="chapter-desc">
+          Pre-approval is required before any offer — no exceptions. This chapter breaks down the exact document list (W-2s, two months of bank statements, RSU grant letters, paystubs), why a credit pull hurts less than you think, and how to choose between a big bank and a local lender who can close in 21 days. Sharon calibrates with your lender before the first tour.
+        </p>
+        <a href="#chapter-2" class="chapter-link">
+          Read chapter
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <!-- Ch 3 -->
+      <div class="chapter-card" id="chapter-3">
+        <div class="chapter-header">
+          <div class="chapter-icon">🗺️</div>
+          <span class="chapter-badge">5 min read</span>
+        </div>
+        <div>
+          <div class="chapter-num">Chapter 03</div>
+          <div class="chapter-title">Choosing where: schools, commute, family fit</div>
+        </div>
+        <p class="chapter-desc">
+          Cupertino Union School District (API 945, Meyerholz Elementary ranked #2 in CA) vs. Palo Alto Unified (API 921, Gunn High) vs. Mountain View Whisman — each with a different price-per-point-of-API tradeoff. Commute to Apple HQ: 8 min from Cupertino. To Google: 14 min from Mountain View. This chapter maps the decision matrix Sharon uses when families can't decide between zipcodes.
+        </p>
+        <a href="#chapter-3" class="chapter-link">
+          Read chapter
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <!-- Ch 4 -->
+      <div class="chapter-card" id="chapter-4">
+        <div class="chapter-header">
+          <div class="chapter-icon">🚪</div>
+          <span class="chapter-badge">3 min read</span>
+        </div>
+        <div>
+          <div class="chapter-num">Chapter 04</div>
+          <div class="chapter-title">Touring with intent: how the 8–12 tour shortlist works</div>
+        </div>
+        <p class="chapter-desc">
+          The shortlist surfaces from 8–12 tours, not the top few. Sharon does the first walk-through with you and captures the notes — lot slope, natural light by 3pm, traffic noise from Lawrence Expressway, cabinet quality, deferred maintenance signals. By tour six the picture becomes clear. This chapter teaches you what to observe so you don't fall in love with staging.
+        </p>
+        <a href="#chapter-4" class="chapter-link">
+          Read chapter
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <!-- Ch 5 -->
+      <div class="chapter-card" id="chapter-5">
+        <div class="chapter-header">
+          <div class="chapter-icon">✍️</div>
+          <span class="chapter-badge">5 min read</span>
+        </div>
+        <div>
+          <div class="chapter-num">Chapter 05</div>
+          <div class="chapter-title">The offer: contingencies, escalation, and what wins</div>
+        </div>
+        <p class="chapter-desc">
+          In a 7-offer situation, the winning bid is rarely the highest number. Sharon calibrates with the listing agent's signals before submitting — seller's preferred close date, whether they've bought elsewhere, how clean the other offers are expected to be. This chapter covers loan, appraisal, and inspection contingencies; escalation clause structure; and when a $25K gap in price is less important than a 14-day close.
+        </p>
+        <a href="#chapter-5" class="chapter-link">
+          Read chapter
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <!-- Ch 6 -->
+      <div class="chapter-card" id="chapter-6">
+        <div class="chapter-header">
+          <div class="chapter-icon">🔍</div>
+          <span class="chapter-badge">4 min read</span>
+        </div>
+        <div>
+          <div class="chapter-num">Chapter 06</div>
+          <div class="chapter-title">Escrow without surprises: inspection, appraisal, disclosures</div>
+        </div>
+        <p class="chapter-desc">
+          Within 7 days of acceptance, the inspection clock starts. This chapter covers what a general inspector misses (sewer lateral, roof underlayment, HVAC age), how to read a Transfer Disclosure Statement, what to do when the appraisal comes in $80K low, and why the 17-day contingency removal deadline is the highest-stakes moment in the whole process.
+        </p>
+        <a href="#chapter-6" class="chapter-link">
+          Read chapter
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <!-- Ch 7 -->
+      <div class="chapter-card" id="chapter-7" style="background: var(--primary-fixed); border-color: var(--primary-fixed-dim);">
+        <div class="chapter-header">
+          <div class="chapter-icon" style="background: var(--on-primary);">🔑</div>
+          <span class="chapter-badge" style="background: var(--on-primary);">3 min read</span>
+        </div>
+        <div>
+          <div class="chapter-num">Chapter 07</div>
+          <div class="chapter-title" style="color: var(--primary);">The final week: walkthrough, wire, signing</div>
+        </div>
+        <p class="chapter-desc" style="color: var(--fg-2);">
+          Closing day is actually three separate events compacted into five days. The final walkthrough happens 24–48 hrs before signing to verify seller's repairs and confirm the home is in the agreed condition. Wire fraud is real — Sharon walks every buyer through phone-verification protocol before any funds move. Signing happens at the title company; recording happens at the county recorder; keys happen same-day or next morning.
+        </p>
+        <a href="#chapter-7" class="chapter-link" style="color: var(--primary);">
+          Read chapter
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── BY THE NUMBERS ─────────────────────────────── -->
+<section class="stats-strip">
+  <div class="stats-inner">
+    <div class="stats-label">By the numbers — what a typical Bay Area first-time close looks like</div>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-value">$1.8<span>M</span></div>
+        <div class="stat-label">Median first-time buyer sale price across Sharon's Cupertino, Sunnyvale & Mountain View closes</div>
+        <div class="stat-sublabel">2022–2024 MLS data</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">8–12</div>
+        <div class="stat-label">Tours before a shortlist forms — the number where clarity consistently appears</div>
+        <div class="stat-sublabel">Sharon's client average</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">47<span>days</span></div>
+        <div class="stat-label">Median escrow length on Sharon's accepted offers — acceptance to recorded deed</div>
+        <div class="stat-sublabel">Santa Clara County, 2023</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">~90<span>days</span></div>
+        <div class="stat-label">Full door-to-keys path: first lender call through close of escrow — 6 stages total</div>
+        <div class="stat-sublabel">Budget → Pre-approval → Tour → Offer → Escrow → Close</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ───────────────────────────────── -->
+<section class="testimonials-section">
+  <div class="section">
+    <div class="section-label">What buyers say</div>
+    <div class="section-title">First-time buyers who went through all 6 stages.</div>
+
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testimonial-quote">
+          "We toured 11 homes over five weekends. By the ninth one, we stopped second-guessing ourselves — Sharon had a way of pulling the honest notes out of each visit. <strong>When we finally submitted on the Cupertino cul-de-sac, we knew exactly what we were offering and why.</strong> Closed 44 days after acceptance. No drama."
+        </p>
+        <div class="testimonial-author">
+          <img src="https://i.pravatar.cc/240?img=12" alt="Kevin & Mei L." class="testimonial-avatar">
+          <div>
+            <div class="testimonial-name">Kevin & Mei L.</div>
+            <div class="testimonial-meta">Cupertino · Closed March 2024 · 4-bed, $2.95M</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testimonial-quote">
+          "I'm an engineer — I needed the process laid out clearly, not sold to me. Sharon gave me the inspection checklist before our first tour, walked me through what the TDS actually says, and told me exactly how the listing agent was reading our offer. <strong>Pre-approval was locked before tour one, per her requirement. She was right.</strong> We needed it day six."
+        </p>
+        <div class="testimonial-author">
+          <img src="https://i.pravatar.cc/240?img=33" alt="Rohan S." class="testimonial-avatar">
+          <div>
+            <div class="testimonial-name">Rohan S.</div>
+            <div class="testimonial-meta">Sunnyvale · Closed October 2023 · 3-bed, $1.78M</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testimonial-quote">
+          "We almost pulled the trigger on the first home we toured — Sharon gently asked us to hold. We're so glad we did. <strong>The home we closed on was tour number nine, $120K under our ceiling, in Meyerholz school boundaries.</strong> She knew what we actually needed better than we did by week two. The whole guide she walks you through — it's real. She actually does it."
+        </p>
+        <div class="testimonial-author">
+          <img src="https://i.pravatar.cc/240?img=25" alt="Priya & Daniel T." class="testimonial-avatar">
+          <div>
+            <div class="testimonial-name">Priya & Daniel T.</div>
+            <div class="testimonial-meta">Cupertino · Closed June 2023 · 4-bed, $3.1M</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── LEAD CAPTURE ───────────────────────────────── -->
+<section class="lead-section" id="get-guide">
+  <div class="section">
+    <div class="lead-wrap">
+      <div class="lead-card">
+        <div class="lead-header">
+          <div class="section-label" style="margin-bottom: var(--space-xl);">Get the full guide</div>
+          <div class="lead-title">All 7 chapters. No paywall.</div>
+          <p class="lead-subtitle">
+            Sharon sends the full guide as a single PDF — 32 pages, no filler. If your timeline is under 6 months, she'll follow up personally within 24 hours to answer your first round of questions.
+          </p>
+        </div>
+
+        <div class="guide-preview" style="margin-bottom: var(--space-3xl);">
+          <div class="guide-preview-icon">📘</div>
+          <div>
+            <span class="guide-preview-title">The First-Time Homebuyer's Guide to the Bay Area</span>
+            <span class="guide-preview-text">32 pages · 7 chapters · Sharon Wang · DRE #02134872 · sharonwangrealtor.com</span>
+          </div>
+        </div>
+
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-grid">
+            <div class="form-field">
+              <label class="form-label" for="fname">First name</label>
+              <input class="form-input" type="text" id="fname" name="fname" placeholder="Wei" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="lname">Last name</label>
+              <input class="form-input" type="text" id="lname" name="lname" placeholder="Chen" required>
+            </div>
+            <div class="form-field full">
+              <label class="form-label" for="email">Email address</label>
+              <input class="form-input" type="email" id="email" name="email" placeholder="wei@example.com" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="neighborhood">Target neighborhood</label>
+              <div class="form-select-wrap">
+                <select class="form-select" id="neighborhood" name="neighborhood" required>
+                  <option value="" disabled selected>Select area…</option>
+                  <option value="cupertino">Cupertino</option>
+                  <option value="palo-alto">Palo Alto</option>
+                  <option value="sunnyvale">Sunnyvale</option>
+                  <option value="mountain-view">Mountain View</option>
+                  <option value="los-altos">Los Altos</option>
+                  <option value="other">Other / Not sure yet</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="timeline">Buying timeline</label>
+              <div class="form-select-wrap">
+                <select class="form-select" id="timeline" name="timeline" required>
+                  <option value="" disabled selected>Select timeline…</option>
+                  <option value="3mo">Within 3 months</option>
+                  <option value="3-6mo">3–6 months</option>
+                  <option value="6-12mo">6–12 months</option>
+                  <option value="researching">Just researching</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="form-submit" id="submit-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Send me the full guide
+          </button>
+
+          <p class="form-note">
+            No spam. <strong>Sharon will reply within 24 hrs</strong> if you marked your timeline as ≤ 6 months. Your info is never shared. Unsubscribe anytime.
+          </p>
+        </form>
+
+        <div id="form-success" style="display:none; text-align:center; padding: var(--space-4xl) 0;">
+          <div style="font-size: 3rem; margin-bottom: var(--space-xl);">📬</div>
+          <div style="font-family: var(--font-headline); font-size: 1.3rem; font-weight: 700; color: var(--fg-1); margin-bottom: var(--space-md);">Guide on its way.</div>
+          <p style="color: var(--fg-muted); font-size: 0.9rem; max-width: 360px; margin: 0 auto; line-height: 1.6;">Check your inbox within 10 minutes. If your timeline is under 6 months, expect a note from Sharon directly within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-row">
+          <img src="https://i.pravatar.cc/240?img=47" alt="Sharon Wang" class="footer-avatar">
+          <div>
+            <div class="footer-name">Sharon Wang</div>
+            <div class="footer-dre">DRE #02134872 · Compass Real Estate</div>
+          </div>
+        </div>
+        <p class="footer-desc">
+          Bay Area Realtor since 2018, focused on Cupertino, Palo Alto, Sunnyvale, Mountain View, and Los Altos. 60+ first-time and move-up closes. Bilingual in English and Mandarin. Practical, calibrated, and always specific with numbers.
+        </p>
+        <div class="footer-social">
+          <a href="#" class="footer-social-link" aria-label="LinkedIn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="WeChat">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="Instagram">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="mailto:sharon@sharonwangrealtor.com" class="footer-social-link" aria-label="Email">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-section-title">Contact</div>
+        <div class="footer-contact-list">
+          <a href="tel:+16505550123" class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>
+            (650) 555-0123
+          </a>
+          <a href="mailto:sharon@sharonwangrealtor.com" class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            sharon@sharonwangrealtor.com
+          </a>
+          <div class="footer-contact-item" style="cursor:default;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Cupertino, CA 95014
+          </div>
+          <a href="https://sharonwangrealtor.com" class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            sharonwangrealtor.com
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-section-title">Guide chapters</div>
+        <div class="footer-links">
+          <a href="#ch-1" class="footer-link">Ch.1 — Afford</a>
+          <a href="#chapter-2" class="footer-link">Ch.2 — Pre-approval</a>
+          <a href="#chapter-3" class="footer-link">Ch.3 — Location</a>
+          <a href="#chapter-4" class="footer-link">Ch.4 — Touring</a>
+          <a href="#chapter-5" class="footer-link">Ch.5 — The offer</a>
+          <a href="#chapter-6" class="footer-link">Ch.6 — Escrow</a>
+          <a href="#chapter-7" class="footer-link">Ch.7 — Close</a>
+          <a href="#get-guide" class="footer-link" style="margin-top: var(--space-sm); color: var(--primary-fixed-dim);">↓ Get the full PDF guide</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        © 2024 Sharon Wang Real Estate. DRE #02134872. Compass Real Estate, 19400 Stevens Creek Blvd, Cupertino, CA 95014.<br>
+        All information deemed reliable but not guaranteed. Not intended as legal or financial advice.
+      </div>
+      <div class="footer-eho">
+        <!-- Equal Housing Opportunity SVG -->
+        <svg width="40" height="40" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Equal Housing Opportunity">
+          <rect width="60" height="60" rx="4" fill="rgba(255,255,255,0.08)"/>
+          <!-- house outline -->
+          <polygon points="30,8 52,28 48,28 48,50 34,50 34,38 26,38 26,50 12,50 12,28 8,28" fill="rgba(255,255,255,0.7)" stroke="none"/>
+          <!-- windows -->
+          <rect x="23" y="20" width="6" height="6" fill="rgba(30,27,25,0.6)"/>
+          <rect x="31" y="20" width="6" height="6" fill="rgba(30,27,25,0.6)"/>
+          <!-- equal sign -->
+          <rect x="20" y="54" width="20" height="2.5" rx="1.25" fill="rgba(255,255,255,0.5)"/>
+          <rect x="20" y="58" width="20" height="2.5" rx="1.25" fill="rgba(255,255,255,0.5)"/>
+        </svg>
+        <div style="font-size: 0.65rem; color: rgba(255,255,255,0.3); line-height: 1.4; max-width: 120px;">Equal Housing Opportunity</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    var form = e.target;
+    var btn = document.getElementById('submit-btn');
+    var success = document.getElementById('form-success');
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    setTimeout(function() {
+      form.style.display = 'none';
+      success.style.display = 'block';
+    }, 1200);
+  }
+
+  // Smooth reveal on scroll
+  if ('IntersectionObserver' in window) {
+    var cards = document.querySelectorAll('.chapter-card, .testimonial-card, .stat-item');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'fadeUp 0.5s ease both';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    cards.forEach(function(card) {
+      card.style.opacity = '0';
+      observer.observe(card);
+    });
+  }
+</script>
+</body>
+</html>
