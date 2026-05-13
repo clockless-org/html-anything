@@ -165,94 +165,104 @@ more interactive, and easier to share when the answer is really a page.
 
 ## Install
 
-### Recommended — Agent Skills CLI
+Pick the path for your agent:
+[Claude Code](#claude-code) ·
+[Codex](#codex) ·
+[claude.ai](#claudeai-web) ·
+[Claude API](#claude-api) ·
+[Cursor / Cline / Windsurf / OpenCode / Goose / Letta / …](#one-command-for-most-cli-and-editor-agents) ·
+[ClawHub](#clawhub-publish)
 
-One command, works across Claude Code, Codex, Cursor, Cline, Windsurf
-and any other agent that follows the [open agent skills](https://skills.sh)
-spec:
+### One command for most CLI and editor agents
 
 ```bash
 npx skills add clockless-org/html-anything
 ```
 
-The CLI also pings the public skills directory, so installs feed the
-[skills.sh leaderboard](https://skills.sh/clockless-org/html-anything).
+Works with **Claude Code**, **Codex**, **Cursor**, **Cline**, **Windsurf**,
+**OpenCode**, **Goose**, **Letta**, **Roo Code**, **Kiro**, and any other
+agent following the [open agent-skills spec](https://agentskills.io).
+The CLI also pings [skills.sh](https://skills.sh/clockless-org/html-anything)
+so installs feed the public leaderboard.
 
-### Manual install (Claude Code)
+### Claude Code
 
 ```bash
-mkdir -p ~/.claude/skills
 git clone https://github.com/clockless-org/html-anything ~/.claude/skills/html-anything
 ```
 
-Restart Claude Code so it loads `SKILL.md`.
+Restart Claude Code so it loads `SKILL.md`. To update later:
+`git -C ~/.claude/skills/html-anything pull`.
 
-### Manual install (Codex)
+### Codex
 
 ```bash
-mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 git clone https://github.com/clockless-org/html-anything "${CODEX_HOME:-$HOME/.codex}/skills/html-anything"
 ```
 
-Restart Codex so it loads the skill.
+Restart Codex.
 
-To update a manual install later:
+### claude.ai (web)
 
-```bash
-git -C ~/.claude/skills/html-anything pull
-```
+1. Download [`html-anything-skill.zip`](https://github.com/clockless-org/html-anything/releases/latest/download/html-anything-skill.zip) (≈300 KB — `SKILL.md` + `prompts/` only).
+2. In claude.ai: **Settings → Features → Skills → Upload a Skill** → drop the zip.
 
-### Publish To ClawHub
+Requires **Pro / Max / Team / Enterprise** with code execution enabled.
+Custom skills on claude.ai are per-user; each teammate uploads their own copy.
 
-This repo includes `.clawhubignore` so ClawHub publishes only the skill bundle:
-`SKILL.md` plus `prompts/`. It intentionally excludes examples, screenshots,
-fixtures, generated outputs, source code, and the repo license file.
+### Claude API
 
 ```bash
-npm i -g clawhub
-clawhub login
-clawhub skill publish . \
-  --owner YOUR_HANDLE_OR_ORG \
-  --version 0.1.0 \
-  --clawscan-note "Creates local HTML pages from user-provided prompts, files, folders, and URLs. Reads local files only when the user asks."
+curl https://api.anthropic.com/v1/skills \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-beta: skills-2025-10-02,code-execution-2025-08-25,files-api-2025-04-14" \
+  -F file=@html-anything-skill.zip
 ```
+
+Then reference the returned `skill_id` in the `container` of any message.
+See the [Skills API guide](https://platform.claude.com/docs/en/build-with-claude/skills-guide).
+Uploaded skills are workspace-wide.
+
+### ClawHub (publish)
+
+This repo carries `.clawhubignore` so only `SKILL.md` + `prompts/` ship:
+
+```bash
+npm i -g clawhub && clawhub login
+clawhub publish . --slug html-anything --version 0.1.1 --tags latest
+```
+
+### Where it does not work
+
+| Surface | Status |
+|---|---|
+| ChatGPT / chatgpt.com | ❌ Custom GPTs are a different format. Use **OpenAI Codex CLI** instead (above). |
+| Gemini web / Google Gems | ❌ Different format. Use **Gemini CLI** (`npx skills add`) instead. |
+| Anthropic / Claude Desktop | ✅ Reads `~/.claude/skills/` — same as Claude Code. |
+
+> ℹ Custom Skills do not sync across surfaces. The same skill uploaded to claude.ai is **not** automatically available on Claude Code or the API — each surface keeps its own copy.
 
 ## Use
 
-Ask in plain language:
+Once installed, ask in plain language. The skill picks up on intent — you do
+not need to say "HTML".
 
 ```text
-Use html-anything to create an interactive teaching site about the solar system.
+Make a solar system teaching site.
+Turn my Amazon order history into a personal spending atlas. (Walk me through the export first.)
+Convert ~/Downloads/_chat.txt into a relationship report.
+Make this CSV into a shareable dashboard.
+Audit this GitHub repo URL.
+Recap last quarter as a one-page report.
 ```
 
-```text
-Explain the solar system as a beautiful interactive page.
-```
+The skill also triggers on phrases like *"make this easier to read"*,
+*"turn this into a visual report"*, *"create a recap"*, or
+*"present this beautifully"*. Short conversational asks stay short.
 
-```text
-Use html-anything on my Amazon order history. Walk me through the export first.
-```
-
-```text
-Use html-anything to turn ~/Downloads/_chat.txt into a relationship report.
-```
-
-```text
-Use html-anything to make this CSV into a shareable dashboard.
-```
-
-```text
-Use html-anything on this GitHub repo URL.
-```
-
-You do not always need to say "HTML". Requests like "make this easier to read",
-"turn this into a visual report", "make a shareable explainer", "create a recap",
-or "present this beautifully" should trigger the skill.
-
-If you already have the file, folder, or URL, give it to the agent. If
-you only know the source type, such as "Amazon orders", "Spotify history",
-"1:1 chat export", or "Google Photos Takeout", the skill first explains how
-to export the data, then converts it after you provide the export.
+If you name a data source but have no file yet (*"my Spotify history"*,
+*"my WhatsApp chat"*, *"my Google Photos Takeout"*), the skill walks you
+through the export, then converts it.
 
 ## Input And Output
 
