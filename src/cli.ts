@@ -14,7 +14,7 @@ import * as path from "node:path"
 import { pickParser } from "./parse/index.js"
 import { parser as knowledgeBaseParser } from "./parse/knowledge-base.js"
 import { parser as photosTakeoutParser } from "./parse/photos-takeout.js"
-import { htmlize } from "./htmlize.js"
+import { getStyleReferenceAssets, htmlize, selectStyleForContent } from "./htmlize.js"
 import { makeLlm } from "./llm.js"
 import type { ConverterOptions, HtmlAnythingStyle, Parser } from "./types.js"
 
@@ -161,6 +161,7 @@ async function main() {
   }
 
   process.stderr.write(`→ designing page…\n`)
+  const selectedStyle = selectStyleForContent(parsed.contentType, args.options)
   const html = await htmlize(parsed, llm, args.options)
 
   const outPath = args.out
@@ -169,7 +170,25 @@ async function main() {
       ? path.join(path.dirname(filepath), `${path.basename(filepath)}.html`)
       : path.join(path.dirname(filepath), `${path.basename(filepath, path.extname(filepath))}.html`)
   await fs.writeFile(outPath, html, "utf8")
+  const copiedAssets = await copyReferencedStyleAssets(selectedStyle, path.dirname(outPath), html)
+  if (copiedAssets.length > 0) {
+    process.stderr.write(`→ copied style assets: ${copiedAssets.join(", ")}\n`)
+  }
   console.log(`✓ ${path.basename(outPath)} (${(html.length / 1024).toFixed(1)} KB) — open in your browser`)
+}
+
+async function copyReferencedStyleAssets(style: HtmlAnythingStyle, outDir: string, html: string): Promise<string[]> {
+  const assets = await getStyleReferenceAssets(style)
+  const copied: string[] = []
+  for (const asset of assets) {
+    const htmlPath = asset.outputRelativePath.split(path.sep).join("/")
+    if (!html.includes(htmlPath)) continue
+    const target = path.join(outDir, asset.outputRelativePath)
+    await fs.mkdir(path.dirname(target), { recursive: true })
+    await fs.cp(asset.sourcePath, target, { recursive: true })
+    copied.push(asset.outputRelativePath)
+  }
+  return copied
 }
 
 main().catch(err => {

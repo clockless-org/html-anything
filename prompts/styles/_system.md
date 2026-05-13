@@ -77,6 +77,11 @@ installed skill has the same target surface as the checked-in demo. If
 `referenceHtml` is absent, fall back to `examples/<example>/output.html` when
 that file exists.
 
+Reference packs are style-scoped:
+
+- `prompts/styles/references/<style>/<name>.html`
+- `prompts/styles/references/<style>/assets/...`
+
 For exact usage matches, the reference HTML is the strongest contract: copy
 the first viewport geometry, token overrides, surface language, class
 vocabulary, primary interaction model, and local asset pattern, then adapt the
@@ -85,6 +90,9 @@ already demonstrates the target.
 
 Also inspect `referenceAssets` and `examples/<example>/assets/` when present.
 Reuse matching assets before generating CSS-only substitutes or new images.
+When a `referenceAssets` path contains `/assets/`, copy that subtree into the
+output folder's `assets/` directory, preserving the relative path after
+`/assets/`.
 
 For looser matches, extract the example's invariants without cloning its
 content. Never copy visible demo-only style badges or gallery harness chrome

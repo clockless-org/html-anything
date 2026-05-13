@@ -84,6 +84,11 @@ writing new HTML. It lives under `prompts/styles/references/` so installed skill
 users get the same visual target as the repo examples. If `referenceHtml` is
 absent, fall back to `examples/<example>/output.html` when available.
 
+Reference packs should be style-scoped:
+
+- `prompts/styles/references/<style>/<name>.html`
+- `prompts/styles/references/<style>/assets/...`
+
 For exact topic or usage matches, such as another solar-system teaching
 studio, use the reference HTML as the structural target: first viewport
 geometry, CSS token overrides, surface treatment, component classes,
@@ -91,6 +96,8 @@ interaction wiring, and asset references should be adapted, not reinvented.
 
 Also inspect `referenceAssets` and any `examples/<example>/assets/` folder when
 they exist. Reuse or copy matching local assets before generating substitutes.
+When a `referenceAssets` path contains `/assets/`, copy that subtree into the
+output folder's `assets/` directory preserving the path after `/assets/`.
 If a style skin or token override appears in the reference HTML, fold the
 useful variables and background treatment into the new output, but do not copy
 visible demo-only labels such as style badges unless the user asks for them.

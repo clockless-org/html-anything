@@ -161,9 +161,9 @@
       ],
       "example": "solar-system-studio",
       "preview": "docs/example-previews/solar-system-studio.jpg",
-      "referenceHtml": "prompts/styles/references/teaching-object-lab.html",
+      "referenceHtml": "prompts/styles/references/teaching/object-lab.html",
       "referenceAssets": [
-        "prompts/styles/references/teaching-object-lab-assets/planets"
+        "prompts/styles/references/teaching/assets/planets"
       ],
       "accent": "#0f766e",
       "coreScaffold": [

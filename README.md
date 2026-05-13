@@ -305,8 +305,10 @@ viewport, component vocabulary, interaction model, motion grammar, and visual
 absence rules. Source modules are translated into the style instead of forcing
 every output into the same dashboard/report shape.
 
-Canonical style references can live under `prompts/styles/references/`, so the
-published skill can use the same structural target as the demo gallery.
+Canonical style references can live under `prompts/styles/references/<style>/`,
+so the published skill can use the same structural target as the demo gallery
+without bundling every example. Style-specific assets stay beside their own
+reference pack and are copied only when that style needs them.
 
 | Usage pattern | Style |
 |---|---|

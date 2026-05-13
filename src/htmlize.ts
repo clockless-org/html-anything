@@ -22,6 +22,28 @@ import type { ConverterOptions, HtmlAnythingStyle, LlmHelper, ParsedFile } from 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const PROMPTS_DIR = path.resolve(__dirname, "..", "prompts")
 
+interface StyleCatalogEntry {
+  id?: string
+  system?: string
+  mode?: string
+  summary?: string
+  useCases?: string[]
+  triggers?: string[]
+  bestSources?: string[]
+  example?: string | null
+  preview?: string | null
+  referenceHtml?: string | null
+  referenceAssets?: string[]
+  coreScaffold?: string[]
+  requiredPrimitives?: string[]
+  avoid?: string[]
+}
+
+export interface StyleReferenceAsset {
+  sourcePath: string
+  outputRelativePath: string
+}
+
 const BASE_PROMPT = `You are designing a single self-contained HTML page that is the **best possible reading and interaction experience** for the specific content in front of you.
 
 You are not converting the file — you are designing the right reading UX *for this content*. Same content type means different layouts depending on shape:
@@ -174,29 +196,10 @@ async function loadStylePrompt(style: HtmlAnythingStyle): Promise<string> {
 }
 
 async function loadStyleCatalogPrompt(style: HtmlAnythingStyle): Promise<string> {
-  const raw = await loadPromptFile(path.join("styles", "catalog.json"))
-  if (!raw) return ""
   try {
-    const catalog = JSON.parse(raw) as {
-      sharedQualityGates?: string[]
-      styles?: Array<{
-        id?: string
-        system?: string
-        mode?: string
-        summary?: string
-        useCases?: string[]
-        triggers?: string[]
-        bestSources?: string[]
-        example?: string | null
-        preview?: string | null
-        referenceHtml?: string | null
-        referenceAssets?: string[]
-        coreScaffold?: string[]
-        requiredPrimitives?: string[]
-        avoid?: string[]
-      }>
-    }
-    const entry = catalog.styles?.find(item => item.id === style)
+    const catalog = await loadStyleCatalog()
+    if (!catalog) return ""
+    const entry = findStyleCatalogEntry(catalog, style)
     if (!entry) return ""
     const referenceHtml = await loadCatalogReference(entry.referenceHtml)
     return [
@@ -237,6 +240,16 @@ async function loadStyleCatalogPrompt(style: HtmlAnythingStyle): Promise<string>
   }
 }
 
+async function loadStyleCatalog(): Promise<{ sharedQualityGates?: string[]; styles?: StyleCatalogEntry[] } | null> {
+  const raw = await loadPromptFile(path.join("styles", "catalog.json"))
+  if (!raw) return null
+  return JSON.parse(raw) as { sharedQualityGates?: string[]; styles?: StyleCatalogEntry[] }
+}
+
+function findStyleCatalogEntry(catalog: { styles?: StyleCatalogEntry[] }, style: HtmlAnythingStyle): StyleCatalogEntry | undefined {
+  return catalog.styles?.find(item => item.id === style)
+}
+
 async function loadCatalogReference(referenceHtml?: string | null): Promise<string> {
   if (!referenceHtml) return ""
   const normalized = referenceHtml.startsWith("prompts/")
@@ -247,6 +260,35 @@ async function loadCatalogReference(referenceHtml?: string | null): Promise<stri
   return html.length > 60000
     ? `${html.slice(0, 60000)}\n<!-- Reference truncated after 60000 chars. Preserve the visible first viewport and style contract above. -->`
     : html
+}
+
+export async function getStyleReferenceAssets(style: HtmlAnythingStyle): Promise<StyleReferenceAsset[]> {
+  try {
+    const catalog = await loadStyleCatalog()
+    if (!catalog) return []
+    const entry = findStyleCatalogEntry(catalog, style)
+    return (entry?.referenceAssets || []).map(referenceAsset => {
+      const normalized = referenceAsset.startsWith("prompts/")
+        ? referenceAsset.slice("prompts/".length)
+        : referenceAsset
+      return {
+        sourcePath: path.join(PROMPTS_DIR, normalized),
+        outputRelativePath: referenceAssetOutputPath(referenceAsset),
+      }
+    })
+  } catch {
+    return []
+  }
+}
+
+function referenceAssetOutputPath(referenceAsset: string): string {
+  const normalized = referenceAsset.replaceAll("\\", "/")
+  const marker = "/assets/"
+  const markerIndex = normalized.indexOf(marker)
+  if (markerIndex >= 0) {
+    return path.join("assets", normalized.slice(markerIndex + marker.length))
+  }
+  return path.join("assets", path.basename(normalized))
 }
 
 async function loadSourcePromptFile(name: string): Promise<string> {

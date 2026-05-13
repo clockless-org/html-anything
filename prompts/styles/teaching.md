@@ -16,10 +16,10 @@ For mixed briefs that need both a guided explanation and an object model, keep
 the step rail and use the object stage as the main teaching surface.
 
 Canonical object-lab reference:
-`prompts/styles/references/teaching-object-lab.html`.
+`prompts/styles/references/teaching/object-lab.html`.
 
 Canonical object-lab assets:
-`prompts/styles/references/teaching-object-lab-assets/planets/`.
+`prompts/styles/references/teaching/assets/planets/`.
 
 A prompt like "Create a three-panel interactive teaching studio about the
 solar system, with a selectable model, compare controls, and live inspector"

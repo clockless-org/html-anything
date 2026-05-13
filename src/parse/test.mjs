@@ -191,6 +191,11 @@ test("style catalog stays in sync with style types, prompts, examples, and previ
     assert.ok(previewStat.isFile(), `${entry.id} preview asset missing`)
 
     if (entry.referenceHtml) {
+      const expectedPrefix = `prompts/styles/references/${entry.id}/`
+      assert.ok(
+        entry.referenceHtml.startsWith(expectedPrefix),
+        `${entry.id} referenceHtml must live under ${expectedPrefix}`,
+      )
       const referencePath = path.join(REPO, entry.referenceHtml)
       const referenceStat = await fs.stat(referencePath)
       assert.ok(referenceStat.isFile(), `${entry.id} referenceHtml missing`)
@@ -204,7 +209,12 @@ test("style catalog stays in sync with style types, prompts, examples, and previ
 
     if (entry.referenceAssets) {
       assert.ok(Array.isArray(entry.referenceAssets), `${entry.id} referenceAssets must be an array`)
+      const expectedPrefix = `prompts/styles/references/${entry.id}/assets/`
       for (const referenceAsset of entry.referenceAssets) {
+        assert.ok(
+          referenceAsset.startsWith(expectedPrefix),
+          `${entry.id} reference asset must live under ${expectedPrefix}: ${referenceAsset}`,
+        )
         const assetStat = await fs.stat(path.join(REPO, referenceAsset))
         assert.ok(assetStat.isDirectory() || assetStat.isFile(), `${entry.id} reference asset missing: ${referenceAsset}`)
       }
@@ -298,11 +308,25 @@ test("htmlize injects packaged reference HTML for reference-backed styles", asyn
   }
   await htmlize(parsed, llm, { style: "teaching" })
   assert.match(seenPrompt, /Selected style: teaching/)
-  assert.match(seenPrompt, /Reference HTML: prompts\/styles\/references\/teaching-object-lab\.html/)
-  assert.match(seenPrompt, /Reference assets: prompts\/styles\/references\/teaching-object-lab-assets\/planets/)
+  assert.match(seenPrompt, /Reference HTML: prompts\/styles\/references\/teaching\/object-lab\.html/)
+  assert.match(seenPrompt, /Reference assets: prompts\/styles\/references\/teaching\/assets\/planets/)
   assert.match(seenPrompt, /## Canonical style reference HTML/)
   assert.match(seenPrompt, /Solar system <span class="gradient-text">object lab<\/span>/)
   assert.match(seenPrompt, /class="studio lesson-shell object-lab"/)
+})
+
+test("style reference assets are style-scoped and map to output assets paths", async () => {
+  const { getStyleReferenceAssets } = await import("../../dist/htmlize.js")
+  const assets = await getStyleReferenceAssets("teaching")
+  assert.ok(assets.length >= 1, "teaching should expose reference assets")
+  assert.ok(
+    assets.some(asset =>
+      asset.sourcePath.endsWith(path.join("prompts", "styles", "references", "teaching", "assets", "planets")) &&
+      asset.outputRelativePath === path.join("assets", "planets")
+    ),
+    "teaching planet assets should map to output assets/planets",
+  )
+  assert.deepEqual(await getStyleReferenceAssets("dashboard"), [])
 })
 
 test("checked-in example pages are complete and have parseable inline scripts", async () => {

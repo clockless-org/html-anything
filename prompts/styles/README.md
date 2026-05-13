@@ -112,8 +112,10 @@ entry should include:
 - `bestSources`: source families that fit this style.
 - `example` and `preview`: a concrete checked-in example when available.
 - `referenceHtml` and `referenceAssets`: optional packaged style targets under
-  `prompts/styles/references/` that installed agents should read before
-  generating exact-match pages.
+  `prompts/styles/references/<style>/` that installed agents should read before
+  generating exact-match pages. Assets live under
+  `prompts/styles/references/<style>/assets/` and are copied into the output
+  `assets/` folder only when that style needs them.
 - `coreScaffold`: the first-viewport/layout skeleton.
 - `requiredPrimitives`: style-native classes that generated HTML should use.
 - `avoid`: generic fallbacks or false signals the style must not produce.
